@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="内存表: 指的是使用Memory引擎的表、创建语法是: create table … engine&#x3D;memory. 这种表的数据都保存在内存里、系统重启的时候会被清空, 但表结构还在.而、临时表是可以使用各种引擎类型. 若使用的是innodb引擎或者mysiam引擎、写数据的时候是写到磁盘的、当前, 临时表也可以使用memory引擎.  一、临时表的特性  创建语法是: create tempo">
+  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么临时表可以重命名 ?">
-<meta property="og:url" content="http://yoursite.com/2020/03/18/mysql_inster/index.html">
+<meta property="og:title" content="Hello World">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/hello-world/index.html">
 <meta property="og:site_name" content="牛牛的Blog">
-<meta property="og:description" content="内存表: 指的是使用Memory引擎的表、创建语法是: create table … engine&#x3D;memory. 这种表的数据都保存在内存里、系统重启的时候会被清空, 但表结构还在.而、临时表是可以使用各种引擎类型. 若使用的是innodb引擎或者mysiam引擎、写数据的时候是写到磁盘的、当前, 临时表也可以使用memory引擎.  一、临时表的特性  创建语法是: create tempo">
+<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-18T09:54:07.000Z">
-<meta property="article:modified_time" content="2020-03-18T09:56:16.000Z">
+<meta property="article:published_time" content="2020-03-20T00:42:01.000Z">
+<meta property="article:modified_time" content="2020-03-20T00:42:01.000Z">
 <meta property="article:author" content="niuniu">
-<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content=" Mysql">
+<meta property="article:tag" content=" Linux">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/18/mysql_inster/">
+<link rel="canonical" href="http://yoursite.com/2020/03/20/hello-world/">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title>为什么临时表可以重命名 ? | 牛牛的Blog</title>
+  <title>Hello World | 牛牛的Blog</title>
   
 
 
@@ -191,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/mysql_inster/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -204,7 +206,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          为什么临时表可以重命名 ?
+          Hello World
         </h1>
 
         <div class="post-meta">
@@ -213,18 +215,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-03-18 17:54:07 / 修改时间：17:56:16" itemprop="dateCreated datePublished" datetime="2020-03-18T17:54:07+08:00">2020-03-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
+              <time title="创建时间：2020-03-20 08:42:01" itemprop="dateCreated datePublished" datetime="2020-03-20T08:42:01+08:00">2020-03-20</time>
             </span>
 
           
@@ -238,44 +230,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>内存表: 指的是使用Memory引擎的表、创建语法是: create table … engine=memory. 这种表的数据都保存在内存里、系统重启的时候会被清空, 但表结构还在.<br>而、临时表是可以使用各种引擎类型. 若使用的是innodb引擎或者mysiam引擎、写数据的时候是写到磁盘的、当前, 临时表也可以使用memory引擎.</p>
-</blockquote>
-<p>一、临时表的特性</p>
-<ol>
-<li>创建语法是: create temporary table…</li>
-<li>一个临时表只能被创建它的session访问、对其它线程不可见. (A线程创建的临时表t、B线程不可见). 在session结束时自动删除.</li>
-<li>临时表可以与普通表同名</li>
-<li>session A内具有同名的临时表和普通表时、show create 语句、及增删改查语句、访问的是临时表</li>
-<li>show tables. 不显示临时表.</li>
-</ol>
-<p>临时表适合用于join优化的场景、为什么呢 ?</p>
-<p>1) 不同session临时表命名是可以重复的、若有多个session同时执行join优化、无需担心表名重复建表失败.<br>2) 无需担心数据删除问题. 若使用临时表、在执行流程过程中Client异常断开、或者DB异常重启、还需要专门清理中间过程生成的数据表、而临时表会自动回收、不需要这个额外的操作.</p>
-<p>二、临时表的应用</p>
-<ol>
-<li>分库分表的跨库查询.<br>一般分库分表的场景、就是要把一个逻辑上的大表分散到不同的数据库实例上. eg. 将大表ht、按照字段f、拆分成1024个分表、然后分布到32个DB实例<br>一般有两种查询场景. 1) 可直接定位分表. 2) 无法定位分表、需要多表数据重组.<br>此时一般有两种思路解决:<br>1) 在proxy层进行代码排序<br>   优势: 处理速度快、拿到分库的数据后、直接在内存中参与计算. 但:<br>   开发工作量大, eg. group by, join 等的操作、对中间层开发要求高.<br>   对proxy的压力较大、容易出现内存不够用和CPU瓶颈问题.<br>2) 将各表拿到的数据、汇总到一个MySQL实例的一个表、然后在汇总实例上进行逻辑操作.</li>
-</ol>
-<p>三、为什么临时表可以重名 ?<br>在执行 create temporary table tmp(id int primary key)engine=innodb; 这个语句时、Mysql会给innodb表创建一个 frm 文件保存表结构定义、还要有地方保存表数据. frm放在临时文件目录下 <code>#sql{进程id}_{线程id}_序列号</code>、 select @@temdir 可以查看临时文件目录.</p>
-<p>5.6之前、MySQL会在临时文件目录下创建一个相同前缀、.ibd 为后缀的文件、用来存放数据文件;<br>5.7开始、MySQL引入临文件表空间、专门存放临时文件数据、不需要创建ibd文件.<br>其实创建一个叫t1的innodb临时表、MySQL在存储上认为跟普通表t1不同、可以与普通表重名.</p>
-<p>MySQL维护数据表、除了物理上要有文件外、内存里也有一套机制区别不同的表、每个表对应一个table_def_key. 普通表的table_def_key是<code>库名 + 表名</code>得到、而临时表的table_def_key是<code>库名 + 表名 + server_id + thread_id</code>, 所以, 临时表不能重名而临时表是可以的.</p>
-<p>在实现上、每个线程都维护了自己的临时表链表. 这样每次session内操作表的时候、先遍历链表、检查是否有对应临时表、有: 优先操作、无: 再操作临时表; session结束时、对链表里的每个临时表都执行 <code>drop temporary table + tb_name</code>的操作. 此时会发现: binlog也记录了 drop temporary操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET TIMESTAMP&#x3D;1584267384&#x2F;*!*&#x2F;;</span><br><span class="line">SET @@session.pseudo_thread_id&#x3D;19&#x2F;*!*&#x2F;;</span><br><span class="line">DROP &#x2F;*!40005 TEMPORARY *&#x2F; TABLE IF EXISTS &#96;x&#96;,&#96;tmp&#96;</span><br></pre></td></tr></table></figure>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-<p>临时表只有在县城内可以访问、为什么要写binlog呢 ? –这就需要考虑主备复制了.</p>
-<p>四、临时表和主备复制.<br>既然写binlog, 就意味着备库需要. eg. 下边的语句序列</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_normal(<span class="keyword">id</span> <span class="built_in">int</span> primary <span class="keyword">key</span>, c <span class="built_in">int</span>)<span class="keyword">engine</span>=<span class="keyword">innodb</span>; // Q1</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">temporary</span> <span class="keyword">table</span> tmp_t <span class="keyword">like</span> t_normal; // Q2</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tmp_t <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">1</span>); // Q3</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_normal <span class="keyword">select</span> * <span class="keyword">from</span> tmp_t; // Q4</span><br></pre></td></tr></table></figure>
-<p>若关于临时表的操作不记录、在备库重放binlog时、就会报错: tmp_t不存在</p>
-<p>如果把binlog设为row格式能解决吗 ? binlog是row时、记录的是操作的数据 <code>插入一行数据(1,1)</code>. 确实如此、若binlog_format=row、那么跟临时表有关的操作不会记录到binlog、<br>即: 只有binlog_format=statement / mixed时、binlog才会记录临时表的操作.<br>此时, 创建临时表的语句会传到备库执行、备库同步时也会创建临时表、所以、也需要在主库上记录 drop temporary table、传给备库.</p>
-<p>MySQL在记录binlog时、不论是create 还是 alter都会原样不变、但drop确会变成 </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="string">`t_normal`</span> <span class="comment">/*generated by server*/</span></span><br></pre></td></tr></table></figure>
-<p>也就是改成了标准格式. 为什么呢 ?<br>因为 drop是可以一次删除多个表. eg. 若设置 binlog_format=row, 若主库执行 <code>drop table t_normal,tmp_t</code>, 则binlog只记录 <code>drop table t_normal</code>; 因为备库无tmp_t、备库执行会出错、所以, 必须将语句改写.</p>
-<p>思考: </p>
-<ol>
-<li><p>主库上不同线程创建同名临时表是无关的、备库是如何处理的呢 ?<br>MySQL在记录binlog时、会把线程id写入binlog、这样备库的应用线程就能知道每个语句的主库线程id、并利用这个线程id来构造临时表的table_def_key. </p>
-</li>
-<li><p>为什么临时表可以使用 alter修改表名、不能使用rename ?<br>因为在<code>rename table</code>时、是按照 db/table.frm 的规则去磁盘找文件、但临时表在磁盘上的frm文件是放在tmpdir目录下的、并且命名规则是: <code>#sql{进程id}_{线程id}_序列号.frm</code>, 所以会找不到.</p>
-</li>
-</ol>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
     </div>
 
@@ -284,9 +251,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
-          </div>
 
         
 
@@ -294,13 +258,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/18/hexo-use/" rel="prev" title="使用hexo 框架搭建网站">
-      <i class="fa fa-chevron-left"></i> 使用hexo 框架搭建网站
+    <a href="/2020/03/18/mysql-insert/" rel="prev" title="为什么临时表可以重命名 ?">
+      <i class="fa fa-chevron-left"></i> 为什么临时表可以重命名 ?
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/18/mysql_no_avaliable/" rel="next" title="如何判定一个数据库出了问题">
-      如何判定一个数据库出了问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -360,6 +321,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -373,7 +335,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
