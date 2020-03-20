@@ -23,7 +23,7 @@
   <meta name="description" content="读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.  两种负载方式的差异: 1231. Client负载、少了一层proxy转发、查询性能稍微好一些、且整体架构简单、排查问题方便、但与DB层耦合性高、若出现主备切换或者库迁移、Client需要调整连接信息2. proxy负载. 对Client友好、但proxy本身也需要高可用架构、整体架构设计较">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读写分离有哪些坑?">
-<meta property="og:url" content="http://yoursite.com/2020/03/18/w-r-Q/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/03/18/mysql_wr_q/index.html">
 <meta property="og:site_name" content="牛牛的Blog">
 <meta property="og:description" content="读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.  两种负载方式的差异: 1231. Client负载、少了一层proxy转发、查询性能稍微好一些、且整体架构简单、排查问题方便、但与DB层耦合性高、若出现主备切换或者库迁移、Client需要调整连接信息2. proxy负载. 对Client友好、但proxy本身也需要高可用架构、整体架构设计较">
 <meta property="og:locale" content="zh_CN">
@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-9443eea1ca9ff032.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/18/w-r-Q/">
+<link rel="canonical" href="http://yoursite.com/2020/03/18/mysql_wr_q/">
 
 
 <script id="page-configurations">
@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/w-r-Q/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/mysql_wr_q/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -318,7 +318,7 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/18/db-nouse/" rel="prev" title="如何判定一个数据库出了问题">
+    <a href="/2020/03/18/mysql_no_avaliable/" rel="prev" title="如何判定一个数据库出了问题">
       <i class="fa fa-chevron-left"></i> 如何判定一个数据库出了问题
     </a></div>
       <div class="post-nav-item"></div>
@@ -394,7 +394,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

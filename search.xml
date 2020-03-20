@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>读写分离有哪些坑?</title>
-    <url>/2020/03/18/w-r-Q/</url>
+    <url>/2020/03/18/mysql_wr_q/</url>
     <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/14027542-9443eea1ca9ff032.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="读写分离基本架构.png"></p>
 <blockquote>
 <p>读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.</p>
@@ -73,7 +73,7 @@
   </entry>
   <entry>
     <title>如何判定一个数据库出了问题</title>
-    <url>/2020/03/18/db-nouse/</url>
+    <url>/2020/03/18/mysql_no_avaliable/</url>
     <content><![CDATA[<blockquote>
 <p>主备切换有两种场景: 主动切换 和 被动切换. 被动切换大多是主库出了问题、由HA系统引发的. 那么: 如何判定主库出了问题呢 ?</p>
 </blockquote>
@@ -114,7 +114,7 @@
   </entry>
   <entry>
     <title>为什么临时表可以重命名 ?</title>
-    <url>/2020/03/18/mysql-insert/</url>
+    <url>/2020/03/18/mysql_inster/</url>
     <content><![CDATA[<blockquote>
 <p>内存表: 指的是使用Memory引擎的表、创建语法是: create table … engine=memory. 这种表的数据都保存在内存里、系统重启的时候会被清空, 但表结构还在.<br>而、临时表是可以使用各种引擎类型. 若使用的是innodb引擎或者mysiam引擎、写数据的时候是写到磁盘的、当前, 临时表也可以使用memory引擎.</p>
 </blockquote>
@@ -215,23 +215,5 @@
       <tags>
         <tag>tools</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/03/18/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
 </search>

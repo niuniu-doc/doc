@@ -23,7 +23,7 @@
   <meta name="description" content="主备切换有两种场景: 主动切换 和 被动切换. 被动切换大多是主库出了问题、由HA系统引发的. 那么: 如何判定主库出了问题呢 ?  一、 select 1 判定实际上, select 1 成功返回、只能说明这个库的进程还在、并不能说明主库没问题. eg. 以下场景: 12345678set global innodb_thread_concurrency&#x3D;3; &#x2F;&#x2F; 控制innodb并发线程上">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何判定一个数据库出了问题">
-<meta property="og:url" content="http://yoursite.com/2020/03/18/db-nouse/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/03/18/mysql_no_avaliable/index.html">
 <meta property="og:site_name" content="牛牛的Blog">
 <meta property="og:description" content="主备切换有两种场景: 主动切换 和 被动切换. 被动切换大多是主库出了问题、由HA系统引发的. 那么: 如何判定主库出了问题呢 ?  一、 select 1 判定实际上, select 1 成功返回、只能说明这个库的进程还在、并不能说明主库没问题. eg. 以下场景: 12345678set global innodb_thread_concurrency&#x3D;3; &#x2F;&#x2F; 控制innodb并发线程上">
 <meta property="og:locale" content="zh_CN">
@@ -36,7 +36,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-a908616fd039d681.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/18/db-nouse/">
+<link rel="canonical" href="http://yoursite.com/2020/03/18/mysql_no_avaliable/">
 
 
 <script id="page-configurations">
@@ -194,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/db-nouse/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/mysql_no_avaliable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -289,11 +289,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/18/mysql-insert/" rel="prev" title="为什么临时表可以重命名 ?">
+    <a href="/2020/03/18/mysql_inster/" rel="prev" title="为什么临时表可以重命名 ?">
       <i class="fa fa-chevron-left"></i> 为什么临时表可以重命名 ?
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/18/w-r-Q/" rel="next" title="读写分离有哪些坑?">
+    <a href="/2020/03/18/mysql_wr_q/" rel="next" title="读写分离有哪些坑?">
       读写分离有哪些坑? <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -368,7 +368,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
