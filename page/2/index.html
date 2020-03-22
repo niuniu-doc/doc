@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_java%E5%9F%BA%E7%A1%80/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -205,7 +205,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/java_java%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">java基础</a>
+            <a href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">effective-java笔记</a>
         </h1>
 
         <div class="post-meta">
@@ -235,7 +235,7 @@
             </span>
 
           
-            <span id="/2020/03/20/java_java%E5%9F%BA%E7%A1%80/" class="post-meta-item leancloud_visitors" data-flag-title="java基础" title="阅读次数">
+            <span id="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="effective-java笔记" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -250,8 +250,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/java_java%E5%9F%BA%E7%A1%80/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_java%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -266,126 +266,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Spring的&#96;scope&#96; :</span><br><span class="line">&#96;Singleton&#96; 一个spring容器中、只有一个&#96;bean&#96; 的实例、spring默认配置</span><br><span class="line">&#96;Prototype&#96; 每次调用新建一个bean</span><br><span class="line">&#96;Request&#96; web项目中、给每个http request请求一个bean实例</span><br><span class="line">&#96;Session&#96; web项目中、给每个http session一个bean实例</span><br><span class="line">&#96;GlobalSession&#96; 只有在Portal应用中有、给每个global http request一个bean实例</span><br></pre></td></tr></table></figure>
-<h4 id="postConstructor"><a href="#postConstructor" class="headerlink" title="postConstructor"></a>postConstructor</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@PostConstruct 在 construct之后执行、</span><br><span class="line">相当于java配置方式的 @Bean(initMethod&#x3D;&#39;xxx&#39;)、</span><br><span class="line">相当于xml配置方式的 init-method</span><br><span class="line"></span><br><span class="line">@PreDestroy 在bean销毁之前执行、</span><br><span class="line">相当于java配置方式的 @Bean(deatroyMethod&#x3D;&#39;xxx&#39;)</span><br><span class="line">相当于xml配置方式的 destroy-method</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">#### profile</span><br></pre></td></tr></table></figure>
-<p>提供不同环境不同配置文件的支持</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 事件</span><br></pre></td></tr></table></figure>
-<p>Spring的事件为Bean与Bean之间的通信提供了支持、</p>
-<p>1) 自定义事件  继承ApplicationEvent<br>2) 定义事件监听器  实现 ApplicationListener<br>3) 使用容器发布事件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 任务</span><br></pre></td></tr></table></figure>
-<ol>
-<li>异步任务 @Async </li>
-<li>规划任务 @Scheduled 每隔固定时间执行</li>
+          <ul>
+<li>考虑静态工厂方法代替构造器<ol>
+<li>含义更明确</li>
+<li></li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 桟</span><br></pre></td></tr></table></figure>
-<p>主要用来存放函数调用所需要的数据(函数参数、返回地址及函数内部的局部变量)、但、返回值不在桟中、会有一个专门的返回值存储器、</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 变量的生命周期</span><br></pre></td></tr></table></figure>
-<ol>
-<li>函数中的参数和函数内定义的变量、都分配在桟上、在函数调用时被分配、调用结束释放</li>
-<li>数组和对象 存放变量地址的空间是分配在桟上的、存放变量内容的空间是分配在堆上的<br>函数调用结束、存放变量地址的空间会被立即释放、而存放内容的空间不会、它会因为没有变量引用、而被垃圾回收机制回收掉<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 类和对象的声明周期</span><br></pre></td></tr></table></figure>
-类加载进内存后、一般不会释放、直到程序结束、一般情况下、类只会加载1次、所以、静态变量在内存中只有一份</li>
-</ol>
-<p>对象：每次new创建一个对象的时候、对象产生、在内存中、会存储这个对象的实例变量值、每new一次、对象就会产生一个、就会有一份独立的实例变量</p>
-<pre><code></code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">java常用注解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="java常用注解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><code>@Controller</code> mvc中、声明一个控制器<br><code>@Component</code> 声明一个通用组件<br><code>@Repository</code> 声明一个dao组件<br><code>@Service</code> 声明一个service组件</p>
-<p><code>@Bean</code> 声明一个bean容器<br><code>@Configuration</code> 声明配置类<br><code>@ComponentScan</code> 包扫描</p>
-<p><code>@Async</code>声明一个异步方法<br><code>@EnableAsync</code> 开启异步任务支持<br><code>@Scheduled</code> 声明一个计划任务<br>       <code>fixdRate</code> 表明每隔固定时间间隔执行<br>      <code>cron</code>表明按照cron表达式在指定时间执行<br><code>@EnableScheduling</code> 开启计划任务支持<br><code>@EnableCaching</code> 开启注解式的缓存支持</p>
-<p><code>@RequestMapping</code> 配置url和方法之间的映射关系<br><code>@Conditional</code> 条件注解<br><code>@ResponseBody</code> 将返回值放在response返回体内、而不是返回一个页面<br><code>@RequestBody</code>允许将request参数放在request体中、而不是放在连接地址后边<br><code>@PathVariable</code>用来接收路径参数</p>
-<p>组合注解<br><code>@WiselyConfiguration</code> 代替 <code>@Configuration</code> + <code>@ComponentScan</code><br><code>@RestController</code> 代替 <code>@Controller</code> + <code>@ResponseBody</code><br><code>@SpringBootApplication</code> 组合了<br><code>@Configuration</code>+<code>@EnableAutoConfiguration</code>+<code>@ComponentScan</code></p>
-<p><code>@ConditionalOnBean</code>当容器里有指定的bean的条件下<br><code>@ConditionalOnClass</code> 当类路径下有指定的类的条件下<br><code>@ConditionalOnExpression</code>基于SpEL做判断<br><code>@ConditionalOnJava</code> 基于jvm版本做判断<br><code>@ConditionalOnMissingBean</code> 当容器中无指定bean的条件下<br><code>@ConditionalOnMissingClass</code> 类路径下无指定class的情况下<br><code>@ConditionalOnNotWebApplication</code> 当前项目不是web项目的情况下<br><code>@ConditionalOnWebApplication</code> 当前项目是web项目的情况下<br><code>@ConditionalOnProperty</code> 指定的属性是否有指定值<br><code>@ConditionalOnResource</code> 类路径是否有指定值</p>
+</li>
+<li></li>
+</ul>
 
       
     </div>
@@ -488,6 +376,106 @@
 <li><code>@Scheduled(fixedDelay = 2000)</code> 等待上次请求结束后、delay 2s 执行下次任务</li>
 <li><code>@Scheduled(fixedDelay = 2000, initDelay = 2000)</code> 项目启动成功后、延迟2s执行任务 </li>
 </ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">java常用注解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="java常用注解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>@Controller</code> mvc中、声明一个控制器<br><code>@Component</code> 声明一个通用组件<br><code>@Repository</code> 声明一个dao组件<br><code>@Service</code> 声明一个service组件</p>
+<p><code>@Bean</code> 声明一个bean容器<br><code>@Configuration</code> 声明配置类<br><code>@ComponentScan</code> 包扫描</p>
+<p><code>@Async</code>声明一个异步方法<br><code>@EnableAsync</code> 开启异步任务支持<br><code>@Scheduled</code> 声明一个计划任务<br>       <code>fixdRate</code> 表明每隔固定时间间隔执行<br>      <code>cron</code>表明按照cron表达式在指定时间执行<br><code>@EnableScheduling</code> 开启计划任务支持<br><code>@EnableCaching</code> 开启注解式的缓存支持</p>
+<p><code>@RequestMapping</code> 配置url和方法之间的映射关系<br><code>@Conditional</code> 条件注解<br><code>@ResponseBody</code> 将返回值放在response返回体内、而不是返回一个页面<br><code>@RequestBody</code>允许将request参数放在request体中、而不是放在连接地址后边<br><code>@PathVariable</code>用来接收路径参数</p>
+<p>组合注解<br><code>@WiselyConfiguration</code> 代替 <code>@Configuration</code> + <code>@ComponentScan</code><br><code>@RestController</code> 代替 <code>@Controller</code> + <code>@ResponseBody</code><br><code>@SpringBootApplication</code> 组合了<br><code>@Configuration</code>+<code>@EnableAutoConfiguration</code>+<code>@ComponentScan</code></p>
+<p><code>@ConditionalOnBean</code>当容器里有指定的bean的条件下<br><code>@ConditionalOnClass</code> 当类路径下有指定的类的条件下<br><code>@ConditionalOnExpression</code>基于SpEL做判断<br><code>@ConditionalOnJava</code> 基于jvm版本做判断<br><code>@ConditionalOnMissingBean</code> 当容器中无指定bean的条件下<br><code>@ConditionalOnMissingClass</code> 类路径下无指定class的情况下<br><code>@ConditionalOnNotWebApplication</code> 当前项目不是web项目的情况下<br><code>@ConditionalOnWebApplication</code> 当前项目是web项目的情况下<br><code>@ConditionalOnProperty</code> 指定的属性是否有指定值<br><code>@ConditionalOnResource</code> 类路径是否有指定值</p>
 
       
     </div>
@@ -1867,11 +1855,11 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
       appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
       placeholder: "欢迎一起来讨论^.^",
-      avatar     : 'mm',
+      avatar     : '',
       meta       : guest,
       pageSize   : '10' || 10,
       visitor    : true,
-      lang       : '' || 'zh-cn',
+      lang       : 'zh-cn' || 'zh-cn',
       path       : location.pathname,
       recordIP   : false,
       serverURLs : ''

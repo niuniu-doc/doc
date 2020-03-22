@@ -1096,6 +1096,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">mq本地搭建</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/" class="post-meta-item leancloud_visitors" data-flag-title="mq本地搭建" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>启动:<br>进入到编译target目录<br>eg. 我的下载路径是 /Users/nj/build/rocketmq-all-4.4.0<br>cd /Users/nj/build/rocketmq-all-4.4.0/distribution/target/apache-rocketmq/</p>
+<p>1.启动namesrv<br>sh bin/mqnamesrv &amp;</p>
+<ol start="2">
+<li><p>启动broker<br>sh bin/mqbroker &amp;</p>
+</li>
+<li><p>测试:<br>sh bin/tools.sh org.apache.rocketmq.example.quickstart.Producer<br>报错:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">17:28:23.123 [main] DEBUG i.n.u.i.l.InternalLoggerFactory - Using SLF4J as the default logging framework</span><br><span class="line">org.apache.rocketmq.client.exception.MQClientException: No route info of this topic, TopicTest1</span><br><span class="line">See http:&#x2F;&#x2F;rocketmq.apache.org&#x2F;docs&#x2F;faq&#x2F; for further details.</span><br><span class="line">	at org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.sendDefaultImpl(DefaultMQProducerImpl.java:610)</span><br><span class="line">17:28:29.595 [NettyClientSelector_1] INFO  RocketmqRemoting - closeChannel: close the connection to remote address[] result: true</span><br><span class="line">	at org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.send(DefaultMQProducerImpl.java:1223)</span><br><span class="line">	at org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.send(DefaultMQProducerImpl.java:1173)</span><br><span class="line">	at org.apache.rocketmq.client.producer.DefaultMQProducer.send(DefaultMQProducer.java:214)</span><br><span class="line">	at com.lct.quickstart.Producer.main(Producer.java:56)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>原因:<br>mac本地搭建使用VPN时、会有两个内网ip、用telnet找到可以访问的那个、<br>修改broker.conf<br>指定brokerIP的地址:<br>brokerIP1 = 192.168.10.54<br>brokerIP2 = 192.168.10.54</p>
+<p>查看broker启动参数:<br>sh bin/mqbroker -m</p>
+<p>mqAdmin使用:<br>####查看集群情况<br>./mqadmin clusterList -n 127.0.0.1:9876</p>
+<p>####查看broker状态<br>./mqadmin brokerStatus -n 127.0.0.1:9876 -b 192.168.10.54:10911</p>
+<p>####查看topic列表<br>./mqadmin topicList -n 192.168.10.54:9876</p>
+<p>####查看topic状态<br>./mqadmin topicStatus -n 127.0.0.1:9876 -t PushTopic</p>
+<p>####查看topic路由<br>./mqadmin topicRoute -n 127.0.0.1:9876 -t PushTopic</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_mq%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1192,117 +1303,6 @@
 <li>写内存的速度大于写磁盘 –&gt; redis 、mysql等系统应用的日志都是先写cache、按照指定规则刷新 –&gt; 有了系统崩溃短时间内log不能恢复的问题</li>
 <li>生产者和消费者速度不一致 –&gt; 有了broker暂存消息</li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">mq本地搭建</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/" class="post-meta-item leancloud_visitors" data-flag-title="mq本地搭建" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>启动:<br>进入到编译target目录<br>eg. 我的下载路径是 /Users/nj/build/rocketmq-all-4.4.0<br>cd /Users/nj/build/rocketmq-all-4.4.0/distribution/target/apache-rocketmq/</p>
-<p>1.启动namesrv<br>sh bin/mqnamesrv &amp;</p>
-<ol start="2">
-<li><p>启动broker<br>sh bin/mqbroker &amp;</p>
-</li>
-<li><p>测试:<br>sh bin/tools.sh org.apache.rocketmq.example.quickstart.Producer<br>报错:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">17:28:23.123 [main] DEBUG i.n.u.i.l.InternalLoggerFactory - Using SLF4J as the default logging framework</span><br><span class="line">org.apache.rocketmq.client.exception.MQClientException: No route info of this topic, TopicTest1</span><br><span class="line">See http:&#x2F;&#x2F;rocketmq.apache.org&#x2F;docs&#x2F;faq&#x2F; for further details.</span><br><span class="line">	at org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.sendDefaultImpl(DefaultMQProducerImpl.java:610)</span><br><span class="line">17:28:29.595 [NettyClientSelector_1] INFO  RocketmqRemoting - closeChannel: close the connection to remote address[] result: true</span><br><span class="line">	at org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.send(DefaultMQProducerImpl.java:1223)</span><br><span class="line">	at org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.send(DefaultMQProducerImpl.java:1173)</span><br><span class="line">	at org.apache.rocketmq.client.producer.DefaultMQProducer.send(DefaultMQProducer.java:214)</span><br><span class="line">	at com.lct.quickstart.Producer.main(Producer.java:56)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>原因:<br>mac本地搭建使用VPN时、会有两个内网ip、用telnet找到可以访问的那个、<br>修改broker.conf<br>指定brokerIP的地址:<br>brokerIP1 = 192.168.10.54<br>brokerIP2 = 192.168.10.54</p>
-<p>查看broker启动参数:<br>sh bin/mqbroker -m</p>
-<p>mqAdmin使用:<br>####查看集群情况<br>./mqadmin clusterList -n 127.0.0.1:9876</p>
-<p>####查看broker状态<br>./mqadmin brokerStatus -n 127.0.0.1:9876 -b 192.168.10.54:10911</p>
-<p>####查看topic列表<br>./mqadmin topicList -n 192.168.10.54:9876</p>
-<p>####查看topic状态<br>./mqadmin topicStatus -n 127.0.0.1:9876 -t PushTopic</p>
-<p>####查看topic路由<br>./mqadmin topicRoute -n 127.0.0.1:9876 -t PushTopic</p>
 
       
     </div>
@@ -1509,11 +1509,11 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
       appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
       placeholder: "欢迎一起来讨论^.^",
-      avatar     : 'mm',
+      avatar     : '',
       meta       : guest,
       pageSize   : '10' || 10,
       visitor    : true,
-      lang       : '' || 'zh-cn',
+      lang       : 'zh-cn' || 'zh-cn',
       path       : location.pathname,
       recordIP   : false,
       serverURLs : ''
