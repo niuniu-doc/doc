@@ -191,6 +191,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" class="post-title-link" itemprop="url">IO设备(43讲)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="IO设备(43讲)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="接口和设备-经典的适配器模式"><a href="#接口和设备-经典的适配器模式" class="headerlink" title="接口和设备: 经典的适配器模式"></a>接口和设备: 经典的适配器模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">实际上, 输出输入设备、并不只是一个设备、大部分的输入输出设备、都有两个组成部分.</span><br><span class="line">接口和实际的IO设备. 硬件设备不是直接接入到总线上和CPU通信的、而是通过接口、用接口连接到总线上</span><br><span class="line">再通过总线和CPU通信的. 平时听说的并行接口(Parallel Interface), 串行接口(Serial Inteerface)、</span><br><span class="line">USB接口都是计算机主板上内置的各个接口, 实际的硬件设备 eg. 使用并口的打印机、使用串口的老式鼠标</span><br><span class="line">或者使用USB接口的U盘、都要插入到这些接口上、才能和CPU工作及通信的.</span><br><span class="line"></span><br><span class="line">接口本身就是一块电路板、CPU其实不是和实际的硬件设备打交道、而是和这个接口电路板打交道.</span><br><span class="line">常说的设备里有三类寄存器、都在设备的接口电路上、而不是实际的设备上.</span><br><span class="line"></span><br><span class="line">三类寄存器: 状态寄存器(Status Register)、命令寄存器(Command Register)和数据寄存器(Data Register)</span><br></pre></td></tr></table></figure>
+
+<h4 id="CPU是如何控制IO设备的"><a href="#CPU是如何控制IO设备的" class="headerlink" title="CPU是如何控制IO设备的"></a>CPU是如何控制IO设备的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">无论是内置在主板上的接口、还是集成在设备上的接口、除了3类寄存器之外、还有对应的控制电路,</span><br><span class="line">正是通过这个控制电路、CPU才能向这个接口电路板传输信号、来控制实际的硬件</span><br><span class="line"></span><br><span class="line">设备上的寄存器有什么用呢 ？</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-1349e7dbc149f62a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="打印机.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 数据寄存器. CPU向IO设备写入需要传输的数据、eg. 要打印&#96;GeekTime&#96;, 会先发送一个G给对应IO设备</span><br><span class="line">2. 命令寄存器. CPU发送一个命令、告诉打印机、要打印. 此时打印机里的控制电路会做两个动作.</span><br><span class="line">1) 设置状态寄存器里的状态为 not-ready</span><br><span class="line">2) 实际操作打印机进行打印</span><br><span class="line">3. 状态寄存器. 告诉CPU、设备已经在工作了、此时再发送数据或者命令都是无效的</span><br><span class="line">直到前边的动作已完成、状态寄存器重新变成ready状态、CPU才发送下一个字符和命令</span><br><span class="line"></span><br><span class="line">在实际情况中、打印机通常不止有数据寄存器还有数据缓冲区、CPU也不是真的一个字符一个字符交给打印机处理的</span><br><span class="line">而是一次性将整个文档传输至打印机的内存或者数据缓冲区一起打印的</span><br></pre></td></tr></table></figure>
+
+<h4 id="信号和地址-发挥总线的价值"><a href="#信号和地址-发挥总线的价值" class="headerlink" title="信号和地址: 发挥总线的价值"></a>信号和地址: 发挥总线的价值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CPU到底要往总线上发送一个什么样的命令、才能和IO接口上的设备通信呢 ？</span><br><span class="line"></span><br><span class="line">CPU和IO设备的通信、一样是通过CPU支持的机器指令来执行的.</span><br><span class="line">和访问主内存一样、使用内存地址来和IO设备通信. 为了让已经足够复杂的CPU尽可能简单、</span><br><span class="line">计算机会把IO设备的各个寄存器及IO设备内部的内存地址、都映射到主内存地址空间来、</span><br><span class="line">主内存的地址空间里、会给不同的IO设备预留一段一段的内存地址. CPU想和IO设备通信的时候、</span><br><span class="line">就往这些地址发送数据、这些地址信息就是通过地址总线老来发送的、对应的数据信息就是通过数据总线发送的</span><br><span class="line"></span><br><span class="line">而IO设备、会监控地址线、且在CPU往自己的地址发送数据的时候、把对应的数据线里边传输过来的数据、</span><br><span class="line">接入到对应的设备里边的寄存器和内存里. CPU无论是向IO设备发送命令、查询状态还是传输数据都可以</span><br><span class="line">通过这种方式. 称为内存映射IO(Memory-Mapped IO, MMIO)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6ca26f4063f664e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<blockquote>
+<p>那么、MMIO是不是唯一一种CPU和设备通信的方式呢 ?</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">不是的. 精简指令集MIPS的CPU特别简单、所以这里只有MMIO. 而有2000多个指令的Intel</span><br><span class="line">而我们有2000多个指令的Intel X86架构的计算机、有专门的和IO设备通信的指令, 即: in 和 out 指令.</span><br><span class="line">Intel CPU虽然也支持MMIO、不过还可以通过特定的指令、来支持端口映射IO(Port-Mapped IO, 简称PMIO)</span><br><span class="line">也可以叫独立输入输出(Isolated IO)</span><br><span class="line"></span><br><span class="line">其实PMIO的通信方式和MMIO差不多、核心区别在于: PMIO里访问的设备地址、不再是在内存地址空间里、</span><br><span class="line">而是一个专门的端口, 这个端口不是硬件杀昂的插口、而是和CPU通信的一个抽象概念</span><br><span class="line"></span><br><span class="line">无论是PMIO还是MMIO、CPU都会传送一条二进制的数据、给到IO设备的对应地址. 设备自己本身的接口电路、</span><br><span class="line">再去解码这个数据、解码之后的数据会变成设备支持的一条指令、再去通过控制电路操作实际的硬件设备</span><br><span class="line">对CPU来说、它不关心设备本身可以支持哪些操作、只是在总线上传输一条条数据就好了.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_GPU%E7%9A%84%E4%BA%A7%E7%94%9F%E5%92%8C%E5%8F%91%E5%B1%95(%E7%AC%AC30%E3%80%8131%E8%AE%B2)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -286,112 +392,6 @@
 <h4 id="GPU里的超线程"><a href="#GPU里的超线程" class="headerlink" title="GPU里的超线程"></a>GPU里的超线程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GPU里的指令、可能会遇到和CPU类似的流水线停顿问题、是不是可以想到优化方案&#96;超线程&#96; ?</span><br><span class="line">在GPU里一样可以有类似的优化. 即: 遇到流水线停顿时、调度一些别的计算任务给当前的ALU</span><br><span class="line"></span><br><span class="line">和超线程一样、既然要调度一个不同的任务执行、就需要针对这个任务、提供更多的执行上下文、so. 一个Core里的执行上下文的数量、需要比 ALU 多</span><br></pre></td></tr></table></figure>
 <p><img src="https://upload-images.jianshu.io/upload_images/14027542-a8845384202d495f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h4 id="GPU在深度学习上的性能差异"><a href="#GPU在深度学习上的性能差异" class="headerlink" title="GPU在深度学习上的性能差异"></a>GPU在深度学习上的性能差异</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">通过芯片瘦身、SIMT和更多的执行上下文、GPU更擅长并行进行暴力运算、恰好适合深度学习的应用场景</span><br><span class="line"></span><br><span class="line">一方面: GPU是一个可以进行通用计算的框架、可以通过编程、在GPU上实现不同的算法、</span><br><span class="line">另一方面: 现在的深度学习计算、都是超大的向量和矩阵、海量的训练样本的计算、整个过程没有复杂的逻辑和分支、非常适合GPU这样并行、计算能力强的架构</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" class="post-title-link" itemprop="url">IO设备(43讲)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="IO设备(43讲)" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="接口和设备-经典的适配器模式"><a href="#接口和设备-经典的适配器模式" class="headerlink" title="接口和设备: 经典的适配器模式"></a>接口和设备: 经典的适配器模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">实际上, 输出输入设备、并不只是一个设备、大部分的输入输出设备、都有两个组成部分.</span><br><span class="line">接口和实际的IO设备. 硬件设备不是直接接入到总线上和CPU通信的、而是通过接口、用接口连接到总线上</span><br><span class="line">再通过总线和CPU通信的. 平时听说的并行接口(Parallel Interface), 串行接口(Serial Inteerface)、</span><br><span class="line">USB接口都是计算机主板上内置的各个接口, 实际的硬件设备 eg. 使用并口的打印机、使用串口的老式鼠标</span><br><span class="line">或者使用USB接口的U盘、都要插入到这些接口上、才能和CPU工作及通信的.</span><br><span class="line"></span><br><span class="line">接口本身就是一块电路板、CPU其实不是和实际的硬件设备打交道、而是和这个接口电路板打交道.</span><br><span class="line">常说的设备里有三类寄存器、都在设备的接口电路上、而不是实际的设备上.</span><br><span class="line"></span><br><span class="line">三类寄存器: 状态寄存器(Status Register)、命令寄存器(Command Register)和数据寄存器(Data Register)</span><br></pre></td></tr></table></figure>
-
-<h4 id="CPU是如何控制IO设备的"><a href="#CPU是如何控制IO设备的" class="headerlink" title="CPU是如何控制IO设备的"></a>CPU是如何控制IO设备的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">无论是内置在主板上的接口、还是集成在设备上的接口、除了3类寄存器之外、还有对应的控制电路,</span><br><span class="line">正是通过这个控制电路、CPU才能向这个接口电路板传输信号、来控制实际的硬件</span><br><span class="line"></span><br><span class="line">设备上的寄存器有什么用呢 ？</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-1349e7dbc149f62a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="打印机.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 数据寄存器. CPU向IO设备写入需要传输的数据、eg. 要打印&#96;GeekTime&#96;, 会先发送一个G给对应IO设备</span><br><span class="line">2. 命令寄存器. CPU发送一个命令、告诉打印机、要打印. 此时打印机里的控制电路会做两个动作.</span><br><span class="line">1) 设置状态寄存器里的状态为 not-ready</span><br><span class="line">2) 实际操作打印机进行打印</span><br><span class="line">3. 状态寄存器. 告诉CPU、设备已经在工作了、此时再发送数据或者命令都是无效的</span><br><span class="line">直到前边的动作已完成、状态寄存器重新变成ready状态、CPU才发送下一个字符和命令</span><br><span class="line"></span><br><span class="line">在实际情况中、打印机通常不止有数据寄存器还有数据缓冲区、CPU也不是真的一个字符一个字符交给打印机处理的</span><br><span class="line">而是一次性将整个文档传输至打印机的内存或者数据缓冲区一起打印的</span><br></pre></td></tr></table></figure>
-
-<h4 id="信号和地址-发挥总线的价值"><a href="#信号和地址-发挥总线的价值" class="headerlink" title="信号和地址: 发挥总线的价值"></a>信号和地址: 发挥总线的价值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CPU到底要往总线上发送一个什么样的命令、才能和IO接口上的设备通信呢 ？</span><br><span class="line"></span><br><span class="line">CPU和IO设备的通信、一样是通过CPU支持的机器指令来执行的.</span><br><span class="line">和访问主内存一样、使用内存地址来和IO设备通信. 为了让已经足够复杂的CPU尽可能简单、</span><br><span class="line">计算机会把IO设备的各个寄存器及IO设备内部的内存地址、都映射到主内存地址空间来、</span><br><span class="line">主内存的地址空间里、会给不同的IO设备预留一段一段的内存地址. CPU想和IO设备通信的时候、</span><br><span class="line">就往这些地址发送数据、这些地址信息就是通过地址总线老来发送的、对应的数据信息就是通过数据总线发送的</span><br><span class="line"></span><br><span class="line">而IO设备、会监控地址线、且在CPU往自己的地址发送数据的时候、把对应的数据线里边传输过来的数据、</span><br><span class="line">接入到对应的设备里边的寄存器和内存里. CPU无论是向IO设备发送命令、查询状态还是传输数据都可以</span><br><span class="line">通过这种方式. 称为内存映射IO(Memory-Mapped IO, MMIO)</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6ca26f4063f664e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
-<blockquote>
-<p>那么、MMIO是不是唯一一种CPU和设备通信的方式呢 ?</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">不是的. 精简指令集MIPS的CPU特别简单、所以这里只有MMIO. 而有2000多个指令的Intel</span><br><span class="line">而我们有2000多个指令的Intel X86架构的计算机、有专门的和IO设备通信的指令, 即: in 和 out 指令.</span><br><span class="line">Intel CPU虽然也支持MMIO、不过还可以通过特定的指令、来支持端口映射IO(Port-Mapped IO, 简称PMIO)</span><br><span class="line">也可以叫独立输入输出(Isolated IO)</span><br><span class="line"></span><br><span class="line">其实PMIO的通信方式和MMIO差不多、核心区别在于: PMIO里访问的设备地址、不再是在内存地址空间里、</span><br><span class="line">而是一个专门的端口, 这个端口不是硬件杀昂的插口、而是和CPU通信的一个抽象概念</span><br><span class="line"></span><br><span class="line">无论是PMIO还是MMIO、CPU都会传送一条二进制的数据、给到IO设备的对应地址. 设备自己本身的接口电路、</span><br><span class="line">再去解码这个数据、解码之后的数据会变成设备支持的一条指令、再去通过控制电路操作实际的硬件设备</span><br><span class="line">对CPU来说、它不关心设备本身可以支持哪些操作、只是在总线上传输一条条数据就好了.</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1363,13 +1363,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
