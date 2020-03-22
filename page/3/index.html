@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_README/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -205,7 +205,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_README/" class="post-title-link" itemprop="url">README</a>
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/" class="post-title-link" itemprop="url">垃圾回收---Java类型引用</a>
         </h1>
 
         <div class="post-meta">
@@ -230,7 +230,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -245,88 +245,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="let’s-start"><a href="#let’s-start" class="headerlink" title="let’s start"></a>let’s start</h4><p>知识的海洋是浩瀚的、有太多的好奇与未知。。。。<br>一直想要探索linux系统到底是如何运行而不得其法、偶然间遇到极课时间的一个linux系统优化的专栏、还不错、<br>写一下自己的收获吧、算是由表及里也好~</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7---pidstat/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7---pidstat/" class="post-title-link" itemprop="url">linux性能监控---pidstat</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>cpu使用率监控<br>pidstat -t {pid}  1 3 -u 每隔1s输出1次、共输出3次系统状况<br>pidstat -t {pid}  1 3 -u -t 同时输出线程使用情况</p>
-</li>
-<li><p>io监控<br>pidstat -t {pid}  1 3 -d -t 查看线程io信息</p>
-</li>
-<li><p>内存使用监控<br>pidstat -t {pid}  1 3 -m -t 查看线程内存使用</p>
-</li>
-</ol>
+          <p>Java垃圾回收的依据是：是否还有引用.</p>
+<h5 id="什么是引用呢-？"><a href="#什么是引用呢-？" class="headerlink" title="什么是引用呢 ？"></a>什么是引用呢 ？</h5><p>jdk1.2 之前的定义是：</p>
+<blockquote>
+<p>若reference类型的数据中存储的数值代表一块内存的起始地址、则这块内存代表一个引用</p>
+</blockquote>
+<p>jdk1.2 之后进行了扩充：</p>
+<blockquote>
+<p>分为<code>强引用</code>、<code>软引用</code>、<code>若引用</code>、<code>虚引用</code>.</p>
+</blockquote>
+<p>如何定义 ？<br><code>强引用 (strong reference)</code>: 程序代码中普遍存在的、类似 <code>Object obj = new Object()</code> 这类的引用， 只要引用还在、永远不会被回收掉的对象</p>
+<p><code>软引用 (soft reference)</code>：描述一些还有用、但不是必须的对象. 软引用关联的对象、在系统将要发生<code>OOM</code>前会对这些对象进行一次回收、若回收能够产生足够的空间、则不会发生<code>OOM</code>， 回收完成依然没有足够的空间才会抛出<code>OOM</code>异常, <code>JDK1.2</code>之后、系统提供了<code>SoftReference</code>来实现软引用</p>
+<p><code>弱引用 (weak reference)</code>: 也是非必须对象、比软引用的引用更弱一些、被弱引用关联的对象只能生存到下次gc发生之前、当垃圾收集器工作时、无论当前内存是否足够、都会回收掉只被弱引用关联的对象<br><code>JDK1.2</code>之后提供了<code>WeakReference类</code>来实现弱引用</p>
+<p><code>虚引用 (Phantom reference)</code>: 一个对象是否有虚引用的存在、完全不影响其生存时间、也无法通过虚引用来取得一个对象的实例、设置虚引用的唯一目的就是能在整个对象进行垃圾收集时收到一个系统通知</p>
 
       
     </div>
@@ -421,7 +352,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7---vmstat/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -435,7 +366,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7---vmstat/" class="post-title-link" itemprop="url">linux性能监控---vmstat</a>
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">垃圾回收---小疑问</a>
         </h1>
 
         <div class="post-meta">
@@ -460,7 +391,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -475,13 +406,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-63558050c585c684.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>各列含义如下：<br><code>procs</code>:<br><code>r</code> 等待运行的进程数<br> <code>b</code> 可中断休眠的进程数</p>
-<p><code>memory</code>: kb<br><code>swpd</code> 虚拟内存的使用项目<br><code>free</code> 空闲的内存<br><code>buff</code> 被用来作为缓存的内存数</p>
-<p><code>swap</code><br><code>si</code> 从磁盘交换到内存的交换页数量、<br><code>so</code> 从内存交换到磁盘的交换页数量、</p>
-<p><code>io</code><br><code>bi</code> 发送到块设备的块数<br><code>bo</code> 从块设备接收到的块数</p>
-<p><code>system</code><br><code>in</code> 每秒的中断数包括时钟中断<br><code>cs</code> 每秒的上下文切换数</p>
-<p><code>cpu</code><br><code>us</code> 用户cpu使用时间<br><code>sy</code> 系统cpu使用时间<br><code>id</code> 空闲时间</p>
+          <p>看懂了gc日志、可能心中还有小小的疑惑？</p>
+<h5 id="为什么需要垃圾回收"><a href="#为什么需要垃圾回收" class="headerlink" title="为什么需要垃圾回收"></a>为什么需要垃圾回收</h5><blockquote>
+<p>在内存的动态分配和回收机制十分成熟的情况下、仍然没办法避免排查各种内存溢出、内存泄露的问题, 当垃圾收集称为系统达到更高并发量的瓶颈时、就需要了解gc的细节、对gc进行必要的监控和调节</p>
+</blockquote>
+<blockquote>
+<p>程序计数器、虚拟机栈、本地方法栈 随线程运行结束而消亡、这几个区域的内存分配和回收具有确定性、不需要过多的考虑内存回收问题<br>而Java堆和方法区、则在运行时才知道要创建的对象、内存的分配是动态的、垃圾回收主要关注的是这部分的内存</p>
+</blockquote>
+<h5 id="如何判断对象已死？"><a href="#如何判断对象已死？" class="headerlink" title="如何判断对象已死？"></a>如何判断对象已死？</h5><blockquote>
+<ol>
+<li>引用计数法<br>给对象添加一个引用计数器、当有新的引用时、计数器的值+1， 引用失效是、计数器的值-1， 计数器的值为0的对象就是不再有引用的对象<br>这种方式的判断效率很高、实现也比较简单、但是不太好判断 循环引用的问题<br>A-&gt;B, B-&gt;A</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>可达性分析<br>通过 <code>GC Roots</code> 作为分析的起点、从这些节点向下搜索、若一个对象通过任意引用链不可达、则会被判断为<code>可回收对象</code></li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">可作为 &#96;gc root&#96; 的对象：</span><br><span class="line">1. 虚拟机桟中引用的对象</span><br><span class="line">2. 方法区中静态属性引用的对象</span><br><span class="line">3. 方法区中常量引用的对象</span><br><span class="line">4. 本地方法桟中JNI(Native方法)引用的对象</span><br></pre></td></tr></table></figure>
+
+<h5 id="为什么gc的过程要stw-？"><a href="#为什么gc的过程要stw-？" class="headerlink" title="为什么gc的过程要stw ？"></a>为什么gc的过程要stw ？</h5><blockquote>
+<p>为了避免分析过程中对象的引用关系还在不断的发生变化、导致分析结果的准确性无法保证<br>系统停顿下来后如果得知对象引用关系呢 ？<br>在hotspot的实现中、有一个OopMap的数据结构、在类加载的时候， 它就把对象内什么偏移量位置上是什么类型的数据计算出来、在jit编译的过程中也会在特定的位置记录桟和寄存器哪些位置是引用、这样gc扫描时就可以直接得到了<br>但是、为什么是特定位置 ？<br>如果每条指令都生成对应OopMap、会需要大量的额外空间、所以只是在特定位置(安全点<code>safepoint</code>)记录这些信息<br><code>notice</code> : 设置标记等待线程运行到安全点再gc解决了大部分问题、但如果线程是<code>sleep</code>或者<code>block</code>状态呢 ？线程无法响应jvm的中断请求、运行到安全点去中断挂起、jvm也不可能得到线程被重新分配CPU时间、so、有了<code>安全区域</code>-<code>safe region</code>来解决<br><code>safe region</code>: 在一个代码片段之内、引用关系不会发生变化、在这个区域内的任意位置进行gc都是安全的，线程在进入安全区域的时候、会设置自己进入安全区域的标记、jvm在gc时、会忽略这类线程<br>在线程离开安全区域时会检测系统是否已经完成了gc、ok则可以继续运行、否则需要等待可以离开安全点的信号</p>
+</blockquote>
+<h5 id="晋升为老年代的判断？"><a href="#晋升为老年代的判断？" class="headerlink" title="晋升为老年代的判断？"></a>晋升为老年代的判断？</h5><blockquote>
+<ol>
+<li>对象优先在Eden区分配、若Eden区无足够的空间、虚拟机会发起一次Minor GC， 经过一次Minor gc、<code>age</code>会<code>+1</code>、达到指定age(<code>-XX:MaxTenuringThreshold指定</code>)时、对象会进入老年代</li>
+<li>Minor gc时、无法放入 <code>survivor</code> 区的对象、会通过<code>分配担保机制</code>提前转移到<code>old generation</code></li>
+<li>大对象直接进入老年代, 为避免提前触发gc  大于 <code>-XX:PreTenureThreshold</code>指定值得对象会提前进入直接在老年代分配</li>
+<li>若survivor区 相同年龄的所有对象的大小的总和&gt;survivor区的一半、则 age &gt;= 该age值得对象可以直接进入老年代、无需等到 <code>-XX:MaxTenuringThreshold</code> 指定年龄值</li>
+</ol>
+</blockquote>
 
       
     </div>
@@ -574,6 +528,353 @@
 <blockquote>
 <p>-a 列出打开文件存在的进程<br>-c&lt;进程名&gt;</p>
 </blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">常用命令</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>cat /proc/cpuinfo | grep &#39;physical id&#39; |  sort| uniq| wc -l</code> 查看物理CPU的个数<br><code>cat /proc/cpuinfo| grep &quot;cpu cores&quot;| uniq</code> 查看每个物理CPU中cores的个数<br><code>cat /proc/cpuinfo| grep &quot;processor&quot;| wc -l</code> 查看逻辑CPU的个数</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/" class="post-title-link" itemprop="url">如何了解自己的系统运行状态</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="平均负载-loadavg"><a href="#平均负载-loadavg" class="headerlink" title="平均负载 loadavg"></a>平均负载 loadavg</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">当系统变慢时、我们想到的很可能是 uptime 或者 top</span><br><span class="line">它每一列的含义是什么 ？</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7a4f7de3de8dc6be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime"></p>
+<p>so. mark<br><code>10:13:59</code> 是当前时间<br><code>up 303 days, 22:27</code> 是系统允许时间<br> <code>1 user</code> 是正在登录用户数<br>load average: 4.61, 4.37, 3.73 这三列呢 ？<br>依次是 过去<code>1min</code>、<code>5min</code>、<code>15min</code>的平均负载</p>
+<h4 id="什么是平均负载-？？？"><a href="#什么是平均负载-？？？" class="headerlink" title="什么是平均负载 ？？？"></a>什么是平均负载 ？？？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">知道了uptime是如何看的、那么平均负载多少算是合适 ？它又是代表什么含义呢 ？</span><br><span class="line"></span><br><span class="line">简单来说平均负载就是单位时间内、系统处于可运行状态和不可中断状态的平均进程数、也就是平均活跃进程数，</span><br><span class="line">之前、我以为是cpu的使用率来着的~~~xxxxx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可运行状态的进程：指正在使用CPU或者等待CPU的进程、ps看到的、处于R状态(Runnable&#x2F;Running)的进程</span><br><span class="line"></span><br><span class="line">不可中断进程：正处于内核关键流程中的进程、并且这些进程是不可打断的、eg. 等待硬件设备的io响应、也就是ps命令中的D状态(uninterrutible sleep)的进程</span><br><span class="line">不可中断状态其实是系统对进程包含和硬件设备的一种保护机制</span><br><span class="line"></span><br><span class="line">既然平均负载就是平均的活跃进程数、那么最理想的状态就是每个CPU上都刚好运行着一个进程(每个cpu充分利用、又不会过载)</span><br><span class="line"></span><br><span class="line">eg. loadavg为2、意味着什么呢 ？</span><br><span class="line">1) 假如系统有2个CPU、则cpu刚好都被占用</span><br><span class="line">2) 在4个CPU的系统上、意味着50%的CPU空闲</span><br><span class="line">3) 在只有1个CPU的系统上、则会有一半的进程竞争不到CPU</span><br><span class="line"></span><br><span class="line">最理想的状态是、刚好等于CPU的核心数</span><br><span class="line">那么如何查询系统有几个CPU ？？</span><br><span class="line">1) 使用top</span><br><span class="line">2) 从&#x2F;proc&#x2F;cpuinfo 获取</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4cf1dcfb4a79d551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cpuinfo.png"></p>
+<h4 id="知道了cpu的核数和衡量指标、如何分析负载趋势？"><a href="#知道了cpu的核数和衡量指标、如何分析负载趋势？" class="headerlink" title="知道了cpu的核数和衡量指标、如何分析负载趋势？"></a>知道了cpu的核数和衡量指标、如何分析负载趋势？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 若1min、5min、15min的值基本相同或者相差不大、说明系统负载很平稳</span><br><span class="line">2. 若1min内的值远小于15min的值、说明最近1min的负载在减小、而过去15min则负载很高</span><br><span class="line">3. 反过来、若最近1imn的值远高于过去15min的负载、说明负载在明显升高、需要持续观察一下</span><br><span class="line"></span><br><span class="line">eg. 单核cpu的 loadavg为：1.73  0.60  7.98 </span><br><span class="line">说明过去1min有73%的超载、过去15min有698%的超载</span><br><span class="line">总体来看、负载在降低</span><br><span class="line"></span><br><span class="line">那么实际生产环境、负载达到多少的时候、我们应该开始关注呢 ？ 一般 超过70%就要持续观察下、看看系统负载的平均趋势</span><br></pre></td></tr></table></figure>
+
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1. 命令</span><br><span class="line">stress 压力测试工具</span><br><span class="line">mpstat 多核CPU性能分析工具、可实时查看每个CPU的平均指标</span><br><span class="line">pidstat 实时查看进程的cpu、内存、io及上下文切换等指标</span><br><span class="line">watch 监控进程</span><br><span class="line"></span><br><span class="line">2. 模拟cpu密集型(需要准备3个终端、每个终端执行一个命令)</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line"></span><br><span class="line">watch -d uptime (-d代表高亮显示变化的区域)</span><br><span class="line"></span><br><span class="line">mpstat -P ALL 5 (-p ALL代表监控所有CPU 5代表间隔5s输出1次)</span><br><span class="line"></span><br><span class="line">3. 模拟IO密集型</span><br><span class="line">stress -i 1 --timeout 600</span><br><span class="line"></span><br><span class="line">4. 大量进程的场景</span><br><span class="line">stress -c 8 --timeout 600</span><br><span class="line"></span><br><span class="line">附：安装stress</span><br><span class="line">sudo yum -y install epel-release</span><br><span class="line">sudo yum -y install stress</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e8ae343bc07ff1ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e6c92ece83479acc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-5b6eb08f6768da70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mpstat.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-title-link" itemprop="url">平均负载</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
+<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
+<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
+<blockquote>
+<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
+<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
+</blockquote>
+<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
+
+
+
+<p>CPU核数查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
+</blockquote>
+<p>平均负载与CPU使用率</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
+
+
+
+<p>案例分析</p>
+<p>一、CPU密集型进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
+<p>二、IO密集型进程</p>
+<p>查看方式同上</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7---vmstat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7---vmstat/" class="post-title-link" itemprop="url">linux性能监控---vmstat</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-63558050c585c684.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>各列含义如下：<br><code>procs</code>:<br><code>r</code> 等待运行的进程数<br> <code>b</code> 可中断休眠的进程数</p>
+<p><code>memory</code>: kb<br><code>swpd</code> 虚拟内存的使用项目<br><code>free</code> 空闲的内存<br><code>buff</code> 被用来作为缓存的内存数</p>
+<p><code>swap</code><br><code>si</code> 从磁盘交换到内存的交换页数量、<br><code>so</code> 从内存交换到磁盘的交换页数量、</p>
+<p><code>io</code><br><code>bi</code> 发送到块设备的块数<br><code>bo</code> 从块设备接收到的块数</p>
+<p><code>system</code><br><code>in</code> 每秒的中断数包括时钟中断<br><code>cs</code> 每秒的上下文切换数</p>
+<p><code>cpu</code><br><code>us</code> 用户cpu使用时间<br><code>sy</code> 系统cpu使用时间<br><code>id</code> 空闲时间</p>
 
       
     </div>
@@ -774,273 +1075,6 @@
 <blockquote>
 <p>flag描述<br>S SYN Connection Start<br>F FIN Connection Finish<br>P PUSH Data Push<br>. ACK Acknowledment</p>
 </blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/" class="post-title-link" itemprop="url">如何了解自己的系统运行状态</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="平均负载-loadavg"><a href="#平均负载-loadavg" class="headerlink" title="平均负载 loadavg"></a>平均负载 loadavg</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">当系统变慢时、我们想到的很可能是 uptime 或者 top</span><br><span class="line">它每一列的含义是什么 ？</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7a4f7de3de8dc6be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime"></p>
-<p>so. mark<br><code>10:13:59</code> 是当前时间<br><code>up 303 days, 22:27</code> 是系统允许时间<br> <code>1 user</code> 是正在登录用户数<br>load average: 4.61, 4.37, 3.73 这三列呢 ？<br>依次是 过去<code>1min</code>、<code>5min</code>、<code>15min</code>的平均负载</p>
-<h4 id="什么是平均负载-？？？"><a href="#什么是平均负载-？？？" class="headerlink" title="什么是平均负载 ？？？"></a>什么是平均负载 ？？？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">知道了uptime是如何看的、那么平均负载多少算是合适 ？它又是代表什么含义呢 ？</span><br><span class="line"></span><br><span class="line">简单来说平均负载就是单位时间内、系统处于可运行状态和不可中断状态的平均进程数、也就是平均活跃进程数，</span><br><span class="line">之前、我以为是cpu的使用率来着的~~~xxxxx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可运行状态的进程：指正在使用CPU或者等待CPU的进程、ps看到的、处于R状态(Runnable&#x2F;Running)的进程</span><br><span class="line"></span><br><span class="line">不可中断进程：正处于内核关键流程中的进程、并且这些进程是不可打断的、eg. 等待硬件设备的io响应、也就是ps命令中的D状态(uninterrutible sleep)的进程</span><br><span class="line">不可中断状态其实是系统对进程包含和硬件设备的一种保护机制</span><br><span class="line"></span><br><span class="line">既然平均负载就是平均的活跃进程数、那么最理想的状态就是每个CPU上都刚好运行着一个进程(每个cpu充分利用、又不会过载)</span><br><span class="line"></span><br><span class="line">eg. loadavg为2、意味着什么呢 ？</span><br><span class="line">1) 假如系统有2个CPU、则cpu刚好都被占用</span><br><span class="line">2) 在4个CPU的系统上、意味着50%的CPU空闲</span><br><span class="line">3) 在只有1个CPU的系统上、则会有一半的进程竞争不到CPU</span><br><span class="line"></span><br><span class="line">最理想的状态是、刚好等于CPU的核心数</span><br><span class="line">那么如何查询系统有几个CPU ？？</span><br><span class="line">1) 使用top</span><br><span class="line">2) 从&#x2F;proc&#x2F;cpuinfo 获取</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4cf1dcfb4a79d551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cpuinfo.png"></p>
-<h4 id="知道了cpu的核数和衡量指标、如何分析负载趋势？"><a href="#知道了cpu的核数和衡量指标、如何分析负载趋势？" class="headerlink" title="知道了cpu的核数和衡量指标、如何分析负载趋势？"></a>知道了cpu的核数和衡量指标、如何分析负载趋势？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 若1min、5min、15min的值基本相同或者相差不大、说明系统负载很平稳</span><br><span class="line">2. 若1min内的值远小于15min的值、说明最近1min的负载在减小、而过去15min则负载很高</span><br><span class="line">3. 反过来、若最近1imn的值远高于过去15min的负载、说明负载在明显升高、需要持续观察一下</span><br><span class="line"></span><br><span class="line">eg. 单核cpu的 loadavg为：1.73  0.60  7.98 </span><br><span class="line">说明过去1min有73%的超载、过去15min有698%的超载</span><br><span class="line">总体来看、负载在降低</span><br><span class="line"></span><br><span class="line">那么实际生产环境、负载达到多少的时候、我们应该开始关注呢 ？ 一般 超过70%就要持续观察下、看看系统负载的平均趋势</span><br></pre></td></tr></table></figure>
-
-<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1. 命令</span><br><span class="line">stress 压力测试工具</span><br><span class="line">mpstat 多核CPU性能分析工具、可实时查看每个CPU的平均指标</span><br><span class="line">pidstat 实时查看进程的cpu、内存、io及上下文切换等指标</span><br><span class="line">watch 监控进程</span><br><span class="line"></span><br><span class="line">2. 模拟cpu密集型(需要准备3个终端、每个终端执行一个命令)</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line"></span><br><span class="line">watch -d uptime (-d代表高亮显示变化的区域)</span><br><span class="line"></span><br><span class="line">mpstat -P ALL 5 (-p ALL代表监控所有CPU 5代表间隔5s输出1次)</span><br><span class="line"></span><br><span class="line">3. 模拟IO密集型</span><br><span class="line">stress -i 1 --timeout 600</span><br><span class="line"></span><br><span class="line">4. 大量进程的场景</span><br><span class="line">stress -c 8 --timeout 600</span><br><span class="line"></span><br><span class="line">附：安装stress</span><br><span class="line">sudo yum -y install epel-release</span><br><span class="line">sudo yum -y install stress</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e8ae343bc07ff1ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e6c92ece83479acc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-5b6eb08f6768da70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mpstat.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">常用命令</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><code>cat /proc/cpuinfo | grep &#39;physical id&#39; |  sort| uniq| wc -l</code> 查看物理CPU的个数<br><code>cat /proc/cpuinfo| grep &quot;cpu cores&quot;| uniq</code> 查看每个物理CPU中cores的个数<br><code>cat /proc/cpuinfo| grep &quot;processor&quot;| wc -l</code> 查看逻辑CPU的个数</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-title-link" itemprop="url">平均负载</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
-<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
-<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
-<blockquote>
-<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
-<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
-</blockquote>
-<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
-
-
-
-<p>CPU核数查看</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
-</blockquote>
-<p>平均负载与CPU使用率</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
-
-
-
-<p>案例分析</p>
-<p>一、CPU密集型进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
-<p>二、IO密集型进程</p>
-<p>查看方式同上</p>
 
       
     </div>

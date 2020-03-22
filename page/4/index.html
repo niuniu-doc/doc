@@ -284,91 +284,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">常用命令</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.version()</span><br><span class="line">mongo --version</span><br><span class="line">mongod --version</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看各节点的健康状态"><a href="#查看各节点的健康状态" class="headerlink" title="查看各节点的健康状态"></a>查看各节点的健康状态</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制集状态查看  rs.status()</span><br><span class="line">查看oplog状态 rs.printReplicationInfo();</span><br><span class="line">查看复制延迟 rs.printSlaveReplicationInfo();</span><br><span class="line">查看服务状态详情 db.serverStatus();</span><br></pre></td></tr></table></figure>
-<h4 id="查看数据库空间大小"><a href="#查看数据库空间大小" class="headerlink" title="查看数据库空间大小"></a>查看数据库空间大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.stats() 默认返回字节</span><br><span class="line">&quot;dataSize&quot; : 20,  &#x2F;&#x2F;所有数据的总大小</span><br><span class="line">&quot;storageSize&quot; : 21, &#x2F;&#x2F;所有数据占的磁盘大小 </span><br><span class="line">&quot;fileSize&quot; : 23,  &#x2F;&#x2F;预分配给数据库的文件大小</span><br><span class="line"></span><br><span class="line">db.stats(1073741824) &#x2F;&#x2F; 得到的单位是 G</span><br><span class="line">这里的objects以及avgObjSize还是bytes为单位的，不受参数影响</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看总的记录数"><a href="#查看总的记录数" class="headerlink" title="查看总的记录数"></a>查看总的记录数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.dbname.find().count()</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(); 会返回所有的记录数</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(true); 会返回limit的记录数</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看数据库信息"><a href="#查看数据库信息" class="headerlink" title="查看数据库信息"></a>查看数据库信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getName 返回当前所在的db名称</span><br></pre></td></tr></table></figure>
-
-<h4 id="允许副本集上的查询"><a href="#允许副本集上的查询" class="headerlink" title="允许副本集上的查询"></a>允许副本集上的查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.slaveOk()</span><br></pre></td></tr></table></figure>
-
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.cnblogs.com&#x2F;kevingrace&#x2F;p&#x2F;8178549.html</span><br><span class="line">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;30088833&#x2F;strange-mongodb-and-mongoose-error-not-master-and-slaveok-false-error&#x2F;30089063</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -447,7 +362,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -461,7 +376,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/mongo_%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">查询计划简要分析</a>
+            <a href="/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">常用命令</a>
         </h1>
 
         <div class="post-meta">
@@ -501,103 +416,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="查看sql执行计划"><a href="#查看sql执行计划" class="headerlink" title="查看sql执行计划"></a>查看sql执行计划</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在查询语句后添加 <span class="keyword">explain</span> 即可</span><br><span class="line">eg. db.collection.find().explain()</span><br></pre></td></tr></table></figure>
+          <h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.version()</span><br><span class="line">mongo --version</span><br><span class="line">mongod --version</span><br></pre></td></tr></table></figure>
 
-<h4 id="返回信息解读"><a href="#返回信息解读" class="headerlink" title="返回信息解读"></a>返回信息解读</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">queryPlanner (查询计划): 查询优化选择的计划细节和被拒绝的计划</span><br><span class="line">    namespace 运行查询的指定命名空间</span><br><span class="line">    indexFilterSet Boolean值、表示mongodb在查询中是否使用索引过滤</span><br><span class="line">    winningPlan 由查询优化选择的计划文档</span><br><span class="line">         stage: 表示查询阶段的字符串</span><br><span class="line">         inputStage: 表示子查询的文档</span><br><span class="line">         inputStages: 表示子过程的文档数组</span><br><span class="line">executionStats(执行状态): 被选中执行计划和被拒绝执行计划的详细说明</span><br><span class="line">     queryPlanner.nReturned－匹配查询条件的文档数</span><br><span class="line">     queryPlanner.executionTimeMillis－计划选择和查询执行所需的总时间（毫秒数）</span><br><span class="line">     queryPlanner.totalKeysExamined－扫描的索引总数</span><br><span class="line">     queryPlanner.totalDocsExamined－扫描的文档总数</span><br><span class="line">     queryPlanner.executionStages－显示执行成功细节的查询阶段树</span><br><span class="line">          executionStages.works－指定查询执行阶段执行的“工作单元”的数量</span><br><span class="line">          executionStages.advanced－返回的中间结果数</span><br><span class="line">          executionStages.needTime－未将中间结果推进到其父级的工作周期数</span><br><span class="line">          executionStages.needYield－存储层要求查询系统产生的锁的次数</span><br><span class="line">          executionStages.isEOF－指定执行阶段是否已到达流结束</span><br><span class="line">     queryPlanner.allPlansExecution－包含在计划选择阶段期间捕获的部分执行信息，包括选择计划和拒绝计划</span><br><span class="line"> serverInfo,（服务器信息）：MongoDB实例的相关信息：</span><br><span class="line">     winningPlan－使用的执行计划</span><br><span class="line">          shards－包括每个访问片的queryPlanner和serverInfo的文档数组</span><br></pre></td></tr></table></figure>
+<h4 id="查看各节点的健康状态"><a href="#查看各节点的健康状态" class="headerlink" title="查看各节点的健康状态"></a>查看各节点的健康状态</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制集状态查看  rs.status()</span><br><span class="line">查看oplog状态 rs.printReplicationInfo();</span><br><span class="line">查看复制延迟 rs.printSlaveReplicationInfo();</span><br><span class="line">查看服务状态详情 db.serverStatus();</span><br></pre></td></tr></table></figure>
+<h4 id="查看数据库空间大小"><a href="#查看数据库空间大小" class="headerlink" title="查看数据库空间大小"></a>查看数据库空间大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.stats() 默认返回字节</span><br><span class="line">&quot;dataSize&quot; : 20,  &#x2F;&#x2F;所有数据的总大小</span><br><span class="line">&quot;storageSize&quot; : 21, &#x2F;&#x2F;所有数据占的磁盘大小 </span><br><span class="line">&quot;fileSize&quot; : 23,  &#x2F;&#x2F;预分配给数据库的文件大小</span><br><span class="line"></span><br><span class="line">db.stats(1073741824) &#x2F;&#x2F; 得到的单位是 G</span><br><span class="line">这里的objects以及avgObjSize还是bytes为单位的，不受参数影响</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
+<h4 id="查看总的记录数"><a href="#查看总的记录数" class="headerlink" title="查看总的记录数"></a>查看总的记录数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.dbname.find().count()</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(); 会返回所有的记录数</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(true); 会返回limit的记录数</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<h4 id="查看数据库信息"><a href="#查看数据库信息" class="headerlink" title="查看数据库信息"></a>查看数据库信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getName 返回当前所在的db名称</span><br></pre></td></tr></table></figure>
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E7%B4%A2%E5%BC%95%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
+<h4 id="允许副本集上的查询"><a href="#允许副本集上的查询" class="headerlink" title="允许副本集上的查询"></a>允许副本集上的查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.slaveOk()</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/mongo_%E7%B4%A2%E5%BC%95%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">索引简单使用</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>###索引管理</p>
-<h4 id="索引创建"><a href="#索引创建" class="headerlink" title="索引创建"></a>索引创建</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.ensureIndex(keys[,options])</span><br><span class="line"></span><br><span class="line">keys: 要建立索引的参数列表 key字段名、1升序 -1降序</span><br><span class="line"></span><br><span class="line">options: 可选参数</span><br><span class="line">background: Boolean 在后台建立索引</span><br><span class="line">unique: boolean 创建唯一索引、默认false</span><br><span class="line">name String指定索引名称</span><br><span class="line">dropDups Boolean创建唯一索引时、若若出现重复、删除后续出现的相同索引、只保留第一个</span><br><span class="line">sparse Boolean 对文档中不存在的字段数据不启用索引、默认false</span><br><span class="line">v index version 索引的版本号</span><br><span class="line">weights document索引权重值、表示改索引相对其它索引字段的得分权重值</span><br></pre></td></tr></table></figure>
-
-<h4 id="重建索引"><a href="#重建索引" class="headerlink" title="重建索引"></a>重建索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.collectionName.reIndex()</span><br><span class="line">作用类似于mysql的optimize、修复多次修改产生的文件空洞</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.collectionName.getIndexes()</span><br><span class="line">查看索引大小</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.collectionName.dropIndex(IndexName)</span><br><span class="line"></span><br><span class="line">删除所有索引</span><br><span class="line">db.collectionName.dropIndexes;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="基础索引与复合索引"><a href="#基础索引与复合索引" class="headerlink" title="基础索引与复合索引"></a>基础索引与复合索引</h3><h4 id="基础索引"><a href="#基础索引" class="headerlink" title="基础索引"></a>基础索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 为一个集合中的某个字段创建索引</span><br><span class="line">eg. db.useers.ensureIndex(&#123;age:1&#125;)</span><br><span class="line"></span><br><span class="line">2. 当数据很多时、索引创建会比较慢、可以指定 background: true</span><br><span class="line">eg. db.users.ensureIndex(&#123;age:1&#125;, &#123;background: true&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="组合索引"><a href="#组合索引" class="headerlink" title="组合索引"></a>组合索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">为users表的age和city字段、创建联合索引、分表按照升序和降序排列</span><br><span class="line">eg. db.useers.ensureIndex(&#123;age:1, city:-1&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看索引-1"><a href="#查看索引-1" class="headerlink" title="查看索引"></a>查看索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.dbname.getIndexes() 返回当前集合所有的索引</span><br><span class="line">1:升序  -1:降序</span><br></pre></td></tr></table></figure>
-
-<h3 id="文档索引"><a href="#文档索引" class="headerlink" title="文档索引"></a>文档索引</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1. mongodb可以为多个字段创建索引、当字段是子文档时、同样可以创建</span><br><span class="line">eg. mongo中有下列数据</span><br><span class="line">&#123;name:&quot;aaa&quot;, address:&#123;city:&quot;bj&quot;,district:&quot;海淀&quot;&#125;&#125;</span><br><span class="line"></span><br><span class="line">可以为address创建索引如下:</span><br><span class="line">db.users.ensureIndex(&#123;address:1&#125;)</span><br><span class="line"></span><br><span class="line">建立索引后、查询时子文档的字段顺序要和查询顺序一致、才可使用索引</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 会使用索引</span><br><span class="line">db.users.find(&#123;address:&#123;city:&quot;bj&quot;,district:&quot;海淀&quot;&#125;&#125;)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 不会使用索引</span><br><span class="line">db.users.find(&#123;address:&#123;district:&quot;海淀&quot;,city:&quot;bj&quot;&#125;&#125;)</span><br><span class="line"></span><br><span class="line">也可以只对子文档的某一个或者部分字段创建索引</span><br><span class="line">db.users.ensureIndex(&#123;&quot;address.city&quot;:1&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="唯一索引与强制索引"><a href="#唯一索引与强制索引" class="headerlink" title="唯一索引与强制索引"></a>唯一索引与强制索引</h3><h4 id="创建唯一索引"><a href="#创建唯一索引" class="headerlink" title="创建唯一索引"></a>创建唯一索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">添加索引时、指定 unique:true 等效于唯一索引</span><br><span class="line">eg. 为users表的email字段添加唯一索引</span><br><span class="line">db.users.ensureIndex(&#123;email:1&#125;,&#123;unique:true&#125;)</span><br><span class="line"></span><br><span class="line">创建唯一索引后、插入重复值时、mongo会报错..</span><br></pre></td></tr></table></figure>
-
-<h4 id="强制使用索引"><a href="#强制使用索引" class="headerlink" title="强制使用索引"></a>强制使用索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find(&#123;name:&#39;aaa&#39;, age:3&#125;).hint(&#123;age:1&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.cnblogs.com&#x2F;kevingrace&#x2F;p&#x2F;8178549.html</span><br><span class="line">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;30088833&#x2F;strange-mongodb-and-mongoose-error-not-master-and-slaveok-false-error&#x2F;30089063</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -909,6 +739,176 @@
 
 <p>疑问</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. broker收到消息会先写commitlog、为什么producer发消息的时候会选择一个Queue去发 ？而不是broker ？再由broker分发到Queue ？</span><br><span class="line"></span><br><span class="line">2. 写commitlog的时候、同步刷盘指针和异步刷盘指针写的是同一个commitlog文件、如何保证消息的有序存储？</span><br><span class="line"></span><br><span class="line">3. 文件清除何时进行 ？</span><br><span class="line"></span><br><span class="line">4. 消息队列如何进行负载均衡？</span><br><span class="line"></span><br><span class="line">5. 消息发送如何保证高可用</span><br><span class="line"></span><br><span class="line">6. 批量消息如何保持一致性</span><br><span class="line"></span><br><span class="line">7. broker失效后120s才能将该broker从路由表中移除、若生产者获取到的路由信息包含已宕机的broker如何处理？</span><br><span class="line"></span><br><span class="line">8.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E7%B4%A2%E5%BC%95%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mongo_%E7%B4%A2%E5%BC%95%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">索引简单使用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>###索引管理</p>
+<h4 id="索引创建"><a href="#索引创建" class="headerlink" title="索引创建"></a>索引创建</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.ensureIndex(keys[,options])</span><br><span class="line"></span><br><span class="line">keys: 要建立索引的参数列表 key字段名、1升序 -1降序</span><br><span class="line"></span><br><span class="line">options: 可选参数</span><br><span class="line">background: Boolean 在后台建立索引</span><br><span class="line">unique: boolean 创建唯一索引、默认false</span><br><span class="line">name String指定索引名称</span><br><span class="line">dropDups Boolean创建唯一索引时、若若出现重复、删除后续出现的相同索引、只保留第一个</span><br><span class="line">sparse Boolean 对文档中不存在的字段数据不启用索引、默认false</span><br><span class="line">v index version 索引的版本号</span><br><span class="line">weights document索引权重值、表示改索引相对其它索引字段的得分权重值</span><br></pre></td></tr></table></figure>
+
+<h4 id="重建索引"><a href="#重建索引" class="headerlink" title="重建索引"></a>重建索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.collectionName.reIndex()</span><br><span class="line">作用类似于mysql的optimize、修复多次修改产生的文件空洞</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.collectionName.getIndexes()</span><br><span class="line">查看索引大小</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.collectionName.dropIndex(IndexName)</span><br><span class="line"></span><br><span class="line">删除所有索引</span><br><span class="line">db.collectionName.dropIndexes;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="基础索引与复合索引"><a href="#基础索引与复合索引" class="headerlink" title="基础索引与复合索引"></a>基础索引与复合索引</h3><h4 id="基础索引"><a href="#基础索引" class="headerlink" title="基础索引"></a>基础索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 为一个集合中的某个字段创建索引</span><br><span class="line">eg. db.useers.ensureIndex(&#123;age:1&#125;)</span><br><span class="line"></span><br><span class="line">2. 当数据很多时、索引创建会比较慢、可以指定 background: true</span><br><span class="line">eg. db.users.ensureIndex(&#123;age:1&#125;, &#123;background: true&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="组合索引"><a href="#组合索引" class="headerlink" title="组合索引"></a>组合索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">为users表的age和city字段、创建联合索引、分表按照升序和降序排列</span><br><span class="line">eg. db.useers.ensureIndex(&#123;age:1, city:-1&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看索引-1"><a href="#查看索引-1" class="headerlink" title="查看索引"></a>查看索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.dbname.getIndexes() 返回当前集合所有的索引</span><br><span class="line">1:升序  -1:降序</span><br></pre></td></tr></table></figure>
+
+<h3 id="文档索引"><a href="#文档索引" class="headerlink" title="文档索引"></a>文档索引</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1. mongodb可以为多个字段创建索引、当字段是子文档时、同样可以创建</span><br><span class="line">eg. mongo中有下列数据</span><br><span class="line">&#123;name:&quot;aaa&quot;, address:&#123;city:&quot;bj&quot;,district:&quot;海淀&quot;&#125;&#125;</span><br><span class="line"></span><br><span class="line">可以为address创建索引如下:</span><br><span class="line">db.users.ensureIndex(&#123;address:1&#125;)</span><br><span class="line"></span><br><span class="line">建立索引后、查询时子文档的字段顺序要和查询顺序一致、才可使用索引</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 会使用索引</span><br><span class="line">db.users.find(&#123;address:&#123;city:&quot;bj&quot;,district:&quot;海淀&quot;&#125;&#125;)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 不会使用索引</span><br><span class="line">db.users.find(&#123;address:&#123;district:&quot;海淀&quot;,city:&quot;bj&quot;&#125;&#125;)</span><br><span class="line"></span><br><span class="line">也可以只对子文档的某一个或者部分字段创建索引</span><br><span class="line">db.users.ensureIndex(&#123;&quot;address.city&quot;:1&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="唯一索引与强制索引"><a href="#唯一索引与强制索引" class="headerlink" title="唯一索引与强制索引"></a>唯一索引与强制索引</h3><h4 id="创建唯一索引"><a href="#创建唯一索引" class="headerlink" title="创建唯一索引"></a>创建唯一索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">添加索引时、指定 unique:true 等效于唯一索引</span><br><span class="line">eg. 为users表的email字段添加唯一索引</span><br><span class="line">db.users.ensureIndex(&#123;email:1&#125;,&#123;unique:true&#125;)</span><br><span class="line"></span><br><span class="line">创建唯一索引后、插入重复值时、mongo会报错..</span><br></pre></td></tr></table></figure>
+
+<h4 id="强制使用索引"><a href="#强制使用索引" class="headerlink" title="强制使用索引"></a>强制使用索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find(&#123;name:&#39;aaa&#39;, age:3&#125;).hint(&#123;age:1&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mongo_%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">查询计划简要分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="查看sql执行计划"><a href="#查看sql执行计划" class="headerlink" title="查看sql执行计划"></a>查看sql执行计划</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在查询语句后添加 <span class="keyword">explain</span> 即可</span><br><span class="line">eg. db.collection.find().explain()</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回信息解读"><a href="#返回信息解读" class="headerlink" title="返回信息解读"></a>返回信息解读</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">queryPlanner (查询计划): 查询优化选择的计划细节和被拒绝的计划</span><br><span class="line">    namespace 运行查询的指定命名空间</span><br><span class="line">    indexFilterSet Boolean值、表示mongodb在查询中是否使用索引过滤</span><br><span class="line">    winningPlan 由查询优化选择的计划文档</span><br><span class="line">         stage: 表示查询阶段的字符串</span><br><span class="line">         inputStage: 表示子查询的文档</span><br><span class="line">         inputStages: 表示子过程的文档数组</span><br><span class="line">executionStats(执行状态): 被选中执行计划和被拒绝执行计划的详细说明</span><br><span class="line">     queryPlanner.nReturned－匹配查询条件的文档数</span><br><span class="line">     queryPlanner.executionTimeMillis－计划选择和查询执行所需的总时间（毫秒数）</span><br><span class="line">     queryPlanner.totalKeysExamined－扫描的索引总数</span><br><span class="line">     queryPlanner.totalDocsExamined－扫描的文档总数</span><br><span class="line">     queryPlanner.executionStages－显示执行成功细节的查询阶段树</span><br><span class="line">          executionStages.works－指定查询执行阶段执行的“工作单元”的数量</span><br><span class="line">          executionStages.advanced－返回的中间结果数</span><br><span class="line">          executionStages.needTime－未将中间结果推进到其父级的工作周期数</span><br><span class="line">          executionStages.needYield－存储层要求查询系统产生的锁的次数</span><br><span class="line">          executionStages.isEOF－指定执行阶段是否已到达流结束</span><br><span class="line">     queryPlanner.allPlansExecution－包含在计划选择阶段期间捕获的部分执行信息，包括选择计划和拒绝计划</span><br><span class="line"> serverInfo,（服务器信息）：MongoDB实例的相关信息：</span><br><span class="line">     winningPlan－使用的执行计划</span><br><span class="line">          shards－包括每个访问片的queryPlanner和serverInfo的文档数组</span><br></pre></td></tr></table></figure>
 
       
     </div>
