@@ -213,8 +213,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/mysql_mysql%E4%BA%8B%E5%8A%A1/" itemprop="url">
-            <span itemprop="name">mysql事务</span>
+          <a class="post-title-link" href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E4%B8%83%E7%A7%8D%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%AE%80%E4%BB%8B/" itemprop="url">
+            <span itemprop="name">垃圾回收---七种垃圾收集器简介</span>
           </a>
       </h2>
 
@@ -273,8 +273,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/mysql_mysql%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/" itemprop="url">
-            <span itemprop="name">mysql索引相关问题整理</span>
+          <a class="post-title-link" href="/2020/03/20/mysql_mysql%E7%B4%A2%E5%BC%95%E9%80%89%E6%8B%A9/" itemprop="url">
+            <span itemprop="name">mysql索引选择</span>
           </a>
       </h2>
 
@@ -293,8 +293,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/mysql_mysql%E7%B4%A2%E5%BC%95%E9%80%89%E6%8B%A9/" itemprop="url">
-            <span itemprop="name">mysql索引选择</span>
+          <a class="post-title-link" href="/2020/03/20/mysql_mysql%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/" itemprop="url">
+            <span itemprop="name">mysql索引相关问题整理</span>
           </a>
       </h2>
 
@@ -580,6 +580,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : false,
+      appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
+      appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
+      placeholder: "欢迎一起来讨论^.^",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>

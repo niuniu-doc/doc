@@ -239,6 +239,27 @@
             </span>
 
           
+            <span id="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E4%B8%83%E7%A7%8D%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%AE%80%E4%BB%8B/" class="post-meta-item leancloud_visitors" data-flag-title="垃圾回收---七种垃圾收集器简介" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E4%B8%83%E7%A7%8D%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%AE%80%E4%BB%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E4%B8%83%E7%A7%8D%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%AE%80%E4%BB%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -332,12 +353,12 @@ ParNew收集器除了使用多线程收集外、其它与Serial收集器并无�
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/mysql_mysql%E4%BA%8B%E5%8A%A1/" rel="prev" title="mysql事务">
-      <i class="fa fa-chevron-left"></i> mysql事务
+    <a href="/2020/03/20/mysql_mysql-%E7%B4%A2%E5%BC%95/" rel="prev" title="mysql-索引">
+      <i class="fa fa-chevron-left"></i> mysql-索引
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---GC%E6%97%A5%E5%BF%97%E8%A7%A3%E8%AF%BB/" rel="next" title="垃圾回收---GC日志解读">
-      垃圾回收---GC日志解读 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/mysql_mysql%E4%BA%8B%E5%8A%A1/" rel="next" title="mysql事务">
+      mysql事务 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -352,6 +373,7 @@ ParNew收集器除了使用多线程收集外、其它与Serial收集器并无�
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -516,6 +538,35 @@ ParNew收集器除了使用多线程收集外、其它与Serial收集器并无�
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : false,
+      appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
+      appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
+      placeholder: "欢迎一起来讨论^.^",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>

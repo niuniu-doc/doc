@@ -294,26 +294,6 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/mysql_mysql%E7%AC%94%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">mysql笔记</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-20T00:00:00+08:00"
-              content="2020-03-20">
-          03-20
-        </time>
-      </div>
-
-      <h2 class="post-title">
           <a class="post-title-link" href="/2020/03/20/mysql_SQL%E6%9B%B4%E6%96%B0/" itemprop="url">
             <span itemprop="name">SQL更新</span>
           </a>
@@ -374,6 +354,26 @@
       </div>
 
       <h2 class="post-title">
+          <a class="post-title-link" href="/2020/03/20/mysql_mysql%E7%AC%94%E8%AE%B0/" itemprop="url">
+            <span itemprop="name">mysql笔记</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-03-20T00:00:00+08:00"
+              content="2020-03-20">
+          03-20
+        </time>
+      </div>
+
+      <h2 class="post-title">
           <a class="post-title-link" href="/2020/03/20/mysql_mysql%E9%94%81%E7%AE%80%E6%9E%90/" itemprop="url">
             <span itemprop="name">mysql锁简析</span>
           </a>
@@ -394,8 +394,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/mysql_order-by%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/" itemprop="url">
-            <span itemprop="name">order-by是怎么工作的</span>
+          <a class="post-title-link" href="/2020/03/20/mysql_mysql%E9%94%81/" itemprop="url">
+            <span itemprop="name">mysql锁</span>
           </a>
       </h2>
 
@@ -580,6 +580,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : false,
+      appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
+      appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
+      placeholder: "欢迎一起来讨论^.^",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>

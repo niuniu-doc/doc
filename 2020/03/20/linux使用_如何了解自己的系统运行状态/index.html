@@ -240,6 +240,27 @@
             </span>
 
           
+            <span id="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/" class="post-meta-item leancloud_visitors" data-flag-title="如何了解自己的系统运行状态" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -279,12 +300,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" rel="prev" title="平均负载">
-      <i class="fa fa-chevron-left"></i> 平均负载
+    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="prev" title="常用命令">
+      <i class="fa fa-chevron-left"></i> 常用命令
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="next" title="常用命令">
-      常用命令 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_tcpdump%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="next" title="tcpdump基本使用">
+      tcpdump基本使用 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -299,6 +320,7 @@
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -463,6 +485,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : false,
+      appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
+      appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
+      placeholder: "欢迎一起来讨论^.^",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>

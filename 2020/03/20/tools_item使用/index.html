@@ -234,6 +234,27 @@
             </span>
 
           
+            <span id="/2020/03/20/tools_item%E4%BD%BF%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="item使用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/tools_item%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/tools_item%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -263,12 +284,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/tools_idea%E7%A0%B4%E8%A7%A3%E5%AE%89%E8%A3%85/" rel="prev" title="idea破解安装">
-      <i class="fa fa-chevron-left"></i> idea破解安装
+    <a href="/2020/03/20/tools_markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" rel="prev" title="markdown常用语法">
+      <i class="fa fa-chevron-left"></i> markdown常用语法
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/tools_idea%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80/" rel="next" title="idea无法打开">
-      idea无法打开 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/tools_idea%E7%A0%B4%E8%A7%A3%E5%AE%89%E8%A3%85/" rel="next" title="idea破解安装">
+      idea破解安装 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -283,6 +304,7 @@
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -446,6 +468,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : false,
+      appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
+      appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
+      placeholder: "欢迎一起来讨论^.^",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>

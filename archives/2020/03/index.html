@@ -233,6 +233,26 @@
       </div>
 
       <h2 class="post-title">
+          <a class="post-title-link" href="/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/" itemprop="url">
+            <span itemprop="name">Hystrix-MDC跟踪</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-03-20T00:00:00+08:00"
+              content="2020-03-20">
+          03-20
+        </time>
+      </div>
+
+      <h2 class="post-title">
           <a class="post-title-link" href="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" itemprop="url">
             <span itemprop="name">Java元注解</span>
           </a>
@@ -273,28 +293,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/" itemprop="url">
-            <span itemprop="name">Hystrix-MDC跟踪</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-20T00:00:00+08:00"
-              content="2020-03-20">
-          03-20
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">effective-java笔记</span>
+          <a class="post-title-link" href="/2020/03/20/java_Java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0/" itemprop="url">
+            <span itemprop="name">Java类的加载和继承实现</span>
           </a>
       </h2>
 
@@ -315,26 +315,6 @@
       <h2 class="post-title">
           <a class="post-title-link" href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" itemprop="url">
             <span itemprop="name">Java多线程实现基础(二)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-20T00:00:00+08:00"
-              content="2020-03-20">
-          03-20
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/java_Java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0/" itemprop="url">
-            <span itemprop="name">Java类的加载和继承实现</span>
           </a>
       </h2>
 
@@ -393,8 +373,28 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/java_java%E5%9F%BA%E7%A1%80/" itemprop="url">
-            <span itemprop="name">java基础</span>
+          <a class="post-title-link" href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" itemprop="url">
+            <span itemprop="name">effective-java笔记</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-03-20T00:00:00+08:00"
+              content="2020-03-20">
+          03-20
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/03/20/java_hbase/" itemprop="url">
+            <span itemprop="name">hbase</span>
           </a>
       </h2>
 
@@ -580,6 +580,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : false,
+      appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
+      appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
+      placeholder: "欢迎一起来讨论^.^",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>

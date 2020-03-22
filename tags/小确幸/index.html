@@ -254,8 +254,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/" itemprop="url">
-            <span itemprop="name">早安、世界</span>
+          <a class="post-title-link" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/" itemprop="url">
+            <span itemprop="name">时光说</span>
           </a>
       </h2>
 
@@ -274,8 +274,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/" itemprop="url">
-            <span itemprop="name">时光说</span>
+          <a class="post-title-link" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/" itemprop="url">
+            <span itemprop="name">早安、世界</span>
           </a>
       </h2>
 
@@ -577,6 +577,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : false,
+      appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
+      appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
+      placeholder: "欢迎一起来讨论^.^",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>
