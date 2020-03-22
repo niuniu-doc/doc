@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="CPU流水线设计指令流水线: 若把指令执行拆分成取指令 -&gt; 指令译码 -&gt; 指令执行 三个部分、这就是一个三级的流水线、若把指令执行进一步拆分成 ALU 计算(指令执行) -&gt; 内存访问 -&gt; 数据写回 就变成了5级流水线、 12五级流水线:表示在同一个时钟周期里、同时运行5条指令的不同阶段, 虽然执行一条指令的时钟周期变成5、但可以提高CPU的主频, 只需要保证最复杂的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="冒险和预测(21~26讲)">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="CPU流水线设计指令流水线: 若把指令执行拆分成取指令 -&gt; 指令译码 -&gt; 指令执行 三个部分、这就是一个三级的流水线、若把指令执行进一步拆分成 ALU 计算(指令执行) -&gt; 内存访问 -&gt; 数据写回 就变成了5级流水线、 12五级流水线:表示在同一个时钟周期里、同时运行5条指令的不同阶段, 虽然执行一条指令的时钟周期变成5、但可以提高CPU的主频, 只需要保证最复杂的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-878133ae5032eb4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-54ea7826a6b70dad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-4d24af97f6f2a623.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-7b98287e4db1bca0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-2b24ee6d961e9f88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-21T12:02:09.000Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-878133ae5032eb4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>冒险和预测(21~26讲) | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">牛牛的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          冒险和预测(21~26讲)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="CPU流水线设计"><a href="#CPU流水线设计" class="headerlink" title="CPU流水线设计"></a>CPU流水线设计</h4><p><code>指令流水线</code>: 若把指令执行拆分成<code>取指令</code> -&gt; <code>指令译码</code> -&gt; <code>指令执行</code> 三个部分、这就是一个三级的流水线、若把指令执行进一步拆分成 <code>ALU
+计算(指令执行)</code> -&gt; <code>内存访问</code> -&gt; <code>数据写回</code> 就变成了5级流水线、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">五级流水线:</span><br><span class="line">表示在同一个时钟周期里、同时运行5条指令的不同阶段, 虽然执行一条指令的时钟周期变成5、但可以提高CPU的主频, 只需要保证最复杂的一个流水线级的操作在一个时钟周期内完成、无需确保最复杂的那条指令在时钟周期里执行完成</span><br></pre></td></tr></table></figure>
+
+<h4 id="超长流水线性能瓶颈"><a href="#超长流水线性能瓶颈" class="headerlink" title="超长流水线性能瓶颈"></a>超长流水线性能瓶颈</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">增加流水线的深度是有性能成本的</span><br><span class="line">用来同步时钟周期的、不再是指令级别, 而是流水线级别、每一个流水线对应的输出、都要放到流水线寄存器(Pipeline Register) 然后在下一个时钟周期交给下一个流水线级处理、so. 增加流水线级、就要多出一级写入流水线寄存器的操作、虽然很快、假设20ps、但不断增加流水线深度、这些操作占整个指令的执行时间的比例就会不断增加</span><br><span class="line"></span><br><span class="line">eg. 指令执行3ns(3000ps)、设计20级的流水线、流水线的操作就需要 20ps * 20 &#x3D; 400ps 占比 400&#x2F;3000超过10% 、也就是但从的增加流水线级数、会带来更多的额外开销、</span><br><span class="line"></span><br><span class="line">所以要合理的设计流水线级数</span><br></pre></td></tr></table></figure>
+
+<h4 id="流水线设计的冒险"><a href="#流水线设计的冒险" class="headerlink" title="流水线设计的冒险"></a>流水线设计的冒险</h4><p>流水线设计需要解决的三大冒险: <code>结构冒险</code>, <code>数据冒险</code> 和 <code>控制冒险</code><br><code>结构冒险</code>: 本质上是硬件层面的资源竞争问题、CPU在同一个时钟周期、同时在运行两条计算机指令的不同阶段、但可能会用到同样的硬件了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-878133ae5032eb4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="同一时钟周期、两个指令访问同一资源.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如上所示: 在第一条指令执行到访存(MEM)阶段的时候、流水线里的第4条指令、在执行指令Fetch的操作、访存和取指令、都要进行内存数据的读取, 内存只有一个地址译码器的作为地址输入、就只能在一个时钟周期里读取一条数据、无法同时执行第一条指令的读取内存数据和第4条指令的读取指令的操作</span><br><span class="line"></span><br><span class="line">类似的资源冲突: </span><br><span class="line">常用的键盘、不是每个键的背后都有一根独立的线路、而是多个键公用一个线路、如果在同一时间、按下两个共用一个线路的按键、这两个按键的信号都没办法传输出去、就出现了按下键却不生效的情况</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在CPU的结构冒险里、对于内存访问和取指令的冲突、直观的解决方案是把内存拆成2部分、让他们有各自的地址译码器、分别是存放指令的程序内存和存放数据的数据内存(对应体系结构叫 哈佛架构(Harvard Architecture)), 但这样拆对于指令和数据需要的内存空间、就无法根据实际的应用动态分配了、解决了资源冲突问题、也失去了灵活性<br>现代CPU架构借鉴了哈佛架构的思路、采用了普林斯顿架构、在高速缓存方面拆分成指令缓存和数据缓存<br>内存的访问速度远比CPU慢、所以现代的CPU不会直接读取主内存、会从主内存把指令和数据加载到高速缓存中、这样后续访问都是访问高速缓存、而指令缓存和数据缓存的拆分使得CPU在进行数据访问和取指令的时候、不会发生资源冲突了</p>
+</blockquote>
+<p><code>数据冒险</code>: 三种不同的依赖关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据冒险就是多个指令间有数据依赖的情况、可以分为 先读后写、先写后读和写后再写、如果满足不了依赖关系、最终结果就会出错</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过流水线停顿(Pipeline Stall):插入nop操作 来解决数据冒险</p>
+</blockquote>
+<h4 id="操作数前推"><a href="#操作数前推" class="headerlink" title="操作数前推"></a>操作数前推</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">add $t0, $s2,$s1</span><br><span class="line">add $s2, $s1,$t0</span><br><span class="line">1. 第一条指令 将s1 和 s2 寄存器里的数据相加、写入 t0 寄存器</span><br><span class="line">2. 第二条指令 将 s1 和 t0 的数据相加、写入 s2 寄存器</span><br><span class="line">指令2 的执行、依赖t0的值、而t0的值来自于前一条指令的计算结果、所以指令2需要等前一指令的数据写回之后才能执行、就遇到了数据依赖冒险、</span><br><span class="line">使用插入nop来解决、可以解决、但是会浪费两个时钟周期</span><br><span class="line"></span><br><span class="line">其实、如果第一条指令的执行结果可以直接传给第二条指令的执行输入、在第一条指令的执行阶段完成之后、直接将数据传输给下一条指令的ALU、下一指令就不需要插入两个nop阶段、就可以继续执行阶段, 如下图所示、这种方案就叫操作数前推</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-54ea7826a6b70dad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="乱序执行"><a href="#乱序执行" class="headerlink" title="乱序执行"></a>乱序执行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">即使综合运用流水线停顿、操作数前推、增加资源等解决结构冒险和数据冒险的问题、仍然会遇到不得不停下整个流水线等待前一指令完成的情况、但是: 如果后边有指令不需要依赖前边指令的执行结果就可以不必等待前边指令完成、直接占用nop即可、这样的解决方案、在计算机里叫 乱序执行</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4d24af97f6f2a623.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不得不nop填充.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7b98287e4db1bca0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="nop占用.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-2b24ee6d961e9f88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="乱序执行的CPU.png"></p>
+<h4 id="乱序执行的步骤"><a href="#乱序执行的步骤" class="headerlink" title="乱序执行的步骤"></a>乱序执行的步骤</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 取指令和指令译码阶段、同其它CPU、会一级一级顺序进行Fetch和Decode</span><br><span class="line">2. 指令译码完成后、CPU不会直接进行指令执行、而是进行指令分发、把指令发到保留站(Reservation Stations)、类似火车站、指令类似列车</span><br><span class="line">3. 指令不会立即执行、而是等待依赖数据完成才执行. 类似火车要等乘客到齐才出发</span><br><span class="line">4. 依赖数据到齐之后、指令可以交给后边的功能单元(Function Unit, FU)、就是ALU来执行、很多功能单元可以并行运行、但不同功能单元可以执行的指令不同、类似铁轨可以从上海北上、到北京或者哈尔滨;有些是南下、到广州或者深圳</span><br><span class="line">5. 指令执行的阶段完成后、不能立即把结果写回寄存器、而是把结果写入指令重排区(Re-Order buffer, ROB).</span><br><span class="line">6. 在重排缓冲区、CPU会按照取指令的顺序、对指令的计算结果重新排序、 只有排在前边的指令都完成才会提交指令、完成整改指令的运算结果</span><br><span class="line">7. 实际的指令计算结果不直接写入内存或者高速缓存、而是先写入存储缓冲区(Store Buffer)，最终才写入高速缓存和内存</span><br><span class="line">so. 在乱序执行的情况下、只有CPU内部指令的执行层面、可能乱序、只要在指令的译码阶段正确的分析出指令之间的数据依赖关系、乱序就只会在无相互影响的指令间发生</span><br></pre></td></tr></table></figure>
+
+<h4 id="分支预测"><a href="#分支预测" class="headerlink" title="分支预测"></a>分支预测</h4><blockquote>
+<p>缩短分支延迟: 将调解判断、地址调整 提前到指令译码阶段进行、无需放到指令执行阶段. 这种方式本质上和数据冒险的操作数前推方案类似、就是在硬件电路层面讲一些计算结果更早的反馈到流水线中、反馈更快、后边指令的等待时间就变短了</p>
+</blockquote>
+<blockquote>
+<p>分支预测: 1) 静态预测、假装分支不发生. 分支预测失败的代价是: 丢弃已取出的指令&amp;清空已使用的寄存器的操作<br>2) 动态分支预测:<br>a. 一级分支预测: 用1比特、记录当前分支的比较清空、来预测下一次分支时候的比较情况<br>b. 双模态预测器: 从2byte记录对应状态、提高预测的准确度</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CPU的流水线设计里、会遇到eg. 指令依赖等的情况、使得下一条指令不能正确执行. 但是通过抢跑的方式、可以得到提升指令 吞吐率 的机会、流水线架构的CPU、是主动的冒险选择</span><br></pre></td></tr></table></figure>
+
+<h4 id="流水线设计总结"><a href="#流水线设计总结" class="headerlink" title="流水线设计总结"></a>流水线设计总结</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为了不浪费CPU的性能、把指令执行的过程切分成一个个的流水线、来提升CPU的吞吐率, 而每增加一级的流水线、也会增加overhead、同样因为指令不是顺序执行</span><br><span class="line"></span><br><span class="line">数据冒险和分支冒险: 通过插入nop来解决</span><br><span class="line"></span><br><span class="line">nop空转: 通过乱序执行来解决</span><br><span class="line"></span><br><span class="line">乱序执行: 是在指令执行阶段通过一个类似线程池的保留站、让系统之家动态调度先执行哪些指令、前提是不破坏数据依赖性. CPU只要等到在指令结果的最终提交阶段、再通过重排序的方式、确保指令是顺序执行的</span><br><span class="line"></span><br><span class="line">超标量: (Superscalar) 和 多发射(Multi issue) 在同一时间把多条指令发射到不同的译码器</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/" rel="prev" title="建立数据通路(17-19讲)">
+      <i class="fa fa-chevron-left"></i> 建立数据通路(17-19讲)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_mysql%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/" rel="next" title="mysql问题梳理">
+      mysql问题梳理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU流水线设计"><span class="nav-number">1.</span> <span class="nav-text">CPU流水线设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#超长流水线性能瓶颈"><span class="nav-number">2.</span> <span class="nav-text">超长流水线性能瓶颈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流水线设计的冒险"><span class="nav-number">3.</span> <span class="nav-text">流水线设计的冒险</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作数前推"><span class="nav-number">4.</span> <span class="nav-text">操作数前推</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#乱序执行"><span class="nav-number">5.</span> <span class="nav-text">乱序执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#乱序执行的步骤"><span class="nav-number">6.</span> <span class="nav-text">乱序执行的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分支预测"><span class="nav-number">7.</span> <span class="nav-text">分支预测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流水线设计总结"><span class="nav-number">8.</span> <span class="nav-text">流水线设计总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

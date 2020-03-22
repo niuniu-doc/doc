@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/14/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content=" Mysql">
+<meta property="article:tag" content=" Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/14/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">牛牛的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8C%87%E4%BB%A4(%E7%AC%AC5%E3%80%816%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8C%87%E4%BB%A4(%E7%AC%AC5%E3%80%816%E8%AE%B2)/" class="post-title-link" itemprop="url">计算机指令(第5、6讲)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、在软硬件接口中、CPU帮我们做了什么事？<br><code>硬件角度</code> CPU就是一个超大规模集成电路、通过电路实现加法、乘法及各种各样的处理逻辑</p>
+<p><code>软件角度</code> CPU就是执行各种计算机指令(机器语言: Machine Language)的逻辑机器</p>
+<p>不同CPU有不同的指令集、所以 电脑上的程序简单的复制下装载到手机上是不能正常运行的、而复制到另外一台计算器上就可以正常运行</p>
+<p><code>存储程序型计算机</code> 程序是由成千上万条指令组成的、但是CPU里不能一直放着所有指令、平时是存储在存储器的、这种指令存储在存储器的计算机叫<code>存储程序型计算机</code></p>
+<p>二、从编译到汇编、代码怎么变成机器码？<br>高级语言 -&gt; 编译 -&gt; 得到汇编代码<br>汇编代码 -&gt; 汇编 -&gt; 机器码(计算机可识别的指令)</p>
+<p>三、解析指令和机器码<br>常见指令:<br><code>算术指令</code> 加减乘除等、在CPU层面、都会变成一条算术指令<br><code>数据传输指令</code> 给变量赋值、在内存里读写数据等、用的都是数据传输类指令<br><code>逻辑类指令</code> 逻辑上的与或非、都是这类指令<br><code>条件分支指令</code> if/else 等都是分支类指令<br><code>无条件跳转指令</code> 函数调用</p>
+<p>四、CPU是如何执行指令的？<br>拿Intel CPU来说、里边包含几百亿个晶体管、实际上指令执行起来非常复杂、对软件程序员来说、只需要知道指令是顺序执行就可以了</p>
+<p>CPU其实是一堆寄存器组成的、而寄存器就是CPU内部由多个触发器(Flip-Flop)或者锁存器(Latches) 组成的简单电路</p>
+<p>N个寄存器或者锁存器可以组成一个N位(bit) 的寄存器、能够保持N位的数据、eg. 我们使用64位Intel的服务器、寄存器就是64位的</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e91a7da79b52f77c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>CPU中不同功能的寄存器会有很多、有三种比较特殊的:<br><code>PC寄存器</code> <code>Program Counter Register</code>， 也叫<code>地址寄存器</code> <code>Instruction Address Register</code> 用来存放<code>下一条</code>需要执行的计算机指令的内存地址</p>
+<p><code>指令寄存器</code> <code>Instruction Register</code> 用来存放<code>当前</code>正在执行的指令</p>
+<p><code>条件码寄存器</code> <code>Status Register</code> 用里边的标记位<code>Flag</code>, 存放CPU进行算术或者逻辑运算的结果</p>
+<p>除了这些特殊的寄存器、CPU还有更多用来存储数据和内存地址的寄存器. 这样的寄存器每类通常有很多、会根据它们的存放内容取名字、eg. <code>整数寄存器</code>, <code>浮点数寄存器</code>, <code>向量寄存器</code>和<code>地址寄存器</code> 等，有些既可以存放数据、也可以存放地址, 我们称为 <code>通用寄存器</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-36b4838173fa42aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>实际上、程序运行的时候、CPU会根据PC寄存器里边的地址、从内存把需要执行的指令读取到寄存器里边执行、然后根据指令长度自增、读取下一条指令, 可以看到指令在内存中是连续保存的、也会顺序加载<br>而有些特殊指令、eg. <code>J指令</code>， 也就是<code>跳转指令</code> 会修改<code>PC</code>寄存器里边的地址值、这样下一条要执行的指令就不是才能够内存顺序加载的了、因此才能使用 <code>if...else</code> / <code>while</code> / <code>for</code> 等语句</p>
+<p>五、周期概念<br><code>指令周期</code> <code>Fetch</code>-&gt;<code>Decode</code> -&gt; <code>Execute</code> (获取指令 -&gt; 指令译码 -&gt; 执行指令 ) 的循环称为一个指令周期(<code>Instruction Cycle</code>)</p>
+<p><code>CPU周期</code> <code>Machine Cycle</code> CPU的内部操作很快、但是内存访问速度很慢、每一条指令都需要从内存里加载而来、把从内存中读取一条指令的最短时间称为一个<code>CPU周期</code></p>
+<p>一个<code>指令周期</code> 包含多个 <code>cpu周期</code>,<br>一个<code>cpu周期</code> 包含多个 <code>时钟周期</code></p>
+<p>六、建立数据通路</p>
+<blockquote>
+<p>数据通路就是我们的处理器单元、通常由两类元件组成：<br>1.操作元件(组合逻辑元件) 其实就是ALU、在特定输入下、根据组合电路的逻辑生成特定输出<br>2.存储元件: 状态元件 eg. 计算过程中用到的寄存器、无论是通用寄存器还是状态寄存器、都是存储元件<br>通过数据总线将操作元件和存储元件连接、就可以完成数据的存储和传输、就是所谓的建立数据通路</p>
+</blockquote>
+<p>  七、CPU所需要的硬件电路</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. ALU: 无状态的、根据输入得到输出结果的电路</span><br><span class="line">2. 寄存器：能够进行状态读写的电路元件. 常见的有 锁存器(Latch)， D触发器(Data&#x2F;Delay Flip-flop) 电路</span><br><span class="line">3. 自动实现pc寄存器自增的电路</span><br><span class="line">4. 译码电路: 实现对指令进行decode、对拿到的地址去获取对应的数据或者指令等</span><br></pre></td></tr></table></figure>
+
+<p><code>组合逻辑电路</code> 给定输入、得到固定输出. 无法完成复杂工作<br><code>时序逻辑电路</code> 解决了<code>自动运行</code>和<code>存储</code>问题</p>
+<blockquote>
+<p>时钟信号: 通过一个电磁电路实现、不断切换信号</p>
+</blockquote>
+<blockquote>
+<p>反馈电路: 把当前电路的输出信号作为输入信号、再返回到当前电路</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E6%BC%AB%E8%B0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E6%BC%AB%E8%B0%88/" class="post-title-link" itemprop="url">计算机概念漫谈</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>总线</code>: 一组电子管道, 携带信息字节、并负责在各个组件间传递</p>
+<blockquote>
+<p>每个IO设备通过一个控制器或者适配器与IO总线相连</p>
+<p>控制器和适配器的区别是: 封装方式的不同、但功能都是在IO总线和IO设备之间传递信息</p>
+<p>控制器: IO设备本身或者系统的主板上的芯片组</p>
+<p>适配器: 是一块插在主板槽上的卡</p>
+</blockquote>
+<blockquote>
+<p>主存: 是一个临时性的存储设备、在处理器执行程序时、用来存放程序和程序处理的数据</p>
+<p>从物理上来说、主存是由一组<code>动态随机存取存储器</code>芯片组成的</p>
+<p>从逻辑上来说、存储器是一个线性的字节数组、每个字节有唯一地址(数组索引)、地址从0开始、</p>
+</blockquote>
+<blockquote>
+<p>处理器: 中央处理单元CPU、简称处理器、是解释(或执行)存储在主存中指令的引擎、</p>
+<p>处理器的核心是<code>一个大小为1个字的存储设备(或寄存器)</code>、即: <code>程序计数器PC</code></p>
+<p>在任何时刻、PC都指向主存中的某条机器语言指令(即: 含有该指令的地址)</p>
+<p>处理器从程序计数器指向的内存处读取指令、解释指令中的位、执行该指令的简单操作、然后更新PC, 使其指向下一条指令(不一定和内存中刚刚执行的指令相邻、比如 jump)</p>
+<p>这样的简单操作不多、围绕 主存、寄存器文件 和 算术/逻辑单元 ALU 进行. eg. 如下操作</p>
+<p><code>加载</code>: 从<code>主存</code>复制一个字节或者一个字到<code>寄存器</code>、以覆盖寄存器原来的内容</p>
+<p><code>存储</code>: 从<code>寄存器</code>复制一个字节或者一个字到<code>主存</code>的某个位置、以覆盖这个位置上原来的内容</p>
+<p><code>操作</code>: 把两个寄存器的内容复制到<code>ALU</code>, ALU对这两个寄存器的字进行算术运算、并将结果存放到一个寄存器中、覆盖该寄存器原来的内容</p>
+<p><code>跳转</code>: 从指令本身抽取一个字、并将这个字复制到程序计数器PC中、以覆盖PC中原来的值</p>
+</blockquote>
+<blockquote>
+<p>处理器的指令架构集描述的是每条机器代码指令的效果</p>
+<p>微体系结构描述的是处理器实际上如何实现的</p>
+</blockquote>
+<p>处理器从寄存器文件中读数据比从主存中读取几乎要快100倍、所以系统设计者采用了更小更快的存储设备 高速缓存存储器 cache 来存放近期需要的数据</p>
+<blockquote>
+<p>位于处理器芯片上的L1高速缓存 容量可以达到数万字节、访问速度几乎和访问寄存器问你件一样快</p>
+<p>一个容量为数十万到数百万字节的L2高速缓存 通过一条特殊的总线连接到处理器、进程访问L2高速缓存的时间要比访问L1高速缓存的时间长5倍、但仍比访问主存快5~10倍</p>
+<p>L1和L2高速缓存是使用 静态随机访问存储器SRAM的硬件技术实现的</p>
+<p>新的系统出现了L3缓存、系统可以获得一个更大的存储器、同时访问素的也更快、是利用了高速缓存的局部性原理、使程序具有访问局部区域里的数据和代码的趋势、通过让高速缓存里存放可能经常性访问的数据、</p>
+</blockquote>
+<blockquote>
+<p>程序不会直接操作硬件、而是依靠操作系统提供的服务</p>
+<p>可以将操作系统看成应用程序和硬件之间插入的一层软件</p>
+<p>操作系统: 1.防止硬件被失控的应用程序滥用 2.向应用程序提供简单一致的机制来控制硬件设备(通过 进程、虚拟内存、文件来实现)</p>
+</blockquote>
+<p>进程:</p>
+<blockquote>
+<p>并发运行: 一个进程的指令和另一个进程指令是交错执行的、大多数系统中可以运行的进程数多于CPU个数、传统系统 一个时刻只能执行一个程序、多核处理器可以同时执行多个程序</p>
+<p>无论是单核还是多核处理器、一个CPU看上去都像是在并发执行多个进程、是通过进程间切换实现的。这种交错执行的机制称为 上下文(包括PC、寄存器文件当前值及主存内容等)切换</p>
+<p>从一个进程到另一个进程的切换是操作系统内核管理的, 内核是操作系统代码常驻主存部分</p>
+<p>注意: 内核不是一个独立的奖金池、而是系统管理全部进程所用代码和数据结构的集合</p>
+</blockquote>
+<p>线程:</p>
+<blockquote>
+<p>进程实际上由多个线程执行单元组成、每个线程运行在进程上下文中、并共享同样的代码和全局数据</p>
+</blockquote>
+<p>虚拟内存;</p>
+<blockquote>
+<p>虚拟内存是一个抽象概念、为每个进程提供了独占使用主存的假象、每个进程看到的内存是一致的、称为虚拟地址空间</p>
+<p>Linux中、地址空间的最上边的区域是给操作系统代码和数据的、底部存放用户进程的代码和数据、地址从下-&gt; 上增加</p>
+<p>每个进程看到的虚拟地址空间由大量准确定义的区构成、每个区有专门的功能(下述从最低地址向上)</p>
+<ul>
+<li>程序代码和数据: 对所有进程来说、代码从同一个固定地址开始、接着是和C全局变量对应的数据位置</li>
+<li>堆: 代码和数据区后紧随着是运行时 堆、代码和数据区在进程开始运行时就指定了大小、堆是在运行时可动态扩展和收缩的空间</li>
+<li>共享库: 大概地址空间的中间是一块用来存放像C标准库和数学库这样的共享库代码和数据的区域</li>
+<li>桟: 位于用户虚拟地址顶部的是用户桟、编译器用它来实现函数调用</li>
+<li>内存虚拟内存: 不允许应用程序读写这个区域的内容或者直接调用年内和定义的函数</li>
+</ul>
+</blockquote>
+<p>文件:</p>
+<blockquote>
+<p>文件就是文字序列、每个io设备、包括磁盘、键盘、显示器 甚至网络都可以看成文件</p>
+<p>系统中的输出输入都是通过Unix io的系统函数调用读写文件来实现的</p>
+</blockquote>
+<p>Amdahl定律:</p>
+<blockquote>
+<p><code>Amdahl定律</code>: 对系统某部分性能的提升取决于该部分的重要性和加速程度、</p>
+<p>eg. 某系统初始耗时 60%、加速比例 k=3 则加速为 1/((1-0.6)+0.6/3) = 1.67倍</p>
+</blockquote>
+<p>并发:</p>
+<blockquote>
+<p>线程级并行:</p>
+<p>1.多个CPU</p>
+<p>2.超线程 又称:同时多线程、是一项允许一个CPU执行多个控制流的技术, 它涉及CPU某些硬件有多个备份、eg. 程序计数器和寄存器文件、而其它的硬件只有一份、eg. 执行浮点数运算的单元, 常规的处理器大约需要20000个时钟周期做线程切换、而超线程的处理器可以在单个周期的基础上决定执行哪个线程</p>
+<p>指令级并行</p>
+<p>早期处理器一个指令需要多个时钟周期来执行、现代处理器可以同时执行多条指令的属性称为: 指令级并行</p>
+<p>单指令、多数据并行</p>
+<p>现代处理器允许一条指令参数多个并行执行的操作、称为: 单指令、多数据并行 即:SIMD并行</p>
+<p>提高这些SIMD指令是为了提高处理影像、声音和视频数据应用的执行速度、虽然有些编译器会试图从C程序中自动抽取SIMD并行性、但更可靠的方法是用编译器支持的特殊向量数据类型来写程序、eg. GCC 就支持向量数据类型</p>
+</blockquote>
+<p>几个抽象:</p>
+<blockquote>
+<p>文件是对IO设备的抽象</p>
+<p>虚拟内存是对程序存储器的抽象</p>
+<p>进程是对一个正在运行的程序的抽象</p>
+<p>虚拟机是对整个计算机的抽象、包括 操作系统、处理器和程序</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组成原理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://time.geekbang.org/column/article/91427" target="_blank" rel="noopener">https://time.geekbang.org/column/article/91427</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/14027542-eb2558be654ee6b2.jpg" alt="图片发自简书App"></p>
+<p>极课时间上的课程是我觉得质量最高的课程、很多课程忍不住想要记下笔记、如果觉得好、还希望大家多支持作者、到极课时间购买课程</p>
+<p>推荐书籍汇总：</p>
+<p>入门书籍：</p>
+<ol>
+<li>程序是怎样跑起来的</li>
+<li>计算机是怎样跑起来的</li>
+</ol>
+<p>深入学习书籍:</p>
+<ol>
+<li>计算机设计与组成: 硬件/软件接口</li>
+<li>深入理解计算机系统</li>
+<li>计算机体系结构: 量化研究方法</li>
+</ol>
+<p>课外阅读:</p>
+<ol>
+<li>What Every Programmer Should Kown About Memory</li>
+<li>编码: 隐匿在计算机软硬件背后的语言</li>
+<li>程序员的自我修养: 链接、装载和库</li>
+<li><a href="https://www.bilibili.com/video/av24540152/" target="_blank" rel="noopener">https://www.bilibili.com/video/av24540152/</a></li>
+</ol>
+<p>阅读推荐</p>
+<p><a href="https://people.freebsd.org/~lstewart/articles/cpumemory.pdf" target="_blank" rel="noopener">https://people.freebsd.org/~lstewart/articles/cpumemory.pdf</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%9B%BE%E8%B0%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%9B%BE%E8%B0%B1/" class="post-title-link" itemprop="url">计算机组成原理图谱</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-52ce3b562ec64e0e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">存储程序计算机: 可存储程序、可编程</span><br><span class="line"></span><br><span class="line">1. 不可编程:  eg. 早期的计算器、只能进行简单算术运算、功能不可被修改</span><br><span class="line">2. 不可存储: eg. 早期的插线板式计算机、每次写好的程序不能存储下来供下次使用、需要相同程序的时候、也必须重新插板子、重新编程</span><br></pre></td></tr></table></figure>
+
+<p>计算机组成<br><img src="https://upload-images.jianshu.io/upload_images/14027542-6f11ef9e0c7d519e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>所有的计算机程序、都可以抽象为从<code>输入设备</code>读取输入程序，通过<code>运算器</code>和<code>控制器</code>来执行存储在<code>存储器</code>里的程序、最终把结果输出到<code>输出设备</code>中<br><img src="https://upload-images.jianshu.io/upload_images/14027542-e4bfce4bf7b31e33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片来源: 极课时间.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AF%BE%E5%90%8E%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AF%BE%E5%90%8E%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">课后问题汇总</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、图灵机和冯.诺依曼机是不同的计算机吗？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">简单来说: 图灵机更侧重于计算抽象、后者更侧重于硬件抽象</span><br></pre></td></tr></table></figure>
+
+<p>二、time指令的返回分表代表什么?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">real time: 时钟时间(Wall clock time), 进从开始到结束所用的实际时间、包括其它进程使用的时间片和等待io完成的时间</span><br><span class="line"></span><br><span class="line">user time: 指进程执行用户态代码(核心之外)使用的时间、执行此进程实际消耗的CPU时间、其它进程和此进程阻塞时间不包含在内</span><br><span class="line"></span><br><span class="line">sys time: 指进程在内核态消耗的cpu时间</span><br><span class="line"></span><br><span class="line">为什么user+sys &gt; real ?</span><br><span class="line">1. user + sys 为实际的CPU时间、若有多个线程、则可能出现、user+sys包含子进程的时间</span><br><span class="line">2. 在多处理器系统上、可能出现、因为多进程或者线程可并行处理</span><br><span class="line">3. time的输出是由几个不同的系统调用得到的</span><br><span class="line">user time和sys time是从wait(2) 或 time(2) 得到的(根据系统不同决定)</span><br><span class="line">real time是从 ge&#39;t&#39;timeofday中结束时间和起始时间相减得到</span><br></pre></td></tr></table></figure>
+
+<p>三、时钟周期是什么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>四、为什么程序无法在linux和win下同时运行？</p>
+<blockquote>
+<p>因为两个系统下的可执行文件的格式不同</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-g 得到的是目标文件</span><br><span class="line">-o 得到的是可执行文件</span><br><span class="line"></span><br><span class="line">c -&gt; 汇编 -&gt; 机器码</span><br><span class="line">c-&gt;汇编: 编译、汇编、链接 3部分组成</span><br><span class="line">汇编-&gt; 机器码: 通过装载器Loader把可执行文件Load到内存中、CPU从内存读取指令和数据、开始真正的执行程序</span><br><span class="line"></span><br><span class="line">目标文件和可执行文件dump得到的内容差不多、因为linux下、都是使用elf(executable and linkable file format)的格式</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-f3fd1f4b38b519c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-39279b8724e3dacf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ELF 文件格式信息:</span><br><span class="line">1. text Section: 代码段 用来保存程序的代码和指令</span><br><span class="line">2. .data Section: 数据段 用来保存程序里边设置好的初始化数据信息</span><br><span class="line">3. .rel.text Section: 重定向表Relocation Table 保留的是当前文件里、哪些跳转地址是未知的</span><br><span class="line">4. .symtab Section: 符号表 保留了当前文件里定义的函数和对应的地址信息</span><br><span class="line">连接器会扫描所有的输入目标文件、把所有符号表里的信息收集起来、构成一个全局的符号表、把所有不确定要跳转地址的代码、根据符号表里存储的地址、进行一次修正, 最后 把所有的目标文件的对应段进行一次合并、变成了最终的可执行代码</span><br></pre></td></tr></table></figure>
+
+<p>五、java这样使用虚拟机的编程语言里、程序是如何装载到内存的 ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jvm是上层应用、无需考虑物理分页、一般是直接考虑对象本身的空间大小、物理硬件统一管理由承载jvm的操作系统来解决</span><br></pre></td></tr></table></figure>
+
+<p>六、CPU一直在取下一条指令、为什么还有满载和idle空闲状态呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%B6%85%E7%BA%BF%E7%A8%8B%E5%92%8CSIMD(27%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%B6%85%E7%BA%BF%E7%A8%8B%E5%92%8CSIMD(27%E8%AE%B2)/" class="post-title-link" itemprop="url">超线程和SIMD(27讲)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>回顾</strong></p>
+<blockquote>
+<p><code>超标量</code>: 可以让取指令及指令译码并行进行、</p>
+<p><code>VLIW</code>: 可以搞定指令先后依赖关系、使得一次取一个指令包</p>
+</blockquote>
+<p>最后两个提升CPU性能的设计: <code>超线程</code> 和 <code>SIMD(单指令多数据流)</code></p>
+<h4 id="超线程"><a href="#超线程" class="headerlink" title="超线程"></a>超线程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">奔腾4处理器失败的重要原因: CPU的流水线级数太深、高达20级、而后期Prescott更是达到了31级、超长流水线、使得各种冒险、并发的方案都用不上</span><br><span class="line"></span><br><span class="line">解决冒险、提升并发的方案, 本质上是一种 &#96;指令级并行(Instruction-level parallelism)&#96;</span><br><span class="line">即: CPU 想要在同一个时间、并行的执行两条指令、而代码原本是有先后顺序的、流水线太深的话、之前的分支预测、乱序执行等优化方式都无法起到很好的效果、</span><br><span class="line"></span><br><span class="line">2002年底、Pentium4的CPU、第一次引入了超线程(Hyper-Threading技术)</span><br><span class="line">&#96;超线程&#96;: 既然CPU运行在代码层面有前后依赖关系的指令、会遇到各种冒险问题、如果运行完全独立的程序呢? 指令间是没有依赖关系的、那么跟多个CPU运行不同任务、或者多进程、多线程技术有什么区别呢 ?</span><br><span class="line"></span><br><span class="line">1.多个CPU上运行不同的程序、单个CPU核心里切换运行不同的线程任务、在同一时间点上、其实一个物理的CPU核心只运行一个线程的指令、所以, 并没有真正做到指令级并行</span><br><span class="line">2. 超线程 是把一个物理CPU核心、伪装成两个逻辑CPU、这个CPU会在硬件层面增加很多电路、使得我们可以在一个CPU核心内部、维护两个不同线程的指令状态信息</span><br><span class="line">eg. 在一个物理CPU核心内部、有双份PC寄存器、指令寄存器及条件码寄存器、可以维护两条并行指令的状态、在外面看起来、好像有两个逻辑层面的CPU同时在运行、也叫&#96;同时多线程&#96;(Simultanneous Multi-Threading, 简称SMT)技术</span><br><span class="line"></span><br><span class="line">但: 在CPU其它的功能组件上、eg. 指令译码器和ALU 依然只有一份、因为超线程并不真正运行两个指令、它的目的在于 一个线程A的指令、在流水线停顿的时候、让线程B与执行、利用此时CPU译码器和ALU的空闲来处理、提高CPU利用率</span><br><span class="line"></span><br><span class="line">通过很小的CPU代价、实现了同时运行多个线程的效果、通常只要在CPU核心添加10%左右的逻辑功能、增加可以忽略不计的晶体管数量、就可以实现、但同样只能应用在特殊的额应用场景下(线程等待时间较长)</span><br><span class="line">eg. 需要对很多请求的数据库应用、就很适合、各个指令都需要等待访问内存数据，CPU计算并未跑满、但当前指令往往要停顿在流水线上、等待内存数据返回、这时、让CPU里的各个功能单元、处理另一个db查询的案例就很好</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-3b63d476f142a99f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="SIMD-如何加速矩阵算法"><a href="#SIMD-如何加速矩阵算法" class="headerlink" title="SIMD: 如何加速矩阵算法"></a>SIMD: 如何加速矩阵算法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SIMD: 单指令多数据流(Single Instruction Multiple Data)</span><br><span class="line">SISD: 单指令单数据(Single Instruction Single Data)</span><br><span class="line">多核CPU可以实现MIMD(Multiple Instruction Multiple Data)</span><br><span class="line"></span><br><span class="line">为什么SIMD指令可以提高代码执行效率呢? </span><br><span class="line">1.因为SIMD在获取数据和执行指令的时候都是并行的、从内存读数据的时候、SIMD是一次性读多个数据</span><br><span class="line">Intel在引入SSE指令集的时候、在CPU里添加了8个128Bits的寄存器、即 16Bytes、一个寄存器一次性可以加载4个整数、比起循环加载、时间就节省了</span><br><span class="line">2. 指令执行层面、4个整数加法、相互之间完全无依赖、也就没有冒险问题要处理、有足够多的FU即可并行执行、这个加法就是4路同时并行的、也会节省时间</span><br><span class="line"></span><br><span class="line">基于SIMD的向量计算指令、正是在Intel发布Pentium处理器的时候、被引入的指令集、当时的指令集叫 &#96;MMX&#96;, 即: &#96;Matrix Math eXtensions&#96;的英文缩写、中文名字叫 矩阵数学扩展</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-f32a5c0c67a98d4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>超线程技术是线程级并行的解决方案、很多场景下不一定能带来性能的提升</p>
+<p>SIMD是指令级并行的解决方案、在处理向量计算的情况下、同一个向量的不同维度之间的计算是相互独立的、</p>
+<p>两者都优化了CPU的使用</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98(37~38%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98(37~38%E8%AE%B2)/" class="post-title-link" itemprop="url">高速缓存(37~38讲)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="为什么需要高速缓存"><a href="#为什么需要高速缓存" class="headerlink" title="为什么需要高速缓存"></a>为什么需要高速缓存</h4><blockquote>
+<p>按照摩尔定律、CPU的访问速度每18个月便会翻一番、相当于每年增长60%、内存的访问速度也在增长、但只有7%左右、使内存和CPU的性能差距不断拉大. 现在一次内存的访问需要120个CPU周期、即: 访问速度有120倍的差距<br>为了弥补两者的性能差异、真实的把CPU使用起来、现代CPU引入了高速缓存</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-63ffb060446bf2df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="CPU和内存的性能差距会越来越大.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">从CPU Cache 被加入CPU开始、内存中的指令、数据会先加载到L1</span><br><span class="line">-L3 Cache中、而不是直接由CPU访问内存去拿、</span><br><span class="line">在95%的情况下、CPU只需要访问L1-L3 Cache、从里边读取指令和数据、无需访问内存</span><br><span class="line">注意: CPU Cache不是单存概念上的Cache(eg. 之前说的以内存作为硬盘的缓存)、而是指特定的由SRAM组成的物理芯片</span><br><span class="line"></span><br><span class="line">CPU从内存中读取数据到CPU Cache的过程中、是一小块、一小块读取的、不是按照单个数组元素读取的、</span><br><span class="line">这样一小块一小块的数据、在CPU Cache里、称为 &#96;Cache Line&#96;(缓存块)</span><br><span class="line">通常Intel的服务器或者PC里、Cache Line的大小通常是64字节</span><br></pre></td></tr></table></figure>
+
+<h4 id="Cache的数据结构和读取过程是什么样的"><a href="#Cache的数据结构和读取过程是什么样的" class="headerlink" title="Cache的数据结构和读取过程是什么样的"></a>Cache的数据结构和读取过程是什么样的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">现代CPU在数据读取时、无论数据是否已经存储在Cache中、都会先访问Cache、</span><br><span class="line">只有Cache中找不到时、才会访问内存、并且将读到的数据写入Cache中、根据时间局部性原理、这样CPU花在等待内存访问上的时间就会大大缩短</span><br><span class="line">通常在基准测试和实际场景中、CPU Cache的命中率可以达到95%以上</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-665111aecb317bc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="与应用相似的架构.png"></p>
+<p>思考: 那么CPU是如何知道要访问的内存数据、存储在Cache的哪个位置呢 ?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CPU访问内存数据、是一小块一小块数据来读取的、对于读取内存中的数据、首先拿到的是数据所在的&#96;内存块(Block)&#96;的地址</span><br><span class="line">而直接映射Cache(Direct Mapped Cache)采用的策略就是确保任何一个内存块的地址、</span><br><span class="line">始终映射到一个固定的CPU Cache地址(Cache Line), 而这个映射关系、通常用mod(求余)计算来实现</span><br><span class="line">eg. 将主内存分成0~31共32个块、共有8个缓存块、用户需要访问第21号内存块、</span><br><span class="line">若21号内存块内容在缓存块中的话、一定在5号缓存块(21%8 &#x3D; 5)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-0e3d70cab102d106.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cache采用mod方式、将内存块映射到对应的CPU Cache.png"></p>
+<p>思考:<br>现在13号、5号和21号都应该在5号缓存块中、那如何区分、当前缓存块中是几号内存对应的数据呢 ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">对应的缓存块会存储一个组标记、记录当前缓存块内存储的数据对应的内存块、</span><br><span class="line">除组标记外、缓存块中还有两个数据:</span><br><span class="line">1. 从主内存中加载来的实际存放的数据、</span><br><span class="line">2.有效位: 用来标记对应的缓存块中的数据是否是有效的、确保不是机器刚启动时的空数据. 有效位为0时、CPU会直接访问内存、重新加载数据</span><br><span class="line">CPU在读取数据的时候、不是要读取医政股Block、只读取一个需要的整数、称为CPU的一个字Word</span><br><span class="line">具体是哪个字、就用这个字在整个Block中的位置来决定、这个位置称为偏移量Offset</span><br><span class="line">而内存地址对应到Cache Line里的数据结构则多了一个有效位和对应的数据</span><br><span class="line">由 索引 + 有效位 + 组标记 + 数据组成</span><br><span class="line"></span><br><span class="line">若: 一个内存中的数据已经在Cache中、访问步骤为:</span><br><span class="line">1. 根据内存地址的地位、计算在Cache中的索引</span><br><span class="line">2. 判断有效位、确认Cache中的数据是有效的</span><br><span class="line">3. 对比内存访问地址的高位、和Cache中的组标记、确认Cache中的数据就是要访问的内存数据、从Cache Line读取对应数据块</span><br><span class="line">4. 根据内存地址的Offset位、从Data Block中读取所需内容</span><br><span class="line">若在2、3步骤中CPU发现数据不是要访问的数据、CPU会访问内存、将Block Data更新到Cache Line中、同时更新对应的有效位和组标记的数据</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bdbd1ecdec2570de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存地址到Cache Line的关系.png"></p>
+<p>思考:volitile 关键字的作用 ?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">一种错误理解是 当成锁、认为类似sychronized 关键字、不同的线程对于特定变量的访问会加锁</span><br><span class="line">另一种误解是 当成原子化的操作机制、认为加了volitile、对于变量的自增操作就变成原子性的了</span><br><span class="line"></span><br><span class="line">其实: volitile 最核心的知识点要关系到Java内存模型(Java Memory Model)上</span><br><span class="line">虽然JMM只是Java虚拟机这个进程级虚拟机里的一个内存模型、但这个内存模型和CPU、高速缓存和主内存组合在一起的硬件体系很相似</span><br><span class="line">虽然Java内存模型是一个隔离了硬件实现的虚拟机内的抽象模型、但给了一个很好的缓存同步问题的示例.</span><br><span class="line">即: 若我们的数据在不同的线程或者CPU核心里去更新、因为不同的线程或者CPU核有各自的缓存、有可能在A线程的更新B线程看不到</span><br></pre></td></tr></table></figure>
+
+<h4 id="CPU高速缓存的写入"><a href="#CPU高速缓存的写入" class="headerlink" title="CPU高速缓存的写入"></a>CPU高速缓存的写入</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">现在使用的Intel CPU、通常都是多核的、每一个CPU核里、都有独立属于自己的L1、L2的Cache 和 多个CPU共用的L3的Cache、主内存</span><br><span class="line">因为CPU Cache的访问速度要比主内存快很多、L1&#x2F;L2 Cache的速度也比L3 快、所以、CPU都是尽可能的从CPU Cache中获取数据、而不是每次从主内存获取</span><br><span class="line"></span><br><span class="line">Java内存模型里、每个线程都有自己的线程桟、每次数据读取其实是从本地线程桟的Cache副本里读取、而不是主内存</span><br><span class="line">若对数据只读还好、但事实是读写同时存在的、这时思考两个问题:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>写Cache的性能也比写主内存快、那写入时应该写主内存还是Cache ?</li>
+<li>若直接写主内存、Cache里的数据是否会失效呢 ?</li>
+</ol>
+</blockquote>
+<h4 id="写直达-Write-Through"><a href="#写直达-Write-Through" class="headerlink" title="写直达 Write-Through"></a>写直达 Write-Through</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-daf2deb032fab327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如上图、最简单的一种写入策略, 写直达. 在这个策略里、每一次数据都要写到主内存里、</span><br><span class="line">写入前, 先判断数据是否在Cache中、若在、先更新Cache、再写入主内存; 若不在、只更新主内存</span><br><span class="line">缺点是: 无论数据是否在Cache里、都需要把数据写到主内存、效率较低</span><br><span class="line">类似volatile关键字、始终把数据同步到主内存里</span><br></pre></td></tr></table></figure>
+
+<h4 id="写回-Write-back"><a href="#写回-Write-back" class="headerlink" title="写回 Write-back"></a>写回 Write-back</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-ead03578a6a2f4d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">不把写入同步到主内存、只写CPU Cache呢？是否可行 ？</span><br><span class="line">如上图所示就是只写Cache的策略 -&gt; 每次只把数据写回Cache、只有在CPU Cache里的数据要被替换的时候、才将数据写回主内存</span><br><span class="line"></span><br><span class="line">过程: 若发现要写回的数据就在Cache中、只更新Cache里的数据即可、同时标记Cache里这个Block的数据是Dirty(与主存不一致)</span><br><span class="line">若发现要写入的数据对应的Cache Block里、放的是别的内存地址的数据</span><br><span class="line">check下数据是否是Dirty、</span><br><span class="line">若是、先写回主内存然后把当前要写入的数据写入到Cache、同时把Cache Block标记成Dirty</span><br><span class="line">若不是、直接将数据写入Cache、然后把Cache Block标记为Dirty</span><br><span class="line"></span><br><span class="line">在使用&#96;写回&#96;这个策略的时候、加载内存数据到Cache里的时候、也要多一步同步脏Cache的动作</span><br><span class="line">若加载内存里的数据到Cache的时候、发现Cache Block里有Dirty标记、需要先把Cache Block的数据写回主内存、才能加载数据覆盖掉Cache</span><br><span class="line"></span><br><span class="line">在写回这个策略里、若大量的操作、都能命中缓存、大部分时间都不需要读写主内存、性能会比写直达好</span><br></pre></td></tr></table></figure>
+
+<p>然而、无论写直达还是写回、都未解决多线程或者多CPU缓存一致性问题….</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_FastDFS%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_FastDFS%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">FastDFS安装部署</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在学习<code>taotao商城</code>这个视频的过程中、用到了<code>fastdfs</code>、刚好自己有一台服务器就自己学习了下、参考了网上多篇文章、感谢各位分享~~</p>
+<p><code>FastDFS</code>是<code>c</code>写的开源分布式文件系统、充分考虑了冗余被人、负载均衡、及线性扩容机制、注重高可用、高性能指标、可以很方便的搭建一套高性能的文件服务器集群提供文件上传、下载等服务~</p>
+<p>###一、FastDFS架构<br><code>FastDFS</code>包括<code>Tracker server</code>和<code>Storage server</code>, 客户端请求<code>Tracker server</code>进行文件上传、下载，通过<code>Tracker server</code>调度最终由<code>Storage server</code>完成文件上传和下载。 <code>Tracker server</code> 的角色类似于<code>dubbo</code>的<code>registry</code>和<code>moniter</code>、并不直接提供服务、而是<code>storage server</code>启动时注册到<code>tracker server</code>, <code>client</code>通过<code>tracker server</code>连接<code>storage server</code>, <code>client</code>不知道自己连接的是哪一台<code>storage server</code>, 连接完成后、上传和下载是<code>client</code>直接请求<code>storage server</code>, 可类比于 <code>dubbo consumer</code>通过<code>registry</code>连接<code>dubbo service</code> 但、连接完成之后是<code>consumer</code>和<code>service</code>直接通信</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-81571b0c67e068ef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="fastdfs.jpg"></p>
+<p>#####文件上传流程<br><img src="https://upload-images.jianshu.io/upload_images/14027542-2c255cded5753807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="文件上传流程.png"></p>
+<h5 id="文件下载流程"><a href="#文件下载流程" class="headerlink" title="文件下载流程"></a>文件下载流程</h5><p><img src="https://upload-images.jianshu.io/upload_images/14027542-9b9dcd61bd1a9a57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="文件下载流程.png"></p>
+<p>####1.Tracker Server<br><code>Tracker server</code>作用是负载均衡和调度，通过<code>Tracker server</code>在文件上传时可以根据一些策略找到<code>Storage server</code>提供文件上传服务，可以将tracker称为追踪服务器或调度服务器</p>
+<p>####1.Storage Server<br><code>Storage server</code>作用是文件存储，客户端上传的文件最终存储在<code>Storage</code>服务器上，<code>Storage server</code>没有实现自己的文件系统而是利用操作系统的文件系统来管理文件。可以将<code>storage</code>称为存储服务器。</p>
+<h3 id="二、FastDFS安装"><a href="#二、FastDFS安装" class="headerlink" title="二、FastDFS安装"></a>二、FastDFS安装</h3><p>####1.安装libfastcommon</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. 下载：</span><br><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;happyfish100&#x2F;libfastcommon&#x2F;archive&#x2F;V1.0.7.tar.gz</span><br><span class="line">2. 修改名字：mv V1.0.7 libfastcommon-1.0.7.tar.gz</span><br><span class="line">3. 解压：tar zxvf libfastcommon-1.0.7.tar.gz</span><br><span class="line">4. cd libfastcommon-1.0.7&#x2F;</span><br><span class="line">5. 编译：.&#x2F;make.sh</span><br><span class="line">6. 安装：.&#x2F;make.sh install</span><br><span class="line"></span><br><span class="line">另外：</span><br><span class="line">设置几个软链接、方便后续扩展nginx时使用：</span><br><span class="line">ln -s &#x2F;usr&#x2F;lib64&#x2F;libfastcommon.so &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libfastcommon.so</span><br><span class="line">ln -s &#x2F;usr&#x2F;lib64&#x2F;libfastcommon.so &#x2F;usr&#x2F;lib&#x2F;libfastcommon.so</span><br><span class="line">ln -s &#x2F;usr&#x2F;lib64&#x2F;libfdfsclient.so &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libfdfsclient.so</span><br><span class="line">ln -s &#x2F;usr&#x2F;lib64&#x2F;libfdfsclient.so &#x2F;usr&#x2F;lib&#x2F;libfdfsclient.so</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-安装-tracker"><a href="#2-安装-tracker" class="headerlink" title="2. 安装 tracker"></a>2. 安装 tracker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 下载：</span><br><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;happyfish100&#x2F;fastdfs&#x2F;archive&#x2F;V5.05.tar.gz</span><br><span class="line">2. 修改名字：mv V5.05 FastDFS_v5.05.tar.gz</span><br><span class="line">3. 解压：tar zxvf FastDFS_v5.05.tar.gz</span><br><span class="line">4. 进入解压后目录：cd fastdfs-5.05&#x2F;</span><br><span class="line">5. 编译：.&#x2F;make.sh</span><br><span class="line">6. 安装：.&#x2F;make.sh install</span><br></pre></td></tr></table></figure>
+<h4 id="3-修改tracker配置文件"><a href="#3-修改tracker配置文件" class="headerlink" title="3. 修改tracker配置文件"></a>3. 修改tracker配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2安装完成后、在&#x2F;etd&#x2F;fdfs下有tracker的配置文件</span><br><span class="line">复制一份：cp &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf.sample &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf</span><br><span class="line">mkdir -p &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;  (此处可以根据自己的情况和习惯存放)</span><br><span class="line">base_path&#x3D; &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;</span><br><span class="line"></span><br><span class="line">启动 tracker 服务：&#x2F;usr&#x2F;bin&#x2F;fdfs_trackerd &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf</span><br><span class="line">重启 tracker 服务：&#x2F;usr&#x2F;bin&#x2F;fdfs_trackerd &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf restart</span><br><span class="line">查看是否有 tracker 进程：ps aux | grep tracker</span><br></pre></td></tr></table></figure>
+<p>####4. storage(存储节点)服务部署</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">一般 storage 服务我们会单独部署到一台服务器上，但是这里为了方便(~~我只有一台服务器~~)就安装在同一台上了</span><br><span class="line"></span><br><span class="line">如果单独部署到一台服务器上、上边tracker的部署步骤重新来一遍即可</span><br><span class="line">这里是同一台server、只修改配置~~</span><br><span class="line"></span><br><span class="line">复制一份配置：cp &#x2F;etc&#x2F;fdfs&#x2F;storage.conf.sample &#x2F;etc&#x2F;fdfs&#x2F;storage.conf</span><br><span class="line">编辑：vim &#x2F;etc&#x2F;fdfs&#x2F;storage.conf</span><br><span class="line">base_path&#x3D; &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;</span><br><span class="line"></span><br><span class="line">创建目录：mkdir  &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;storage&#x2F;images-data</span><br><span class="line">store_path0&#x3D; &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;storage&#x2F;images-data</span><br><span class="line"></span><br><span class="line">图片实际存放路径，如果有多个，这里可以有多行(要创建多个目录)：</span><br><span class="line">store_path0&#x3D;&#x2F;opt&#x2F;fastdfs&#x2F;storage&#x2F;images-data0</span><br><span class="line">store_path1&#x3D;&#x2F;opt&#x2F;fastdfs&#x2F;storage&#x2F;images-data1</span><br><span class="line"></span><br><span class="line">subdir_count_per_path&#x3D;256 </span><br><span class="line">是用来配置目录个数的、如果只是练习不做实际存储服务、可改小一点儿</span><br><span class="line"></span><br><span class="line">指定 tracker 服务器的 IP 和端口</span><br><span class="line">tracker_server&#x3D;192.168.1.114:22122 (192.168.1.114)是你的server服务器ip、本机也可以使用(0.0.0.0:22122)、记得不可使用127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-测试服务"><a href="#5-测试服务" class="headerlink" title="5. 测试服务"></a>5. 测试服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">启动 storage 服务：&#x2F;usr&#x2F;bin&#x2F;fdfs_storaged &#x2F;etc&#x2F;fdfs&#x2F;storage.conf，首次启动会很慢，因为它在创建预设存储文件的目录</span><br><span class="line">重启 storage 服务：&#x2F;usr&#x2F;bin&#x2F;fdfs_storaged &#x2F;etc&#x2F;fdfs&#x2F;storage.conf restart</span><br><span class="line">查看是否有 storage 进程：ps aux | grep storage</span><br></pre></td></tr></table></figure>
+
+<p>####6. 查看<code>tracker</code>是否可以正常与<code>storage</code>通信</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fdfs_monitor &#x2F;etc&#x2F;fdfs&#x2F;storage.conf</span><br><span class="line">...</span><br><span class="line">Storage 1:</span><br><span class="line">        id &#x3D; 192.168.2.231</span><br><span class="line">        ip_addr &#x3D; 192.168.2.231  ACTIVE --若看到ACTIVE这个字样、代表可以正常通信</span><br><span class="line">...</span><br><span class="line">查看storage和tracker是否正常启动：</span><br><span class="line">ps aux | grep fdfs</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c47e3762cf5b81c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="进程.png"></p>
+<h4 id="7-使用fdfs-client测试"><a href="#7-使用fdfs-client测试" class="headerlink" title="7. 使用fdfs_client测试"></a>7. 使用fdfs_client测试</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">复制一份配置：cp &#x2F;etc&#x2F;fdfs&#x2F;client.conf.sample &#x2F;etc&#x2F;fdfs&#x2F;client.conf</span><br><span class="line">编辑：vim &#x2F;etc&#x2F;fdfs&#x2F;client.conf</span><br><span class="line"></span><br><span class="line">base_path&#x3D; &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;</span><br><span class="line"></span><br><span class="line">指定 tracker 服务器的 IP 和端口</span><br><span class="line">tracker_server&#x3D;192.168.1.114:22122</span><br><span class="line">log_level&#x3D;info</span><br><span class="line"></span><br><span class="line">echo asasasa &gt; ~&#x2F;test.txt</span><br><span class="line"></span><br><span class="line">测试：fdfs_test &#x2F;etc&#x2F;fdfs&#x2F;client.conf upload ~&#x2F;test.txt </span><br><span class="line">可以看到如下图所示、就是上传成功了</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-3ebfd5dda0a5732d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test.png"></p>
+<p>####8. 安装Nginx和其插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">如果Nginx已经安装过，则仅需要fastdfs-nginx-module_v1.16.tar.gz</span><br><span class="line">下载nginx：wget http:&#x2F;&#x2F;nginx.org&#x2F;download&#x2F;nginx-1.11.8.tar.gz</span><br><span class="line">下载Nginx插件:wget http:&#x2F;&#x2F;jaist.dl.sourceforge.NET&#x2F;project&#x2F;fastdfs&#x2F;FastDFS%20Nginx%20Module%20Source%20Code&#x2F;fastdfs-nginx-module_v1.16.tar.gz</span><br><span class="line">解压 Nginx 模块：tar zxvf fastdfs-nginx-module_v1.16.tar.gz</span><br><span class="line">进入解压后的目录 </span><br><span class="line">cd fastdfs-nginx-module</span><br><span class="line">vim src&#x2F;config</span><br><span class="line">修改：去掉local、因为实际安装fastdfs时、是放到了&#x2F;usr&#x2F;include下</span><br><span class="line">1. CORE_INCS&#x3D;&quot;$CORE_INCS &#x2F;usr&#x2F;local&#x2F;include&#x2F;fastdfs &#x2F;usr&#x2F;local&#x2F;include&#x2F;fastcommon&#x2F;&quot;</span><br><span class="line">-&gt; CORE_INCS&#x3D;&quot;$CORE_INCS &#x2F;usr&#x2F;include&#x2F;fastdfs &#x2F;usr&#x2F;include&#x2F;fastcommon&#x2F;&quot;</span><br><span class="line"></span><br><span class="line">2.  CORE_LIBS&#x3D;&quot;$CORE_LIBS -L&#x2F;usr&#x2F;local&#x2F;lib -lfastcommon -lfdfsclient&quot;</span><br><span class="line">-&gt; CORE_LIBS&#x3D;&quot;$CORE_LIBS -L&#x2F;usr&#x2F;lib -lfastcommon -lfdfsclient&quot;</span><br><span class="line"></span><br><span class="line">回到nginx的解压目录</span><br><span class="line">cd ..&#x2F;nginx-1.11.8</span><br><span class="line">sudo .&#x2F;configure  --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx --sbin-path&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;nginx --conf-path&#x3D;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf --pid-path&#x3D;&#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;nginx.pid --lock-path&#x3D;&#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;nginx.lock --error-log-path&#x3D;&#x2F;usr&#x2F;local&#x2F;var&#x2F;log&#x2F;nginx&#x2F;^Cror.log --http-log-path&#x3D;&#x2F;usr&#x2F;local&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log --with-http_gzip_static_module --with-http_stub_status_module --with-http_ssl_module --with-file-aio --add-module&#x3D;&#x2F;home&#x2F;nj&#x2F;build&#x2F;fastdfs-nginx-module&#x2F;src</span><br><span class="line"></span><br><span class="line">sudo make  &amp;&amp; sudo  make install （若是有权限的账户、可以不用加sudo、我使用的是普通用户）</span><br></pre></td></tr></table></figure>
+
+<p>####9. 整个fastdfs-nginx-module和nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">copy fastdfs-nginx-module的配置文件到 &#x2F;etc&#x2F;fdfs下、方便查找</span><br><span class="line">cp &#x2F;home&#x2F;nj&#x2F;build&#x2F;fastdfs-nginx-module&#x2F;src&#x2F;mod_fdfs.conf &#x2F;etc&#x2F;fdfs</span><br><span class="line">vi &#x2F;etc&#x2F;fdfs&#x2F;mod_fdfs.conf</span><br><span class="line"></span><br><span class="line">base_path&#x3D;&#x2F;usr&#x2F;local&#x2F;fastdfs</span><br><span class="line">tracker_server&#x3D;192.168.1.114:22122</span><br><span class="line">url_have_group_name &#x3D; true</span><br><span class="line">store_path0&#x3D;&#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;storage</span><br></pre></td></tr></table></figure>
+
+<p>####10. 然后配置Nginx，添加如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">        </span><br><span class="line">         # 配置fastdfs的访问路径</span><br><span class="line">        location &#x2F;group1&#x2F;M00 &#123;</span><br><span class="line">            ngx_fastdfs_module;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">启动nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="用浏览器访问刚才步骤7中测试上传的文件："><a href="#用浏览器访问刚才步骤7中测试上传的文件：" class="headerlink" title="用浏览器访问刚才步骤7中测试上传的文件："></a>用浏览器访问刚才步骤7中测试上传的文件：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;xxxx&#x2F;group1&#x2F;M00&#x2F;00&#x2F;00&#x2F;fwAAAVu0UTSAZiNHAAAACE6c2W4921_big.txt</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-2fc2f16221227b59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片存储测试.png"></p>
+<h3 id="哦啦-到此安装完成、可以使用了"><a href="#哦啦-到此安装完成、可以使用了" class="headerlink" title="^.^哦啦~ 到此安装完成、可以使用了~"></a><code>^.^</code>哦啦~ 到此安装完成、可以使用了<del>~</del></h3><p>####另外：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fastdfs提供了php_client、可以使用php调用fastdfs的服务</span><br><span class="line">参考：</span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;happyfish100&#x2F;fastdfs&#x2F;tree&#x2F;master&#x2F;php_client&#x2F;FastDFS%20Nginx%20Module%20Source%20Code&#x2F;fastdfs-nginx-module_v1.16.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h4 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h4><blockquote>
+<ol>
+<li><a href="https://github.com/happyfish100/fastdfs/tree/master/php_client" target="_blank" rel="noopener">https://github.com/happyfish100/fastdfs/tree/master/php_client</a></li>
+<li><a href="https://www.waitig.com/fastdfs%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4.html" target="_blank" rel="noopener">https://www.waitig.com/fastdfs%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4.html</a></li>
+<li><a href="https://www.codetd.com/article/3138763" target="_blank" rel="noopener">https://www.codetd.com/article/3138763</a></li>
+<li><a href="http://soartju.iteye.com/blog/803477" target="_blank" rel="noopener">http://soartju.iteye.com/blog/803477</a><br>等多个网络资源…</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---GC%E6%97%A5%E5%BF%97%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---GC%E6%97%A5%E5%BF%97%E8%A7%A3%E8%AF%BB/" class="post-title-link" itemprop="url">垃圾回收---GC日志解读</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="年轻代log解读"><a href="#年轻代log解读" class="headerlink" title="年轻代log解读"></a>年轻代log解读</h4><p>年轻代以ParNew收集器为例, 采用的是复制算法, log如下：<br><img src="https://upload-images.jianshu.io/upload_images/14027542-4695c4709d665059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">2019-02-01T21:18:15:00.382+0800: 718675.758: Application time: 0.7177964 seconds</span><br><span class="line">&#123;Heap before GC invocations&#x3D;65632 (full 18):</span><br><span class="line"> par new generation   total 471872K, used 421490K [0x0000000080000000, 0x00000000a0000000, 0x00000000a0000000)</span><br><span class="line">  eden space 419456K, 100% used [0x0000000080000000, 0x00000000999a0000, 0x00000000999a0000)</span><br><span class="line">  from space 52416K,   3% used [0x00000000999a0000, 0x0000000099b9c830, 0x000000009ccd0000)</span><br><span class="line">  to   space 52416K,   0% used [0x000000009ccd0000, 0x000000009ccd0000, 0x00000000a0000000)</span><br><span class="line"> concurrent mark-sweep generation total 1572864K, used 905696K [0x00000000a0000000, 0x0000000100000000, 0x0000000100000000)</span><br><span class="line"> Metaspace       used 104594K, capacity 113116K, committed 113664K, reserved 1148928K</span><br><span class="line">  class space    used 12280K, capacity 13738K, committed 13824K, reserved 1048576K</span><br><span class="line"></span><br><span class="line">2019-02-01T18:15:00.383+0800: 718675.758: [GC (Allocation Failure) 2019-02-01T18:15:00.384+0800: 718675.759: [ParNew: 109872K-&gt;5255K(118016K), 0.0211147 secs] 142365K-&gt;37748K(511232K), 0.0212949 secs] [Times: user&#x3D;0.26 sys&#x3D;0.04, real&#x3D;0.02 secs]</span><br></pre></td></tr></table></figure>
+<p>其中:<br>*<code>Heap before GC invocations=65632 (full 18)</code>: <code>invocations=65632</code>表示经历的gc的次数 <code>full 18</code>表示经历的full gc的次数</p>
+<ul>
+<li><code>2019-02-01T18:15:00.383</code>：发生<code>minor gc</code>的时间</li>
+<li><code>718675.758</code>：GC时、相对GVM启动时间的偏移量</li>
+<li><code>ParNew</code> 收集器的名称 , 会<code>STW</code>(<a href="https://www.jianshu.com/p/d07194a20ec1" target="_blank" rel="noopener">https://www.jianshu.com/p/d07194a20ec1</a>)</li>
+<li><code>109872K-&gt;5255K</code>：收集前后年轻代的使用情况</li>
+<li><code>118016K</code>：整个年轻代的容量</li>
+<li><code>0.0211147 secs</code>： stw的时间</li>
+<li><code>142365K-&gt;37748K</code>：GC前后整个堆的使用情况</li>
+<li><code>511232K</code>：整个堆的容量</li>
+<li><code>0.0212949 secs</code>：ParNew 收集器标记和复制年轻代活着的对象所花费的时间(包括和老年代通信的开销、对象晋升到老年代开销、垃圾收集周期结束一些最后的清理对象等的花销)</li>
+<li><code>user</code>：GC 线程在垃圾收集期间所使用的 CPU 总时间</li>
+<li><code>sys</code>：系统调用或者等待系统事件花费的时间</li>
+<li><code>real</code>: 应用被暂停的时钟时间、由于GC是多线程的、<code>real</code>可能会<code>小于</code> <code>user+sys</code>, 如果是单线程的、real是接近 <code>user+sys</code>的时间的</li>
+</ul>
+<h4 id="CMS-log-大致解读"><a href="#CMS-log-大致解读" class="headerlink" title="CMS log 大致解读"></a>CMS log 大致解读</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">2018-04-12T13:48:26.233+0800: 15578.148: [GC [1 CMS-initial-mark: 6294851K(20971520K)] 6354687K(24746432K), 0.0466580 secs] [Times: user&#x3D;0.04 sys&#x3D;0.00, real&#x3D;0.04 secs]</span><br><span class="line">2018-04-12T13:48:26.280+0800: 15578.195: [CMS-concurrent-mark-start]</span><br><span class="line">2018-04-12T13:48:26.418+0800: 15578.333: [CMS-concurrent-mark: 0.138&#x2F;0.138 secs] [Times: user&#x3D;1.01 sys&#x3D;0.21, real&#x3D;0.14 secs]</span><br><span class="line">2018-04-12T13:48:26.418+0800: 15578.334: [CMS-concurrent-preclean-start]</span><br><span class="line">2018-04-12T13:48:26.476+0800: 15578.391: [CMS-concurrent-preclean: 0.056&#x2F;0.057 secs] [Times: user&#x3D;0.20 sys&#x3D;0.12, real&#x3D;0.06 secs]</span><br><span class="line">2018-04-12T13:48:26.476+0800: 15578.391: [CMS-concurrent-abortable-preclean-start]</span><br><span class="line">2018-04-12T13:48:29.989+0800: 15581.905: [CMS-concurrent-abortable-preclean: 3.506&#x2F;3.514 secs] [Times: user&#x3D;11.93 sys&#x3D;6.77, real&#x3D;3.51 secs]</span><br><span class="line">2018-04-12T13:48:29.991+0800: 15581.906: [GC[YG occupancy: 1805641 K (3774912 K)]2018-04-12T13:48:29.991+0800: 15581.906: [GC2018-04-12T13:48:29.991+0800: 15581.906: [ParNew: 1805641K-&gt;48395K(3774912K), 0.0826620 secs] 8100493K-&gt;6348225K(24746432K), 0.0829480 secs] [Times: user&#x3D;0.81 sys&#x3D;0.00, real&#x3D;0.09 secs]2018-04-12T13:48:30.074+0800: 15581.989: [Rescan (parallel) , 0.0429390 secs]2018-04-12T13:48:30.117+0800: 15582.032: [weak refs processing, 0.0027800 secs]2018-04-12T13:48:30.119+0800: 15582.035: [class unloading, 0.0033120 secs]2018-04-12T13:48:30.123+0800: 15582.038: [scrub symbol table, 0.0016780 secs]2018-04-12T13:48:30.124+0800: 15582.040: [scrub string table, 0.0004780 secs] [1 CMS-remark: 6299829K(20971520K)] 6348225K(24746432K), 0.1365130 secs] [Times: user&#x3D;1.24 sys&#x3D;0.00, real&#x3D;0.14 secs]</span><br><span class="line">2018-04-12T13:48:30.128+0800: 15582.043: [CMS-concurrent-sweep-start]</span><br><span class="line">2018-04-12T13:48:36.638+0800: 15588.553: [GC2018-04-12T13:48:36.638+0800: 15588.554: [ParNew: 3403915K-&gt;52142K(3774912K), 0.0874610 secs] 4836483K-&gt;1489601K(24746432K), 0.0877490 secs] [Times: user&#x3D;0.84 sys&#x3D;0.00, real&#x3D;0.09 secs]</span><br><span class="line">2018-04-12T13:48:38.412+0800: 15590.327: [CMS-concurrent-sweep: 8.193&#x2F;8.284 secs] [Times: user&#x3D;30.34 sys&#x3D;16.44, real&#x3D;8.28 secs]</span><br><span class="line">2018-04-12T13:48:38.419+0800: 15590.334: [CMS-concurrent-reset-start]</span><br><span class="line">2018-04-12T13:48:38.462+0800: 15590.377: [CMS-concurrent-reset: 0.044&#x2F;0.044 secs] [Times: user&#x3D;0.15 sys&#x3D;0.10, real&#x3D;0.04 secs]</span><br></pre></td></tr></table></figure>
+<p>由于CMS涉及的阶段比较多、分阶段来说下~</p>
+<h5 id="初始标记-initial-mark阶段"><a href="#初始标记-initial-mark阶段" class="headerlink" title="初始标记 initial mark阶段"></a>初始标记 initial mark阶段</h5><p><code>STW</code>中的一次、为了标记直接被<code>GC root引用</code>或者<code>年轻代</code> <code>存活对象引用</code>的所有对象(<a href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep" target="_blank" rel="noopener">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep</a>)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-550f1b5ef67f99d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>上述示例的对应信息为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018-04-12T13:48:26.233+0800: 15578.148: [GC [1 CMS-initial-mark: 6294851K(20971520K)] 6354687K(24746432K), 0.0466580 secs] [Times: user&#x3D;0.04 sys&#x3D;0.00, real&#x3D;0.04 secs]</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>2018-04-12T13:48:26.233+0800</code>：GC开始时间(同 ParNew收集器)</li>
+<li><code>15578.148</code>：JVM运行时间(同 ParNew收集器)</li>
+<li><code>CMS-initial-mark</code>：CMS当前阶段(这里代表 <code>初始标记</code>)</li>
+<li><code>6294851K</code>：当前老年代使用的容量</li>
+<li><code>(20971520K)</code>：老年代可使用的最大容量</li>
+<li><code>6354687K</code>：整个堆目前使用的情况</li>
+<li><code>(24746432K)</code>：整个堆当前可用情况</li>
+<li><code>0.0466580 secs</code>：该阶段持续时间</li>
+<li><code>[Times: user=0.04 sys=0.00, real=0.04 secs]</code> 同 <code>ParNew</code>收集器</li>
+</ul>
+<h5 id="并发标记阶段-Concurrent-Mark"><a href="#并发标记阶段-Concurrent-Mark" class="headerlink" title="并发标记阶段(Concurrent Mark)"></a>并发标记阶段(Concurrent Mark)</h5><p>遍历老年代，然后标记所有存活的对象、会根据上个阶段找到的 GC Roots 遍历查找，与用户的应用程序<code>并发运行</code><br><code>注意</code>不是所有的老年代存活对象都会被标记、因为在标记期间引用关系可能会发生改变(<a href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep)、" target="_blank" rel="noopener">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep)、</a><br><img src="https://upload-images.jianshu.io/upload_images/14027542-b3d7a48abe067d6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>与上图对比可用发现已经有一个对象的引用关系发生了改变</p>
+<p>本阶段log如下：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;2018-04-12T13:48:26.280+0800: 15578.195: [CMS-concurrent-mark-start]</span><br><span class="line">&gt;2018-04-12T13:48:26.418+0800: 15578.333: [CMS-concurrent-mark: 0.138&#x2F;0.138 secs] [Times: user&#x3D;1.01 sys&#x3D;0.21, real&#x3D;0.14 secs]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>CMS-concurrent-mark</code>: <code>并发收集</code>阶段, 遍历老年代、标记所有存活对象</li>
+<li><code>0.138/0.138 secs</code>这个阶段的<code>持续时间</code>与<code>时钟时间</code></li>
+<li><code>[Times: user=1.01 sys=0.21, real=0.14 secs]</code>：同上、但是从并发标记的开始时间计算的、期间是并发进行、所以参考意义不大(包含的不仅仅是gc线程的工作)</li>
+</ul>
+</blockquote>
+<h5 id="并发预清理-concurrent-preclean"><a href="#并发预清理-concurrent-preclean" class="headerlink" title="并发预清理(concurrent preclean)"></a>并发预清理(concurrent preclean)</h5><p>也是一个并发阶段，与应用的线程<code>并发运行</code>，<code>不会 stop</code>应用的线程<br>在并发运行的过程中、一些对象的引用可能会发生变化、发生这种情况时、jvm会将这个对象的区域<code>Card</code>标记为<code>Dirty</code>，也就是<code>Card Marking</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c040c645b1abbe18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>在 <code>preclean</code>阶段、能够从Dirty对象可到达的对象也会被标记、标记完成之后、<code>Dirty Card</code>就会被清除了、<br><img src="https://upload-images.jianshu.io/upload_images/14027542-2fd204c365b46807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>这个阶段的log如下：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018-04-12T13:48:26.418+0800: 15578.334: [CMS-concurrent-preclean-start]</span><br><span class="line">2018-04-12T13:48:26.476+0800: 15578.391: [CMS-concurrent-preclean: 0.056&#x2F;0.057 secs] [Times: user&#x3D;0.20 sys&#x3D;0.12, real&#x3D;0.06 secs]</span><br></pre></td></tr></table></figure>
+<p><code>CMS-concurrent-preclean</code> 阶段名称、对前边并发标记阶段中引用发生变化的对象进行标记<br><code>0.056/0.057 secs</code> 这个阶段持续的时间与时钟时间<br><code>[Times: user=0.20 sys=0.12, real=0.06 secs]</code> 同<code>并发标记</code>阶段</p>
+</blockquote>
+<h5 id="可中止的并发预清理-Concurrent-Abortable-Preclean"><a href="#可中止的并发预清理-Concurrent-Abortable-Preclean" class="headerlink" title="可中止的并发预清理(Concurrent Abortable Preclean)"></a>可中止的并发预清理(Concurrent Abortable Preclean)</h5><p><code>并发</code> &amp; <code>不影响</code>用户线程, 是为了 尽量承担STW中的最终标记阶段的工作， 这个阶段是在重复做很多相同的工作，直接满足一些条件（比如：重复迭代的次数、完成的工作量或者时钟时间等）<br>log如下：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;2018-04-12T13:48:26.476+0800: 15578.391: [CMS-concurrent-abortable-preclean-start]</span><br><span class="line">&gt;2018-04-12T13:48:29.989+0800: 15581.905: [CMS-concurrent-abortable-preclean: 3.506&#x2F;3.514 secs] [Times: user&#x3D;11.93 sys&#x3D;6.77, real&#x3D;3.51 secs]</span><br></pre></td></tr></table></figure>
+<p><code>CMS-concurrent-abortable-preclean</code>阶段名称<br><code>3.506/3.514 secs</code>通常在<code>5s</code>左右、<br><code>[Times: user=11.93 sys=6.77, real=3.51 secs]</code>同预清理阶段<br>主要做了两件事：</p>
+</blockquote>
+<ul>
+<li>处理 From 和 To 区的对象，标记可达的老年代对象</li>
+<li>和上一个阶段一样，扫描处理Dirty Card中的对象</li>
+</ul>
+<p>具体执行多久，取决于许多因素，满足其中一个条件将会中止运行：</p>
+<ul>
+<li>执行循环次数达到了阈值</li>
+<li>执行时间达到了阈值</li>
+<li>新生代Eden区的内存使用率达到了阈值</li>
+</ul>
+<h5 id="最终标记阶段-Final-Remark"><a href="#最终标记阶段-Final-Remark" class="headerlink" title="最终标记阶段(Final Remark)"></a>最终标记阶段(Final Remark)</h5><p>第二个 <code>STW</code>阶段, 也是最后一个、目标是标记所有老年代所有的存活对象，由于之前的阶段是并发执行的，gc 线程可能跟不上应用程序的变化，为了完成标记老年代所有存活对象的目标，STW 就非常有必要了， 通常 CMS 的 Final Remark 阶段会在年轻代尽可能干净的时候运行，目的是为了减少连续 STW 发生的可能性（年轻代存活对象过多的话，也会导致老年代涉及的存活对象会很多）。这个阶段会比前面的几个阶段更复杂一些，相关日志如下：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;2018-04-12T13:48:29.991+0800: 15581.906: </span><br><span class="line">&gt;[GC[YG occupancy: 1805641 K (3774912 K)]2018-04-12T13:48:29.991+0800: 15581.906: [GC2018-04-12T13:48:29.991+0800: 15581.906: [ParNew: 1805641K-&gt;48395K(3774912K), 0.0826620 secs] 8100493K-&gt;6348225K(24746432K), 0.0829480 secs] [Times: user&#x3D;0.81 sys&#x3D;0.00, real&#x3D;0.09 secs]2018-04-12T13:48:30.074+0800: 15581.989: [Rescan (parallel) , 0.0429390 secs]2018-04-12T13:48:30.117+0800: 15582.032: [weak refs processing, 0.0027800 secs]2018-04-12T13:48:30.119+0800: 15582.035: [class unloading, 0.0033120 secs]2018-04-12T13:48:30.123+0800: 15582.038: [scrub symbol table, 0.0016780 secs]2018-04-12T13:48:30.124+0800: 15582.040: [scrub string table, 0.0004780 secs] [1 CMS-remark: 6299829K(20971520K)] 6348225K(24746432K), 0.1365130 secs] [Times: user&#x3D;1.24 sys&#x3D;0.00, real&#x3D;0.14 secs]</span><br></pre></td></tr></table></figure>
+<p><code>YG occupancy: 1805641 K (3774912 K)</code> 年轻代当前占用量及容量<br><code>ParNew:...</code>触发了一次<code>young gc</code>, 触发的原因是为了减少 年轻代的存活对象、尽量是年前代干净一些<br><code>[Rescan (parallel) , 0.0429390 secs]</code> 这个 Rescan 是当应用暂停的情况下完成对所有存活对象的标记，这个阶段是<code>并行</code>处理的，这里花费了 0.0429390s<br><code>[weak refs processing, 0.0027800 secs]</code> 第一个子阶段，它的工作是处理弱引用<br><code>[class unloading, 0.0033120 secs]</code> 删除无用class<br><code>[scrub symbol table, 0.0016780 secs] ... [scrub string table, 0.0004780 secs]</code> 最后一个子阶段, cleaning up symbol and string tables which hold class-level metadata and internalized string respectively<br><code>6299829K(20971520K)</code> 这个阶段之后，老年代的使用量与总量<br><code>6348225K(24746432K)</code>这个阶段后，堆的使用量与总量<br><code>0.1365130 secs</code>阶段持续时长<br><code>[Times: user=1.24 sys=0.00, real=0.14 secs]</code>对应时间信息</p>
+</blockquote>
+<h5 id="并发清理-Concurrent-Sweep"><a href="#并发清理-Concurrent-Sweep" class="headerlink" title="并发清理(Concurrent Sweep)"></a>并发清理(Concurrent Sweep)</h5><p>不需要 STW，它是与用户的应用程序<code>并发运行</code>, 清除那些不再使用的对象，回收它们的占用空间为将来使用(<a href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep" target="_blank" rel="noopener">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep</a>)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-d560490b0613a37e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>log如下(这中间又发生了一次 Young GC)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2018-04-12T13:48:30.128+0800: 15582.043: [CMS-concurrent-sweep-start]</span><br><span class="line">2018-04-12T13:48:36.638+0800: 15588.553: [GC2018-04-12T13:48:36.638+0800: 15588.554: [ParNew: 3403915K-&gt;52142K(3774912K), 0.0874610 secs] 4836483K-&gt;1489601K(24746432K), 0.0877490 secs] [Times: user&#x3D;0.84 sys&#x3D;0.00, real&#x3D;0.09 secs]</span><br><span class="line">2018-04-12T13:48:38.412+0800: 15590.327: [CMS-concurrent-sweep: 8.193&#x2F;8.284 secs] [Times: user&#x3D;30.34 sys&#x3D;16.44, real&#x3D;8.28 secs]</span><br></pre></td></tr></table></figure>
+<p>*<code>CMS-concurrent-sweep</code> 阶段名称: 主要是清除那些没有被标记的对象，回收它们的占用空间</p>
+<ul>
+<li><code>8.193/8.284 secs</code> 这个阶段的持续时间与时钟时间</li>
+<li><code>[Times: user=30.34 sys=16.44, real=8.28 secs]</code> 同上</li>
+</ul>
+<h5 id="并发重置-Concurrent-Reset"><a href="#并发重置-Concurrent-Reset" class="headerlink" title="并发重置(Concurrent Reset)"></a>并发重置(Concurrent Reset)</h5><p>这个阶段也是并发执行的，它会重设 CMS 内部的数据结构，为下次的 GC 做准备</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018-04-12T13:48:38.419+0800: 15590.334: [CMS-concurrent-reset-start]</span><br><span class="line">2018-04-12T13:48:38.462+0800: 15590.377: [CMS-concurrent-reset: 0.044&#x2F;0.044 secs] [Times: user&#x3D;0.15 sys&#x3D;0.10, real&#x3D;0.04 secs]</span><br></pre></td></tr></table></figure>
+<p>*<code>CMS-concurrent-reset</code> 阶段名称</p>
+<ul>
+<li><code>0.044/0.044 secs</code> 这个阶段的持续时间与时钟时间</li>
+<li><code>[Times: user=0.15 sys=0.10, real=0.04 secs]</code> 同上</li>
+</ul>
+<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p>CMS 通过将大量工作分散到并发处理阶段来在减少 STW 时间，在这块做得非常优秀，但是 CMS 也有一些其他的问题：</p>
+<ul>
+<li>CMS 收集器无法处理浮动垃圾（ Floating Garbage），可能出现 “Concurrnet Mode Failure” 失败而导致另一次 Full GC 的产生，可能引发串行 Full GC；</li>
+<li>空间碎片，导致无法分配大对象，CMS 收集器提供了一个 -XX:+UseCMSCompactAtFullCollection 开关参数（默认就是开启的），用于在 CMS 收集器顶不住要进行 Full GC 时开启内存碎片的合并整理过程，内存整理的过程是无法并发的，空间碎片问题没有了，但停顿时间不得不变长；</li>
+<li>对于堆比较大的应用上，GC 的时间难以预估</li>
+</ul>
+<p>so. G1开始兴起、</p>
+<blockquote>
+<ul>
+<li>由于<code>G1</code>采用复制算法、很好的避免了 <code>空间碎片</code></li>
+<li>采用region分区思想、解决了停顿时长可控</li>
+<li>不过貌似并没有从根源上解决 浮动垃圾的问题~~</li>
+</ul>
+</blockquote>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><ul>
+<li><a href="http://matt33.com/2018/07/28/jvm-cms/" target="_blank" rel="noopener">http://matt33.com/2018/07/28/jvm-cms/</a></li>
+<li><a href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep" target="_blank" rel="noopener">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep</a></li>
+<li><a href="https://zhanjia.iteye.com/blog/2435266" target="_blank" rel="noopener">https://zhanjia.iteye.com/blog/2435266</a><br>等</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E4%B8%83%E7%A7%8D%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E4%B8%83%E7%A7%8D%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">垃圾回收---七种垃圾收集器简介</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>####基本概念：</p>
+<p>新生代：大多数对象在eden区生产、很多对象的什么周期很短、每次新生代的垃圾回收(<code>minor gc</code>)后只有少量对象存活<br>      所以选用的是复制算法、只需要少量的复制成本就可以完成回收<br>      <code>young generation</code> 一般又分为 <code>eden</code>区 和 <code>survivor</code> 区(一般<code>2</code>个<code>survivor</code>区)<br>      大部分对象在eden区生产、eden区满时、还存活的对象被复制到两个survivor区中的一个、这个survivor区满时<br>      此区存活切不满足<code>晋升</code>条件的对象将被复制到另一个survivor区(对象每经历一次<code>minor gc</code>， <code>age</code> + 1，<br>      到达年龄阈值后、被放到老年代<code>old generation</code>, 在<code>Serial</code>和<code>ParNew GC</code>)两种垃圾回收器中、<code>晋升年龄阈值</code><br>      由参数 <code>MaxTenuringThreshould</code>设定、默认15</p>
+<p>老年代：<code>old generation</code>在新生代中经历了n次垃圾回收后仍然存活的对象、会被放到老年代、改区域对象存活的几率比较高<br>      老年代的垃圾回收(<code>Major gc</code>)通常使用 <code>标记-清理</code>或者<code>标记-整理</code>算法，整堆的回收(包括young和old)称为<code>full gc</code><br>      (HotSpot VM)中、除了<code>CMS</code>之外、其它能收集老年代的gc都会同时回收整个GC堆、包括新生代</p>
+<p>永久代: <code>perm generation</code>主要存放元数据、eg. <code>class</code>, <code>method</code>的元信息、与垃圾回收要回收的关系不大、相对新生代<br>      和老年代、改区域对垃圾回收的影响较小</p>
+<h4 id="常见的垃圾回收器"><a href="#常见的垃圾回收器" class="headerlink" title="常见的垃圾回收器"></a>常见的垃圾回收器</h4><h5 id="新生代垃圾收集器"><a href="#新生代垃圾收集器" class="headerlink" title="新生代垃圾收集器"></a>新生代垃圾收集器</h5><ol>
+<li><code>Serial</code>：串行收集器、采用复制算法、jdk1.3之前的唯一选择、单线程、进行垃圾收集时、会STW<pre><code>`jdk1.3`之后又很多优秀收集器、单由于它 对于限定单个cpi的环境来说、没有线程交互的开销、简单高效
+至今仍然是 hotspot 虚拟机运行在client模式下的默认新生代收集器</code></pre></li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-ffea12d750747d02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="serial &amp; serial old.png"></p>
+<ol start="2">
+<li><code>ParNew</code>：<code>Serial</code>的多线程版本、除了使用多线程进行垃圾收集外、其余行为包括<code>Serial收集器可用的控制参数</code>，<pre><code>`收集算法`, `stw`, `对象分配规则`, `回收策略`等 与`Serial`收集器的完全相同、两者公用了很多代码
+ParNew收集器除了使用多线程收集外、其它与Serial收集器并无太多创新之处、`但`是在Server模式下的首选
+一个与性能无关的原因:除Serial外、它是唯一能够和`CMS`收集器(`Concurrent Mark Sweep`)配合工作的         
+`ParNew` 收集器在 `单CPU` 的环境中、不会有比`Serial`收集器更好的效果、甚至由于存在线程交互的开销
+在两个CPU的环境中都不能百分之百的保证超越、在多CPU的环境下、随着`CPU的增加`、在GC时、
+对资源的有效利用是有好处的、默认开启的`收集线程`数和`CPU的数量`相同, 在CPU非常多的时候、可以通过 
+`-XX:ParallerGCThreads`参数设置</code></pre></li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7b2a44d4cfdc7d12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ParNew &amp; Serial Old.png"></p>
+<ol start="3">
+<li><code>Parallel Scavenge</code>: 收集器是<code>并行</code>的<code>多线程</code> <code>新生代</code>收集器, 使用<code>复制</code>算法<pre><code>它与其它收集器的关注点不同、CMS等收集器的关注点是：尽可能缩短垃圾收集时用户线程的停顿时间
+而Parallel Scavenge的关注点是：达到一个可控制的吞吐量
+`停顿短`适合需要与用户交互的程序、良好的响应可以提高用户体验
+`高吞吐量`则可以高效的利用CPU时间、尽快的完成任务、适合在后台运算无需太多交互的任务
+`Parallel Scavenge`收集器提供了一个开关参数 `-XX:UseAdaptiveSizePolicy`指定后可以不用人工指定
+新生代大小(-Xmn)、Eden和Survivor区的比率(-XX:SurvivorRatio)、
+晋升老年代年龄(-XX:PretenureSizeThreshold)等参数细节了、虚拟机会根据当前系统的运行情况、动态调整参数
+这种方式称为：`GC的自适应调节策略`
+`注意` Parallel Scavenge收集器无法和CMS配合使用、在`JDK1.6`推出`Parallel Old`之前、
+只能和`Serail Old`收集器一起使用</code></pre>·<br> <img src="https://upload-images.jianshu.io/upload_images/14027542-601ead2dd3099f9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paralle Scavenge.png"></li>
+</ol>
+<h5 id="老年代收集器"><a href="#老年代收集器" class="headerlink" title="老年代收集器"></a>老年代收集器</h5><ol>
+<li><p><code>Serial Old</code>是<code>Serial</code>收集器的老年代版本、<code>单线程</code>, 使用<code>标记-整理</code>(<code>Mark-Compact</code>)算法</p>
+<pre><code>1) JDK1.5及之前的版本(Parallel Old)诞生之前、与 `Parallel Scavenge`配合使用
+2) 作为CMS收集器的后备预案、在并发手机发生 `Concurrent Mode Failuer`时使用</code></pre></li>
+<li><p><code>Parallel Old</code>是<code>Parallel Scavenge</code>的老年代版本, 使用<code>多线程</code>和<code>标记-整理</code>算法, <code>JDK1.6</code>的版本才开始提供</p>
+<pre><code>在它出现之后`吞吐量优先`才有了名副其实的应用组合、在注重吞吐量和cpu敏感的场合、都可以优先考虑
+`Parallel Scavenge`和`Parallel Old`组合     </code></pre></li>
+<li><p><code>CMS</code>:<code>Concurrent Mark Sweep</code>收集器是一种以最短回收停顿时间为目标的收集器、使用<code>标记-清除</code>算法<br>   基本流程：<br>   1) <code>初始标记</code>:<code>CMS Initial mark</code>仅标记<code>GC Roots</code>能直接关联的对象、速度很快, 会 STW<br>   2) <code>并发标记</code>:<code>CMS Concurrent mark</code>是<code>GC Roots Tracing</code>的过程、耗时最长、但不会STW<br>   3) <code>重新标记</code>:<code>CMS remark</code>为了修正并发标记期间用户程序继续访问导致标记产生变动的对象的标记</p>
+<pre><code>时间会比初始标记长、单远小于并发标记, 需要 STW</code></pre><p>   4) <code>并发清除</code>: <code>CMS concurrent sweep</code><br>   缺点：1) CPU资源敏感、在并发阶段不会导致停顿、单会占用CPU资源、导致应用程序变慢、总的吞吐量降低</p>
+<pre><code>  默认启动的回收线程数是`(CPU数+3)/4`，即不少于25%的CPU资源、且随着cpu的增加而下降
+  但、CPU资源不足时、cms对用户程序的影响可能变大、若CPU的负载本身就很高、还要分出一般运算能力
+  去执行垃圾收集、系统也会有明显的卡顿
+2)无法处理浮动垃圾`Floating Garbage`可能出现`Concurrent Mode Failure`而导致Full gc
+   由于CMS并发清理阶段用户线程还在运行着，伴随程序运行自然就还会有新的垃圾不断产生。
+   出现在标记过程之后，无法再当次收集中处理掉它们，只能待下一次GC时再清理掉。这一部分垃圾就被称为`浮动垃圾`
+3) 产生空间碎片: 空间碎片过多时、会导致老年代空间有剩余、单无法找到足够大连续空间来分配当前对象</code></pre></li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-a48e748a7206f8ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cms.png"></p>
+<ol start="4">
+<li>G1 收集器<br>   <code>G1</code>: <code>Garbage First</code>收集器是新的、面向Server应用、HotSpot团队赋予它的使命是：在将来替换掉CMS收集器<pre><code>1) 并发与并行：G1可充分利用多CPU、多核条件下的硬件优势、使用多个CPU来缩短STW的停顿时间、
+   部分收集器原本需要停顿Java线程执行的GC动作、G1可以通过并发的方式让Java程序继续执行
+2) 分代收集: G1可以不需要其它收集器的配合自己管理整个GC堆、可以采用不同方式去处理新创建的对象和
+   已存活一段时间、经过了n次GC的old对象来获取更好的收集效果            
+3) 空间整合: G1从整体来看是基于`标记-整理`实现的, 从局部(两个Region间)来看是基于复制的
+   所以、在G1运行期间不会产生大量的内存空间碎片、避免提前触发full gc
+4) 可预测的停顿: G1和CMS的共同关注点是降级停顿、但G1除了降低停顿之外、还能建立可预测的停顿时间模型
+   让使用者明确指定在一个长度为M ms的时间片段内、消耗在GC上的时间不得超过N ms、
+   这几乎是实时Java(RTSJ)的垃圾收集器的特征了</code></pre></li>
+</ol>
+<p>G1收集器：<a href="https://www.jianshu.com/p/5a95ce2bbb36" target="_blank" rel="noopener">https://www.jianshu.com/p/5a95ce2bbb36</a></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="https://crowhawk.github.io/2017/08/15/jvm_3/" target="_blank" rel="noopener">https://crowhawk.github.io/2017/08/15/jvm_3/</a></li>
+<li><a href="https://tech.meituan.com/2017/12/29/jvm-optimize.html" target="_blank" rel="noopener">https://tech.meituan.com/2017/12/29/jvm-optimize.html</a><br>等众多网络文章</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

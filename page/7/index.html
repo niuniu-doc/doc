@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/7/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content=" Mysql">
+<meta property="article:tag" content=" Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">牛牛的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88,-%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88,-%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">幻读是什么,-幻读有什么问题</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Innodb默认事务隔离级别是可重复读. 接下来的场景设定在可重复读隔离级别(特殊说明除外)</p>
+</blockquote>
+<p>一、幻读是什么 ?<br><img src="https://upload-images.jianshu.io/upload_images/14027542-a05959ed4d3c5fed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="假设只在id=5这行加锁.png"></p>
+<ol>
+<li>在Q1只返回id=5这一行</li>
+<li>在T2时刻、session B把id=0 这行的d值改为5、T3时刻Q2查询出来 id=5 和 id=0 这两行</li>
+<li>T4时刻、session C 又插入一行 (1,1,5), 因此T5时刻、查出 id=0, 1, 5三行.<br>Q3读到id=1 这一行的现象被称为<code>幻读</code>.</li>
+</ol>
+<p><code>幻读</code>: 一个事务在前后两次查询同一个范围的时候、后一次查询看到了前一次查询未看到的行. 两点说明: </p>
+<ol>
+<li>在可重复读隔离级别下、普通查询是快照读、不会看到别的事务插入数据, 所以、只会在当前读下才会出现.</li>
+<li>幻读 仅指新插入的行被读到、修改后满足条件、而被读取到、不能称为<code>幻读</code>.</li>
+</ol>
+<p>二、幻读有什么问题 ?</p>
+<ol>
+<li>首先是语义上的. 前一次查询已经声明要把d=5的行加锁、不许别的事务进行读写操作, 而幻读却破坏了这个语义.</li>
+<li>是数据一致性的问题. 锁的设计是为了保证数据的一致性. 这个一致性、不止是数据库内部数据状态此刻的一致性、还包含了数据和日志在逻辑上的一致性.</li>
+</ol>
+<p>三、如何解决幻读?<br>产生幻读的原因是: 行锁只能锁住行、但是新插入记录这个动作、要更新的是记录之间的间隙、为了解决幻读、就引入了间隙锁(Gap Lock).<br>跟行锁产生冲突的是、另外一个行锁. 跟间隙锁存在冲突关系的是: 往间隙中插入一个记录这个操作. 间隙锁之间不存在冲突关系.<br><img src="https://upload-images.jianshu.io/upload_images/14027542-e275608aeb25fad2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="两种行锁之间的冲突关系.png"></p>
+<p>间隙锁和行锁合称 next-key lock, 每个next-key lock是前开后闭的区间. 即: 若表t初始化后、若用select * from t for update. 将整个记录锁起来、就会形成7个next-key lock, 分别是 (-∞,0]、(0,5]、(5,10]、(10,15]、(15,20]、(20, 25]、(25, +supremum].<br><img src="https://upload-images.jianshu.io/upload_images/14027542-84514755a22c141e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="表t主键索引上的行锁和间隙锁.png"></p>
+<p>但: 间隙锁的引入会降低db的并发度.</p>
+<p>如果事务隔离级别是: RC(Read Committed)就不会有间隙锁了.<br>那线上业务该如何选择隔离级别呢 ?</p>
+<ol>
+<li>若读提交隔离级别够用、业务不需要可重复读的保证、这样考虑读提交下操作数据的锁范围更小(没有间隙锁), 这个选择是合理的.</li>
+<li>业务逻辑使用读提交、逻辑备份时、mysqldump为什么把备份线程设置为 可重复读呢 ?</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E6%AD%BB%E9%94%81%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E6%AD%BB%E9%94%81%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">死锁日志分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="innodb基于系统参数开启监控"><a href="#innodb基于系统参数开启监控" class="headerlink" title="innodb基于系统参数开启监控"></a>innodb基于系统参数开启监控</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. set global  innodb_status_output&#x3D;on; #开启innodb标准监控</span><br><span class="line">2. set global innodb_status_output_locks&#x3D;on; # 开启innodb锁监控</span><br><span class="line">3. set global innodb_print_all_deadlocks&#x3D;on; # 将死锁日志记录到错误日志文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="死锁分析"><a href="#死锁分析" class="headerlink" title="死锁分析"></a>死锁分析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">2019-05-21 21:46:44 7f9ac2fff700</span><br><span class="line">*** (1) TRANSACTION:</span><br><span class="line">TRANSACTION 14234356386, ACTIVE 0 sec fetching rows</span><br><span class="line">mysql tables in use 1, locked 1</span><br><span class="line">LOCK WAIT 4 lock struct(s), heap size 1184, 2 row lock(s)</span><br><span class="line">MySQL thread id 101287388, OS thread handle 0x7f9ac472c700, query id 15913830552 10.20.00.217 zop Searching rows for update</span><br><span class="line">update driver_statistics set statistics_status&#x3D;0 , statistics_time&#x3D;NOW() where statistics_status&#x3D;1 and statistics_time &lt;&#x3D; DATE_SUB(NOW(),INTERVA</span><br><span class="line">L 120 SECOND)</span><br><span class="line">*** (1) WAITING FOR THIS LOCK TO BE GRANTED:</span><br><span class="line">RECORD LOCKS space id 65 page no 203 n bits 208 index &#96;PRIMARY&#96; of table &#96;platform&#96;.&#96;driver_statistics&#96; trx id 14234356386 lock_mode X loc</span><br><span class="line">ks rec but not gap waiting</span><br><span class="line">*** (2) TRANSACTION:</span><br><span class="line">TRANSACTION 14234356375, ACTIVE 0 sec updating or deleting, thread declared inside InnoDB 0</span><br><span class="line">mysql tables in use 1, locked 1</span><br><span class="line">3 lock struct(s), heap size 1184, 2 row lock(s), undo log entries 1</span><br><span class="line">MySQL thread id 101570708, OS thread handle 0x7f9ac2fff700, query id 15913830539 10.20.00.217 zop updating</span><br><span class="line">update driver_statistics</span><br><span class="line">     SET status &#x3D; 2,time &#x3D; &#39;2019-05-21 21:46:44.96&#39;,d_id &#x3D; 44201,</span><br><span class="line">        d_phone &#x3D; &#39;15601237231&#39;, d_name &#x3D; &#39;k&#39;</span><br><span class="line">    where id &#x3D; 54145</span><br><span class="line">*** (2) HOLDS THE LOCK(S):</span><br><span class="line">RECORD LOCKS space id 65 page no 203 n bits 208 index &#96;PRIMARY&#96; of table &#96;platform&#96;.&#96;driver_statistics&#96; trx id 14234356375 lock_mode X loc</span><br><span class="line">ks rec but not gap</span><br><span class="line">*** (2) WAITING FOR THIS LOCK TO BE GRANTED:</span><br><span class="line">RECORD LOCKS space id 65 page no 7749 n bits 1616 index &#96;idx_statistics_status&#96; of table &#96;platform&#96;.&#96;driver_statistics&#96; trx id 14234356375</span><br><span class="line"> lock_mode X locks rec but not gap waiting</span><br><span class="line">*** WE ROLL BACK TRANSACTION (2)</span><br><span class="line">------------</span><br></pre></td></tr></table></figure>
+
+<h4 id="先看事务一的信息"><a href="#先看事务一的信息" class="headerlink" title="先看事务一的信息"></a>先看事务一的信息</h4><blockquote>
+<p>***(1) TRANSACTION:<br>TRANSACTION 14234356386, ACTIVE 0 sec fetching rows</p>
+</blockquote>
+<p><code>active 0 sec</code> 表示事务活跃时间<br><code>fetching rows</code> 表示事务正在做的事儿</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可能的事务有 inserting、updating、deleting、fetching rows等</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>mysql tables in use 1, locked 1<br>LOCK WAIT 4 lock struct(s), heap size 1184, 2 row lock(s)</p>
+</blockquote>
+<p><code>mysql tables in use 1</code> 表示mysql有一个表被使用<br><code>locked 1</code> 表示有一个表锁<br><code>LOCK WAIT</code> 表示事务正在等待锁<br><code>4 lock struct(s)</code> 表示该事务的锁链表长度为 4, 表示该事务的锁链表的长度为 11，每个链表节点代表该事务持有的一个锁结构，包括表锁，记录锁以及 autoinc 锁等。<br><code>heap size 1184</code> 为事务分配的锁堆内存大小<br><code>2 row lock(s)</code> 表示当前事务持有的行锁个数, 通过遍历上边的4个锁结构、找到其中类型为LOCK_REC的记录数、</p>
+<blockquote>
+<p>MySQL thread id 101287388, OS thread handle 0x7f9ac472c700, query id 15913830552 10.20.00.217 zop Searching rows for update</p>
+</blockquote>
+<p><code>MySQL thread id .. OS...</code> 当前事务线程信息<br><code>10.20.00.217 zop</code> 数据库的ip和dbname<br><code>Searching rows for update</code> 当前事务的状态</p>
+<blockquote>
+<p>update d_statistics set statistics_status=0, statistics_time=now() where statistics_status=1 and statistics_time &lt;=date_sub(now(),interval 120 seconds)</p>
+</blockquote>
+<blockquote>
+<p>当前正在执行的sql语句</p>
+</blockquote>
+<blockquote>
+<p>*** (1) WAITING FOR THIS LOCK TO BE GRANTED:<br>RECORD LOCKS space id 65 page no 203 n bits 208 index <code>PRIMARY</code> of table <code>platform</code>.<code>driver_statistics</code> trx id 14234356386 lock_mode X loc<br>ks rec but not gap waiting</p>
+</blockquote>
+<p><code>lock_mode X</code> 表示改记录锁为排他锁<br><code>RECORD LOCKS</code> 表示正在等待的是记录锁<br><code>index PRIMARY</code> 表示要加锁的索引为主键索引<br><code>n bits 208</code> 表示这个记录锁结构上保留有208个bit位(改page上的记录数+64)、<br><code>lock_mode X</code>表示该记录锁为排他锁、<br><code>locks rec but not gap waiting</code>表示要加的锁为记录锁、并且处于锁等待状态</p>
+<h4 id="再看事务二的分析"><a href="#再看事务二的分析" class="headerlink" title="再看事务二的分析"></a>再看事务二的分析</h4><p><code>undo log entries 1</code>表示当前事务有1个undo log记录、因为二级索引不记undo log、表示该事务更新了1个聚簇索引</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> (2) HOLDS THE LOCK(S):</span><br><span class="line">RECORD LOCKS space id 65 page no 203 n bits 208 index &#96;PRIMARY&#96; of table &#96;platform&#96;.&#96;driver_statistics&#96; trx id 14234356375 lock_mode X loc</span><br><span class="line">ks rec but not gap</span><br></pre></td></tr></table></figure>
+<p>表示事务2 持有主键索引的X记录锁、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(2) WAITING FOR THIS LOCK TO BE GRANTED:</span><br><span class="line">RECORD LOCKS space id 65 page no 7749 n bits 1616 index &#96;idx_statistics_status&#96; of table &#96;platform&#96;.&#96;driver_statistics&#96; trx id 14234356375</span><br><span class="line"> lock_mode X locks rec but not gap waiting</span><br></pre></td></tr></table></figure>
+<p>表示事务2正在等待二级索引上的X记录锁</p>
+<h4 id="mysql-加锁方式"><a href="#mysql-加锁方式" class="headerlink" title="mysql 加锁方式"></a>mysql 加锁方式</h4><p><a href="https://www.aneasystone.com/archives/2017/11/solving-dead-locks-two.html" target="_blank" rel="noopener">https://www.aneasystone.com/archives/2017/11/solving-dead-locks-two.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">批量update时、mysql server会根据where条件读取第一条满足条件的记录、innodb引擎返回第一条记录、并加锁(current read)、待mysql server收到这条加锁的记录后、再发起update请求、更新记录</span><br><span class="line">server和innodb的交互是一条一条进行的、加锁也是一条一条进行的、</span><br><span class="line">在给二级索引加X锁的同时、会给主键索引也加上X锁、</span><br><span class="line">记录锁是加在索引上的、若表未建索引、db也会隐式的创建一个索引</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">若sql无法使用索引时会走主索引实现全表扫描、mysql会给全表所有的记录行加记录锁、若一个where条件无法索引快速过滤、存储引擎就会将所有的记录加锁后返回、mysql server在进行过滤时、若发现不满足、会调用unlock_row把不满足的记录释放、但是每条记录的加锁操作还是不能省略的、so在没有索引时、会消耗大量的锁资源、增加db开销、降低db的并发性</span><br><span class="line"></span><br><span class="line">RC级别不会加间隙锁</span><br></pre></td></tr></table></figure>
+
+<h4 id="加锁情况分析"><a href="#加锁情况分析" class="headerlink" title="加锁情况分析"></a>加锁情况分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">1. 主键索引命中:</span><br><span class="line">    RR和RC 一样、都只加记录锁</span><br><span class="line"></span><br><span class="line">2. 主键索引非命中</span><br><span class="line">    RC不加锁、RR加 gap 锁</span><br><span class="line"></span><br><span class="line">3. 唯一二级索引、查询命中</span><br><span class="line">   RC和RR都只加记录锁、加二级索引锁的同时会加主键索引锁</span><br><span class="line"></span><br><span class="line">4. 唯一二级索引、查询非命中</span><br><span class="line">   RC不加锁、RR会加GAP锁、但只加二级索引、不加主键索引</span><br><span class="line"></span><br><span class="line">5.二级非唯一索引、查询命中</span><br><span class="line">  RC会加记录锁、RR还会加GAP锁、</span><br><span class="line"></span><br><span class="line">6.二级非唯一索引、查询未命中</span><br><span class="line">  RC不加锁、RR会加GAP锁、</span><br><span class="line"></span><br><span class="line">7. 无索引</span><br><span class="line">   若where条件不能走索引、只能走全表扫描</span><br><span class="line">   RC会给所有记录加行锁、RR会给所有记录加行锁 + 所有聚簇索引之间加GAP锁</span><br><span class="line"></span><br><span class="line">8.聚簇索引范围查询</span><br><span class="line">   包含等于时、会给下一条记录也加上next-key lock</span><br><span class="line"></span><br><span class="line">9.二级索引范围查询</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html" target="_blank" rel="noopener">https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html</a><br><a href="https://www.aneasystone.com/archives/2017/12/solving-dead-locks-three.html" target="_blank" rel="noopener">https://www.aneasystone.com/archives/2017/12/solving-dead-locks-three.html</a><br><a href="https://blog.csdn.net/enweitech/article/details/52447006" target="_blank" rel="noopener">https://blog.csdn.net/enweitech/article/details/52447006</a><br><a href="https://blog.csdn.net/miyatang/article/details/78227344" target="_blank" rel="noopener">https://blog.csdn.net/miyatang/article/details/78227344</a><br><a href="https://time.geekbang.org/column/article/75659" target="_blank" rel="noopener">https://time.geekbang.org/column/article/75659</a><br><a href="https://my.oschina.net/u/2408025/blog/535941" target="_blank" rel="noopener">https://my.oschina.net/u/2408025/blog/535941</a><br><a href="https://dbarobin.com/2015/01/27/innodb-lock-wait-under-mysql-5.5/" target="_blank" rel="noopener">https://dbarobin.com/2015/01/27/innodb-lock-wait-under-mysql-5.5/</a><br><a href="https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html" target="_blank" rel="noopener">https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html</a><br><a href="https://www.cnblogs.com/LBSer/p/5183300.html" target="_blank" rel="noopener">https://www.cnblogs.com/LBSer/p/5183300.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" class="post-title-link" itemprop="url">表数据删了一半、表大小不变</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>innodb表包含两部分: 表定义和表数据、在mysql8.0之前、表定义单独存放、.frm 文件、8.0之后允许把表结构定义放在系统数据表中了(表结构定义占用的空间很小)</p>
+</blockquote>
+<h4 id="innodb-file-per-table"><a href="#innodb-file-per-table" class="headerlink" title="innodb_file_per_table"></a>innodb_file_per_table</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">off: 表数据放在系统共享表空间、跟数据字典放在一起</span><br><span class="line">on: 每个innodb表数据存储在一个.ibd结尾的文件中(drop table时直接删除文件)</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据删除流程"><a href="#数据删除流程" class="headerlink" title="数据删除流程"></a>数据删除流程</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-9ef7fd91e2dcd722.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="索引树示意图"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. 假设删掉R4这个记录、innodb引擎只会把这个记录标记为已删除、之后再插入一个300-600之间的记录时、可能会复用这个位置、但是空间不会释放</span><br><span class="line">2. innodb的数据是按页存放的、如果删掉了一个数据页上的所有内容呢 ？</span><br><span class="line">    整个页可以复用</span><br><span class="line">3. 数据页的复用: 可以复用到任意位置</span><br><span class="line">    记录复用: 插入数据若不在400-600之间、无法复用</span><br><span class="line">4. 若相邻两个数据页的利用率都很小、系统会把数据合并到一个页】另一个标记为可复用</span><br><span class="line">5. delete删除整个表数据呢？所有数据页都被标记为可复用</span><br><span class="line">所以delete操作只是标记页面可复用、这些可复用但未被复用的空间、就像是空洞、空间不会回收</span><br><span class="line"></span><br><span class="line">6. 插入数据也会造成空洞</span><br><span class="line">    数据若不是顺序插入、如果需要在某个页的末尾插入一条记录、就会申请新的页、把要插入位置之后的数据转移到新的页去: 如下图</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-dede264180fcc1f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<h4 id="如何去除空洞"><a href="#如何去除空洞" class="headerlink" title="如何去除空洞"></a>如何去除空洞</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 重建表 alter table A engine&#x3D;Innodb</span><br><span class="line">2. 5.6之后的版本、引入Online DDL、重建流程变为: </span><br><span class="line">    1. 建立一个临时文件、扫描表A主键的所有数据页、</span><br><span class="line">    2. 用数据页中表A的记录生成B+树、存储到临时文件中、</span><br><span class="line">    3. 生成临时文件过程中、所有表A的操作记录在日志文件(row log) 中、</span><br><span class="line">    4. 临时文件生成后、将日志文件应用于临时文件、得到与表A逻辑相同的文件</span><br><span class="line">    5. 用临时文件替换表A的数据文件</span><br><span class="line">    与以前不同之处在于: 在重建表的过程中允许对表A的操作</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-92ae8e30bfdb3194.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重建表流程.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-79acd12bb61357d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Online DDL.png"></p>
+<h4 id="完全Online-？"><a href="#完全Online-？" class="headerlink" title="完全Online ？"></a>完全Online ？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">不是, DDL之前是要拿MDL锁的、但这个写锁会在copy数据之前退化成读锁、就不会阻塞CURD操作了</span><br><span class="line">可以直接解锁？不行、为了保证自己在copy的过程中表结构不会再次被修改、为了保护自己</span><br><span class="line">对大表来说、最耗时的是copy文件、可以认为MDL读锁的时间可以忽略、但操作会比较消耗IO和CPU、安全操作可以使用 gh-ost来做</span><br></pre></td></tr></table></figure>
+
+<h4 id="online和inplace"><a href="#online和inplace" class="headerlink" title="online和inplace"></a>online和inplace</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">图三中、表A导出数据存放位置叫tmp_table、是一个临时表、在server层创建</span><br><span class="line">图四种、表A重建的数据放在tmp_file、是innodb内部创建出来的、整个DDL过程在innodb内部完成、对server来说、没有挪到数据到临时表、是原地操作、inplace</span><br><span class="line"></span><br><span class="line">假如磁盘空间是1.2T、现有一个1T的表、可否完成一个inpalce的DDL？</span><br><span class="line">不能、inplace也是需要临时空间的、alter table t engine&#x3D;innodb,ALGORITHM&#x3D;inplace;</span><br><span class="line">copy表其实是: alter table t engine&#x3D;innodb,ALGORITHM&#x3D;copy; 对应图三</span><br><span class="line"></span><br><span class="line">inplace和online并无直接关系</span><br><span class="line">eg. 添加索引、是inplace操作、但不是online的</span><br></pre></td></tr></table></figure>
+
+<h4 id="alter-table、analyze-table-、-optimize-table"><a href="#alter-table、analyze-table-、-optimize-table" class="headerlink" title="alter table、analyze table 、 optimize table"></a>alter table、analyze table 、 optimize table</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 5.6之后、默认上图四操作、就是recreate</span><br><span class="line">2. analyze table不是重建表、是重新统计索引信息、过程会加MDL读锁</span><br><span class="line">3. optimize &#x3D; recreate+analyze</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/" class="post-title-link" itemprop="url">读写分离有哪些坑-</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-9443eea1ca9ff032.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="读写分离基本架构.png"></p>
+<blockquote>
+<p>读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.</p>
+</blockquote>
+<p>两种负载方式的差异:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. Client负载、少了一层proxy转发、查询性能稍微好一些、且整体架构简单、排查问题方便、</span><br><span class="line">但与DB层耦合性高、若出现主备切换或者库迁移、Client需要调整连接信息</span><br><span class="line">2. proxy负载. 对Client友好、但proxy本身也需要高可用架构、整体架构设计较复杂.</span><br></pre></td></tr></table></figure>
+<p>不管采用哪种负载方式, 都会存在<code>从库读到系统过期状态</code>的现象, 称为<code>过期读</code>.<br>那么、如何解决过期读呢 ?<br>一、强制走主库<br>其实就是将查询分类、对于必须拿到最新结果的请求、强制转发到主库; 对于可以接受稍微延迟的请求、转发给从库. 但: 极端情况下、可能所有的请求都不能接受延迟、这样所有请求都打到主库、就失去了扩展性.</p>
+<p>二、sleep一段时间<br>eg. 查询数据之前、先强制等待一段时间、但会失去用户体验度. 不过可以折中、用Ajax将客户端输入内容直接展示在页面上、而不去查询DB.<br>存在的问题是: </p>
+<ol>
+<li>若查询本可以0.5s就从从库拿到结果、也会等1s</li>
+<li>若延迟超过1s、还是会出现过期读.</li>
+</ol>
+<p>三、判断主备无延迟</p>
+<ol>
+<li><p>每次从库查询前、先判断<code>seconds_behind_master</code>值、直到=0、才执行查询请求.</p>
+</li>
+<li><p>对比位点、确保主备无延迟<br><code>master_log_file</code> 和 <code>read_master_log_pos</code>, 表示读到的主库的最新位点<br><code>relay_master_log_file</code> 和 <code>exec_master_log_pos</code>表示备库执行的最新位点<br>这两组值完全相同时、表示接收的日志已完成同步.</p>
+</li>
+<li><p>对比gtid<br><code>auto_position</code>=1, 表示主备关系使用了gtid协议<br><code>retrieved_gtid_set</code>, 表示的是备库收到的所有日志gtid集合<br><code>executed_gtid_set</code>, 是备库已经执行完成的gtid集合<br>这两个集合相同、表示接收到的日志已同步完成.</p>
+<p> 2、3两个方案都是基于<code>备库接收到的日志</code>执行完成了、但还有一部分日志是: Client已经收到提交确认、但备库还未收到日志的状态、所以, 比1要好些、但未达到精准的程度.</p>
+</li>
+</ol>
+<p>四、配合semi-sync方案<br>对于上边的问题、可以解决不? 利用版同步复制、<code>semi-sync replication</code>可以.<br><code>semi-sync</code>设计:</p>
+<ol>
+<li>事务提交时、将binlog发给从库</li>
+<li>从库收到binlog、给主库发送一个ack、代表收到了</li>
+<li>主库收到ack以后、才返回给客户端<code>事务完成</code>的确认.<br>这样, 使用semi-sync配合前边的位点判断、就可以确定从库上执行的查询请求、避免过期读</li>
+</ol>
+<p>但: 一主多从的场景下、主库只要等到一个从库的ack、就开始对Client返回确认、这时可能会存在过期读(查询请求落到了非确认的从库上)</p>
+<p>判断同步位点还有一个潜在问题: 若业务更新的高峰期、可能出现主库的位点或者GTID集合更新很快、导致位点等着判断一直不成立、从库迟迟无法响应的情况. 其实、我们并不需要完全同步、只希望要查询的数据已经同步即可.</p>
+<p>五、等主库位点<br>可以解决上边两个问题:</p>
+<ol>
+<li>一主多从时、部分从库过期读</li>
+<li>过度等待<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">master_pos_wait</span>(<span class="keyword">file</span>, pos[, <span class="keyword">timeout</span>]);</span><br></pre></td></tr></table></figure>
+执行逻辑:</li>
+<li>从库上执行</li>
+<li>file 和 pos 指主库上的文件名 和 位置</li>
+<li>timeout 可选、设为正整数N表示这个函数最多等待N秒<br>正常返回一个正整数M、表示从命令开始执行、到应用完file和pos代表的binlog位置、执行了多少事务.<br>其它返回值:</li>
+<li>null、表示执行期间、备库同步线程发生异常</li>
+<li>-1、超过等待时间Ns</li>
+<li>0、刚开始执行时、发现该位置已经执行过了.<br>则、查询逻辑变成了:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. trx1更新完成后、马上执行 show master status 得到当前主库执行到的File 和 Pos</span><br><span class="line">2. 选择一个从库执行查询语句</span><br><span class="line">3. 在从库上执行 select master_pos_wait(File, Pos, 1);</span><br><span class="line">4. 若返回值是&gt;&#x3D;0的正整数、则在该从库查询、否则到主库查询</span><br><span class="line">同样存在的问题是: 若所有从库都延迟了、查询压力会打到主库</span><br></pre></td></tr></table></figure>
+一般对于不允许过期读的要求、有两种方案: 超时放弃 和 转到主库, 要根据业务选择.</li>
+</ol>
+<p>六、等GTID<br>若开启GTID模式、同样有等待GTID的方案</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> wait_for_executed_gtid_set(gtid_set, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>执行逻辑:</p>
+<ol>
+<li>等待、直到该库执行的事务中包含传入的gtid_set、返回0</li>
+<li>超时返回1</li>
+<li>7.6版本开始、可以把事务的gtid返回给客户端<br>此时、等GTID的执行流程就变成:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. trx1事务更新完后、从返回包之间获取事务的gtid、记为gtid1</span><br><span class="line">2. 选定一个从库执行查询语句</span><br><span class="line">3. 在从库上执行 select wait_for_Executed_gtid_set(gtid1, 1);</span><br><span class="line">4. 若返回0、则在该从库执行查询、否则、到主库执行查询.</span><br></pre></td></tr></table></figure>
+问题跟等位点的一样、选择超时放弃还是转到主库查询、要根据业务场景选择.</li>
+</ol>
+<p>思考:</p>
+<blockquote>
+<p>若系统采用的是等待GTID的方案、此时要对一个大表做DDL、可能会出现什么情况呢? 为避免这种情况、改怎么做呢 ?</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    这是一个典型的大事务的场景、若该DDL语句在主库执行了10min、提交到备库、也需要执行10min、</span><br><span class="line">那么在主库DDL之后再提交的事务的GTID、去备库查的时候、就会等待10min才出现. 这样这个读写分离机制</span><br><span class="line">至少10min内都会超时、既然是预期内的操作、应该在业务低峰期进行、确保主库可以支撑所有的业务查询、</span><br><span class="line">然后把请求都切到主库、再在主库上做DDL.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Redis读书笔记</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- MarkdownTOC -->
+
+<ul>
+<li>一些说明</li>
+<li>书籍资源</li>
+</ul>
+<!-- /MarkdownTOC -->
+
+
+<h4 id="一些说明"><a href="#一些说明" class="headerlink" title="一些说明"></a>一些说明</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">最近读了一本书、感觉有些部分还不错、希望分享出来、</span><br><span class="line">是读书笔记、可能提炼度不够、希望以后的自己做的越来越好~~.~~</span><br><span class="line">书籍：Redis-4.x CookBook</span><br><span class="line">除特别说明外、本系列文档都是针对 redis 4.x 的版本</span><br></pre></td></tr></table></figure>
+
+<h4 id="书籍资源"><a href="#书籍资源" class="headerlink" title="书籍资源"></a>书籍资源</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">原项目代码git托管地址：</span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;PacktPublishing&#x2F;Redis-4.x-Cookbook</span><br><span class="line"></span><br><span class="line">书中相关图文：</span><br><span class="line">https:&#x2F;&#x2F;www.packtpub.com&#x2F;sites&#x2F;default&#x2F;files&#x2F;downloads&#x2F;Redis4xCookbook_ColorImages.pdf</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/redis_redis%E5%8A%9F%E8%83%BD%E6%A2%B3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/redis_redis%E5%8A%9F%E8%83%BD%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">redis功能梳理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-36a967723586a0bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/redis_redis%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/redis_redis%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">redis基础命令</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="redis基础命令"><a href="#redis基础命令" class="headerlink" title="redis基础命令"></a>redis基础命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">1. 返回给定pattern的所有key</span><br><span class="line">   keys *</span><br><span class="line">   keys list*</span><br><span class="line"></span><br><span class="line">2. 确认key是否存在</span><br><span class="line">   exists key</span><br><span class="line">   </span><br><span class="line">3. 删除key</span><br><span class="line">   del key</span><br><span class="line"></span><br><span class="line">4. 设置key过期</span><br><span class="line">   expire key expire</span><br><span class="line"></span><br><span class="line">5. 将当期数据库的某个key转移到另外一个db</span><br><span class="line">   move key dbindex</span><br><span class="line"></span><br><span class="line">6. 移除给定key的过期时间</span><br><span class="line">   persist key</span><br><span class="line"></span><br><span class="line">7. randomkey 随机返回一个key</span><br><span class="line"></span><br><span class="line">8. rename key newname 重新命名一个key</span><br><span class="line"></span><br><span class="line">9. type key 查看key的数据类型</span><br><span class="line"></span><br><span class="line">10. dump key 返回序列化后的key</span><br><span class="line"></span><br><span class="line">11. restore key 反序列化为redis键</span><br><span class="line"></span><br><span class="line">12. expireat 和expire类型、接受的参数为 unix时间戳</span><br><span class="line"></span><br><span class="line">13. migrate host port key destination-db timout [copy] [repalce]</span><br><span class="line">    将key原子性的从当前实例转移到目标实例的指定db上、一旦传送成功、key会出现在目标实例、当前实例的key会被删除</span><br><span class="line">    eg. redis-cli -h host migrate des_host 6379 operateKey 0 1000</span><br><span class="line">    </span><br><span class="line">14. Object 从内部观察redis对象</span><br><span class="line">    Object encoding key </span><br><span class="line">    (str: raw &amp; int(为了节省内存) list: ziplist &amp; linkedlist set: intset &amp; hashtable</span><br><span class="line">     hash: zipmap &amp; hashtable zset: ziplist &amp; skiplist)</span><br><span class="line">    Object refcount key</span><br><span class="line">    object idletime key</span><br><span class="line"></span><br><span class="line">15. renamenx key 当且仅当newkey不存在时、改名为newkey</span><br><span class="line"></span><br><span class="line">16. sort 对列表、集合、有序集合中的key进行排序</span><br><span class="line">    alpha对字符串进行排序  sort list alpha</span><br><span class="line">    limit offset count 跳过offset个元素、返回count个元素</span><br><span class="line">    sort list limit offset count</span><br><span class="line">    </span><br><span class="line">17. scan、sscan、hscan、zscan 迭代元素</span><br><span class="line">    scan cursor 迭代获取元素</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/redis_redis%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/redis_redis%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">redis运维命令</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>平时觉得没什么用的命令、关键时候救命、😁<del>~</del></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. 查看db大小</span><br><span class="line">   redis-cli -h host -p port -a password dbsize</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2. cat a.txt | redis-cli 从文件读入redis</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3. redis-cli -a password --csv lrange mylist offset count</span><br><span class="line">    从redis中快速读取一些key</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">4. n command 重复执行n次command</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">5. help @</span><br><span class="line">  @generic  @list  @hash  @set  @sorted_set @string  @hyperloglog、@server、@connection、@scripting、@pubsub、@transactions</span><br><span class="line"></span><br><span class="line">help &lt;command&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">6. redis-cli --stat 实时监控redis运行状况</span><br><span class="line">   redis-cli monitor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">7. redis-cli --bigkeys 查看redis中比较大的key</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">8. redis-cli --scan --pattern &#39;*my*&#39; 用scan来查找key、并过滤</span><br><span class="line">   redis-cli --scan --pattern &#39;*my*&#39; |wc -l  直接使用管道作为下个命令的输入</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">9.  redis-cli -h host --rdb &#x2F;tmp&#x2F;dump.rdb</span><br><span class="line">    备份远程redis数据到本地文件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">10. maxmemory size 设置redis使用的最大内存</span><br><span class="line">      超过最大内存时、key过期策略</span><br><span class="line"></span><br><span class="line">     # volatile-lru -&gt; remove the key with an expire set using an LRU algorithm</span><br><span class="line">   # allkeys-lru -&gt; remove any key accordingly to the LRU algorithm</span><br><span class="line">   # volatile-random -&gt; remove a random key with an expire set</span><br><span class="line">   # allkeys-random -&gt; remove a random key, any key</span><br><span class="line">   # volatile-ttl -&gt; remove the key with the nearest expire time (minor TTL)</span><br><span class="line">   # noeviction -&gt; don&#39;t expire at all, just return an error on write operations</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">11. 使用客户端查看redis配置</span><br><span class="line">     redis-cli -h host config get key</span><br><span class="line">     redis-cli -h host config get slowlog-log-slower-than 单位 微秒</span><br><span class="line">     redis-cli -h host config get slowlog-log-slower-than 慢操作日志队列大小</span><br><span class="line">     redis-cli -h host slowlog get 10 查看最近10条慢日志</span><br><span class="line">     hash-max-ziplist-entries 配置使用hashmap编码的最大字节数</span><br><span class="line">     redis-cli -h host get client-output-buffer-limit 客户端buffer控制、在server与client的交互中、</span><br><span class="line"></span><br><span class="line">每个连接都会有一个buffer关联、此buffer用来队列化等待被client接受的响应信息、若client不及时响应、</span><br><span class="line">buffer中积压的数据达到阈值、将会导致连接失败、buffer被移除</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">12. redis以指定配置文件启动</span><br><span class="line">      redis-server redis.conf &amp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">13. redis-cli --lru-test 10000000 模拟1000w keys的执行情况</span><br><span class="line">     在maxmemory无限制的情况下、测试时无意义的、因为内存无限制、命中率会是100%、计算机的ram会被耗尽</span><br><span class="line">    记得配置key的过期策略</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_Mac%E5%AE%89%E8%A3%85mat%E7%8B%AC%E7%AB%8B%E5%B7%A5%E5%85%B7%E6%8A%A5%E9%94%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_Mac%E5%AE%89%E8%A3%85mat%E7%8B%AC%E7%AB%8B%E5%B7%A5%E5%85%B7%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">Mac安装mat独立工具报错</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>####问题描述<br>官网下载、安装<br><img src="https://upload-images.jianshu.io/upload_images/14027542-0d8d68043d36538d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">An error has occurred. </span><br><span class="line">See the log file </span><br><span class="line">&#x2F;Users&#x2F;%username%&#x2F;.eclipse&#x2F;1899417313_macosx_cocoa_x86_64&#x2F;configuration&#x2F;1507391541586.log.</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-56ee81ed27935fe5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">!ENTRY org.eclipse.osgi 4 0 2019-07-26 21:12:08.965</span><br><span class="line">!MESSAGE Application error</span><br><span class="line">!STACK 1</span><br><span class="line">java.lang.IllegalStateException: The platform metadata area could not be written: &#x2F;private&#x2F;var&#x2F;folders&#x2F;kc&#x2F;cc7tcgrx6_1d355s45t1q3nh0000gn&#x2F;T&#x2F;AppTranslocation&#x2F;9361422A-8DF8-482D-873B-8C030C46FB6E&#x2F;d&#x2F;mat.app&#x2F;Contents&#x2F;MacOS&#x2F;workspace&#x2F;.metadata.  By default the platform writes its content</span><br><span class="line">under the current working directory when the platform is launched.  Use the -data parameter to</span><br><span class="line">specify a different content area for the platform.</span><br><span class="line">        at org.eclipse.core.internal.runtime.DataArea.assertLocationInitialized(DataArea.java:70)</span><br><span class="line">        at org.eclipse.core.internal.runtime.DataArea.getStateLocation(DataArea.java:138)</span><br><span class="line">        at org.eclipse.core.internal.preferences.InstancePreferences.getBaseLocation(InstancePreferences.java:44)</span><br><span class="line">        at org.eclipse.core.internal.preferences.InstancePreferences.initializeChildren(InstancePreferences.java:209)</span><br><span class="line">        at org.eclipse.core.internal.preferences.InstancePreferences.&lt;init&gt;(InstancePreferences.java:59)</span><br><span class="line">        at org.eclipse.core.internal.preferences.InstancePreferences.internalCreate(InstancePreferences.java:220)</span><br><span class="line">        at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:349)</span><br><span class="line">@</span><br></pre></td></tr></table></figure>
+
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用命令行打开MemoryAnalyzer.ini，添加-data参数 </span><br><span class="line">&#x2F;Users&#x2F;nj&#x2F;package&#x2F;mat.app&#x2F;Contents&#x2F;Eclipse&#x2F;MemoryAnalyzer.ini</span><br><span class="line">如：</span><br><span class="line">-data</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;var&#x2F;log&#x2F;mat&#x2F;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-data 放在 launcher前、</span><br><span class="line">-data 和 value要放在两行</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-360b39a7c35efd15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_git%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_git%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">git相关</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>分支merge错了、需要撤回merge<br> git merge –abort</p>
+</li>
+<li><p>查看某段时间段内某个用户的提交<br>git log -p –author={name} –since={start-time} –until={end-time}<br>eg. git log -p –author=nj –since=2019-09-24 –until=2019-09-24</p>
+</li>
+<li><p>查看某次提交属于哪个分支<br>  git br -r –contains commitId<br>  eg. git br -r –contains ca4efc1a</p>
+</li>
+<li><p>tag删除<br> git tag -d tag_name  删除本地tag<br> git push origin :refs/tags/tag_name 删除远程tag</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content=" Mysql">
+<meta property="article:tag" content=" Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">牛牛的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_mq%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mq_mq%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">mq网络传输模型</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>实现通过网络来传输数据、需要网络通信类库, 大部分网络通信基础类库都是同步的. 一个TCP连接建立后、用户代码会得到用于收发数据的通道、每个通道会在内存开辟两片区域用于收发数据的缓存</p>
+<p>发数据比较简单:<br>用户代码在发送时写入的数据会暂存在缓存中、然后操作系统会通过网卡、把发送缓存中的数据传输到对端的服务器上<br>       只要缓存不满、或者发送数据的速度未超过网卡传输速度的上限、发送数据的操作耗时就只是写入一次内存的时间、同步发送即可、无需异步</p>
+<p>接收数据比较麻烦、它不知道什么时候会收到数据<br><code>同步IO</code>: 用一个线程阻塞、等待数据、数据到来、操作系统会先把数据写入到接收缓存、然后给接收数据的线程发通知、接收线程收到通知结束等待、开始读取数据、处理完将继续阻塞、等待下次数据到来<br><img src="https://upload-images.jianshu.io/upload_images/14027542-31618a43c52ff67d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>同步IO处理少量连接没问题、但同时处理大量连接的时候、每个连接都会阻塞一个线程来等待数据、这些连接都在收发数据的时候就会有大量的线程来抢占CPU的世界、造成频繁的CPU上下文切换、导致CPU的负载升高、系统性能下降</p>
+<p>期望值:<br>事先定义好收到数据后的处理逻辑、将它作为一个回调方法、收到数据后、网络通信框架直接回调这个方法就好</p>
+<h4 id="Java网络模型"><a href="#Java网络模型" class="headerlink" title="Java网络模型"></a>Java网络模型</h4><p>极客时间留言区看到一个很不错的评论、收藏下<br>举例: 有一个养鸡的农场、里边养着各个农户Thread的鸡Socket、每个农户都在农场中建立了自己的鸡舍SocketCahnnel</p>
+<ol>
+<li><code>BIO</code>: Bolck IO, 每个农户盯着自己的鸡舍、有下蛋、就去捡</li>
+<li><code>NIO</code>: No-Block IO, 单 Selector、农户们花钱请了一个饲养员 <code>Selector</code>, 并且告诉饲养员Register 若哪家的鸡下蛋要向农户报告 select keys</li>
+<li><code>NIO</code>: No-Block IO - 多Selector、鸡舍增多时、一个饲养员巡视(轮询)一次的时间增大、延迟较大、多请几个、每个饲养员分配几个鸡舍管理、减小延迟</li>
+<li><code>epoll</code>: 饲养员不巡查鸡舍、听到有鸡打鸣(活跃连接)就知道下单了</li>
+<li><code>AIO</code>: Asynchronous IO、鸡下单后、饲养员负责取蛋、通知农户来取即可、不需要农户自己到鸡舍取蛋</li>
+</ol>
+<h4 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h4><p>TCP连接上、传输数据的基本形式是二进制流、0和1、在一般编程语言或者框架提供的api中、传输数据的基本形式是字节Byte、本质上是二进制流</p>
+<p>编写的程序是结构化的数据, eg. 类或者结构体<br><strong>显然, 要使用网络框架的API来传输结构化的数据、必须先实现结构化的数据和字节流之间的双向转换</strong></p>
+<p>文件内保存数据的形式也是二进制序列、所以、也需要序列化结构化数据才能实现</p>
+<h4 id="如何选择序列化方式"><a href="#如何选择序列化方式" class="headerlink" title="如何选择序列化方式"></a>如何选择序列化方式</h4><p>需要权衡的因素:</p>
+<ul>
+<li>序列化后的数据易于阅读</li>
+<li>实现复杂度低</li>
+<li>序列化和发序列化越快越好</li>
+<li>序列化后的信息密度越大越好、即同一个结构化刷数据、序列化后占用的空间越小越好</li>
+</ul>
+<p>而 1和4 是矛盾的、2 和 3是矛盾的、所以需要根据业务场景合理选择</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>在内存中存放的数据、最基础的存储单元也是二进制比特、也就是说应用程序操作的对象、在内存中也是使用二进制存储的、既然都是二进制、为什么不直接把二进制数据通过网络发送出去 ？</p>
+<p>内存里的内容、不通用、不同系统不同语言的组织可能都是不一样的、而且存在很多引用、指针、并不是直接数据块<br>序列化、反序列化其实是约定一种标准、大家都遵守就能实现跨语言、跨平台</p>
+<h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><p><strong>高并发下的内存管理技巧</strong></p>
+<ol>
+<li><p>优化代码中处理请求的业务逻辑、减少创建一次性对象、eg. 可以将受到请求的Request对象在业务流程中尽量传递下去、而不是执行一个步骤就创建一个内容和Request对象差不多的新对象</p>
+</li>
+<li><p>使用频繁的对象、可以考虑建立一个对象池、收到请求后在对象池内申请一个对象、使用完放回对象池</p>
+</li>
+<li><p>可能的话、直接使用更大内存的服务器、也可以非常有效的缓解这个问题</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_rocketMQ%E5%AE%9E%E4%BE%8B%E4%B8%8A%E7%9A%84%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mq_rocketMQ%E5%AE%9E%E4%BE%8B%E4%B8%8A%E7%9A%84%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" class="post-title-link" itemprop="url">rocketMQ实例上的定时任务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 120s更新一次nameSrv地址表</span><br><span class="line">2. 30s或指定配置时间pollNameServerInterval 更新一次 topic路由信息</span><br><span class="line">3. 30s或指定时间 heartbeatBrokerInterval 更新一次broker信息</span><br><span class="line">4. 5s或persistConsumerOffsetInterval时间、持久化一次消费偏移量信息</span><br><span class="line">5. 每分钟动态调整一个threadpool大小</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_rocketMQ%E6%B6%88%E6%81%AF%E5%AD%98%E5%82%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mq_rocketMQ%E6%B6%88%E6%81%AF%E5%AD%98%E5%82%A8/" class="post-title-link" itemprop="url">rocketMQ消息存储</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">rocketmq消息格式</span><br><span class="line">totalSize: 消息长度、4字节</span><br><span class="line">magicCode: 魔术 4字节</span><br><span class="line">bodycrc: 消息体crc校验码 4字节</span><br><span class="line">queueId: 消息队列id 4字节</span><br><span class="line">flag: 消息flag、mq不处理、</span><br><span class="line">ququeoffset: 消息在队列中的偏移量</span><br><span class="line">physicaloffset: 消息在commitlog中的偏移量</span><br><span class="line">sysflag: 消息系统flag、eg 是否压缩、是否是事务消息等 4字节</span><br><span class="line">bronTimeStamp: 生产者调用消息发送API时的时间戳 8字节</span><br><span class="line">bornHost: 消息发送者ip、端口 8字节</span><br><span class="line">storeTimeStamp: 消息存储时间戳  8字节</span><br><span class="line">storeHostAddress: broker服务器ip+port 8字节</span><br><span class="line">reconsumetimes: 消息重试次数 4字节</span><br><span class="line">bodylength: 消息长度</span><br><span class="line">body: 消息内容</span><br><span class="line">topicLength: 主题存储长度</span><br><span class="line">topic: 主题</span><br><span class="line">propertiesLength: 消息属性长度、2字节</span><br><span class="line">Properties: 消息属性</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. 存储设计</span><br><span class="line">   commitLog: 消息存储文件、所有topic的消息都存储在commitLog</span><br><span class="line">   大小默认1G、以文件中第一个偏移量为文件名、偏移量小于20位、用0补全</span><br><span class="line">   </span><br><span class="line">   consumeQueue: 消息消费队列、消息到达commitLog后悔异步转发到Queue、</span><br><span class="line">   indexFile: 消息索引文件、主要存储key与offset的对应关系</span><br><span class="line">   </span><br><span class="line">   事务状态服务: 存储每条消息的事务状态</span><br><span class="line">   定时消息服务: 每一个延迟级别对应一个消息消费队列、存储延迟队列的消息拉取进度</span><br><span class="line">   </span><br><span class="line">2. msg发送存储流程</span><br><span class="line">   若当前broker挂掉或者broker为slave或者不支持写入时、拒绝写入</span><br><span class="line">   若topic的长度&gt;256个字符、或者msg的属性长度&gt;65535时、拒绝写入</span><br><span class="line">   </span><br><span class="line">   若消息的延迟级别&gt;0, 将消息的原主题名称和原消息队列id存入消息属性、使用延迟消息队列schedule_topic</span><br><span class="line">   </span><br><span class="line">   transientStorePoolEnable 是否开启缓存池. rocketmq单独创建一个mappedByteBuffer内存缓存池、临时存储数据、数据会先写入该内存映射、然后由commit线程复制到与物理文件对应的内存映射中、主要是提供一种内存锁定、将当前堆外内存一直锁定在内存中、避免被进程将该内存交互到磁盘、提高存储性能</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">3. 存储文件组织与内存映射机制</span><br><span class="line">   doAppend只是将消息存储到byteBuffer中、然后创建AppendMessageResult、只是将消息存储在MappedFile对应的内存映射buffer中、并未刷到磁盘</span><br><span class="line">   handleDiskFlush方法会处理数据持久化</span><br><span class="line">   handleHA会处理m-s</span><br><span class="line">   </span><br><span class="line">4. 存储文件</span><br><span class="line">   commitlog: 消息存储目录</span><br><span class="line">   config运行期间配置信息</span><br><span class="line">   consumequque 消息消费队列存储目录</span><br><span class="line">   index 消息索引文件存储目录</span><br><span class="line">   abort 启动时创建、正常退出之前删除</span><br><span class="line">   checkpoint 文件检测点、存储commitlog文件最后一次刷盘时间戳、consumeQueue最后一次刷盘时间、index文件最后一次刷盘时间戳</span><br><span class="line">   </span><br><span class="line">5. 消费队列、索引文件构成和机制</span><br><span class="line">6. 文件恢复机制</span><br><span class="line">   rocketmq将消息全量存储在commitlog中、然后异步转发任务更新consumeQueue、index文件、若消息成功存储在commitLog转发任务执行失败、eg. broker宕机、则存储三者不一致的情况、commitlog中的消息可能永远不会被消费、rocketmq是如何保障最终一致性的 ？</span><br><span class="line">   1) 判断上次退出是否正常、在broker启动时check是否存储abort文件、若存在、说明是非正常退出、需要修复</span><br><span class="line">   2) 加载延迟队列</span><br><span class="line">   3) 加载commitlog文件</span><br><span class="line">   4) 加载消息消费队列</span><br><span class="line">   5) 加载checkpoint文件、</span><br><span class="line">   6) 加载索引文件、索引文件上次刷盘时间&lt;该索引文件最大的消息时间戳时 说明索引文件不完备、立即销毁</span><br><span class="line">   7) 根据broker是否正常停止、执行不同的恢复策略</span><br><span class="line">   </span><br><span class="line">7. 刷盘机制</span><br><span class="line">   rocketMQ的刷盘是基于NIO的内存映射机制MappedByteBuffer、消息存储时先将消息追加到内存、再根据配置的刷盘策略在不同时间进行刷写磁盘。</span><br><span class="line">   同步刷盘时: 消息追加到内存后悔同步调用force()方法</span><br><span class="line">   消息生产者将在消息服务器端将消息内容追加到内存映射文件后、需同步将内存内容立刻刷到磁盘、调用内存映射文件MapppedByteBuffer的force方法可将内存中的数据写入磁盘</span><br><span class="line">   </span><br><span class="line">   异步刷盘时: 消息写到内存后、会立即返回给producer、mq单独起一个线程按照固定频率刷盘</span><br><span class="line">   若开启 transientStorePoolEnable机制、RocketMQ会单独申请一个与目标物理文件commitlog相同大小的堆外内存、它将会使用内存锁定、不会被置换到虚拟内存中、消息先追加到堆外内存、然后提交到与物理文件的内存映射内存中、再flush到磁盘</span><br><span class="line">   若未开启transientStorePoolEnable机制、消息直接追加到与物理文件直接映射内存中、然后刷写到磁盘</span><br><span class="line">   1) 先将消息直接追加到ByteBuffer(堆外内存DirectlyByteBuffer), WrotePosition随消息增加不断向后移动</span><br><span class="line">   2) CommiteRealTimeService线程默认每200ms将ByteBuffer中新追加的内容(WritePosition-commitedPosition)提交到MappedByteBuffer中</span><br><span class="line">   3) MappedByteBuffer在内存中追加提交的内存、wrotePosition向前后移动、然后返回</span><br><span class="line">   4) commit操作成功返回、将commitedPosition想前后移动本次提交的内容长度、此时wrotePosition指针依然可以向前推进</span><br><span class="line">   5) flushRealTimeService线程默认每500ms将MappedByteBuffer中新追加的内容wrotePosition-上次刷写位置 flushedPositiont通过调研MappedByteBuffer#force方法讲数据刷写到磁盘</span><br><span class="line">   </span><br><span class="line">8. 文件删除机制</span><br><span class="line">   rocketMQ操作commitLog、conssumeQueue是基于内存映射机制并在启动的时候加载commitLog、consumeQueue下所有的文件、为了避免内存与磁盘浪费、引入文件过期机制:</span><br><span class="line">   超过一定时间间隔内没有更新的文件被认为过期文件、默认72h、可通过fileReservedTime来修改</span><br><span class="line">   满足以下条件会删除:</span><br><span class="line">   1) 指定删除文件的时间点、固定时间执行删除 默认凌晨4点</span><br><span class="line">   2) 磁盘不足时、主动触发过期文件删除操作 磁盘分区使用率超过90%不可写入</span><br><span class="line">   3) 预留、手工触发</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_rocketMq%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mq_rocketMq%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">rocketMq入门</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h4><ul>
+<li><p><code>Producer</code> </p>
+<p>消息生产者、负责生产消息、一般由业务系统负责生产消息</p>
+</li>
+<li><p><code>Consumer</code></p>
+<p>消息消费者、负责消费消息、一般由后台系统负责异步消费</p>
+<ul>
+<li><p><code>Push Consumer</code></p>
+<p>Consumer的一种、通常向consumer对象注册一个Listener接口、一旦收到消息、Consumer对象立即回调Listener接口方法</p>
+</li>
+<li><p><code>Pull Consumer</code></p>
+<p>Consumer的一种、应用通常主动调用Consumer的拉取消息放啊从Broker拉取消息、主动权由应用控制</p>
+</li>
+</ul>
+</li>
+<li><p><code>Producer Group</code></p>
+<p>一类Producer的集合名称、这类Producer通常发送一类消息、且发送逻辑一致</p>
+</li>
+<li><p><code>Consumer Group</code></p>
+<p>一类Consumer的集合名称、消费同一类消息、消费逻辑一致</p>
+</li>
+<li><p><code>Broker</code></p>
+<p>消息中转角色、负责存储消息、转发消息、一般也称为<code>Server</code>、在JMS规范中称为<code>Provider</code></p>
+</li>
+<li><p><code>广播消费</code></p>
+<p>一条消息被多个Consumer消费、即使这些Consumer属于同一个group、可以认为在消息划分方面无意义</p>
+</li>
+<li><p><code>集群消费</code></p>
+<p>一个Consumer Group中的Consumer实例平均分摊消费消息、eg. 某个topic有9条消息、其中一个Consumer Group有3个实例、则 每个实例只消费其中的3条消息</p>
+</li>
+<li><p><code>顺序消息</code></p>
+<p>消费消息的顺序要同发送消息的顺序一致、在RocketMQ中、主要指的是局部顺序、即: 同一类消息为满足顺序性、必须Producer单线程顺序发送、且发送到同一个队列、</p>
+</li>
+<li><p><code>普通顺序消费</code></p>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-720659236fc9c351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RocketMQ物理部署结构.png"></p>
+<h4 id="RocketMQ网络部署特点"><a href="#RocketMQ网络部署特点" class="headerlink" title="RocketMQ网络部署特点"></a>RocketMQ网络部署特点</h4><ul>
+<li><p>NameServer 几乎无状态节点、可集群部署、节点间无任何信息同步</p>
+</li>
+<li><p>Broker部署相对复杂、分为master和slave、0表示master、非0表示slave、</p>
+<p>每个Broker与Name Server集群中的所有节点建立长连接、定时注册Topic信息到所有的Name Server</p>
+</li>
+<li><p>Producer 与NameServer中的随机一个节点建立长连接、定期从NameServer取topic信息、并向提供topic服务的Master建立长连接、定时向master发送心跳、Producer完全无状态、可集群部署</p>
+</li>
+<li><p>Consumer与NameServer中随机一个节点建立长连接、从NameServer取topic路由信息、并向提供topic服务的Master、Slave建立长连接、定时向master、slave发送心跳、即可以从master订阅消息、也可以从slave订阅消息</p>
+</li>
+</ul>
+<h4 id="RocketMQ逻辑部署结构"><a href="#RocketMQ逻辑部署结构" class="headerlink" title="RocketMQ逻辑部署结构"></a>RocketMQ逻辑部署结构</h4><p>(<img src="https://upload-images.jianshu.io/upload_images/14027542-0a5961f3b407c08b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="逻辑部署结构.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_MySQL%E6%9C%89%E5%93%AA%E4%BA%9B%60%E9%A5%AE%E9%B8%A9%E6%AD%A2%E6%B8%B4%60%E7%9A%84%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_MySQL%E6%9C%89%E5%93%AA%E4%BA%9B%60%E9%A5%AE%E9%B8%A9%E6%AD%A2%E6%B8%B4%60%E7%9A%84%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">MySQL有哪些`饮鸩止渴`的提高性能的方法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、短链接风暴<br>正常的短连接模式是连接到数据库后、执行很少的SQL语句就断开、下次需要再重连、若使用的是短连接、在业务高峰期、可能会出现连接数暴涨的情况. MySQL建联的成本是比较高的、除正常的网络三次握手外、还需要登录权限判断和获得这个连接的数据读写权限.</p>
+<p>DB压力小时、这些成本并不明显、但DB处理较慢时、连接数就会暴涨、max_connections参数、用来控制一个MySQL实例同时存在的连接数的上限、超过该值、系统会拒绝接下来的连接请求. 此时一个自然的想法是: 调高max_connections的值、但更多请求进来、可能会导致系统的负载进一步变大、大量的资源消耗在鉴权等逻辑上、已经拿到连接的线程拿不到CPU资源去执行请求, 适得其反. </p>
+<p>可以怎么做呢 ?</p>
+<ol>
+<li><p>先处理掉那些占着连接、但不工作的线程.<br>通过kill_connection主动踢掉. 类似提前设置wait_timeout参数(一个线程空闲wait_timeout秒之后、MySQL会主动断开连接)<br>information_schema.innodb_trx 表可以查看事务具体状态.<br>从服务端断开: kill connection + id. 此时Client处于sleep状态、连接被服务端主动断开后、Client不会马上知道、直到Client发起下一个请求, 才会收到 Lost Connection的错误.<br>此时若Client不重新建联、而直接使用原连接重试、会觉得MySQL一直没恢复</p>
+</li>
+<li><p>减少连接过程的消耗<br>有的业务代码会在短时间内先申请大量数据库连接备用、若现在数据库确认是被连接打挂了、可以先让DB跳过鉴权. 重启DB、使用 –skip-grant-tables 参数启动.<br>但这样MySQL会跳过所有的鉴权、包括连接过程和语句执行过程, 风险极高、尤其是允许外网访问时.<br>Mysql8.0, 跳过鉴权时、会默认打开–skip-networking只允许本地Client可见.</p>
+</li>
+</ol>
+<p>二、慢查询性能问题.<br>可能引发慢查询一般有3种可能:</p>
+<ol>
+<li><p>索引没设计好</p>
+</li>
+<li><p>SQL没写好</p>
+</li>
+<li><p>MySQL选错了索引</p>
+</li>
+<li><p>索引未设计好、MySQL5.6以后创建索引都支持Online了、一般高峰期DB被SQL打挂时、最高效的做法就是快速添加索引. 若有主备、最高在备库先执行、<br>1) 在备库执行set sql_bin_log=off, 关闭binlog写入、执行alter语句添加索引<br>2) 执行主备切换、<br>3) 此时主库是B、备库是A、在A上执行 set sql_log_bin=off, 执行alter语句添加索引<br>平时做变更时、应考虑 gh-ost 更稳妥、但紧急处理时、上边的方案最高效.</p>
+</li>
+<li><p>语句没写好<br>Mysql5.7以上的版本、提供了 query_rewrite 功能、可以将输入的语句改写成另外一种模式.<br>eg. select * from t where id+1=10000 会让索引失效、可以通过一个改写语句解决</p>
+</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> query_rewrite.rewrite_rules(pattern, replacement, pattern_database) </span><br><span class="line"><span class="keyword">values</span> (<span class="string">"select * from t where id + 1 = ?"</span>, <span class="string">"select * from t where id = ? - 1"</span>, <span class="string">"db1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">call</span> query_rewrite.flush_rewrite_rules(); // 让新插入的规则生效</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>索引没选对、可以通过上线前的SQL分析来提早发现.</li>
+</ol>
+<p>三、QPS突增问题<br>有时业务突然出现高峰、或者应用程序bug导致某个语句的QPS暴涨、也可能导致MySQL压力过大、影响服务. </p>
+<ol>
+<li>若是新业务bug导致、且新业务可以下掉、只是时间没那么快、可以直接从DB上把白名单禁掉.</li>
+<li>若这个新功能使用的是独立账号、可以将该账号禁用, 这样由它引发的QPS就会降到0</li>
+<li>若新功能是跟主体功能部署在一起的、只能通过处理语句来限制, 可以使用上边的重写功能、将压力最大的SQL重写为 select 1.<br>当然该操作的风险很高、它可能导致:</li>
+<li>若别的功能也用到了该SQL、会被误伤</li>
+<li>很多业务不是靠一个SQL就完成逻辑的、这样会导致后边的业务一起失败.</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/" class="post-title-link" itemprop="url">Mysql-是如何保障高可用的</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-242e0ecf16d359cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MySQL主备切换流程.png"></p>
+<p>一、主备延迟<br>数据同步的关键时间节点:</p>
+<ol>
+<li>主库A执行完一个事务、写入binlog、记为 T1;</li>
+<li>传给备库B、将备库B接收完binlog的时刻记为 T2;</li>
+<li>备库B执行完事务的时刻记为 T3;<br>主备延迟: 同一个事务在备库执行完的时间和主库执行完的时间之间的差值: T3 - T1<br>show slave status; - seconds_behind_master表示当前备库延迟时间</li>
+</ol>
+<p>注: 主备机的系统时间不一致时、会不会导致主备延迟值不准 ?<br>不会. 备库连接主库时、会通过执行 select unix_timestamp 获得当前主库的系统时间、与本机不一致时、会在执行 seconds_behind_master 时扣除差值</p>
+<p>二、主备延迟的来源</p>
+<ol>
+<li>有些部署条件下、备库所在机器的性能较差<br>此时一般将备库设为<code>非双1模式</code>. 现在一般会使用对称部署(主备规格相同).</li>
+<li>使用对称部署、为何仍然存在主备延迟 ?<br>备库可能压力较大、存在一些慢查询、导致备库查询消耗大量CPU资源、影响数据同步、造成主备延迟.<br>解决:<br>1) 使用一主多从、分担读压力<br>2) 通过binlog输出到外部系统、如: hadoop, 提供统计类查询</li>
+<li>采用了一主多从、备库的压力不超过主库的情况下、还有什么情况会导致主备延迟呢 ?<br>1) 可能存在大的事务, 因为主库上必须等事务执行完成才会写入binlog、再传给备库、若一个SQL执行10min、这个事务就很可能会导致从库延迟10min.(所以最好不要一次delete太多数据)<br>2) 大表DDL也是一个大事务的场景</li>
+<li>如果备库上也不做大事务了、还有什么原因会导致主备延迟吗 ?<br>备库的并行复制能力.</li>
+</ol>
+<p>三、主备切换策略:</p>
+<ol>
+<li><p>可靠性优先.<br>1) 先判断备库B的 seconds_behind_master 是否小于指定值, 若否、持续观察<br>2) 把主库A改成只读状态, readonly设为true.<br>3) 判断备库B的 seconds_behind_master 值、直到变为0<br>4) 把备库B改为可写入, readonly设为false.<br>5) 将业务请求切到B<br>2~5 的过程、系统处于不可用状态.</p>
+</li>
+<li><p>可用性优先<br>将1中、4)、5) 调整到最开始执行、直接让备库可读写、系统就无不可用时间、但会产生数据不一致. 暂时称为<code>可用性优先策略</code><br>此时若 binlog_format 为: statement、则会发生数据不一致的线下<br>若 binlog_format 为: row、会提示错误</p>
+</li>
+</ol>
+<p>所以、MySQL高可用系统的可用性是依赖于主备延迟的、延迟的时间越小、在主库故障时、服务恢复需要的时间就越短, 可用性就越高.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_Mysql-%E6%98%AF%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_Mysql-%E6%98%AF%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E7%9A%84/" class="post-title-link" itemprop="url">Mysql-是怎么保证数据不丢的</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-56a40a40793fd005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/440" alt="binlog写盘状态.png"></p>
+<p>一、binlog的写入机制</p>
+<ol>
+<li>binlog写入逻辑:<br>1) 事务执行过程中、先写日志导binlog cache、事务提交时、再把binlog cache写入到binlog文件中.<br>2) 一个事务的binlog不能被拆开、因此不论事务有多大、也要确保一次性写入. 系统给binlog cache每个线程分配一片内存(binlog_cache_size大小), 超过会先暂存到磁盘.<br>3) 事务提交时、执行器会把binlog cache里的完整事务写入binlog、清空binlog cache.</li>
+<li>每个线程有自己的binlog cache、但共用binlog文件.<br>事务提交、先写入到文件系统的page cache(write), 然后调用fsync写入磁盘(占用IOPS)<br>write和fsync的时机:<br>sync_binlog=0, 每次事务提交只write、不fsync<br>sync_binlog=1, 每次事务提交都执行fsync<br>sync_binlog=N, 每次事务提交都write、累积N个事务才fsync<br>所以、在出现IO瓶颈的场景里、可以将sync_binlog设置为一个比较大的值、可以提升性能.<br>风险: 若主机异常重启、会丢失最近N个事务的binlog.</li>
+</ol>
+<p>二、redo log的写入机制<br>事务执行过程中会先写redo log buffer, 然后才写redo log<br><img src="https://upload-images.jianshu.io/upload_images/14027542-c93a7e2e48dc724e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="redo log存储状态.png"><br>从redo log的三种状态说起:</p>
+<ol>
+<li>存在redo log buffer中、物理上是在 mysql 进程内存中.</li>
+<li>写到磁盘write、但未持久化fsync、物理上是在文件系统的Page Cache中</li>
+<li>持久化到磁盘</li>
+</ol>
+<p>1、2的过程都很快、但3的速度就慢很多了. InnoDB提供了三种策略, 通过 innodb_flush_log_at_trx_commit参数控制:</p>
+<ol>
+<li>0, 表示每次事务提交只把redo log留在redo log buffer中</li>
+<li>1, 表示每次事务提交都将redo log直接持久化到磁盘</li>
+<li>2, 表示每次事务提交都把redo log写到Page Cache.<br>InnoDB 有一个后台线程、每隔1s、会把redo log buffer中的日志调用write写到FS Pae Cache、然后调用 fsync 持久化到磁盘.</li>
+</ol>
+<p>注意: 事务执行过程中的redo log也是在buffer中、可能会被后台线程一起持久化到磁盘<br>还有两种场景会将一个未提交的事务redo log写入磁盘:</p>
+<ol>
+<li>redo log buffer占用的空间即将达到innodb_log_buffer_size 一半的时候、后台线程会主动写盘. (此时事务未提交、只是write、并未fsync, 即: 只留在FS Page Cache)</li>
+<li>并行事务提交时, 顺带将该事务的 redo log buffer持久化到磁盘、eg. Trx A执行到一半、Trx B要把buffer数据写入磁盘、会顺带把Trx A的日志一起持久化到磁盘<br>注意: 若将 innodb_flush_log_at_trx_commit 设为1, redo log在prepare阶段就要持久化一次、因为有一个崩溃恢复依赖于prepare的redo log + binlog.<br>通常说的<code>双1</code>配置、是redo log 和binlog的刷盘机制都设为1, 即: 一个事务完整提交前、需要等待两次刷盘: redo log(prepare阶段) 和 binlog</li>
+</ol>
+<p>思考: TPS 2w/s 的话、写盘就是 4w/s, 但磁盘能力只有2w/s, 是怎么实现的呢 ?<br>组提交: 三个并发事务trx1, trx2, trx3, 对应LSN(日志逻辑序列化、单调递增)分别为:50, 120, 160, trx1写盘时、这组(trx1-&gt;3)已经有3个事务、LSN也变成了160, 去写盘时、带的LSN=160, 等trx1返回时、所有LSN&lt;160的redo log都已持久化到磁盘, trx2,trx3可直接返回.<br><img src="https://upload-images.jianshu.io/upload_images/14027542-1044eab2470e5e22.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="两阶段提交细化.png"></p>
+<p>在并发更新场景下、第一个事务写完 redo log buffer、调用fsync越晚、组员越多、节约IOPS效果越好.<br>binlog的write 和 fsync的时间间隔短、组提交优化不如redo log.<br>可以通过设置以下参数来提升效果:</p>
+<ol>
+<li>binlog_group_commit_sync_delay, 延迟x 微秒后才调用fsync</li>
+<li>binlog_group_commit_sync_no_delay_count, 累积x次以后调用fsync<br>二者满足其一就调用 fsync</li>
+</ol>
+<p>另: 不建议设置 innodb_flush_log_at_trx_commit=0, 因为这样redo log只保存在内存中、MySQL异常重启会丢失数据、风险太大. 而redo log写到 FS Page Cache的速度也是很快的、不会损失很多性能, 可以保证异常重启不丢数据、风险小很多.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_SQL%E6%89%A7%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_SQL%E6%89%A7%E8%A1%8C/" class="post-title-link" itemprop="url">SQL执行</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h3 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h3><h4 id="MySQL架构图"><a href="#MySQL架构图" class="headerlink" title="MySQL架构图"></a>MySQL架构图</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-4270d2d72dee925f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<h4 id="server层、"><a href="#server层、" class="headerlink" title="server层、"></a>server层、</h4><blockquote>
+<p>包含连接器、查询缓存、分析器、优化器、执行器等、涵盖mysql大部分核心功能、<br>及mysql所有的内置函数(日期、时间、数学和加密函数等)、所有跨存储引擎的功能<br>(视图、存储过程、触发器等)都在这一层实现</p>
+</blockquote>
+<h5 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql -h$ip -P$port -u$user -p</span><br><span class="line">若 用户名和密码 认证失败、会返回 Access denied for user 的错误</span><br><span class="line">若认证通过、这个连接里的权限都会依赖此时权限表查到的权限</span><br><span class="line">此时用admin账号修改该用户的权限、不会立即生效、会在重新连接时生效</span><br><span class="line"></span><br><span class="line">连接完成后、无后续动作、则连接处于sleep状态、</span><br><span class="line"></span><br><span class="line">client 长时间(wait_time参数控制)不操作、连接器会断开连接</span><br><span class="line"></span><br><span class="line">连接断开之后、再发送请求、会收到 Lost connection to mysql server during query的响应</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-60a2493de769f5b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-18905125b398ebe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-ee3accb459dc1246.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">key 是 sql、value是查询结果 - 任意更新会导致缓存失效</span><br><span class="line">不建议使用</span><br></pre></td></tr></table></figure>
+
+<h5 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">词法分析: 根据关键词识别语句类型 select&#x2F;update&#x2F;insert</span><br><span class="line">语法分析: 若有语法错误、会返回 You have an error in your SQL </span><br><span class="line"></span><br><span class="line">elect 1 from t where id&#x3D;1;</span><br><span class="line">ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;elect 1 from t where id&#x3D;1&#39; at line 1</span><br><span class="line">                         </span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">##### 优化器</span><br></pre></td></tr></table></figure>
+<p>经过分析器、mysql知道了想要做什么、优化器干什么呢 ？</p>
+<ol>
+<li>表中有多个索引的时候、决定使用哪个索引</li>
+<li>多表join的时候、决定连表顺序</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![image.png](https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;14027542-b2765ac683595a26.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 执行器</span><br></pre></td></tr></table></figure>
+<p>在分析器、优化器之后、mysql知道了要做什么、怎么做、就开始进入到执行器阶段、开始执行</p>
+<ol>
+<li><p>命中查询缓存、会在查询缓存返回结果时进行权限验证</p>
+</li>
+<li><p>非命中 先验证权限、无 -&gt; 直接返回错误</p>
+<pre><code>有 -&gt; 执行SQL</code></pre></li>
+<li><p>eg. mysql&gt; select * from T where ID=10;</p>
+<p> 若 id 无索引:<br> 1) 调用innodb引擎接口查询第一行、若id = 10、存入结果集、否则 跳过、继续<br> 2) 调用引擎接口取下一行、直至最后一行<br> 3) 执行器将满足结果的行作为结果集返回给client</p>
+<p> 若id 有索引:<br> 1) 调用innodb查询 满足条件的 第一行、放入结果集<br> 2) 查询满足条件的下一行..<br> 3) 将结果集返回给client</p>
+<p>在db慢SQL中、有一个 rows_examined 字段、表示在SQL执行过程中扫描了多少行、<br>是在 执行器 调用 引擎 获取数据行的时候累计的、<br>注：有些情况下、执行器调用一次会扫描很多行、所以 实际扫描行数 != rows_examined</p>
+</li>
+</ol>
+<pre><code></code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_SQL%E6%9B%B4%E6%96%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_SQL%E6%9B%B4%E6%96%B0/" class="post-title-link" itemprop="url">SQL更新</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="redolog-重做日志-innodb引擎层特有"><a href="#redolog-重做日志-innodb引擎层特有" class="headerlink" title="redolog(重做日志 - innodb引擎层特有)"></a>redolog(重做日志 - innodb引擎层特有)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MySQL使用AWL(Write-Ahead Logging)技术, 当有记录需要更新的时候、innodb就先把记录写到redo log、并更新内存、这时、更新就算完成. 当innodb引擎比较空闲的时候、会将操作更新到磁盘</span><br><span class="line"></span><br><span class="line">触发更新的点:</span><br><span class="line">1. redo log 写满时(redo log文件大小是固定的 - 循环覆盖) </span><br><span class="line">   write pos: 当前位置 </span><br><span class="line">   check point: 当前要擦除的位置</span><br><span class="line">   write和check间有空间、就代表可更新、否则、就要先擦除记录、推进checkpoint、</span><br><span class="line">2.</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e22222b71aa4fb6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<h4 id="binlog-归档日志-MySQL-server层实现"><a href="#binlog-归档日志-MySQL-server层实现" class="headerlink" title="binlog(归档日志 - MySQL server层实现)"></a>binlog(归档日志 - MySQL server层实现)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql引擎实现的日志、与redo log 的差异？</span><br><span class="line">1. redo log 是innodb特有的; binlog是mysql server层实现、所有引擎可以使用</span><br><span class="line">2. redo log 记录的是物理日志、记录的是&quot;在某个数据页上做了什么修改&quot;</span><br><span class="line">   binlog 是逻辑日志、记录的是原始逻辑、eg. 给id&#x3D;2的c字段+1</span><br><span class="line">3. redo log 循环写、空间固定 </span><br><span class="line">    binlog 是追加写、日志写满会切换到下一个</span><br></pre></td></tr></table></figure>
+
+<h4 id="为什么有redo-log-和-binlog-？"><a href="#为什么有redo-log-和-binlog-？" class="headerlink" title="为什么有redo log 和 binlog ？"></a>为什么有redo log 和 binlog ？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sync_binlog: 1 - 每次都持久化到磁盘</span><br><span class="line">binlog: statment格式、记录的是sql语句、</span><br><span class="line">           row格式、记录的是行内容、更新前后都有</span><br><span class="line"></span><br><span class="line">mysql整体包含: </span><br><span class="line">server层 - 主要做的是mysql功能层面的事情、</span><br><span class="line">引擎层 - 负责存储</span><br><span class="line">最初、mysql无innodb引擎、MySQL自带的引擎是myisam、但它没有crash-safe的能力、server层的binlog日志、只能用于归档、innodb是另外一个公司以插件形式引入、用redo log 来实现crash-safe能力</span><br></pre></td></tr></table></figure>
+
+<h4 id="update语句执行"><a href="#update语句执行" class="headerlink" title="update语句执行"></a>update语句执行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">update table set c&#x3D;c+1 where id&#x3D;2</span><br><span class="line">1. 执行器先找引擎取 id&#x3D;2 这一行、id是主键、引擎可以直接使用树搜索找到. 若 id &#x3D; 2 所在的数据页本来就在内存中、直接返回给执行器; 否则、先从磁盘读入内存、再返回</span><br><span class="line">2. 执行器拿到引擎给出的数据行、把值 +1 、得到新的一行数据、再调用引擎接口写入新的数据行</span><br><span class="line">3. 引擎将新的数据行更新到内存、同时将更新操作记录到 redo log. 此时redo log 处于 prepare 状态、然后告诉执行器、执行完成、随时可以提交事务.</span><br><span class="line">4. 执行器生成操作的binlog、并把binlog写入磁盘</span><br><span class="line">5. 执行器调用引擎的提交事务接口、引擎把刚刚写入的redo log改成commit状态、更新完成</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7b1034b758d49c13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="update.png"></p>
+<h4 id="为什么需要两阶段提交"><a href="#为什么需要两阶段提交" class="headerlink" title="为什么需要两阶段提交"></a>为什么需要两阶段提交</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> redo log 和 binlog 是两个独立的逻辑、若不使用两阶段提交、则会是2种情况</span><br><span class="line">1. 先 redo log、 后binlog</span><br><span class="line">   若redolog完成、binlog未完成、进程异常重启、redo log生效、为修改后的值 </span><br><span class="line">  若使用binlog恢复临时库、由于binlog未写完就崩溃、会少一条记录、源库和备库就会出现不一致</span><br><span class="line">2. 先binlog、后 redo log</span><br><span class="line">    binlog写完后crash、redo log未写、在恢复时、认为事务无效、</span><br><span class="line">    binlog已写完、恢复备份库时、认为有效、出现不一致...</span><br><span class="line">所以、为了保证redo log 和 binlog提交状态的逻辑一致性</span><br></pre></td></tr></table></figure>
+
+<h4 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. binlog 是每次update都会写磁盘？</span><br><span class="line">2. 如果 redo log 第一阶段完成(prepare状态)、binlog完成、此时crash、在系统重启之后、这个log会被重放吗</span><br><span class="line">   会、满足prepare 和 binlog的完整、在重启时、会自动执行commit</span><br><span class="line">3. 极端情况下、redo log被写满、新的事务进入、需要擦除redo log(被修改的脏页被迫刷新到磁盘) -&gt; 数据在 commit 之前被持久化、此时如何处理 ？</span><br><span class="line">这些数据在内存中属于无效事务、其它事务读不到、即时被写入磁盘也没关系、再次读入内存时、依然是原逻辑</span><br><span class="line">4. redo log 是顺序写 ？ binlog是随机写 ？</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_java-jdbc%E5%8F%82%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_java-jdbc%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">java-jdbc参数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数说明</th>
+<th>缺省值</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user</td>
+<td>数据库用户名</td>
+<td></td>
+<td>all</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码</td>
+<td></td>
+<td>all</td>
+</tr>
+<tr>
+<td>useUnicode</td>
+<td>是否使用unicode字符集、若characterEncoding设置为gb2312或者gbk、则必须设置为true</td>
+<td>false</td>
+<td>&gt;1.1</td>
+</tr>
+<tr>
+<td>characterEncoding</td>
+<td>指定字符编码</td>
+<td>false</td>
+<td>&gt;1.1</td>
+</tr>
+<tr>
+<td>autoReconnect</td>
+<td>db异常时、是否自动重连？</td>
+<td>false</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>autoReconnectForPools</td>
+<td>是否使用针对db 连接池的重连策略</td>
+<td>false</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>failOverReadOnly</td>
+<td>自动重连成功后、连接是否设为只读</td>
+<td>true</td>
+<td>3.0.12</td>
+</tr>
+<tr>
+<td>maxReconnects</td>
+<td>autoReconnect设为true时、重试次数</td>
+<td>3</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>initalTimeout</td>
+<td>autoReconnect为true时、两次重试之间的时间间隔</td>
+<td>2s</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>connectTimeOut</td>
+<td>和数据库建立socket连接的超时时间ms</td>
+<td>0-永不超时</td>
+<td>3.0.1</td>
+</tr>
+<tr>
+<td>socketTimeOut</td>
+<td>socket读写超时ms</td>
+<td>0-永不超时</td>
+<td>3.0.1</td>
+</tr>
+<tr>
+<td>zeroDateTimeBehavior</td>
+<td>将db 0值转化为null</td>
+<td></td>
+<td>3.1.4</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

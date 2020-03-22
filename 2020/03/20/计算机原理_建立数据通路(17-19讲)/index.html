@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="指令周期12345计算机每执行一条指令的过程、可以分解为:1. Fetch(取得指令), 也就是从PC寄存器找到对应的指令地址、根据指令地址从内存找到具体指令、加载到指令寄存器、然后将PC寄存器自增、好在未来执行下一条指令2. Decode(指令译码): 根据指令寄存器里的指令、解析成将要进行什么样的操作、是R、I、J中的哪一种指令、具体要操作哪些寄存器、数据或者内存地址3. Execute(执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="建立数据通路(17-19讲)">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="指令周期12345计算机每执行一条指令的过程、可以分解为:1. Fetch(取得指令), 也就是从PC寄存器找到对应的指令地址、根据指令地址从内存找到具体指令、加载到指令寄存器、然后将PC寄存器自增、好在未来执行下一条指令2. Decode(指令译码): 根据指令寄存器里的指令、解析成将要进行什么样的操作、是R、I、J中的哪一种指令、具体要操作哪些寄存器、数据或者内存地址3. Execute(执行">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-21T12:02:09.000Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>建立数据通路(17-19讲) | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">牛牛的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          建立数据通路(17-19讲)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="指令周期"><a href="#指令周期" class="headerlink" title="指令周期"></a>指令周期</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">计算机每执行一条指令的过程、可以分解为:</span><br><span class="line">1. Fetch(取得指令), 也就是从PC寄存器找到对应的指令地址、根据指令地址从内存找到具体指令、加载到指令寄存器、然后将PC寄存器自增、好在未来执行下一条指令</span><br><span class="line">2. Decode(指令译码): 根据指令寄存器里的指令、解析成将要进行什么样的操作、是R、I、J中的哪一种指令、具体要操作哪些寄存器、数据或者内存地址</span><br><span class="line">3. Execute(执行指令), 也就是实际运行对应的R、I、J这些特定的指令、进行算术逻辑操作、数据传输或者直接的地址跳转</span><br><span class="line">4. 重复1~3的步骤</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>Machine Cycle</code>: 又称为<code>机器周期</code>或者<code>CPU周期</code>, CPU的内部操作速度很快、但是访问内存的速度却慢很多、每一条指令都从内存中加载而来、所以一般把从内存中读取一条指令的最短时间称为<code>CPU周期</code></p>
+<p><code>Clock Cycle</code>: 也就是时钟周期及机器的主频、一个CPU周期通常是几个时钟周期的积累、一个CPU周期的时间、就是这几个时钟周期的总和</p>
+<blockquote>
+<p> 对于一个指令周期来说、取出一条指令、然后执行、至少需要两个CPU周期、取出指令至少需要一个CPU周期、执行也至少需要一个CPU周期、复杂的指令需要更多的CPU周期</p>
+<p>so. 一个指令周期包含多个CPU周期、而一个CPU周期又包含多个时钟周期</p>
+</blockquote>
+<h4 id="建立数据通路"><a href="#建立数据通路" class="headerlink" title="建立数据通路"></a>建立数据通路</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">一般来说、数据通路就是处理器单元、通常有两类元件组成</span><br><span class="line"></span><br><span class="line">1. 操作元件: 也叫组合逻辑单元、就是ALU、功能就是在特定的输入下、根据下面的组合电路的逻辑、生成特定的输出</span><br><span class="line">2. 存储元件: 也叫状态原件, eg. 计算过程中需要用到的寄存器、无论是通用寄存器还是状态寄存器、其实都是存储原件</span><br><span class="line"></span><br><span class="line">通过数据总线的方式、将操作元件和存储元件连接起来、就可以完成数据的存储、处理和传输了、这就是所谓的建立数据通路</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>控制器: 可以看成只是机械的重复 Fetch -&gt; Decode -&gt; Execute 循环中的前两个步骤、然后将最后一个步骤通过控制器产生的信号、交给ALU去处理</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">控制器电路听起来很简单、其实特别复杂,</span><br><span class="line">1. 所有CPU支持的指令、都会在控制器里边被解析成不同的输出信号、eg. Intel CPU支持2000个以上的指令、意味着: 控制器输出的控制信号、至少有2000种不同的组合</span><br><span class="line">控制器里的ALU和各种组合逻辑电路、可以认为是一个固定功能的电路、控制器翻译出来的、就是不同的控制信号、这些控制信号、告诉ALU去做不同的计算</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CPU所需要的硬件电路"><a href="#CPU所需要的硬件电路" class="headerlink" title="CPU所需要的硬件电路"></a>CPU所需要的硬件电路</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">要想搭建CPU、需要再数字电路层面、实现一些功能.</span><br><span class="line">一、ALU: 实际就是一个没有状态的、根据输入计算输出结果的一个电路</span><br><span class="line">二、需要一个寄存器(可进行状态读写的电路元件)</span><br><span class="line">   需要一个电路(可存储上次计算的结果)、这个计算结果不一定立刻能拿到电路的下游使用、但可在需要的时候拿出来使用、常见能够进行状态读写的电路有: 锁存器(Latch) 和 D触发器(Data &#x2F; Delay Flip-flop)</span><br><span class="line">三、需要有一个&#96;自动&#96;的电路: 可按照固定的周期、不停地实现呢PC寄存器自增、自动的执行 Fetch-Decode-Execute的步骤</span><br><span class="line">四、需要一个译码电路: 无论是decode还是对于拿到的内存地址去获对应的数据或者指令、都需要通过一个电路找到对应的数据、这个就是译码器电路</span><br><span class="line"></span><br><span class="line">虽然CPU已经是有几十亿个晶体管组成的及其复杂的电路、但 仍然是由一个个的基本功能的电路组成的</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="时序逻辑电路"><a href="#时序逻辑电路" class="headerlink" title="时序逻辑电路"></a>时序逻辑电路</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">解决了以下问题:</span><br><span class="line">1. 自动运行, 时序电路接通后可以不停的开启和关闭开关、进入下一个自动运行的状态、使得控制器不停的让PC寄存器自增读取下一条指令成为可能</span><br><span class="line">2. 存储问题, 通过时序电路实现的触发器、可以把计算结果存储在特定的电路里、而不是像组合逻辑电路、一旦输入变化、对应的输出也会变化</span><br><span class="line">3. 时序协调问题, 无论是程序实现的软件指令还是硬件层面、各种指令的操作都有先后的顺序要求、时序电路使得不同的事件按照时间顺序发生</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="时钟信号的硬件实现"><a href="#时钟信号的硬件实现" class="headerlink" title="时钟信号的硬件实现"></a>时钟信号的硬件实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">时钟: CPU的祝您是又一个晶体振荡器实现的、而这个晶体振荡器生成的电路信号、就是时钟信号</span><br><span class="line">反馈电路: 将电路的输出信号作为输入信号的电路构造方式、叫做反馈电路</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="通过D触发器实现存储功能"><a href="#通过D触发器实现存储功能" class="headerlink" title="通过D触发器实现存储功能"></a>通过D触发器实现存储功能</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">将R和S两个信号通过一个反相器合并、可以通过一个数据信号D进行Q的写入操作</span><br><span class="line"></span><br><span class="line">只要CLK信号是1、R和S就可以设置输出Q、而当CLK信号是0的时候、无论R和S怎么设置、输出信号Q是不变的、这样、整个电路就成了我们最常用的D型触发器、用来控制R和S这两个开关的信号、可以视为一个输入的数据信号D、也就是Data、这就是D型触发器的由来</span><br><span class="line"></span><br><span class="line">一个D型触发器、只能控制1bit的读写、若同时拿出多个D型触发器并列在一起、并且把用同一个CLK信号控制作为所有D型触发器的开关、就变成了一个N位的D型触发器、可以同时控制N位的读写</span><br><span class="line"></span><br><span class="line">CPU中的寄存器可以直接通过D型触发器来构造、可以在D触发器的基础上、加上更多的开关、来实现清0或者全置位这样的操作</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="PC寄存器所需要的计数器"><a href="#PC寄存器所需要的计数器" class="headerlink" title="PC寄存器所需要的计数器"></a>PC寄存器所需要的计数器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PC寄存器还有个名字叫程序计数器、为什么呢 ?</span><br><span class="line">有了时钟信号、可以提供定时的输入、有了D型触发器、可以在时钟信号控制的时间点写入数据、将这两个功能组合起来、就可以实现一个自动的计数器了</span><br><span class="line"></span><br><span class="line">加法器的两个输入、一个始终设置为1、另外一个个来自于一个D型触发器A、将加法器的输出结果、写到这个D触发器的A里边、于是 D型触发器里边的数据就会在固定的时钟信号为1的时候更新一次</span><br><span class="line"></span><br><span class="line">加法计数、内存取值、乃至后边的命令执行、最终其实都是由时钟信号来控制执行时间点和先后顺序的、这也是需要时序电路最核心的原因</span><br><span class="line"></span><br><span class="line">在最简单的情况下、需要让每一条指令、从程序计数器、到获取指令、执行指令、都在一个时钟周期内完成、若PC计数器增长太快、程序就会出错, 因为此时前一次运算的结果还没写回对应的寄存器</span><br><span class="line">在这种情况下、需要在一个时钟周期里、确保执行完成一条最复杂的CPU指令、即: 耗时最长的一条CPU指令、这样的CPU设计、称为 单指令周期处理器</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="读写数据所需要的译码器"><a href="#读写数据所需要的译码器" class="headerlink" title="读写数据所需要的译码器"></a>读写数据所需要的译码器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">现在数据可以存储在D触发器里了、若将多个D触发器放在一起、就可以形成很大的一块存储空间、甚至可以当成一块内存来使用、</span><br><span class="line">eg. 现在的电脑内存可能有8G、16G、那么怎么才能知道写入和读取的数据是这块大的内存里、哪几个bit呢 ?</span><br><span class="line">于是: 我们需要一个电路来完成寻址的工作、就是 译码器</span><br><span class="line">将寻址退化到最简单的模型、就是两个地址中选择一个、称为 2-1选择器、</span><br><span class="line">若输入的信号有三个不同的开关、就可以从 2³&#x3D;8中选择一个地址了、即3-8译码器</span><br><span class="line">现代计算机是64位的、寻址空间是2的64次方、需要一个有64个开关的译码器</span><br><span class="line"></span><br><span class="line">所以: 译码器的本质、就是从输出的多个位的信号中、根据一定的开关和电路组合、选择自己想要的信号、除了可以寻址、还可以将对应的需要运行的指令码同样通过译码器、找出我们期望执行的指令、也就是opcode及后边对应的操作数或者寄存器地址</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>因为从内存取指令的时间很长、若使用单指令周期处理器、意味着我们的指令都要去等待一些慢速操作、这些不同指令执行速度的差异、也正是计算机指令有指令周期、CPU周期和时钟周期之分的原因、因此, 优化现代CPU性能时、用的CPU都不是单指令周期处理器、而是通过流水线、分支预测等技术、来实现在一个周期里同时执行多个指令</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E5%86%8D%E5%BF%86%E9%99%88%E6%83%85/" rel="prev" title="再忆陈情">
+      <i class="fa fa-chevron-left"></i> 再忆陈情
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/" rel="next" title="冒险和预测(21~26讲)">
+      冒险和预测(21~26讲) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#指令周期"><span class="nav-number">1.</span> <span class="nav-text">指令周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立数据通路"><span class="nav-number">2.</span> <span class="nav-text">建立数据通路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU所需要的硬件电路"><span class="nav-number">3.</span> <span class="nav-text">CPU所需要的硬件电路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时序逻辑电路"><span class="nav-number">4.</span> <span class="nav-text">时序逻辑电路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时钟信号的硬件实现"><span class="nav-number">5.</span> <span class="nav-text">时钟信号的硬件实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过D触发器实现存储功能"><span class="nav-number">6.</span> <span class="nav-text">通过D触发器实现存储功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PC寄存器所需要的计数器"><span class="nav-number">7.</span> <span class="nav-text">PC寄存器所需要的计数器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读写数据所需要的译码器"><span class="nav-number">8.</span> <span class="nav-text">读写数据所需要的译码器</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
