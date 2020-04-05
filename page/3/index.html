@@ -191,6 +191,237 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/" class="post-title-link" itemprop="url">垃圾回收---Java类型引用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="垃圾回收---Java类型引用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Java垃圾回收的依据是：是否还有引用.</p>
+<h5 id="什么是引用呢-？"><a href="#什么是引用呢-？" class="headerlink" title="什么是引用呢 ？"></a>什么是引用呢 ？</h5><p>jdk1.2 之前的定义是：</p>
+<blockquote>
+<p>若reference类型的数据中存储的数值代表一块内存的起始地址、则这块内存代表一个引用</p>
+</blockquote>
+<p>jdk1.2 之后进行了扩充：</p>
+<blockquote>
+<p>分为<code>强引用</code>、<code>软引用</code>、<code>若引用</code>、<code>虚引用</code>.</p>
+</blockquote>
+<p>如何定义 ？<br><code>强引用 (strong reference)</code>: 程序代码中普遍存在的、类似 <code>Object obj = new Object()</code> 这类的引用， 只要引用还在、永远不会被回收掉的对象</p>
+<p><code>软引用 (soft reference)</code>：描述一些还有用、但不是必须的对象. 软引用关联的对象、在系统将要发生<code>OOM</code>前会对这些对象进行一次回收、若回收能够产生足够的空间、则不会发生<code>OOM</code>， 回收完成依然没有足够的空间才会抛出<code>OOM</code>异常, <code>JDK1.2</code>之后、系统提供了<code>SoftReference</code>来实现软引用</p>
+<p><code>弱引用 (weak reference)</code>: 也是非必须对象、比软引用的引用更弱一些、被弱引用关联的对象只能生存到下次gc发生之前、当垃圾收集器工作时、无论当前内存是否足够、都会回收掉只被弱引用关联的对象<br><code>JDK1.2</code>之后提供了<code>WeakReference类</code>来实现弱引用</p>
+<p><code>虚引用 (Phantom reference)</code>: 一个对象是否有虚引用的存在、完全不影响其生存时间、也无法通过虚引用来取得一个对象的实例、设置虚引用的唯一目的就是能在整个对象进行垃圾收集时收到一个系统通知</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">垃圾回收---小疑问</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/" class="post-meta-item leancloud_visitors" data-flag-title="垃圾回收---小疑问" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>看懂了gc日志、可能心中还有小小的疑惑？</p>
+<h5 id="为什么需要垃圾回收"><a href="#为什么需要垃圾回收" class="headerlink" title="为什么需要垃圾回收"></a>为什么需要垃圾回收</h5><blockquote>
+<p>在内存的动态分配和回收机制十分成熟的情况下、仍然没办法避免排查各种内存溢出、内存泄露的问题, 当垃圾收集称为系统达到更高并发量的瓶颈时、就需要了解gc的细节、对gc进行必要的监控和调节</p>
+</blockquote>
+<blockquote>
+<p>程序计数器、虚拟机栈、本地方法栈 随线程运行结束而消亡、这几个区域的内存分配和回收具有确定性、不需要过多的考虑内存回收问题<br>而Java堆和方法区、则在运行时才知道要创建的对象、内存的分配是动态的、垃圾回收主要关注的是这部分的内存</p>
+</blockquote>
+<h5 id="如何判断对象已死？"><a href="#如何判断对象已死？" class="headerlink" title="如何判断对象已死？"></a>如何判断对象已死？</h5><blockquote>
+<ol>
+<li>引用计数法<br>给对象添加一个引用计数器、当有新的引用时、计数器的值+1， 引用失效是、计数器的值-1， 计数器的值为0的对象就是不再有引用的对象<br>这种方式的判断效率很高、实现也比较简单、但是不太好判断 循环引用的问题<br>A-&gt;B, B-&gt;A</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>可达性分析<br>通过 <code>GC Roots</code> 作为分析的起点、从这些节点向下搜索、若一个对象通过任意引用链不可达、则会被判断为<code>可回收对象</code></li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">可作为 &#96;gc root&#96; 的对象：</span><br><span class="line">1. 虚拟机桟中引用的对象</span><br><span class="line">2. 方法区中静态属性引用的对象</span><br><span class="line">3. 方法区中常量引用的对象</span><br><span class="line">4. 本地方法桟中JNI(Native方法)引用的对象</span><br></pre></td></tr></table></figure>
+
+<h5 id="为什么gc的过程要stw-？"><a href="#为什么gc的过程要stw-？" class="headerlink" title="为什么gc的过程要stw ？"></a>为什么gc的过程要stw ？</h5><blockquote>
+<p>为了避免分析过程中对象的引用关系还在不断的发生变化、导致分析结果的准确性无法保证<br>系统停顿下来后如果得知对象引用关系呢 ？<br>在hotspot的实现中、有一个OopMap的数据结构、在类加载的时候， 它就把对象内什么偏移量位置上是什么类型的数据计算出来、在jit编译的过程中也会在特定的位置记录桟和寄存器哪些位置是引用、这样gc扫描时就可以直接得到了<br>但是、为什么是特定位置 ？<br>如果每条指令都生成对应OopMap、会需要大量的额外空间、所以只是在特定位置(安全点<code>safepoint</code>)记录这些信息<br><code>notice</code> : 设置标记等待线程运行到安全点再gc解决了大部分问题、但如果线程是<code>sleep</code>或者<code>block</code>状态呢 ？线程无法响应jvm的中断请求、运行到安全点去中断挂起、jvm也不可能得到线程被重新分配CPU时间、so、有了<code>安全区域</code>-<code>safe region</code>来解决<br><code>safe region</code>: 在一个代码片段之内、引用关系不会发生变化、在这个区域内的任意位置进行gc都是安全的，线程在进入安全区域的时候、会设置自己进入安全区域的标记、jvm在gc时、会忽略这类线程<br>在线程离开安全区域时会检测系统是否已经完成了gc、ok则可以继续运行、否则需要等待可以离开安全点的信号</p>
+</blockquote>
+<h5 id="晋升为老年代的判断？"><a href="#晋升为老年代的判断？" class="headerlink" title="晋升为老年代的判断？"></a>晋升为老年代的判断？</h5><blockquote>
+<ol>
+<li>对象优先在Eden区分配、若Eden区无足够的空间、虚拟机会发起一次Minor GC， 经过一次Minor gc、<code>age</code>会<code>+1</code>、达到指定age(<code>-XX:MaxTenuringThreshold指定</code>)时、对象会进入老年代</li>
+<li>Minor gc时、无法放入 <code>survivor</code> 区的对象、会通过<code>分配担保机制</code>提前转移到<code>old generation</code></li>
+<li>大对象直接进入老年代, 为避免提前触发gc  大于 <code>-XX:PreTenureThreshold</code>指定值得对象会提前进入直接在老年代分配</li>
+<li>若survivor区 相同年龄的所有对象的大小的总和&gt;survivor区的一半、则 age &gt;= 该age值得对象可以直接进入老年代、无需等到 <code>-XX:MaxTenuringThreshold</code> 指定年龄值</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_README/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1115,305 +1346,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-title-link" itemprop="url">平均负载</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-meta-item leancloud_visitors" data-flag-title="平均负载" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
-<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
-<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
-<blockquote>
-<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
-<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
-</blockquote>
-<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
-
-
-
-<p>CPU核数查看</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
-</blockquote>
-<p>平均负载与CPU使用率</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
-
-
-
-<p>案例分析</p>
-<p>一、CPU密集型进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
-<p>二、IO密集型进程</p>
-<p>查看方式同上</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" class="post-title-link" itemprop="url">Linux内核学习---1</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E5%86%85%E6%A0%B8/" itemprop="url" rel="index"><span itemprop="name">Linux内核</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" class="post-meta-item leancloud_visitors" data-flag-title="Linux内核学习---1" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="开机加电-gt-main-函数执行"><a href="#开机加电-gt-main-函数执行" class="headerlink" title="开机加电 -&gt; main 函数执行"></a>开机加电 -&gt; main 函数执行</h4><blockquote>
-<p>分3步完成、实现从启动盘加载操作系统、完成 main 函数加载所需要的准备工作</p>
-</blockquote>
-<h5 id="启动BIOS、完成实模式下的中断向量表和中断服务程序"><a href="#启动BIOS、完成实模式下的中断向量表和中断服务程序" class="headerlink" title="启动BIOS、完成实模式下的中断向量表和中断服务程序"></a>启动BIOS、完成实模式下的中断向量表和中断服务程序</h5><p>Q: RAM ？<br>A: Random Access Memory. 随机存取存储器、eg. 内存条<br>   特点是 在加电状态下、可随意读写、断电消失</p>
-<p>Q: 加电瞬间、RAM中无任何程序、谁来完成 操作系统从软盘的加载 ？<br>A: BIOS</p>
-<p>Q: 为什么必须把操作系统从软盘加载到RAM ？<br>A: CPU的逻辑电路被设计为只能从内存中运行、无法直接从软盘运行</p>
-<p>Q: 为什么CPU的逻辑电路被设计为只能从内存运行 ？<br>A: … 暂未清楚</p>
-<p>Q: BIOS本身是如何启动的 ？<br>A: 固定地址: 0xFFFF0、<br>   CPU逻辑上被设计为、在加电的瞬间、强行将 CS设为 0xF000, IP 设为 0xFFF0<br>   这样、CS:IP 就指向 0xFFFF0(BIOS程序的入口地址、BIOS程序就开始运行)</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bc3706ad36a398b8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BIOS.jpg"></p>
-<h5 id="从启动盘加载操作系统到内存、加载操作系统的工作就是利用-中断服务程序来完成的"><a href="#从启动盘加载操作系统到内存、加载操作系统的工作就是利用-中断服务程序来完成的" class="headerlink" title="从启动盘加载操作系统到内存、加载操作系统的工作就是利用 中断服务程序来完成的"></a>从启动盘加载操作系统到内存、加载操作系统的工作就是利用 中断服务程序来完成的</h5><p>开始加载操作系统….</p>
-<blockquote>
-<p>对Linux 0.11而言、是分3步、<br>  1: 有BIOS中断 0x19 将第一扇区bootsect的内容加载到内存<br>  2: 在bootsect的引导下、将后边的4个扇区和240个扇区的内容依次加载到内存中</p>
-</blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-8467ab9c24c4efbc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BIOS程序加载.jpg"></p>
-<p>Q: 操作系统如何加载 ？<br>A: BIOS代码执行完毕、硬件完成开机自检、会和BIOS联手、让CPU收到 int 0x19中断、CPU在中断向量表中找到中断程序的位置(0x0E6F2)<br>   即: 启动记载服务程序的入口地址、<br>   so. in 0x19中断程序的作用就是把软盘第一扇区的代码512b加载到内存指定位置(BIOS设计、与操作系统无关) - 内存(0x07C00)处<br>   第一扇区的代码作用就是将软盘中的操作系统程序陆续加载到内存、所以称为引导程序(bootsect)<br>   第一扇区的载入、标记着操作系统代码要开始发挥作用<br><img src="https://upload-images.jianshu.io/upload_images/14027542-482d2aaafa61ffa8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="响应int0x19中断.jpg"></p>
-<h5 id="操作系统的内存规划"><a href="#操作系统的内存规划" class="headerlink" title="操作系统的内存规划"></a>操作系统的内存规划</h5><p>实模式下最大的寻址为1MB</p>
-<pre><code>//代码路径：boot/bootsect.s  
-    …  
-.globl begtext, begdata, begbss, endtext, enddata, endbss  
-.text  
-begtext:  
-.data  
-begdata:  
-.bss  
-begbss:  
-.text  
-
-SETUPLEN= 4    ! nr of setup-sectors  
-BOOTSEG = 0x07c0    ! original address of boot-sector  
-INITSEG = 0x9000    ! we move boot here-out of the way  
-SETUPSEG= 0x9020    ! setup starts here  
-SYSSEG  = 0x1000    ! system loaded at 0x10000 (65536).  
-ENDSEG  = SYSSEG + SYSSIZE  ! where to stop loading  
-
-! ROOT_DEV:0x000 - same type of floppy as boot.  
-!  0x301 - first partition on first drive etc  
-ROOT_DEV= 0x306 
-… 
-![实模式下的内存使用规划.jpg](https://upload-images.jianshu.io/upload_images/14027542-2fd3e1e6ef913630.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre><p><code>SETUPLEN</code> -&gt; <code>SETUPSEG 0x9020</code> (被加载到的位置)<br><code>BOOTSEG(0x07c0)</code>(BIOS加载的位置) -&gt; <code>INITSEG 0x9000</code>(被移动到的新的位置)<br><code>SYSSEG 0x1000</code> 内核被加载的位置<br><code>ENDSEG</code> 内核末尾位置<br><code>ROOT_DEV 0x306</code> 根文件设备号<br><strong>注意:</strong><br>CPU的段寄存器（CS）指向 <code>0x07C0</code> -&gt; 原来 BOOTSEG 所在的位置</p>
-<h5 id="为执行32位的main函数做过度工作"><a href="#为执行32位的main函数做过度工作" class="headerlink" title="为执行32位的main函数做过度工作"></a>为执行32位的main函数做过度工作</h5><h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><blockquote>
-<ol>
-<li>实模式: 兼容80286之后80x86的兼容CPU的模式、特性是一个20位的存储器地址空间(2^20 1MB的存储器空间可被寻址)<br>可以直接软件访问BIOS及周边硬件、无硬件支持的分页机制和实时多任务概念<br>80286 开始、所有的CPU开机都是 实模式 、之前的CPU只有一种模式、类似 实模式</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="2">
-<li>CPU: 计算机所有的计算操作都由它完成、可以理解为 一个有输入和输出功能的集成电路</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="3">
-<li>CPU寻址: 使用CS、IP两个寄存器<br>  CS: Code Segment Register 即代码段寄存器、指向CPU当前执行代码在内存中的位置(代码段的起始位置)、<br>  实模式为绝对地址、16位、保护模式为线性地址 需要结合GDT才能找到段基址<br>  IP/EIP: Intruction Pointer. 指令寄存器、存在于CPU中、记录将要执行的代码在代码段中的偏移地址<br>  实模式为绝对地址、指令指针为16位、即IP、保护模式为32位、即EIP、<br>  CS:IP 寻址规则: 段基址*16 + 偏移地址</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="4">
-<li>中断向量表建立<br>  BIOS在最开始的位置(0x00000)用1k内存(0x00000 - 0x003FF)构建中断向量表、接下来256k(0x00400～0x004FF)构建BIOS数据区<br>  大概57k后的位置(0x0E05B)加载了大概8k左右的与中断向量表相关的中断服务程序 </li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="5">
-<li>中断向量表<br>  记录所有中断向量对应中断程序的位置、实模式中断机制实现的重要部分</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="6">
-<li>中断服务程序<br>  通过中断向量表的索引对中断程序进行响应、是一些具有特殊功能的代码</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="7">
-<li>磁盘磁头<br>  利用特殊材料的电阻值会随磁场变化的原来来读写盘片数据、将硬盘盘片上的磁信号转化为电信号向外传输</li>
-</ol>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1484,20 +1416,20 @@ ROOT_DEV= 0x306
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_DMA--%E4%B8%BA%E4%BB%80%E4%B9%88Kafka%E8%BF%99%E4%B9%88%E5%BF%AB-(48%E8%AE%B2)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -205,7 +205,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" class="post-title-link" itemprop="url">IO设备(43讲)</a>
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_DMA--%E4%B8%BA%E4%BB%80%E4%B9%88Kafka%E8%BF%99%E4%B9%88%E5%BF%AB-(48%E8%AE%B2)/" class="post-title-link" itemprop="url">DMA--为什么Kafka这么快-(48讲)</a>
         </h1>
 
         <div class="post-meta">
@@ -235,7 +235,7 @@
             </span>
 
           
-            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="IO设备(43讲)" title="阅读次数">
+            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_DMA--%E4%B8%BA%E4%BB%80%E4%B9%88Kafka%E8%BF%99%E4%B9%88%E5%BF%AB-(48%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="DMA--为什么Kafka这么快-(48讲)" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -250,8 +250,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_DMA--%E4%B8%BA%E4%BB%80%E4%B9%88Kafka%E8%BF%99%E4%B9%88%E5%BF%AB-(48%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_DMA--%E4%B8%BA%E4%BB%80%E4%B9%88Kafka%E8%BF%99%E4%B9%88%E5%BF%AB-(48%E8%AE%B2)/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -266,18 +266,140 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="接口和设备-经典的适配器模式"><a href="#接口和设备-经典的适配器模式" class="headerlink" title="接口和设备: 经典的适配器模式"></a>接口和设备: 经典的适配器模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">实际上, 输出输入设备、并不只是一个设备、大部分的输入输出设备、都有两个组成部分.</span><br><span class="line">接口和实际的IO设备. 硬件设备不是直接接入到总线上和CPU通信的、而是通过接口、用接口连接到总线上</span><br><span class="line">再通过总线和CPU通信的. 平时听说的并行接口(Parallel Interface), 串行接口(Serial Inteerface)、</span><br><span class="line">USB接口都是计算机主板上内置的各个接口, 实际的硬件设备 eg. 使用并口的打印机、使用串口的老式鼠标</span><br><span class="line">或者使用USB接口的U盘、都要插入到这些接口上、才能和CPU工作及通信的.</span><br><span class="line"></span><br><span class="line">接口本身就是一块电路板、CPU其实不是和实际的硬件设备打交道、而是和这个接口电路板打交道.</span><br><span class="line">常说的设备里有三类寄存器、都在设备的接口电路上、而不是实际的设备上.</span><br><span class="line"></span><br><span class="line">三类寄存器: 状态寄存器(Status Register)、命令寄存器(Command Register)和数据寄存器(Data Register)</span><br></pre></td></tr></table></figure>
-
-<h4 id="CPU是如何控制IO设备的"><a href="#CPU是如何控制IO设备的" class="headerlink" title="CPU是如何控制IO设备的"></a>CPU是如何控制IO设备的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">无论是内置在主板上的接口、还是集成在设备上的接口、除了3类寄存器之外、还有对应的控制电路,</span><br><span class="line">正是通过这个控制电路、CPU才能向这个接口电路板传输信号、来控制实际的硬件</span><br><span class="line"></span><br><span class="line">设备上的寄存器有什么用呢 ？</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-1349e7dbc149f62a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="打印机.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 数据寄存器. CPU向IO设备写入需要传输的数据、eg. 要打印&#96;GeekTime&#96;, 会先发送一个G给对应IO设备</span><br><span class="line">2. 命令寄存器. CPU发送一个命令、告诉打印机、要打印. 此时打印机里的控制电路会做两个动作.</span><br><span class="line">1) 设置状态寄存器里的状态为 not-ready</span><br><span class="line">2) 实际操作打印机进行打印</span><br><span class="line">3. 状态寄存器. 告诉CPU、设备已经在工作了、此时再发送数据或者命令都是无效的</span><br><span class="line">直到前边的动作已完成、状态寄存器重新变成ready状态、CPU才发送下一个字符和命令</span><br><span class="line"></span><br><span class="line">在实际情况中、打印机通常不止有数据寄存器还有数据缓冲区、CPU也不是真的一个字符一个字符交给打印机处理的</span><br><span class="line">而是一次性将整个文档传输至打印机的内存或者数据缓冲区一起打印的</span><br></pre></td></tr></table></figure>
-
-<h4 id="信号和地址-发挥总线的价值"><a href="#信号和地址-发挥总线的价值" class="headerlink" title="信号和地址: 发挥总线的价值"></a>信号和地址: 发挥总线的价值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CPU到底要往总线上发送一个什么样的命令、才能和IO接口上的设备通信呢 ？</span><br><span class="line"></span><br><span class="line">CPU和IO设备的通信、一样是通过CPU支持的机器指令来执行的.</span><br><span class="line">和访问主内存一样、使用内存地址来和IO设备通信. 为了让已经足够复杂的CPU尽可能简单、</span><br><span class="line">计算机会把IO设备的各个寄存器及IO设备内部的内存地址、都映射到主内存地址空间来、</span><br><span class="line">主内存的地址空间里、会给不同的IO设备预留一段一段的内存地址. CPU想和IO设备通信的时候、</span><br><span class="line">就往这些地址发送数据、这些地址信息就是通过地址总线老来发送的、对应的数据信息就是通过数据总线发送的</span><br><span class="line"></span><br><span class="line">而IO设备、会监控地址线、且在CPU往自己的地址发送数据的时候、把对应的数据线里边传输过来的数据、</span><br><span class="line">接入到对应的设备里边的寄存器和内存里. CPU无论是向IO设备发送命令、查询状态还是传输数据都可以</span><br><span class="line">通过这种方式. 称为内存映射IO(Memory-Mapped IO, MMIO)</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6ca26f4063f664e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
-<blockquote>
-<p>那么、MMIO是不是唯一一种CPU和设备通信的方式呢 ?</p>
+          <blockquote>
+<p>SSD的IOPS可以达到2w、4w, 可CPU主频在2GHZ以上、每秒可以有2亿次操作, 若对于IO操作、都是由CPU发出对应的指令、然后等待IO设备完成操作之后返回、那CPU有大部分的时间在等待IO. 其实对于IO设备的大量操作、都只是把内存数据传输到IO设备而已、CPU是无效等待, 于是, 就有了 <code>DMA</code>(Direct Memory Access)<code>直接内存访问</code> 技术</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">不是的. 精简指令集MIPS的CPU特别简单、所以这里只有MMIO. 而有2000多个指令的Intel</span><br><span class="line">而我们有2000多个指令的Intel X86架构的计算机、有专门的和IO设备通信的指令, 即: in 和 out 指令.</span><br><span class="line">Intel CPU虽然也支持MMIO、不过还可以通过特定的指令、来支持端口映射IO(Port-Mapped IO, 简称PMIO)</span><br><span class="line">也可以叫独立输入输出(Isolated IO)</span><br><span class="line"></span><br><span class="line">其实PMIO的通信方式和MMIO差不多、核心区别在于: PMIO里访问的设备地址、不再是在内存地址空间里、</span><br><span class="line">而是一个专门的端口, 这个端口不是硬件杀昂的插口、而是和CPU通信的一个抽象概念</span><br><span class="line"></span><br><span class="line">无论是PMIO还是MMIO、CPU都会传送一条二进制的数据、给到IO设备的对应地址. 设备自己本身的接口电路、</span><br><span class="line">再去解码这个数据、解码之后的数据会变成设备支持的一条指令、再去通过控制电路操作实际的硬件设备</span><br><span class="line">对CPU来说、它不关心设备本身可以支持哪些操作、只是在总线上传输一条条数据就好了.</span><br></pre></td></tr></table></figure>
+<h4 id="理解DMA、一个协处理器"><a href="#理解DMA、一个协处理器" class="headerlink" title="理解DMA、一个协处理器"></a>理解DMA、一个协处理器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">本质上: DMA技术就是在主板上放一块独立的芯片, 在进行内存与IO设备的数据传输时, 不在通过CPU来控制</span><br><span class="line">数据传输、而是通过&#96;DMA控制器&#96;(&#96;DMAC&#96;), 这块芯片可以认为就是一个&#96;协处理器&#96;</span><br><span class="line"></span><br><span class="line">DMAC最有价值的地方体现在, 当要传输的数据特别大、速度特别快, 或者传输的数据特别小、速度特别慢时.</span><br><span class="line">eg. 1. 用千兆网卡或者硬盘传输大量数据时、若都用CPU来搬运的话、肯定忙不过来、所以, 选择DMAC</span><br><span class="line">    2. 数据传输很慢时, DMAC可以等数据到齐了、再发送信号给CPU处理、而不是让CPU在那里忙等待.</span><br><span class="line"></span><br><span class="line">DMAC在控制数据传输时、还是需要CPU的.</span><br><span class="line"></span><br><span class="line">总线上的设备包括&#96;主设备&#96;和&#96;从设备&#96;, 主动发起数据传输的、必须是主设备, eg.CPU;从设备只能接收数据. </span><br><span class="line">所以: 只能是 CPU从IO设备读数据、或者是CPU向IO设备写数据.</span><br><span class="line"></span><br><span class="line">IO设备不能向主设备发起请求吗？</span><br><span class="line">可以. 但发送的不是实际的数据内容, 而是控制信号. IO设备可以告诉CPU, 有数据要传输、实际数据由CPU</span><br><span class="line">拉取, 而不是IO设备主动推送给CPU.</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c4145e8dae426f5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="包含DMAC的数据传输.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">DMAC既是一个主设备、有是一个从设备. 对CPU来说、它是从设备, 对IO设备来说、它是主设备.</span><br><span class="line">使用DMAC进行数据传输的过程如下:</span><br><span class="line">1. CPU作为一个主设备、向DMAC设备发起请求(就是在DMAC里修改配置寄存器).</span><br><span class="line">2. CPU修改DMAC寄存器的时候, 会告诉DMAC几个信息:</span><br><span class="line">   1) 源地址的初始值及传输时的地址增减方式</span><br><span class="line">       源地址: 数据要从哪里传输过来. eg. 从内存写入硬盘时, 就是一个内存地址</span><br><span class="line">              从硬盘读取到内存时, 就是硬盘的IO接口的地址.</span><br><span class="line">       地址的增减方式: 是说数据从大的地址向小的地址传输, 还是从晓得地址往大的地址传输.</span><br><span class="line">   2) 目标地址初始值及传输时的地址增减方式</span><br><span class="line">   3) 要传输的数据长度</span><br><span class="line">3. 设置完这些信息DMAC就变成一个空闲的状态idle</span><br><span class="line">4. 若从硬盘 -&gt; 内存加载数据, 硬盘会向DMAC发起一个数据传输请求,这个请求是通过额外的连线(不是总线)</span><br><span class="line">5. DMAC再通过一个额外的连线响应该请求.</span><br><span class="line">6. 于是, DMAC再向内存发起总线读的数据传输请求, 就从硬盘读到了DMAC控制器里.</span><br><span class="line">7. 然后、DMAC再向我们的内存发起写的请求、把数据写入内存</span><br><span class="line">8. DMAC会反复进行6、7 的操作, 直到DMAC的寄存器里边设置的数据长度传输完成.</span><br><span class="line">9. 数据传输完成之后、DMAC重新回到第三步的空闲状态.</span><br><span class="line"></span><br><span class="line">整个数据传输的过程中，我们不是通过 CPU 来搬运数据，而是由 DMAC 这个芯片来搬运数据.</span><br><span class="line">但是 CPU 在这个过程中也是必不可少的. 因为传输什么数据，从哪里传输到哪里，其实还是 CPU 来设置的.</span><br><span class="line">这也是为什么，DMAC 被叫作&#96;协处理器&#96;</span><br><span class="line"></span><br><span class="line">早期的计算机里没有DMAC、所有数据都是CPU来搬运的、然后出现了主板上独立的DMAC控制器.</span><br><span class="line">现在数据传输要求越来越复杂、加上显卡、网卡、硬盘等各个设备对数据传输的需求不同、各个设备</span><br><span class="line">都有自己的DMAC芯片了</span><br></pre></td></tr></table></figure>
+
+<h4 id="Kafka为什么这么快"><a href="#Kafka为什么这么快" class="headerlink" title="Kafka为什么这么快"></a>Kafka为什么这么快</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">kafka 是一个用来处理实时数据的管道, 常用来做消息队列、或者收集和落地海量的日志. </span><br><span class="line">作为一个实时数据和日志的管道、瓶颈自然也在IO层面</span><br><span class="line"></span><br><span class="line">kafka常见的两种海量数据传输: 1.从网络接收上游数据,落地到本地磁盘 2.从本地磁盘读取、发送到网络上.</span><br><span class="line"></span><br><span class="line">先看场景2, 最直观的是用一个文件读操作, 从磁盘把数据读到内存、再通过一个socket、把数据发到网络上.</span><br><span class="line"></span><br><span class="line">File.read(fileDesc, buf, len);</span><br><span class="line">Socket.send(socket, buf, len);</span><br><span class="line"></span><br><span class="line">这样会有四次数据传输:(两次DMA、两次通过CPU控制的传输)</span><br><span class="line">1. 从硬盘上、读到操作系统内核缓冲区(通过DMA搬运).</span><br><span class="line">2. 将内核缓冲区的数据、复制到应用分配的内存里(通过CPU搬运)</span><br><span class="line">3. 从应用的内存、写到操作系统Socket的缓冲区里(CPU搬运)</span><br><span class="line">4. 从Socket的缓冲区、写到网卡的缓冲区(DMA)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-1827f1506ed4ab8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="本次磁盘到网络的数据传输过程.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">其实只需要搬运一份数据、却搬运了4次、且: 从内核的缓冲区传输到应用的内存里、再从应用的内存里</span><br><span class="line">传输到socket的缓冲区里、其实是把一份数据在内存里搬来搬去, 所以kafka就调用Java NIO库、</span><br><span class="line">FileCahnnel-&gt;transfer to 方法, 将数据直接通过Channel写入到对应网络设备, 且对于socket的操作、</span><br><span class="line">也不是写到socket的buffer里、而是直接根据描述符写入到网卡的缓冲区, 省去了2、3, 只有两次数据传输.</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-b190e4dc04bd2a64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="kafka的数据传输模型.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这样、同一份数据的传输次数从4次变成了2次、且没有通过CPU传输、都是DMA传输, 在这个方法里、</span><br><span class="line">没有在内存层面copy数据, 也称为&#96;零拷贝&#96;(Zero-Copy)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_FPGA%E5%92%8CASIC(32%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_FPGA%E5%92%8CASIC(32%E8%AE%B2)/" class="post-title-link" itemprop="url">FPGA和ASIC(32讲)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_FPGA%E5%92%8CASIC(32%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="FPGA和ASIC(32讲)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_FPGA%E5%92%8CASIC(32%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_FPGA%E5%92%8CASIC(32%E8%AE%B2)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="FPG"><a href="#FPG" class="headerlink" title="FPG"></a>FPG</h4><blockquote>
+<p>CPU其实是一些简单的门电路搭建而成、从最简单的门电路、搭建成半加器、全加器, 然后再搭建完整功能的ALU. 这些功能有完成各种实际计算功能的组合逻辑电路、也有用来控制数据访问、创建出寄存器和内存的时序逻辑电路, 一个<code>4核</code> <code>i7</code>的CPU、大约有20亿个晶体管.</p>
+</blockquote>
+<p>思考:</p>
+<blockquote>
+<p>如何保证连接20亿晶体管时不出错 ？若每验证一次bug就重新生成一块芯片、代价过高.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">现场可编程门阵列(Filed-Programmable Gate array)解决了这个问题.</span><br><span class="line">P: Programmable, 可通过编程来控制的硬件</span><br><span class="line">G: Gate, 代码芯片里的门电路, 各种编程功能的实现、依赖的就是一个个的门电路</span><br><span class="line">A: Array, 阵列, 是说在一块&#96;FPGA&#96;上、布满了大量的门电路</span><br><span class="line">F: 一块&#96;FPGA&#96;的板子、可以多次进行编程、不像&#96;PAL&#96;(Programming Array Logic, 可编程阵列逻辑)这样古老的硬件设备、只能编程一次.</span><br></pre></td></tr></table></figure>
+
+<p>思考:</p>
+<blockquote>
+<p>如何对硬件进行编程呢 ?</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">CPU其实是通过晶体管、来实现各种组合逻辑或者时序逻辑、如何去&#96;编程&#96;这些线路呢 ?</span><br><span class="line">一、用存储功能实现组合逻辑</span><br><span class="line">在实现CPU时、需要完成各种各样的电路逻辑、在FPGA里、这些基本的电路逻辑、不是采用布线连接的方式进行的、</span><br><span class="line">而是预先根据软件里设计的逻辑电路、算出对应的真值表、然后直接存到&#96;LUT(Look-Up Table, 查找表)&#96;的电路中</span><br><span class="line">(其实就是一块存储空间、存储了输入特定信号时、对应输出是0还是1)</span><br><span class="line">如图(Look-Up Table)示:</span><br><span class="line">这个查表的方法、其实就是FPGA通过LUT来实现各种组合逻辑的方法</span><br><span class="line"></span><br><span class="line">二、对于需要实现的时序逻辑电路、可以在FPGA里直接放上&#96;D触发器&#96;、作为&#96;寄存器&#96;. </span><br><span class="line">和CPU里的触发器本质相同、会把多个LUT的电路和寄存器组合在一起(称为&#96;逻辑簇&#96;). </span><br><span class="line">在FPGA里、组合了多个LUT和寄存器的设备叫 &#96;CLB&#96;(Configurable Logic Block, 可配置逻辑块)</span><br><span class="line">通过配置CLB实现的功能类似全加器、是基础电路上的组合、可提供更复杂的功能、更复杂的芯片可以从CLB组合搭建、不用从基本门电路</span><br><span class="line"></span><br><span class="line">三、FPGA是通过可编程逻辑布线来连接各个不同的CLB、最终实现我们想要的功能芯片. </span><br><span class="line">可类比为铁路网、整个铁路系统已经铺好、单设计了很多岔道、通过控制岔道来确定不同列车的线路. </span><br><span class="line">在可编程逻辑布线里、编程做的、就是拨动像岔道一样的各个电路开关、最终实现CLB之间的连接、完成我们想要的功能</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-71a87f3241540b00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Look-Up Table.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7a1ee5e4e7844f2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="ASIC"><a href="#ASIC" class="headerlink" title="ASIC"></a>ASIC</h4><blockquote>
+<p>虽然在手机或者录音笔上塞上一个Intel的CPU可以实现拍照、录音等功能、但, 显然比较浪费、于是: 考虑为专门用途的场景、设计单独芯片, 称为:<br><code>ASIC(Application-Specifed Integrated Circuit)</code> -&gt; 专用集成电路, 电路比较精简、制造成本也比CPU低、功耗也较小</p>
+</blockquote>
+<p>思考:</p>
+<blockquote>
+<p>可以FPGA实现ASIC的事情吗?</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">可以、而且成本和功耗上要优于做通用计算的CPU和GPU、</span><br><span class="line"></span><br><span class="line">那: 为什么不直接使用FPGA替代ASIC呢 ?</span><br><span class="line">硬件上的浪费. 每一个门电路都是一个小小浪费、一个LUT电路设计出来、既可以实现&#96;与&#96;门、</span><br><span class="line">又可以实现&#96;或&#96;门、用到的晶体管是比单一功能要多的、单品FPGA的生成制造成本也较高</span><br><span class="line">FPGA的优点是: 无硬件研发成本、ASIC的电路设计、需要仿真、验证、还要经过六篇、变成一个印刷的电路板、最终变成芯片、</span><br><span class="line">从研发到上式、最低花费也要几万美元、高的话、可能在几千万到数亿美元、还要失败的可能,</span><br><span class="line">若设计的芯片最终只制造几千片、那还是FPGA的成本较低</span><br><span class="line"></span><br><span class="line">实际上: 到底采用FPGA这样的可编程通用硬件、还是ASIC这样的专用芯片, 核心决定因素还是成本(不止是单个芯片的制造成本、还包括总体拥有成本)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>FPGA</code> 本质上是一个可以通过编程来控制硬件电路的芯片、通过<code>LUT</code>这样的存储设备来代替硬连线的电路、有了可编程逻辑门、然后把LUT和寄存器放在一起、变成一个更复杂的电路<code>CLB</code>, 单号通过可编程布线中的开关、设计成芯片、<code>FPGA</code>常用来进行芯片的设计和验证、也可直接当成专用芯片、替代CPU或者GPU<br>相比<code>FPGA</code>, <code>ASIC</code>设计出来的芯片针对特殊场景、研发成本高、制造成本和能耗较低、针对大量需求、适合<code>ASIC</code></p>
+</blockquote>
 
       
     </div>
@@ -392,6 +514,112 @@
 <h4 id="GPU里的超线程"><a href="#GPU里的超线程" class="headerlink" title="GPU里的超线程"></a>GPU里的超线程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GPU里的指令、可能会遇到和CPU类似的流水线停顿问题、是不是可以想到优化方案&#96;超线程&#96; ?</span><br><span class="line">在GPU里一样可以有类似的优化. 即: 遇到流水线停顿时、调度一些别的计算任务给当前的ALU</span><br><span class="line"></span><br><span class="line">和超线程一样、既然要调度一个不同的任务执行、就需要针对这个任务、提供更多的执行上下文、so. 一个Core里的执行上下文的数量、需要比 ALU 多</span><br></pre></td></tr></table></figure>
 <p><img src="https://upload-images.jianshu.io/upload_images/14027542-a8845384202d495f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h4 id="GPU在深度学习上的性能差异"><a href="#GPU在深度学习上的性能差异" class="headerlink" title="GPU在深度学习上的性能差异"></a>GPU在深度学习上的性能差异</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">通过芯片瘦身、SIMT和更多的执行上下文、GPU更擅长并行进行暴力运算、恰好适合深度学习的应用场景</span><br><span class="line"></span><br><span class="line">一方面: GPU是一个可以进行通用计算的框架、可以通过编程、在GPU上实现不同的算法、</span><br><span class="line">另一方面: 现在的深度学习计算、都是超大的向量和矩阵、海量的训练样本的计算、整个过程没有复杂的逻辑和分支、非常适合GPU这样并行、计算能力强的架构</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" class="post-title-link" itemprop="url">IO设备(43讲)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="IO设备(43讲)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="接口和设备-经典的适配器模式"><a href="#接口和设备-经典的适配器模式" class="headerlink" title="接口和设备: 经典的适配器模式"></a>接口和设备: 经典的适配器模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">实际上, 输出输入设备、并不只是一个设备、大部分的输入输出设备、都有两个组成部分.</span><br><span class="line">接口和实际的IO设备. 硬件设备不是直接接入到总线上和CPU通信的、而是通过接口、用接口连接到总线上</span><br><span class="line">再通过总线和CPU通信的. 平时听说的并行接口(Parallel Interface), 串行接口(Serial Inteerface)、</span><br><span class="line">USB接口都是计算机主板上内置的各个接口, 实际的硬件设备 eg. 使用并口的打印机、使用串口的老式鼠标</span><br><span class="line">或者使用USB接口的U盘、都要插入到这些接口上、才能和CPU工作及通信的.</span><br><span class="line"></span><br><span class="line">接口本身就是一块电路板、CPU其实不是和实际的硬件设备打交道、而是和这个接口电路板打交道.</span><br><span class="line">常说的设备里有三类寄存器、都在设备的接口电路上、而不是实际的设备上.</span><br><span class="line"></span><br><span class="line">三类寄存器: 状态寄存器(Status Register)、命令寄存器(Command Register)和数据寄存器(Data Register)</span><br></pre></td></tr></table></figure>
+
+<h4 id="CPU是如何控制IO设备的"><a href="#CPU是如何控制IO设备的" class="headerlink" title="CPU是如何控制IO设备的"></a>CPU是如何控制IO设备的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">无论是内置在主板上的接口、还是集成在设备上的接口、除了3类寄存器之外、还有对应的控制电路,</span><br><span class="line">正是通过这个控制电路、CPU才能向这个接口电路板传输信号、来控制实际的硬件</span><br><span class="line"></span><br><span class="line">设备上的寄存器有什么用呢 ？</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-1349e7dbc149f62a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="打印机.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 数据寄存器. CPU向IO设备写入需要传输的数据、eg. 要打印&#96;GeekTime&#96;, 会先发送一个G给对应IO设备</span><br><span class="line">2. 命令寄存器. CPU发送一个命令、告诉打印机、要打印. 此时打印机里的控制电路会做两个动作.</span><br><span class="line">1) 设置状态寄存器里的状态为 not-ready</span><br><span class="line">2) 实际操作打印机进行打印</span><br><span class="line">3. 状态寄存器. 告诉CPU、设备已经在工作了、此时再发送数据或者命令都是无效的</span><br><span class="line">直到前边的动作已完成、状态寄存器重新变成ready状态、CPU才发送下一个字符和命令</span><br><span class="line"></span><br><span class="line">在实际情况中、打印机通常不止有数据寄存器还有数据缓冲区、CPU也不是真的一个字符一个字符交给打印机处理的</span><br><span class="line">而是一次性将整个文档传输至打印机的内存或者数据缓冲区一起打印的</span><br></pre></td></tr></table></figure>
+
+<h4 id="信号和地址-发挥总线的价值"><a href="#信号和地址-发挥总线的价值" class="headerlink" title="信号和地址: 发挥总线的价值"></a>信号和地址: 发挥总线的价值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CPU到底要往总线上发送一个什么样的命令、才能和IO接口上的设备通信呢 ？</span><br><span class="line"></span><br><span class="line">CPU和IO设备的通信、一样是通过CPU支持的机器指令来执行的.</span><br><span class="line">和访问主内存一样、使用内存地址来和IO设备通信. 为了让已经足够复杂的CPU尽可能简单、</span><br><span class="line">计算机会把IO设备的各个寄存器及IO设备内部的内存地址、都映射到主内存地址空间来、</span><br><span class="line">主内存的地址空间里、会给不同的IO设备预留一段一段的内存地址. CPU想和IO设备通信的时候、</span><br><span class="line">就往这些地址发送数据、这些地址信息就是通过地址总线老来发送的、对应的数据信息就是通过数据总线发送的</span><br><span class="line"></span><br><span class="line">而IO设备、会监控地址线、且在CPU往自己的地址发送数据的时候、把对应的数据线里边传输过来的数据、</span><br><span class="line">接入到对应的设备里边的寄存器和内存里. CPU无论是向IO设备发送命令、查询状态还是传输数据都可以</span><br><span class="line">通过这种方式. 称为内存映射IO(Memory-Mapped IO, MMIO)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6ca26f4063f664e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<blockquote>
+<p>那么、MMIO是不是唯一一种CPU和设备通信的方式呢 ?</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">不是的. 精简指令集MIPS的CPU特别简单、所以这里只有MMIO. 而有2000多个指令的Intel</span><br><span class="line">而我们有2000多个指令的Intel X86架构的计算机、有专门的和IO设备通信的指令, 即: in 和 out 指令.</span><br><span class="line">Intel CPU虽然也支持MMIO、不过还可以通过特定的指令、来支持端口映射IO(Port-Mapped IO, 简称PMIO)</span><br><span class="line">也可以叫独立输入输出(Isolated IO)</span><br><span class="line"></span><br><span class="line">其实PMIO的通信方式和MMIO差不多、核心区别在于: PMIO里访问的设备地址、不再是在内存地址空间里、</span><br><span class="line">而是一个专门的端口, 这个端口不是硬件杀昂的插口、而是和CPU通信的一个抽象概念</span><br><span class="line"></span><br><span class="line">无论是PMIO还是MMIO、CPU都会传送一条二进制的数据、给到IO设备的对应地址. 设备自己本身的接口电路、</span><br><span class="line">再去解码这个数据、解码之后的数据会变成设备支持的一条指令、再去通过控制电路操作实际的硬件设备</span><br><span class="line">对CPU来说、它不关心设备本身可以支持哪些操作、只是在总线上传输一条条数据就好了.</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1049,243 +1277,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">存储器层次结构</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" class="post-meta-item leancloud_visitors" data-flag-title="存储器层次结构" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>存储器系统是一个通过各种不同的方法和设备、一层层组合起来的系统.</p>
-</blockquote>
-<h4 id="SRAM"><a href="#SRAM" class="headerlink" title="SRAM"></a>SRAM</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">静态存储器, 只要通电、保存的数据就一直存在、断电则丢失, 1bit 数据、大概需要6~8个晶体管, </span><br><span class="line">密度不高、同样物理空间下、存储的数据有限、不过, 由于电路简单、访问速度特别快</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bffe7a74d40dae20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6个晶体管组成SRAM的一个bit.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在CPU中、通常有L1、L2、L3三层高速缓存</span><br><span class="line">每个CPU有一块属于自己的L1缓存(&#96;指令缓存&#96;和&#96;数据缓存&#96; )</span><br><span class="line">L2缓存也是每个CPU有一块、但不在CPU内部、访问速度比L1稍慢</span><br><span class="line">L3 Cache通常是多个CPU核心共用的、尺寸更大、访问更慢一些</span><br></pre></td></tr></table></figure>
-
-<h4 id="DRAM"><a href="#DRAM" class="headerlink" title="DRAM"></a>DRAM</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">比SRAM来说、DRAM的密度更高、容量更大、价格也便宜、CPU一般使用的是SRAM、内存一般使用的是DRAM</span><br><span class="line"></span><br><span class="line">DRAM被称为动态存储器、是因为DRAM需要不断刷新、才能保持数据被存储起来</span><br><span class="line">DRAM的一个bit、只需要一个晶体管和一个电容就可以、同样物理空间、存储数据更多、即: 存储密度更大</span><br><span class="line">但: 数据是存储在电容里的、电容会不断漏电、需要定时刷新充电、才能保持数据不丢失</span><br><span class="line">DRAM的数据访问电路和刷新电路都比SRAM更复杂、so. 访问延时更长</span><br></pre></td></tr></table></figure>
-
-<h4 id="存储器的层次结构"><a href="#存储器的层次结构" class="headerlink" title="存储器的层次结构"></a>存储器的层次结构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">整个存储器的层次结构、都类似于SRAM和DRAM在性能和价格上的差异、SRAM更贵、速度更快</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-d9ca803938888292.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="存储器的层次关系图.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 从Cache、内存、到SSD和HDD硬盘、计算机用到了所有存储设备、其中, 容量越小的设备速度越快、且: CPU不是直接合每一种存储设备打交道、而是只与相邻设备打交道.</span><br><span class="line">eg. CPU Cache是从内存加载而来、数据需要写回内存、并不会直接写回数据到硬盘、也不会直接从硬盘加载数据到CPU Cache、而是先加载到内存、再从内存加载到Cache中</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这样、每个存储器只喝相邻的一层存储器打交道、且随着一层层向下、存储器的容量逐渐增大、访问速度逐层变慢、且单位存储成本也在逐层下降、就构成了存储器的层次结构</p>
-</blockquote>
-<h4 id="如何权衡价格和性能"><a href="#如何权衡价格和性能" class="headerlink" title="如何权衡价格和性能"></a>如何权衡价格和性能</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">存储器在不同层级之间的性能和价格差异、都至少在一个数量级以上、</span><br><span class="line">eg. L1 Cache的访问延时是1ns、内存是100ns、在价格上也差出了400倍</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-04e233a82ad956b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="存储器性能和价格对比图.png"></p>
-<blockquote>
-<p>一台惠普战66的笔记本配置如下:</p>
-</blockquote>
-<ol>
-<li><p>Intel i5-8265U 的CPU (4核)</p>
-<ul>
-<li>每个核有有32K、共128KB的L1指令Cache 和 128KB 的数据Cache、采用8路组相连的放置策略</li>
-<li>每个核有256KB、共1M的L2 Cache、采用的是4路组相连的放置策略</li>
-<li>多个核心共用的12MB 的L3 Cache、采用的是12路组相连的放置策略</li>
-</ul>
-</li>
-<li><p>8G的内存</p>
-</li>
-<li><p>128GB 的SSD硬盘</p>
-</li>
-<li><p>1T的HDD硬盘</p>
-<blockquote>
-<p>可以看到，在一台实际的计算机里面，越是速度快的设备，容量就越小。这里一共十多兆的 Cache，成本只是几十美元。而 8GB 的内存、128G 的 SSD 以及 1T 的 HDD，大概零售价格加在一起，也就和我们的高速缓存的价格差不多   </p>
-</blockquote>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86(36%E8%AE%B2)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86(36%E8%AE%B2)/" class="post-title-link" itemprop="url">局部性原理(36讲)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86(36%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="局部性原理(36讲)" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86(36%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86(36%E8%AE%B2)/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>平时服务端访问db遇到瓶颈的时候、大部分工程师会选择添加缓存、来缓解DB压力、提升程序性能、但一定是有效的吗 ?</p>
-</blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-a6decbd56530e742.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加缓存层.png"></p>
-<h4 id="理解局部性原理"><a href="#理解局部性原理" class="headerlink" title="理解局部性原理"></a>理解局部性原理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">时间局部性: 若一个数据被访问了、短时间内再次被访问的概率就增加. </span><br><span class="line">eg. 今天读一本小说、还未读完、明天接着读的概率就很大</span><br><span class="line">电商系统中、用户打开一个APP、看到首屏、推断会访问其它页面、将用户的个人信息、从存储在硬盘的数据库读取到内存的缓存中来</span><br><span class="line">利用的就是时间局部性</span><br><span class="line"></span><br><span class="line">空间局部性: eg. 存储数据时、数组内的多项数据会存储在相邻位置、</span><br><span class="line">好比图书馆会将同一系列的书放到一个书架上、摆在一起、加载的时候一并加载、</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-99bf7bdef7b5865d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="同一数据在短时间内会反复访问.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-95a6a3adbe0eaed6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="相邻的数据被连续访问.png"></p>
-<blockquote>
-<p>有了时间和空间局部性、可以不用将数据都放在内场车、也不用都放在HDD上、而是将访问次数多的数据、放在贵但是快一些的存储器、访问次数少、价格便宜的放在慢但容量大的容器里、组合使用各种存储设备</p>
-</blockquote>
-<h4 id="如何花最少的钱满足存储需求？"><a href="#如何花最少的钱满足存储需求？" class="headerlink" title="如何花最少的钱满足存储需求？"></a>如何花最少的钱满足存储需求？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">假设: 需要提供一个亚马逊这样的电商网站、有6亿件商品、每件商品需要4MB 存储空间(共6亿 * 4MB &#x3D; 2400TB)</span><br><span class="line"></span><br><span class="line">1.数据都放在内存、需要3600w美元(2400TB&#x2F;1MB * 0.015美元)</span><br><span class="line">2.假设内存只存放1%的热门商品600w件、剩下存储到HDD硬盘上、存储成本就下降到 45.6w美元、原来的1.3%</span><br><span class="line">3600w美元*1% + 2400T&#x2F;1M * 0.00004美元 &#x3D; 45.6w美元</span><br><span class="line"></span><br><span class="line">利用的就是时间局部性、将用户访问过的数据、加载到内存中、一旦内存放不下、就把长时间未访问的数据从内存移走、</span><br><span class="line">其实就是LRU缓存算法、商品访问越频繁、越容易在内存找到、很好的利用了内存的随机访问性</span><br><span class="line"></span><br><span class="line">另外还要关注一个指标: 缓存命中率 (Hit Rate &#x2F; Hit Ratio)</span><br><span class="line"></span><br><span class="line">内存的随机访问需要100ns、即: 极限情况下、可以支持1000w次随机访问</span><br><span class="line">假设: 用了24T(8G一条)内存、意味着3000条内存、可以支持每秒300亿次访问</span><br><span class="line">24TB &#x2F; 8GB * 1s&#x2F;100ns &#x3D; 300亿</span><br><span class="line">以2017年3亿的用户来看、每天的活跃用户1亿、平均访问100个商品、平均每秒访问的商品数量12w次 </span><br><span class="line">假设数据没有命中缓存、对应的数据请求访问HDD磁盘、一块硬盘每秒只能支撑100次随机访问、</span><br><span class="line">2400TB的数据、4TB一块磁盘的话、有600块、每秒支撑 6w次请求</span><br><span class="line">2400TB&#x2F;4TB * 1s&#x2F;10ms </span><br><span class="line">这意味着: 所有的商品都直接到了HDD硬盘、HDD支撑不了这样的压力</span><br><span class="line">至少需要50%的缓存命中率、HDD磁盘才可以支撑对应的访问次数</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1356,20 +1347,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

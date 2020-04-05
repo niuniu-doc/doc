@@ -191,6 +191,279 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/" class="post-title-link" itemprop="url">备库为什么会延迟好几个小时</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/" class="post-meta-item leancloud_visitors" data-flag-title="备库为什么会延迟好几个小时" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>若备库执行日志的速度低于主库生成日志的速度、备库有可能很久都追不上主库<br>MySQL5.6版本之前、MySQL只支持单线程复制、主库并发高、TPS较高时、可能会出现主备延迟<br>5.6版本之后、sql_thread不会直接更新数据、而是交给 coordinator 来中转日志和分发事务、由worker进程来更新数据. worker的线程数由 slave_parallel_works 决定.<br>一般32核机器设置为 8~16、备库还要提供查询、不能把CPU都吃光了.</p>
+</blockquote>
+<p>思考: </p>
+<ol>
+<li><p>事务能不能轮询分发给各个worker ?<br>不可以. 事务分发给worker以后、不同worker就独立执行了、但由于CPU的调度策略、第二个事务可能会比第一个先执行、此时、若两个事务更新的是同一行数据、就会导致主备不一致.</p>
+</li>
+<li><p>同一个事务的多个更新语句、能不能分发给多个worker执行 ?<br>不可以. 若Trx1 更新了t1和t2 两个表的各一行数据、若分发到不同的worker执行、虽然备库最终结果是一致的、但 t1更新完成的瞬间、会出现不一致, 破坏了事务的隔离性</p>
+</li>
+</ol>
+<p>所以: 分发器 coordinator 需要满足:</p>
+<ol>
+<li>不能造成覆盖更新、更新同一行数据的两个事务必须分发到同一个worker</li>
+<li>同一个事务必须分发到同一个worker.</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6992c49571630b74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="主备流程图.png"></p>
+<p>不同版本的并行复制策略:</p>
+<ol>
+<li><p>5.5版本<br>官方5.5版本不支持并行复制.<br>1) 按表分发. 每个worker线程维护一个hash表、用来保存当前正在这个worker上执行的事务所涉及的表. 有事务分配给该worker时、涉及的表会加入到对应hash表、worker执行完成、从hash表移除. 若与多个worker冲突、coordinator进入等待.<br>事务分发时、与worker冲突情况:<br>a. 跟所有worker都不冲突、coordinator直接分发给最空闲的worker线程<br>b. 跟多于一个worker冲突、coordinator进入等待、直到和该事务冲突的worker进程只有1个<br>c. 若只跟一个worker冲突、分配给存在冲突关系的worker.<br>按表分发、在多表负载均匀的场景下效果不错、但若碰到热点表、比如: 所有的更新事务都涉及同一张表时、所有事务都会分发到同一个worker、就变成单线程了.</p>
+<p>2) 按行分发. 若两个事务没有更新相同行、可以在备库并行执行、要求binlog格式必须是row.<br>此时判断冲突规则就是 库名 + 表名 + 唯一键值(还要考虑唯一索引)<br>相比于按表分发、按行分发在决定线程分发的时候、需要消耗更多的计算资源. </p>
+<p>按表分发和按行分发都有约束:</p>
+<ol>
+<li>binlog格式必须是Row</li>
+<li>表必须要有主键</li>
+<li>不能有外键、有外键时、级联更新的行不会记录binlog、这样冲突检测就不准确.<br>按行分发有个问题: 大事务耗费CPU和内存.<br>解决: 会设置一个阈值、若单事务超过设置行阈值(eg. 单事务更新行数超过10w)、就退化为单线程模式: 1. coordinator暂时hold住事务、2. 等所有worker变成空队列、coordinator直接执行事务 3. 恢复并行模式</li>
+</ol>
+</li>
+<li><p>5.6按库并行<br>原理同上、并行效果取决于压力模型. 若主库上有多个DB、并且多个DB的压力均衡、使用库级别分发效果较好. 相对表级别和行级别优势:<br>1) 构造hash值很快、只需要库名、且一个实例上DB数量不会过多<br>2) 不要求binlog格式为row、statement也可以拿到库名.<br>但: 若主库上的所有表都放在同一个DB里、这个策略就没用了、若不同DB热点不同、也起不到并行效果.</p>
+</li>
+<li><p>MariaDB的并行复制策略<br>利用的是组提交的特性.<br>1) 能够在同一组里提交的事务、一定不会修改同一行<br>2) 主库上可以并行执行的事务、备库上也一定可以并行执行</p>
+</li>
+<li><p>在一组提交的事务、有一个相同的commit_id、下一组就是 commit_id + 1</p>
+</li>
+<li><p>commit_id直接写入binlog</p>
+</li>
+<li><p>传到备库应用时、相同commit_id的事务分发到多个worker执行</p>
+</li>
+<li><p>一组全部执行完、coordinator再取下一组数据.<br>可以模拟主库的并行模式. 但: 并未完全实现<code>模拟主库并发度</code>这个目标, 在主库上、一组事务commit时、下一组事务是同时处于<code>执行中</code>的. 而备库需要第一组事务执行完、第二组才能开始执行、这样系统的吞吐量就不够、另外、容易被大事务拖后腿.<br>假设 trx1 / trx2 / trx3为一组事务、trx2为大事务、这样、trx1/trx3执行完后也必须等待trx2执行完成、下一组才能开始执行、这段时间只有一个worker线程在工作、是对资源的浪费.</p>
+</li>
+<li><p>MySQL5.7的并行复制策略<br>MySQL5.7提供了 slave-parallel-type 控制并行复制策略<br>slave-parallel-type=database; 表示使用mysql5.6的按库并行复制<br>slave-parallel-type=logical_clock; 表示使用类似mariadb的策略、但做了改进</p>
+</li>
+</ol>
+<p>思考: 同时处于<code>执行状态</code>的所有事务、是不是可以并行 ?<br>不能. 可能有由于锁冲突而处于锁等待状态的事务、若这些事务在备库上分配到不同的worker、会出现主备不一致. 所以、MariaDB的核心是、处于commit状态的事务并行处理.</p>
+<p>而实际上: 处于redo log prepare阶段的事务、都已经通过了锁冲突检验、<br>所以, Mysql5.7的并行复制策略思想是:</p>
+<p>1) 同时处于prepare状态的事务、在备库可以并行执行<br>2) 处于prepare状态的事务、与处于commit状态的事务之间、在备库执行时、也是可以并行的.<br>binlog_group_commit_sync_delay表示延迟多少微秒后调用fsync<br>binlog_group_commit_sync_no_Delay_count表示累积多少次后才调用fsync<br>这两个参数可以用于故意拉长binlog从write到fsync的时间、减少binlog的写盘次数、在5.7的复制策略里、可以用来制造更多处于<code>prepare阶段的事务</code>、增加备库并行度</p>
+<ol start="5">
+<li>Mysql5.7.22并行复制策略</li>
+<li>4月发布的5.7.22版本、增加一个机遇writeset的并行复制<br>binlog-transaction-dependency-tracking控制是否使用新的策略<br>1) commit_order、根据同时进入prepare和commit来判断是否可以并行的策略<br>2) writeset、表示对于事务涉及更新的每一行计算hash值、组成writeset、若两个事务没有操作相同行、就可以并行复制<br>3) writeset_session、在主库上同一个线程先后执行的两个事务、在备库执行时、要保证相同的先后顺序、hash值是通过 db+table+index+value计算的、类似5.5按行复制<br>但: 1. writeset是在主库生成后直接写入binlog的、在备库执行时、不需要解析binlog、节省计算量</li>
+<li>不需要把整个事务的binlog都扫一遍、才决定分发到哪个worker、更省内存</li>
+<li>备库的分发策略不依赖binlog内容、binlog格式可以不局限于row<br>通用性更有保证.</li>
+</ol>
+<p>思考: 假设5.7.22版本的主库、单线程插入很多数据、过了3个小时、想给这个主库搭一个相同版本的备库. 为了更快的追上主库、需要怎么选择并行复制策略呢 ?</p>
+<ol>
+<li>commit_order 由于是单线程执行、每个事务的commit_id不同、从库也只能是单线程执行<br>2、 writeset_order 要求同一个线程的日志必须要与主库上的先后顺序相同、也会导致退化为单线程<br>所以应该选择 writeset 并行复制策略.</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">如何判定一个数据库出了问题</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/mysql_%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="如何判定一个数据库出了问题" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/mysql_%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>主备切换有两种场景: 主动切换 和 被动切换. 被动切换大多是主库出了问题、由HA系统引发的. 那么: 如何判定主库出了问题呢 ?</p>
+</blockquote>
+<p>一、 select 1 判定<br>实际上, select 1 成功返回、只能说明这个库的进程还在、并不能说明主库没问题. eg. 以下场景:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> innodb_thread_concurrency=<span class="number">3</span>; // 控制innodb并发线程上限. 超过、进入等待. 来避免线程数过多、上下文切换的成本过高.</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="string">`t`</span>(</span><br><span class="line"> <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line"><span class="string">`c`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">default</span> <span class="literal">null</span></span><br><span class="line">) <span class="keyword">engine</span>=<span class="keyword">innodb</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-a908616fd039d681.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>在session D里、select 1是可执行成功的, 但查询表t会被堵住.<br>注意:</p>
+<blockquote>
+<p>并发连接和并发查询不是一个概念. show processlist看到的几千个连接、指的就是并发连接.<br>当前正在执行的语句、才是并发查询.<br>连接多顶多占一些内存、而并发查询多、才是造成CPU压力的根本. 在线程进入锁等待之后、并发线程的计数会-1, 行锁(包括间隙锁)不占用CPU资源.</p>
+</blockquote>
+<p>思考:</p>
+<blockquote>
+<p>Mysql会什么设计锁等待不计入并发线程数呢 ?</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">假设以下场景:</span><br><span class="line">1. 线程1 执行begin; update t set c&#x3D;c+1 where id&#x3D;1; 启动事务trx1, 然后保持、此时线程处于空闲</span><br><span class="line">状态、不计入并发线程</span><br><span class="line">2.  线程2~129执行 update t set c&#x3D;c+1 where id&#x3D;1; 由于等行锁、进入等待、这样就有128个</span><br><span class="line">线程处于等待状态.</span><br><span class="line">3. 若处于等待状态线程计数不-1, innodb会认为线程用满、阻止其他查询语句进入引擎执行、线程1不能</span><br><span class="line">提交、而另外的128个线程又处于锁等待状态、整个系统就阻塞了. 如下图:</span><br><span class="line">此时innodb不能响应任何请求、且所有线程都处于等待状态、此时占用CPU为0, 很不合理、所以 </span><br><span class="line">设计进入锁等待、将并发线程的计数器-1, 是合理的.</span><br><span class="line"></span><br><span class="line">但: 若真的执行查询、还是计入并发线程的. eg. select sleep(100) from t;</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-facf6013361bf644.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="等待并发线程不减1, 系统锁死.png"></p>
+<p>二、查表判断<br>在系统库(mysql)新建一个表, eg. 命名为 health_check, 里边只放一行数据、定期检测, 可以发现由于并发线程数过多导致的db不可用.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> mysql.health_check;</span><br></pre></td></tr></table></figure>
+<p>但: 若空间满了、这种方法又不好使.<br>更新事务要写binlog、而一旦binlog所在磁盘空间占用率达到100%, 那所有的更新和事务提交的commit语句都会被堵住, 但可以正常读取. </p>
+<p>三、更新判断</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> mysql.headlth_check <span class="keyword">set</span> t_modified=<span class="keyword">now</span>();</span><br></pre></td></tr></table></figure>
+<p>节点可用性的检测都应该包含主库和备库、若用来检测主库的话、备库也要进行更新检测. 但: 备库的检测也是要写binlog的、一般会把A和B的主备关系、设计为双M架构、所以在备库B上执行的检测命令、也会发回给主库A.<br>但若A、B更新同一条数据、就可能发生行冲突、导致主备同步停止. 可以插入多条数据、使用A、B的server_id做主键.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="string">`headlth_check`</span>(</span><br><span class="line"> <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line"><span class="string">`t_modified`</span> <span class="built_in">timestamp</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span> <span class="keyword">current_timestamp</span>,</span><br><span class="line">primary <span class="keyword">key</span>(<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">engine</span>=<span class="keyword">innodb</span>;</span><br><span class="line"><span class="comment"># 检测命令</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.health_check(<span class="keyword">id</span>, t_modified) <span class="keyword">values</span>(@@server_id, <span class="keyword">now</span>()) <span class="keyword">on</span> <span class="keyword">duplicate</span></span><br></pre></td></tr></table></figure>
+<p>这是一个比较常见的方案、但还存在一些问题, <code>判定慢</code>.<br>eg. 所有的检测逻辑都需要一个超时时间N、执行update、超过Ns不返回、认为系统不可用.<br>但: 假设日志盘IO利用率已经100%, 这个时候系统响应很慢、需要主备切换. 但检测使用的update需要的资源很少、拿到io就可以提交成功、超时之前就返回了、于是得到了<code>系统正常</code>的结论, 显然这是不合理的判定.</p>
+<p>四、内部统计<br>针对磁盘利用率、若Mysql 可以告知每次请求的io时间、就靠谱多了.<br>5.6版本以后的performance_schema库、file_summay_by_event_name表里就统计了每次IO请求时间.<br>event_name=’wait/io/file/innodb/innodb_log_file’ 统计的是redo log的写入时间. 第一列 event_name表示统计的类型.<br>接下来3组、统计的是redo log操作时间</p>
+<p>第一组5列、是所有IO类型的统计:<br>count_star 是所有IO总次数<br>sum、min、avg、max是统计的总和、最小、平均和最大值.(单位ps)</p>
+<p>第二组6列、是读操作的统计<br>最后一列 sum_number_of_bytes_read统计的是、总共从redo log读多少个字节</p>
+<p>第三组6列, 是写操作统计</p>
+<p>最后四组时间、是对其它类型数据的统计、在redo log里、可以认为是对 fsync的统计.</p>
+<p>binlog对应的event_name是: wait/io/file/sql/binlog 这行、统计逻辑同 redo log. 额外的统计这些信息、是有性能耗损的、大概在10%左右. 建议只开启需要的项. </p>
+<p>打开统计项之后、可以通过判断MAX_TIMER的值来判断数据库是否有问题.<br>eg. 设定阈值、单次IO超过200ms属于异常、出现异常把之前的统计值清空、再次出现这个异常就可以加入监控累计值了.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88,-%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1097,215 +1370,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_Mac%E5%AE%89%E8%A3%85mat%E7%8B%AC%E7%AB%8B%E5%B7%A5%E5%85%B7%E6%8A%A5%E9%94%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/tools_Mac%E5%AE%89%E8%A3%85mat%E7%8B%AC%E7%AB%8B%E5%B7%A5%E5%85%B7%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">Mac安装mat独立工具报错</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/tools_Mac%E5%AE%89%E8%A3%85mat%E7%8B%AC%E7%AB%8B%E5%B7%A5%E5%85%B7%E6%8A%A5%E9%94%99/" class="post-meta-item leancloud_visitors" data-flag-title="Mac安装mat独立工具报错" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/tools_Mac%E5%AE%89%E8%A3%85mat%E7%8B%AC%E7%AB%8B%E5%B7%A5%E5%85%B7%E6%8A%A5%E9%94%99/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/tools_Mac%E5%AE%89%E8%A3%85mat%E7%8B%AC%E7%AB%8B%E5%B7%A5%E5%85%B7%E6%8A%A5%E9%94%99/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>####问题描述<br>官网下载、安装<br><img src="https://upload-images.jianshu.io/upload_images/14027542-0d8d68043d36538d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">An error has occurred. </span><br><span class="line">See the log file </span><br><span class="line">&#x2F;Users&#x2F;%username%&#x2F;.eclipse&#x2F;1899417313_macosx_cocoa_x86_64&#x2F;configuration&#x2F;1507391541586.log.</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-56ee81ed27935fe5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">!ENTRY org.eclipse.osgi 4 0 2019-07-26 21:12:08.965</span><br><span class="line">!MESSAGE Application error</span><br><span class="line">!STACK 1</span><br><span class="line">java.lang.IllegalStateException: The platform metadata area could not be written: &#x2F;private&#x2F;var&#x2F;folders&#x2F;kc&#x2F;cc7tcgrx6_1d355s45t1q3nh0000gn&#x2F;T&#x2F;AppTranslocation&#x2F;9361422A-8DF8-482D-873B-8C030C46FB6E&#x2F;d&#x2F;mat.app&#x2F;Contents&#x2F;MacOS&#x2F;workspace&#x2F;.metadata.  By default the platform writes its content</span><br><span class="line">under the current working directory when the platform is launched.  Use the -data parameter to</span><br><span class="line">specify a different content area for the platform.</span><br><span class="line">        at org.eclipse.core.internal.runtime.DataArea.assertLocationInitialized(DataArea.java:70)</span><br><span class="line">        at org.eclipse.core.internal.runtime.DataArea.getStateLocation(DataArea.java:138)</span><br><span class="line">        at org.eclipse.core.internal.preferences.InstancePreferences.getBaseLocation(InstancePreferences.java:44)</span><br><span class="line">        at org.eclipse.core.internal.preferences.InstancePreferences.initializeChildren(InstancePreferences.java:209)</span><br><span class="line">        at org.eclipse.core.internal.preferences.InstancePreferences.&lt;init&gt;(InstancePreferences.java:59)</span><br><span class="line">        at org.eclipse.core.internal.preferences.InstancePreferences.internalCreate(InstancePreferences.java:220)</span><br><span class="line">        at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:349)</span><br><span class="line">@</span><br></pre></td></tr></table></figure>
-
-<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用命令行打开MemoryAnalyzer.ini，添加-data参数 </span><br><span class="line">&#x2F;Users&#x2F;nj&#x2F;package&#x2F;mat.app&#x2F;Contents&#x2F;Eclipse&#x2F;MemoryAnalyzer.ini</span><br><span class="line">如：</span><br><span class="line">-data</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;var&#x2F;log&#x2F;mat&#x2F;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-data 放在 launcher前、</span><br><span class="line">-data 和 value要放在两行</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-360b39a7c35efd15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_git%E7%9B%B8%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/tools_git%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">git相关</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/tools_git%E7%9B%B8%E5%85%B3/" class="post-meta-item leancloud_visitors" data-flag-title="git相关" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/tools_git%E7%9B%B8%E5%85%B3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/tools_git%E7%9B%B8%E5%85%B3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>分支merge错了、需要撤回merge<br> git merge –abort</p>
-</li>
-<li><p>查看某段时间段内某个用户的提交<br>git log -p –author={name} –since={start-time} –until={end-time}<br>eg. git log -p –author=nj –since=2019-09-24 –until=2019-09-24</p>
-</li>
-<li><p>查看某次提交属于哪个分支<br>  git br -r –contains commitId<br>  eg. git br -r –contains ca4efc1a</p>
-</li>
-<li><p>tag删除<br> git tag -d tag_name  删除本地tag<br> git push origin :refs/tags/tag_name 删除远程tag</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1376,20 +1440,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

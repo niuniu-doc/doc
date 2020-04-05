@@ -191,6 +191,218 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_postman%E5%8A%9F%E8%83%BD%E6%94%AF%E6%8C%81%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_postman%E5%8A%9F%E8%83%BD%E6%94%AF%E6%8C%81%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">postman功能支持记录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/tools_postman%E5%8A%9F%E8%83%BD%E6%94%AF%E6%8C%81%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="postman功能支持记录" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/tools_postman%E5%8A%9F%E8%83%BD%E6%94%AF%E6%8C%81%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/tools_postman%E5%8A%9F%E8%83%BD%E6%94%AF%E6%8C%81%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. add collection 可以理解为一个project</span><br><span class="line">2. add floders 添加目录、可以添加多级、可以理解为多个功能模块</span><br><span class="line">3. add requests 添加请求</span><br><span class="line">4. mock server 作为mock数据的接口、有调用上限</span><br><span class="line">5. runner 可以支持简单压测</span><br><span class="line">6. environment 支持分组(dev&#x2F;test&#x2F;prod 环境区分、每个分组下支持多个变量)</span><br><span class="line">7. globals 全局变量、会在每个请求中添加</span><br><span class="line">8. view in web &#x2F; publish 支持发布、共享</span><br><span class="line">9. history 支持浏览记录查看</span><br><span class="line">10. 文档说明支持markdown格式</span><br><span class="line">11. monitor 服务性能监控</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件参考"><a href="#文件参考" class="headerlink" title="文件参考"></a>文件参考</h4><p><a href="https://crifan.github.io/api_tool_postman/website/" target="_blank" rel="noopener">https://crifan.github.io/api_tool_postman/website/</a></p>
+<p><a href="https://blog.csdn.net/water_0815/article/details/53326990" target="_blank" rel="noopener">https://blog.csdn.net/water_0815/article/details/53326990</a></p>
+<p><a href="https://blog.csdn.net/ruanhao1203/article/details/79096279" target="_blank" rel="noopener">https://blog.csdn.net/ruanhao1203/article/details/79096279</a></p>
+<p><a href="https://www.cnblogs.com/qiaoyeye/p/5524750.html" target="_blank" rel="noopener">https://www.cnblogs.com/qiaoyeye/p/5524750.html</a></p>
+<p><a href="https://blog.csdn.net/cloud_huan/article/details/78326159" target="_blank" rel="noopener">https://blog.csdn.net/cloud_huan/article/details/78326159</a></p>
+<p><a href="https://www.jianshu.com/p/12185c5dc120" target="_blank" rel="noopener">https://www.jianshu.com/p/12185c5dc120</a></p>
+<p><a href="https://juejin.im/entry/5a32a7e86fb9a0452a3c5b97" target="_blank" rel="noopener">https://juejin.im/entry/5a32a7e86fb9a0452a3c5b97</a></p>
+<p><a href="https://blog.csdn.net/testdeveloper/article/details/80679988" target="_blank" rel="noopener">https://blog.csdn.net/testdeveloper/article/details/80679988</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_postman%E6%B7%BB%E5%8A%A0sign%E7%AD%BE%E5%90%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_postman%E6%B7%BB%E5%8A%A0sign%E7%AD%BE%E5%90%8D/" class="post-title-link" itemprop="url">postman添加sign签名</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/tools_postman%E6%B7%BB%E5%8A%A0sign%E7%AD%BE%E5%90%8D/" class="post-meta-item leancloud_visitors" data-flag-title="postman添加sign签名" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/tools_postman%E6%B7%BB%E5%8A%A0sign%E7%AD%BE%E5%90%8D/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/tools_postman%E6%B7%BB%E5%8A%A0sign%E7%AD%BE%E5%90%8D/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="安装postman插件"><a href="#安装postman插件" class="headerlink" title="安装postman插件"></a>安装postman插件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;451e0d009304</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="常用功能使用"><a href="#常用功能使用" class="headerlink" title="常用功能使用"></a>常用功能使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;15f8dfaaecef</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="生成sign签名"><a href="#生成sign签名" class="headerlink" title="生成sign签名"></a>生成sign签名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1. 编写脚本 </span><br><span class="line">   以order项目为例(下边sign.js)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2. 在请求中添加脚本</span><br><span class="line">   managerEnvirenment -&gt; add -&gt; sign (值可以随便给、这个是用来给postman使用的、在发送请求时会替换为计算出来的sign值)</span><br><span class="line">   如下图所示</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3. 发送请求、可以发现签名是ok的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">4. 如果发现签名不对、可以调试脚本</span><br><span class="line">   在chrome地址栏中输入：chrome:&#x2F;&#x2F;flags&#x2F;#debug-packed-apps ，开启Debugging for packed app</span><br><span class="line">   输入chrome:&#x2F;&#x2F;inspect&#x2F;#apps，选择postman的inspect  会弹出调试框</span><br><span class="line">   </span><br><span class="line">   在弹出的调试框里、选择elements在下边可以看到console</span><br><span class="line">   可以查看签名的方式是否正确(配合idea调试、对比签名方式和签名结果)</span><br><span class="line">   idea调试：以debug模式运行、</span><br><span class="line">   在指定合适的位置打断点、代码逻辑运行到断点处即会被中断掉、可以进行单步调试~~</span><br><span class="line">   查找问题出现的原因</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h4 id="sign-js"><a href="#sign-js" class="headerlink" title="sign.js"></a>sign.js</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> appkey = <span class="string">'6615be7b44ca4ab9ac03060088202792'</span>; <span class="comment">// 自动化测试的key</span></span><br><span class="line"> <span class="comment">//获取当前时间</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">createTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> (<span class="keyword">new</span> <span class="built_in">Date</span>()).valueOf();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">var</span> time = createTime();</span><br><span class="line"> <span class="keyword">var</span> method = request.method;</span><br><span class="line"> <span class="keyword">delete</span> request.data[<span class="string">"sign"</span>];</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">"request data is : "</span> + request.data);</span><br><span class="line"> <span class="keyword">var</span> keys = <span class="built_in">Object</span>.keys(request.data), i, len = keys.length;</span><br><span class="line"> keys.sort();</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">"sortedKeys is : "</span> + keys)</span><br><span class="line"> <span class="comment">// Build the request body string from the Postman request.data object</span></span><br><span class="line"> <span class="keyword">var</span> requestBody = <span class="string">""</span>;</span><br><span class="line"> <span class="keyword">var</span> firstpass = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 构造数据为 key=param&amp;key=param....字符串</span></span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">var</span> index <span class="keyword">in</span> keys)&#123;</span><br><span class="line"> <span class="keyword">if</span> (keys[index] == <span class="string">"sign"</span>) &#123;</span><br><span class="line"> 	<span class="keyword">continue</span>;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">if</span>(!firstpass)&#123;</span><br><span class="line">    requestBody += <span class="string">"&amp;"</span>;</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span>(keys[index]==<span class="string">"create_time"</span>)&#123;</span><br><span class="line">    request.data[keys[index]]=time;</span><br><span class="line">    <span class="built_in">console</span>.log(request.data[keys[index]]);</span><br><span class="line">    &#125;</span><br><span class="line">    requestBody += keys[index] + <span class="string">"="</span> + request.data[keys[index]];</span><br><span class="line">    firstpass = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">requestBody += <span class="string">'&amp;key='</span> + appkey;   </span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"request body is : "</span> + requestBody);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> md5=CryptoJS.MD5(requestBody, appkey);</span><br><span class="line"><span class="keyword">var</span> base64md5 = CryptoJS.enc.Base64.stringify(md5);</span><br><span class="line"><span class="built_in">console</span>.log(base64md5);</span><br><span class="line">postman.setEnvironmentVariable(<span class="string">'sign'</span>, base64md5); <span class="comment">// 将变量放入postman 变量中;</span></span><br></pre></td></tr></table></figure>
+<p>图一、添加postman环境变量<br><img src="https://upload-images.jianshu.io/upload_images/14027542-5337c8380fbe226e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-323bcf356a646c1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-2cf8d68e2ad29999.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>图二、postman脚本调试<br><img src="https://upload-images.jianshu.io/upload_images/14027542-6f2ffb4315989907.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-066f5d87bcf85312.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-5e0888d32e2590c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1015,256 +1227,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/" class="post-title-link" itemprop="url">早安、世界</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/" class="post-meta-item leancloud_visitors" data-flag-title="早安、世界" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>啊哈</p>
-<!-- MarkdownTOC -->
-
-<ul>
-<li>缘起</li>
-<li>过往、感恩</li>
-<li>现在、enjoying~~</li>
-<li>未来、waiting~~</li>
-<li>接下来的日子</li>
-<li>Why</li>
-</ul>
-<!-- /MarkdownTOC -->
-
-<h4 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">起床、读书、做在窗边、抬头的那一刻、竟是万分温暖、初阳淡淡、轻洒墙角、沉睡了一晚的楼脚飘过</span><br><span class="line">一抹明丽的淡红、不由自主想起那些游离于心间的美好、禁不住自我感动了一把^.^</span><br><span class="line"></span><br><span class="line">又想起最近种种、嗯嗯、新开的简书还是空白的、那么、让我开始一个新的篇章吧~~</span><br></pre></td></tr></table></figure>
-
-<h4 id="过往、感恩"><a href="#过往、感恩" class="headerlink" title="过往、感恩"></a>过往、感恩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">普通的不能在普通的大学、好不经意流散的时光、无所事事面对将要毕业的我、无疑是失败的~~</span><br><span class="line"></span><br><span class="line">幸运、偶然的机会走近 IT 的世界、从此打开一扇门、感谢曾经一路走来的小伙伴、给过我太多帮助</span><br><span class="line"></span><br><span class="line">幸运、16年年初发现自己的世界如此之小、别离、来到北京、或许那时候只是觉得自己的世界太小了、想要一个更大的天地</span><br><span class="line"></span><br><span class="line">幸运、来到北京没有遇到太多别人描述里的坎坷与压力、有的是我想要的世界、有的是同事的热心帮助、</span><br><span class="line">差不多从没基础开始吧、从此我进入了一个喜欢而又迷茫着的世界、发现它的周边是如此的绚丽多彩、</span><br><span class="line">从此、匆匆忙忙、想要知道的多一点、再多一点、那时候不懂的东西太多、感觉是新鲜好奇的、于是尽自己最大努力去学、沉浸于这种成长的幸福</span><br><span class="line"></span><br><span class="line">要感谢的人很多、你们陪我成长、给我鼓励、~~心里默默一一谢过、而有些、我相信、我不说、你们也懂、</span><br><span class="line">懂我深深的感恩、亦懂我害怕让你们失望的忐忑、让我们一起加油、为我们喜欢的未来~.~</span><br></pre></td></tr></table></figure>
-
-<h4 id="现在、enjoying"><a href="#现在、enjoying" class="headerlink" title="现在、enjoying~~"></a>现在、enjoying~~</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   过往、就在那里、不管你喜不喜欢、都不会再变、我的过去不管是无知的苍白还是迷茫后的成长、</span><br><span class="line">   我都喜欢、它的身上流动着我的气息、无知的四年大学、我亦不后悔、一种经历、一种人生。</span><br><span class="line"></span><br><span class="line">   笃信、不喜欢的过去、就认真的作为借鉴、迷茫之后、世界是清晰的、却也更大更广、</span><br><span class="line">   很长一段时间的迷茫之后、不久前、选择了一条、在很多人眼里向下走的路、我却坚定不移、</span><br><span class="line">我相信自己的选择、我知道自己想要什么</span><br><span class="line">   en&#x2F;就酱紫、自己决定了的、就认真的走下去、失败总比苍白更美好</span><br><span class="line"></span><br><span class="line">   换句话、既然一无所有、又何惧失败、~~</span><br><span class="line"></span><br><span class="line">   诚然、幸运之神再次眷顾了我、很顺利、下个月中旬可以转过去、开始java之旅、为了得到这次机会、</span><br><span class="line">   我同意php 和 java的项目一起做、精力稍有分散、会有2份压力、但我愿意用这段时光见证自己的成长</span><br><span class="line">   enen~.</span><br></pre></td></tr></table></figure>
-
-<h4 id="未来、waiting"><a href="#未来、waiting" class="headerlink" title="未来、waiting~~"></a>未来、waiting~~</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">生如逆旅单行道、哪有岁月可回头、既然如此、何不用心谱写未来、干嘛不让未来的自己感谢现在的自己^.^</span><br><span class="line"></span><br><span class="line">^.^ enen、我还是那个小小小小的小女孩儿</span><br><span class="line">那个每次有好事发生都把你们拿出来感谢一遍的小女生、你们告诉我那叫越努力越幸运、</span><br><span class="line">我心底却始终认为该归功于你们、是你们不遗余力的帮助、so、不管是怎样的吧、愿我们的未来都是我们期待的模样</span><br><span class="line"></span><br><span class="line">勇气不是不害怕、而是尽管害怕依然可以迎难而上～</span><br><span class="line"></span><br><span class="line">愿我们都能带着一颗留白的心上路、在光阴里扮演一个最从容的角色～</span><br><span class="line"></span><br><span class="line">愿我们都能带着最微薄的行李和最丰厚的自己、在时间里流浪、流梦为马、随处可栖～</span><br><span class="line"></span><br><span class="line">Thanks、我的朋友们、你们才是我最宝贵的财富、愿我们永远是最幸福的模样~~</span><br></pre></td></tr></table></figure>
-
-<h4 id="接下来的日子"><a href="#接下来的日子" class="headerlink" title="接下来的日子"></a>接下来的日子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">还会喜欢看阳光飘落</span><br><span class="line">还会喜欢拿着洒水壶给我的小花儿们来一场甘霖</span><br><span class="line">还会喜欢晚上躺在床上什么都不思考、安静的放空自我</span><br><span class="line">还会喜欢抬眼的那一刻发现的诸多美好、一溜烟儿的跑出去浪上一会儿</span><br><span class="line">还会喜欢风轻轻吹过的日子、和朋友们做在一起聊聊天</span><br><span class="line">还会喜欢做在书桌前发发呆、思念我的朋友们</span><br><span class="line">还好喜欢周末去逛逛街、晚上跑跑步</span><br><span class="line">还会喜欢就算不论何时、都想要搞明白想要搞明白的东西、</span><br><span class="line">en&#x2F;我还是我、所有的都一如既往~~</span><br></pre></td></tr></table></figure>
-
-<h4 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">是的、我... 小神经有犯抽了、aha~、总是喜欢这种细碎的小美好、怀念下朋友们、然后发发神经、</span><br><span class="line"></span><br><span class="line">正经的、未来不可欺、让我们一起加油吧~~</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;end</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/" class="post-title-link" itemprop="url">时光说</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/" class="post-meta-item leancloud_visitors" data-flag-title="时光说" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <pre><code>愿我们心生玲珑、细品丝丝温情～
-
-愿我们心坚如铁、足御刺骨寒冷～
-
-不委屈每一份善意、亦不惧怕每一分寒意～
-
-愿我们有人吐槽、亦善聆听～
-
-愿我们有人宠爱、亦不骄横～
-
-不满亦不积怨、任性但不失理性～
-
-愿我们有机会倾听故事的全部～
-
-愿我们就算是被人认识万分之一亦不悲伤～
-
-不愤世嫉俗、也不过分张扬～
-
-愿我们的朋友不止是正向的、能有机会完整的成长～
-
-愿我们见惯所有的恶、亦能有发自内心的善～
-
-懂得拿起、又善于放下～
-
-但愿我们能把平凡乃至糟糕的日子过的精彩、也能在顺风顺水的日子保持谦和～
-
-但愿我们能耐得住所有成长的寂寞、也能在最得意的时候谦卑温和～
-
-……
-
-嗯、不是在最好的日子里遇到了你们、
-
-而是遇到你们才有了这段最美好的时光～
-
-不愿时光不老、不求相伴永远、但愿我们相顾不言早已知其冷暖～
-
-------
-
-人生就是一场修行. 成长毫无违和～</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1335,20 +1297,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
