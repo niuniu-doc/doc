@@ -2,9 +2,9 @@
 title: 如何同时登陆两个github账号
 date: 2020-03-18 14:53:42
 tags: 
-    - tools 
+    - Tools 
 categories: 
-    - my-tools
+    - Tools
 ---
 
 #### 生成一个新的ssh key
@@ -51,4 +51,4 @@ Host xxx //你的host别名
 ```
 eg. git@github.com:hbxn740150254/BestoneGitHub.git
  -> git@xxx:hbxn740150254/BestoneGitHub.git
- ```
+```
