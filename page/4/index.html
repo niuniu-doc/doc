@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_tcpdump%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -206,7 +206,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_tcpdump%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">tcpdump基本使用</a>
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-title-link" itemprop="url">平均负载</a>
         </h1>
 
         <div class="post-meta">
@@ -236,7 +236,7 @@
             </span>
 
           
-            <span id="/2020/03/20/linux%E4%BD%BF%E7%94%A8_tcpdump%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="tcpdump基本使用" title="阅读次数">
+            <span id="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-meta-item leancloud_visitors" data-flag-title="平均负载" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -251,8 +251,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_tcpdump%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E4%BD%BF%E7%94%A8_tcpdump%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -267,132 +267,210 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>选项</strong></p>
-<ul>
-<li><code>-i any</code> 监听所有的网卡接口、用来查看是否有网络流量</li>
-<li><code>-i eth0</code> 只监听eth0网卡流量</li>
-<li><code>-D</code> 显示可用的接口列表</li>
-<li><code>-n</code> 不解析主机名、直接使用ip</li>
-<li><code>-nn</code> 显示端口</li>
-<li><code>-q</code> 显示简化输出</li>
-<li><code>-t</code> 显示可读的时间戳</li>
-<li><code>-X</code> 以<code>hex</code>和<code>ASCII</code>两种形式显示包内容</li>
-<li><code>-v</code> <code>-vv</code> <code>-vvv</code> 显示更加多的包信息</li>
-<li><code>-XX</code> 与 <code>-X</code> 类似、增加以太网header的显示</li>
-<li><code>-c</code> 只读取<code>x</code>个包, 然后停止</li>
-<li><code>-s</code> 指定每个包捕获的长度、单位是 <code>byte</code>, 可以使用 <code>-s0</code> 捕获整个包</li>
-<li><code>-S</code> 输出绝对的序列号</li>
-<li><code>-e</code> 获取以太网 <code>header</code></li>
-<li><code>-w</code> 将捕获的数据包信息写入文件</li>
-<li><code>-r</code> 加载之前保存的文件</li>
-</ul>
-<p><strong>表达式</strong><br>在<code>tcpdump</code>中可以使用表达式过滤指定类型的流量：</p>
-<ul>
-<li>类型type选项包含：<code>host</code>  <code>net</code> <code>port</code></li>
-<li>方向dir包含：<code>src</code>  <code>dst</code></li>
-<li>协议proto选项包含：<code>tcp</code> <code>udp</code> <code>ah</code>等</li>
-</ul>
-<p><strong>示例</strong></p>
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
+<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
+<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
 <blockquote>
-<p>捕获所有流量<br>tcpdump -i any</p>
+<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
+<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
+</blockquote>
+<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
+
+
+
+<p>CPU核数查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
+</blockquote>
+<p>平均负载与CPU使用率</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
+
+
+
+<p>案例分析</p>
+<p>一、CPU密集型进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
+<p>二、IO密集型进程</p>
+<p>查看方式同上</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" class="post-title-link" itemprop="url">Linux内核学习---1</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E5%86%85%E6%A0%B8/" itemprop="url" rel="index"><span itemprop="name">Linux内核</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" class="post-meta-item leancloud_visitors" data-flag-title="Linux内核学习---1" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="开机加电-gt-main-函数执行"><a href="#开机加电-gt-main-函数执行" class="headerlink" title="开机加电 -&gt; main 函数执行"></a>开机加电 -&gt; main 函数执行</h4><blockquote>
+<p>分3步完成、实现从启动盘加载操作系统、完成 main 函数加载所需要的准备工作</p>
+</blockquote>
+<h5 id="启动BIOS、完成实模式下的中断向量表和中断服务程序"><a href="#启动BIOS、完成实模式下的中断向量表和中断服务程序" class="headerlink" title="启动BIOS、完成实模式下的中断向量表和中断服务程序"></a>启动BIOS、完成实模式下的中断向量表和中断服务程序</h5><p>Q: RAM ？<br>A: Random Access Memory. 随机存取存储器、eg. 内存条<br>   特点是 在加电状态下、可随意读写、断电消失</p>
+<p>Q: 加电瞬间、RAM中无任何程序、谁来完成 操作系统从软盘的加载 ？<br>A: BIOS</p>
+<p>Q: 为什么必须把操作系统从软盘加载到RAM ？<br>A: CPU的逻辑电路被设计为只能从内存中运行、无法直接从软盘运行</p>
+<p>Q: 为什么CPU的逻辑电路被设计为只能从内存运行 ？<br>A: … 暂未清楚</p>
+<p>Q: BIOS本身是如何启动的 ？<br>A: 固定地址: 0xFFFF0、<br>   CPU逻辑上被设计为、在加电的瞬间、强行将 CS设为 0xF000, IP 设为 0xFFF0<br>   这样、CS:IP 就指向 0xFFFF0(BIOS程序的入口地址、BIOS程序就开始运行)</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bc3706ad36a398b8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BIOS.jpg"></p>
+<h5 id="从启动盘加载操作系统到内存、加载操作系统的工作就是利用-中断服务程序来完成的"><a href="#从启动盘加载操作系统到内存、加载操作系统的工作就是利用-中断服务程序来完成的" class="headerlink" title="从启动盘加载操作系统到内存、加载操作系统的工作就是利用 中断服务程序来完成的"></a>从启动盘加载操作系统到内存、加载操作系统的工作就是利用 中断服务程序来完成的</h5><p>开始加载操作系统….</p>
+<blockquote>
+<p>对Linux 0.11而言、是分3步、<br>  1: 有BIOS中断 0x19 将第一扇区bootsect的内容加载到内存<br>  2: 在bootsect的引导下、将后边的4个扇区和240个扇区的内容依次加载到内存中</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-8467ab9c24c4efbc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BIOS程序加载.jpg"></p>
+<p>Q: 操作系统如何加载 ？<br>A: BIOS代码执行完毕、硬件完成开机自检、会和BIOS联手、让CPU收到 int 0x19中断、CPU在中断向量表中找到中断程序的位置(0x0E6F2)<br>   即: 启动记载服务程序的入口地址、<br>   so. in 0x19中断程序的作用就是把软盘第一扇区的代码512b加载到内存指定位置(BIOS设计、与操作系统无关) - 内存(0x07C00)处<br>   第一扇区的代码作用就是将软盘中的操作系统程序陆续加载到内存、所以称为引导程序(bootsect)<br>   第一扇区的载入、标记着操作系统代码要开始发挥作用<br><img src="https://upload-images.jianshu.io/upload_images/14027542-482d2aaafa61ffa8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="响应int0x19中断.jpg"></p>
+<h5 id="操作系统的内存规划"><a href="#操作系统的内存规划" class="headerlink" title="操作系统的内存规划"></a>操作系统的内存规划</h5><p>实模式下最大的寻址为1MB</p>
+<pre><code>//代码路径：boot/bootsect.s  
+    …  
+.globl begtext, begdata, begbss, endtext, enddata, endbss  
+.text  
+begtext:  
+.data  
+begdata:  
+.bss  
+begbss:  
+.text  
+
+SETUPLEN= 4    ! nr of setup-sectors  
+BOOTSEG = 0x07c0    ! original address of boot-sector  
+INITSEG = 0x9000    ! we move boot here-out of the way  
+SETUPSEG= 0x9020    ! setup starts here  
+SYSSEG  = 0x1000    ! system loaded at 0x10000 (65536).  
+ENDSEG  = SYSSEG + SYSSIZE  ! where to stop loading  
+
+! ROOT_DEV:0x000 - same type of floppy as boot.  
+!  0x301 - first partition on first drive etc  
+ROOT_DEV= 0x306 
+… 
+![实模式下的内存使用规划.jpg](https://upload-images.jianshu.io/upload_images/14027542-2fd3e1e6ef913630.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+</code></pre><p><code>SETUPLEN</code> -&gt; <code>SETUPSEG 0x9020</code> (被加载到的位置)<br><code>BOOTSEG(0x07c0)</code>(BIOS加载的位置) -&gt; <code>INITSEG 0x9000</code>(被移动到的新的位置)<br><code>SYSSEG 0x1000</code> 内核被加载的位置<br><code>ENDSEG</code> 内核末尾位置<br><code>ROOT_DEV 0x306</code> 根文件设备号<br><strong>注意:</strong><br>CPU的段寄存器（CS）指向 <code>0x07C0</code> -&gt; 原来 BOOTSEG 所在的位置</p>
+<h5 id="为执行32位的main函数做过度工作"><a href="#为执行32位的main函数做过度工作" class="headerlink" title="为执行32位的main函数做过度工作"></a>为执行32位的main函数做过度工作</h5><h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><blockquote>
+<ol>
+<li>实模式: 兼容80286之后80x86的兼容CPU的模式、特性是一个20位的存储器地址空间(2^20 1MB的存储器空间可被寻址)<br>可以直接软件访问BIOS及周边硬件、无硬件支持的分页机制和实时多任务概念<br>80286 开始、所有的CPU开机都是 实模式 、之前的CPU只有一种模式、类似 实模式</li>
+</ol>
 </blockquote>
 <blockquote>
-<p>指定网卡接口、查看指定网卡发生了什么<br>tcpdump -i eth0</p>
+<ol start="2">
+<li>CPU: 计算机所有的计算操作都由它完成、可以理解为 一个有输入和输出功能的集成电路</li>
+</ol>
 </blockquote>
 <blockquote>
-<p>原生输出、不解析主机、端口、显示绝对序列号、可读的时间戳<br>tcpdump -ttttnnvvS</p>
+<ol start="3">
+<li>CPU寻址: 使用CS、IP两个寄存器<br>  CS: Code Segment Register 即代码段寄存器、指向CPU当前执行代码在内存中的位置(代码段的起始位置)、<br>  实模式为绝对地址、16位、保护模式为线性地址 需要结合GDT才能找到段基址<br>  IP/EIP: Intruction Pointer. 指令寄存器、存在于CPU中、记录将要执行的代码在代码段中的偏移地址<br>  实模式为绝对地址、指令指针为16位、即IP、保护模式为32位、即EIP、<br>  CS:IP 寻址规则: 段基址*16 + 偏移地址</li>
+</ol>
 </blockquote>
 <blockquote>
-<p>查看指定ip的流量<br>tcpdump host {ip}</p>
+<ol start="4">
+<li>中断向量表建立<br>  BIOS在最开始的位置(0x00000)用1k内存(0x00000 - 0x003FF)构建中断向量表、接下来256k(0x00400～0x004FF)构建BIOS数据区<br>  大概57k后的位置(0x0E05B)加载了大概8k左右的与中断向量表相关的中断服务程序 </li>
+</ol>
 </blockquote>
 <blockquote>
-<p>使用<code>源</code>和<code>目的</code>过滤<br>tcpdump src {source ip}<br>tcpdump dst {dest ip}</p>
+<ol start="5">
+<li>中断向量表<br>  记录所有中断向量对应中断程序的位置、实模式中断机制实现的重要部分</li>
+</ol>
 </blockquote>
 <blockquote>
-<p>过滤某个子网的数据包<br>tcpdump net 1.2.3.0/24</p>
+<ol start="6">
+<li>中断服务程序<br>  通过中断向量表的索引对中断程序进行响应、是一些具有特殊功能的代码</li>
+</ol>
 </blockquote>
 <blockquote>
-<p>过滤指定端口相关的流量<br>tcpdump port {port}<br>tcpdump src port {port} -&gt; 只显示发出</p>
-</blockquote>
-<blockquote>
-<p>过滤指定协议的流量<br>tcpdump tcp</p>
-</blockquote>
-<blockquote>
-<p>只显示ipv6流量<br>tcpdump ip6</p>
-</blockquote>
-<blockquote>
-<p>基于包大小过滤流量<br>tcpdump less 32<br>tcpdump grater 64<br>tcpdump &lt;=128</p>
-</blockquote>
-<blockquote>
-<p>使用端口范围过滤<br>tcpdump portrange 21-23</p>
-</blockquote>
-<blockquote>
-<p>保存到指定文件<br>tcpdump port 80 -w file</p>
-</blockquote>
-<blockquote>
-<p>加载之前保存的文件<br>tcpdump -r file</p>
-</blockquote>
-<p><strong>高级使用</strong></p>
-<ul>
-<li><code>AND</code>: <code>and</code> or <code>&amp;&amp;</code></li>
-<li><code>OR</code>: <code>or</code> or <code>||</code></li>
-<li><code>except</code>: <code>not</code> or <code>!</code><blockquote>
-<p>过滤指定源和目的端口<br>tcpdump -n src 1.1.1.2 and dst port 8080</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>过滤指定网络方向<br>tcpdump -n src net 1.1.1.2/16 and dst net 1.1.1.3/16</p>
-</blockquote>
-<blockquote>
-<p>过滤到指定ip的非icmp报文<br>tcpdump dst 1.1.1.2 and src net and not icmp</p>
-</blockquote>
-<blockquote>
-<p>构建规则过于复杂的时候、可以使用单引号将规则放到一起<br>tcpdump ‘src 1.1.1.1 and (dst port 80 or 22)’</p>
-</blockquote>
-<p><strong>隔离指定的TCP标识</strong><br><code>tcp[13]</code>表示在tcp header中的偏移位置13开始、后边代表的是匹配的字节数</p>
-<blockquote>
-<p>显示所有的urgent包(URG)<br>tcpdump ‘tcp[13] &amp; 32!=0’</p>
-</blockquote>
-<blockquote>
-<p>显示所有的ACK包<br>tcpdump ‘tcp[13] &amp; 16!=0’</p>
-</blockquote>
-<blockquote>
-<p>显示所有的push包<br>tcpdump ‘tcp[13] &amp; 8!=0’</p>
-</blockquote>
-<blockquote>
-<p>显示所有的reset包<br>tcpdump ‘[tcp13] &amp; 4!=0’</p>
-</blockquote>
-<blockquote>
-<p>显示所有的SYN包<br>tcpdump ‘[tcp13] &amp; 2!=0’</p>
-</blockquote>
-<blockquote>
-<p>显示所有的FIN包<br>tcpdump ‘[tcp13] &amp; 1!=0’</p>
-</blockquote>
-<blockquote>
-<p>显示所有的SYN/ACK包<br>tcpdump ‘tcp[13]=18’</p>
-</blockquote>
-<p><strong>识别重要流量</strong></p>
-<blockquote>
-<p>过滤同时设置SYN和RST标识的包（这在正常情况下不应该发生）<br>tcpdump ‘tcp[13] = 6’</p>
-</blockquote>
-<blockquote>
-<p>过滤明文的HTTP GET请求<br>tcpdump ‘tcp[32:4] = 0x47455420’</p>
-</blockquote>
-<blockquote>
-<p>通过横幅文本过滤任意端口的SSH连接<br>tcpdump ‘tcp[(tcp[12]&gt;&gt;2):4] = 0x5353482D’</p>
-</blockquote>
-<blockquote>
-<p>过滤TTL小于10的包（通常情况下是存在问题或者在使用traceroute）<br>tcpdump ‘ip[8] &lt; 10’</p>
-</blockquote>
-<blockquote>
-<p>过滤恶意的包<br>tcpdump ‘ip[6] &amp; 128 != 0’</p>
-</blockquote>
-<p><strong>理解报文内容</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">08:41:13.729687 IP 192.168.64.28.22 &gt; 192.168.64.1.41916: Flags [P.], seq 196:568, ack 1, win 309, options [nop,nop,TS val 117964079 ecr 816509256], length 372</span><br></pre></td></tr></table></figure>
-<p><code>08:41:13.729687</code> 本地时间戳<br><code>ip</code> 协议是ipv4、若是ipv6会显示为 ip6<br><code>192.168.64.28.22</code> 源ip和端口<br><code>192.168.64.1.41916</code> 目的ip和端口<br><code>Flags [P.]</code> 报文标记段<br><code>seq 196:568</code> 代表该数据包包含该数据流的第 196 到 568 字节<br><code>ack 1</code> 该数据包是数据发送方，ack 值为 1。在数据接收方，该字段代表数据流上的下一个预期字节数据，例如，该数据流中下一个数据包的 ack 值应该是 568<br><code>win 309</code> 表示接收缓冲区中可用的字节数，后跟 TCP 选项如 MSS（最大段大小）或者窗口比例值<br><code>length 372</code> 代表数据包有效载荷字节长度</p>
-<blockquote>
-<p>flag描述<br>S SYN Connection Start<br>F FIN Connection Finish<br>P PUSH Data Push<br>. ACK Acknowledment</p>
+<ol start="7">
+<li>磁盘磁头<br>  利用特殊材料的电阻值会随磁场变化的原来来读写盘片数据、将硬盘盘片上的磁信号转化为电信号向外传输</li>
+</ol>
 </blockquote>
 
       
@@ -829,175 +907,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" class="post-title-link" itemprop="url">Linux内核学习---1</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E5%86%85%E6%A0%B8/" itemprop="url" rel="index"><span itemprop="name">Linux内核</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" class="post-meta-item leancloud_visitors" data-flag-title="Linux内核学习---1" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="开机加电-gt-main-函数执行"><a href="#开机加电-gt-main-函数执行" class="headerlink" title="开机加电 -&gt; main 函数执行"></a>开机加电 -&gt; main 函数执行</h4><blockquote>
-<p>分3步完成、实现从启动盘加载操作系统、完成 main 函数加载所需要的准备工作</p>
-</blockquote>
-<h5 id="启动BIOS、完成实模式下的中断向量表和中断服务程序"><a href="#启动BIOS、完成实模式下的中断向量表和中断服务程序" class="headerlink" title="启动BIOS、完成实模式下的中断向量表和中断服务程序"></a>启动BIOS、完成实模式下的中断向量表和中断服务程序</h5><p>Q: RAM ？<br>A: Random Access Memory. 随机存取存储器、eg. 内存条<br>   特点是 在加电状态下、可随意读写、断电消失</p>
-<p>Q: 加电瞬间、RAM中无任何程序、谁来完成 操作系统从软盘的加载 ？<br>A: BIOS</p>
-<p>Q: 为什么必须把操作系统从软盘加载到RAM ？<br>A: CPU的逻辑电路被设计为只能从内存中运行、无法直接从软盘运行</p>
-<p>Q: 为什么CPU的逻辑电路被设计为只能从内存运行 ？<br>A: … 暂未清楚</p>
-<p>Q: BIOS本身是如何启动的 ？<br>A: 固定地址: 0xFFFF0、<br>   CPU逻辑上被设计为、在加电的瞬间、强行将 CS设为 0xF000, IP 设为 0xFFF0<br>   这样、CS:IP 就指向 0xFFFF0(BIOS程序的入口地址、BIOS程序就开始运行)</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bc3706ad36a398b8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BIOS.jpg"></p>
-<h5 id="从启动盘加载操作系统到内存、加载操作系统的工作就是利用-中断服务程序来完成的"><a href="#从启动盘加载操作系统到内存、加载操作系统的工作就是利用-中断服务程序来完成的" class="headerlink" title="从启动盘加载操作系统到内存、加载操作系统的工作就是利用 中断服务程序来完成的"></a>从启动盘加载操作系统到内存、加载操作系统的工作就是利用 中断服务程序来完成的</h5><p>开始加载操作系统….</p>
-<blockquote>
-<p>对Linux 0.11而言、是分3步、<br>  1: 有BIOS中断 0x19 将第一扇区bootsect的内容加载到内存<br>  2: 在bootsect的引导下、将后边的4个扇区和240个扇区的内容依次加载到内存中</p>
-</blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-8467ab9c24c4efbc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BIOS程序加载.jpg"></p>
-<p>Q: 操作系统如何加载 ？<br>A: BIOS代码执行完毕、硬件完成开机自检、会和BIOS联手、让CPU收到 int 0x19中断、CPU在中断向量表中找到中断程序的位置(0x0E6F2)<br>   即: 启动记载服务程序的入口地址、<br>   so. in 0x19中断程序的作用就是把软盘第一扇区的代码512b加载到内存指定位置(BIOS设计、与操作系统无关) - 内存(0x07C00)处<br>   第一扇区的代码作用就是将软盘中的操作系统程序陆续加载到内存、所以称为引导程序(bootsect)<br>   第一扇区的载入、标记着操作系统代码要开始发挥作用<br><img src="https://upload-images.jianshu.io/upload_images/14027542-482d2aaafa61ffa8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="响应int0x19中断.jpg"></p>
-<h5 id="操作系统的内存规划"><a href="#操作系统的内存规划" class="headerlink" title="操作系统的内存规划"></a>操作系统的内存规划</h5><p>实模式下最大的寻址为1MB</p>
-<pre><code>//代码路径：boot/bootsect.s  
-    …  
-.globl begtext, begdata, begbss, endtext, enddata, endbss  
-.text  
-begtext:  
-.data  
-begdata:  
-.bss  
-begbss:  
-.text  
-
-SETUPLEN= 4    ! nr of setup-sectors  
-BOOTSEG = 0x07c0    ! original address of boot-sector  
-INITSEG = 0x9000    ! we move boot here-out of the way  
-SETUPSEG= 0x9020    ! setup starts here  
-SYSSEG  = 0x1000    ! system loaded at 0x10000 (65536).  
-ENDSEG  = SYSSEG + SYSSIZE  ! where to stop loading  
-
-! ROOT_DEV:0x000 - same type of floppy as boot.  
-!  0x301 - first partition on first drive etc  
-ROOT_DEV= 0x306 
-… 
-![实模式下的内存使用规划.jpg](https://upload-images.jianshu.io/upload_images/14027542-2fd3e1e6ef913630.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre><p><code>SETUPLEN</code> -&gt; <code>SETUPSEG 0x9020</code> (被加载到的位置)<br><code>BOOTSEG(0x07c0)</code>(BIOS加载的位置) -&gt; <code>INITSEG 0x9000</code>(被移动到的新的位置)<br><code>SYSSEG 0x1000</code> 内核被加载的位置<br><code>ENDSEG</code> 内核末尾位置<br><code>ROOT_DEV 0x306</code> 根文件设备号<br><strong>注意:</strong><br>CPU的段寄存器（CS）指向 <code>0x07C0</code> -&gt; 原来 BOOTSEG 所在的位置</p>
-<h5 id="为执行32位的main函数做过度工作"><a href="#为执行32位的main函数做过度工作" class="headerlink" title="为执行32位的main函数做过度工作"></a>为执行32位的main函数做过度工作</h5><h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><blockquote>
-<ol>
-<li>实模式: 兼容80286之后80x86的兼容CPU的模式、特性是一个20位的存储器地址空间(2^20 1MB的存储器空间可被寻址)<br>可以直接软件访问BIOS及周边硬件、无硬件支持的分页机制和实时多任务概念<br>80286 开始、所有的CPU开机都是 实模式 、之前的CPU只有一种模式、类似 实模式</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="2">
-<li>CPU: 计算机所有的计算操作都由它完成、可以理解为 一个有输入和输出功能的集成电路</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="3">
-<li>CPU寻址: 使用CS、IP两个寄存器<br>  CS: Code Segment Register 即代码段寄存器、指向CPU当前执行代码在内存中的位置(代码段的起始位置)、<br>  实模式为绝对地址、16位、保护模式为线性地址 需要结合GDT才能找到段基址<br>  IP/EIP: Intruction Pointer. 指令寄存器、存在于CPU中、记录将要执行的代码在代码段中的偏移地址<br>  实模式为绝对地址、指令指针为16位、即IP、保护模式为32位、即EIP、<br>  CS:IP 寻址规则: 段基址*16 + 偏移地址</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="4">
-<li>中断向量表建立<br>  BIOS在最开始的位置(0x00000)用1k内存(0x00000 - 0x003FF)构建中断向量表、接下来256k(0x00400～0x004FF)构建BIOS数据区<br>  大概57k后的位置(0x0E05B)加载了大概8k左右的与中断向量表相关的中断服务程序 </li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="5">
-<li>中断向量表<br>  记录所有中断向量对应中断程序的位置、实模式中断机制实现的重要部分</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="6">
-<li>中断服务程序<br>  通过中断向量表的索引对中断程序进行响应、是一些具有特殊功能的代码</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="7">
-<li>磁盘磁头<br>  利用特殊材料的电阻值会随磁场变化的原来来读写盘片数据、将硬盘盘片上的磁信号转化为电信号向外传输</li>
-</ol>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E7%B4%A2%E5%BC%95%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1240,121 +1149,6 @@ ROOT_DEV= 0x306
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">MQ的消息模型和事务</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" class="post-meta-item leancloud_visitors" data-flag-title="MQ的消息模型和事务" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="消息队列架构演进"><a href="#消息队列架构演进" class="headerlink" title="消息队列架构演进"></a>消息队列架构演进</h4><p><strong>早期mq就是按照队列的数据结构来设计的</strong><br><img src="https://upload-images.jianshu.io/upload_images/14027542-7491db81233d4005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="早期MQ架构"></p>
-<p>若有多个生产者往同一队列发送消息、这个队列可以消费到生产者消息的集合、顺序为生产者发送消息的自然顺序<br>若多个消费者消费一个队列、这些消费者是竞争关系、只消费到队列的一部分数据<br>需要每个消费者消费全量消息时、只能创建多个Queue、让生产者发送多份数据、并且生产者必须知道有多少消费者、违背了消息队列解耦的初衷</p>
-<p><strong>演进架构</strong><br>发布 - 订阅模型(Publish-Subscribe Pattern)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-83faa4bba38ebc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发布-订阅模型"></p>
-<p>在P-S架构中、msg发送方称为发布者Publisher、接收方称为订阅者Subscriber、服务端存放消息的容器称为主题Topic、消费之前必须先订阅主题</p>
-<p>其实和队列模式没有本质区别、最大的区别在于: 一份数据能不能被消费多次</p>
-<h4 id="RabbitMQ的消息模型"><a href="#RabbitMQ的消息模型" class="headerlink" title="RabbitMQ的消息模型"></a>RabbitMQ的消息模型</h4><p>RabbitMQ是少数坚持使用队列模型的产品之一、它如何解决多个消费者的问题呢 ？<br>Exchange: 位于生产者和队列之间、生产者不关心将消息发送给哪个队列、而是将消息发送给Exchange、由Exchange上配置的策略来决定将消息投递到哪些队列中<br><img src="https://upload-images.jianshu.io/upload_images/14027542-9c144b17627ba919.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RabbitMQ消息模型"></p>
-<p>同一份消息需要被多个消费者消费时、需要配置exchange将消息发送到多个队列、每个队列中存放一份完整的消息数据、</p>
-<h4 id="RocketMQ的消息模型"><a href="#RocketMQ的消息模型" class="headerlink" title="RocketMQ的消息模型"></a>RocketMQ的消息模型</h4><p>RocketMQ使用的是标准的发布-订阅模型、</p>
-<p>普通的MQ都是使用的请求-确认机制、确保消息不会再传递过程中由于网络故障或服务器故障丢失. 在生产端、生产者将消息发给服务端Broker、Broker在收到消息并将消息写入主题或者队列后、会给生产者发送确认的响应、若生产者未收到服务端的确认或者收到失败的响应、会重新发消息; 在消费端、消费者收到消息并完成消费逻辑后也会给服务端发送消费成功的确认、服务端只有在收到消费确认后、才会认为一条消息被成功消费、否则会重发消息</p>
-<p>为了保证消息有序性、在消息被成功消费前、下一条消息不能被消费、否则就出现了消息空洞、违背了有序性的原则、所以 MQ增加了队列的概念、只在队列层面保证消息的有序性、主题层面不保证</p>
-<p>消息会被不同消费组消费、消费完的消息不会立即删除、MQ为每个队列维护了一个消费位置Consumer Offset、每成功消费一条消息、位置就+1</p>
-<h4 id="Kafka的消息模型"><a href="#Kafka的消息模型" class="headerlink" title="Kafka的消息模型"></a>Kafka的消息模型</h4><p>Kafka的消费模型和RocketMQ的模型是完全一样的、唯一的区别是 在Kafka中队列这个概念的名称不同、Kafka对应的概念叫 <code>分区</code> - <code>Partition</code> </p>
-<p>注意:<br>RocketMQ 和 Kafka 的业务模型一样、不代表实现一致、其实实现是完全不同的、就像MySQL和hbase存放数据的单元都是表、实现完全不同、MySQL使用B+树来存储、HBase 使用KV结构存储</p>
-<h4 id="MQ的事务实现"><a href="#MQ的事务实现" class="headerlink" title="MQ的事务实现"></a>MQ的事务实现</h4><p>Kafka 和 RocketMQ 都提供了事务的实现<br>在消息队列上开启一个事务、给服务器发送一个<code>半消息</code>状态、它包含完整的消息内容、但对于消费者不可见、本地事务提交后再提交消息事务<br>但: 如果提交消息事务失败怎么办 ？</p>
-<ol>
-<li>kafka的方案简单粗暴、直接抛异常、用户自行处理</li>
-<li>RocketMQ提供了事务反查机制、若Broker未收到提交或者回滚的请求、Broker会定期去Producer上反查本地事务对应状态、来决定事务提交还是回滚<br><img src="https://upload-images.jianshu.io/upload_images/14027542-40c0cd530d78849e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ol>
-<h4 id="消息可靠性保证"><a href="#消息可靠性保证" class="headerlink" title="消息可靠性保证"></a>消息可靠性保证</h4><p><strong>检测消息丢失</strong><br>1.若基础设施比较完善、一般会有分布式链路追踪系统、可以追踪消息流<br>2.利用消息有序性校验: 给每个发出的消息附加一个连续的序号、若序号不连续、就可以判定为消息丢失<br>注意: 多个producer 和 多个consumer的情况、需要判定每个分区的序列有效性<br><strong>如何保证</strong><br>1.生产阶段、根据不同mq的确认机制、进行对应的处理 eg: kafka -&gt; 捕获异常<br>2.存储阶段、正常broker运行的时候、不会出现消息丢失、但若broker出现了故障或者宕机、是可能丢消息的. 单节点broker可以配置broker在收到消息后立即落盘、broker是集群的时候、可以配置至少2个节点收到消息再确认<br>3.消费阶段、同生产阶段、消费端<em>业务逻辑</em>成功后再回传确认<br>有可能消息再网络传输过程中发生错误、发送方收不到确认就会重发消息、所以Broker 和 Consumer 都可能会收到重复消息、需要注意接口的幂等性</p>
-<p><strong>业务变相实现</strong><br>1.利用数据库的唯一约束实现幂等、<br>2.为更新的数据设置前置条件、满足某种条件才更新<br>3.记录并检查操作(需要考虑唯一ID的生成和多步操作的原子性)</p>
-<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>幂等方案、不止是可以解决消息重复的问题、也同样适用于其它场景.eg: 将HTTP服务设计成幂等的、解决前端或者APP重复提交表单数据问题、也可以将一个微服务设计成幂等的、解决RPC框架自动重试导致的重复调用问题</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_RocketMQ%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1468,6 +1262,121 @@ ROOT_DEV= 0x306
 
 <p>疑问</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. broker收到消息会先写commitlog、为什么producer发消息的时候会选择一个Queue去发 ？而不是broker ？再由broker分发到Queue ？</span><br><span class="line"></span><br><span class="line">2. 写commitlog的时候、同步刷盘指针和异步刷盘指针写的是同一个commitlog文件、如何保证消息的有序存储？</span><br><span class="line"></span><br><span class="line">3. 文件清除何时进行 ？</span><br><span class="line"></span><br><span class="line">4. 消息队列如何进行负载均衡？</span><br><span class="line"></span><br><span class="line">5. 消息发送如何保证高可用</span><br><span class="line"></span><br><span class="line">6. 批量消息如何保持一致性</span><br><span class="line"></span><br><span class="line">7. broker失效后120s才能将该broker从路由表中移除、若生产者获取到的路由信息包含已宕机的broker如何处理？</span><br><span class="line"></span><br><span class="line">8.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">MQ的消息模型和事务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" class="post-meta-item leancloud_visitors" data-flag-title="MQ的消息模型和事务" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="消息队列架构演进"><a href="#消息队列架构演进" class="headerlink" title="消息队列架构演进"></a>消息队列架构演进</h4><p><strong>早期mq就是按照队列的数据结构来设计的</strong><br><img src="https://upload-images.jianshu.io/upload_images/14027542-7491db81233d4005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="早期MQ架构"></p>
+<p>若有多个生产者往同一队列发送消息、这个队列可以消费到生产者消息的集合、顺序为生产者发送消息的自然顺序<br>若多个消费者消费一个队列、这些消费者是竞争关系、只消费到队列的一部分数据<br>需要每个消费者消费全量消息时、只能创建多个Queue、让生产者发送多份数据、并且生产者必须知道有多少消费者、违背了消息队列解耦的初衷</p>
+<p><strong>演进架构</strong><br>发布 - 订阅模型(Publish-Subscribe Pattern)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-83faa4bba38ebc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发布-订阅模型"></p>
+<p>在P-S架构中、msg发送方称为发布者Publisher、接收方称为订阅者Subscriber、服务端存放消息的容器称为主题Topic、消费之前必须先订阅主题</p>
+<p>其实和队列模式没有本质区别、最大的区别在于: 一份数据能不能被消费多次</p>
+<h4 id="RabbitMQ的消息模型"><a href="#RabbitMQ的消息模型" class="headerlink" title="RabbitMQ的消息模型"></a>RabbitMQ的消息模型</h4><p>RabbitMQ是少数坚持使用队列模型的产品之一、它如何解决多个消费者的问题呢 ？<br>Exchange: 位于生产者和队列之间、生产者不关心将消息发送给哪个队列、而是将消息发送给Exchange、由Exchange上配置的策略来决定将消息投递到哪些队列中<br><img src="https://upload-images.jianshu.io/upload_images/14027542-9c144b17627ba919.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RabbitMQ消息模型"></p>
+<p>同一份消息需要被多个消费者消费时、需要配置exchange将消息发送到多个队列、每个队列中存放一份完整的消息数据、</p>
+<h4 id="RocketMQ的消息模型"><a href="#RocketMQ的消息模型" class="headerlink" title="RocketMQ的消息模型"></a>RocketMQ的消息模型</h4><p>RocketMQ使用的是标准的发布-订阅模型、</p>
+<p>普通的MQ都是使用的请求-确认机制、确保消息不会再传递过程中由于网络故障或服务器故障丢失. 在生产端、生产者将消息发给服务端Broker、Broker在收到消息并将消息写入主题或者队列后、会给生产者发送确认的响应、若生产者未收到服务端的确认或者收到失败的响应、会重新发消息; 在消费端、消费者收到消息并完成消费逻辑后也会给服务端发送消费成功的确认、服务端只有在收到消费确认后、才会认为一条消息被成功消费、否则会重发消息</p>
+<p>为了保证消息有序性、在消息被成功消费前、下一条消息不能被消费、否则就出现了消息空洞、违背了有序性的原则、所以 MQ增加了队列的概念、只在队列层面保证消息的有序性、主题层面不保证</p>
+<p>消息会被不同消费组消费、消费完的消息不会立即删除、MQ为每个队列维护了一个消费位置Consumer Offset、每成功消费一条消息、位置就+1</p>
+<h4 id="Kafka的消息模型"><a href="#Kafka的消息模型" class="headerlink" title="Kafka的消息模型"></a>Kafka的消息模型</h4><p>Kafka的消费模型和RocketMQ的模型是完全一样的、唯一的区别是 在Kafka中队列这个概念的名称不同、Kafka对应的概念叫 <code>分区</code> - <code>Partition</code> </p>
+<p>注意:<br>RocketMQ 和 Kafka 的业务模型一样、不代表实现一致、其实实现是完全不同的、就像MySQL和hbase存放数据的单元都是表、实现完全不同、MySQL使用B+树来存储、HBase 使用KV结构存储</p>
+<h4 id="MQ的事务实现"><a href="#MQ的事务实现" class="headerlink" title="MQ的事务实现"></a>MQ的事务实现</h4><p>Kafka 和 RocketMQ 都提供了事务的实现<br>在消息队列上开启一个事务、给服务器发送一个<code>半消息</code>状态、它包含完整的消息内容、但对于消费者不可见、本地事务提交后再提交消息事务<br>但: 如果提交消息事务失败怎么办 ？</p>
+<ol>
+<li>kafka的方案简单粗暴、直接抛异常、用户自行处理</li>
+<li>RocketMQ提供了事务反查机制、若Broker未收到提交或者回滚的请求、Broker会定期去Producer上反查本地事务对应状态、来决定事务提交还是回滚<br><img src="https://upload-images.jianshu.io/upload_images/14027542-40c0cd530d78849e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ol>
+<h4 id="消息可靠性保证"><a href="#消息可靠性保证" class="headerlink" title="消息可靠性保证"></a>消息可靠性保证</h4><p><strong>检测消息丢失</strong><br>1.若基础设施比较完善、一般会有分布式链路追踪系统、可以追踪消息流<br>2.利用消息有序性校验: 给每个发出的消息附加一个连续的序号、若序号不连续、就可以判定为消息丢失<br>注意: 多个producer 和 多个consumer的情况、需要判定每个分区的序列有效性<br><strong>如何保证</strong><br>1.生产阶段、根据不同mq的确认机制、进行对应的处理 eg: kafka -&gt; 捕获异常<br>2.存储阶段、正常broker运行的时候、不会出现消息丢失、但若broker出现了故障或者宕机、是可能丢消息的. 单节点broker可以配置broker在收到消息后立即落盘、broker是集群的时候、可以配置至少2个节点收到消息再确认<br>3.消费阶段、同生产阶段、消费端<em>业务逻辑</em>成功后再回传确认<br>有可能消息再网络传输过程中发生错误、发送方收不到确认就会重发消息、所以Broker 和 Consumer 都可能会收到重复消息、需要注意接口的幂等性</p>
+<p><strong>业务变相实现</strong><br>1.利用数据库的唯一约束实现幂等、<br>2.为更新的数据设置前置条件、满足某种条件才更新<br>3.记录并检查操作(需要考虑唯一ID的生成和多步操作的原子性)</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>幂等方案、不止是可以解决消息重复的问题、也同样适用于其它场景.eg: 将HTTP服务设计成幂等的、解决前端或者APP重复提交表单数据问题、也可以将一个微服务设计成幂等的、解决RPC框架自动重试导致的重复调用问题</p>
 
       
     </div>
