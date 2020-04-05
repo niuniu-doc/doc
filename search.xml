@@ -339,6 +339,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Java元注解</title>
+    <url>/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<p>Java中元注解有4个：<code>@Retention</code>, <code>@Target</code>, <code>@Document</code>, <code>@Inherited</code></p>
+<p><code>@Retention</code>注解的保留位置：<br><code>@Retention(RetentionPolicy.SOURCE)</code> 注解仅存在于源码中、在class字节码文件中不存在<br><code>@Retention(RetentionPolicy.CLASS)</code> 默认保留策略、注解会在class文件中存在、但、运行时无法获得<br><code>@Retention(RetentionPolicy.RUNTIME)</code> 注解会在class文件中存在、并且可以通过反射得到</p>
+<p><code>@Target</code> 注解的作用目标<br><code>@Target(ElementType.TYPE)</code> 接口、类、枚举、注解<br><code>@Target(ElementType.FIELD)</code> 字段、枚举的常量<br><code>@Target(ElementType.METHOD)</code> 方法<br><code>@Target(ElementType.PARAMETER)</code> 方法参数<br><code>@Target(ElementType.CONSTRUCTOR)</code> 构造函数<br><code>@Target(ElementType.LOCAL_VARIABLE)</code> 局部变量<br><code>@Target(ElementType.ANNTATION_TYPE)</code> 注解<br><code>@Target(ElementType.PACKAGE)</code> 包</p>
+<p><code>@Document</code> 说明该注解将会被包含在javadoc中</p>
+<p><code>@Inherited</code> 说明子类可以继承父类中的该注解</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hystrix-MDC跟踪</title>
     <url>/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/</url>
     <content><![CDATA[<p>一、实现HystrixConcurrencyStrategy</p>
@@ -372,22 +388,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java元注解</title>
-    <url>/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<p>Java中元注解有4个：<code>@Retention</code>, <code>@Target</code>, <code>@Document</code>, <code>@Inherited</code></p>
-<p><code>@Retention</code>注解的保留位置：<br><code>@Retention(RetentionPolicy.SOURCE)</code> 注解仅存在于源码中、在class字节码文件中不存在<br><code>@Retention(RetentionPolicy.CLASS)</code> 默认保留策略、注解会在class文件中存在、但、运行时无法获得<br><code>@Retention(RetentionPolicy.RUNTIME)</code> 注解会在class文件中存在、并且可以通过反射得到</p>
-<p><code>@Target</code> 注解的作用目标<br><code>@Target(ElementType.TYPE)</code> 接口、类、枚举、注解<br><code>@Target(ElementType.FIELD)</code> 字段、枚举的常量<br><code>@Target(ElementType.METHOD)</code> 方法<br><code>@Target(ElementType.PARAMETER)</code> 方法参数<br><code>@Target(ElementType.CONSTRUCTOR)</code> 构造函数<br><code>@Target(ElementType.LOCAL_VARIABLE)</code> 局部变量<br><code>@Target(ElementType.ANNTATION_TYPE)</code> 注解<br><code>@Target(ElementType.PACKAGE)</code> 包</p>
-<p><code>@Document</code> 说明该注解将会被包含在javadoc中</p>
-<p><code>@Inherited</code> 说明子类可以继承父类中的该注解</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java多线程实现基础(一)</title>
     <url>/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/</url>
     <content><![CDATA[<h4 id="CPU-的术语介绍"><a href="#CPU-的术语介绍" class="headerlink" title="CPU 的术语介绍"></a>CPU 的术语介绍</h4><p><code>内存屏障</code>: <code>memory barriers</code> 一组处理器指令、用于实现对内存操作的顺序限制</p>
@@ -403,22 +403,6 @@
 <h4 id="Lock前缀的指令"><a href="#Lock前缀的指令" class="headerlink" title="Lock前缀的指令"></a>Lock前缀的指令</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">lock 前缀的指令、在多核处理器下会引发两件事:</span><br><span class="line">1. 将当期处理器的缓存行数据写回内存</span><br><span class="line">2. 这个写回内存操作会使在其它CPU里缓存了该地址的数据无效</span><br></pre></td></tr></table></figure>
 
 <h4 id="volatile的实现"><a href="#volatile的实现" class="headerlink" title="volatile的实现"></a>volatile的实现</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">为了提高速度、CPU不直接和内存通信、而是先将系统内存的数据加载到内存缓存后再操作</span><br><span class="line">但: 操作完全不知道何时会被写回内存</span><br><span class="line"></span><br><span class="line">volatile声明的变量进行读写、JVM会向处理器发送一条Lock前缀的指令、精讲变量所在的</span><br><span class="line">缓存行数据写回到内存</span><br><span class="line"></span><br><span class="line">在多核处理器下、实现了缓存一致性协议、每个处理器通过嗅探在总线上传播的数据来检查</span><br><span class="line">自己的缓存是否已过期、当处理器发现自己缓存行对应的内存地址呗修改、会将当期处理器的</span><br><span class="line">缓存行状态设为无效、重新从系统内存读取</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java多线程实现基础(二)</title>
-    <url>/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/</url>
-    <content><![CDATA[<h4 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h4><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 线程通信</span><br><span class="line">   线程之间以何种方式进行消息传递</span><br><span class="line">   共享内存 &amp; 消息传递</span><br><span class="line">   </span><br><span class="line">2. 线程同步</span><br><span class="line">   程序间用于控制不同线程间操作发生相对顺序的机制</span><br><span class="line">   </span><br><span class="line">   java是共享内存模型】采用的是隐式通信、显式修改</span><br><span class="line">   </span><br><span class="line">   jvm定义了线程和主内存(Main Memory)之间的关系:</span><br><span class="line">   1) 线程之间的共享变量存储在主内存中</span><br><span class="line">   2) 线程私有变量存储在私有本地内存 Local Memory中、</span><br><span class="line">      本地内存是jvm的一个抽象概念、并非真实存在、涵盖缓存、缓冲区、寄存器及其它硬件及编译器优化</span><br><span class="line">   Java同步原语(synchronize volatile  final)</span><br></pre></td></tr></table></figure>
-
-<h3 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 编译器重排</span><br><span class="line">   在不改变单线程语义的条件下、编译器可以重排指令的执行顺序</span><br><span class="line">2. 指令重排 </span><br><span class="line">   现代cpu采用了指令级并行技术、可以同时执行多条指令、若无数据依赖、</span><br><span class="line">   处理器可以改变机器指令的执行顺序</span><br><span class="line">3. 内存系统的重排</span><br><span class="line">   由于处理器采用缓存和读写缓冲区、使得加载和存储操作看上去是乱序的、</span><br><span class="line">   可能在乱序执行</span><br></pre></td></tr></table></figure>
-
-<h4 id="jvm-指令执行"><a href="#jvm-指令执行" class="headerlink" title="jvm 指令执行"></a>jvm 指令执行</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">未使用同步的程序在jvm中的执行基本无序、</span><br><span class="line">1. jvm不保证单线程内的操作会按照程序代码顺序执行、临界区指令重排</span><br><span class="line">2. jvm不保证所有线程看到的执行顺序一致</span><br><span class="line">3. jvm不保证64位的long、double类型写操作具有原子性</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -471,6 +455,22 @@
 
 
 <h4 id="note"><a href="#note" class="headerlink" title="note"></a>note</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 核心线程不会预先创建，只有当有任务时才会创建</span><br><span class="line">2. 核心线程不会因为空闲而被终止，keepAliveTime参数不适用于它</span><br><span class="line">3. 核心线程干预</span><br><span class="line">   1) public int prestartAllCoreThreads() 预先创建所有的核心线程</span><br><span class="line">   2) public boolean prestartCoreThread() 创建一个核心线程，如果所有核心线程都已创建，返回false</span><br><span class="line">   3) public void allowCoreThreadTimeOut(boolean value) 如果参数为true，则keepAliveTime参数也适用于核心线程</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java多线程实现基础(二)</title>
+    <url>/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/</url>
+    <content><![CDATA[<h4 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h4><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 线程通信</span><br><span class="line">   线程之间以何种方式进行消息传递</span><br><span class="line">   共享内存 &amp; 消息传递</span><br><span class="line">   </span><br><span class="line">2. 线程同步</span><br><span class="line">   程序间用于控制不同线程间操作发生相对顺序的机制</span><br><span class="line">   </span><br><span class="line">   java是共享内存模型】采用的是隐式通信、显式修改</span><br><span class="line">   </span><br><span class="line">   jvm定义了线程和主内存(Main Memory)之间的关系:</span><br><span class="line">   1) 线程之间的共享变量存储在主内存中</span><br><span class="line">   2) 线程私有变量存储在私有本地内存 Local Memory中、</span><br><span class="line">      本地内存是jvm的一个抽象概念、并非真实存在、涵盖缓存、缓冲区、寄存器及其它硬件及编译器优化</span><br><span class="line">   Java同步原语(synchronize volatile  final)</span><br></pre></td></tr></table></figure>
+
+<h3 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 编译器重排</span><br><span class="line">   在不改变单线程语义的条件下、编译器可以重排指令的执行顺序</span><br><span class="line">2. 指令重排 </span><br><span class="line">   现代cpu采用了指令级并行技术、可以同时执行多条指令、若无数据依赖、</span><br><span class="line">   处理器可以改变机器指令的执行顺序</span><br><span class="line">3. 内存系统的重排</span><br><span class="line">   由于处理器采用缓存和读写缓冲区、使得加载和存储操作看上去是乱序的、</span><br><span class="line">   可能在乱序执行</span><br></pre></td></tr></table></figure>
+
+<h4 id="jvm-指令执行"><a href="#jvm-指令执行" class="headerlink" title="jvm 指令执行"></a>jvm 指令执行</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">未使用同步的程序在jvm中的执行基本无序、</span><br><span class="line">1. jvm不保证单线程内的操作会按照程序代码顺序执行、临界区指令重排</span><br><span class="line">2. jvm不保证所有线程看到的执行顺序一致</span><br><span class="line">3. jvm不保证64位的long、double类型写操作具有原子性</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -599,25 +599,6 @@
 <p><code>@RequestMapping</code> 配置url和方法之间的映射关系<br><code>@Conditional</code> 条件注解<br><code>@ResponseBody</code> 将返回值放在response返回体内、而不是返回一个页面<br><code>@RequestBody</code>允许将request参数放在request体中、而不是放在连接地址后边<br><code>@PathVariable</code>用来接收路径参数</p>
 <p>组合注解<br><code>@WiselyConfiguration</code> 代替 <code>@Configuration</code> + <code>@ComponentScan</code><br><code>@RestController</code> 代替 <code>@Controller</code> + <code>@ResponseBody</code><br><code>@SpringBootApplication</code> 组合了<br><code>@Configuration</code>+<code>@EnableAutoConfiguration</code>+<code>@ComponentScan</code></p>
 <p><code>@ConditionalOnBean</code>当容器里有指定的bean的条件下<br><code>@ConditionalOnClass</code> 当类路径下有指定的类的条件下<br><code>@ConditionalOnExpression</code>基于SpEL做判断<br><code>@ConditionalOnJava</code> 基于jvm版本做判断<br><code>@ConditionalOnMissingBean</code> 当容器中无指定bean的条件下<br><code>@ConditionalOnMissingClass</code> 类路径下无指定class的情况下<br><code>@ConditionalOnNotWebApplication</code> 当前项目不是web项目的情况下<br><code>@ConditionalOnWebApplication</code> 当前项目是web项目的情况下<br><code>@ConditionalOnProperty</code> 指定的属性是否有指定值<br><code>@ConditionalOnResource</code> 类路径是否有指定值</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java秒级定时任务的实现</title>
-    <url>/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<p><code>@Scheduled</code> 注解、简单轻量级task配置</p>
-<p><code>@Scheduled</code> 使用：</p>
-<ul>
-<li><code>@Scheduled(cron = &quot;0 5 * * * * ?&quot;)</code> 10分钟执行1次</li>
-<li><code>@Scheduled(fixedRate = 2000)</code> 每2s执行1次、不用等待上次执行完成</li>
-<li><code>@Scheduled(fixedDelay = 2000)</code> 等待上次请求结束后、delay 2s 执行下次任务</li>
-<li><code>@Scheduled(fixedDelay = 2000, initDelay = 2000)</code> 项目启动成功后、延迟2s执行任务 </li>
-</ul>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -1178,6 +1159,25 @@ Humongous Objects的分配和回收:
       </tags>
   </entry>
   <entry>
+    <title>java秒级定时任务的实现</title>
+    <url>/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p><code>@Scheduled</code> 注解、简单轻量级task配置</p>
+<p><code>@Scheduled</code> 使用：</p>
+<ul>
+<li><code>@Scheduled(cron = &quot;0 5 * * * * ?&quot;)</code> 10分钟执行1次</li>
+<li><code>@Scheduled(fixedRate = 2000)</code> 每2s执行1次、不用等待上次执行完成</li>
+<li><code>@Scheduled(fixedDelay = 2000)</code> 等待上次请求结束后、delay 2s 执行下次任务</li>
+<li><code>@Scheduled(fixedDelay = 2000, initDelay = 2000)</code> 项目启动成功后、延迟2s执行任务 </li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>垃圾回收---小疑问</title>
     <url>/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/</url>
     <content><![CDATA[<p>看懂了gc日志、可能心中还有小小的疑惑？</p>
@@ -1219,18 +1219,6 @@ Humongous Objects的分配和回收:
       </tags>
   </entry>
   <entry>
-    <title>README</title>
-    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_README/</url>
-    <content><![CDATA[<h4 id="let’s-start"><a href="#let’s-start" class="headerlink" title="let’s start"></a>let’s start</h4><p>知识的海洋是浩瀚的、有太多的好奇与未知。。。。<br>一直想要探索linux系统到底是如何运行而不得其法、偶然间遇到极课时间的一个linux系统优化的专栏、还不错、<br>写一下自己的收获吧、算是由表及里也好~</p>
-]]></content>
-      <categories>
-        <category>Linux使用</category>
-      </categories>
-      <tags>
-        <tag>Linux使用</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux性能监控---pidstat</title>
     <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7---pidstat/</url>
     <content><![CDATA[<ol>
@@ -1241,6 +1229,18 @@ Humongous Objects的分配和回收:
 <li><p>内存使用监控<br>pidstat -t {pid}  1 3 -m -t 查看线程内存使用</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Linux使用</category>
+      </categories>
+      <tags>
+        <tag>Linux使用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>README</title>
+    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_README/</url>
+    <content><![CDATA[<h4 id="let’s-start"><a href="#let’s-start" class="headerlink" title="let’s start"></a>let’s start</h4><p>知识的海洋是浩瀚的、有太多的好奇与未知。。。。<br>一直想要探索linux系统到底是如何运行而不得其法、偶然间遇到极课时间的一个linux系统优化的专栏、还不错、<br>写一下自己的收获吧、算是由表及里也好~</p>
 ]]></content>
       <categories>
         <category>Linux使用</category>
@@ -1281,6 +1281,28 @@ Humongous Objects的分配和回收:
       </tags>
   </entry>
   <entry>
+    <title>如何了解自己的系统运行状态</title>
+    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/</url>
+    <content><![CDATA[<h4 id="平均负载-loadavg"><a href="#平均负载-loadavg" class="headerlink" title="平均负载 loadavg"></a>平均负载 loadavg</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">当系统变慢时、我们想到的很可能是 uptime 或者 top</span><br><span class="line">它每一列的含义是什么 ？</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7a4f7de3de8dc6be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime"></p>
+<p>so. mark<br><code>10:13:59</code> 是当前时间<br><code>up 303 days, 22:27</code> 是系统允许时间<br> <code>1 user</code> 是正在登录用户数<br>load average: 4.61, 4.37, 3.73 这三列呢 ？<br>依次是 过去<code>1min</code>、<code>5min</code>、<code>15min</code>的平均负载</p>
+<h4 id="什么是平均负载-？？？"><a href="#什么是平均负载-？？？" class="headerlink" title="什么是平均负载 ？？？"></a>什么是平均负载 ？？？</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">知道了uptime是如何看的、那么平均负载多少算是合适 ？它又是代表什么含义呢 ？</span><br><span class="line"></span><br><span class="line">简单来说平均负载就是单位时间内、系统处于可运行状态和不可中断状态的平均进程数、也就是平均活跃进程数，</span><br><span class="line">之前、我以为是cpu的使用率来着的~~~xxxxx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可运行状态的进程：指正在使用CPU或者等待CPU的进程、ps看到的、处于R状态(Runnable&#x2F;Running)的进程</span><br><span class="line"></span><br><span class="line">不可中断进程：正处于内核关键流程中的进程、并且这些进程是不可打断的、eg. 等待硬件设备的io响应、也就是ps命令中的D状态(uninterrutible sleep)的进程</span><br><span class="line">不可中断状态其实是系统对进程包含和硬件设备的一种保护机制</span><br><span class="line"></span><br><span class="line">既然平均负载就是平均的活跃进程数、那么最理想的状态就是每个CPU上都刚好运行着一个进程(每个cpu充分利用、又不会过载)</span><br><span class="line"></span><br><span class="line">eg. loadavg为2、意味着什么呢 ？</span><br><span class="line">1) 假如系统有2个CPU、则cpu刚好都被占用</span><br><span class="line">2) 在4个CPU的系统上、意味着50%的CPU空闲</span><br><span class="line">3) 在只有1个CPU的系统上、则会有一半的进程竞争不到CPU</span><br><span class="line"></span><br><span class="line">最理想的状态是、刚好等于CPU的核心数</span><br><span class="line">那么如何查询系统有几个CPU ？？</span><br><span class="line">1) 使用top</span><br><span class="line">2) 从&#x2F;proc&#x2F;cpuinfo 获取</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4cf1dcfb4a79d551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cpuinfo.png"></p>
+<h4 id="知道了cpu的核数和衡量指标、如何分析负载趋势？"><a href="#知道了cpu的核数和衡量指标、如何分析负载趋势？" class="headerlink" title="知道了cpu的核数和衡量指标、如何分析负载趋势？"></a>知道了cpu的核数和衡量指标、如何分析负载趋势？</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 若1min、5min、15min的值基本相同或者相差不大、说明系统负载很平稳</span><br><span class="line">2. 若1min内的值远小于15min的值、说明最近1min的负载在减小、而过去15min则负载很高</span><br><span class="line">3. 反过来、若最近1imn的值远高于过去15min的负载、说明负载在明显升高、需要持续观察一下</span><br><span class="line"></span><br><span class="line">eg. 单核cpu的 loadavg为：1.73  0.60  7.98 </span><br><span class="line">说明过去1min有73%的超载、过去15min有698%的超载</span><br><span class="line">总体来看、负载在降低</span><br><span class="line"></span><br><span class="line">那么实际生产环境、负载达到多少的时候、我们应该开始关注呢 ？ 一般 超过70%就要持续观察下、看看系统负载的平均趋势</span><br></pre></td></tr></table></figure>
+
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 命令</span><br><span class="line">stress 压力测试工具</span><br><span class="line">mpstat 多核CPU性能分析工具、可实时查看每个CPU的平均指标</span><br><span class="line">pidstat 实时查看进程的cpu、内存、io及上下文切换等指标</span><br><span class="line">watch 监控进程</span><br><span class="line"></span><br><span class="line">2. 模拟cpu密集型(需要准备3个终端、每个终端执行一个命令)</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line"></span><br><span class="line">watch -d uptime (-d代表高亮显示变化的区域)</span><br><span class="line"></span><br><span class="line">mpstat -P ALL 5 (-p ALL代表监控所有CPU 5代表间隔5s输出1次)</span><br><span class="line"></span><br><span class="line">3. 模拟IO密集型</span><br><span class="line">stress -i 1 --timeout 600</span><br><span class="line"></span><br><span class="line">4. 大量进程的场景</span><br><span class="line">stress -c 8 --timeout 600</span><br><span class="line"></span><br><span class="line">附：安装stress</span><br><span class="line">sudo yum -y install epel-release</span><br><span class="line">sudo yum -y install stress</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e8ae343bc07ff1ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e6c92ece83479acc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-5b6eb08f6768da70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mpstat.png"></p>
+]]></content>
+      <categories>
+        <category>Linux使用</category>
+      </categories>
+      <tags>
+        <tag>Linux使用</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>lsof---一切皆文件</title>
     <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<blockquote>
@@ -1302,6 +1324,65 @@ Humongous Objects的分配和回收:
 <blockquote>
 <p>-a 列出打开文件存在的进程<br>-c&lt;进程名&gt;</p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>Linux使用</category>
+      </categories>
+      <tags>
+        <tag>Linux使用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用命令</title>
+    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p><code>cat /proc/cpuinfo | grep &#39;physical id&#39; |  sort| uniq| wc -l</code> 查看物理CPU的个数<br><code>cat /proc/cpuinfo| grep &quot;cpu cores&quot;| uniq</code> 查看每个物理CPU中cores的个数<br><code>cat /proc/cpuinfo| grep &quot;processor&quot;| wc -l</code> 查看逻辑CPU的个数</p>
+]]></content>
+      <categories>
+        <category>Linux使用</category>
+      </categories>
+      <tags>
+        <tag>Linux使用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>平均负载</title>
+    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</url>
+    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
+<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
+<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
+<blockquote>
+<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
+<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
+</blockquote>
+<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
+
+
+
+<p>CPU核数查看</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
+</blockquote>
+<p>平均负载与CPU使用率</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
+
+
+
+<p>案例分析</p>
+<p>一、CPU密集型进程</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
+<p>二、IO密集型进程</p>
+<p>查看方式同上</p>
 ]]></content>
       <categories>
         <category>Linux使用</category>
@@ -1449,84 +1530,87 @@ Humongous Objects的分配和回收:
       </tags>
   </entry>
   <entry>
-    <title>如何了解自己的系统运行状态</title>
-    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/</url>
-    <content><![CDATA[<h4 id="平均负载-loadavg"><a href="#平均负载-loadavg" class="headerlink" title="平均负载 loadavg"></a>平均负载 loadavg</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">当系统变慢时、我们想到的很可能是 uptime 或者 top</span><br><span class="line">它每一列的含义是什么 ？</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7a4f7de3de8dc6be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime"></p>
-<p>so. mark<br><code>10:13:59</code> 是当前时间<br><code>up 303 days, 22:27</code> 是系统允许时间<br> <code>1 user</code> 是正在登录用户数<br>load average: 4.61, 4.37, 3.73 这三列呢 ？<br>依次是 过去<code>1min</code>、<code>5min</code>、<code>15min</code>的平均负载</p>
-<h4 id="什么是平均负载-？？？"><a href="#什么是平均负载-？？？" class="headerlink" title="什么是平均负载 ？？？"></a>什么是平均负载 ？？？</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">知道了uptime是如何看的、那么平均负载多少算是合适 ？它又是代表什么含义呢 ？</span><br><span class="line"></span><br><span class="line">简单来说平均负载就是单位时间内、系统处于可运行状态和不可中断状态的平均进程数、也就是平均活跃进程数，</span><br><span class="line">之前、我以为是cpu的使用率来着的~~~xxxxx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可运行状态的进程：指正在使用CPU或者等待CPU的进程、ps看到的、处于R状态(Runnable&#x2F;Running)的进程</span><br><span class="line"></span><br><span class="line">不可中断进程：正处于内核关键流程中的进程、并且这些进程是不可打断的、eg. 等待硬件设备的io响应、也就是ps命令中的D状态(uninterrutible sleep)的进程</span><br><span class="line">不可中断状态其实是系统对进程包含和硬件设备的一种保护机制</span><br><span class="line"></span><br><span class="line">既然平均负载就是平均的活跃进程数、那么最理想的状态就是每个CPU上都刚好运行着一个进程(每个cpu充分利用、又不会过载)</span><br><span class="line"></span><br><span class="line">eg. loadavg为2、意味着什么呢 ？</span><br><span class="line">1) 假如系统有2个CPU、则cpu刚好都被占用</span><br><span class="line">2) 在4个CPU的系统上、意味着50%的CPU空闲</span><br><span class="line">3) 在只有1个CPU的系统上、则会有一半的进程竞争不到CPU</span><br><span class="line"></span><br><span class="line">最理想的状态是、刚好等于CPU的核心数</span><br><span class="line">那么如何查询系统有几个CPU ？？</span><br><span class="line">1) 使用top</span><br><span class="line">2) 从&#x2F;proc&#x2F;cpuinfo 获取</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4cf1dcfb4a79d551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cpuinfo.png"></p>
-<h4 id="知道了cpu的核数和衡量指标、如何分析负载趋势？"><a href="#知道了cpu的核数和衡量指标、如何分析负载趋势？" class="headerlink" title="知道了cpu的核数和衡量指标、如何分析负载趋势？"></a>知道了cpu的核数和衡量指标、如何分析负载趋势？</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 若1min、5min、15min的值基本相同或者相差不大、说明系统负载很平稳</span><br><span class="line">2. 若1min内的值远小于15min的值、说明最近1min的负载在减小、而过去15min则负载很高</span><br><span class="line">3. 反过来、若最近1imn的值远高于过去15min的负载、说明负载在明显升高、需要持续观察一下</span><br><span class="line"></span><br><span class="line">eg. 单核cpu的 loadavg为：1.73  0.60  7.98 </span><br><span class="line">说明过去1min有73%的超载、过去15min有698%的超载</span><br><span class="line">总体来看、负载在降低</span><br><span class="line"></span><br><span class="line">那么实际生产环境、负载达到多少的时候、我们应该开始关注呢 ？ 一般 超过70%就要持续观察下、看看系统负载的平均趋势</span><br></pre></td></tr></table></figure>
+    <title>curd操作</title>
+    <url>/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><p><code>$sum</code>: 计算总和</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select count(1) from table group by f1; </span><br><span class="line"></span><br><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt;select field,sum(f2) from table group by f1;</span><br></pre></td></tr></table></figure>
+<p><code>$avg</code>: 计算平均值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;, avg:&#123;$avg:$f&#125;&#125;&#125;])</span><br><span class="line">-&gt; select field,avg(f) from table group by field;</span><br></pre></td></tr></table></figure>
+<p><code>$min</code>: 获取集合中所有文档对应的最小值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;,min:&#123;$min:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select min(f2) from table group by field;</span><br></pre></td></tr></table></figure>
+<p><code>$max</code>: 获取集合中所有文档对应的最大值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">参考min</span><br></pre></td></tr></table></figure>
+<p><code>$push</code>: 在结果文档中插入值到一个数组</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,url:&#123;$push:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$first</code>: 根据资源文档的排序获取第一个文档数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,first_url:&#123;$first:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$last</code>: 根据资源文档的排序获取最后一个文档数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">参考first</span><br></pre></td></tr></table></figure>
 
-<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 命令</span><br><span class="line">stress 压力测试工具</span><br><span class="line">mpstat 多核CPU性能分析工具、可实时查看每个CPU的平均指标</span><br><span class="line">pidstat 实时查看进程的cpu、内存、io及上下文切换等指标</span><br><span class="line">watch 监控进程</span><br><span class="line"></span><br><span class="line">2. 模拟cpu密集型(需要准备3个终端、每个终端执行一个命令)</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line"></span><br><span class="line">watch -d uptime (-d代表高亮显示变化的区域)</span><br><span class="line"></span><br><span class="line">mpstat -P ALL 5 (-p ALL代表监控所有CPU 5代表间隔5s输出1次)</span><br><span class="line"></span><br><span class="line">3. 模拟IO密集型</span><br><span class="line">stress -i 1 --timeout 600</span><br><span class="line"></span><br><span class="line">4. 大量进程的场景</span><br><span class="line">stress -c 8 --timeout 600</span><br><span class="line"></span><br><span class="line">附：安装stress</span><br><span class="line">sudo yum -y install epel-release</span><br><span class="line">sudo yum -y install stress</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e8ae343bc07ff1ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e6c92ece83479acc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-5b6eb08f6768da70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mpstat.png"></p>
+<p><code>$project</code> 修改输出文档的结构<br><code>$match</code> 用于过滤数据、<br><code>$limit</code> 限制返回条数<br><code>$skip</code> 跳过指定条数的文档<br><code>$unwind</code> 将某个数组类型字段拆分成多条<br><code>$group</code> 将集合中的文档分组、可用于统计结果<br><code>$sort</code> 将文档排序后输出</p>
+<p>eg.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;)</span><br><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;,[&#123;$match:&#123;score:&#123;$gt:70,$lte:90&#125;&#125;&#125;,&#123;$group:&#123;_id:null,count:&#123;$sum:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">map ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</span><br><span class="line">reduce 统计函数，reduce函数的任务就是将key-values变成key-value，也就是把values数组变成一个单一的值value。。</span><br><span class="line">out 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</span><br><span class="line">query 一个筛选条件，只有满足条件的文档才会调用map函数。（query。limit，sort可以随意组合）</span><br><span class="line">sort 和limit结合的sort排序参数（也是在发往map函数前给文档排序），可以优化分组机制</span><br><span class="line">limit 发往map函数的文档数量的上限（要是没有limit，单独使用sort的用处不大）</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Linux使用</category>
+        <category>Mongo</category>
       </categories>
       <tags>
-        <tag>Linux使用</tag>
+        <tag>Mongo</tag>
       </tags>
   </entry>
   <entry>
     <title>常用命令</title>
-    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p><code>cat /proc/cpuinfo | grep &#39;physical id&#39; |  sort| uniq| wc -l</code> 查看物理CPU的个数<br><code>cat /proc/cpuinfo| grep &quot;cpu cores&quot;| uniq</code> 查看每个物理CPU中cores的个数<br><code>cat /proc/cpuinfo| grep &quot;processor&quot;| wc -l</code> 查看逻辑CPU的个数</p>
+    <url>/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.version()</span><br><span class="line">mongo --version</span><br><span class="line">mongod --version</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看各节点的健康状态"><a href="#查看各节点的健康状态" class="headerlink" title="查看各节点的健康状态"></a>查看各节点的健康状态</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">复制集状态查看  rs.status()</span><br><span class="line">查看oplog状态 rs.printReplicationInfo();</span><br><span class="line">查看复制延迟 rs.printSlaveReplicationInfo();</span><br><span class="line">查看服务状态详情 db.serverStatus();</span><br></pre></td></tr></table></figure>
+<h4 id="查看数据库空间大小"><a href="#查看数据库空间大小" class="headerlink" title="查看数据库空间大小"></a>查看数据库空间大小</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.stats() 默认返回字节</span><br><span class="line">&quot;dataSize&quot; : 20,  &#x2F;&#x2F;所有数据的总大小</span><br><span class="line">&quot;storageSize&quot; : 21, &#x2F;&#x2F;所有数据占的磁盘大小 </span><br><span class="line">&quot;fileSize&quot; : 23,  &#x2F;&#x2F;预分配给数据库的文件大小</span><br><span class="line"></span><br><span class="line">db.stats(1073741824) &#x2F;&#x2F; 得到的单位是 G</span><br><span class="line">这里的objects以及avgObjSize还是bytes为单位的，不受参数影响</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看总的记录数"><a href="#查看总的记录数" class="headerlink" title="查看总的记录数"></a>查看总的记录数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.dbname.find().count()</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(); 会返回所有的记录数</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(true); 会返回limit的记录数</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看数据库信息"><a href="#查看数据库信息" class="headerlink" title="查看数据库信息"></a>查看数据库信息</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.getName 返回当前所在的db名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="允许副本集上的查询"><a href="#允许副本集上的查询" class="headerlink" title="允许副本集上的查询"></a>允许副本集上的查询</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rs.slaveOk()</span><br></pre></td></tr></table></figure>
+
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.cnblogs.com&#x2F;kevingrace&#x2F;p&#x2F;8178549.html</span><br><span class="line">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;30088833&#x2F;strange-mongodb-and-mongoose-error-not-master-and-slaveok-false-error&#x2F;30089063</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Linux使用</category>
+        <category>Mongo</category>
       </categories>
       <tags>
-        <tag>Linux使用</tag>
+        <tag>Mongo</tag>
       </tags>
   </entry>
   <entry>
-    <title>平均负载</title>
-    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</url>
-    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
+    <title>安装使用</title>
+    <url>/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">database 数据库</span><br><span class="line">collection 数据表</span><br><span class="line">document 数据记录行&#x2F;文档</span><br><span class="line">filed 数据域</span><br><span class="line">index 索引</span><br><span class="line">primary key 主键、默认 _id</span><br></pre></td></tr></table></figure>
 
+<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. show dbs 查看所有数据的列表</span><br><span class="line">   db 显示当前数据库对象或者集合</span><br><span class="line">   use local 切换到local这个db</span><br><span class="line">2. use niuniu  db不存在时会自动创建</span><br><span class="line">3. db.dropDatabase() 删除一个db</span><br><span class="line"></span><br><span class="line">4. db.createCollection(&quot;niu&quot;) # 先创建集合、类似db中的表</span><br><span class="line">   show tables&#x2F;collections 查看所有的表</span><br><span class="line">   db.niu.drop() # 删除一个table</span><br><span class="line"></span><br><span class="line">5. db.niu.insert(&#123;&quot;name&quot;:&quot;niu&quot;&#125;) 插入文档</span><br><span class="line">6. db.niu.save() 若不指定id, 类似于insert、若指定、会执行更新</span><br><span class="line">7. db.help() 库的帮助信息</span><br><span class="line">8. db.table.help() 表的帮助文档</span><br></pre></td></tr></table></figure>
 
-
-<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
-<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
-<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
-<blockquote>
-<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
-<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
-</blockquote>
-<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
-
-
-
-<p>CPU核数查看</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
-</blockquote>
-<p>平均负载与CPU使用率</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
-
-
-
-<p>案例分析</p>
-<p>一、CPU密集型进程</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
-<p>二、IO密集型进程</p>
-<p>查看方式同上</p>
+<h4 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mongo 192.168.1.100:27017&#x2F;test</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Linux使用</category>
+        <category>Mongo</category>
       </categories>
       <tags>
-        <tag>Linux使用</tag>
+        <tag>Mongo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>查询计划简要分析</title>
+    <url>/2020/03/20/mongo_%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h4 id="查看sql执行计划"><a href="#查看sql执行计划" class="headerlink" title="查看sql执行计划"></a>查看sql执行计划</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">在查询语句后添加 <span class="keyword">explain</span> 即可</span><br><span class="line">eg. db.collection.find().explain()</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回信息解读"><a href="#返回信息解读" class="headerlink" title="返回信息解读"></a>返回信息解读</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">queryPlanner (查询计划): 查询优化选择的计划细节和被拒绝的计划</span><br><span class="line">    namespace 运行查询的指定命名空间</span><br><span class="line">    indexFilterSet Boolean值、表示mongodb在查询中是否使用索引过滤</span><br><span class="line">    winningPlan 由查询优化选择的计划文档</span><br><span class="line">         stage: 表示查询阶段的字符串</span><br><span class="line">         inputStage: 表示子查询的文档</span><br><span class="line">         inputStages: 表示子过程的文档数组</span><br><span class="line">executionStats(执行状态): 被选中执行计划和被拒绝执行计划的详细说明</span><br><span class="line">     queryPlanner.nReturned－匹配查询条件的文档数</span><br><span class="line">     queryPlanner.executionTimeMillis－计划选择和查询执行所需的总时间（毫秒数）</span><br><span class="line">     queryPlanner.totalKeysExamined－扫描的索引总数</span><br><span class="line">     queryPlanner.totalDocsExamined－扫描的文档总数</span><br><span class="line">     queryPlanner.executionStages－显示执行成功细节的查询阶段树</span><br><span class="line">          executionStages.works－指定查询执行阶段执行的“工作单元”的数量</span><br><span class="line">          executionStages.advanced－返回的中间结果数</span><br><span class="line">          executionStages.needTime－未将中间结果推进到其父级的工作周期数</span><br><span class="line">          executionStages.needYield－存储层要求查询系统产生的锁的次数</span><br><span class="line">          executionStages.isEOF－指定执行阶段是否已到达流结束</span><br><span class="line">     queryPlanner.allPlansExecution－包含在计划选择阶段期间捕获的部分执行信息，包括选择计划和拒绝计划</span><br><span class="line"> serverInfo,（服务器信息）：MongoDB实例的相关信息：</span><br><span class="line">     winningPlan－使用的执行计划</span><br><span class="line">          shards－包括每个访问片的queryPlanner和serverInfo的文档数组</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Mongo</category>
+      </categories>
+      <tags>
+        <tag>Mongo</tag>
       </tags>
   </entry>
   <entry>
@@ -1613,90 +1697,6 @@ ROOT_DEV= 0x306
       </categories>
       <tags>
         <tag>Linux内核</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>curd操作</title>
-    <url>/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><p><code>$sum</code>: 计算总和</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select count(1) from table group by f1; </span><br><span class="line"></span><br><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt;select field,sum(f2) from table group by f1;</span><br></pre></td></tr></table></figure>
-<p><code>$avg</code>: 计算平均值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;, avg:&#123;$avg:$f&#125;&#125;&#125;])</span><br><span class="line">-&gt; select field,avg(f) from table group by field;</span><br></pre></td></tr></table></figure>
-<p><code>$min</code>: 获取集合中所有文档对应的最小值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;,min:&#123;$min:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select min(f2) from table group by field;</span><br></pre></td></tr></table></figure>
-<p><code>$max</code>: 获取集合中所有文档对应的最大值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">参考min</span><br></pre></td></tr></table></figure>
-<p><code>$push</code>: 在结果文档中插入值到一个数组</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,url:&#123;$push:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-<p><code>$first</code>: 根据资源文档的排序获取第一个文档数据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,first_url:&#123;$first:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-<p><code>$last</code>: 根据资源文档的排序获取最后一个文档数据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">参考first</span><br></pre></td></tr></table></figure>
-
-<p><code>$project</code> 修改输出文档的结构<br><code>$match</code> 用于过滤数据、<br><code>$limit</code> 限制返回条数<br><code>$skip</code> 跳过指定条数的文档<br><code>$unwind</code> 将某个数组类型字段拆分成多条<br><code>$group</code> 将集合中的文档分组、可用于统计结果<br><code>$sort</code> 将文档排序后输出</p>
-<p>eg.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;)</span><br><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;,[&#123;$match:&#123;score:&#123;$gt:70,$lte:90&#125;&#125;&#125;,&#123;$group:&#123;_id:null,count:&#123;$sum:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-
-<h4 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">map ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</span><br><span class="line">reduce 统计函数，reduce函数的任务就是将key-values变成key-value，也就是把values数组变成一个单一的值value。。</span><br><span class="line">out 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</span><br><span class="line">query 一个筛选条件，只有满足条件的文档才会调用map函数。（query。limit，sort可以随意组合）</span><br><span class="line">sort 和limit结合的sort排序参数（也是在发往map函数前给文档排序），可以优化分组机制</span><br><span class="line">limit 发往map函数的文档数量的上限（要是没有limit，单独使用sort的用处不大）</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Mongo</category>
-      </categories>
-      <tags>
-        <tag>Mongo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>安装使用</title>
-    <url>/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">database 数据库</span><br><span class="line">collection 数据表</span><br><span class="line">document 数据记录行&#x2F;文档</span><br><span class="line">filed 数据域</span><br><span class="line">index 索引</span><br><span class="line">primary key 主键、默认 _id</span><br></pre></td></tr></table></figure>
-
-<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. show dbs 查看所有数据的列表</span><br><span class="line">   db 显示当前数据库对象或者集合</span><br><span class="line">   use local 切换到local这个db</span><br><span class="line">2. use niuniu  db不存在时会自动创建</span><br><span class="line">3. db.dropDatabase() 删除一个db</span><br><span class="line"></span><br><span class="line">4. db.createCollection(&quot;niu&quot;) # 先创建集合、类似db中的表</span><br><span class="line">   show tables&#x2F;collections 查看所有的表</span><br><span class="line">   db.niu.drop() # 删除一个table</span><br><span class="line"></span><br><span class="line">5. db.niu.insert(&#123;&quot;name&quot;:&quot;niu&quot;&#125;) 插入文档</span><br><span class="line">6. db.niu.save() 若不指定id, 类似于insert、若指定、会执行更新</span><br><span class="line">7. db.help() 库的帮助信息</span><br><span class="line">8. db.table.help() 表的帮助文档</span><br></pre></td></tr></table></figure>
-
-<h4 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mongo 192.168.1.100:27017&#x2F;test</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Mongo</category>
-      </categories>
-      <tags>
-        <tag>Mongo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用命令</title>
-    <url>/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.version()</span><br><span class="line">mongo --version</span><br><span class="line">mongod --version</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看各节点的健康状态"><a href="#查看各节点的健康状态" class="headerlink" title="查看各节点的健康状态"></a>查看各节点的健康状态</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">复制集状态查看  rs.status()</span><br><span class="line">查看oplog状态 rs.printReplicationInfo();</span><br><span class="line">查看复制延迟 rs.printSlaveReplicationInfo();</span><br><span class="line">查看服务状态详情 db.serverStatus();</span><br></pre></td></tr></table></figure>
-<h4 id="查看数据库空间大小"><a href="#查看数据库空间大小" class="headerlink" title="查看数据库空间大小"></a>查看数据库空间大小</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.stats() 默认返回字节</span><br><span class="line">&quot;dataSize&quot; : 20,  &#x2F;&#x2F;所有数据的总大小</span><br><span class="line">&quot;storageSize&quot; : 21, &#x2F;&#x2F;所有数据占的磁盘大小 </span><br><span class="line">&quot;fileSize&quot; : 23,  &#x2F;&#x2F;预分配给数据库的文件大小</span><br><span class="line"></span><br><span class="line">db.stats(1073741824) &#x2F;&#x2F; 得到的单位是 G</span><br><span class="line">这里的objects以及avgObjSize还是bytes为单位的，不受参数影响</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看总的记录数"><a href="#查看总的记录数" class="headerlink" title="查看总的记录数"></a>查看总的记录数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.dbname.find().count()</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(); 会返回所有的记录数</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(true); 会返回limit的记录数</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看数据库信息"><a href="#查看数据库信息" class="headerlink" title="查看数据库信息"></a>查看数据库信息</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.getName 返回当前所在的db名称</span><br></pre></td></tr></table></figure>
-
-<h4 id="允许副本集上的查询"><a href="#允许副本集上的查询" class="headerlink" title="允许副本集上的查询"></a>允许副本集上的查询</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rs.slaveOk()</span><br></pre></td></tr></table></figure>
-
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.cnblogs.com&#x2F;kevingrace&#x2F;p&#x2F;8178549.html</span><br><span class="line">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;30088833&#x2F;strange-mongodb-and-mongoose-error-not-master-and-slaveok-false-error&#x2F;30089063</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Mongo</category>
-      </categories>
-      <tags>
-        <tag>Mongo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>查询计划简要分析</title>
-    <url>/2020/03/20/mongo_%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h4 id="查看sql执行计划"><a href="#查看sql执行计划" class="headerlink" title="查看sql执行计划"></a>查看sql执行计划</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">在查询语句后添加 <span class="keyword">explain</span> 即可</span><br><span class="line">eg. db.collection.find().explain()</span><br></pre></td></tr></table></figure>
-
-<h4 id="返回信息解读"><a href="#返回信息解读" class="headerlink" title="返回信息解读"></a>返回信息解读</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">queryPlanner (查询计划): 查询优化选择的计划细节和被拒绝的计划</span><br><span class="line">    namespace 运行查询的指定命名空间</span><br><span class="line">    indexFilterSet Boolean值、表示mongodb在查询中是否使用索引过滤</span><br><span class="line">    winningPlan 由查询优化选择的计划文档</span><br><span class="line">         stage: 表示查询阶段的字符串</span><br><span class="line">         inputStage: 表示子查询的文档</span><br><span class="line">         inputStages: 表示子过程的文档数组</span><br><span class="line">executionStats(执行状态): 被选中执行计划和被拒绝执行计划的详细说明</span><br><span class="line">     queryPlanner.nReturned－匹配查询条件的文档数</span><br><span class="line">     queryPlanner.executionTimeMillis－计划选择和查询执行所需的总时间（毫秒数）</span><br><span class="line">     queryPlanner.totalKeysExamined－扫描的索引总数</span><br><span class="line">     queryPlanner.totalDocsExamined－扫描的文档总数</span><br><span class="line">     queryPlanner.executionStages－显示执行成功细节的查询阶段树</span><br><span class="line">          executionStages.works－指定查询执行阶段执行的“工作单元”的数量</span><br><span class="line">          executionStages.advanced－返回的中间结果数</span><br><span class="line">          executionStages.needTime－未将中间结果推进到其父级的工作周期数</span><br><span class="line">          executionStages.needYield－存储层要求查询系统产生的锁的次数</span><br><span class="line">          executionStages.isEOF－指定执行阶段是否已到达流结束</span><br><span class="line">     queryPlanner.allPlansExecution－包含在计划选择阶段期间捕获的部分执行信息，包括选择计划和拒绝计划</span><br><span class="line"> serverInfo,（服务器信息）：MongoDB实例的相关信息：</span><br><span class="line">     winningPlan－使用的执行计划</span><br><span class="line">          shards－包括每个访问片的queryPlanner和serverInfo的文档数组</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Mongo</category>
-      </categories>
-      <tags>
-        <tag>Mongo</tag>
       </tags>
   </entry>
   <entry>
@@ -2475,6 +2475,54 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
+    <title>mysql锁简析</title>
+    <url>/2020/03/20/mysql_mysql%E9%94%81%E7%AE%80%E6%9E%90/</url>
+    <content><![CDATA[<h3 id="mysql锁"><a href="#mysql锁" class="headerlink" title="mysql锁"></a>mysql锁</h3><blockquote>
+<p>根据加锁的范围、MySQL里边的锁可以分为全局锁、表级锁和行锁三类</p>
+</blockquote>
+<h4 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">全局锁: 就是要对整个db实例加锁. mysql提供了一个全局锁支持: </span><br><span class="line">flush tables with read lock;(FTWRL)</span><br><span class="line">此时: update、ddl、dml语句会被阻塞</span><br><span class="line"></span><br><span class="line">典型场景: 全库逻辑备份</span><br><span class="line"></span><br><span class="line">但是让整个db处于只读状态、比较危险:</span><br><span class="line">若是操作主库、则在整个备份期间、都不能执行更新】整个业务基本上处于停滞状态</span><br><span class="line">若操作从库、则备份期间从库不能执行主库同步过来的binlog、会导致主从延迟</span><br><span class="line"></span><br><span class="line">那么、如果实现不影响业务的备份呢 ？</span><br><span class="line"></span><br><span class="line">1. innodb引擎可以使用一致性读</span><br><span class="line">   mysql自带备份工具mysqldump使用参数 --single-transaction 时、mysql就好启动一个事务、来确保拿到一致性视图</span><br><span class="line"></span><br><span class="line">2. 为何不选择 set global readonly&#x3D;true ?</span><br><span class="line">   1) 在某些系统中、readonly可能被用来做其它逻辑、比如用来判断db是主还是备库 ？</span><br><span class="line">   2) 在异常处理上的差异</span><br><span class="line">      若执行FTWRL之后、mysql异常断开、mysql会自动释放这个全局锁、整个库可以回到正常更新的状态</span><br><span class="line">      设置readonly、若client异常、则db会一直保持readonly状态、会导致整个库长时间不可写、风险较高</span><br><span class="line">   3) MDL 在slave库上对super权限无效</span><br></pre></td></tr></table></figure>
+
+<h4 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql的表级锁有2种: mysql表锁 和 元数据锁(meta data lock, MDL)</span><br><span class="line"></span><br><span class="line">表锁的语法是: lock tables .. read&#x2F;write. 与FTWRL类似、使用unlock tables主动释放锁、也可以在client断开时自动释放</span><br><span class="line">既限制别的线程、也限制本线程</span><br><span class="line">eg. 某个线程A中执行 lock tables t1 read, t2 write; </span><br><span class="line">则其它线程写t1, 读写t2 都会被阻塞、同时、线程A在执行unlock tables之前、也只能执行读t1, 读写t2的操作</span><br><span class="line">但innodb可以支持行锁、一般就不使用 lock tables了、毕竟影响还是很大的</span><br><span class="line"></span><br><span class="line">元数据锁:</span><br><span class="line">不需要显式使用、在访问一个表的时候会被自动加上、MDL的作用是 保证读写的正确性</span><br><span class="line">eg. 正在遍历某表的数据、在执行期间另外一个线程对这个表的结构做了变更、减少了一列、查询结果就会有问题</span><br><span class="line"></span><br><span class="line">在mysql5.5的版本中引入了MDL、当对表curd操作时、会加MDL读锁、对表结构变更时、会加MDL写锁</span><br><span class="line"></span><br><span class="line">* 读锁之间不互斥、可以同时对一张表增删改查</span><br><span class="line">* 写锁、读写锁之间互斥、用来保证表结构变更操作的安全性</span><br><span class="line">so. 两个线程同时对一个表做结构变更时、其中一个要等另外一个执行完才开始执行</span><br></pre></td></tr></table></figure>
+
+<h5 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h5><p>case: 给一个小表加字段、却导致db挂掉</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">note: 给表加字段或者修改字段或者加索引、都会导致全表扫描数据</span><br><span class="line">在对大表操作时、都会特别小心、避免对线上造成影响、小表一般认为很快结束、会比较大意、其实、小表操作不当也会造成db挂掉</span><br><span class="line"></span><br><span class="line">实验环境: mysql5.6 t是小表</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-94717b6aa177cad2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>可以看到: session A先启动、这时会对t加MDL读锁、session B操作不被影响<br>session C需要MDL写锁、blocked、此时db表现为 不可读写<br>若: 此时db的写十分频繁、且client有重试机制、超时后起一个新的session、这些session很快就会把连接打满</p>
+</blockquote>
+<p>Q: 那么如何安全的给表加字段呢 ？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">首先要解决长事务、事务不提交、就会一直占着MDL锁. 在mysql的information_schema库的innodb_trx表中、可以看到当前</span><br><span class="line">正在执行的事务、若要做ddl变更的表刚好有长事务在执行、要考虑先暂停DDL或者kill掉事务</span><br><span class="line"></span><br><span class="line">若要变更的是热点表、请求频繁、虽然数据量不大、但请求特别频繁、而不得不加字段、如何做 ?</span><br><span class="line"></span><br><span class="line">此时kill未必管用、因为新的请求马上就进来了、此时比较理想的机制是: </span><br><span class="line">在alter table语句里设定等待时间、若在这个等待时间里能拿到MDL写锁最好、拿不到也不要阻塞后边的业务、先放弃</span><br><span class="line">之后再重复</span><br><span class="line"></span><br><span class="line">语法: </span><br><span class="line">alter table table nowait add column...</span><br><span class="line">alter table table wait n add column...</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="查看锁表情况"><a href="#查看锁表情况" class="headerlink" title="查看锁表情况"></a>查看锁表情况</h4><blockquote>
+<p>show status like ‘table%’;</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">table_locks_immediate 指能够立即获取表级锁的次数</span><br><span class="line">table_locks_waited 指的是不能立即获取表级锁而需要等待的次数、num越大、锁等待越多、有锁争用的情况</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看正在被锁定的表"><a href="#查看正在被锁定的表" class="headerlink" title="查看正在被锁定的表"></a>查看正在被锁定的表</h4><blockquote>
+<p>show open tables where in_use&gt;0;</p>
+</blockquote>
+<h4 id="锁涉及表说明"><a href="#锁涉及表说明" class="headerlink" title="锁涉及表说明"></a>锁涉及表说明</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">information_shcema库</span><br><span class="line">innodb_trx 当前innodb内核中的活跃事务</span><br><span class="line">innodb_locks 当前状态下产生的innodb锁、仅在有锁等待时打印</span><br><span class="line">innodb_lock_waits 当前状态产生的innodb锁等待 仅在有锁等待时打印</span><br></pre></td></tr></table></figure>
+
+<p><strong>innodb_trx表结构说明</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">字段名                 说明</span><br><span class="line"></span><br><span class="line">trx_id innodb          存储引擎内部唯一的事物ID </span><br><span class="line">trx_state              当前事务状态（running和lock wait两种状态） </span><br><span class="line">trx_started            事务的开始时间 </span><br><span class="line">trx_requested_lock_id  等待事务的锁ID，如trx_state的状态为Lock wait，那么该值带表当前事物等待之前事物占用资源的ID，若trx_state不是Lock wait 则该值为NULL </span><br><span class="line">trx_wait_started       事务等待的开始时间 </span><br><span class="line">trx_weight             事务的权重，在innodb存储引擎中，当发生死锁需要回滚的时，innodb存储引擎会选择该值最小的进行回滚 </span><br><span class="line">trx_mysql_thread_id     mysql中的线程id, 即show processlist显示的结果 </span><br><span class="line">trx_query               事务运行的SQL语句</span><br></pre></td></tr></table></figure>
+
+<p><strong>innodb_locks表结构说明</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">字段名       说明</span><br><span class="line"></span><br><span class="line">lock_id      锁的ID </span><br><span class="line">lock_trx_id  事务的ID </span><br><span class="line">lock_mode    锁的模式（S锁与X锁两种模式） </span><br><span class="line">lock_type    锁的类型 表锁还是行锁（RECORD） </span><br><span class="line">lock_table   要加锁的表 </span><br><span class="line">lock_index   锁住的索引 </span><br><span class="line">lock_space   锁住对象的space id </span><br><span class="line">lock_page    事务锁定页的数量，若是表锁则该值为NULL </span><br><span class="line">lock_rec     事务锁定行的数量，若是表锁则该值为NULL </span><br><span class="line">lock_data    事务锁定记录主键值，若是表锁则该值为NULL（此选项不可信)</span><br></pre></td></tr></table></figure>
+
+<p><strong>innodb_lock_waits表结构说明</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">字段名             说明 </span><br><span class="line"></span><br><span class="line">requesting_trx_id  申请锁资源的事物ID </span><br><span class="line">requested_lock_id  申请的锁的ID </span><br><span class="line">blocking_trx_id    阻塞其他事物的事物ID </span><br><span class="line">blocking_lock_id   阻塞其他锁的锁ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="加锁的原则"><a href="#加锁的原则" class="headerlink" title="加锁的原则"></a>加锁的原则</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 基本单位 nex-key-lock</span><br><span class="line">2. 查找过程中访问到的对象才加锁</span><br><span class="line">3. 索引上的等值查询、给唯一错音加锁的时候、next-key lock退化为行锁</span><br><span class="line">4. 索引上的等值查询、向右遍历时且最后一个值不满足等值条件时、退化为间隙锁</span><br><span class="line">5. 唯一索引上的范围查询会访问到不满足条件的第一个值为止</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql锁</title>
     <url>/2020/03/20/mysql_mysql%E9%94%81/</url>
     <content><![CDATA[<h3 id="锁的种类和概念"><a href="#锁的种类和概念" class="headerlink" title="锁的种类和概念"></a>锁的种类和概念</h3><p><em>Shared and Exclusive Locks</em></p>
@@ -2518,54 +2566,6 @@ ROOT_DEV= 0x306
 
 <p><em>latch vs lock</em></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">latch: mutex、rw-lock、临界资源用完就释放、不支持死锁检测、应用程序维护 非db锁</span><br><span class="line">lock: 事务结束后释放、支持死锁检测、db锁</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql锁简析</title>
-    <url>/2020/03/20/mysql_mysql%E9%94%81%E7%AE%80%E6%9E%90/</url>
-    <content><![CDATA[<h3 id="mysql锁"><a href="#mysql锁" class="headerlink" title="mysql锁"></a>mysql锁</h3><blockquote>
-<p>根据加锁的范围、MySQL里边的锁可以分为全局锁、表级锁和行锁三类</p>
-</blockquote>
-<h4 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">全局锁: 就是要对整个db实例加锁. mysql提供了一个全局锁支持: </span><br><span class="line">flush tables with read lock;(FTWRL)</span><br><span class="line">此时: update、ddl、dml语句会被阻塞</span><br><span class="line"></span><br><span class="line">典型场景: 全库逻辑备份</span><br><span class="line"></span><br><span class="line">但是让整个db处于只读状态、比较危险:</span><br><span class="line">若是操作主库、则在整个备份期间、都不能执行更新】整个业务基本上处于停滞状态</span><br><span class="line">若操作从库、则备份期间从库不能执行主库同步过来的binlog、会导致主从延迟</span><br><span class="line"></span><br><span class="line">那么、如果实现不影响业务的备份呢 ？</span><br><span class="line"></span><br><span class="line">1. innodb引擎可以使用一致性读</span><br><span class="line">   mysql自带备份工具mysqldump使用参数 --single-transaction 时、mysql就好启动一个事务、来确保拿到一致性视图</span><br><span class="line"></span><br><span class="line">2. 为何不选择 set global readonly&#x3D;true ?</span><br><span class="line">   1) 在某些系统中、readonly可能被用来做其它逻辑、比如用来判断db是主还是备库 ？</span><br><span class="line">   2) 在异常处理上的差异</span><br><span class="line">      若执行FTWRL之后、mysql异常断开、mysql会自动释放这个全局锁、整个库可以回到正常更新的状态</span><br><span class="line">      设置readonly、若client异常、则db会一直保持readonly状态、会导致整个库长时间不可写、风险较高</span><br><span class="line">   3) MDL 在slave库上对super权限无效</span><br></pre></td></tr></table></figure>
-
-<h4 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql的表级锁有2种: mysql表锁 和 元数据锁(meta data lock, MDL)</span><br><span class="line"></span><br><span class="line">表锁的语法是: lock tables .. read&#x2F;write. 与FTWRL类似、使用unlock tables主动释放锁、也可以在client断开时自动释放</span><br><span class="line">既限制别的线程、也限制本线程</span><br><span class="line">eg. 某个线程A中执行 lock tables t1 read, t2 write; </span><br><span class="line">则其它线程写t1, 读写t2 都会被阻塞、同时、线程A在执行unlock tables之前、也只能执行读t1, 读写t2的操作</span><br><span class="line">但innodb可以支持行锁、一般就不使用 lock tables了、毕竟影响还是很大的</span><br><span class="line"></span><br><span class="line">元数据锁:</span><br><span class="line">不需要显式使用、在访问一个表的时候会被自动加上、MDL的作用是 保证读写的正确性</span><br><span class="line">eg. 正在遍历某表的数据、在执行期间另外一个线程对这个表的结构做了变更、减少了一列、查询结果就会有问题</span><br><span class="line"></span><br><span class="line">在mysql5.5的版本中引入了MDL、当对表curd操作时、会加MDL读锁、对表结构变更时、会加MDL写锁</span><br><span class="line"></span><br><span class="line">* 读锁之间不互斥、可以同时对一张表增删改查</span><br><span class="line">* 写锁、读写锁之间互斥、用来保证表结构变更操作的安全性</span><br><span class="line">so. 两个线程同时对一个表做结构变更时、其中一个要等另外一个执行完才开始执行</span><br></pre></td></tr></table></figure>
-
-<h5 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h5><p>case: 给一个小表加字段、却导致db挂掉</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">note: 给表加字段或者修改字段或者加索引、都会导致全表扫描数据</span><br><span class="line">在对大表操作时、都会特别小心、避免对线上造成影响、小表一般认为很快结束、会比较大意、其实、小表操作不当也会造成db挂掉</span><br><span class="line"></span><br><span class="line">实验环境: mysql5.6 t是小表</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-94717b6aa177cad2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<blockquote>
-<p>可以看到: session A先启动、这时会对t加MDL读锁、session B操作不被影响<br>session C需要MDL写锁、blocked、此时db表现为 不可读写<br>若: 此时db的写十分频繁、且client有重试机制、超时后起一个新的session、这些session很快就会把连接打满</p>
-</blockquote>
-<p>Q: 那么如何安全的给表加字段呢 ？</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">首先要解决长事务、事务不提交、就会一直占着MDL锁. 在mysql的information_schema库的innodb_trx表中、可以看到当前</span><br><span class="line">正在执行的事务、若要做ddl变更的表刚好有长事务在执行、要考虑先暂停DDL或者kill掉事务</span><br><span class="line"></span><br><span class="line">若要变更的是热点表、请求频繁、虽然数据量不大、但请求特别频繁、而不得不加字段、如何做 ?</span><br><span class="line"></span><br><span class="line">此时kill未必管用、因为新的请求马上就进来了、此时比较理想的机制是: </span><br><span class="line">在alter table语句里设定等待时间、若在这个等待时间里能拿到MDL写锁最好、拿不到也不要阻塞后边的业务、先放弃</span><br><span class="line">之后再重复</span><br><span class="line"></span><br><span class="line">语法: </span><br><span class="line">alter table table nowait add column...</span><br><span class="line">alter table table wait n add column...</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看锁表情况"><a href="#查看锁表情况" class="headerlink" title="查看锁表情况"></a>查看锁表情况</h4><blockquote>
-<p>show status like ‘table%’;</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">table_locks_immediate 指能够立即获取表级锁的次数</span><br><span class="line">table_locks_waited 指的是不能立即获取表级锁而需要等待的次数、num越大、锁等待越多、有锁争用的情况</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看正在被锁定的表"><a href="#查看正在被锁定的表" class="headerlink" title="查看正在被锁定的表"></a>查看正在被锁定的表</h4><blockquote>
-<p>show open tables where in_use&gt;0;</p>
-</blockquote>
-<h4 id="锁涉及表说明"><a href="#锁涉及表说明" class="headerlink" title="锁涉及表说明"></a>锁涉及表说明</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">information_shcema库</span><br><span class="line">innodb_trx 当前innodb内核中的活跃事务</span><br><span class="line">innodb_locks 当前状态下产生的innodb锁、仅在有锁等待时打印</span><br><span class="line">innodb_lock_waits 当前状态产生的innodb锁等待 仅在有锁等待时打印</span><br></pre></td></tr></table></figure>
-
-<p><strong>innodb_trx表结构说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">字段名                 说明</span><br><span class="line"></span><br><span class="line">trx_id innodb          存储引擎内部唯一的事物ID </span><br><span class="line">trx_state              当前事务状态（running和lock wait两种状态） </span><br><span class="line">trx_started            事务的开始时间 </span><br><span class="line">trx_requested_lock_id  等待事务的锁ID，如trx_state的状态为Lock wait，那么该值带表当前事物等待之前事物占用资源的ID，若trx_state不是Lock wait 则该值为NULL </span><br><span class="line">trx_wait_started       事务等待的开始时间 </span><br><span class="line">trx_weight             事务的权重，在innodb存储引擎中，当发生死锁需要回滚的时，innodb存储引擎会选择该值最小的进行回滚 </span><br><span class="line">trx_mysql_thread_id     mysql中的线程id, 即show processlist显示的结果 </span><br><span class="line">trx_query               事务运行的SQL语句</span><br></pre></td></tr></table></figure>
-
-<p><strong>innodb_locks表结构说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">字段名       说明</span><br><span class="line"></span><br><span class="line">lock_id      锁的ID </span><br><span class="line">lock_trx_id  事务的ID </span><br><span class="line">lock_mode    锁的模式（S锁与X锁两种模式） </span><br><span class="line">lock_type    锁的类型 表锁还是行锁（RECORD） </span><br><span class="line">lock_table   要加锁的表 </span><br><span class="line">lock_index   锁住的索引 </span><br><span class="line">lock_space   锁住对象的space id </span><br><span class="line">lock_page    事务锁定页的数量，若是表锁则该值为NULL </span><br><span class="line">lock_rec     事务锁定行的数量，若是表锁则该值为NULL </span><br><span class="line">lock_data    事务锁定记录主键值，若是表锁则该值为NULL（此选项不可信)</span><br></pre></td></tr></table></figure>
-
-<p><strong>innodb_lock_waits表结构说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">字段名             说明 </span><br><span class="line"></span><br><span class="line">requesting_trx_id  申请锁资源的事物ID </span><br><span class="line">requested_lock_id  申请的锁的ID </span><br><span class="line">blocking_trx_id    阻塞其他事物的事物ID </span><br><span class="line">blocking_lock_id   阻塞其他锁的锁ID</span><br></pre></td></tr></table></figure>
-
-<h4 id="加锁的原则"><a href="#加锁的原则" class="headerlink" title="加锁的原则"></a>加锁的原则</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 基本单位 nex-key-lock</span><br><span class="line">2. 查找过程中访问到的对象才加锁</span><br><span class="line">3. 索引上的等值查询、给唯一错音加锁的时候、next-key lock退化为行锁</span><br><span class="line">4. 索引上的等值查询、向右遍历时且最后一个值不满足等值条件时、退化为间隙锁</span><br><span class="line">5. 唯一索引上的范围查询会访问到不满足条件的第一个值为止</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>MySQL</category>
@@ -3314,6 +3314,18 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
+    <title>xmind常用快捷键</title>
+    <url>/2020/03/20/tools_xmind%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<p><code>tab</code> 插入子主题<br><code>shift + enter</code> 当前主题之前插入主题<br><code>enter</code> 当前主题之后插入主题<br><code>command + B</code> 插入外框<br><code>option + enter</code> 插入标注<br><code>command + ]</code> 插入概要<br><code>command + L</code> 插入联系<br><code>command + i</code> 插入图片</p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Tools</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vim</title>
     <url>/2020/03/20/tools_vim/</url>
     <content><![CDATA[<ul>
@@ -3328,18 +3340,6 @@ ROOT_DEV= 0x306
 <li>包含指定字符的个数 <code>:%s/pattern//gn</code></li>
 <li>忽略大小写查找 `/</li>
 </ul>
-]]></content>
-      <categories>
-        <category>Tools</category>
-      </categories>
-      <tags>
-        <tag>Tools</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>xmind常用快捷键</title>
-    <url>/2020/03/20/tools_xmind%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
-    <content><![CDATA[<p><code>tab</code> 插入子主题<br><code>shift + enter</code> 当前主题之前插入主题<br><code>enter</code> 当前主题之后插入主题<br><code>command + B</code> 插入外框<br><code>option + enter</code> 插入标注<br><code>command + ]</code> 插入概要<br><code>command + L</code> 插入联系<br><code>command + i</code> 插入图片</p>
 ]]></content>
       <categories>
         <category>Tools</category>
@@ -3388,29 +3388,6 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
-    <title>常用sql</title>
-    <url>/2020/03/20/tools_%E5%B8%B8%E7%94%A8sql/</url>
-    <content><![CDATA[<ol>
-<li><p>insert.. select<br>eg. insert into tb1 select * from tb2 ; </p>
-</li>
-<li><p>create … like<br>eg. create tb1 like tb2;</p>
-</li>
-<li><p>查看所有库中包含指定字段的所有表</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select * from information_schema where column_name&#x3D;&#39;xxx&#39;;</span><br><span class="line"></span><br><span class="line">-- 指定db</span><br><span class="line">select * from information_schema where column_name&#x3D;&#39;xxx&#39; and table_schema&#x3D;&#39;xxdb&#39;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>批量修改表字段类型</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">CONCAT</span>(<span class="string">'alter table  '</span>,TABLE_SCHEMA,<span class="string">'.'</span>,TABLE_NAME,<span class="string">'  </span></span><br><span class="line"><span class="string">modify `'</span>, COLUMN_NAME, <span class="string">'` bigint(20) '</span>,  </span><br><span class="line"><span class="string">' default '</span>, COLUMN_DEFAULT, <span class="string">' COMMENT  '' , COLUMN_COMMENT, '';'</span>) </span><br><span class="line"><span class="keyword">from</span> information_schema.COLUMNS </span><br><span class="line"><span class="keyword">where</span>  COLUMN_NAME = <span class="string">'first_order_id'</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Tools</category>
-      </categories>
-      <tags>
-        <tag>Tools</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>彻底卸载idea</title>
     <url>/2020/03/20/tools_%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDidea/</url>
     <content><![CDATA[<p>完全卸载idea</p>
@@ -3425,6 +3402,29 @@ ROOT_DEV= 0x306
 <p>Idea 的缓存文件在</p>
 <p>/Users/xxxx/Library/Preferences<br>注意：以上方式会直接删除缓存文件，所以你重新安装的idea，没有任何插件【卸载前可导出配置setting.jar】</p>
 <p>原文链接：<a href="https://blog.csdn.net/qq_17213067/article/details/88226062" target="_blank" rel="noopener">https://blog.csdn.net/qq_17213067/article/details/88226062</a></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Tools</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用sql</title>
+    <url>/2020/03/20/tools_%E5%B8%B8%E7%94%A8sql/</url>
+    <content><![CDATA[<ol>
+<li><p>insert.. select<br>eg. insert into tb1 select * from tb2 ; </p>
+</li>
+<li><p>create … like<br>eg. create tb1 like tb2;</p>
+</li>
+<li><p>查看所有库中包含指定字段的所有表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select * from information_schema where column_name&#x3D;&#39;xxx&#39;;</span><br><span class="line"></span><br><span class="line">-- 指定db</span><br><span class="line">select * from information_schema where column_name&#x3D;&#39;xxx&#39; and table_schema&#x3D;&#39;xxdb&#39;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>批量修改表字段类型</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">CONCAT</span>(<span class="string">'alter table  '</span>,TABLE_SCHEMA,<span class="string">'.'</span>,TABLE_NAME,<span class="string">'  </span></span><br><span class="line"><span class="string">modify `'</span>, COLUMN_NAME, <span class="string">'` bigint(20) '</span>,  </span><br><span class="line"><span class="string">' default '</span>, COLUMN_DEFAULT, <span class="string">' COMMENT  '' , COLUMN_COMMENT, '';'</span>) </span><br><span class="line"><span class="keyword">from</span> information_schema.COLUMNS </span><br><span class="line"><span class="keyword">where</span>  COLUMN_NAME = <span class="string">'first_order_id'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Tools</category>
@@ -3562,29 +3562,6 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
-    <title>未知的小惊喜</title>
-    <url>/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9C%AA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%83%8A%E5%96%9C/</url>
-    <content><![CDATA[<p>时光跳动、晴雨霾风哀愁喜, 无需计较、无需叹息、无需着急….</p>
-<p>属于你的、终归是属于你、想要的、只需努力、静静等待</p>
-<p>有人说, 机遇很重要、是的、很重要、前提是、当机遇到来的时候有足够的能力来把握<br>机遇才叫机遇、否则只能叫别人的机遇….</p>
-<p>有人说、背景很重要、是的、很重要、前提是、你只是芸芸众生中特别一般的一个<br>背景才能带来优越感、跳出一般人的圈子、背景可能只是润色….</p>
-<p>有人说、家境很重要、是的、很重要、有些人一出生就在你人生的终点线附近、<br>能说这话的、一定没有一个特别优秀的家庭背景、<br>为何不努力让自己的下一代出生就站在较好的起点线上?</p>
-<p>有人说、子孙自有子孙福、他们怎么样看自己的努力和造化、这话我不去反驳</p>
-<p>我只想能给自己想要的东西、输在了起跑线不可怕<br>就算是奋斗了10年才能和别人坐在一起聊天又如何？如果不奋斗、连一起聊天的机会都没有<br>世界是不公平的、也是公平的</p>
-<p>所有的努力不一定都能得到回报、不努力也不一定得不到回报<br>不管你选不选择、相不相信、事实就在这里</p>
-<p>路还是要自己走的<del>~</del></p>
-<p>遇见小惊喜、迷惑了很久的东西、豁然开朗、感觉所有的努力都是值得的<br>有感而发</p>
-<p>愿每个人都能按自己最喜欢的方式去生活、感谢不曾放弃努力的自己~</p>
-<p>.^.^.</p>
-]]></content>
-      <categories>
-        <category>小确幸</category>
-      </categories>
-      <tags>
-        <tag>小确幸</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>杂谈</title>
     <url>/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9D%82%E8%B0%88/</url>
     <content><![CDATA[<p>   突然想说、喜欢安姐、😝、优秀的那么自然、还有那么许多一直优秀的人、读读你们的故事、思考下自己的人生、是啊、对错并不重要、关键是成长和思考</p>
@@ -3602,6 +3579,29 @@ ROOT_DEV= 0x306
 <p>黄老邪  挺喜欢的、热情、不古板、博学、有责任心、若说做错了什么、大概就是对他那几个徒儿吧、角色整体来说很喜欢、喜欢那份儿潇洒、喜欢那份儿真诚、或许也是经过世事历练的成长吧、从很多回忆来看、年轻时应该比较狂傲、大抵也不怎么听得进去劝~</p>
 <p>共性: 大侠们不喜欢搞清楚事实、过于江湖义气、过于在乎名誉</p>
 <p>可能最喜欢的角色是一灯大师、一直的善良、对瑛姑的钟爱、人生鼎盛时的峰转、归于自身的身心修养、喜欢这种淡淡的人生态度<del>~</del></p>
+]]></content>
+      <categories>
+        <category>小确幸</category>
+      </categories>
+      <tags>
+        <tag>小确幸</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>未知的小惊喜</title>
+    <url>/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9C%AA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%83%8A%E5%96%9C/</url>
+    <content><![CDATA[<p>时光跳动、晴雨霾风哀愁喜, 无需计较、无需叹息、无需着急….</p>
+<p>属于你的、终归是属于你、想要的、只需努力、静静等待</p>
+<p>有人说, 机遇很重要、是的、很重要、前提是、当机遇到来的时候有足够的能力来把握<br>机遇才叫机遇、否则只能叫别人的机遇….</p>
+<p>有人说、背景很重要、是的、很重要、前提是、你只是芸芸众生中特别一般的一个<br>背景才能带来优越感、跳出一般人的圈子、背景可能只是润色….</p>
+<p>有人说、家境很重要、是的、很重要、有些人一出生就在你人生的终点线附近、<br>能说这话的、一定没有一个特别优秀的家庭背景、<br>为何不努力让自己的下一代出生就站在较好的起点线上?</p>
+<p>有人说、子孙自有子孙福、他们怎么样看自己的努力和造化、这话我不去反驳</p>
+<p>我只想能给自己想要的东西、输在了起跑线不可怕<br>就算是奋斗了10年才能和别人坐在一起聊天又如何？如果不奋斗、连一起聊天的机会都没有<br>世界是不公平的、也是公平的</p>
+<p>所有的努力不一定都能得到回报、不努力也不一定得不到回报<br>不管你选不选择、相不相信、事实就在这里</p>
+<p>路还是要自己走的<del>~</del></p>
+<p>遇见小惊喜、迷惑了很久的东西、豁然开朗、感觉所有的努力都是值得的<br>有感而发</p>
+<p>愿每个人都能按自己最喜欢的方式去生活、感谢不曾放弃努力的自己~</p>
+<p>.^.^.</p>
 ]]></content>
       <categories>
         <category>小确幸</category>
@@ -4034,6 +4034,33 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
+    <title>url解析流程</title>
+    <url>/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_url%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<ul>
+<li><p>浏览器进程主要负责用户交互、子进程管理和文件存储等功能</p>
+</li>
+<li><p>网络进程是面向渲染进程和浏览器进程等提供网络下载功能</p>
+</li>
+<li><p>渲染进程主要职责是把从网络下载的HTML、JS、CSS图片等资源解析为可显示赫尔交互的页面</p>
+</li>
+</ul>
+<h4 id="请求解析流程"><a href="#请求解析流程" class="headerlink" title="请求解析流程"></a>请求解析流程</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">大致可以描述为：</span><br><span class="line">1. 首先从浏览器进程输入请求URL</span><br><span class="line">2. 网络进程发起URL请求</span><br><span class="line">3. 服务器响应URL请求之后、浏览器进程开始准备渲染进程</span><br><span class="line">4. 渲染进程准备好之后、向渲染进程提交网络进程响应的数据、称为提交文档阶段</span><br><span class="line">5. 渲染进程接收完整文档信息之后、开始解析加载页面及子资源、完成页面渲染</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 用户输入</span><br><span class="line">   用户在地址栏输入查询关键字时、地址栏会判断输入的是关键字还是请求的URL</span><br><span class="line">   若是搜索内容、地址栏会使用浏览器默认的搜索引擎、合成包含搜索关键字的URL</span><br><span class="line">   若输入内容符合URL规则、则解析为URL、浏览器加载一个地址之后、导航栏图表就进入了加载状态、页面没变、需要等待提交文档阶段、页面内容才会替换</span><br><span class="line">2. URL请求过程</span><br><span class="line">   浏览器进程通过进程间通信IPC把url请求发送到网络进程、网络进程接收到URL请求后才发起请求</span><br><span class="line">   </span><br><span class="line">   1) 网络进程先查找本地缓存是否缓存了改资源、若有直接返回</span><br><span class="line">   2) 没有、进入网络请求流程(DNS解析-&gt;ip、若https协议先建立TLS连接)</span><br><span class="line">   3) 利用IP地址和服务器建立TCP连接、建立连接后浏览器会构造请求信息(请求行&#x2F;头)把相关cookie加入请求头、发送请求信息</span><br><span class="line">   4) 服务器收到请求后、生产响应数据(响应行&#x2F;头&#x2F;体)、发给网络进程、网络进程接收到响应行和响应头之后解析响应头</span><br><span class="line">      a. 重定向 - 响应码 301|302 从响应头提取Location、然后发起新的请求、从新开始</span><br><span class="line">      b. 响应数据类型处理</span><br><span class="line">         Content-Type标记浏览器响应类型 text&#x2F;html 代表返回数据是HTML格式、继续后续流程</span><br><span class="line">         application&#x2F;octet-stream 返回数据是字节流类型、按照下载类型来处理、请求提交给浏览器的下载管理器</span><br><span class="line">3. 准备渲染进程</span><br><span class="line">   默认情况下、Chrome会为每个页面分配一个渲染进程、但某些情况下会多个页面运行在同一渲染进程中</span><br><span class="line">   通常: </span><br><span class="line">   打开新的页面会使用单独的渲染进程、</span><br><span class="line">   若从A页面打开B页面、且AB属于同一站点、则B复用A页面的渲染进程、若是其它情况、会单独创建进程</span><br><span class="line">   </span><br><span class="line">   渲染进程准备好之后、不能立即进入文档解析阶段、因为此时文档还在网络进程中、并未提交给渲染进程、所以下一步是进入提交文档阶段</span><br><span class="line">   </span><br><span class="line">4. 提交文档</span><br><span class="line">   提交文档(响应数据)的请求是浏览器进程发出的、渲染进程接收到消息后、会和网络进程建立传输数据的通道</span><br><span class="line">   文档数据传输完成后、渲染进程返回 确认提交 的消息给浏览器进程</span><br><span class="line">   浏览器进程在收到确认提交的消息后、更新浏览器界面状态、包含了安全状态、地址栏的url、前进后退的历史状态、并更新web界面</span><br><span class="line">   </span><br><span class="line">   一个完整的导航走完了、进入渲染阶段</span><br><span class="line">   </span><br><span class="line">5. 渲染阶段</span><br><span class="line">   文档一旦被提交、渲染进程就开始页面解析和子资源加载了、一旦页面生成、渲染进程会给浏览器进程发送消息、浏览器进程收到消息停止标签页上的加载动画</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-26a86c6a9a0ae591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="浏览器加载页面.png"></p>
+]]></content>
+      <categories>
+        <category>浏览器</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>浏览器渲染流程</title>
     <url>/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/</url>
     <content><![CDATA[<p>HTML的内容由标记和文本组成、也称标签</p>
@@ -4094,33 +4121,6 @@ ROOT_DEV= 0x306
 <h4 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h4><p><code>重排</code>: 通过JS或者CS修改元素几何位置、eg. 改变元素的宽、高、等会触发重新布局、解析之后的一系列子阶段、这个过程就叫重排、需要更新完整的渲染流水线、开销很大</p>
 <p><code>重绘</code>: eg. JS更改某些元素的背景色、布局阶段不会重新执行、直接进入绘制阶段、然后执行之后的子阶段、相对<code>重排</code> 少了<code>布局</code>和<code>分层</code>阶段、执行效率会高一些</p>
 <p><code>直接合成阶段</code>: eg. 使用CSS的transform来实现动画、可以避开<code>重排</code>和<code>重绘</code>阶段、直接在非主线程上执行合成动画操作、大大提升绘制效率</p>
-]]></content>
-      <categories>
-        <category>浏览器</category>
-      </categories>
-      <tags>
-        <tag>浏览器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>url解析流程</title>
-    <url>/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_url%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<ul>
-<li><p>浏览器进程主要负责用户交互、子进程管理和文件存储等功能</p>
-</li>
-<li><p>网络进程是面向渲染进程和浏览器进程等提供网络下载功能</p>
-</li>
-<li><p>渲染进程主要职责是把从网络下载的HTML、JS、CSS图片等资源解析为可显示赫尔交互的页面</p>
-</li>
-</ul>
-<h4 id="请求解析流程"><a href="#请求解析流程" class="headerlink" title="请求解析流程"></a>请求解析流程</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">大致可以描述为：</span><br><span class="line">1. 首先从浏览器进程输入请求URL</span><br><span class="line">2. 网络进程发起URL请求</span><br><span class="line">3. 服务器响应URL请求之后、浏览器进程开始准备渲染进程</span><br><span class="line">4. 渲染进程准备好之后、向渲染进程提交网络进程响应的数据、称为提交文档阶段</span><br><span class="line">5. 渲染进程接收完整文档信息之后、开始解析加载页面及子资源、完成页面渲染</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 用户输入</span><br><span class="line">   用户在地址栏输入查询关键字时、地址栏会判断输入的是关键字还是请求的URL</span><br><span class="line">   若是搜索内容、地址栏会使用浏览器默认的搜索引擎、合成包含搜索关键字的URL</span><br><span class="line">   若输入内容符合URL规则、则解析为URL、浏览器加载一个地址之后、导航栏图表就进入了加载状态、页面没变、需要等待提交文档阶段、页面内容才会替换</span><br><span class="line">2. URL请求过程</span><br><span class="line">   浏览器进程通过进程间通信IPC把url请求发送到网络进程、网络进程接收到URL请求后才发起请求</span><br><span class="line">   </span><br><span class="line">   1) 网络进程先查找本地缓存是否缓存了改资源、若有直接返回</span><br><span class="line">   2) 没有、进入网络请求流程(DNS解析-&gt;ip、若https协议先建立TLS连接)</span><br><span class="line">   3) 利用IP地址和服务器建立TCP连接、建立连接后浏览器会构造请求信息(请求行&#x2F;头)把相关cookie加入请求头、发送请求信息</span><br><span class="line">   4) 服务器收到请求后、生产响应数据(响应行&#x2F;头&#x2F;体)、发给网络进程、网络进程接收到响应行和响应头之后解析响应头</span><br><span class="line">      a. 重定向 - 响应码 301|302 从响应头提取Location、然后发起新的请求、从新开始</span><br><span class="line">      b. 响应数据类型处理</span><br><span class="line">         Content-Type标记浏览器响应类型 text&#x2F;html 代表返回数据是HTML格式、继续后续流程</span><br><span class="line">         application&#x2F;octet-stream 返回数据是字节流类型、按照下载类型来处理、请求提交给浏览器的下载管理器</span><br><span class="line">3. 准备渲染进程</span><br><span class="line">   默认情况下、Chrome会为每个页面分配一个渲染进程、但某些情况下会多个页面运行在同一渲染进程中</span><br><span class="line">   通常: </span><br><span class="line">   打开新的页面会使用单独的渲染进程、</span><br><span class="line">   若从A页面打开B页面、且AB属于同一站点、则B复用A页面的渲染进程、若是其它情况、会单独创建进程</span><br><span class="line">   </span><br><span class="line">   渲染进程准备好之后、不能立即进入文档解析阶段、因为此时文档还在网络进程中、并未提交给渲染进程、所以下一步是进入提交文档阶段</span><br><span class="line">   </span><br><span class="line">4. 提交文档</span><br><span class="line">   提交文档(响应数据)的请求是浏览器进程发出的、渲染进程接收到消息后、会和网络进程建立传输数据的通道</span><br><span class="line">   文档数据传输完成后、渲染进程返回 确认提交 的消息给浏览器进程</span><br><span class="line">   浏览器进程在收到确认提交的消息后、更新浏览器界面状态、包含了安全状态、地址栏的url、前进后退的历史状态、并更新web界面</span><br><span class="line">   </span><br><span class="line">   一个完整的导航走完了、进入渲染阶段</span><br><span class="line">   </span><br><span class="line">5. 渲染阶段</span><br><span class="line">   文档一旦被提交、渲染进程就开始页面解析和子资源加载了、一旦页面生成、渲染进程会给浏览器进程发送消息、浏览器进程收到消息停止标签页上的加载动画</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-26a86c6a9a0ae591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="浏览器加载页面.png"></p>
 ]]></content>
       <categories>
         <category>浏览器</category>
@@ -4850,6 +4850,41 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
+    <title>计算机组成原理</title>
+    <url>/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p><a href="https://time.geekbang.org/column/article/91427" target="_blank" rel="noopener">https://time.geekbang.org/column/article/91427</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/14027542-eb2558be654ee6b2.jpg" alt="图片发自简书App"></p>
+<p>极课时间上的课程是我觉得质量最高的课程、很多课程忍不住想要记下笔记、如果觉得好、还希望大家多支持作者、到极课时间购买课程</p>
+<p>推荐书籍汇总：</p>
+<p>入门书籍：</p>
+<ol>
+<li>程序是怎样跑起来的</li>
+<li>计算机是怎样跑起来的</li>
+</ol>
+<p>深入学习书籍:</p>
+<ol>
+<li>计算机设计与组成: 硬件/软件接口</li>
+<li>深入理解计算机系统</li>
+<li>计算机体系结构: 量化研究方法</li>
+</ol>
+<p>课外阅读:</p>
+<ol>
+<li>What Every Programmer Should Kown About Memory</li>
+<li>编码: 隐匿在计算机软硬件背后的语言</li>
+<li>程序员的自我修养: 链接、装载和库</li>
+<li><a href="https://www.bilibili.com/video/av24540152/" target="_blank" rel="noopener">https://www.bilibili.com/video/av24540152/</a></li>
+</ol>
+<p>阅读推荐</p>
+<p><a href="https://people.freebsd.org/~lstewart/articles/cpumemory.pdf" target="_blank" rel="noopener">https://people.freebsd.org/~lstewart/articles/cpumemory.pdf</a></p>
+]]></content>
+      <categories>
+        <category>计算机原理</category>
+      </categories>
+      <tags>
+        <tag>计算机原理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>计算机概念漫谈</title>
     <url>/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E6%BC%AB%E8%B0%88/</url>
     <content><![CDATA[<p><code>总线</code>: 一组电子管道, 携带信息字节、并负责在各个组件间传递</p>
@@ -4943,41 +4978,6 @@ ROOT_DEV= 0x306
 <p>进程是对一个正在运行的程序的抽象</p>
 <p>虚拟机是对整个计算机的抽象、包括 操作系统、处理器和程序</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>计算机原理</category>
-      </categories>
-      <tags>
-        <tag>计算机原理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计算机组成原理</title>
-    <url>/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<p><a href="https://time.geekbang.org/column/article/91427" target="_blank" rel="noopener">https://time.geekbang.org/column/article/91427</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/14027542-eb2558be654ee6b2.jpg" alt="图片发自简书App"></p>
-<p>极课时间上的课程是我觉得质量最高的课程、很多课程忍不住想要记下笔记、如果觉得好、还希望大家多支持作者、到极课时间购买课程</p>
-<p>推荐书籍汇总：</p>
-<p>入门书籍：</p>
-<ol>
-<li>程序是怎样跑起来的</li>
-<li>计算机是怎样跑起来的</li>
-</ol>
-<p>深入学习书籍:</p>
-<ol>
-<li>计算机设计与组成: 硬件/软件接口</li>
-<li>深入理解计算机系统</li>
-<li>计算机体系结构: 量化研究方法</li>
-</ol>
-<p>课外阅读:</p>
-<ol>
-<li>What Every Programmer Should Kown About Memory</li>
-<li>编码: 隐匿在计算机软硬件背后的语言</li>
-<li>程序员的自我修养: 链接、装载和库</li>
-<li><a href="https://www.bilibili.com/video/av24540152/" target="_blank" rel="noopener">https://www.bilibili.com/video/av24540152/</a></li>
-</ol>
-<p>阅读推荐</p>
-<p><a href="https://people.freebsd.org/~lstewart/articles/cpumemory.pdf" target="_blank" rel="noopener">https://people.freebsd.org/~lstewart/articles/cpumemory.pdf</a></p>
 ]]></content>
       <categories>
         <category>计算机原理</category>
