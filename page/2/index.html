@@ -822,109 +822,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">zk使用</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="zk使用" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="参考配置项"><a href="#参考配置项" class="headerlink" title="参考配置项"></a>参考配置项</h1><p><code>tickTime</code> 用于计算的时间单元、eg. session超时、N*tickTime<br><code>initLimit</code> 用于集群、允许从节点连接、并同步到master节点的初始化连接时间、以tickTime的倍数来表示<br><code>syncLimit</code> 用于集群、master主节点与从节点之间发送消息、请求和应答的时间长度(心跳机制)<br><code>dataDir</code> 数据文件目录、必须<br><code>dataLogDir</code> 日志目录、非必须、默认<code>dataDir</code><br><code>clientPort</code> 连接服务器的端口、默认 <code>2181</code></p>
-<h1 id="client-连接"><a href="#client-连接" class="headerlink" title="client 连接"></a>client 连接</h1><p><code>zkCli.sh</code> 默认连接2181</p>
-<h1 id="client-命令"><a href="#client-命令" class="headerlink" title="client 命令"></a>client 命令</h1><p><code>ls</code> 与linux下<code>ls</code>同义<br><code>ls</code> 等同于  <code>ls</code> + <code>stat</code><br><code>stat</code> 状态显示 zZxid zookeeper为数据分配的id pZxid 子节点的id<br><code>get</code> 查看节点数据<br><code>create</code> 创建节点 -e 临时节点<br><code>set</code> 修改节点数据<br><code>delete</code> 删除节点数据</p>
-<h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><p>构成: scheme: 采用的权限机制<br>(word:anyone:[permissions] |<br>auth:user:password:[permissions] |<br>digest:user:BASE64(SHA1(pass)):[permissions])<br>(ip:192.168.1.1:[permission])<br>(super: 代表超管、拥有所有的权限)</p>
-<p>id: 代表允许访问的机制 </p>
-<p>permissons: 权限</p>
-<p>权限字符缩写 crdwa<br>create: 创建子节点<br>read: 获取节点、子节点<br>write: 设置节点数据<br>delete: 删除子节点<br>admin: 设置权限</p>
-<p><code>getAcl</code> 获取节点的acl权限信息<br><code>setAcl</code> 设置某个节点的acl权限信息<br><code>addAuth</code> 输入认证权限信息、注册时、输入明文密码(登录)、但在zk的系统里、是以密文存在的</p>
-<h1 id="four-letter-cmd"><a href="#four-letter-cmd" class="headerlink" title="four letter cmd"></a>four letter cmd</h1><p><code>stat</code> 当前节点的状态信息<br><code>ruok</code> 当前节点是否ok<br><code>conf</code> 查看服务器相关的配置<br><code>cons</code> 展示连接到server的client信息<br><code>envi</code> 打印环境变量信息<br><code>mntr</code> 监控zk的健康信息<br><code>wchs</code> watcher的信息<br><code>wchc</code> session与watch对应关系信息<br><code>wchp</code> path与watch对应关系</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---G1%E6%94%B6%E9%9B%86%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1125,6 +1022,109 @@ Humongous Objects的分配和回收:
 <h6 id="附："><a href="#附：" class="headerlink" title="附："></a>附：</h6><pre><code>1. `可达性`: GC Root可以到达此对象
 2. `并行执行`: 多个线程同时执行gc
 3. `并发执行`: 用户线程和GC线程同时执行</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/14027542-907fa5f1c490a4f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="G1.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">zk使用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="zk使用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="参考配置项"><a href="#参考配置项" class="headerlink" title="参考配置项"></a>参考配置项</h1><p><code>tickTime</code> 用于计算的时间单元、eg. session超时、N*tickTime<br><code>initLimit</code> 用于集群、允许从节点连接、并同步到master节点的初始化连接时间、以tickTime的倍数来表示<br><code>syncLimit</code> 用于集群、master主节点与从节点之间发送消息、请求和应答的时间长度(心跳机制)<br><code>dataDir</code> 数据文件目录、必须<br><code>dataLogDir</code> 日志目录、非必须、默认<code>dataDir</code><br><code>clientPort</code> 连接服务器的端口、默认 <code>2181</code></p>
+<h1 id="client-连接"><a href="#client-连接" class="headerlink" title="client 连接"></a>client 连接</h1><p><code>zkCli.sh</code> 默认连接2181</p>
+<h1 id="client-命令"><a href="#client-命令" class="headerlink" title="client 命令"></a>client 命令</h1><p><code>ls</code> 与linux下<code>ls</code>同义<br><code>ls</code> 等同于  <code>ls</code> + <code>stat</code><br><code>stat</code> 状态显示 zZxid zookeeper为数据分配的id pZxid 子节点的id<br><code>get</code> 查看节点数据<br><code>create</code> 创建节点 -e 临时节点<br><code>set</code> 修改节点数据<br><code>delete</code> 删除节点数据</p>
+<h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><p>构成: scheme: 采用的权限机制<br>(word:anyone:[permissions] |<br>auth:user:password:[permissions] |<br>digest:user:BASE64(SHA1(pass)):[permissions])<br>(ip:192.168.1.1:[permission])<br>(super: 代表超管、拥有所有的权限)</p>
+<p>id: 代表允许访问的机制 </p>
+<p>permissons: 权限</p>
+<p>权限字符缩写 crdwa<br>create: 创建子节点<br>read: 获取节点、子节点<br>write: 设置节点数据<br>delete: 删除子节点<br>admin: 设置权限</p>
+<p><code>getAcl</code> 获取节点的acl权限信息<br><code>setAcl</code> 设置某个节点的acl权限信息<br><code>addAuth</code> 输入认证权限信息、注册时、输入明文密码(登录)、但在zk的系统里、是以密文存在的</p>
+<h1 id="four-letter-cmd"><a href="#four-letter-cmd" class="headerlink" title="four letter cmd"></a>four letter cmd</h1><p><code>stat</code> 当前节点的状态信息<br><code>ruok</code> 当前节点是否ok<br><code>conf</code> 查看服务器相关的配置<br><code>cons</code> 展示连接到server的client信息<br><code>envi</code> 打印环境变量信息<br><code>mntr</code> 监控zk的健康信息<br><code>wchs</code> watcher的信息<br><code>wchc</code> session与watch对应关系信息<br><code>wchp</code> path与watch对应关系</p>
 
       
     </div>
