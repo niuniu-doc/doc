@@ -192,6 +192,129 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4(40%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4(40%E8%AE%B2)/" class="post-title-link" itemprop="url">虚拟内存和内存保护(40讲)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4(40%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="虚拟内存和内存保护(40讲)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4(40%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4(40%E8%AE%B2)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>内存需要被分成固定大小的页(Page),通过虚拟地址到物理地址的转换、才能找到实际物理地址、程序看到的地址都是虚拟地址</p>
+</blockquote>
+<h4 id="简单页表"><a href="#简单页表" class="headerlink" title="简单页表"></a>简单页表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">虚拟内存和物理内存映射、最直观的方法就是建立一张映射表、实现虚拟内存到物理内存的一一映射</span><br><span class="line">其实就是页表(Page)</span><br><span class="line"></span><br><span class="line">这种转换会把一个内存地址分成页号Directory和偏移量Offset两个部分</span><br><span class="line">前边的高位、就是内存地址的页号; 后边的地位就是内存地址里的偏移量.</span><br><span class="line">地址转换的页表、只保留页号之间的映射关系即可.</span><br><span class="line"></span><br><span class="line">同一个页面的内存、在物理层面是连续的、eg. 一个页大小为4K</span><br><span class="line">需要20位的高位和12位的地位</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-19cb2185b036b931.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<blockquote>
+<p>内存地址转换:</p>
+</blockquote>
+<ol>
+<li>将虚拟内存地址、切分成页号和偏移量的组合</li>
+<li>从页表里边、查询出虚拟页号对应的物理页号</li>
+<li>拿物理页号 + 偏移量 -&gt; 物理内存地址</li>
+</ol>
+<p>思考: 这样一个页表需要多大空间 ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">32位的内存地址空间、需要记录2^20大小的数组、一个页号是完整的32位的4字节、这样一个页表就需要4M的空间</span><br><span class="line">并且: 每个进程都有属于自己的虚拟地址空间、也就是、每个进程都需要这样一个页表.</span><br><span class="line">不管进程本身是只有几KB大小的程序、还是需要几GB这样的内存空间、都需要这样一个页表</span><br><span class="line">现在的内存大多超过了4G、若使用上边的数据结构来保存页面、内存占用会更大、如何处理呢 ？</span><br></pre></td></tr></table></figure>
+
+<h4 id="多级页表"><a href="#多级页表" class="headerlink" title="多级页表"></a>多级页表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">大部分进程占用的内存是有限的、需要的页自然也是有限的、只保存 &#96;用到的页&#96;</span><br><span class="line">之间的映射关系即可</span><br><span class="line"></span><br><span class="line">那、是不是可以选择hash表呢 ？其实采用的是多级页表. 为什么呢 ？</span><br><span class="line"></span><br><span class="line">在整个进程的内存地址空间、通常是 &#96;两头实、中间空&#96;. 在程序运行的时候、内存地址从顶部往下、</span><br><span class="line">不断分配占用的桟的空间. 而堆的空间、则是从底部往上、不断分配占用的</span><br><span class="line"></span><br><span class="line">所以、在一个世纪的程序进程里、虚拟内存占用的地址空间、通常是两段连续的空间、而不是完全散落的随机的内存地址. </span><br><span class="line">而多级页表、就很适合这样的内存地址分布</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以一个4级的多级页表为例: 同一个虚拟内存地址、偏移量的部分和简单页表一样不变、但原有的页号部分、拆成4段、从低到高、分成4级到1级这样4个页表索引</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-2446e7a120d4d843.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">对应的、一个进程会有一个4级页表、先通过4级页表索引、找到4级页表里对应的条目Entry. 存放的是一张3级页表所在的位置</span><br><span class="line">4级页表的每一个条目、都对应这一张3级页表、所以可能有多张3级页表</span><br><span class="line"></span><br><span class="line">找到对应的3级页表之后、用3级页表找对应3级索引的条目.</span><br><span class="line">3级页表的索引会指向一个2级页表、同样、二级页表使用索引指向1级页表</span><br><span class="line">1级页表的条目对应的数据内容是物理页号.</span><br><span class="line">拿到物理页号之后、使用 &#96;页号 + 偏移量 &#96; 得到最终的物理内存地址</span><br><span class="line"></span><br><span class="line">可能有很多张1级页表、2级页表甚至3级页表、但: 因为实际的虚拟内存地址通常是连续的、可能只需要很少的2级页表、甚至只需要一张3级页表就可以了</span><br><span class="line">事实上、多级页表就像一个多叉树、常称为页表树(Page Table Tree)</span><br><span class="line"></span><br><span class="line">因为虚拟地址分布的连续性、树的第一层节点的指针、很多是空的、无需对应子树、找最终物理页号</span><br><span class="line">就类似通过一个特定的访问路径、走到树最底层的叶子节点.</span><br><span class="line"></span><br><span class="line">这样分成4级的多级页表来看、若每一级都用5个bit表示、每一张某一级的页表、只需要2^5&#x3D;32个条目</span><br><span class="line">若每个条目还是4个字节、共需要128字节、而一个一级索引表、对应32个4KB的、即共128KB的大小</span><br><span class="line">一个填满的2级索引、对应32个1级索引、即4MB的大小</span><br><span class="line"></span><br><span class="line">若一个进程占用8MB的内存空间、分成2个4MB的连续空间、则它需要2个独立的、填满的2级索引表、</span><br><span class="line">64个1级索引表、2个独立的3级索引表、1个4级索引表、共需要64+2+2+1&#x3D;69个索引表、每个128字节(9KB)</span><br><span class="line">差不多只有简单页表的1&#x2F;500、不过也带来了时间上的开销</span><br><span class="line"></span><br><span class="line">原本只需要一次内存访问就可以找到物理页号、算出物理内存地址、使用4级页表的话、就需要4次内存访问、才能找到物理页号</span><br></pre></td></tr></table></figure>
+
+<p>思考:</p>
+<blockquote>
+<p>内存访问比Cache的性能要差很多、原本只是要做一个简单地址转换、反而要访问好几次内存、时间性能的损耗如何优化呢 ？</p>
+</blockquote>
+<p>— 下文分析</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%A7%A3%E6%9E%90TLB%E5%92%8C%E5%86%85%E5%AD%98%E5%8C%85%E5%90%AB(41%E8%AE%B2)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1284,145 +1407,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_FastDFS%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_FastDFS%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">FastDFS安装部署</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_FastDFS%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" class="post-meta-item leancloud_visitors" data-flag-title="FastDFS安装部署" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_FastDFS%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_FastDFS%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在学习<code>taotao商城</code>这个视频的过程中、用到了<code>fastdfs</code>、刚好自己有一台服务器就自己学习了下、参考了网上多篇文章、感谢各位分享~~</p>
-<p><code>FastDFS</code>是<code>c</code>写的开源分布式文件系统、充分考虑了冗余被人、负载均衡、及线性扩容机制、注重高可用、高性能指标、可以很方便的搭建一套高性能的文件服务器集群提供文件上传、下载等服务~</p>
-<p>###一、FastDFS架构<br><code>FastDFS</code>包括<code>Tracker server</code>和<code>Storage server</code>, 客户端请求<code>Tracker server</code>进行文件上传、下载，通过<code>Tracker server</code>调度最终由<code>Storage server</code>完成文件上传和下载。 <code>Tracker server</code> 的角色类似于<code>dubbo</code>的<code>registry</code>和<code>moniter</code>、并不直接提供服务、而是<code>storage server</code>启动时注册到<code>tracker server</code>, <code>client</code>通过<code>tracker server</code>连接<code>storage server</code>, <code>client</code>不知道自己连接的是哪一台<code>storage server</code>, 连接完成后、上传和下载是<code>client</code>直接请求<code>storage server</code>, 可类比于 <code>dubbo consumer</code>通过<code>registry</code>连接<code>dubbo service</code> 但、连接完成之后是<code>consumer</code>和<code>service</code>直接通信</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-81571b0c67e068ef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="fastdfs.jpg"></p>
-<p>#####文件上传流程<br><img src="https://upload-images.jianshu.io/upload_images/14027542-2c255cded5753807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="文件上传流程.png"></p>
-<h5 id="文件下载流程"><a href="#文件下载流程" class="headerlink" title="文件下载流程"></a>文件下载流程</h5><p><img src="https://upload-images.jianshu.io/upload_images/14027542-9b9dcd61bd1a9a57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="文件下载流程.png"></p>
-<p>####1.Tracker Server<br><code>Tracker server</code>作用是负载均衡和调度，通过<code>Tracker server</code>在文件上传时可以根据一些策略找到<code>Storage server</code>提供文件上传服务，可以将tracker称为追踪服务器或调度服务器</p>
-<p>####1.Storage Server<br><code>Storage server</code>作用是文件存储，客户端上传的文件最终存储在<code>Storage</code>服务器上，<code>Storage server</code>没有实现自己的文件系统而是利用操作系统的文件系统来管理文件。可以将<code>storage</code>称为存储服务器。</p>
-<h3 id="二、FastDFS安装"><a href="#二、FastDFS安装" class="headerlink" title="二、FastDFS安装"></a>二、FastDFS安装</h3><p>####1.安装libfastcommon</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. 下载：</span><br><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;happyfish100&#x2F;libfastcommon&#x2F;archive&#x2F;V1.0.7.tar.gz</span><br><span class="line">2. 修改名字：mv V1.0.7 libfastcommon-1.0.7.tar.gz</span><br><span class="line">3. 解压：tar zxvf libfastcommon-1.0.7.tar.gz</span><br><span class="line">4. cd libfastcommon-1.0.7&#x2F;</span><br><span class="line">5. 编译：.&#x2F;make.sh</span><br><span class="line">6. 安装：.&#x2F;make.sh install</span><br><span class="line"></span><br><span class="line">另外：</span><br><span class="line">设置几个软链接、方便后续扩展nginx时使用：</span><br><span class="line">ln -s &#x2F;usr&#x2F;lib64&#x2F;libfastcommon.so &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libfastcommon.so</span><br><span class="line">ln -s &#x2F;usr&#x2F;lib64&#x2F;libfastcommon.so &#x2F;usr&#x2F;lib&#x2F;libfastcommon.so</span><br><span class="line">ln -s &#x2F;usr&#x2F;lib64&#x2F;libfdfsclient.so &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libfdfsclient.so</span><br><span class="line">ln -s &#x2F;usr&#x2F;lib64&#x2F;libfdfsclient.so &#x2F;usr&#x2F;lib&#x2F;libfdfsclient.so</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-安装-tracker"><a href="#2-安装-tracker" class="headerlink" title="2. 安装 tracker"></a>2. 安装 tracker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 下载：</span><br><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;happyfish100&#x2F;fastdfs&#x2F;archive&#x2F;V5.05.tar.gz</span><br><span class="line">2. 修改名字：mv V5.05 FastDFS_v5.05.tar.gz</span><br><span class="line">3. 解压：tar zxvf FastDFS_v5.05.tar.gz</span><br><span class="line">4. 进入解压后目录：cd fastdfs-5.05&#x2F;</span><br><span class="line">5. 编译：.&#x2F;make.sh</span><br><span class="line">6. 安装：.&#x2F;make.sh install</span><br></pre></td></tr></table></figure>
-<h4 id="3-修改tracker配置文件"><a href="#3-修改tracker配置文件" class="headerlink" title="3. 修改tracker配置文件"></a>3. 修改tracker配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2安装完成后、在&#x2F;etd&#x2F;fdfs下有tracker的配置文件</span><br><span class="line">复制一份：cp &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf.sample &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf</span><br><span class="line">mkdir -p &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;  (此处可以根据自己的情况和习惯存放)</span><br><span class="line">base_path&#x3D; &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;</span><br><span class="line"></span><br><span class="line">启动 tracker 服务：&#x2F;usr&#x2F;bin&#x2F;fdfs_trackerd &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf</span><br><span class="line">重启 tracker 服务：&#x2F;usr&#x2F;bin&#x2F;fdfs_trackerd &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf restart</span><br><span class="line">查看是否有 tracker 进程：ps aux | grep tracker</span><br></pre></td></tr></table></figure>
-<p>####4. storage(存储节点)服务部署</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">一般 storage 服务我们会单独部署到一台服务器上，但是这里为了方便(~~我只有一台服务器~~)就安装在同一台上了</span><br><span class="line"></span><br><span class="line">如果单独部署到一台服务器上、上边tracker的部署步骤重新来一遍即可</span><br><span class="line">这里是同一台server、只修改配置~~</span><br><span class="line"></span><br><span class="line">复制一份配置：cp &#x2F;etc&#x2F;fdfs&#x2F;storage.conf.sample &#x2F;etc&#x2F;fdfs&#x2F;storage.conf</span><br><span class="line">编辑：vim &#x2F;etc&#x2F;fdfs&#x2F;storage.conf</span><br><span class="line">base_path&#x3D; &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;</span><br><span class="line"></span><br><span class="line">创建目录：mkdir  &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;storage&#x2F;images-data</span><br><span class="line">store_path0&#x3D; &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;storage&#x2F;images-data</span><br><span class="line"></span><br><span class="line">图片实际存放路径，如果有多个，这里可以有多行(要创建多个目录)：</span><br><span class="line">store_path0&#x3D;&#x2F;opt&#x2F;fastdfs&#x2F;storage&#x2F;images-data0</span><br><span class="line">store_path1&#x3D;&#x2F;opt&#x2F;fastdfs&#x2F;storage&#x2F;images-data1</span><br><span class="line"></span><br><span class="line">subdir_count_per_path&#x3D;256 </span><br><span class="line">是用来配置目录个数的、如果只是练习不做实际存储服务、可改小一点儿</span><br><span class="line"></span><br><span class="line">指定 tracker 服务器的 IP 和端口</span><br><span class="line">tracker_server&#x3D;192.168.1.114:22122 (192.168.1.114)是你的server服务器ip、本机也可以使用(0.0.0.0:22122)、记得不可使用127.0.0.1</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-测试服务"><a href="#5-测试服务" class="headerlink" title="5. 测试服务"></a>5. 测试服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">启动 storage 服务：&#x2F;usr&#x2F;bin&#x2F;fdfs_storaged &#x2F;etc&#x2F;fdfs&#x2F;storage.conf，首次启动会很慢，因为它在创建预设存储文件的目录</span><br><span class="line">重启 storage 服务：&#x2F;usr&#x2F;bin&#x2F;fdfs_storaged &#x2F;etc&#x2F;fdfs&#x2F;storage.conf restart</span><br><span class="line">查看是否有 storage 进程：ps aux | grep storage</span><br></pre></td></tr></table></figure>
-
-<p>####6. 查看<code>tracker</code>是否可以正常与<code>storage</code>通信</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fdfs_monitor &#x2F;etc&#x2F;fdfs&#x2F;storage.conf</span><br><span class="line">...</span><br><span class="line">Storage 1:</span><br><span class="line">        id &#x3D; 192.168.2.231</span><br><span class="line">        ip_addr &#x3D; 192.168.2.231  ACTIVE --若看到ACTIVE这个字样、代表可以正常通信</span><br><span class="line">...</span><br><span class="line">查看storage和tracker是否正常启动：</span><br><span class="line">ps aux | grep fdfs</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c47e3762cf5b81c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="进程.png"></p>
-<h4 id="7-使用fdfs-client测试"><a href="#7-使用fdfs-client测试" class="headerlink" title="7. 使用fdfs_client测试"></a>7. 使用fdfs_client测试</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">复制一份配置：cp &#x2F;etc&#x2F;fdfs&#x2F;client.conf.sample &#x2F;etc&#x2F;fdfs&#x2F;client.conf</span><br><span class="line">编辑：vim &#x2F;etc&#x2F;fdfs&#x2F;client.conf</span><br><span class="line"></span><br><span class="line">base_path&#x3D; &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;</span><br><span class="line"></span><br><span class="line">指定 tracker 服务器的 IP 和端口</span><br><span class="line">tracker_server&#x3D;192.168.1.114:22122</span><br><span class="line">log_level&#x3D;info</span><br><span class="line"></span><br><span class="line">echo asasasa &gt; ~&#x2F;test.txt</span><br><span class="line"></span><br><span class="line">测试：fdfs_test &#x2F;etc&#x2F;fdfs&#x2F;client.conf upload ~&#x2F;test.txt </span><br><span class="line">可以看到如下图所示、就是上传成功了</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-3ebfd5dda0a5732d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test.png"></p>
-<p>####8. 安装Nginx和其插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">如果Nginx已经安装过，则仅需要fastdfs-nginx-module_v1.16.tar.gz</span><br><span class="line">下载nginx：wget http:&#x2F;&#x2F;nginx.org&#x2F;download&#x2F;nginx-1.11.8.tar.gz</span><br><span class="line">下载Nginx插件:wget http:&#x2F;&#x2F;jaist.dl.sourceforge.NET&#x2F;project&#x2F;fastdfs&#x2F;FastDFS%20Nginx%20Module%20Source%20Code&#x2F;fastdfs-nginx-module_v1.16.tar.gz</span><br><span class="line">解压 Nginx 模块：tar zxvf fastdfs-nginx-module_v1.16.tar.gz</span><br><span class="line">进入解压后的目录 </span><br><span class="line">cd fastdfs-nginx-module</span><br><span class="line">vim src&#x2F;config</span><br><span class="line">修改：去掉local、因为实际安装fastdfs时、是放到了&#x2F;usr&#x2F;include下</span><br><span class="line">1. CORE_INCS&#x3D;&quot;$CORE_INCS &#x2F;usr&#x2F;local&#x2F;include&#x2F;fastdfs &#x2F;usr&#x2F;local&#x2F;include&#x2F;fastcommon&#x2F;&quot;</span><br><span class="line">-&gt; CORE_INCS&#x3D;&quot;$CORE_INCS &#x2F;usr&#x2F;include&#x2F;fastdfs &#x2F;usr&#x2F;include&#x2F;fastcommon&#x2F;&quot;</span><br><span class="line"></span><br><span class="line">2.  CORE_LIBS&#x3D;&quot;$CORE_LIBS -L&#x2F;usr&#x2F;local&#x2F;lib -lfastcommon -lfdfsclient&quot;</span><br><span class="line">-&gt; CORE_LIBS&#x3D;&quot;$CORE_LIBS -L&#x2F;usr&#x2F;lib -lfastcommon -lfdfsclient&quot;</span><br><span class="line"></span><br><span class="line">回到nginx的解压目录</span><br><span class="line">cd ..&#x2F;nginx-1.11.8</span><br><span class="line">sudo .&#x2F;configure  --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx --sbin-path&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;nginx --conf-path&#x3D;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf --pid-path&#x3D;&#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;nginx.pid --lock-path&#x3D;&#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;nginx.lock --error-log-path&#x3D;&#x2F;usr&#x2F;local&#x2F;var&#x2F;log&#x2F;nginx&#x2F;^Cror.log --http-log-path&#x3D;&#x2F;usr&#x2F;local&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log --with-http_gzip_static_module --with-http_stub_status_module --with-http_ssl_module --with-file-aio --add-module&#x3D;&#x2F;home&#x2F;nj&#x2F;build&#x2F;fastdfs-nginx-module&#x2F;src</span><br><span class="line"></span><br><span class="line">sudo make  &amp;&amp; sudo  make install （若是有权限的账户、可以不用加sudo、我使用的是普通用户）</span><br></pre></td></tr></table></figure>
-
-<p>####9. 整个fastdfs-nginx-module和nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">copy fastdfs-nginx-module的配置文件到 &#x2F;etc&#x2F;fdfs下、方便查找</span><br><span class="line">cp &#x2F;home&#x2F;nj&#x2F;build&#x2F;fastdfs-nginx-module&#x2F;src&#x2F;mod_fdfs.conf &#x2F;etc&#x2F;fdfs</span><br><span class="line">vi &#x2F;etc&#x2F;fdfs&#x2F;mod_fdfs.conf</span><br><span class="line"></span><br><span class="line">base_path&#x3D;&#x2F;usr&#x2F;local&#x2F;fastdfs</span><br><span class="line">tracker_server&#x3D;192.168.1.114:22122</span><br><span class="line">url_have_group_name &#x3D; true</span><br><span class="line">store_path0&#x3D;&#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;storage</span><br></pre></td></tr></table></figure>
-
-<p>####10. 然后配置Nginx，添加如下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">        </span><br><span class="line">         # 配置fastdfs的访问路径</span><br><span class="line">        location &#x2F;group1&#x2F;M00 &#123;</span><br><span class="line">            ngx_fastdfs_module;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">启动nginx</span><br></pre></td></tr></table></figure>
-
-<h4 id="用浏览器访问刚才步骤7中测试上传的文件："><a href="#用浏览器访问刚才步骤7中测试上传的文件：" class="headerlink" title="用浏览器访问刚才步骤7中测试上传的文件："></a>用浏览器访问刚才步骤7中测试上传的文件：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;xxxx&#x2F;group1&#x2F;M00&#x2F;00&#x2F;00&#x2F;fwAAAVu0UTSAZiNHAAAACE6c2W4921_big.txt</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-2fc2f16221227b59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片存储测试.png"></p>
-<h3 id="哦啦-到此安装完成、可以使用了"><a href="#哦啦-到此安装完成、可以使用了" class="headerlink" title="^.^哦啦~ 到此安装完成、可以使用了~"></a><code>^.^</code>哦啦~ 到此安装完成、可以使用了<del>~</del></h3><p>####另外：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fastdfs提供了php_client、可以使用php调用fastdfs的服务</span><br><span class="line">参考：</span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;happyfish100&#x2F;fastdfs&#x2F;tree&#x2F;master&#x2F;php_client&#x2F;FastDFS%20Nginx%20Module%20Source%20Code&#x2F;fastdfs-nginx-module_v1.16.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h4 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h4><blockquote>
-<ol>
-<li><a href="https://github.com/happyfish100/fastdfs/tree/master/php_client" target="_blank" rel="noopener">https://github.com/happyfish100/fastdfs/tree/master/php_client</a></li>
-<li><a href="https://www.waitig.com/fastdfs%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4.html" target="_blank" rel="noopener">https://www.waitig.com/fastdfs%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4.html</a></li>
-<li><a href="https://www.codetd.com/article/3138763" target="_blank" rel="noopener">https://www.codetd.com/article/3138763</a></li>
-<li><a href="http://soartju.iteye.com/blog/803477" target="_blank" rel="noopener">http://soartju.iteye.com/blog/803477</a><br>等多个网络资源…</li>
-</ol>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1495,7 +1479,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">154</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

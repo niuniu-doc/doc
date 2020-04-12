@@ -192,6 +192,250 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-title-link" itemprop="url">平均负载</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-meta-item leancloud_visitors" data-flag-title="平均负载" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
+<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
+<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
+<blockquote>
+<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
+<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
+</blockquote>
+<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
+
+
+
+<p>CPU核数查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
+</blockquote>
+<p>平均负载与CPU使用率</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
+
+
+
+<p>案例分析</p>
+<p>一、CPU密集型进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
+<p>二、IO密集型进程</p>
+<p>查看方式同上</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">curd操作</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" class="post-meta-item leancloud_visitors" data-flag-title="curd操作" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><p><code>$sum</code>: 计算总和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select count(1) from table group by f1; </span><br><span class="line"></span><br><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt;select field,sum(f2) from table group by f1;</span><br></pre></td></tr></table></figure>
+<p><code>$avg</code>: 计算平均值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;, avg:&#123;$avg:$f&#125;&#125;&#125;])</span><br><span class="line">-&gt; select field,avg(f) from table group by field;</span><br></pre></td></tr></table></figure>
+<p><code>$min</code>: 获取集合中所有文档对应的最小值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;,min:&#123;$min:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select min(f2) from table group by field;</span><br></pre></td></tr></table></figure>
+<p><code>$max</code>: 获取集合中所有文档对应的最大值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考min</span><br></pre></td></tr></table></figure>
+<p><code>$push</code>: 在结果文档中插入值到一个数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,url:&#123;$push:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$first</code>: 根据资源文档的排序获取第一个文档数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,first_url:&#123;$first:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$last</code>: 根据资源文档的排序获取最后一个文档数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考first</span><br></pre></td></tr></table></figure>
+
+<p><code>$project</code> 修改输出文档的结构<br><code>$match</code> 用于过滤数据、<br><code>$limit</code> 限制返回条数<br><code>$skip</code> 跳过指定条数的文档<br><code>$unwind</code> 将某个数组类型字段拆分成多条<br><code>$group</code> 将集合中的文档分组、可用于统计结果<br><code>$sort</code> 将文档排序后输出</p>
+<p>eg.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;)</span><br><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;,[&#123;$match:&#123;score:&#123;$gt:70,$lte:90&#125;&#125;&#125;,&#123;$group:&#123;_id:null,count:&#123;$sum:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">map ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</span><br><span class="line">reduce 统计函数，reduce函数的任务就是将key-values变成key-value，也就是把values数组变成一个单一的值value。。</span><br><span class="line">out 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</span><br><span class="line">query 一个筛选条件，只有满足条件的文档才会调用map函数。（query。limit，sort可以随意组合）</span><br><span class="line">sort 和limit结合的sort排序参数（也是在发往map函数前给文档排序），可以优化分组机制</span><br><span class="line">limit 发往map函数的文档数量的上限（要是没有limit，单独使用sort的用处不大）</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -361,250 +605,6 @@ ROOT_DEV= 0x306
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">curd操作</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" class="post-meta-item leancloud_visitors" data-flag-title="curd操作" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><p><code>$sum</code>: 计算总和</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select count(1) from table group by f1; </span><br><span class="line"></span><br><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt;select field,sum(f2) from table group by f1;</span><br></pre></td></tr></table></figure>
-<p><code>$avg</code>: 计算平均值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;, avg:&#123;$avg:$f&#125;&#125;&#125;])</span><br><span class="line">-&gt; select field,avg(f) from table group by field;</span><br></pre></td></tr></table></figure>
-<p><code>$min</code>: 获取集合中所有文档对应的最小值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;,min:&#123;$min:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select min(f2) from table group by field;</span><br></pre></td></tr></table></figure>
-<p><code>$max</code>: 获取集合中所有文档对应的最大值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考min</span><br></pre></td></tr></table></figure>
-<p><code>$push</code>: 在结果文档中插入值到一个数组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,url:&#123;$push:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-<p><code>$first</code>: 根据资源文档的排序获取第一个文档数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,first_url:&#123;$first:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-<p><code>$last</code>: 根据资源文档的排序获取最后一个文档数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考first</span><br></pre></td></tr></table></figure>
-
-<p><code>$project</code> 修改输出文档的结构<br><code>$match</code> 用于过滤数据、<br><code>$limit</code> 限制返回条数<br><code>$skip</code> 跳过指定条数的文档<br><code>$unwind</code> 将某个数组类型字段拆分成多条<br><code>$group</code> 将集合中的文档分组、可用于统计结果<br><code>$sort</code> 将文档排序后输出</p>
-<p>eg.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;)</span><br><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;,[&#123;$match:&#123;score:&#123;$gt:70,$lte:90&#125;&#125;&#125;,&#123;$group:&#123;_id:null,count:&#123;$sum:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-
-<h4 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">map ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</span><br><span class="line">reduce 统计函数，reduce函数的任务就是将key-values变成key-value，也就是把values数组变成一个单一的值value。。</span><br><span class="line">out 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</span><br><span class="line">query 一个筛选条件，只有满足条件的文档才会调用map函数。（query。limit，sort可以随意组合）</span><br><span class="line">sort 和limit结合的sort排序参数（也是在发往map函数前给文档排序），可以优化分组机制</span><br><span class="line">limit 发往map函数的文档数量的上限（要是没有limit，单独使用sort的用处不大）</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-title-link" itemprop="url">平均负载</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-meta-item leancloud_visitors" data-flag-title="平均负载" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
-<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
-<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
-<blockquote>
-<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
-<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
-</blockquote>
-<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
-
-
-
-<p>CPU核数查看</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
-</blockquote>
-<p>平均负载与CPU使用率</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
-
-
-
-<p>案例分析</p>
-<p>一、CPU密集型进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
-<p>二、IO密集型进程</p>
-<p>查看方式同上</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -685,6 +685,101 @@ ROOT_DEV= 0x306
 <h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. show dbs 查看所有数据的列表</span><br><span class="line">   db 显示当前数据库对象或者集合</span><br><span class="line">   use local 切换到local这个db</span><br><span class="line">2. use niuniu  db不存在时会自动创建</span><br><span class="line">3. db.dropDatabase() 删除一个db</span><br><span class="line"></span><br><span class="line">4. db.createCollection(&quot;niu&quot;) # 先创建集合、类似db中的表</span><br><span class="line">   show tables&#x2F;collections 查看所有的表</span><br><span class="line">   db.niu.drop() # 删除一个table</span><br><span class="line"></span><br><span class="line">5. db.niu.insert(&#123;&quot;name&quot;:&quot;niu&quot;&#125;) 插入文档</span><br><span class="line">6. db.niu.save() 若不指定id, 类似于insert、若指定、会执行更新</span><br><span class="line">7. db.help() 库的帮助信息</span><br><span class="line">8. db.table.help() 表的帮助文档</span><br></pre></td></tr></table></figure>
 
 <h4 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo 192.168.1.100:27017&#x2F;test</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">常用命令</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-meta-item leancloud_visitors" data-flag-title="常用命令" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>cat /proc/cpuinfo | grep &#39;physical id&#39; |  sort| uniq| wc -l</code> 查看物理CPU的个数<br><code>cat /proc/cpuinfo| grep &quot;cpu cores&quot;| uniq</code> 查看每个物理CPU中cores的个数<br><code>cat /proc/cpuinfo| grep &quot;processor&quot;| wc -l</code> 查看逻辑CPU的个数</p>
 
       
     </div>
@@ -1149,121 +1244,6 @@ ROOT_DEV= 0x306
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">MQ的消息模型和事务</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" class="post-meta-item leancloud_visitors" data-flag-title="MQ的消息模型和事务" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="消息队列架构演进"><a href="#消息队列架构演进" class="headerlink" title="消息队列架构演进"></a>消息队列架构演进</h4><p><strong>早期mq就是按照队列的数据结构来设计的</strong><br><img src="https://upload-images.jianshu.io/upload_images/14027542-7491db81233d4005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="早期MQ架构"></p>
-<p>若有多个生产者往同一队列发送消息、这个队列可以消费到生产者消息的集合、顺序为生产者发送消息的自然顺序<br>若多个消费者消费一个队列、这些消费者是竞争关系、只消费到队列的一部分数据<br>需要每个消费者消费全量消息时、只能创建多个Queue、让生产者发送多份数据、并且生产者必须知道有多少消费者、违背了消息队列解耦的初衷</p>
-<p><strong>演进架构</strong><br>发布 - 订阅模型(Publish-Subscribe Pattern)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-83faa4bba38ebc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发布-订阅模型"></p>
-<p>在P-S架构中、msg发送方称为发布者Publisher、接收方称为订阅者Subscriber、服务端存放消息的容器称为主题Topic、消费之前必须先订阅主题</p>
-<p>其实和队列模式没有本质区别、最大的区别在于: 一份数据能不能被消费多次</p>
-<h4 id="RabbitMQ的消息模型"><a href="#RabbitMQ的消息模型" class="headerlink" title="RabbitMQ的消息模型"></a>RabbitMQ的消息模型</h4><p>RabbitMQ是少数坚持使用队列模型的产品之一、它如何解决多个消费者的问题呢 ？<br>Exchange: 位于生产者和队列之间、生产者不关心将消息发送给哪个队列、而是将消息发送给Exchange、由Exchange上配置的策略来决定将消息投递到哪些队列中<br><img src="https://upload-images.jianshu.io/upload_images/14027542-9c144b17627ba919.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RabbitMQ消息模型"></p>
-<p>同一份消息需要被多个消费者消费时、需要配置exchange将消息发送到多个队列、每个队列中存放一份完整的消息数据、</p>
-<h4 id="RocketMQ的消息模型"><a href="#RocketMQ的消息模型" class="headerlink" title="RocketMQ的消息模型"></a>RocketMQ的消息模型</h4><p>RocketMQ使用的是标准的发布-订阅模型、</p>
-<p>普通的MQ都是使用的请求-确认机制、确保消息不会再传递过程中由于网络故障或服务器故障丢失. 在生产端、生产者将消息发给服务端Broker、Broker在收到消息并将消息写入主题或者队列后、会给生产者发送确认的响应、若生产者未收到服务端的确认或者收到失败的响应、会重新发消息; 在消费端、消费者收到消息并完成消费逻辑后也会给服务端发送消费成功的确认、服务端只有在收到消费确认后、才会认为一条消息被成功消费、否则会重发消息</p>
-<p>为了保证消息有序性、在消息被成功消费前、下一条消息不能被消费、否则就出现了消息空洞、违背了有序性的原则、所以 MQ增加了队列的概念、只在队列层面保证消息的有序性、主题层面不保证</p>
-<p>消息会被不同消费组消费、消费完的消息不会立即删除、MQ为每个队列维护了一个消费位置Consumer Offset、每成功消费一条消息、位置就+1</p>
-<h4 id="Kafka的消息模型"><a href="#Kafka的消息模型" class="headerlink" title="Kafka的消息模型"></a>Kafka的消息模型</h4><p>Kafka的消费模型和RocketMQ的模型是完全一样的、唯一的区别是 在Kafka中队列这个概念的名称不同、Kafka对应的概念叫 <code>分区</code> - <code>Partition</code> </p>
-<p>注意:<br>RocketMQ 和 Kafka 的业务模型一样、不代表实现一致、其实实现是完全不同的、就像MySQL和hbase存放数据的单元都是表、实现完全不同、MySQL使用B+树来存储、HBase 使用KV结构存储</p>
-<h4 id="MQ的事务实现"><a href="#MQ的事务实现" class="headerlink" title="MQ的事务实现"></a>MQ的事务实现</h4><p>Kafka 和 RocketMQ 都提供了事务的实现<br>在消息队列上开启一个事务、给服务器发送一个<code>半消息</code>状态、它包含完整的消息内容、但对于消费者不可见、本地事务提交后再提交消息事务<br>但: 如果提交消息事务失败怎么办 ？</p>
-<ol>
-<li>kafka的方案简单粗暴、直接抛异常、用户自行处理</li>
-<li>RocketMQ提供了事务反查机制、若Broker未收到提交或者回滚的请求、Broker会定期去Producer上反查本地事务对应状态、来决定事务提交还是回滚<br><img src="https://upload-images.jianshu.io/upload_images/14027542-40c0cd530d78849e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ol>
-<h4 id="消息可靠性保证"><a href="#消息可靠性保证" class="headerlink" title="消息可靠性保证"></a>消息可靠性保证</h4><p><strong>检测消息丢失</strong><br>1.若基础设施比较完善、一般会有分布式链路追踪系统、可以追踪消息流<br>2.利用消息有序性校验: 给每个发出的消息附加一个连续的序号、若序号不连续、就可以判定为消息丢失<br>注意: 多个producer 和 多个consumer的情况、需要判定每个分区的序列有效性<br><strong>如何保证</strong><br>1.生产阶段、根据不同mq的确认机制、进行对应的处理 eg: kafka -&gt; 捕获异常<br>2.存储阶段、正常broker运行的时候、不会出现消息丢失、但若broker出现了故障或者宕机、是可能丢消息的. 单节点broker可以配置broker在收到消息后立即落盘、broker是集群的时候、可以配置至少2个节点收到消息再确认<br>3.消费阶段、同生产阶段、消费端<em>业务逻辑</em>成功后再回传确认<br>有可能消息再网络传输过程中发生错误、发送方收不到确认就会重发消息、所以Broker 和 Consumer 都可能会收到重复消息、需要注意接口的幂等性</p>
-<p><strong>业务变相实现</strong><br>1.利用数据库的唯一约束实现幂等、<br>2.为更新的数据设置前置条件、满足某种条件才更新<br>3.记录并检查操作(需要考虑唯一ID的生成和多步操作的原子性)</p>
-<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>幂等方案、不止是可以解决消息重复的问题、也同样适用于其它场景.eg: 将HTTP服务设计成幂等的、解决前端或者APP重复提交表单数据问题、也可以将一个微服务设计成幂等的、解决RPC框架自动重试导致的重复调用问题</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_RocketMQ%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1464,7 +1444,7 @@ ROOT_DEV= 0x306
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">154</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_SQL%E6%9B%B4%E6%96%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -206,7 +206,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/mysql_SQL%E6%9B%B4%E6%96%B0/" class="post-title-link" itemprop="url">SQL更新</a>
+            <a href="/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/" class="post-title-link" itemprop="url">Mysql-是如何保障高可用的</a>
         </h1>
 
         <div class="post-meta">
@@ -236,7 +236,7 @@
             </span>
 
           
-            <span id="/2020/03/20/mysql_SQL%E6%9B%B4%E6%96%B0/" class="post-meta-item leancloud_visitors" data-flag-title="SQL更新" title="阅读次数">
+            <span id="/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/" class="post-meta-item leancloud_visitors" data-flag-title="Mysql-是如何保障高可用的" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -251,8 +251,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/mysql_SQL%E6%9B%B4%E6%96%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_SQL%E6%9B%B4%E6%96%B0/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -267,17 +267,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="redolog-重做日志-innodb引擎层特有"><a href="#redolog-重做日志-innodb引擎层特有" class="headerlink" title="redolog(重做日志 - innodb引擎层特有)"></a>redolog(重做日志 - innodb引擎层特有)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MySQL使用AWL(Write-Ahead Logging)技术, 当有记录需要更新的时候、innodb就先把记录写到redo log、并更新内存、这时、更新就算完成. 当innodb引擎比较空闲的时候、会将操作更新到磁盘</span><br><span class="line"></span><br><span class="line">触发更新的点:</span><br><span class="line">1. redo log 写满时(redo log文件大小是固定的 - 循环覆盖) </span><br><span class="line">   write pos: 当前位置 </span><br><span class="line">   check point: 当前要擦除的位置</span><br><span class="line">   write和check间有空间、就代表可更新、否则、就要先擦除记录、推进checkpoint、</span><br><span class="line">2.</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e22222b71aa4fb6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
-<h4 id="binlog-归档日志-MySQL-server层实现"><a href="#binlog-归档日志-MySQL-server层实现" class="headerlink" title="binlog(归档日志 - MySQL server层实现)"></a>binlog(归档日志 - MySQL server层实现)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql引擎实现的日志、与redo log 的差异？</span><br><span class="line">1. redo log 是innodb特有的; binlog是mysql server层实现、所有引擎可以使用</span><br><span class="line">2. redo log 记录的是物理日志、记录的是&quot;在某个数据页上做了什么修改&quot;</span><br><span class="line">   binlog 是逻辑日志、记录的是原始逻辑、eg. 给id&#x3D;2的c字段+1</span><br><span class="line">3. redo log 循环写、空间固定 </span><br><span class="line">    binlog 是追加写、日志写满会切换到下一个</span><br></pre></td></tr></table></figure>
-
-<h4 id="为什么有redo-log-和-binlog-？"><a href="#为什么有redo-log-和-binlog-？" class="headerlink" title="为什么有redo log 和 binlog ？"></a>为什么有redo log 和 binlog ？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sync_binlog: 1 - 每次都持久化到磁盘</span><br><span class="line">binlog: statment格式、记录的是sql语句、</span><br><span class="line">           row格式、记录的是行内容、更新前后都有</span><br><span class="line"></span><br><span class="line">mysql整体包含: </span><br><span class="line">server层 - 主要做的是mysql功能层面的事情、</span><br><span class="line">引擎层 - 负责存储</span><br><span class="line">最初、mysql无innodb引擎、MySQL自带的引擎是myisam、但它没有crash-safe的能力、server层的binlog日志、只能用于归档、innodb是另外一个公司以插件形式引入、用redo log 来实现crash-safe能力</span><br></pre></td></tr></table></figure>
-
-<h4 id="update语句执行"><a href="#update语句执行" class="headerlink" title="update语句执行"></a>update语句执行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">update table set c&#x3D;c+1 where id&#x3D;2</span><br><span class="line">1. 执行器先找引擎取 id&#x3D;2 这一行、id是主键、引擎可以直接使用树搜索找到. 若 id &#x3D; 2 所在的数据页本来就在内存中、直接返回给执行器; 否则、先从磁盘读入内存、再返回</span><br><span class="line">2. 执行器拿到引擎给出的数据行、把值 +1 、得到新的一行数据、再调用引擎接口写入新的数据行</span><br><span class="line">3. 引擎将新的数据行更新到内存、同时将更新操作记录到 redo log. 此时redo log 处于 prepare 状态、然后告诉执行器、执行完成、随时可以提交事务.</span><br><span class="line">4. 执行器生成操作的binlog、并把binlog写入磁盘</span><br><span class="line">5. 执行器调用引擎的提交事务接口、引擎把刚刚写入的redo log改成commit状态、更新完成</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7b1034b758d49c13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="update.png"></p>
-<h4 id="为什么需要两阶段提交"><a href="#为什么需要两阶段提交" class="headerlink" title="为什么需要两阶段提交"></a>为什么需要两阶段提交</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> redo log 和 binlog 是两个独立的逻辑、若不使用两阶段提交、则会是2种情况</span><br><span class="line">1. 先 redo log、 后binlog</span><br><span class="line">   若redolog完成、binlog未完成、进程异常重启、redo log生效、为修改后的值 </span><br><span class="line">  若使用binlog恢复临时库、由于binlog未写完就崩溃、会少一条记录、源库和备库就会出现不一致</span><br><span class="line">2. 先binlog、后 redo log</span><br><span class="line">    binlog写完后crash、redo log未写、在恢复时、认为事务无效、</span><br><span class="line">    binlog已写完、恢复备份库时、认为有效、出现不一致...</span><br><span class="line">所以、为了保证redo log 和 binlog提交状态的逻辑一致性</span><br></pre></td></tr></table></figure>
-
-<h4 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. binlog 是每次update都会写磁盘？</span><br><span class="line">2. 如果 redo log 第一阶段完成(prepare状态)、binlog完成、此时crash、在系统重启之后、这个log会被重放吗</span><br><span class="line">   会、满足prepare 和 binlog的完整、在重启时、会自动执行commit</span><br><span class="line">3. 极端情况下、redo log被写满、新的事务进入、需要擦除redo log(被修改的脏页被迫刷新到磁盘) -&gt; 数据在 commit 之前被持久化、此时如何处理 ？</span><br><span class="line">这些数据在内存中属于无效事务、其它事务读不到、即时被写入磁盘也没关系、再次读入内存时、依然是原逻辑</span><br><span class="line">4. redo log 是顺序写 ？ binlog是随机写 ？</span><br></pre></td></tr></table></figure>
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-242e0ecf16d359cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MySQL主备切换流程.png"></p>
+<p>一、主备延迟<br>数据同步的关键时间节点:</p>
+<ol>
+<li>主库A执行完一个事务、写入binlog、记为 T1;</li>
+<li>传给备库B、将备库B接收完binlog的时刻记为 T2;</li>
+<li>备库B执行完事务的时刻记为 T3;<br>主备延迟: 同一个事务在备库执行完的时间和主库执行完的时间之间的差值: T3 - T1<br>show slave status; - seconds_behind_master表示当前备库延迟时间</li>
+</ol>
+<p>注: 主备机的系统时间不一致时、会不会导致主备延迟值不准 ?<br>不会. 备库连接主库时、会通过执行 select unix_timestamp 获得当前主库的系统时间、与本机不一致时、会在执行 seconds_behind_master 时扣除差值</p>
+<p>二、主备延迟的来源</p>
+<ol>
+<li>有些部署条件下、备库所在机器的性能较差<br>此时一般将备库设为<code>非双1模式</code>. 现在一般会使用对称部署(主备规格相同).</li>
+<li>使用对称部署、为何仍然存在主备延迟 ?<br>备库可能压力较大、存在一些慢查询、导致备库查询消耗大量CPU资源、影响数据同步、造成主备延迟.<br>解决:<br>1) 使用一主多从、分担读压力<br>2) 通过binlog输出到外部系统、如: hadoop, 提供统计类查询</li>
+<li>采用了一主多从、备库的压力不超过主库的情况下、还有什么情况会导致主备延迟呢 ?<br>1) 可能存在大的事务, 因为主库上必须等事务执行完成才会写入binlog、再传给备库、若一个SQL执行10min、这个事务就很可能会导致从库延迟10min.(所以最好不要一次delete太多数据)<br>2) 大表DDL也是一个大事务的场景</li>
+<li>如果备库上也不做大事务了、还有什么原因会导致主备延迟吗 ?<br>备库的并行复制能力.</li>
+</ol>
+<p>三、主备切换策略:</p>
+<ol>
+<li><p>可靠性优先.<br>1) 先判断备库B的 seconds_behind_master 是否小于指定值, 若否、持续观察<br>2) 把主库A改成只读状态, readonly设为true.<br>3) 判断备库B的 seconds_behind_master 值、直到变为0<br>4) 把备库B改为可写入, readonly设为false.<br>5) 将业务请求切到B<br>2~5 的过程、系统处于不可用状态.</p>
+</li>
+<li><p>可用性优先<br>将1中、4)、5) 调整到最开始执行、直接让备库可读写、系统就无不可用时间、但会产生数据不一致. 暂时称为<code>可用性优先策略</code><br>此时若 binlog_format 为: statement、则会发生数据不一致的线下<br>若 binlog_format 为: row、会提示错误</p>
+</li>
+</ol>
+<p>所以、MySQL高可用系统的可用性是依赖于主备延迟的、延迟的时间越小、在主库故障时、服务恢复需要的时间就越短, 可用性就越高.</p>
 
       
     </div>
@@ -676,6 +688,130 @@
 </li>
 </ol>
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_SQL%E6%89%A7%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_SQL%E6%89%A7%E8%A1%8C/" class="post-title-link" itemprop="url">SQL执行</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/mysql_SQL%E6%89%A7%E8%A1%8C/" class="post-meta-item leancloud_visitors" data-flag-title="SQL执行" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/mysql_SQL%E6%89%A7%E8%A1%8C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_SQL%E6%89%A7%E8%A1%8C/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h3 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h3><h4 id="MySQL架构图"><a href="#MySQL架构图" class="headerlink" title="MySQL架构图"></a>MySQL架构图</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-4270d2d72dee925f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<h4 id="server层、"><a href="#server层、" class="headerlink" title="server层、"></a>server层、</h4><blockquote>
+<p>包含连接器、查询缓存、分析器、优化器、执行器等、涵盖mysql大部分核心功能、<br>及mysql所有的内置函数(日期、时间、数学和加密函数等)、所有跨存储引擎的功能<br>(视图、存储过程、触发器等)都在这一层实现</p>
+</blockquote>
+<h5 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql -h$ip -P$port -u$user -p</span><br><span class="line">若 用户名和密码 认证失败、会返回 Access denied for user 的错误</span><br><span class="line">若认证通过、这个连接里的权限都会依赖此时权限表查到的权限</span><br><span class="line">此时用admin账号修改该用户的权限、不会立即生效、会在重新连接时生效</span><br><span class="line"></span><br><span class="line">连接完成后、无后续动作、则连接处于sleep状态、</span><br><span class="line"></span><br><span class="line">client 长时间(wait_time参数控制)不操作、连接器会断开连接</span><br><span class="line"></span><br><span class="line">连接断开之后、再发送请求、会收到 Lost connection to mysql server during query的响应</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-60a2493de769f5b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-18905125b398ebe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-ee3accb459dc1246.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">key 是 sql、value是查询结果 - 任意更新会导致缓存失效</span><br><span class="line">不建议使用</span><br></pre></td></tr></table></figure>
+
+<h5 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">词法分析: 根据关键词识别语句类型 select&#x2F;update&#x2F;insert</span><br><span class="line">语法分析: 若有语法错误、会返回 You have an error in your SQL </span><br><span class="line"></span><br><span class="line">elect 1 from t where id&#x3D;1;</span><br><span class="line">ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;elect 1 from t where id&#x3D;1&#39; at line 1</span><br><span class="line">                         </span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">##### 优化器</span><br></pre></td></tr></table></figure>
+<p>经过分析器、mysql知道了想要做什么、优化器干什么呢 ？</p>
+<ol>
+<li>表中有多个索引的时候、决定使用哪个索引</li>
+<li>多表join的时候、决定连表顺序</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![image.png](https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;14027542-b2765ac683595a26.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 执行器</span><br></pre></td></tr></table></figure>
+<p>在分析器、优化器之后、mysql知道了要做什么、怎么做、就开始进入到执行器阶段、开始执行</p>
+<ol>
+<li><p>命中查询缓存、会在查询缓存返回结果时进行权限验证</p>
+</li>
+<li><p>非命中 先验证权限、无 -&gt; 直接返回错误</p>
+<pre><code>有 -&gt; 执行SQL</code></pre></li>
+<li><p>eg. mysql&gt; select * from T where ID=10;</p>
+<p> 若 id 无索引:<br> 1) 调用innodb引擎接口查询第一行、若id = 10、存入结果集、否则 跳过、继续<br> 2) 调用引擎接口取下一行、直至最后一行<br> 3) 执行器将满足结果的行作为结果集返回给client</p>
+<p> 若id 有索引:<br> 1) 调用innodb查询 满足条件的 第一行、放入结果集<br> 2) 查询满足条件的下一行..<br> 3) 将结果集返回给client</p>
+<p>在db慢SQL中、有一个 rows_examined 字段、表示在SQL执行过程中扫描了多少行、<br>是在 执行器 调用 引擎 获取数据行的时候累计的、<br>注：有些情况下、执行器调用一次会扫描很多行、所以 实际扫描行数 != rows_examined</p>
+</li>
+</ol>
+<pre><code></code></pre>
       
     </div>
 
@@ -1388,138 +1524,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E4%B8%BB%E5%BA%93%E5%BC%82%E5%B8%B8%E3%80%81%E4%BB%8E%E5%BA%93%E6%80%8E%E4%B9%88%E5%8A%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/mysql_%E4%B8%BB%E5%BA%93%E5%BC%82%E5%B8%B8%E3%80%81%E4%BB%8E%E5%BA%93%E6%80%8E%E4%B9%88%E5%8A%9E/" class="post-title-link" itemprop="url">主库异常、从库怎么办</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/mysql_%E4%B8%BB%E5%BA%93%E5%BC%82%E5%B8%B8%E3%80%81%E4%BB%8E%E5%BA%93%E6%80%8E%E4%B9%88%E5%8A%9E/" class="post-meta-item leancloud_visitors" data-flag-title="主库异常、从库怎么办" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/mysql_%E4%B8%BB%E5%BA%93%E5%BC%82%E5%B8%B8%E3%80%81%E4%BB%8E%E5%BA%93%E6%80%8E%E4%B9%88%E5%8A%9E/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_%E4%B8%BB%E5%BA%93%E5%BC%82%E5%B8%B8%E3%80%81%E4%BB%8E%E5%BA%93%E6%80%8E%E4%B9%88%E5%8A%9E/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-d8b11878314944da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/440" alt="一主多从基本架构.png"><br>说明: 虚箭头表示主备关系、从库B、C、D指向主库A</p>
-<blockquote>
-<p>那么、当主库A发生故障时、A’会成为新的主库、具体怎么切换的呢 ?</p>
-</blockquote>
-<p>一、基于位点的主备复制<br>当需要把节点B设置为A’的从库时、需要执行<code>change master</code>命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">change master to</span><br><span class="line">master_host&#x3D;$host_name</span><br><span class="line">master_port&#x3D;$port</span><br><span class="line">master_user&#x3D;$user_name</span><br><span class="line">master_password&#x3D;$password</span><br><span class="line">master_log_file&#x3D;$master_log_name</span><br><span class="line">master_log_pos&#x3D;$master_log_pos</span><br></pre></td></tr></table></figure>
-<p>其中, <code>master_log_file</code>和<code>master_log_pos</code>表示要从从库的<code>master_log_name</code>文件的<code>master_log_pos</code>位置开始同步, 即: 主库对应文件名和日志偏移量</p>
-<ol>
-<li>如何获取同步位点(偏移量)呢 ?<br>方法一：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 等待新主库&#96;A&#39;&#96; 把中转日志 relay log全部同步完成</span><br><span class="line">2. 在&#96;A&#39;&#96;上执行 show master status命令、得到&#96;A&#39;&#96;上最新的File和Position</span><br><span class="line">3. 取原主库A故障的时刻T</span><br><span class="line">4. 用mysqlbinlog工具解析&#96;A&#39;&#96;的File、得到T时刻的位点</span><br><span class="line"></span><br><span class="line">mysqlbinlog File --stop-datatime&#x3D;T --start-datetime&#x3D;T， 如下图所示 end_log_pos的值</span><br></pre></td></tr></table></figure>
-<img src="https://upload-images.jianshu.io/upload_images/14027542-11317714a2bf6581.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>但这样得到的值并不精准、假设 T时刻、主库A完成insert操作、插入行R、将binlog传给了A’ 和 B、传完的瞬间A故障, 此时系统状态为:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 从库B已经同步了binlog、R已存在</span><br><span class="line">2. 在新的主库&#96;A&#39;&#96;, R也存在、且是写在123这个位置后的、</span><br><span class="line">3. 在从库B上执行 change master时、指向&#96;A&#39;&#96;的123位置、R的binlog再次同步到从库B、造成主键冲突.</span><br></pre></td></tr></table></figure>
-通常情况下会主动跳过错误, 有两种方式可以主动跳过:</li>
-<li>主动跳过一个事务<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> sql_slave_skip_counter=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</span><br></pre></td></tr></table></figure></li>
-<li>跳过指定类型的错误<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1062 <span class="keyword">insert</span>唯一键冲突</span><br><span class="line"><span class="number">1032</span> 删除数据时、找不到行</span><br><span class="line">slave_skip_errors=<span class="string">'1032,1062'</span>; 会主动跳过这两类的错误</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>方法二、GTID<br>通过sql_slave_skip_counter跳过事务和slave_skip_errors忽略错误的方法、虽然最终可以建立新的主备关系、但操作复杂、容易出错、Mysql5.6引入了<code>GTID(Global Transaction Identifier)</code>. 格式:<code>GTID=server_uuid:gno</code><br>其中:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">server_uuid 是实例第一次启动时生成的, 全局唯一</span><br><span class="line">gno是一个整数、初始值是1, 每次提交事务时分配给这个事务、并+1</span><br></pre></td></tr></table></figure>
-<p>官方定义: <code>GTID=source_id:transaction_id</code></p>
-<p>GTID模式的启动很简单、只需要启动是增加参数:<br>gtid_mode=on 和 enforce_gtid_consistency=on 即可.</p>
-<p>GTID模式下、每个事务都会跟一个GTID对应、有两种生成方式, 具体使用哪种取决于 session 变量和 gtid_next 的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 若 gtid_next&#x3D;automatic, 代表使用默认值、Mysql会把server_uuid:gno 分配给它</span><br><span class="line">   a. 记录binlog时、先记录一行set</span><br><span class="line">       @@session.gtid_mext &#x3D; &#39;server_uuid.gno&#39;</span><br><span class="line">   b. 把这个gtid加入到本实例的gtid集合 </span><br><span class="line">2. 若gtid是固定的值、eg. 通过set gtid_next&#x3D;&#39;current_gtid&#39;指定、会有两种可能性:</span><br><span class="line">   a. 若current_gtid已存在实例的gtid集合、接下来的事务会被系统忽略</span><br><span class="line">   b. 若不再、就将该值分配给要执行的事务、系统不需要生成、gno也不用+1</span><br></pre></td></tr></table></figure>
-<p>这样、MySQL维护了一个GTID集合、用来对应<code>实例执行过的所有事务</code></p>
-<p>当出现主键冲突时、可以通过GTID加入的方式、跳过事务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set gtid_next&#x3D;&#39;conflict gtid&#39;; </span><br><span class="line">begin;</span><br><span class="line">commit; &#x2F;&#x2F; 通过提交一个空事务、将gtid加入到实例X的GTID集合</span><br><span class="line">set gtid_next&#x3D;automatic; &#x2F;&#x2F; 恢复GTID自动分配模式</span><br><span class="line">start slave; &#x2F;&#x2F; 启动从库</span><br></pre></td></tr></table></figure>
-
-
-<p>二、基于GTID的主备切换</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span></span><br><span class="line">master_host=$host_name</span><br><span class="line">master_port=$port</span><br><span class="line">master_user=$user_name</span><br><span class="line">master_password=$<span class="keyword">password</span></span><br><span class="line">master_auto_position=<span class="number">1</span> // 表示主备关系使用的是gtid协议</span><br></pre></td></tr></table></figure>
-<p>主备切换逻辑:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 实例B指向主库&#96;A&#39;&#96;, 基于主备协议建立连接</span><br><span class="line">2. 实例B把 set_b 发送给主库 &#96;A&#39;&#96;</span><br><span class="line">3. 实例&#96;A&#39;&#96;算出 set_a 与 set_b的差集、即: 所有存在于 set_a、但不存在于 set_b 的gtid集合、判断&#96;A&#39;&#96;本地是否包含了这个差集需要的所有binlog事务</span><br><span class="line">   a. 若不包含、表示 &#96;A&#39;&#96; 已经把实例B需要的binlog删除掉、直接返回错误</span><br><span class="line">   b. 若包含、&#96;A&#39;&#96;从自己的binlog找到第一个不在 set_b 的事务、发给B</span><br><span class="line">4. 从该事务开始、往后读文件、按顺序读取binlog发送给B执行.</span><br></pre></td></tr></table></figure>
-<p>其实、这里边包含了一个设计思想: 在基于GTID的主备关系里、系统认为只要建立主备关系、就必须要保证主库发给备库的日志是完整的、若实例B需要的日志已经不存在、<code>A&#39;</code>就拒绝发送给B</p>
-<p>这跟基于位点的主备协议不同. 基于位点的协议、是由备库决定的、备库指定哪个位点、主库就发送哪个位点、不做日志的完整性判断. GTID是备库自动判断的.</p>
-<p>思考:</p>
-<blockquote>
-<p>若在GTID模式下设置主从关系的时候、从库执行start slave命令后、主库发现需要的binlog已经被删除掉了、导致主备创建不成功. 怎么处理呢 ?</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 若业务允许主从不一致、可以在主库上执行 &#96;show global variables like gtid_purged&#96;、得到主库已经删除的gtid集合、假设是 gtid_purged1, 然后先在从库执行 reset master, 再执行 set global gtid_purged&#x3D;gtid_purged1; 最后执行 start slave, 就会从现存binlog开始同步.</span><br><span class="line">2. 若需要主从数据一致的话、最好还是通过重新搭建从库来做</span><br><span class="line">3. 若其它从库有全量binlog的话、可以把新的从库先接到全量binlog的从库、追上日志以后、若有需要、再切回主库</span><br><span class="line">4. 若binlog有备份、可以先在从库应用缺失的binlog、然后再执行start slave.</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1592,7 +1596,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">154</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

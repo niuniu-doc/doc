@@ -339,6 +339,45 @@
       </tags>
   </entry>
   <entry>
+    <title>Idea使用leetcode插件</title>
+    <url>/2020/03/20/Tools_idea-leetcode-plugin/</url>
+    <content><![CDATA[<h4 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h4><p>这种方式相对比较简单, <code>idea</code> -&gt; <code>Preference</code> -&gt; <code>Plugins</code>, 在跳出界面 <code>Marketplace</code> 选项卡下输入<code>leetcode</code>， 就可以看到 <code>leetcode editor</code>这个插件, 点击 <code>Install</code> 安装后重启即可</p>
+<h4 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h4><p><a href="https://plugins.jetbrains.com/plugin/12132-leetcode-editor" target="_blank" rel="noopener">https://plugins.jetbrains.com/plugin/12132-leetcode-editor</a></p>
+<p>下载插件安装包、idea -&gt; Preference -&gt; Plugins, 设置(齿轮型⚙)的图标, 点击选择 <code>Install from Disk</code>, 找到刚刚下载的插件安装, 然后重启即可</p>
+<p>(PS: 我一般喜欢把插件包放在统一目录下、防止文件清理时误删、放哪里不影响使用)</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><a href="https://plugins.jetbrains.com/plugin/12132-leetcode-editor" target="_blank" rel="noopener">https://plugins.jetbrains.com/plugin/12132-leetcode-editor</a> 可以参考官方说明.</p>
+<p>0.0 需要先注册leetcode账户, 将idea与leetcode关联起来. 然后、在右侧导航那里就可以看到 leetcode的小图标了.</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-02dfa5bfc0947db3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>点击图中1处: 展开leetcode设置面板,<br>点击图中2处: 设置leetcode账户关联</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6fa76302691112a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="账户设置.png"><br>其中: </p>
+<p>1) URL要选择你注册的地址 leetcode-cn.com 是中文leetcode网站、<br>          leetcode.com 是英文版的网站、与注册要一致、不然会登录失败<br>2) Code Type 是编程语言<br>3) LoginName 和 Password 就是leetcode的账号、密码了~</p>
+<p>点击图中3处: 登录leetcode账户<br>点击图中4处: 拉取题目列表</p>
+<p>这样就可以愉快的用起来了<sub>~</sub></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Tools</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java元注解</title>
+    <url>/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<p>Java中元注解有4个：<code>@Retention</code>, <code>@Target</code>, <code>@Document</code>, <code>@Inherited</code></p>
+<p><code>@Retention</code>注解的保留位置：<br><code>@Retention(RetentionPolicy.SOURCE)</code> 注解仅存在于源码中、在class字节码文件中不存在<br><code>@Retention(RetentionPolicy.CLASS)</code> 默认保留策略、注解会在class文件中存在、但、运行时无法获得<br><code>@Retention(RetentionPolicy.RUNTIME)</code> 注解会在class文件中存在、并且可以通过反射得到</p>
+<p><code>@Target</code> 注解的作用目标<br><code>@Target(ElementType.TYPE)</code> 接口、类、枚举、注解<br><code>@Target(ElementType.FIELD)</code> 字段、枚举的常量<br><code>@Target(ElementType.METHOD)</code> 方法<br><code>@Target(ElementType.PARAMETER)</code> 方法参数<br><code>@Target(ElementType.CONSTRUCTOR)</code> 构造函数<br><code>@Target(ElementType.LOCAL_VARIABLE)</code> 局部变量<br><code>@Target(ElementType.ANNTATION_TYPE)</code> 注解<br><code>@Target(ElementType.PACKAGE)</code> 包</p>
+<p><code>@Document</code> 说明该注解将会被包含在javadoc中</p>
+<p><code>@Inherited</code> 说明子类可以继承父类中的该注解</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hystrix-MDC跟踪</title>
     <url>/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/</url>
     <content><![CDATA[<p>一、实现HystrixConcurrencyStrategy</p>
@@ -363,22 +402,6 @@
 </ol>
 <p><img src="https://upload-images.jianshu.io/upload_images/14027542-87639bf3513c1838.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>文章参考<br><a href="https://my.oschina.net/u/3748347/blog/1823392" target="_blank" rel="noopener">https://my.oschina.net/u/3748347/blog/1823392</a><br><a href="https://wanghaolistening.github.io/2019/01/26/Hystrix-%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" target="_blank" rel="noopener">https://wanghaolistening.github.io/2019/01/26/Hystrix-%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</a></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java元注解</title>
-    <url>/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<p>Java中元注解有4个：<code>@Retention</code>, <code>@Target</code>, <code>@Document</code>, <code>@Inherited</code></p>
-<p><code>@Retention</code>注解的保留位置：<br><code>@Retention(RetentionPolicy.SOURCE)</code> 注解仅存在于源码中、在class字节码文件中不存在<br><code>@Retention(RetentionPolicy.CLASS)</code> 默认保留策略、注解会在class文件中存在、但、运行时无法获得<br><code>@Retention(RetentionPolicy.RUNTIME)</code> 注解会在class文件中存在、并且可以通过反射得到</p>
-<p><code>@Target</code> 注解的作用目标<br><code>@Target(ElementType.TYPE)</code> 接口、类、枚举、注解<br><code>@Target(ElementType.FIELD)</code> 字段、枚举的常量<br><code>@Target(ElementType.METHOD)</code> 方法<br><code>@Target(ElementType.PARAMETER)</code> 方法参数<br><code>@Target(ElementType.CONSTRUCTOR)</code> 构造函数<br><code>@Target(ElementType.LOCAL_VARIABLE)</code> 局部变量<br><code>@Target(ElementType.ANNTATION_TYPE)</code> 注解<br><code>@Target(ElementType.PACKAGE)</code> 包</p>
-<p><code>@Document</code> 说明该注解将会被包含在javadoc中</p>
-<p><code>@Inherited</code> 说明子类可以继承父类中的该注解</p>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -512,17 +535,29 @@
       </tags>
   </entry>
   <entry>
-    <title>effective-java笔记</title>
-    <url>/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<ul>
-<li>考虑静态工厂方法代替构造器<ol>
-<li>含义更明确</li>
-<li></li>
+    <title>java基础</title>
+    <url>/2020/03/20/java_java%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h4 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Spring的&#96;scope&#96; :</span><br><span class="line">&#96;Singleton&#96; 一个spring容器中、只有一个&#96;bean&#96; 的实例、spring默认配置</span><br><span class="line">&#96;Prototype&#96; 每次调用新建一个bean</span><br><span class="line">&#96;Request&#96; web项目中、给每个http request请求一个bean实例</span><br><span class="line">&#96;Session&#96; web项目中、给每个http session一个bean实例</span><br><span class="line">&#96;GlobalSession&#96; 只有在Portal应用中有、给每个global http request一个bean实例</span><br></pre></td></tr></table></figure>
+<h4 id="postConstructor"><a href="#postConstructor" class="headerlink" title="postConstructor"></a>postConstructor</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PostConstruct 在 construct之后执行、</span><br><span class="line">相当于java配置方式的 @Bean(initMethod&#x3D;&#39;xxx&#39;)、</span><br><span class="line">相当于xml配置方式的 init-method</span><br><span class="line"></span><br><span class="line">@PreDestroy 在bean销毁之前执行、</span><br><span class="line">相当于java配置方式的 @Bean(deatroyMethod&#x3D;&#39;xxx&#39;)</span><br><span class="line">相当于xml配置方式的 destroy-method</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">#### profile</span><br></pre></td></tr></table></figure>
+<p>提供不同环境不同配置文件的支持</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 事件</span><br></pre></td></tr></table></figure>
+<p>Spring的事件为Bean与Bean之间的通信提供了支持、</p>
+<p>1) 自定义事件  继承ApplicationEvent<br>2) 定义事件监听器  实现 ApplicationListener<br>3) 使用容器发布事件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 任务</span><br></pre></td></tr></table></figure>
+<ol>
+<li>异步任务 @Async </li>
+<li>规划任务 @Scheduled 每隔固定时间执行</li>
 </ol>
-</li>
-<li></li>
-</ul>
-]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 桟</span><br></pre></td></tr></table></figure>
+<p>主要用来存放函数调用所需要的数据(函数参数、返回地址及函数内部的局部变量)、但、返回值不在桟中、会有一个专门的返回值存储器、</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 变量的生命周期</span><br></pre></td></tr></table></figure>
+<ol>
+<li>函数中的参数和函数内定义的变量、都分配在桟上、在函数调用时被分配、调用结束释放</li>
+<li>数组和对象 存放变量地址的空间是分配在桟上的、存放变量内容的空间是分配在堆上的<br>函数调用结束、存放变量地址的空间会被立即释放、而存放内容的空间不会、它会因为没有变量引用、而被垃圾回收机制回收掉<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 类和对象的声明周期</span><br></pre></td></tr></table></figure>
+类加载进内存后、一般不会释放、直到程序结束、一般情况下、类只会加载1次、所以、静态变量在内存中只有一份</li>
+</ol>
+<p>对象：每次new创建一个对象的时候、对象产生、在内存中、会存储这个对象的实例变量值、每new一次、对象就会产生一个、就会有一份独立的实例变量</p>
+<pre><code></code></pre>]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -560,37 +595,6 @@
       </tags>
   </entry>
   <entry>
-    <title>java基础</title>
-    <url>/2020/03/20/java_java%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h4 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Spring的&#96;scope&#96; :</span><br><span class="line">&#96;Singleton&#96; 一个spring容器中、只有一个&#96;bean&#96; 的实例、spring默认配置</span><br><span class="line">&#96;Prototype&#96; 每次调用新建一个bean</span><br><span class="line">&#96;Request&#96; web项目中、给每个http request请求一个bean实例</span><br><span class="line">&#96;Session&#96; web项目中、给每个http session一个bean实例</span><br><span class="line">&#96;GlobalSession&#96; 只有在Portal应用中有、给每个global http request一个bean实例</span><br></pre></td></tr></table></figure>
-<h4 id="postConstructor"><a href="#postConstructor" class="headerlink" title="postConstructor"></a>postConstructor</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PostConstruct 在 construct之后执行、</span><br><span class="line">相当于java配置方式的 @Bean(initMethod&#x3D;&#39;xxx&#39;)、</span><br><span class="line">相当于xml配置方式的 init-method</span><br><span class="line"></span><br><span class="line">@PreDestroy 在bean销毁之前执行、</span><br><span class="line">相当于java配置方式的 @Bean(deatroyMethod&#x3D;&#39;xxx&#39;)</span><br><span class="line">相当于xml配置方式的 destroy-method</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">#### profile</span><br></pre></td></tr></table></figure>
-<p>提供不同环境不同配置文件的支持</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 事件</span><br></pre></td></tr></table></figure>
-<p>Spring的事件为Bean与Bean之间的通信提供了支持、</p>
-<p>1) 自定义事件  继承ApplicationEvent<br>2) 定义事件监听器  实现 ApplicationListener<br>3) 使用容器发布事件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 任务</span><br></pre></td></tr></table></figure>
-<ol>
-<li>异步任务 @Async </li>
-<li>规划任务 @Scheduled 每隔固定时间执行</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 桟</span><br></pre></td></tr></table></figure>
-<p>主要用来存放函数调用所需要的数据(函数参数、返回地址及函数内部的局部变量)、但、返回值不在桟中、会有一个专门的返回值存储器、</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 变量的生命周期</span><br></pre></td></tr></table></figure>
-<ol>
-<li>函数中的参数和函数内定义的变量、都分配在桟上、在函数调用时被分配、调用结束释放</li>
-<li>数组和对象 存放变量地址的空间是分配在桟上的、存放变量内容的空间是分配在堆上的<br>函数调用结束、存放变量地址的空间会被立即释放、而存放内容的空间不会、它会因为没有变量引用、而被垃圾回收机制回收掉<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 类和对象的声明周期</span><br></pre></td></tr></table></figure>
-类加载进内存后、一般不会释放、直到程序结束、一般情况下、类只会加载1次、所以、静态变量在内存中只有一份</li>
-</ol>
-<p>对象：每次new创建一个对象的时候、对象产生、在内存中、会存储这个对象的实例变量值、每new一次、对象就会产生一个、就会有一份独立的实例变量</p>
-<pre><code></code></pre>]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java常用注解</title>
     <url>/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/</url>
     <content><![CDATA[<p><code>@Controller</code> mvc中、声明一个控制器<br><code>@Component</code> 声明一个通用组件<br><code>@Repository</code> 声明一个dao组件<br><code>@Service</code> 声明一个service组件</p>
@@ -599,6 +603,25 @@
 <p><code>@RequestMapping</code> 配置url和方法之间的映射关系<br><code>@Conditional</code> 条件注解<br><code>@ResponseBody</code> 将返回值放在response返回体内、而不是返回一个页面<br><code>@RequestBody</code>允许将request参数放在request体中、而不是放在连接地址后边<br><code>@PathVariable</code>用来接收路径参数</p>
 <p>组合注解<br><code>@WiselyConfiguration</code> 代替 <code>@Configuration</code> + <code>@ComponentScan</code><br><code>@RestController</code> 代替 <code>@Controller</code> + <code>@ResponseBody</code><br><code>@SpringBootApplication</code> 组合了<br><code>@Configuration</code>+<code>@EnableAutoConfiguration</code>+<code>@ComponentScan</code></p>
 <p><code>@ConditionalOnBean</code>当容器里有指定的bean的条件下<br><code>@ConditionalOnClass</code> 当类路径下有指定的类的条件下<br><code>@ConditionalOnExpression</code>基于SpEL做判断<br><code>@ConditionalOnJava</code> 基于jvm版本做判断<br><code>@ConditionalOnMissingBean</code> 当容器中无指定bean的条件下<br><code>@ConditionalOnMissingClass</code> 类路径下无指定class的情况下<br><code>@ConditionalOnNotWebApplication</code> 当前项目不是web项目的情况下<br><code>@ConditionalOnWebApplication</code> 当前项目是web项目的情况下<br><code>@ConditionalOnProperty</code> 指定的属性是否有指定值<br><code>@ConditionalOnResource</code> 类路径是否有指定值</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>effective-java笔记</title>
+    <url>/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<ul>
+<li>考虑静态工厂方法代替构造器<ol>
+<li>含义更明确</li>
+<li></li>
+</ol>
+</li>
+<li></li>
+</ul>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -635,6 +658,26 @@
 <p><img src="https://upload-images.jianshu.io/upload_images/14027542-25bef17f4a7bd4d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="analyzer.png"></p>
 <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">如果遇到错误：java.lang.AbstractMethodError</span><br><span class="line">可以检查下分词器的版本是否过低</span><br><span class="line">当前这篇文章使用的solr是7.2.1的版本、使用的是网盘保存的分词器版本、是ok的、</span><br><span class="line">之前使用了 IKAnalyzer2012FF_u1.jar 这个版本、出现的上述错误~</span><br></pre></td></tr></table></figure>
 <p><img src="https://upload-images.jianshu.io/upload_images/14027542-733f055952b7cd35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error.png"></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>zk使用</title>
+    <url>/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1 id="参考配置项"><a href="#参考配置项" class="headerlink" title="参考配置项"></a>参考配置项</h1><p><code>tickTime</code> 用于计算的时间单元、eg. session超时、N*tickTime<br><code>initLimit</code> 用于集群、允许从节点连接、并同步到master节点的初始化连接时间、以tickTime的倍数来表示<br><code>syncLimit</code> 用于集群、master主节点与从节点之间发送消息、请求和应答的时间长度(心跳机制)<br><code>dataDir</code> 数据文件目录、必须<br><code>dataLogDir</code> 日志目录、非必须、默认<code>dataDir</code><br><code>clientPort</code> 连接服务器的端口、默认 <code>2181</code></p>
+<h1 id="client-连接"><a href="#client-连接" class="headerlink" title="client 连接"></a>client 连接</h1><p><code>zkCli.sh</code> 默认连接2181</p>
+<h1 id="client-命令"><a href="#client-命令" class="headerlink" title="client 命令"></a>client 命令</h1><p><code>ls</code> 与linux下<code>ls</code>同义<br><code>ls</code> 等同于  <code>ls</code> + <code>stat</code><br><code>stat</code> 状态显示 zZxid zookeeper为数据分配的id pZxid 子节点的id<br><code>get</code> 查看节点数据<br><code>create</code> 创建节点 -e 临时节点<br><code>set</code> 修改节点数据<br><code>delete</code> 删除节点数据</p>
+<h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><p>构成: scheme: 采用的权限机制<br>(word:anyone:[permissions] |<br>auth:user:password:[permissions] |<br>digest:user:BASE64(SHA1(pass)):[permissions])<br>(ip:192.168.1.1:[permission])<br>(super: 代表超管、拥有所有的权限)</p>
+<p>id: 代表允许访问的机制 </p>
+<p>permissons: 权限</p>
+<p>权限字符缩写 crdwa<br>create: 创建子节点<br>read: 获取节点、子节点<br>write: 设置节点数据<br>delete: 删除子节点<br>admin: 设置权限</p>
+<p><code>getAcl</code> 获取节点的acl权限信息<br><code>setAcl</code> 设置某个节点的acl权限信息<br><code>addAuth</code> 输入认证权限信息、注册时、输入明文密码(登录)、但在zk的系统里、是以密文存在的</p>
+<h1 id="four-letter-cmd"><a href="#four-letter-cmd" class="headerlink" title="four letter cmd"></a>four letter cmd</h1><p><code>stat</code> 当前节点的状态信息<br><code>ruok</code> 当前节点是否ok<br><code>conf</code> 查看服务器相关的配置<br><code>cons</code> 展示连接到server的client信息<br><code>envi</code> 打印环境变量信息<br><code>mntr</code> 监控zk的健康信息<br><code>wchs</code> watcher的信息<br><code>wchc</code> session与watch对应关系信息<br><code>wchp</code> path与watch对应关系</p>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -780,26 +823,6 @@ Humongous Objects的分配和回收:
       </tags>
   </entry>
   <entry>
-    <title>zk使用</title>
-    <url>/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h1 id="参考配置项"><a href="#参考配置项" class="headerlink" title="参考配置项"></a>参考配置项</h1><p><code>tickTime</code> 用于计算的时间单元、eg. session超时、N*tickTime<br><code>initLimit</code> 用于集群、允许从节点连接、并同步到master节点的初始化连接时间、以tickTime的倍数来表示<br><code>syncLimit</code> 用于集群、master主节点与从节点之间发送消息、请求和应答的时间长度(心跳机制)<br><code>dataDir</code> 数据文件目录、必须<br><code>dataLogDir</code> 日志目录、非必须、默认<code>dataDir</code><br><code>clientPort</code> 连接服务器的端口、默认 <code>2181</code></p>
-<h1 id="client-连接"><a href="#client-连接" class="headerlink" title="client 连接"></a>client 连接</h1><p><code>zkCli.sh</code> 默认连接2181</p>
-<h1 id="client-命令"><a href="#client-命令" class="headerlink" title="client 命令"></a>client 命令</h1><p><code>ls</code> 与linux下<code>ls</code>同义<br><code>ls</code> 等同于  <code>ls</code> + <code>stat</code><br><code>stat</code> 状态显示 zZxid zookeeper为数据分配的id pZxid 子节点的id<br><code>get</code> 查看节点数据<br><code>create</code> 创建节点 -e 临时节点<br><code>set</code> 修改节点数据<br><code>delete</code> 删除节点数据</p>
-<h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><p>构成: scheme: 采用的权限机制<br>(word:anyone:[permissions] |<br>auth:user:password:[permissions] |<br>digest:user:BASE64(SHA1(pass)):[permissions])<br>(ip:192.168.1.1:[permission])<br>(super: 代表超管、拥有所有的权限)</p>
-<p>id: 代表允许访问的机制 </p>
-<p>permissons: 权限</p>
-<p>权限字符缩写 crdwa<br>create: 创建子节点<br>read: 获取节点、子节点<br>write: 设置节点数据<br>delete: 删除子节点<br>admin: 设置权限</p>
-<p><code>getAcl</code> 获取节点的acl权限信息<br><code>setAcl</code> 设置某个节点的acl权限信息<br><code>addAuth</code> 输入认证权限信息、注册时、输入明文密码(登录)、但在zk的系统里、是以密文存在的</p>
-<h1 id="four-letter-cmd"><a href="#four-letter-cmd" class="headerlink" title="four letter cmd"></a>four letter cmd</h1><p><code>stat</code> 当前节点的状态信息<br><code>ruok</code> 当前节点是否ok<br><code>conf</code> 查看服务器相关的配置<br><code>cons</code> 展示连接到server的client信息<br><code>envi</code> 打印环境变量信息<br><code>mntr</code> 监控zk的健康信息<br><code>wchs</code> watcher的信息<br><code>wchc</code> session与watch对应关系信息<br><code>wchp</code> path与watch对应关系</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>垃圾回收---JDK监控工具</title>
     <url>/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JDK%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/</url>
     <content><![CDATA[<h4 id="JDK监控工具"><a href="#JDK监控工具" class="headerlink" title="JDK监控工具"></a>JDK监控工具</h4><p><code>jps</code>: JVM Process Status Tool. 显示指定系统内所有HotSpot vm 进程<br><code>jstat</code>: JVM statistic Monitor Tool. 用于收集vm各方面的运行数据<br><code>jinfo</code>: Configuration Info For Java. 显示虚拟机配置信息<br><code>jmap</code>: Memory Map For Java. 生成内存转储快照文件(headdump文件)<br><code>jhat</code>: JVM Head Dump Browser. 用于分析dump文件、<br><code>jstack</code>: 显示虚拟机的线程快照</p>
@@ -830,6 +853,30 @@ Humongous Objects的分配和回收:
 <blockquote>
 <p><code>-F</code> 正常的输出请求不被响应时、强制输出线程堆栈<br><code>-l</code> 除堆栈外、显示线程的锁信息<br><code>-m</code> 若调用本地方法、显示C/C++的线程堆栈</p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>垃圾回收---Java类型引用</title>
+    <url>/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/</url>
+    <content><![CDATA[<p>Java垃圾回收的依据是：是否还有引用.</p>
+<h5 id="什么是引用呢-？"><a href="#什么是引用呢-？" class="headerlink" title="什么是引用呢 ？"></a>什么是引用呢 ？</h5><p>jdk1.2 之前的定义是：</p>
+<blockquote>
+<p>若reference类型的数据中存储的数值代表一块内存的起始地址、则这块内存代表一个引用</p>
+</blockquote>
+<p>jdk1.2 之后进行了扩充：</p>
+<blockquote>
+<p>分为<code>强引用</code>、<code>软引用</code>、<code>若引用</code>、<code>虚引用</code>.</p>
+</blockquote>
+<p>如何定义 ？<br><code>强引用 (strong reference)</code>: 程序代码中普遍存在的、类似 <code>Object obj = new Object()</code> 这类的引用， 只要引用还在、永远不会被回收掉的对象</p>
+<p><code>软引用 (soft reference)</code>：描述一些还有用、但不是必须的对象. 软引用关联的对象、在系统将要发生<code>OOM</code>前会对这些对象进行一次回收、若回收能够产生足够的空间、则不会发生<code>OOM</code>， 回收完成依然没有足够的空间才会抛出<code>OOM</code>异常, <code>JDK1.2</code>之后、系统提供了<code>SoftReference</code>来实现软引用</p>
+<p><code>弱引用 (weak reference)</code>: 也是非必须对象、比软引用的引用更弱一些、被弱引用关联的对象只能生存到下次gc发生之前、当垃圾收集器工作时、无论当前内存是否足够、都会回收掉只被弱引用关联的对象<br><code>JDK1.2</code>之后提供了<code>WeakReference类</code>来实现弱引用</p>
+<p><code>虚引用 (Phantom reference)</code>: 一个对象是否有虚引用的存在、完全不影响其生存时间、也无法通过虚引用来取得一个对象的实例、设置虚引用的唯一目的就是能在整个对象进行垃圾收集时收到一个系统通知</p>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -1154,30 +1201,6 @@ Humongous Objects的分配和回收:
       </tags>
   </entry>
   <entry>
-    <title>垃圾回收---Java类型引用</title>
-    <url>/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/</url>
-    <content><![CDATA[<p>Java垃圾回收的依据是：是否还有引用.</p>
-<h5 id="什么是引用呢-？"><a href="#什么是引用呢-？" class="headerlink" title="什么是引用呢 ？"></a>什么是引用呢 ？</h5><p>jdk1.2 之前的定义是：</p>
-<blockquote>
-<p>若reference类型的数据中存储的数值代表一块内存的起始地址、则这块内存代表一个引用</p>
-</blockquote>
-<p>jdk1.2 之后进行了扩充：</p>
-<blockquote>
-<p>分为<code>强引用</code>、<code>软引用</code>、<code>若引用</code>、<code>虚引用</code>.</p>
-</blockquote>
-<p>如何定义 ？<br><code>强引用 (strong reference)</code>: 程序代码中普遍存在的、类似 <code>Object obj = new Object()</code> 这类的引用， 只要引用还在、永远不会被回收掉的对象</p>
-<p><code>软引用 (soft reference)</code>：描述一些还有用、但不是必须的对象. 软引用关联的对象、在系统将要发生<code>OOM</code>前会对这些对象进行一次回收、若回收能够产生足够的空间、则不会发生<code>OOM</code>， 回收完成依然没有足够的空间才会抛出<code>OOM</code>异常, <code>JDK1.2</code>之后、系统提供了<code>SoftReference</code>来实现软引用</p>
-<p><code>弱引用 (weak reference)</code>: 也是非必须对象、比软引用的引用更弱一些、被弱引用关联的对象只能生存到下次gc发生之前、当垃圾收集器工作时、无论当前内存是否足够、都会回收掉只被弱引用关联的对象<br><code>JDK1.2</code>之后提供了<code>WeakReference类</code>来实现弱引用</p>
-<p><code>虚引用 (Phantom reference)</code>: 一个对象是否有虚引用的存在、完全不影响其生存时间、也无法通过虚引用来取得一个对象的实例、设置虚引用的唯一目的就是能在整个对象进行垃圾收集时收到一个系统通知</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>垃圾回收---小疑问</title>
     <url>/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/</url>
     <content><![CDATA[<p>看懂了gc日志、可能心中还有小小的疑惑？</p>
@@ -1471,15 +1494,81 @@ Humongous Objects的分配和回收:
       </tags>
   </entry>
   <entry>
-    <title>常用命令</title>
-    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p><code>cat /proc/cpuinfo | grep &#39;physical id&#39; |  sort| uniq| wc -l</code> 查看物理CPU的个数<br><code>cat /proc/cpuinfo| grep &quot;cpu cores&quot;| uniq</code> 查看每个物理CPU中cores的个数<br><code>cat /proc/cpuinfo| grep &quot;processor&quot;| wc -l</code> 查看逻辑CPU的个数</p>
+    <title>平均负载</title>
+    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</url>
+    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
+<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
+<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
+<blockquote>
+<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
+<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
+</blockquote>
+<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
+
+
+
+<p>CPU核数查看</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
+</blockquote>
+<p>平均负载与CPU使用率</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
+
+
+
+<p>案例分析</p>
+<p>一、CPU密集型进程</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
+<p>二、IO密集型进程</p>
+<p>查看方式同上</p>
 ]]></content>
       <categories>
         <category>Linux使用</category>
       </categories>
       <tags>
         <tag>Linux使用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>curd操作</title>
+    <url>/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><p><code>$sum</code>: 计算总和</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select count(1) from table group by f1; </span><br><span class="line"></span><br><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt;select field,sum(f2) from table group by f1;</span><br></pre></td></tr></table></figure>
+<p><code>$avg</code>: 计算平均值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;, avg:&#123;$avg:$f&#125;&#125;&#125;])</span><br><span class="line">-&gt; select field,avg(f) from table group by field;</span><br></pre></td></tr></table></figure>
+<p><code>$min</code>: 获取集合中所有文档对应的最小值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;,min:&#123;$min:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select min(f2) from table group by field;</span><br></pre></td></tr></table></figure>
+<p><code>$max</code>: 获取集合中所有文档对应的最大值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">参考min</span><br></pre></td></tr></table></figure>
+<p><code>$push</code>: 在结果文档中插入值到一个数组</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,url:&#123;$push:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$first</code>: 根据资源文档的排序获取第一个文档数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,first_url:&#123;$first:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$last</code>: 根据资源文档的排序获取最后一个文档数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">参考first</span><br></pre></td></tr></table></figure>
+
+<p><code>$project</code> 修改输出文档的结构<br><code>$match</code> 用于过滤数据、<br><code>$limit</code> 限制返回条数<br><code>$skip</code> 跳过指定条数的文档<br><code>$unwind</code> 将某个数组类型字段拆分成多条<br><code>$group</code> 将集合中的文档分组、可用于统计结果<br><code>$sort</code> 将文档排序后输出</p>
+<p>eg.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;)</span><br><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;,[&#123;$match:&#123;score:&#123;$gt:70,$lte:90&#125;&#125;&#125;,&#123;$group:&#123;_id:null,count:&#123;$sum:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">map ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</span><br><span class="line">reduce 统计函数，reduce函数的任务就是将key-values变成key-value，也就是把values数组变成一个单一的值value。。</span><br><span class="line">out 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</span><br><span class="line">query 一个筛选条件，只有满足条件的文档才会调用map函数。（query。limit，sort可以随意组合）</span><br><span class="line">sort 和limit结合的sort排序参数（也是在发往map函数前给文档排序），可以优化分组机制</span><br><span class="line">limit 发往map函数的文档数量的上限（要是没有limit，单独使用sort的用处不大）</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Mongo</category>
+      </categories>
+      <tags>
+        <tag>Mongo</tag>
       </tags>
   </entry>
   <entry>
@@ -1569,84 +1658,6 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
-    <title>curd操作</title>
-    <url>/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><p><code>$sum</code>: 计算总和</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select count(1) from table group by f1; </span><br><span class="line"></span><br><span class="line">db.mycol.aggregate([&#123;$group : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt;select field,sum(f2) from table group by f1;</span><br></pre></td></tr></table></figure>
-<p><code>$avg</code>: 计算平均值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;, avg:&#123;$avg:$f&#125;&#125;&#125;])</span><br><span class="line">-&gt; select field,avg(f) from table group by field;</span><br></pre></td></tr></table></figure>
-<p><code>$min</code>: 获取集合中所有文档对应的最小值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.test.aggregate([&#123;$group:&#123;_id:&quot;$field&quot;,min:&#123;$min:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; select min(f2) from table group by field;</span><br></pre></td></tr></table></figure>
-<p><code>$max</code>: 获取集合中所有文档对应的最大值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">参考min</span><br></pre></td></tr></table></figure>
-<p><code>$push</code>: 在结果文档中插入值到一个数组</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,url:&#123;$push:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-<p><code>$first</code>: 根据资源文档的排序获取第一个文档数据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,first_url:&#123;$first:&quot;$url&quot;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-<p><code>$last</code>: 根据资源文档的排序获取最后一个文档数据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">参考first</span><br></pre></td></tr></table></figure>
-
-<p><code>$project</code> 修改输出文档的结构<br><code>$match</code> 用于过滤数据、<br><code>$limit</code> 限制返回条数<br><code>$skip</code> 跳过指定条数的文档<br><code>$unwind</code> 将某个数组类型字段拆分成多条<br><code>$group</code> 将集合中的文档分组、可用于统计结果<br><code>$sort</code> 将文档排序后输出</p>
-<p>eg.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;)</span><br><span class="line">db.t.aggregate(&#123;$project:&#123;_id:0,title:1,tags:1&#125;&#125;,[&#123;$match:&#123;score:&#123;$gt:70,$lte:90&#125;&#125;&#125;,&#123;$group:&#123;_id:null,count:&#123;$sum:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-
-<h4 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">map ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</span><br><span class="line">reduce 统计函数，reduce函数的任务就是将key-values变成key-value，也就是把values数组变成一个单一的值value。。</span><br><span class="line">out 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</span><br><span class="line">query 一个筛选条件，只有满足条件的文档才会调用map函数。（query。limit，sort可以随意组合）</span><br><span class="line">sort 和limit结合的sort排序参数（也是在发往map函数前给文档排序），可以优化分组机制</span><br><span class="line">limit 发往map函数的文档数量的上限（要是没有limit，单独使用sort的用处不大）</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Mongo</category>
-      </categories>
-      <tags>
-        <tag>Mongo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>平均负载</title>
-    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</url>
-    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: 11:39:32 up 13 days,  1:51, 18 users,  load average: 6.21, 5.86, 4.91</span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近1min、5min、15min的平均负载 load average</span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
-<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning / Runable) 状态</p>
-<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
-<blockquote>
-<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
-<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
-</blockquote>
-<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 在只有2个CPU的系统上、意味着CPU刚好可以全部占用</span><br><span class="line">2. 在4个CPU的系统上、意味着有50%的空闲</span><br><span class="line">3. 在1个CPU的系统上、意外着会有一半的进程竞争不到CPU</span><br></pre></td></tr></table></figure>
-
-
-
-<p>CPU核数查看</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;cpuinfo | grep &#39;model name&#39; | wc -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
-</blockquote>
-<p>平均负载与CPU使用率</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用CPU的进程 + 等待CPU的进程 + 等待io的进程</span><br><span class="line">2. CPU使用率: 单位时间内CPU繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. cpu密集型、使用大量CPU会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、CPU使用率不一定很高</span><br></pre></td></tr></table></figure>
-
-
-
-<p>案例分析</p>
-<p>一、CPU密集型进程</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">终端一:</span><br><span class="line">stress --cpu 1 --timeout 600</span><br><span class="line">--cpu CPU压力测试</span><br><span class="line"></span><br><span class="line">终端二:</span><br><span class="line">watch -d uptime </span><br><span class="line">-d: 高亮显示变化区域</span><br><span class="line"></span><br><span class="line">终端三:</span><br><span class="line">mpstat -P ALL 5</span><br><span class="line">-P ALL: 表示监控所有CPU</span><br><span class="line">5表示间隔5s输出一组数据</span><br><span class="line"></span><br><span class="line">终端四:</span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
-<p>二、IO密集型进程</p>
-<p>查看方式同上</p>
-]]></content>
-      <categories>
-        <category>Linux使用</category>
-      </categories>
-      <tags>
-        <tag>Linux使用</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>安装使用</title>
     <url>/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">database 数据库</span><br><span class="line">collection 数据表</span><br><span class="line">document 数据记录行&#x2F;文档</span><br><span class="line">filed 数据域</span><br><span class="line">index 索引</span><br><span class="line">primary key 主键、默认 _id</span><br></pre></td></tr></table></figure>
@@ -1660,6 +1671,18 @@ ROOT_DEV= 0x306
       </categories>
       <tags>
         <tag>Mongo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用命令</title>
+    <url>/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p><code>cat /proc/cpuinfo | grep &#39;physical id&#39; |  sort| uniq| wc -l</code> 查看物理CPU的个数<br><code>cat /proc/cpuinfo| grep &quot;cpu cores&quot;| uniq</code> 查看每个物理CPU中cores的个数<br><code>cat /proc/cpuinfo| grep &quot;processor&quot;| wc -l</code> 查看逻辑CPU的个数</p>
+]]></content>
+      <categories>
+        <category>Linux使用</category>
+      </categories>
+      <tags>
+        <tag>Linux使用</tag>
       </tags>
   </entry>
   <entry>
@@ -1776,38 +1799,6 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
-    <title>MQ的消息模型和事务</title>
-    <url>/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/</url>
-    <content><![CDATA[<h4 id="消息队列架构演进"><a href="#消息队列架构演进" class="headerlink" title="消息队列架构演进"></a>消息队列架构演进</h4><p><strong>早期mq就是按照队列的数据结构来设计的</strong><br><img src="https://upload-images.jianshu.io/upload_images/14027542-7491db81233d4005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="早期MQ架构"></p>
-<p>若有多个生产者往同一队列发送消息、这个队列可以消费到生产者消息的集合、顺序为生产者发送消息的自然顺序<br>若多个消费者消费一个队列、这些消费者是竞争关系、只消费到队列的一部分数据<br>需要每个消费者消费全量消息时、只能创建多个Queue、让生产者发送多份数据、并且生产者必须知道有多少消费者、违背了消息队列解耦的初衷</p>
-<p><strong>演进架构</strong><br>发布 - 订阅模型(Publish-Subscribe Pattern)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-83faa4bba38ebc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发布-订阅模型"></p>
-<p>在P-S架构中、msg发送方称为发布者Publisher、接收方称为订阅者Subscriber、服务端存放消息的容器称为主题Topic、消费之前必须先订阅主题</p>
-<p>其实和队列模式没有本质区别、最大的区别在于: 一份数据能不能被消费多次</p>
-<h4 id="RabbitMQ的消息模型"><a href="#RabbitMQ的消息模型" class="headerlink" title="RabbitMQ的消息模型"></a>RabbitMQ的消息模型</h4><p>RabbitMQ是少数坚持使用队列模型的产品之一、它如何解决多个消费者的问题呢 ？<br>Exchange: 位于生产者和队列之间、生产者不关心将消息发送给哪个队列、而是将消息发送给Exchange、由Exchange上配置的策略来决定将消息投递到哪些队列中<br><img src="https://upload-images.jianshu.io/upload_images/14027542-9c144b17627ba919.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RabbitMQ消息模型"></p>
-<p>同一份消息需要被多个消费者消费时、需要配置exchange将消息发送到多个队列、每个队列中存放一份完整的消息数据、</p>
-<h4 id="RocketMQ的消息模型"><a href="#RocketMQ的消息模型" class="headerlink" title="RocketMQ的消息模型"></a>RocketMQ的消息模型</h4><p>RocketMQ使用的是标准的发布-订阅模型、</p>
-<p>普通的MQ都是使用的请求-确认机制、确保消息不会再传递过程中由于网络故障或服务器故障丢失. 在生产端、生产者将消息发给服务端Broker、Broker在收到消息并将消息写入主题或者队列后、会给生产者发送确认的响应、若生产者未收到服务端的确认或者收到失败的响应、会重新发消息; 在消费端、消费者收到消息并完成消费逻辑后也会给服务端发送消费成功的确认、服务端只有在收到消费确认后、才会认为一条消息被成功消费、否则会重发消息</p>
-<p>为了保证消息有序性、在消息被成功消费前、下一条消息不能被消费、否则就出现了消息空洞、违背了有序性的原则、所以 MQ增加了队列的概念、只在队列层面保证消息的有序性、主题层面不保证</p>
-<p>消息会被不同消费组消费、消费完的消息不会立即删除、MQ为每个队列维护了一个消费位置Consumer Offset、每成功消费一条消息、位置就+1</p>
-<h4 id="Kafka的消息模型"><a href="#Kafka的消息模型" class="headerlink" title="Kafka的消息模型"></a>Kafka的消息模型</h4><p>Kafka的消费模型和RocketMQ的模型是完全一样的、唯一的区别是 在Kafka中队列这个概念的名称不同、Kafka对应的概念叫 <code>分区</code> - <code>Partition</code> </p>
-<p>注意:<br>RocketMQ 和 Kafka 的业务模型一样、不代表实现一致、其实实现是完全不同的、就像MySQL和hbase存放数据的单元都是表、实现完全不同、MySQL使用B+树来存储、HBase 使用KV结构存储</p>
-<h4 id="MQ的事务实现"><a href="#MQ的事务实现" class="headerlink" title="MQ的事务实现"></a>MQ的事务实现</h4><p>Kafka 和 RocketMQ 都提供了事务的实现<br>在消息队列上开启一个事务、给服务器发送一个<code>半消息</code>状态、它包含完整的消息内容、但对于消费者不可见、本地事务提交后再提交消息事务<br>但: 如果提交消息事务失败怎么办 ？</p>
-<ol>
-<li>kafka的方案简单粗暴、直接抛异常、用户自行处理</li>
-<li>RocketMQ提供了事务反查机制、若Broker未收到提交或者回滚的请求、Broker会定期去Producer上反查本地事务对应状态、来决定事务提交还是回滚<br><img src="https://upload-images.jianshu.io/upload_images/14027542-40c0cd530d78849e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ol>
-<h4 id="消息可靠性保证"><a href="#消息可靠性保证" class="headerlink" title="消息可靠性保证"></a>消息可靠性保证</h4><p><strong>检测消息丢失</strong><br>1.若基础设施比较完善、一般会有分布式链路追踪系统、可以追踪消息流<br>2.利用消息有序性校验: 给每个发出的消息附加一个连续的序号、若序号不连续、就可以判定为消息丢失<br>注意: 多个producer 和 多个consumer的情况、需要判定每个分区的序列有效性<br><strong>如何保证</strong><br>1.生产阶段、根据不同mq的确认机制、进行对应的处理 eg: kafka -&gt; 捕获异常<br>2.存储阶段、正常broker运行的时候、不会出现消息丢失、但若broker出现了故障或者宕机、是可能丢消息的. 单节点broker可以配置broker在收到消息后立即落盘、broker是集群的时候、可以配置至少2个节点收到消息再确认<br>3.消费阶段、同生产阶段、消费端<em>业务逻辑</em>成功后再回传确认<br>有可能消息再网络传输过程中发生错误、发送方收不到确认就会重发消息、所以Broker 和 Consumer 都可能会收到重复消息、需要注意接口的幂等性</p>
-<p><strong>业务变相实现</strong><br>1.利用数据库的唯一约束实现幂等、<br>2.为更新的数据设置前置条件、满足某种条件才更新<br>3.记录并检查操作(需要考虑唯一ID的生成和多步操作的原子性)</p>
-<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>幂等方案、不止是可以解决消息重复的问题、也同样适用于其它场景.eg: 将HTTP服务设计成幂等的、解决前端或者APP重复提交表单数据问题、也可以将一个微服务设计成幂等的、解决RPC框架自动重试导致的重复调用问题</p>
-]]></content>
-      <categories>
-        <category>MQ</category>
-      </categories>
-      <tags>
-        <tag>MQ</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RocketMQ简介</title>
     <url>/2020/03/20/mq_RocketMQ%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<p>组件:</p>
@@ -1848,6 +1839,38 @@ ROOT_DEV= 0x306
 
 <p>疑问</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. broker收到消息会先写commitlog、为什么producer发消息的时候会选择一个Queue去发 ？而不是broker ？再由broker分发到Queue ？</span><br><span class="line"></span><br><span class="line">2. 写commitlog的时候、同步刷盘指针和异步刷盘指针写的是同一个commitlog文件、如何保证消息的有序存储？</span><br><span class="line"></span><br><span class="line">3. 文件清除何时进行 ？</span><br><span class="line"></span><br><span class="line">4. 消息队列如何进行负载均衡？</span><br><span class="line"></span><br><span class="line">5. 消息发送如何保证高可用</span><br><span class="line"></span><br><span class="line">6. 批量消息如何保持一致性</span><br><span class="line"></span><br><span class="line">7. broker失效后120s才能将该broker从路由表中移除、若生产者获取到的路由信息包含已宕机的broker如何处理？</span><br><span class="line"></span><br><span class="line">8.</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>MQ</category>
+      </categories>
+      <tags>
+        <tag>MQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MQ的消息模型和事务</title>
+    <url>/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/</url>
+    <content><![CDATA[<h4 id="消息队列架构演进"><a href="#消息队列架构演进" class="headerlink" title="消息队列架构演进"></a>消息队列架构演进</h4><p><strong>早期mq就是按照队列的数据结构来设计的</strong><br><img src="https://upload-images.jianshu.io/upload_images/14027542-7491db81233d4005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="早期MQ架构"></p>
+<p>若有多个生产者往同一队列发送消息、这个队列可以消费到生产者消息的集合、顺序为生产者发送消息的自然顺序<br>若多个消费者消费一个队列、这些消费者是竞争关系、只消费到队列的一部分数据<br>需要每个消费者消费全量消息时、只能创建多个Queue、让生产者发送多份数据、并且生产者必须知道有多少消费者、违背了消息队列解耦的初衷</p>
+<p><strong>演进架构</strong><br>发布 - 订阅模型(Publish-Subscribe Pattern)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-83faa4bba38ebc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发布-订阅模型"></p>
+<p>在P-S架构中、msg发送方称为发布者Publisher、接收方称为订阅者Subscriber、服务端存放消息的容器称为主题Topic、消费之前必须先订阅主题</p>
+<p>其实和队列模式没有本质区别、最大的区别在于: 一份数据能不能被消费多次</p>
+<h4 id="RabbitMQ的消息模型"><a href="#RabbitMQ的消息模型" class="headerlink" title="RabbitMQ的消息模型"></a>RabbitMQ的消息模型</h4><p>RabbitMQ是少数坚持使用队列模型的产品之一、它如何解决多个消费者的问题呢 ？<br>Exchange: 位于生产者和队列之间、生产者不关心将消息发送给哪个队列、而是将消息发送给Exchange、由Exchange上配置的策略来决定将消息投递到哪些队列中<br><img src="https://upload-images.jianshu.io/upload_images/14027542-9c144b17627ba919.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RabbitMQ消息模型"></p>
+<p>同一份消息需要被多个消费者消费时、需要配置exchange将消息发送到多个队列、每个队列中存放一份完整的消息数据、</p>
+<h4 id="RocketMQ的消息模型"><a href="#RocketMQ的消息模型" class="headerlink" title="RocketMQ的消息模型"></a>RocketMQ的消息模型</h4><p>RocketMQ使用的是标准的发布-订阅模型、</p>
+<p>普通的MQ都是使用的请求-确认机制、确保消息不会再传递过程中由于网络故障或服务器故障丢失. 在生产端、生产者将消息发给服务端Broker、Broker在收到消息并将消息写入主题或者队列后、会给生产者发送确认的响应、若生产者未收到服务端的确认或者收到失败的响应、会重新发消息; 在消费端、消费者收到消息并完成消费逻辑后也会给服务端发送消费成功的确认、服务端只有在收到消费确认后、才会认为一条消息被成功消费、否则会重发消息</p>
+<p>为了保证消息有序性、在消息被成功消费前、下一条消息不能被消费、否则就出现了消息空洞、违背了有序性的原则、所以 MQ增加了队列的概念、只在队列层面保证消息的有序性、主题层面不保证</p>
+<p>消息会被不同消费组消费、消费完的消息不会立即删除、MQ为每个队列维护了一个消费位置Consumer Offset、每成功消费一条消息、位置就+1</p>
+<h4 id="Kafka的消息模型"><a href="#Kafka的消息模型" class="headerlink" title="Kafka的消息模型"></a>Kafka的消息模型</h4><p>Kafka的消费模型和RocketMQ的模型是完全一样的、唯一的区别是 在Kafka中队列这个概念的名称不同、Kafka对应的概念叫 <code>分区</code> - <code>Partition</code> </p>
+<p>注意:<br>RocketMQ 和 Kafka 的业务模型一样、不代表实现一致、其实实现是完全不同的、就像MySQL和hbase存放数据的单元都是表、实现完全不同、MySQL使用B+树来存储、HBase 使用KV结构存储</p>
+<h4 id="MQ的事务实现"><a href="#MQ的事务实现" class="headerlink" title="MQ的事务实现"></a>MQ的事务实现</h4><p>Kafka 和 RocketMQ 都提供了事务的实现<br>在消息队列上开启一个事务、给服务器发送一个<code>半消息</code>状态、它包含完整的消息内容、但对于消费者不可见、本地事务提交后再提交消息事务<br>但: 如果提交消息事务失败怎么办 ？</p>
+<ol>
+<li>kafka的方案简单粗暴、直接抛异常、用户自行处理</li>
+<li>RocketMQ提供了事务反查机制、若Broker未收到提交或者回滚的请求、Broker会定期去Producer上反查本地事务对应状态、来决定事务提交还是回滚<br><img src="https://upload-images.jianshu.io/upload_images/14027542-40c0cd530d78849e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ol>
+<h4 id="消息可靠性保证"><a href="#消息可靠性保证" class="headerlink" title="消息可靠性保证"></a>消息可靠性保证</h4><p><strong>检测消息丢失</strong><br>1.若基础设施比较完善、一般会有分布式链路追踪系统、可以追踪消息流<br>2.利用消息有序性校验: 给每个发出的消息附加一个连续的序号、若序号不连续、就可以判定为消息丢失<br>注意: 多个producer 和 多个consumer的情况、需要判定每个分区的序列有效性<br><strong>如何保证</strong><br>1.生产阶段、根据不同mq的确认机制、进行对应的处理 eg: kafka -&gt; 捕获异常<br>2.存储阶段、正常broker运行的时候、不会出现消息丢失、但若broker出现了故障或者宕机、是可能丢消息的. 单节点broker可以配置broker在收到消息后立即落盘、broker是集群的时候、可以配置至少2个节点收到消息再确认<br>3.消费阶段、同生产阶段、消费端<em>业务逻辑</em>成功后再回传确认<br>有可能消息再网络传输过程中发生错误、发送方收不到确认就会重发消息、所以Broker 和 Consumer 都可能会收到重复消息、需要注意接口的幂等性</p>
+<p><strong>业务变相实现</strong><br>1.利用数据库的唯一约束实现幂等、<br>2.为更新的数据设置前置条件、满足某种条件才更新<br>3.记录并检查操作(需要考虑唯一ID的生成和多步操作的原子性)</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>幂等方案、不止是可以解决消息重复的问题、也同样适用于其它场景.eg: 将HTTP服务设计成幂等的、解决前端或者APP重复提交表单数据问题、也可以将一个微服务设计成幂等的、解决RPC框架自动重试导致的重复调用问题</p>
 ]]></content>
       <categories>
         <category>MQ</category>
@@ -2093,40 +2116,6 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
-    <title>Mysql-是如何保障高可用的</title>
-    <url>/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/</url>
-    <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/14027542-242e0ecf16d359cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MySQL主备切换流程.png"></p>
-<p>一、主备延迟<br>数据同步的关键时间节点:</p>
-<ol>
-<li>主库A执行完一个事务、写入binlog、记为 T1;</li>
-<li>传给备库B、将备库B接收完binlog的时刻记为 T2;</li>
-<li>备库B执行完事务的时刻记为 T3;<br>主备延迟: 同一个事务在备库执行完的时间和主库执行完的时间之间的差值: T3 - T1<br>show slave status; - seconds_behind_master表示当前备库延迟时间</li>
-</ol>
-<p>注: 主备机的系统时间不一致时、会不会导致主备延迟值不准 ?<br>不会. 备库连接主库时、会通过执行 select unix_timestamp 获得当前主库的系统时间、与本机不一致时、会在执行 seconds_behind_master 时扣除差值</p>
-<p>二、主备延迟的来源</p>
-<ol>
-<li>有些部署条件下、备库所在机器的性能较差<br>此时一般将备库设为<code>非双1模式</code>. 现在一般会使用对称部署(主备规格相同).</li>
-<li>使用对称部署、为何仍然存在主备延迟 ?<br>备库可能压力较大、存在一些慢查询、导致备库查询消耗大量CPU资源、影响数据同步、造成主备延迟.<br>解决:<br>1) 使用一主多从、分担读压力<br>2) 通过binlog输出到外部系统、如: hadoop, 提供统计类查询</li>
-<li>采用了一主多从、备库的压力不超过主库的情况下、还有什么情况会导致主备延迟呢 ?<br>1) 可能存在大的事务, 因为主库上必须等事务执行完成才会写入binlog、再传给备库、若一个SQL执行10min、这个事务就很可能会导致从库延迟10min.(所以最好不要一次delete太多数据)<br>2) 大表DDL也是一个大事务的场景</li>
-<li>如果备库上也不做大事务了、还有什么原因会导致主备延迟吗 ?<br>备库的并行复制能力.</li>
-</ol>
-<p>三、主备切换策略:</p>
-<ol>
-<li><p>可靠性优先.<br>1) 先判断备库B的 seconds_behind_master 是否小于指定值, 若否、持续观察<br>2) 把主库A改成只读状态, readonly设为true.<br>3) 判断备库B的 seconds_behind_master 值、直到变为0<br>4) 把备库B改为可写入, readonly设为false.<br>5) 将业务请求切到B<br>2~5 的过程、系统处于不可用状态.</p>
-</li>
-<li><p>可用性优先<br>将1中、4)、5) 调整到最开始执行、直接让备库可读写、系统就无不可用时间、但会产生数据不一致. 暂时称为<code>可用性优先策略</code><br>此时若 binlog_format 为: statement、则会发生数据不一致的线下<br>若 binlog_format 为: row、会提示错误</p>
-</li>
-</ol>
-<p>所以、MySQL高可用系统的可用性是依赖于主备延迟的、延迟的时间越小、在主库故障时、服务恢复需要的时间就越短, 可用性就越高.</p>
-]]></content>
-      <categories>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mysql-是怎么保证数据不丢的</title>
     <url>/2020/03/20/mysql_Mysql-%E6%98%AF%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E7%9A%84/</url>
     <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/14027542-56a40a40793fd005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/440" alt="binlog写盘状态.png"></p>
@@ -2168,47 +2157,6 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
-    <title>SQL执行</title>
-    <url>/2020/03/20/mysql_SQL%E6%89%A7%E8%A1%8C/</url>
-    <content><![CDATA[<p>[toc]</p>
-<h3 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h3><h4 id="MySQL架构图"><a href="#MySQL架构图" class="headerlink" title="MySQL架构图"></a>MySQL架构图</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-4270d2d72dee925f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
-<h4 id="server层、"><a href="#server层、" class="headerlink" title="server层、"></a>server层、</h4><blockquote>
-<p>包含连接器、查询缓存、分析器、优化器、执行器等、涵盖mysql大部分核心功能、<br>及mysql所有的内置函数(日期、时间、数学和加密函数等)、所有跨存储引擎的功能<br>(视图、存储过程、触发器等)都在这一层实现</p>
-</blockquote>
-<h5 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -h$ip -P$port -u$user -p</span><br><span class="line">若 用户名和密码 认证失败、会返回 Access denied for user 的错误</span><br><span class="line">若认证通过、这个连接里的权限都会依赖此时权限表查到的权限</span><br><span class="line">此时用admin账号修改该用户的权限、不会立即生效、会在重新连接时生效</span><br><span class="line"></span><br><span class="line">连接完成后、无后续动作、则连接处于sleep状态、</span><br><span class="line"></span><br><span class="line">client 长时间(wait_time参数控制)不操作、连接器会断开连接</span><br><span class="line"></span><br><span class="line">连接断开之后、再发送请求、会收到 Lost connection to mysql server during query的响应</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-60a2493de769f5b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-18905125b398ebe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-ee3accb459dc1246.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h5 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">key 是 sql、value是查询结果 - 任意更新会导致缓存失效</span><br><span class="line">不建议使用</span><br></pre></td></tr></table></figure>
-
-<h5 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">词法分析: 根据关键词识别语句类型 select&#x2F;update&#x2F;insert</span><br><span class="line">语法分析: 若有语法错误、会返回 You have an error in your SQL </span><br><span class="line"></span><br><span class="line">elect 1 from t where id&#x3D;1;</span><br><span class="line">ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;elect 1 from t where id&#x3D;1&#39; at line 1</span><br><span class="line">                         </span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">##### 优化器</span><br></pre></td></tr></table></figure>
-<p>经过分析器、mysql知道了想要做什么、优化器干什么呢 ？</p>
-<ol>
-<li>表中有多个索引的时候、决定使用哪个索引</li>
-<li>多表join的时候、决定连表顺序</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![image.png](https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;14027542-b2765ac683595a26.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 执行器</span><br></pre></td></tr></table></figure>
-<p>在分析器、优化器之后、mysql知道了要做什么、怎么做、就开始进入到执行器阶段、开始执行</p>
-<ol>
-<li><p>命中查询缓存、会在查询缓存返回结果时进行权限验证</p>
-</li>
-<li><p>非命中 先验证权限、无 -&gt; 直接返回错误</p>
-<pre><code>有 -&gt; 执行SQL</code></pre></li>
-<li><p>eg. mysql&gt; select * from T where ID=10;</p>
-<p> 若 id 无索引:<br> 1) 调用innodb引擎接口查询第一行、若id = 10、存入结果集、否则 跳过、继续<br> 2) 调用引擎接口取下一行、直至最后一行<br> 3) 执行器将满足结果的行作为结果集返回给client</p>
-<p> 若id 有索引:<br> 1) 调用innodb查询 满足条件的 第一行、放入结果集<br> 2) 查询满足条件的下一行..<br> 3) 将结果集返回给client</p>
-<p>在db慢SQL中、有一个 rows_examined 字段、表示在SQL执行过程中扫描了多少行、<br>是在 执行器 调用 引擎 获取数据行的时候累计的、<br>注：有些情况下、执行器调用一次会扫描很多行、所以 实际扫描行数 != rows_examined</p>
-</li>
-</ol>
-<pre><code></code></pre>]]></content>
-      <categories>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SQL更新</title>
     <url>/2020/03/20/mysql_SQL%E6%9B%B4%E6%96%B0/</url>
     <content><![CDATA[<h4 id="redolog-重做日志-innodb引擎层特有"><a href="#redolog-重做日志-innodb引擎层特有" class="headerlink" title="redolog(重做日志 - innodb引擎层特有)"></a>redolog(重做日志 - innodb引擎层特有)</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MySQL使用AWL(Write-Ahead Logging)技术, 当有记录需要更新的时候、innodb就先把记录写到redo log、并更新内存、这时、更新就算完成. 当innodb引擎比较空闲的时候、会将操作更新到磁盘</span><br><span class="line"></span><br><span class="line">触发更新的点:</span><br><span class="line">1. redo log 写满时(redo log文件大小是固定的 - 循环覆盖) </span><br><span class="line">   write pos: 当前位置 </span><br><span class="line">   check point: 当前要擦除的位置</span><br><span class="line">   write和check间有空间、就代表可更新、否则、就要先擦除记录、推进checkpoint、</span><br><span class="line">2.</span><br></pre></td></tr></table></figure>
@@ -2222,6 +2170,40 @@ ROOT_DEV= 0x306
 <h4 id="为什么需要两阶段提交"><a href="#为什么需要两阶段提交" class="headerlink" title="为什么需要两阶段提交"></a>为什么需要两阶段提交</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> redo log 和 binlog 是两个独立的逻辑、若不使用两阶段提交、则会是2种情况</span><br><span class="line">1. 先 redo log、 后binlog</span><br><span class="line">   若redolog完成、binlog未完成、进程异常重启、redo log生效、为修改后的值 </span><br><span class="line">  若使用binlog恢复临时库、由于binlog未写完就崩溃、会少一条记录、源库和备库就会出现不一致</span><br><span class="line">2. 先binlog、后 redo log</span><br><span class="line">    binlog写完后crash、redo log未写、在恢复时、认为事务无效、</span><br><span class="line">    binlog已写完、恢复备份库时、认为有效、出现不一致...</span><br><span class="line">所以、为了保证redo log 和 binlog提交状态的逻辑一致性</span><br></pre></td></tr></table></figure>
 
 <h4 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. binlog 是每次update都会写磁盘？</span><br><span class="line">2. 如果 redo log 第一阶段完成(prepare状态)、binlog完成、此时crash、在系统重启之后、这个log会被重放吗</span><br><span class="line">   会、满足prepare 和 binlog的完整、在重启时、会自动执行commit</span><br><span class="line">3. 极端情况下、redo log被写满、新的事务进入、需要擦除redo log(被修改的脏页被迫刷新到磁盘) -&gt; 数据在 commit 之前被持久化、此时如何处理 ？</span><br><span class="line">这些数据在内存中属于无效事务、其它事务读不到、即时被写入磁盘也没关系、再次读入内存时、依然是原逻辑</span><br><span class="line">4. redo log 是顺序写 ？ binlog是随机写 ？</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mysql-是如何保障高可用的</title>
+    <url>/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/</url>
+    <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/14027542-242e0ecf16d359cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MySQL主备切换流程.png"></p>
+<p>一、主备延迟<br>数据同步的关键时间节点:</p>
+<ol>
+<li>主库A执行完一个事务、写入binlog、记为 T1;</li>
+<li>传给备库B、将备库B接收完binlog的时刻记为 T2;</li>
+<li>备库B执行完事务的时刻记为 T3;<br>主备延迟: 同一个事务在备库执行完的时间和主库执行完的时间之间的差值: T3 - T1<br>show slave status; - seconds_behind_master表示当前备库延迟时间</li>
+</ol>
+<p>注: 主备机的系统时间不一致时、会不会导致主备延迟值不准 ?<br>不会. 备库连接主库时、会通过执行 select unix_timestamp 获得当前主库的系统时间、与本机不一致时、会在执行 seconds_behind_master 时扣除差值</p>
+<p>二、主备延迟的来源</p>
+<ol>
+<li>有些部署条件下、备库所在机器的性能较差<br>此时一般将备库设为<code>非双1模式</code>. 现在一般会使用对称部署(主备规格相同).</li>
+<li>使用对称部署、为何仍然存在主备延迟 ?<br>备库可能压力较大、存在一些慢查询、导致备库查询消耗大量CPU资源、影响数据同步、造成主备延迟.<br>解决:<br>1) 使用一主多从、分担读压力<br>2) 通过binlog输出到外部系统、如: hadoop, 提供统计类查询</li>
+<li>采用了一主多从、备库的压力不超过主库的情况下、还有什么情况会导致主备延迟呢 ?<br>1) 可能存在大的事务, 因为主库上必须等事务执行完成才会写入binlog、再传给备库、若一个SQL执行10min、这个事务就很可能会导致从库延迟10min.(所以最好不要一次delete太多数据)<br>2) 大表DDL也是一个大事务的场景</li>
+<li>如果备库上也不做大事务了、还有什么原因会导致主备延迟吗 ?<br>备库的并行复制能力.</li>
+</ol>
+<p>三、主备切换策略:</p>
+<ol>
+<li><p>可靠性优先.<br>1) 先判断备库B的 seconds_behind_master 是否小于指定值, 若否、持续观察<br>2) 把主库A改成只读状态, readonly设为true.<br>3) 判断备库B的 seconds_behind_master 值、直到变为0<br>4) 把备库B改为可写入, readonly设为false.<br>5) 将业务请求切到B<br>2~5 的过程、系统处于不可用状态.</p>
+</li>
+<li><p>可用性优先<br>将1中、4)、5) 调整到最开始执行、直接让备库可读写、系统就无不可用时间、但会产生数据不一致. 暂时称为<code>可用性优先策略</code><br>此时若 binlog_format 为: statement、则会发生数据不一致的线下<br>若 binlog_format 为: row、会提示错误</p>
+</li>
+</ol>
+<p>所以、MySQL高可用系统的可用性是依赖于主备延迟的、延迟的时间越小、在主库故障时、服务恢复需要的时间就越短, 可用性就越高.</p>
 ]]></content>
       <categories>
         <category>MySQL</category>
@@ -2454,6 +2436,47 @@ ROOT_DEV= 0x306
 </li>
 </ol>
 ]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL执行</title>
+    <url>/2020/03/20/mysql_SQL%E6%89%A7%E8%A1%8C/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h3 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h3><h4 id="MySQL架构图"><a href="#MySQL架构图" class="headerlink" title="MySQL架构图"></a>MySQL架构图</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-4270d2d72dee925f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<h4 id="server层、"><a href="#server层、" class="headerlink" title="server层、"></a>server层、</h4><blockquote>
+<p>包含连接器、查询缓存、分析器、优化器、执行器等、涵盖mysql大部分核心功能、<br>及mysql所有的内置函数(日期、时间、数学和加密函数等)、所有跨存储引擎的功能<br>(视图、存储过程、触发器等)都在这一层实现</p>
+</blockquote>
+<h5 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -h$ip -P$port -u$user -p</span><br><span class="line">若 用户名和密码 认证失败、会返回 Access denied for user 的错误</span><br><span class="line">若认证通过、这个连接里的权限都会依赖此时权限表查到的权限</span><br><span class="line">此时用admin账号修改该用户的权限、不会立即生效、会在重新连接时生效</span><br><span class="line"></span><br><span class="line">连接完成后、无后续动作、则连接处于sleep状态、</span><br><span class="line"></span><br><span class="line">client 长时间(wait_time参数控制)不操作、连接器会断开连接</span><br><span class="line"></span><br><span class="line">连接断开之后、再发送请求、会收到 Lost connection to mysql server during query的响应</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-60a2493de769f5b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-18905125b398ebe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-ee3accb459dc1246.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">key 是 sql、value是查询结果 - 任意更新会导致缓存失效</span><br><span class="line">不建议使用</span><br></pre></td></tr></table></figure>
+
+<h5 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">词法分析: 根据关键词识别语句类型 select&#x2F;update&#x2F;insert</span><br><span class="line">语法分析: 若有语法错误、会返回 You have an error in your SQL </span><br><span class="line"></span><br><span class="line">elect 1 from t where id&#x3D;1;</span><br><span class="line">ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;elect 1 from t where id&#x3D;1&#39; at line 1</span><br><span class="line">                         </span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">##### 优化器</span><br></pre></td></tr></table></figure>
+<p>经过分析器、mysql知道了想要做什么、优化器干什么呢 ？</p>
+<ol>
+<li>表中有多个索引的时候、决定使用哪个索引</li>
+<li>多表join的时候、决定连表顺序</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![image.png](https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;14027542-b2765ac683595a26.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 执行器</span><br></pre></td></tr></table></figure>
+<p>在分析器、优化器之后、mysql知道了要做什么、怎么做、就开始进入到执行器阶段、开始执行</p>
+<ol>
+<li><p>命中查询缓存、会在查询缓存返回结果时进行权限验证</p>
+</li>
+<li><p>非命中 先验证权限、无 -&gt; 直接返回错误</p>
+<pre><code>有 -&gt; 执行SQL</code></pre></li>
+<li><p>eg. mysql&gt; select * from T where ID=10;</p>
+<p> 若 id 无索引:<br> 1) 调用innodb引擎接口查询第一行、若id = 10、存入结果集、否则 跳过、继续<br> 2) 调用引擎接口取下一行、直至最后一行<br> 3) 执行器将满足结果的行作为结果集返回给client</p>
+<p> 若id 有索引:<br> 1) 调用innodb查询 满足条件的 第一行、放入结果集<br> 2) 查询满足条件的下一行..<br> 3) 将结果集返回给client</p>
+<p>在db慢SQL中、有一个 rows_examined 字段、表示在SQL执行过程中扫描了多少行、<br>是在 执行器 调用 引擎 获取数据行的时候累计的、<br>注：有些情况下、执行器调用一次会扫描很多行、所以 实际扫描行数 != rows_examined</p>
+</li>
+</ol>
+<pre><code></code></pre>]]></content>
       <categories>
         <category>MySQL</category>
       </categories>
@@ -3585,32 +3608,6 @@ ROOT_DEV= 0x306
       </tags>
   </entry>
   <entry>
-    <title>杂谈</title>
-    <url>/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9D%82%E8%B0%88/</url>
-    <content><![CDATA[<p>   突然想说、喜欢安姐、😝、优秀的那么自然、还有那么许多一直优秀的人、读读你们的故事、思考下自己的人生、是啊、对错并不重要、关键是成长和思考</p>
-<p>希望所有人都能按照自己的意愿过一生</p>
-<p>——- 杂谈 ——-</p>
-<p>最近在看了些电视剧、射雕英雄传、很多自己喜欢的角色、可能每个人都不完美、但刻画的是那么的真实</p>
-<p>黄蓉 机敏、博学、善良、调皮、黄小邪 哈哈哈~、总是特别的机智</p>
-<p>郭靖 老实、有点儿木讷、小事听蓉儿的、大事却会坚守自己的内心、机警不足、有些迂腐、哈哈哈、不过瑕不掩瑜、善良而又有责任心的他应该赢得了不少人的好感</p>
-<p>华筝 善良、专一、任性、顾大局、对她没有蓉儿喜欢的深、却想不到有什么不好的地方</p>
-<p>穆念慈 善良、希望过平凡的生活可生活却给了她一个不甘心平凡的相公</p>
-<p>杨康 好的一点是 对自己在乎的人是很真心的、比如父王、母亲、念慈、师傅、不能忍受的是 做事情太残忍、不善良、喜欢他的规划性、年纪不大、做事情缺能充分考虑、前后关联、这种思维很重要, 如果方向不偏、应该是有一番成就的、抢夺丐帮帮主那事儿、我觉得不是一般20岁的孩子就能达到的思维水平、可以认可的是能力、但不证明他做的事情是正确的</p>
-<p>丘处机 我觉得最不好的一点是 每次不给人说话的机会、太过于按照自己的想法去判定<br>至少 在开篇和江南奇怪打起来、导致主持过世他是有一部分责任的、如果先搞清楚是非黑白、就不至于这样、孙x来着的、同样的问题</p>
-<p>老顽童  哈哈哈、很深入人心的一个角色、任性、贪玩儿、武功很好、对朋友也很好、有时候责任心不够</p>
-<p>洪七公 武功好、人好、不古板、耐心好、我最欣赏的角色之一、不像大多数的角色一样、不给人说话解释的机会</p>
-<p>黄老邪  挺喜欢的、热情、不古板、博学、有责任心、若说做错了什么、大概就是对他那几个徒儿吧、角色整体来说很喜欢、喜欢那份儿潇洒、喜欢那份儿真诚、或许也是经过世事历练的成长吧、从很多回忆来看、年轻时应该比较狂傲、大抵也不怎么听得进去劝~</p>
-<p>共性: 大侠们不喜欢搞清楚事实、过于江湖义气、过于在乎名誉</p>
-<p>可能最喜欢的角色是一灯大师、一直的善良、对瑛姑的钟爱、人生鼎盛时的峰转、归于自身的身心修养、喜欢这种淡淡的人生态度<del>~</del></p>
-]]></content>
-      <categories>
-        <category>小确幸</category>
-      </categories>
-      <tags>
-        <tag>小确幸</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>那段时光、恰恰好~</title>
     <url>/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%82%A3%E6%AE%B5%E6%97%B6%E5%85%89%E3%80%81%E6%81%B0%E6%81%B0%E5%A5%BD~/</url>
     <content><![CDATA[<pre><code>--  致心灵相依的朋友们</code></pre><p>愿我们不浓不淡、不执着不言弃<br>清淡如水、落花无痕<br>如一缕清风、做着暖情的自己～ </p>
@@ -3654,6 +3651,32 @@ ROOT_DEV= 0x306
 <p>23、晓星尘笑道：“那可不行，你一开口我就笑。我一笑，剑就不稳了。”</p>
 <p>24、君不见陌上花开落几度，燕影疏斜去又还。君不闻无名之曲歌长夜，歪坐榻上醉复醒。君不知山有木兮木有枝，枇杷尚青酸伴苦。君不复黑衣横笛且徐行，执杯瑶酹对空席。</p>
 <p>25、霜华敛去君珍重 在无明月送清风。</p>
+]]></content>
+      <categories>
+        <category>小确幸</category>
+      </categories>
+      <tags>
+        <tag>小确幸</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>杂谈</title>
+    <url>/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9D%82%E8%B0%88/</url>
+    <content><![CDATA[<p>   突然想说、喜欢安姐、😝、优秀的那么自然、还有那么许多一直优秀的人、读读你们的故事、思考下自己的人生、是啊、对错并不重要、关键是成长和思考</p>
+<p>希望所有人都能按照自己的意愿过一生</p>
+<p>——- 杂谈 ——-</p>
+<p>最近在看了些电视剧、射雕英雄传、很多自己喜欢的角色、可能每个人都不完美、但刻画的是那么的真实</p>
+<p>黄蓉 机敏、博学、善良、调皮、黄小邪 哈哈哈~、总是特别的机智</p>
+<p>郭靖 老实、有点儿木讷、小事听蓉儿的、大事却会坚守自己的内心、机警不足、有些迂腐、哈哈哈、不过瑕不掩瑜、善良而又有责任心的他应该赢得了不少人的好感</p>
+<p>华筝 善良、专一、任性、顾大局、对她没有蓉儿喜欢的深、却想不到有什么不好的地方</p>
+<p>穆念慈 善良、希望过平凡的生活可生活却给了她一个不甘心平凡的相公</p>
+<p>杨康 好的一点是 对自己在乎的人是很真心的、比如父王、母亲、念慈、师傅、不能忍受的是 做事情太残忍、不善良、喜欢他的规划性、年纪不大、做事情缺能充分考虑、前后关联、这种思维很重要, 如果方向不偏、应该是有一番成就的、抢夺丐帮帮主那事儿、我觉得不是一般20岁的孩子就能达到的思维水平、可以认可的是能力、但不证明他做的事情是正确的</p>
+<p>丘处机 我觉得最不好的一点是 每次不给人说话的机会、太过于按照自己的想法去判定<br>至少 在开篇和江南奇怪打起来、导致主持过世他是有一部分责任的、如果先搞清楚是非黑白、就不至于这样、孙x来着的、同样的问题</p>
+<p>老顽童  哈哈哈、很深入人心的一个角色、任性、贪玩儿、武功很好、对朋友也很好、有时候责任心不够</p>
+<p>洪七公 武功好、人好、不古板、耐心好、我最欣赏的角色之一、不像大多数的角色一样、不给人说话解释的机会</p>
+<p>黄老邪  挺喜欢的、热情、不古板、博学、有责任心、若说做错了什么、大概就是对他那几个徒儿吧、角色整体来说很喜欢、喜欢那份儿潇洒、喜欢那份儿真诚、或许也是经过世事历练的成长吧、从很多回忆来看、年轻时应该比较狂傲、大抵也不怎么听得进去劝~</p>
+<p>共性: 大侠们不喜欢搞清楚事实、过于江湖义气、过于在乎名誉</p>
+<p>可能最喜欢的角色是一灯大师、一直的善良、对瑛姑的钟爱、人生鼎盛时的峰转、归于自身的身心修养、喜欢这种淡淡的人生态度<del>~</del></p>
 ]]></content>
       <categories>
         <category>小确幸</category>

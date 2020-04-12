@@ -192,6 +192,106 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E6%80%A7%E8%83%BD%E6%9E%81%E8%87%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E6%80%A7%E8%83%BD%E6%9E%81%E8%87%B4/" class="post-title-link" itemprop="url">CPU性能极致</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E6%80%A7%E8%83%BD%E6%9E%81%E8%87%B4/" class="post-meta-item leancloud_visitors" data-flag-title="CPU性能极致" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E6%80%A7%E8%83%BD%E6%9E%81%E8%87%B4/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E6%80%A7%E8%83%BD%E6%9E%81%E8%87%B4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="超线程"><a href="#超线程" class="headerlink" title="超线程"></a>超线程</h4><blockquote>
+<p>在一个物理CPU核心内部、有双份的PC寄存器、指令寄存器和条件码寄存器、这样这个CPU核心就可以维护两条并行的指令的状态、在外部看起来似乎有两个逻辑层面的CPU在同时运行. so 又称为同时多线程(SMT: Simulataneous Multi-Threading)、但其它功能组件依然是一份、因为超线程不是真的同时运行两个指令、而是在一个线程A的指令在流水线里停顿的时候、让空闲的CPU译码器和ALU去执行线程B的指令</p>
+</blockquote>
+<h4 id="SIMD-单指令多数据流"><a href="#SIMD-单指令多数据流" class="headerlink" title="SIMD 单指令多数据流"></a>SIMD 单指令多数据流</h4><blockquote>
+<p>一种指令级并行的加速方案、在处理向量计算的情况下、同一个向量的不同维度直接的计算是相互独立的、而CPU里的寄存器、又可以放得下多条数据、所以可以一次性取出多条数据、交给CPU并行执行</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_DMA--%E4%B8%BA%E4%BB%80%E4%B9%88Kafka%E8%BF%99%E4%B9%88%E5%BF%AB-(48%E8%AE%B2)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1169,115 +1269,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD(%E7%AC%AC4%E8%AE%B2)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD(%E7%AC%AC4%E8%AE%B2)/" class="post-title-link" itemprop="url">如何提高性能(第4讲)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD(%E7%AC%AC4%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="如何提高性能(第4讲)" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD(%E7%AC%AC4%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD(%E7%AC%AC4%E8%AE%B2)/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>基本概念:<br><code>响应时间</code>:  执行程序需要花费的时间<br><code>吞吐率</code>: 一定时间内、可以执行的指令</p>
-<p>性能一般定义为: <code>1/响应时间</code></p>
-<p>计算机的计时单位: <code>cpu时钟</code></p>
-<p>虽然时间是衡量性能的标准、但是也有很大的差异</p>
-<ol>
-<li><code>时间不准</code> 应该参与比较的是刨除了io和cpu切换之外的实际CPU时间(user + sys)</li>
-<li>就算拿到cpu时间也不一定可以比较  CPU满载运行时、可能会降频<br>此外、还会受到主板、内存等的硬件影响</li>
-</ol>
-<p><code>程序的cpu执行时间</code> = <code>cpu时钟周期数</code> x <code>时钟周期时间</code><br>cpu 时钟周期时间越小、散热的压力也就越大<br><code>cpu时钟周期数</code> = <code>指令数</code> x <code>cpi</code> x <code>Clock Circle Time</code><br><code>cpi</code> : 每条指令的平均时钟周期数 Cycles Per Instruction</p>
-<p>时钟周期时间: 取决于硬件<br>CPI: 取决于一条指令需要多少CPU周期、<br>指令数: 代表程序执行需要多少指令、用哪些指令</p>
-<p><code>功耗</code> ~= <code>1/2</code> x <code>负载电容</code> x <code>电压的平方</code> x <code>开关频率</code> x <code>晶体管数量</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">所以: </span><br><span class="line">1.为了提升性能、需要增加晶体管数量, 同样面积、就要把体积造的小、  就是提升&#96;制程&#96;</span><br><span class="line">2.但是 功耗增加太多、会导致CPU散热跟不上、就需要降低电压、</span><br><span class="line">   而功耗是和电压的平方成正比的、意味着电压下降到原来的 1&#x2F;5 、功耗就会变成原来的 1&#x2F;25.</span><br></pre></td></tr></table></figure>
-
-<p>提升计算机性能的方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1. 摩尔定律: 增加晶体管数量(主频)</span><br><span class="line">2. 并行原理: 多CPU</span><br><span class="line">3. 加速大概率事件: gpu替代cpu</span><br><span class="line">4. 通过流水线提升性能: 把cpu执行指令的过程细分</span><br><span class="line">5. 通过预测提高性能: 分支和冒险, 局部性原理</span><br><span class="line"></span><br><span class="line">应用：</span><br><span class="line">加速大概率事件: 缓存(内存、CDN缓存)</span><br><span class="line">流水线: 并发编程、异步编程、音频播放器边放边缓冲</span><br><span class="line">预测: 下一页预加载、cdn预热、指令预加载</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1350,7 +1341,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">154</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
