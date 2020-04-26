@@ -1,5 +1,5 @@
 ---
-title: 读写分离有哪些坑-
+title: 读写分离有哪些坑
 date: 2020-03-20
 categories:
   - MySQL

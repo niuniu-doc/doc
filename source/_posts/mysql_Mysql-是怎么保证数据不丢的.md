@@ -1,5 +1,5 @@
 ---
-title: Mysql-是怎么保证数据不丢的
+title: Mysql是怎么保证数据不丢的
 date: 2020-03-20
 categories:
   - MySQL

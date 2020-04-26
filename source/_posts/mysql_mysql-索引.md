@@ -1,5 +1,5 @@
 ---
-title: mysql-索引
+title: mysql索引
 date: 2020-03-20
 categories:
   - MySQL

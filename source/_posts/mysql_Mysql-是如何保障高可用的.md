@@ -1,5 +1,5 @@
 ---
-title: Mysql-是如何保障高可用的
+title: Mysql是如何保障高可用的
 date: 2020-03-20
 categories:
   - MySQL
@@ -33,7 +33,7 @@ show slave status; - seconds_behind_master表示当前备库延迟时间
 4. 如果备库上也不做大事务了、还有什么原因会导致主备延迟吗 ?
    备库的并行复制能力.
    
-  
+
 三、主备切换策略:
 1. 可靠性优先.
    1) 先判断备库B的 seconds_behind_master 是否小于指定值, 若否、持续观察
