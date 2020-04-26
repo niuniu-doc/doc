@@ -1,5 +1,5 @@
 ---
-title: 使用hexo 框架搭建网站
+title: 使用 hexo 框架搭建网站
 date: 2020-03-18 14:53:42
 tags: 
    - Tools 
@@ -7,7 +7,7 @@ categories:
    - Tools
 ---
 
-#### 使用hexo 框架搭建网站
+#### 使用 hexo 框架搭建网站
 
 ##### 先搭建基础环境
    ```
@@ -24,7 +24,7 @@ categories:
    hexo g // 生成站点, g -> generate
    hexo s // 运行网站, s -> server
    ```
-   此时、本地网站已经搭建完成, 访问 localhost:4000 即可.
+   此时、本地网站已经搭建完成, 访问 `localhost:4000` 即可.
 ##### 配置文件 `_config.yml`
    ```
    title: 牛牛的Blog
@@ -57,7 +57,7 @@ categories:
    ```
    hexo new page categories // 打开分类功能
    ```
-   打开 source/categories/index.md、修改为:
+   打开 `source/categories/index.md`、修改为:
    ```
    type: categories
    comments: false
@@ -93,6 +93,40 @@ categories:
          `/xxx/` 展示的是分类名称 
          `||` 后边是图标
          图标从 [fontawesome.com](https://fontawesome.com/icons?d=gallery&m=free) 获取
+
+##### 将链接修改为蓝色
+打开`themes/next/source/css/_common/components/post/post.styl` 文件, 将下面的代码复制到文件最后
+```css
+.post-body p a{
+     color: #0593d3;
+     border-bottom: none;
+     &:hover {
+       color: #0477ab;
+       text-decoration: underline;
+     }
+   }
+```
+
+##### 修改代码块样式
+打开 `themes/next/_config.yml`, 搜索 `custom_file_path`, 去掉 `style` 前边的注释, 然后新建或者打开 `{blog_root}/source/_date/styles.styl` 文件 
+```css
+code {
+    color: #D1082D;
+    background: #E8E5E6;
+    margin: 2px;
+   // font-size: 14px; // 设置你的字体大小
+   // font-family: Source Corde Pro; // 设置你喜欢的字体
+}
+// 大代码块的自定义样式
+.highlight, pre {
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 3px;
+}
+.highlight, code, pre {
+    border: 1px solid #d6d6d6;
+}
+```
 
 #### 使用valine评论系统
 
