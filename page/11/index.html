@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDidea/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -206,7 +206,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">复杂度分析</a>
+            <a href="/2020/03/20/tools_%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDidea/" class="post-title-link" itemprop="url">彻底卸载idea</a>
         </h1>
 
         <div class="post-meta">
@@ -231,12 +231,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构和算法</span></a>
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="复杂度分析" title="阅读次数">
+            <span id="/2020/03/20/tools_%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDidea/" class="post-meta-item leancloud_visitors" data-flag-title="彻底卸载idea" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -251,8 +251,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/tools_%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDidea/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/tools_%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDidea/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -267,32 +267,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#####为什么需要复杂度分析?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">通过监控得到的时间和内存占用是正确的、有些地方称为: 事后统计法</span><br><span class="line">但事后统计有很大的局限性:</span><br><span class="line">1. 测试结果严重依赖测试环境</span><br><span class="line">   机器配置和设置都会导致测试结果的差异</span><br><span class="line">2. 受数据规模的影响较大</span><br><span class="line">   eg. 对于同一排序算法、待排序数据的有序度不同、排序得到的时间差别会比较大、也会受数据本征的影响. 若原数据有序、对有些算法来说 可能不需要任何操作、会特别快</span><br><span class="line">   另: 数据规模较小时、可能无法反馈出排序算法的性能</span><br><span class="line">   </span><br><span class="line">所以、需要一个不受测试数据和测试环境影响、可以用来粗略计算算法执行效率的方法。</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">算法的执行效率简单来说、就是算法代码执行的时间</span><br><span class="line"></span><br><span class="line">eg. 下边代码</span><br><span class="line"> int cal(int n) &#123;</span><br><span class="line">   int sum &#x3D; 0;</span><br><span class="line">   int i &#x3D; 1;</span><br><span class="line">   for (; i &lt;&#x3D; n; ++i) &#123;</span><br><span class="line">     sum &#x3D; sum + i;</span><br><span class="line">   &#125;</span><br><span class="line">   return sum;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> 从CPU的角度来看、每一行都有类似的操作: 读数据-运算-写数据</span><br><span class="line"> 尽管每行代码对应的CPU执行的个数、执行的时间都不同、但对于粗略估计、可以认为是相同的, 假设为: unit_time</span><br><span class="line"> 第4、5行运行了n遍、需要2n*unit_time, so. 总共需要 (2n+2)*unit_time</span><br><span class="line"> 所有代码的执行时间 T(n) 与执行次数成正比</span><br><span class="line"> </span><br><span class="line"> 将改规律记为:</span><br><span class="line"> T(n) &#x3D; O(f(n)) </span><br><span class="line"> T(n):执行时间 n:数据规模 f(n):每行代码的执行次数总和、就是大O时间复杂度表示法</span><br><span class="line"> </span><br><span class="line"> 大O时间复杂度只是代表执行时间随数据规模增长的变化趋势、而不是真正的代码执行时间、也叫 渐进时间复杂度</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 只关注执行次数最多的代码</span><br><span class="line">2. 加法法则: 总复杂度等于量级最大的代码的复杂度</span><br><span class="line">3. 乘法法则: 嵌套代码的复杂度&#x3D;嵌套内外代码复杂度的乘积</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="常见复杂度量级"><a href="#常见复杂度量级" class="headerlink" title="常见复杂度量级"></a>常见复杂度量级</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">常量阶 O(1)</span><br><span class="line">对数阶 O(log n)</span><br><span class="line">线性阶 O(n)</span><br><span class="line">线性对数阶 O(nlog n)</span><br><span class="line">平方阶 O(n&lt;sup&gt;2&lt;&#x2F;sup&gt;)、立方阶  O(n&lt;sup&gt;3&lt;&#x2F;sup&gt;)、... K次方阶  O(n&lt;sup&gt;k&lt;&#x2F;sup&gt;)</span><br><span class="line">指数阶 O(2&lt;sup&gt;2&lt;&#x2F;sup&gt;)</span><br><span class="line">阶乘阶O(n!)</span><br><span class="line"></span><br><span class="line">可以粗略的分为 多项式量级和非多项式量级(指数阶 和 阶乘阶)、把时间复杂度为非多项式量级的算法问题叫 NP问题、当n的规模增大时、非多项式量级算法很低效</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="复杂度量级简单说明"><a href="#复杂度量级简单说明" class="headerlink" title="复杂度量级简单说明"></a>复杂度量级简单说明</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. O(1)</span><br><span class="line">   常量级复杂度、一般只要算法中不存在循环、递归语句、代码行再多、时间复杂度也是 O(1)</span><br><span class="line"> </span><br><span class="line">2. O(logn)、O(nlogn)</span><br><span class="line">   对数阶复杂度(归并排序、快速排序的时间复杂度都是O(nlogn)</span><br><span class="line">   eg. i&#x3D;1;while(i&lt;n)&#123;i &#x3D; i*3;&#125;</span><br><span class="line"></span><br><span class="line">3. O(m+n)、O(m*n)</span><br><span class="line">   明显有m和n两个数据规模的示例</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h5><blockquote>
-<p>时间复杂度的全称是: 渐进时间复杂度、表示算法的执行时间与数据规模之间的增长关系</p>
-<p>类比: 空间复杂度 –&gt; 空间渐进复杂度、表示算法的存储空间与数据规模之间的增长关系</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">常用的空间复杂度只有: O(1)、O(n)、O(n&lt;sup&gt;2&lt;&#x2F;sup&gt;)</span><br></pre></td></tr></table></figure>
+          <p>完全卸载idea</p>
+<p>首先在应用里面右键移动到垃圾桶[先卸载应用]</p>
+<p>cd Users/xxx/Library/</p>
+<p>上面的xxx对应你的用户名，然后输入</p>
+<p>rm -rf Logs/IntelliJIdeaxxx/</p>
+<p>rm -rf Preferences/IntelliJIdeaxxx/</p>
+<p>rm -rf Application\ Support/IntelliJIdeaxxx/</p>
+<p>rm -rf Caches/IntelliJIdeaxxx<br>上面的对应xxx对应不同的版本号，注意开头是 IntelliJIdea就行</p>
+<p>把～/下的.idea/也删掉</p>
+<p>Idea 的缓存文件在</p>
+<p>/Users/xxxx/Library/Preferences<br>注意：以上方式会直接删除缓存文件，所以你重新安装的idea，没有任何插件【卸载前可导出配置setting.jar】</p>
+<p>原文链接：<a href="https://blog.csdn.net/qq_17213067/article/details/88226062" target="_blank" rel="noopener">https://blog.csdn.net/qq_17213067/article/details/88226062</a></p>
 
       
     </div>
@@ -312,7 +298,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E5%86%B5/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/web-design_README/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -326,7 +312,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E5%86%B5/" class="post-title-link" itemprop="url">数据结构概况</a>
+            <a href="/2020/03/20/web-design_README/" class="post-title-link" itemprop="url">README</a>
         </h1>
 
         <div class="post-meta">
@@ -351,12 +337,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构和算法</span></a>
+                  <a href="/categories/Web-design/" itemprop="url" rel="index"><span itemprop="name">Web-design</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E5%86%B5/" class="post-meta-item leancloud_visitors" data-flag-title="数据结构概况" title="阅读次数">
+            <span id="/2020/03/20/web-design_README/" class="post-meta-item leancloud_visitors" data-flag-title="README" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -371,8 +357,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E5%86%B5/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E5%86%B5/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/web-design_README/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/web-design_README/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -387,10 +373,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>课程链接：<br><a href="https://time.geekbang.org/column/article/40011" target="_blank" rel="noopener">https://time.geekbang.org/column/article/40011</a></p>
-<p>【强烈推荐极客时间原版课程、这里仅仅是个人笔记、方便自己学习回顾】</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6dc246178f53676e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据结构和算法概况.jpg"></p>
-
+          
       
     </div>
 
@@ -409,7 +392,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E4%B8%94%E8%B5%B0%E4%B8%94%E5%9B%9E%E9%A6%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -423,7 +406,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">数组</a>
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E4%B8%94%E8%B5%B0%E4%B8%94%E5%9B%9E%E9%A6%96/" class="post-title-link" itemprop="url">且走且回首</a>
         </h1>
 
         <div class="post-meta">
@@ -448,12 +431,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构和算法</span></a>
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/" class="post-meta-item leancloud_visitors" data-flag-title="数组" title="阅读次数">
+            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E4%B8%94%E8%B5%B0%E4%B8%94%E5%9B%9E%E9%A6%96/" class="post-meta-item leancloud_visitors" data-flag-title="且走且回首" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -468,8 +451,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E4%B8%94%E8%B5%B0%E4%B8%94%E5%9B%9E%E9%A6%96/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E4%B8%94%E8%B5%B0%E4%B8%94%E5%9B%9E%E9%A6%96/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -485,22 +468,12 @@
 
       
           <blockquote>
-<p>数组: 用一组连续的内存空间、存储一组具有相同数据类型的线性表数据结构</p>
+<p>不管是磕磕绊绊也好、惊喜无限也罢、我们总是用力的走完了这一年、犹如东逝之水、不管有没有激起一朵浪花、时光仍是悄然的划过、不留痕迹、或者交界钟声想起的那一刻、我们才蓦然明白、19年已从指间划过, 永远的变成回忆、沉淀在心底….</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.线性表: 数据只有前、后两个方向. 链表、队列、桟也是线性结构</span><br><span class="line">2.连续空间、数据类型相同: 使得数组可以随机访问、但: 插入、删除数据的效率就低很多、需要数据重排</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="插入和删除"><a href="#插入和删除" class="headerlink" title="插入和删除"></a>插入和删除</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1.插入</span><br><span class="line">  1) 末尾插入、无需移动元素、复杂度 O(1)</span><br><span class="line">  2) 头部插入、搬移全部元素、复杂度 O(n)</span><br><span class="line">  每个位置插入的概率相同、平均复杂度为 (1+2+3+...n)&#x2F;n &#x3D; O(n)</span><br><span class="line"> </span><br><span class="line">  若数组有序、只需要搬移k之后的数据</span><br><span class="line">  若数组无序、且不要求有序、将k位置的元素直接搬移到最后、只需要一次搬移 O(1)</span><br><span class="line">  </span><br><span class="line">2.删除</span><br><span class="line">  1) 与插入类似、最好O(1) 最坏O(n) 平均O(n)</span><br><span class="line">  2) 删除多(m)个元素时、可先标记删除(只标记)、后一次性删除、节省m*O(n)次操作</span><br><span class="line">     JVM的标记清除算法的核心</span><br></pre></td></tr></table></figure>
-
-
-
-<p>容器能否代替数组 ?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. arrayList 将数组操作的细节封装. eg. 数据搬移</span><br><span class="line">2. arrayList 支持动态扩容、默认扩容是1.5 </span><br><span class="line">   扩容涉及到内存申请和数据搬移、比较耗时、若知道数据存储大小时、最好指定大小</span><br><span class="line">   </span><br><span class="line"> 1. 容器无法存储基础类型、eg. int, long, 需要封装为 Integer、Long 而自动装箱则有部分性能损耗</span><br><span class="line"> 2. 若数据大小已知、且操作特别简单、可直接使用数组</span><br><span class="line"> 所以、对业务开发基本上直接使用容器就好、省力、不易出错、丢失的性能可以不太关注、不影响整体性能</span><br><span class="line"> 对底层开发、性能要做到极致、数组就优于容器成为首选</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="为什么大部分编程语言中、数组从0开始编号"><a href="#为什么大部分编程语言中、数组从0开始编号" class="headerlink" title="为什么大部分编程语言中、数组从0开始编号"></a>为什么大部分编程语言中、数组从0开始编号</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">下标确切定义是: 偏移offset、</span><br><span class="line">1.使用a表示首地址、a[0]就是偏移为0的位置、即首地址、a[k]表示第k个type_size的地址</span><br><span class="line">  a[k]_addr &#x3D; base_addr + k*type_size</span><br><span class="line">2.若使用1开始计数、则</span><br><span class="line">  a[k]_addr &#x3D; base_addr + (k-1)*type_size </span><br><span class="line"> 从1开始编号、对于CPU来说、就是多了一次减法运算</span><br></pre></td></tr></table></figure>
+<p>2019年, 成长的一年、亦是堕落的一年, 经历了激情澎湃、我辈自有凌云志的兴奋期, 也挨过了 凄清惨淡的身心俱疲; 尝试过落叶无声, 默然关怀的佛系思维、也有过人我无犯的不甘怯懦, 时光滴滴哒哒的向前走、一切依然成了回忆、永远定格, 再去思考、凡此种种、或觉得可笑, 或觉得落寞</p>
+<p>2020年、愿自己是阳光的、积极的、把更多的精力凝聚在自己身上, 给自己尽可能的成长, 感受日出日落的美好、品味云淡风轻的生活, 好好的锻炼身体, 努力的追求新知, 静待一切的一切、终将美好<del>~</del></p>
+<p>古今多少事、都付笑谈中, 愿我们都能惯看秋月春风, 遇见最美好的人、经历最美好的时光, 一起感受生活的滴滴点点、愿我们都如朝阳, 温暖而柔和….</p>
+<p>未来的每一天都值得期待…..</p>
 
       
     </div>
@@ -520,7 +493,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E9%93%BE%E8%A1%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%94%B6%E8%97%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -534,7 +507,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">链表</a>
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%94%B6%E8%97%8F/" class="post-title-link" itemprop="url">收藏</a>
         </h1>
 
         <div class="post-meta">
@@ -559,12 +532,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构和算法</span></a>
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E9%93%BE%E8%A1%A8/" class="post-meta-item leancloud_visitors" data-flag-title="链表" title="阅读次数">
+            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%94%B6%E8%97%8F/" class="post-meta-item leancloud_visitors" data-flag-title="收藏" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -579,8 +552,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E9%93%BE%E8%A1%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E9%93%BE%E8%A1%A8/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%94%B6%E8%97%8F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%94%B6%E8%97%8F/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -595,13 +568,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h5 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">链表: 用指针将一组零散的内存块串联在一起、其中: 把内存块称为链表的节点</span><br><span class="line">为了将节点串联起来、每个链表的节点除了存储数据、还需要记录链上的下一个节点的地址(后继指针)</span><br><span class="line"></span><br><span class="line">分为:单链表、双链表和循环链表</span><br><span class="line"></span><br><span class="line">其中: 第一个节点称为头节点(用来记录链表的基地址)、最后一个节点称为尾节点、</span><br><span class="line"></span><br><span class="line">单链表的尾节点指向一个空地址NULL、</span><br><span class="line">循环链表: 一种特殊的单链表、与单链表的区别是: 尾节点指向链表的头节点</span><br><span class="line">双向链表: 每个节点有一个后继指针next和一个前驱指针prev</span><br><span class="line"></span><br><span class="line">存储相同的数据、双向链表要占据两个额外的空间来存储prev和next指针、需要更多的空间、但也带来了双向链表操作的灵活性</span><br><span class="line"></span><br><span class="line">一个重要思想:</span><br><span class="line">空间换时间: 在内存充足的时候、若追求代码的执行速度、可以利用空间换时间、选择空间复杂度高、但时间复杂度相对较低的算法</span><br><span class="line">相反: 若内存较少、eg. 代码跑在单片机或者手机上、就需要考虑时间换空间的思路</span><br></pre></td></tr></table></figure>
-
-<h5 id="链表vs数组"><a href="#链表vs数组" class="headerlink" title="链表vs数组"></a>链表vs数组</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 链表可有效使用内存、插入和删除效率较高</span><br><span class="line">2. 数组随机访问效率更高、插入删除效率较低</span><br><span class="line">3. 数组的连续存储性、可借助CPU的缓存机制、预读数组中数据、访问效率更高</span><br><span class="line">   链表存储非连续、对CPU缓存支持不够友好</span><br><span class="line">4. 数组大小固定、一旦声明就要占用整块的连续空间、若声明的数组过大、系统无足够连续内存、会导致OOM、链表本身无大小限制、可天然支持动态扩容</span><br><span class="line">5. 若代码对内存要求很高、则数组更合适、且: 对链表频繁的增删会导致频繁的内存申请和释放、容易造成GC</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="几个写链表代码的技巧"><a href="#几个写链表代码的技巧" class="headerlink" title="几个写链表代码的技巧"></a>几个写链表代码的技巧</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">一、理解指针或者引用的含义</span><br><span class="line">   将某个变量赋值给指针、实际上就是将这个变量的地址赋值给指针、即: 指针中存储了这个变量的内存地址、指向了这个变量、通过指针就能找到这个变量</span><br><span class="line"></span><br><span class="line">二、警惕指针丢失和内存泄漏</span><br><span class="line">   插入节点时需要注意操作顺序、删除节点时也要手动释放内存</span><br><span class="line"></span><br><span class="line">三、利用哨兵简化实现难度</span><br><span class="line">   针对链表的增删操作、需要对头节点和尾节点进行特殊处理</span><br><span class="line"></span><br><span class="line">四、留意边界条件</span><br><span class="line">   1. 空链表能否正常工作 ？</span><br><span class="line">   2. 只有一个节点的链表能否正常工作 ？</span><br><span class="line">   3. 只有两个节点能否正常工作 ？</span><br><span class="line">   4. 处理头尾节点时能否正常工作 ？</span><br><span class="line"></span><br><span class="line">五、举例画图、辅助思考</span><br><span class="line"></span><br><span class="line">六、多写多练</span><br></pre></td></tr></table></figure>
+          <p>文档：MySQL技术内幕 InnoDB存储引擎<br>链接：<a href="http://note.youdao.com/noteshare?id=825861cad04ce2d9420b7c6949320dee" target="_blank" rel="noopener">http://note.youdao.com/noteshare?id=825861cad04ce2d9420b7c6949320dee</a></p>
+<p>文档：从Paxos到zookeeper<br>链接：<a href="http://note.youdao.com/noteshare?id=5c62699d4db431b25d73ff05bf500fbf" target="_blank" rel="noopener">http://note.youdao.com/noteshare?id=5c62699d4db431b25d73ff05bf500fbf</a></p>
+<p>文档：深入理解Java虚拟机<br>链接：<a href="http://note.youdao.com/noteshare?id=bca9a23c7db0031bc7a67010ffbab1bd" target="_blank" rel="noopener">http://note.youdao.com/noteshare?id=bca9a23c7db0031bc7a67010ffbab1bd</a></p>
+<p>jvm工具收藏<br><a href="https://www.cnblogs.com/noKing/p/9457541.html" target="_blank" rel="noopener">https://www.cnblogs.com/noKing/p/9457541.html</a></p>
 
       
     </div>
@@ -621,7 +591,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_http%E8%AF%B7%E6%B1%82%E8%A7%A3%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -635,7 +605,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_http%E8%AF%B7%E6%B1%82%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">http请求解析</a>
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/" class="post-title-link" itemprop="url">早安、世界</a>
         </h1>
 
         <div class="post-meta">
@@ -660,12 +630,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_http%E8%AF%B7%E6%B1%82%E8%A7%A3%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="http请求解析" title="阅读次数">
+            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/" class="post-meta-item leancloud_visitors" data-flag-title="早安、世界" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -680,8 +650,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_http%E8%AF%B7%E6%B1%82%E8%A7%A3%E6%9E%90/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_http%E8%AF%B7%E6%B1%82%E8%A7%A3%E6%9E%90/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -696,659 +666,605 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="如何把数据包送达目的主机"><a href="#如何把数据包送达目的主机" class="headerlink" title="如何把数据包送达目的主机"></a>如何把数据包送达目的主机</h4><blockquote>
-<p>主机A -&gt; 网络层(添加IP头信息) -&gt; 底层 -&gt; 物理网络 -&gt; 主机B -&gt; 解析IP头信息 -&gt; 将数据部分交给应用</p>
-</blockquote>
-<h4 id="如何把数据包送达应用程序"><a href="#如何把数据包送达应用程序" class="headerlink" title="如何把数据包送达应用程序"></a>如何把数据包送达应用程序</h4><blockquote>
-<p>UDP协议: User Datagram Protocol<br>网络层和上层之间添加一层(传输层)、封装UDP头信息</p>
-</blockquote>
-<p>UDP并不提供重传机制、只是丢弃当前数据包、且发送之后不知道是不是数据能到达目的地</p>
-<h4 id="TCP将数据完整送达应用程序"><a href="#TCP将数据完整送达应用程序" class="headerlink" title="TCP将数据完整送达应用程序"></a>TCP将数据完整送达应用程序</h4><blockquote>
-<p>对于数据包丢失的情况、TCP提供重传机制<br>引入数据包排序机制、保证将乱序的数据包组合成一个完整的文件</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">浏览器使用HTTP协议作为应用层协议、用来封装请求的文本信息</span><br><span class="line">使用TCP&#x2F;IP作为传输层协议 将它发在网络上</span><br><span class="line">即: HTTP请求的内容是通过TCP的传输数据阶段来实现的</span><br></pre></td></tr></table></figure>
+          <p>啊哈</p>
+<!-- MarkdownTOC -->
 
-
-
-<h4 id="HTTP请求流程"><a href="#HTTP请求流程" class="headerlink" title="HTTP请求流程"></a>HTTP请求流程</h4><ul>
-<li>构建请求</li>
-</ul>
-<blockquote>
-<p>GET /index.html HTTP1.1</p>
-</blockquote>
 <ul>
-<li>查找缓存</li>
+<li>缘起</li>
+<li>过往、感恩</li>
+<li>现在、enjoying~~</li>
+<li>未来、waiting~~</li>
+<li>接下来的日子</li>
+<li>Why</li>
 </ul>
-<blockquote>
-<p>浏览器在网络请求之后会保存资源副本在本地</p>
+<!-- /MarkdownTOC -->
+
+<h4 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h4><figure class="highlight parser3"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">起床、读书、做在窗边、抬头的那一刻、竟是万分温暖、初阳淡淡、轻洒墙角、沉睡了一晚的楼脚飘过</span></span><br><span class="line"><span class="xml">一抹明丽的淡红、不由自主想起那些游离于心间的美好、禁不住自我感动了一把</span><span class="keyword">^.</span><span class="xml">^</span></span><br><span class="line"></span><br><span class="line"><span class="xml">又想起最近种种、嗯嗯、新开的简书还是空白的、那么、让我开始一个新的篇章吧~~</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="过往、感恩"><a href="#过往、感恩" class="headerlink" title="过往、感恩"></a>过往、感恩</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">普通的不能在普通的大学、好不经意流散的时光、无所事事面对将要毕业的我、无疑是失败的~~</span><br><span class="line"></span><br><span class="line">幸运、偶然的机会走近 IT 的世界、从此打开一扇门、感谢曾经一路走来的小伙伴、给过我太多帮助</span><br><span class="line"></span><br><span class="line">幸运、<span class="number">16</span>年年初发现自己的世界如此之小、别离、来到北京、或许那时候只是觉得自己的世界太小了、想要一个更大的天地</span><br><span class="line"></span><br><span class="line">幸运、来到北京没有遇到太多别人描述里的坎坷与压力、有的是我想要的世界、有的是同事的热心帮助、</span><br><span class="line">差不多从没基础开始吧、从此我进入了一个喜欢而又迷茫着的世界、发现它的周边是如此的绚丽多彩、</span><br><span class="line">从此、匆匆忙忙、想要知道的多一点、再多一点、那时候不懂的东西太多、感觉是新鲜好奇的、于是尽自己最大努力去学、沉浸于这种成长的幸福</span><br><span class="line"></span><br><span class="line">要感谢的人很多、你们陪我成长、给我鼓励、~~心里默默一一谢过、而有些、我相信、我不说、你们也懂、</span><br><span class="line">懂我深深的感恩、亦懂我害怕让你们失望的忐忑、让我们一起加油、为我们喜欢的未来~.~</span><br></pre></td></tr></table></figure>
+
+<h4 id="现在、enjoying"><a href="#现在、enjoying" class="headerlink" title="现在、enjoying~~"></a>现在、enjoying~~</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   过往、就在那里、不管你喜不喜欢、都不会再变、我的过去不管是无知的苍白还是迷茫后的成长、</span><br><span class="line">   我都喜欢、它的身上流动着我的气息、无知的四年大学、我亦不后悔、一种经历、一种人生。</span><br><span class="line"></span><br><span class="line">   笃信、不喜欢的过去、就认真的作为借鉴、迷茫之后、世界是清晰的、却也更大更广、</span><br><span class="line">   很长一段时间的迷茫之后、不久前、选择了一条、在很多人眼里向下走的路、我却坚定不移、</span><br><span class="line">我相信自己的选择、我知道自己想要什么</span><br><span class="line">   en/就酱紫、自己决定了的、就认真的走下去、失败总比苍白更美好</span><br><span class="line"></span><br><span class="line">   换句话、既然一无所有、又何惧失败、~~</span><br><span class="line"></span><br><span class="line">   诚然、幸运之神再次眷顾了我、很顺利、下个月中旬可以转过去、开始java之旅、为了得到这次机会、</span><br><span class="line">   我同意php 和 java的项目一起做、精力稍有分散、会有<span class="number">2</span>份压力、但我愿意用这段时光见证自己的成长</span><br><span class="line">   enen~.</span><br></pre></td></tr></table></figure>
+
+<h4 id="未来、waiting"><a href="#未来、waiting" class="headerlink" title="未来、waiting~~"></a>未来、waiting~~</h4><figure class="highlight parser3"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">生如逆旅单行道、哪有岁月可回头、既然如此、何不用心谱写未来、干嘛不让未来的自己感谢现在的自己</span><span class="keyword">^.</span><span class="xml">^</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">^.</span><span class="xml">^ enen、我还是那个小小小小的小女孩儿</span></span><br><span class="line"><span class="xml">那个每次有好事发生都把你们拿出来感谢一遍的小女生、你们告诉我那叫越努力越幸运、</span></span><br><span class="line"><span class="xml">我心底却始终认为该归功于你们、是你们不遗余力的帮助、so、不管是怎样的吧、愿我们的未来都是我们期待的模样</span></span><br><span class="line"></span><br><span class="line"><span class="xml">勇气不是不害怕、而是尽管害怕依然可以迎难而上～</span></span><br><span class="line"></span><br><span class="line"><span class="xml">愿我们都能带着一颗留白的心上路、在光阴里扮演一个最从容的角色～</span></span><br><span class="line"></span><br><span class="line"><span class="xml">愿我们都能带着最微薄的行李和最丰厚的自己、在时间里流浪、流梦为马、随处可栖～</span></span><br><span class="line"></span><br><span class="line"><span class="xml">Thanks、我的朋友们、你们才是我最宝贵的财富、愿我们永远是最幸福的模样~~</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="接下来的日子"><a href="#接下来的日子" class="headerlink" title="接下来的日子"></a>接下来的日子</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">还会喜欢看阳光飘落</span><br><span class="line">还会喜欢拿着洒水壶给我的小花儿们来一场甘霖</span><br><span class="line">还会喜欢晚上躺在床上什么都不思考、安静的放空自我</span><br><span class="line">还会喜欢抬眼的那一刻发现的诸多美好、一溜烟儿的跑出去浪上一会儿</span><br><span class="line">还会喜欢风轻轻吹过的日子、和朋友们做在一起聊聊天</span><br><span class="line">还会喜欢做在书桌前发发呆、思念我的朋友们</span><br><span class="line">还好喜欢周末去逛逛街、晚上跑跑步</span><br><span class="line">还会喜欢就算不论何时、都想要搞明白想要搞明白的东西、</span><br><span class="line"><span class="keyword">en</span>/我还是我、所有的都一如既往~~</span><br></pre></td></tr></table></figure>
+
+<h4 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h4><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">是的、我... 小神经有犯抽了、aha~、总是喜欢这种细碎的小美好、怀念下朋友们、然后发发神经、</span><br><span class="line"></span><br><span class="line">正经的、未来不可欺、让我们一起加油吧~~</span><br><span class="line"></span><br><span class="line">=<span class="ruby">=<span class="keyword">end</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9C%AA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%83%8A%E5%96%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9C%AA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%83%8A%E5%96%9C/" class="post-title-link" itemprop="url">未知的小惊喜</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9C%AA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%83%8A%E5%96%9C/" class="post-meta-item leancloud_visitors" data-flag-title="未知的小惊喜" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9C%AA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%83%8A%E5%96%9C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9C%AA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%83%8A%E5%96%9C/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>时光跳动、晴雨霾风哀愁喜, 无需计较、无需叹息、无需着急….</p>
+<p>属于你的、终归是属于你、想要的、只需努力、静静等待</p>
+<p>有人说, 机遇很重要、是的、很重要、前提是、当机遇到来的时候有足够的能力来把握<br>机遇才叫机遇、否则只能叫别人的机遇….</p>
+<p>有人说、背景很重要、是的、很重要、前提是、你只是芸芸众生中特别一般的一个<br>背景才能带来优越感、跳出一般人的圈子、背景可能只是润色….</p>
+<p>有人说、家境很重要、是的、很重要、有些人一出生就在你人生的终点线附近、<br>能说这话的、一定没有一个特别优秀的家庭背景、<br>为何不努力让自己的下一代出生就站在较好的起点线上?</p>
+<p>有人说、子孙自有子孙福、他们怎么样看自己的努力和造化、这话我不去反驳</p>
+<p>我只想能给自己想要的东西、输在了起跑线不可怕<br>就算是奋斗了10年才能和别人坐在一起聊天又如何？如果不奋斗、连一起聊天的机会都没有<br>世界是不公平的、也是公平的</p>
+<p>所有的努力不一定都能得到回报、不努力也不一定得不到回报<br>不管你选不选择、相不相信、事实就在这里</p>
+<p>路还是要自己走的<del>~</del></p>
+<p>遇见小惊喜、迷惑了很久的东西、豁然开朗、感觉所有的努力都是值得的<br>有感而发</p>
+<p>愿每个人都能按自己最喜欢的方式去生活、感谢不曾放弃努力的自己~</p>
+<p>.^.^.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/" class="post-title-link" itemprop="url">时光说</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/" class="post-meta-item leancloud_visitors" data-flag-title="时光说" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <pre><code>愿我们心生玲珑、细品丝丝温情～
+
+愿我们心坚如铁、足御刺骨寒冷～
+
+不委屈每一份善意、亦不惧怕每一分寒意～
+
+愿我们有人吐槽、亦善聆听～
+
+愿我们有人宠爱、亦不骄横～
+
+不满亦不积怨、任性但不失理性～
+
+愿我们有机会倾听故事的全部～
+
+愿我们就算是被人认识万分之一亦不悲伤～
+
+不愤世嫉俗、也不过分张扬～
+
+愿我们的朋友不止是正向的、能有机会完整的成长～
+
+愿我们见惯所有的恶、亦能有发自内心的善～
+
+懂得拿起、又善于放下～
+
+但愿我们能把平凡乃至糟糕的日子过的精彩、也能在顺风顺水的日子保持谦和～
+
+但愿我们能耐得住所有成长的寂寞、也能在最得意的时候谦卑温和～
+
+……
+
+嗯、不是在最好的日子里遇到了你们、
+
+而是遇到你们才有了这段最美好的时光～
+
+不愿时光不老、不求相伴永远、但愿我们相顾不言早已知其冷暖～
+
+------
+
+人生就是一场修行. 成长毫无违和～</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%82%A3%E6%AE%B5%E6%97%B6%E5%85%89%E3%80%81%E6%81%B0%E6%81%B0%E5%A5%BD~/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%82%A3%E6%AE%B5%E6%97%B6%E5%85%89%E3%80%81%E6%81%B0%E6%81%B0%E5%A5%BD~/" class="post-title-link" itemprop="url">那段时光、恰恰好~</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%82%A3%E6%AE%B5%E6%97%B6%E5%85%89%E3%80%81%E6%81%B0%E6%81%B0%E5%A5%BD~/" class="post-meta-item leancloud_visitors" data-flag-title="那段时光、恰恰好~" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%82%A3%E6%AE%B5%E6%97%B6%E5%85%89%E3%80%81%E6%81%B0%E6%81%B0%E5%A5%BD~/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%82%A3%E6%AE%B5%E6%97%B6%E5%85%89%E3%80%81%E6%81%B0%E6%81%B0%E5%A5%BD~/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <pre><code>--  致心灵相依的朋友们</code></pre><p>愿我们不浓不淡、不执着不言弃<br>清淡如水、落花无痕<br>如一缕清风、做着暖情的自己～ </p>
+<p>温柔淡雅、在凡尘世事的人间烟火里做一个馨香的自己～<br>如一汪清泉、细润绵长</p>
+<p>找寻内心深处最炙烈的自己、又学会不着痕迹～</p>
+<p>愿我们温润如玉、凡世无双、用平凡造就灵魂的精灵～</p>
+<p>一切恰到好处、只一句、你也在、刚刚好～</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%99%88%E6%83%85%E4%BB%A4%E7%BB%8F%E5%85%B8%E5%AF%B9%E7%99%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%99%88%E6%83%85%E4%BB%A4%E7%BB%8F%E5%85%B8%E5%AF%B9%E7%99%BD/" class="post-title-link" itemprop="url">陈情令经典对白</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%99%88%E6%83%85%E4%BB%A4%E7%BB%8F%E5%85%B8%E5%AF%B9%E7%99%BD/" class="post-meta-item leancloud_visitors" data-flag-title="陈情令经典对白" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%99%88%E6%83%85%E4%BB%A4%E7%BB%8F%E5%85%B8%E5%AF%B9%E7%99%BD/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%99%88%E6%83%85%E4%BB%A4%E7%BB%8F%E5%85%B8%E5%AF%B9%E7%99%BD/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1、忘羡一曲远，曲终人不散。</p>
+<p>2、我想带一人回云深不知处。带回去，藏起来。</p>
+<p>3、我<a href="http://www.kuyv.cn/tv/modaozushizhichenqingling/castlist/11/" target="_blank" rel="noopener"><strong>薛洋</strong></a>，晓天地，晓人心，但终究不<a href="http://www.kuyv.cn/tv/modaozushizhichenqingling/castlist/9/" target="_blank" rel="noopener"><strong>晓星尘</strong></a>。</p>
+<p>4、是<a href="http://www.kuyv.cn/tv/modaozushizhichenqingling/castlist/5/" target="_blank" rel="noopener"><strong>蓝曦臣</strong></a>，我这一生，杀父杀兄杀妻杀子杀师杀友，什么坏事没做过!”他倒吸了一口气，仿佛肺部被刺穿，“可我独独没有想过要害你。</p>
+<p>5、他并不怕摔，这些年来，也摔过很多次。但摔到地上，毕竟还是会疼。如果有个人能接住他，那就再好不过了。</p>
+<p>6、其实从头到尾，被挫骨扬灰，灰飞烟灭的，只有<a href="http://www.kuyv.cn/tv/modaozushizhichenqingling/castlist/2/" target="_blank" rel="noopener"><strong>温情</strong></a>一人。</p>
+<p>7、要救一个人往往束手无策，可要害一个人，又何止有千百种办法。</p>
+<p>8、为遇一人而入红尘，人去我亦去，此身不留尘。</p>
+<p>9、全世界只为你一人唱的曲，今生成为我认出你最好的证明。</p>
+<p>10、只是自以为心若顽石，却终究人非草木。</p>
+<p>11、他是真真实实的人，他是见不得光的鬼，他们之间，仿佛永远都隔着这样一道生死鸿沟。</p>
+<p>12、天真无忌的童言，最是能致命。小孩子什么都不懂，而正是因为他们不懂，所以伤人心才往往最直接。</p>
+<p>13、我独自徘徊在孤苦世间、耗尽元神精气，宁可魂飞魄散，也想再见你一面。但这一见，就是最后永诀。</p>
+<p>14、他哽咽着道：“你说过，将来我做家主，你做我的下属，一辈子扶持我，永远不会背叛云梦江氏……这是你自己说的。”沉默片刻，<a href="http://www.kuyv.cn/tv/modaozushizhichenqingling/castlist/0/" target="_blank" rel="noopener"><strong>魏无羡</strong></a>道：“对不起。我食言了。”</p>
+<p>15、喝他喝过的酒，受他受过的伤，种他种过的思追。</p>
+<p>16、因为并不存在任何误会。误会这种东西，推心置腹畅谈一番，摊开了说，便能清楚明白、你好我好。可这世上，更多的是无解的难题。</p>
+<p>17、现在才去堵伤口，什么用都没有。晓星尘已经死了，彻彻底底地死了。连魂魄都碎了。</p>
+<p>18、人间欠我一颗糖，我却只有砒霜付以人间。</p>
+<p>19、原以为殊途同归，却不想同道殊途。</p>
+<p>20、薛洋，他们若不要你，我要你，你看，我也有糖…我知道，我不是晓星尘。</p>
+<p>21、酒很香，很醇，也很辣，大概能明白那个人为什么会喜欢。喝他喝过的酒，受他受过的伤。</p>
+<p>22、人这一辈子，有两句肉麻的话是非说不可的。――“谢谢你”和“对不起”。</p>
+<p>23、晓星尘笑道：“那可不行，你一开口我就笑。我一笑，剑就不稳了。”</p>
+<p>24、君不见陌上花开落几度，燕影疏斜去又还。君不闻无名之曲歌长夜，歪坐榻上醉复醒。君不知山有木兮木有枝，枇杷尚青酸伴苦。君不复黑衣横笛且徐行，执杯瑶酹对空席。</p>
+<p>25、霜华敛去君珍重 在无明月送清风。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%9B%B6%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%BE%8E%E5%A5%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%9B%B6%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%BE%8E%E5%A5%BD/" class="post-title-link" itemprop="url">零零碎的小美好</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%9B%B6%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%BE%8E%E5%A5%BD/" class="post-meta-item leancloud_visitors" data-flag-title="零零碎的小美好" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%9B%B6%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%BE%8E%E5%A5%BD/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E9%9B%B6%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%BE%8E%E5%A5%BD/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>有些句子、简简单单、曼妙无比、收藏谨记~</p>
 <ol>
-<li>缓解服务端压力、提升性能</li>
-<li>对于网站来说、可以实现快速下载</li>
-<li>若本地无资源副本、就会进入网络请求</li>
-</ol>
-</blockquote>
-<ul>
-<li>准备IP地址和端口</li>
-</ul>
-<blockquote>
-<p>思考：</p>
-<ol>
-<li>http请求的第一步是什么呢 ？- 构建请求信息</li>
-<li>建立连接的信息都包含什么? - ip和端口号</li>
-<li>如果只有url可以拿到建立连接的信息么 ？- 通过DNS解析、http协议默认80端口</li>
-</ol>
-</blockquote>
-<ul>
-<li>等待TCP队列</li>
-</ul>
-<blockquote>
-<p>准备好IP和端口、是不是就可以建立TCP连接？</p>
-<p>不一定, Chrome 同一个域名最多建立6个TCP连接、若同时有10个请求、会有4个请求进入排队队列等待、直到进行中的请求完成</p>
-</blockquote>
-<ul>
-<li>建立TCP连接</li>
-</ul>
-<blockquote>
-<p>在http开始工作之前、需要先建立TCP连接</p>
-</blockquote>
-<ul>
-<li>发送HTTP请求</li>
-</ul>
-<blockquote>
-<ol>
-<li>请求行(请求方法、路由、http版本)</li>
-<li>请求头(cookie等信息)</li>
-<li>请求体(请求参数等)</li>
-</ol>
-</blockquote>
-<h4 id="服务端处理http请求流程"><a href="#服务端处理http请求流程" class="headerlink" title="服务端处理http请求流程"></a>服务端处理http请求流程</h4><ul>
-<li>返回请求</li>
-<li>断开连接(正常情况下、一单server返回响应数据、就会关闭TCP连接、若头信息加入 Connection:Keep-Alive则保持TCP连接不断开)</li>
-<li>重定向</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_url%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_url%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/" class="post-title-link" itemprop="url">url解析流程</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_url%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="url解析流程" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_url%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_url%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><p>浏览器进程主要负责用户交互、子进程管理和文件存储等功能</p>
+<li><p>时光不老、青春不散、繁华落幕、漫看似水流年~</p>
 </li>
-<li><p>网络进程是面向渲染进程和浏览器进程等提供网络下载功能</p>
+<li><p>星光不问赶路人、时光不负有心人</p>
 </li>
-<li><p>渲染进程主要职责是把从网络下载的HTML、JS、CSS图片等资源解析为可显示赫尔交互的页面</p>
+<li><p>生活从来不会给我们从容思考的机会</p>
 </li>
-</ul>
-<h4 id="请求解析流程"><a href="#请求解析流程" class="headerlink" title="请求解析流程"></a>请求解析流程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">大致可以描述为：</span><br><span class="line">1. 首先从浏览器进程输入请求URL</span><br><span class="line">2. 网络进程发起URL请求</span><br><span class="line">3. 服务器响应URL请求之后、浏览器进程开始准备渲染进程</span><br><span class="line">4. 渲染进程准备好之后、向渲染进程提交网络进程响应的数据、称为提交文档阶段</span><br><span class="line">5. 渲染进程接收完整文档信息之后、开始解析加载页面及子资源、完成页面渲染</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">1. 用户输入</span><br><span class="line">   用户在地址栏输入查询关键字时、地址栏会判断输入的是关键字还是请求的URL</span><br><span class="line">   若是搜索内容、地址栏会使用浏览器默认的搜索引擎、合成包含搜索关键字的URL</span><br><span class="line">   若输入内容符合URL规则、则解析为URL、浏览器加载一个地址之后、导航栏图表就进入了加载状态、页面没变、需要等待提交文档阶段、页面内容才会替换</span><br><span class="line">2. URL请求过程</span><br><span class="line">   浏览器进程通过进程间通信IPC把url请求发送到网络进程、网络进程接收到URL请求后才发起请求</span><br><span class="line">   </span><br><span class="line">   1) 网络进程先查找本地缓存是否缓存了改资源、若有直接返回</span><br><span class="line">   2) 没有、进入网络请求流程(DNS解析-&gt;ip、若https协议先建立TLS连接)</span><br><span class="line">   3) 利用IP地址和服务器建立TCP连接、建立连接后浏览器会构造请求信息(请求行&#x2F;头)把相关cookie加入请求头、发送请求信息</span><br><span class="line">   4) 服务器收到请求后、生产响应数据(响应行&#x2F;头&#x2F;体)、发给网络进程、网络进程接收到响应行和响应头之后解析响应头</span><br><span class="line">      a. 重定向 - 响应码 301|302 从响应头提取Location、然后发起新的请求、从新开始</span><br><span class="line">      b. 响应数据类型处理</span><br><span class="line">         Content-Type标记浏览器响应类型 text&#x2F;html 代表返回数据是HTML格式、继续后续流程</span><br><span class="line">         application&#x2F;octet-stream 返回数据是字节流类型、按照下载类型来处理、请求提交给浏览器的下载管理器</span><br><span class="line">3. 准备渲染进程</span><br><span class="line">   默认情况下、Chrome会为每个页面分配一个渲染进程、但某些情况下会多个页面运行在同一渲染进程中</span><br><span class="line">   通常: </span><br><span class="line">   打开新的页面会使用单独的渲染进程、</span><br><span class="line">   若从A页面打开B页面、且AB属于同一站点、则B复用A页面的渲染进程、若是其它情况、会单独创建进程</span><br><span class="line">   </span><br><span class="line">   渲染进程准备好之后、不能立即进入文档解析阶段、因为此时文档还在网络进程中、并未提交给渲染进程、所以下一步是进入提交文档阶段</span><br><span class="line">   </span><br><span class="line">4. 提交文档</span><br><span class="line">   提交文档(响应数据)的请求是浏览器进程发出的、渲染进程接收到消息后、会和网络进程建立传输数据的通道</span><br><span class="line">   文档数据传输完成后、渲染进程返回 确认提交 的消息给浏览器进程</span><br><span class="line">   浏览器进程在收到确认提交的消息后、更新浏览器界面状态、包含了安全状态、地址栏的url、前进后退的历史状态、并更新web界面</span><br><span class="line">   </span><br><span class="line">   一个完整的导航走完了、进入渲染阶段</span><br><span class="line">   </span><br><span class="line">5. 渲染阶段</span><br><span class="line">   文档一旦被提交、渲染进程就开始页面解析和子资源加载了、一旦页面生成、渲染进程会给浏览器进程发送消息、浏览器进程收到消息停止标签页上的加载动画</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-26a86c6a9a0ae591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="浏览器加载页面.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/" class="post-title-link" itemprop="url">浏览器渲染流程</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="浏览器渲染流程" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>HTML的内容由标记和文本组成、也称标签</p>
-<p>CSS又称 层叠样式表、由选择器和属性组成</p>
-<p>JS 使页面内容动起来</p>
-<p>渲染模块在执行过程中分为很多子阶段、输入的HTML经过这些子阶段、输出像素、这个处理过程称为 渲染流水线</p>
-<ol>
-<li><p>构建DOM树</p>
-<blockquote>
-<p>浏览器无法直接理解和使用html、需要先转化为其能理解的结构 - DOM树</p>
-<p>构建dom树的输入是简单的html文件、经过html解析器解析、输出 树状结构的DOM</p>
-<p>DOM和html的内容基本一致、但dom是保存在内存中的树状就结构、可以通过JS直接修改</p>
-</blockquote>
+<li><p>勿以流沙造高台</p>
 </li>
-<li><p>样式计算</p>
-<blockquote>
-<p>是为了计算出DOM节点中每个元素的具体样式</p>
-<p>1) 将CSS转化为浏览器可理解的结构 stylesheets</p>
-<p>2) 转换样式表中的属性值、使其标准化 eg. 2em -&gt; 32px  blue -&gt; rgb(0,0,255)</p>
-<p>3) 计算出dom树中每个节点的具体样式 </p>
-</blockquote>
+<li><p>人生如逆旅，我亦是行人<br>ps: 生如逆旅单行道、从无岁月可回头</p>
 </li>
-<li><p>布局计算</p>
-<blockquote>
-<p>计算dom树中可见元素的几何位置</p>
-<p>1) 创建布局树 遍历dom节点、将这些节点加载到布局中</p>
-<p>2) 布局计算 将布局运算的结果写回布局树</p>
-</blockquote>
+<li><p>时光是种极好的东西、<br> 原谅了不可原谅的、过去了曾经过不去的、也许偶尔想回到之前的时光、但我知道 人 始终要学会向前看…</p>
 </li>
-<li><p>分层</p>
-<blockquote>
-<p>为了更方便的实现3D变换、页面滚动或者使用z-indexing做z轴排序等</p>
-<p>渲染引擎还需要为特定的节点生成专用图层、并生成一棵对应的图层树LayerTree</p>
-<p>浏览器的页面其实是很多图层、这些图层叠加后合成了最终的页面</p>
-<p>并不是所有的布局树的每个节点都包含一个图层、若节点无对应图层、则从属于父节点的图层</p>
-<p>1) 拥有层叠上下文属性的元素会被提升为单独的一层</p>
-<p>2) 需要裁剪的地方也会被创建为图层</p>
-</blockquote>
+<li><p>我也愿学习蝴蝶、一再的蜕变、一再的祝愿 既不思虑、也不彷徨；既不回顾、也不忧伤～</p>
 </li>
-<li><p>绘制</p>
-<blockquote>
-<p>图层的绘制与画画的流程基本一致、会把一个图层的绘制拆分成很多小的绘制指令、然后将指令按照顺序组成一个待绘制列表</p>
-</blockquote>
+<li><p>不雨花犹落、无风絮自飞</p>
 </li>
-<li><p>栅格化</p>
-<blockquote>
-<p>绘制列表只是用来记录绘制顺序和绘制指令的列表、而实际上绘制操作是由渲染引擎中的合成线程来完成(图层绘制列表准备完成后、主线程会把绘制列表提交给合成线程)</p>
-<p>通常、栅格化过程会使用GPU来加速生成、使用GPU生成位图的过程叫 快速栅格化、生成的位图保存在GPU内存中</p>
-</blockquote>
+<li><p>终于明白、有些路只能一个人走、<br>那些约好同行的人、一起相伴、走过雨季、走过年华、但总有一天会在某个渡口离散</p>
 </li>
-<li><p>合成</p>
-<blockquote>
-<p>所有图块被光栅化之后、合成进程会生成一个绘制图块的命令、提交给浏览器进程</p>
-<p>浏览器进程的viz组件、接收绘制命令绘制内容显示到浏览器</p>
-</blockquote>
+<li><p>真正的宁静、不是避开车马喧嚣、而是在心中修篱种菊、尽管如流往事、每一天都有涛声依旧、只要消除执念、便可寂静安然～</p>
+</li>
+<li><p>愿你此生清澈明朗、流年无殇; 也愿你时光静好、安暖如初</p>
 </li>
 </ol>
-<h4 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h4><p><code>重排</code>: 通过JS或者CS修改元素几何位置、eg. 改变元素的宽、高、等会触发重新布局、解析之后的一系列子阶段、这个过程就叫重排、需要更新完整的渲染流水线、开销很大</p>
-<p><code>重绘</code>: eg. JS更改某些元素的背景色、布局阶段不会重新执行、直接进入绘制阶段、然后执行之后的子阶段、相对<code>重排</code> 少了<code>布局</code>和<code>分层</code>阶段、执行效率会高一些</p>
-<p><code>直接合成阶段</code>: eg. 使用CSS的transform来实现动画、可以避开<code>重排</code>和<code>重绘</code>阶段、直接在非主线程上执行合成动画操作、大大提升绘制效率</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_DHCP%E4%B8%8EPXE--ip%E6%98%AF%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%E3%80%81%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E6%B2%A1%E7%9A%84--/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_DHCP%E4%B8%8EPXE--ip%E6%98%AF%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%E3%80%81%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E6%B2%A1%E7%9A%84--/" class="post-title-link" itemprop="url">DHCP与PXE--ip是怎么来的、又是怎么没的--</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">网络协议</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_DHCP%E4%B8%8EPXE--ip%E6%98%AF%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%E3%80%81%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E6%B2%A1%E7%9A%84--/" class="post-meta-item leancloud_visitors" data-flag-title="DHCP与PXE--ip是怎么来的、又是怎么没的--" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_DHCP%E4%B8%8EPXE--ip%E6%98%AF%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%E3%80%81%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E6%B2%A1%E7%9A%84--/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_DHCP%E4%B8%8EPXE--ip%E6%98%AF%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%E3%80%81%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E6%B2%A1%E7%9A%84--/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="如何配置ip地址"><a href="#如何配置ip地址" class="headerlink" title="如何配置ip地址"></a>如何配置ip地址</h4><ol>
-<li>使用net-tools<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ifconfig eth1 10.0.0.1&#x2F;24</span><br><span class="line">$ sudo ifconfig eth1 up</span><br></pre></td></tr></table></figure></li>
-<li>使用iprote2<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ip addr add 10.0.0.1&#x2F;24 dev eth1</span><br><span class="line">$ sudo ip link set up eth1</span><br></pre></td></tr></table></figure>
-但: 是可以随意配置的吗 ?<blockquote>
-<p>显然不是. 只要在网络上的包、都是完整的、可以有下层无上层、不能反之.<br>若配置为不同网段, 发送请求包时、linux的默认逻辑是: 跨网段调用、不会直接将包发送到网络上、而是企图发送到网关.<br>若配置同网段呢? – 会配置失败</p>
-</blockquote>
-</li>
-</ol>
-<h4 id="动态主机配置协议-DHCP"><a href="#动态主机配置协议-DHCP" class="headerlink" title="动态主机配置协议(DHCP)"></a>动态主机配置协议(DHCP)</h4><p><code>DHCP</code>: 动态主机配置协议(Dynamic Host Configuration Protocol)<br>有了DHCP、网络管理员只需要配置一段共享的ip地址. 每一台新接入的机器会通过DHCP协议去共享的ip地址里申请、然后自动配置 </p>
-<blockquote>
-<p>若数据中心里的服务器、ip一旦配置好、基本不会改变、相当于自己买房、自己装修. DHCP的方式类似于租房、临时借用、用完归还即可.</p>
-</blockquote>
-<h4 id="解析DHCP的工作方式"><a href="#解析DHCP的工作方式" class="headerlink" title="解析DHCP的工作方式"></a>解析DHCP的工作方式</h4><p>刚加入网络的机器、暂无ip地址、处于<code>DHCP Discover</code>的状态.</p>
-<p>它会使用ip地址 0.0.0.0 发送广播包、目的地址为: 255.255.255.255. 广播包封装了UDP、UDP封装了BOOTP. 若网络里配置了DHCP Server, Server会分配ip地址给该MAC地址、同时记录(不会分配给其它机器). 这个过程称为 <code>DHCP Offer</code>.</p>
-<p>若收到多个DHCP Server回复、一般会选择接受第一个到达的、且向网络发送一个DHCP Request广播数据包, 包含Clineet的MAC地址、接受的ip地址、提供该ip的HDCP Server地址等, 告诉其它server它接受了哪一台server提供的ip、请求他们撤销提供的ip、以提供给下一个ip租用者.</p>
-<p>DHCP Server 接收到Client的request后、会广播返回一个ACK消息.</p>
-<p>client会在租期过去50%时、向为其提供ip地址的server发送request消息包, client 再根据接收到server回应的ack消息包中提供的新的租期及其他已更新的tcp/ip参数更新自己的配置.</p>
-<h4 id="预启动执行环境-PXE"><a href="#预启动执行环境-PXE" class="headerlink" title="预启动执行环境(PXE)"></a>预启动执行环境(PXE)</h4><p>预启动执行环境: </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_ifconfig/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_ifconfig/" class="post-title-link" itemprop="url">ifconfig</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">网络协议</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_ifconfig/" class="post-meta-item leancloud_visitors" data-flag-title="ifconfig" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_ifconfig/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_ifconfig/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><code>ip地址</code>是一个网卡在网络世界的通信地址、类似<code>门牌号</code></p>
-</blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-73bac7cc574fb7e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="32位ip地址分类.png"></p>
-<h4 id="无类型域间选路-CIDR"><a href="#无类型域间选路-CIDR" class="headerlink" title="无类型域间选路(CIDR)"></a>无类型域间选路(CIDR)</h4><p>从上图可以看到、C类地址能包含的主机数只有 2<sup>8</sup> = 254个, 数量过少; 而B类地址能包含的最大主机数量又太多了、一般企业规模达不到65534、剩余的地址就是浪费.</p>
-<p>于是产生了一个折中方案: CIDR. 打破ip类别设计、将32位ip一分为二、前边是网络号、后边是主机号.<br>eg. 10.100.122.2/24<br><code>/</code> 表示前24位代表网络号、后8位是主机号</p>
-<p>伴随CIDR存在的还有<code>广播地址</code> 和 <code>子网掩码</code>.<br>广播地址是: 10.100.122.255, 若发送这个地址、所有10.100.122 网络里的机器都可以收到<br>子网掩码: 255.255.255.0</p>
-<p>将子网掩码 和 ip 进行 AND运算、可以得到网络号</p>
-<h4 id="公有ip地址-和-私有ip地址"><a href="#公有ip地址-和-私有ip地址" class="headerlink" title="公有ip地址 和 私有ip地址"></a>公有ip地址 和 私有ip地址</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-6f0cb3fd1a380ca4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="私有ip地址范围.png"></p>
-<p><code>组播地址</code>: 属于某个组的机器都能收到消息.<br>eg. 邮件组</p>
-<p>在ip地址的后边、有个scope, 对eth0这个网卡来讲、是global, 说明这个网卡是可以对外的、可以接收来自各个地方的包. 对于lo来讲、是host, 说明这张网卡仅可以供本机相互通信.</p>
-<p>lo 全程 loopback, 又称<code>回环接口</code>, 往往被分配打平 127.0.0.1 这个地址、经过内核处理后直接返回、不会在任何网络中出现.</p>
-<h4 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h4><p><code>MAC地址</code>是一个网卡的物理地址、十六进制表示、6个byte、全局唯一. 但不可替代ip地址.<br>类似: 身份证号全网唯一、但若在问路时、被人知道的概率确很小、ip具有定位功能、类似省市区街道小区的概念、</p>
-<p>MAC地址本身更像是身份证、是唯一标识. 设计唯一性是为了不同网卡放在同一网络时、可以不用担心冲突. 从硬件角度、确保不同网卡有不同标识.</p>
-<p>MAC具有一定定位功能、但范围有限. 局限在同一子网. 跨子网的情况、就需要ip地址来查找了.</p>
-<h4 id="网络设备的状态标识"><a href="#网络设备的状态标识" class="headerlink" title="网络设备的状态标识"></a>网络设备的状态标识</h4><p>&lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; 是干什么的？这个叫作 net_device flags，网络设备的状态标识</p>
-<p>UP 代表网卡处于启动的状态<br>BROADCAST 表示网卡有广播地址、可以发送广播<br>MULTICAST 表示网卡可以发送多播包<br>LOWER_UP 表示L1是启动的, 即: 网线插着呢</p>
-<p>mtu 1500 呢 ? 代表最大传输MTU为1500, 这个是以太网的默认值<br>网络是层层封装的, MTU是二层MAC概念. MAC层有MAC层的头、以太网规定连MAC头带正文合起来不能超过1500个字节、正文里有ip、tcp、http的头,<br>若放不下、就需要分片来传输.</p>
-<p><code>qdisc pfifo_fast</code> 全称<code>queueing discipline</code>, 即<code>排队规则</code>. 内核若需要通过某个网络接口发送数据包、就需要按照为这个接口配置的qdisc将数据包加入队列.<br>最简单的qdisc是 pfifo, 它不对进入的数据包做任何处理、数据包采用先入先出的方式通过队列. pfifo_fast 稍微复杂些、它的队列包括3个波段(band)、在每个波段里使用先进先出的规则. band 0的优先级最高, band 2的最低, 若band 0里有数据包、系统就不会处理band 1里的数据包.</p>
-<p>数据包是按照服务类型(<code>Type of Service, TOS</code>)被分配到三个波段的、TOS是 IP 头里边的一个字段、代表了当前包的优先级.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E5%8F%91%E5%B1%95%E5%9B%9E%E9%A1%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E5%8F%91%E5%B1%95%E5%9B%9E%E9%A1%BE/" class="post-title-link" itemprop="url">CPU发回顾</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E5%8F%91%E5%B1%95%E5%9B%9E%E9%A1%BE/" class="post-meta-item leancloud_visitors" data-flag-title="CPU发回顾" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E5%8F%91%E5%B1%95%E5%9B%9E%E9%A1%BE/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E5%8F%91%E5%B1%95%E5%9B%9E%E9%A1%BE/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">指令周期: Fetch -&gt; Decode -&gt; Execute</span><br><span class="line"></span><br><span class="line">CPU周期: 从内存取出一条指令的最短时间(一个指令周期至少需要2个CPU周期)</span><br><span class="line"></span><br><span class="line">通过D触发器实现存储功能</span><br><span class="line">通过时钟信号实现计数器</span><br><span class="line"></span><br><span class="line">一个时钟周期内确保完成一条最复杂的CPU指令 -&gt; 单指令周期处理器</span><br><span class="line">译码器 -&gt; 从输入的多个位的信号中、根据一定的开关和电路组合、选择出自己想要的信号</span><br><span class="line">优化1: CPU流水线设计(保障一个最复杂的流水线级在一个时钟周期内完成即可)</span><br><span class="line">       不能优化单条指令执行延时、可以提高CPU的吞吐率(可同时并行多条指令)</span><br><span class="line">       </span><br><span class="line">       缺点: 流水线深度增加带来性能成本、每级流水线的输出需放到流水线寄存器、然后在下一个时钟周期、交给下一个流水线级处理、每增加一级就要多一次写入流水线寄存器的操作(20ps)</span><br><span class="line">       为了保证指令的响应时间这个指标、只有提升时钟周期、电路数量和晶体管数量都会增加、功耗变大</span><br><span class="line">       </span><br><span class="line">       挑战: 冒险和分支预测</span><br><span class="line"> </span><br><span class="line">优化2: 结构冒险 -&gt; 增加资源(eg. 数据内存和指令内存分开, 现代CPU只将CPU内部的缟素缓存分成指令缓存和数据缓存)</span><br><span class="line"></span><br><span class="line">优化3: 数据冒险 -&gt; 流水线停顿(插入NOP操作), 最差会退化成单指令周期CPU</span><br><span class="line">优化4: 数据冒险 -&gt; 操作数前推(操作数转发、节省了写入写入寄存器、从寄存器读出的时间)</span><br><span class="line">优化5: 乱序执行 -&gt; 将指令发送到保留站 -&gt; 提交到不同的FU -&gt; 重排缓存区重排(cpu按照取指顺序、对指令结果重排, 只有排在前边的都完成、才提交指令、完成指令运算) -&gt; 指令提交</span><br><span class="line">       提高了CPU的吞吐量</span><br><span class="line">优化6: 分支预测(缩短分支延迟、动态分支预测、静态分支预测)</span><br><span class="line">优化7: 超标量(多发射, 让cpi&gt;1, 并行取指、译码 -&gt; 需要增加电路元件)</span><br><span class="line">优化8: 超线程: 在一个CPU内部、有双份PC寄存器、指令寄存器、条件码寄存器、同时维护两个并行指令的状态(指令译码器、ALU都只有单份)</span><br><span class="line">优化9: SIMD(单指令多数据流):一次加载多个整数、然后使用多个FU并行计算(MMX)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1368,7 +1284,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1436,14 +1352,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

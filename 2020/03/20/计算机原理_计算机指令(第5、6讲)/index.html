@@ -293,7 +293,7 @@
 <p>数据通路就是我们的处理器单元、通常由两类元件组成：<br>1.操作元件(组合逻辑元件) 其实就是ALU、在特定输入下、根据组合电路的逻辑生成特定输出<br>2.存储元件: 状态元件 eg. 计算过程中用到的寄存器、无论是通用寄存器还是状态寄存器、都是存储元件<br>通过数据总线将操作元件和存储元件连接、就可以完成数据的存储和传输、就是所谓的建立数据通路</p>
 </blockquote>
 <p>  七、CPU所需要的硬件电路</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. ALU: 无状态的、根据输入得到输出结果的电路</span><br><span class="line">2. 寄存器：能够进行状态读写的电路元件. 常见的有 锁存器(Latch)， D触发器(Data&#x2F;Delay Flip-flop) 电路</span><br><span class="line">3. 自动实现pc寄存器自增的电路</span><br><span class="line">4. 译码电路: 实现对指令进行decode、对拿到的地址去获取对应的数据或者指令等</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> ALU: 无状态的、根据输入得到输出结果的电路</span><br><span class="line"><span class="number">2.</span> 寄存器：能够进行状态读写的电路元件. 常见的有 锁存器(Latch)， D触发器(Data/Delay Flip-flop) 电路</span><br><span class="line"><span class="number">3.</span> 自动实现pc寄存器自增的电路</span><br><span class="line"><span class="number">4.</span> 译码电路: 实现对指令进行decode、对拿到的地址去获取对应的数据或者指令等</span><br></pre></td></tr></table></figure>
 
 <p><code>组合逻辑电路</code> 给定输入、得到固定输出. 无法完成复杂工作<br><code>时序逻辑电路</code> 解决了<code>自动运行</code>和<code>存储</code>问题</p>
 <blockquote>
@@ -324,8 +324,8 @@
       <i class="fa fa-chevron-left"></i> 计算机组成原理
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BF%A1%E6%81%AF%E5%AD%98%E5%82%A8/" rel="next" title="计算机信息存储">
-      计算机信息存储 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E6%BC%AB%E8%B0%88/" rel="next" title="计算机概念漫谈">
+      计算机概念漫谈 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -402,14 +402,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

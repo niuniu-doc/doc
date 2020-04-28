@@ -274,12 +274,12 @@
 <li><p><code>man rpm</code> 查看rpm帮助文档</p>
 </li>
 <li><p>yum配置文件 <code>/etc/yum.repos.d/CentOS-Base.repo</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name&#x3D;CentOS-$releasever - Base - 163.com</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.163.com&#x2F;centos&#x2F;$releasever&#x2F;os&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.163.com&#x2F;centos&#x2F;RPM-GPG-KEY-CentOS-7</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[base]</span></span><br><span class="line"><span class="attr">name</span>=CentOS-<span class="variable">$releasever</span> - Base - <span class="number">163</span>.com</span><br><span class="line"><span class="attr">baseurl</span>=http://mirrors.<span class="number">163</span>.com/centos/<span class="variable">$releasever</span>/os/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgkey</span>=http://mirrors.<span class="number">163</span>.com/centos/RPM-GPG-KEY-CentOS-<span class="number">7</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>nohup</code> <code>no hang up</code> 程序不挂起、退出命令行、程序依然执行</p>
 </li>
 <li><p><code>&amp;</code> 表示后台运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; out.file 2&gt;&amp;1 &amp;</span><br><span class="line">1表示文件描述符1, 代表标准输出</span><br><span class="line">2表示文件描述符2, 代表标准错误输出</span><br><span class="line">2&gt;&amp;1 合并标准错误输出和标准输出 输出到out.file</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; <span class="keyword">out</span>.file <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br><span class="line"><span class="number">1</span>表示文件描述符<span class="number">1</span>, 代表标准输出</span><br><span class="line"><span class="number">2</span>表示文件描述符<span class="number">2</span>, 代表标准错误输出</span><br><span class="line"><span class="number">2</span>&gt;&amp;<span class="number">1</span> 合并标准错误输出和标准输出 输出到<span class="keyword">out</span>.file</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>ps -ef | grep command | awk ‘{print $2}’ | xargs kill -9 </p>
@@ -287,7 +287,7 @@
 </blockquote>
 </li>
 <li><p>创建新的进程 <code>fork</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">父进程返回0、子进程返回进程号、调用execve来执行另外的程序(先copy再修改)</span><br><span class="line">每个进程有独立的内存空间、相互不干扰</span><br><span class="line">代码段: Code Segment 存放程序代码</span><br><span class="line">数据段: Data Segment 存放运行中数据</span><br><span class="line">       局部变量、当前函数执行时分配、运行结束释放</span><br><span class="line">       动态分配、长时间保存、指明才销毁 堆heap</span><br><span class="line">一个进程的内存空32位是 4G、64位</span><br><span class="line"></span><br><span class="line">进程内存的分配是在使用时、进程需要使用内存的时候调用内存管理系统登记、但此时不会真正分配、真正写入数据的时候发现无对应物理内存、才会触发中断、分配物理内存</span><br><span class="line"></span><br><span class="line">需要内存小的时候、使用brk分配和原来的数据堆连在一起、</span><br><span class="line">需要内存大的时候、使用mmap、重新划分一整块区域</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">父进程返回<span class="number">0</span>、子进程返回进程号、调用execve来执行另外的程序(先copy再修改)</span><br><span class="line">每个进程有独立的内存空间、相互不干扰</span><br><span class="line">代码段: Code Segment 存放程序代码</span><br><span class="line">数据段: Data Segment 存放运行中数据</span><br><span class="line">       局部变量、当前函数执行时分配、运行结束释放</span><br><span class="line">       动态分配、长时间保存、指明才销毁 堆heap</span><br><span class="line">一个进程的内存空<span class="number">32</span>位是 <span class="number">4</span>G、<span class="number">64</span>位</span><br><span class="line"></span><br><span class="line">进程内存的分配是在使用时、进程需要使用内存的时候调用内存管理系统登记、但此时不会真正分配、真正写入数据的时候发现无对应物理内存、才会触发中断、分配物理内存</span><br><span class="line"></span><br><span class="line">需要内存小的时候、使用brk分配和原来的数据堆连在一起、</span><br><span class="line">需要内存大的时候、使用mmap、重新划分一整块区域</span><br></pre></td></tr></table></figure>
 
 <p>等待子进程 <code>waitpid</code></p>
 </li>
@@ -448,14 +448,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

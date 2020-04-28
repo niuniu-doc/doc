@@ -275,7 +275,7 @@
 <blockquote>
 <p><code>-class</code> 监视类装载、卸载数量、总空间及类装载所需时间<br><code>-gc</code> 监视Java堆情况、包括Eden区、两个Survivor区、老年代、永久代的容量、已用空间、GC时间合计等信息<br><code>-gccapacity</code> 监视内容与<code>-gc</code>基本相同、主要关注java堆各个区域用到的最大、最小空间<br><code>-gcutil</code>  监视内容与<code>-gc</code>基本相同、主要关注已使用空间与总空间的比率<br><code>-gccause</code> 与<code>-gcutil</code>相同、会额外输出导致上次gc的原因<br><code>-gcnew</code> 监视新生代gc的状况<br><code>-gcnewcapacity</code> 与<code>gcnew</code>基本相同、输出主要关注最大、最小空间<br><code>-gcold</code> 监视老年代gc的状况<br><code>-gcoldcapacity</code> 与<code>gcold</code>基本相同、输出主要关注最大、最小空间<br><code>-gcpermcapacity</code> 输出永久代最大、最小空间<br><code>-compiler</code>  输出jit编译过的方法、耗时等信息<br><code>-printcompalition</code> 输出已被编译过的方法</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">eg. jstat -gcutil  41610 250 3</span><br><span class="line">  S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT   </span><br><span class="line">  0.00   0.00   4.00   0.43  62.81  65.59      1    0.002     1    0.006    0.008</span><br><span class="line">  0.00   0.00   4.00   0.43  62.81  65.59      1    0.002     1    0.006    0.008</span><br><span class="line">  0.00   0.00   4.00   0.43  62.81  65.59      1    0.002     1    0.006    0.008</span><br><span class="line">S0: survivor0区、都是空的</span><br><span class="line">S1: survivor0区、都是空的</span><br><span class="line">E: Eden区、4%的使用率</span><br><span class="line">O: Old区、0.43%的使用率</span><br><span class="line">M:Perm区、62.81%的使用率</span><br><span class="line">CCS: class Space、 65.59%的使用率</span><br><span class="line">YGC: young gc、1次</span><br><span class="line">YGCT： young gc 耗时 0.002s</span><br><span class="line">FGC: full gc 1次</span><br><span class="line">FGCT: full  gc 耗时 0.006s</span><br><span class="line">GCT: 总的gc耗时 0.008s</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">eg.</span> <span class="string">jstat</span> <span class="string">-gcutil</span>  <span class="number">41610</span> <span class="number">250</span> <span class="number">3</span></span><br><span class="line">  <span class="string">S0</span>     <span class="string">S1</span>     <span class="string">E</span>      <span class="string">O</span>      <span class="string">M</span>     <span class="string">CCS</span>    <span class="string">YGC</span>     <span class="string">YGCT</span>    <span class="string">FGC</span>    <span class="string">FGCT</span>     <span class="string">GCT</span>   </span><br><span class="line">  <span class="number">0.00</span>   <span class="number">0.00</span>   <span class="number">4.00</span>   <span class="number">0.43</span>  <span class="number">62.81</span>  <span class="number">65.59</span>      <span class="number">1</span>    <span class="number">0.002</span>     <span class="number">1</span>    <span class="number">0.006</span>    <span class="number">0.008</span></span><br><span class="line">  <span class="number">0.00</span>   <span class="number">0.00</span>   <span class="number">4.00</span>   <span class="number">0.43</span>  <span class="number">62.81</span>  <span class="number">65.59</span>      <span class="number">1</span>    <span class="number">0.002</span>     <span class="number">1</span>    <span class="number">0.006</span>    <span class="number">0.008</span></span><br><span class="line">  <span class="number">0.00</span>   <span class="number">0.00</span>   <span class="number">4.00</span>   <span class="number">0.43</span>  <span class="number">62.81</span>  <span class="number">65.59</span>      <span class="number">1</span>    <span class="number">0.002</span>     <span class="number">1</span>    <span class="number">0.006</span>    <span class="number">0.008</span></span><br><span class="line"><span class="attr">S0:</span> <span class="string">survivor0区、都是空的</span></span><br><span class="line"><span class="attr">S1:</span> <span class="string">survivor0区、都是空的</span></span><br><span class="line"><span class="attr">E:</span> <span class="string">Eden区、4%的使用率</span></span><br><span class="line"><span class="attr">O:</span> <span class="string">Old区、0.43%的使用率</span></span><br><span class="line"><span class="string">M:Perm区、62.81%的使用率</span></span><br><span class="line"><span class="attr">CCS:</span> <span class="string">class</span> <span class="string">Space、</span> <span class="number">65.59</span><span class="string">%的使用率</span></span><br><span class="line"><span class="attr">YGC:</span> <span class="string">young</span> <span class="string">gc、1次</span></span><br><span class="line"><span class="string">YGCT：</span> <span class="string">young</span> <span class="string">gc</span> <span class="string">耗时</span> <span class="number">0.</span><span class="string">002s</span></span><br><span class="line"><span class="attr">FGC:</span> <span class="string">full</span> <span class="string">gc</span> <span class="number">1</span><span class="string">次</span></span><br><span class="line"><span class="attr">FGCT:</span> <span class="string">full</span>  <span class="string">gc</span> <span class="string">耗时</span> <span class="number">0.</span><span class="string">006s</span></span><br><span class="line"><span class="attr">GCT:</span> <span class="string">总的gc耗时</span> <span class="number">0.</span><span class="string">008s</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a><code>jinfo</code></h4><p><code>usage</code> : <code>jinfo [opt] pid</code></p>
 <blockquote>
@@ -284,7 +284,7 @@
 <h4 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a><code>jmap</code></h4><blockquote>
 <p><code>-dump</code> 生成快照文件<br>eg. jmap -dump:format=b, file=path pid<br><code>-finalizerinfo</code> 线上在F-Queue中等等Finalizer线程执行finalize方法的对象<br><code>-heap</code> 线上Java堆详细信息<br><code>-histo</code> 显示堆中对象的统计信息<br><code>-permstat</code> 以classLoader为统计路径、显示永久代内存使用情况<br><code>-F</code> 虚拟机不响应-dump时、使用-F强制生成dump文件</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jmap -histo[:live] pid 显示堆中活跃对象</span><br><span class="line">jmap -dump:[live,], file&#x3D;filename 生成java堆</span><br></pre></td></tr></table></figure>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jmap -histo[:live] <span class="keyword">pid</span> 显示堆中活跃对象</span><br><span class="line">jmap -dump:[live,], <span class="keyword">file</span>=<span class="keyword">filename</span> 生成java堆</span><br></pre></td></tr></table></figure>
 
 <h4 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a><code>jhat</code></h4><p><code>Usage:</code> <code>jhat -port 9000 dump-file</code></p>
 <blockquote>
@@ -312,12 +312,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/" rel="prev" title="垃圾回收---Java类型引用">
-      <i class="fa fa-chevron-left"></i> 垃圾回收---Java类型引用
+    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JVM%E5%8F%82%E6%95%B0%E5%B0%8F%E8%AE%B0/" rel="prev" title="垃圾回收---JVM参数小记">
+      <i class="fa fa-chevron-left"></i> 垃圾回收---JVM参数小记
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---G1%E6%94%B6%E9%9B%86%E5%99%A8/" rel="next" title="垃圾回收---G1收集器">
-      垃圾回收---G1收集器 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/" rel="next" title="java秒级定时任务的实现">
+      java秒级定时任务的实现 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -395,14 +395,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

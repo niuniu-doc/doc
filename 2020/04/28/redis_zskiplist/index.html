@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source Code Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="压缩列表是列表键和hash键的底层实现之一, 当一个键只包含少量列表项、且每个列表项要么是小整数值、要么是长度比较短的字符串、那么redis就会使用压缩列表作为底层实现  压缩列表的组成压缩列表是Redis为了节约内存开发的, 是一系列特殊编码的连续内存块组成的顺序型数据结构,  一个压缩列表可以包含任意多个节点(entry), 每个节点可以保存一个字节数组或者一个整数值  zltytes: 压">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reids数据结构学习 - 压缩列表(六)">
+<meta property="og:url" content="http://yoursite.com/2020/04/28/redis_zskiplist/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="压缩列表是列表键和hash键的底层实现之一, 当一个键只包含少量列表项、且每个列表项要么是小整数值、要么是长度比较短的字符串、那么redis就会使用压缩列表作为底层实现  压缩列表的组成压缩列表是Redis为了节约内存开发的, 是一系列特殊编码的连续内存块组成的顺序型数据结构,  一个压缩列表可以包含任意多个节点(entry), 每个节点可以保存一个字节数组或者一个整数值  zltytes: 压">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/image-ziplist.png">
+<meta property="og:image" content="http://yoursite.com/images/image-ziplistNode.png">
+<meta property="og:image" content="http://yoursite.com/images/image-ziplistLoop.png">
+<meta property="og:image" content="http://yoursite.com/images/image-ziplist-charArray.png">
+<meta property="og:image" content="http://yoursite.com/images/image-ziplist-encoding-int.png">
+<meta property="og:image" content="http://yoursite.com/images/image-ziplist-encoding-charArr-demo.png">
+<meta property="og:image" content="http://yoursite.com/images/image-ziplist-encoding-int-demo.png">
+<meta property="article:published_time" content="2020-04-28T13:29:51.000Z">
+<meta property="article:modified_time" content="2020-04-28T13:33:11.905Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/image-ziplist.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/28/redis_zskiplist/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Reids数据结构学习 - 压缩列表(六) | 牛牛的小窝</title>
+  <meta name="referrer" content="no-referrer"/>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">牛牛的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/28/redis_zskiplist/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Reids数据结构学习 - 压缩列表(六)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-28 21:29:51 / 修改时间：21:33:11" itemprop="dateCreated datePublished" datetime="2020-04-28T21:29:51+08:00">2020-04-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/28/redis_zskiplist/" class="post-meta-item leancloud_visitors" data-flag-title="Reids数据结构学习 - 压缩列表(六)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/28/redis_zskiplist/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/28/redis_zskiplist/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>压缩列表是列表键和hash键的底层实现之一, 当一个键只包含少量列表项、且每个列表项要么是小整数值、要么是长度比较短的字符串、那么redis就会使用压缩列表作为底层实现</p>
+</blockquote>
+<h4 id="压缩列表的组成"><a href="#压缩列表的组成" class="headerlink" title="压缩列表的组成"></a>压缩列表的组成</h4><p>压缩列表是Redis为了节约内存开发的, 是一系列特殊编码的连续内存块组成的顺序型数据结构, </p>
+<p>一个压缩列表可以包含任意多个节点(entry), 每个节点可以保存一个字节数组或者一个整数值</p>
+<p><img src="/images/image-ziplist.png" alt="image-20200428095213572"></p>
+<p><code>zltytes</code>: 压缩列表的总长度</p>
+<p><code>zltail</code>: 表示表头和表尾节点的位置偏移量</p>
+<p><code>zllen</code>: 表示压缩列表包含的节点数</p>
+<h4 id="压缩列表节点的构成"><a href="#压缩列表节点的构成" class="headerlink" title="压缩列表节点的构成"></a>压缩列表节点的构成</h4><p>每个压缩列表节点可以保存一个字节数组或者一个整数值, 字节数组可以是下边任意一种:</p>
+<ol>
+<li>长度小于等于63(2<sup>6</sup>-1)字节的字节数组</li>
+<li>长度小于等于16383 (2<sup>14</sup>-1)字节的字节数组</li>
+<li>长度小于等于 4294964295 (2<sup>32</sup>-1)字节的字节数组</li>
+</ol>
+<p>而整数值则可以是下边六种长度的一种:</p>
+<ol>
+<li>4位, 介于 0~12 之间的无符号整数</li>
+<li>1字节长的有符号整数</li>
+<li>3字节长的有符号整数</li>
+<li>int16_t 类型的整数</li>
+<li>int32_t 类型的整数</li>
+<li>int64_t 类型的整数</li>
+</ol>
+<p>每个压缩列表节点由 <code>previous_entry_length</code>、<code>encoding</code>、<code>content</code> 三个部分组成</p>
+<p><img src="/images/image-ziplistNode.png" alt="image-20200428095909275"></p>
+<h5 id="previous-entry-length"><a href="#previous-entry-length" class="headerlink" title="previous_entry_length"></a>previous_entry_length</h5><p>节点的<code>previous_entry_length</code> 属性以字节为单位, 记录压缩列表前一个节点的长度, 可以是<code>1字节</code> 或者 <code>5字节</code>, 若前一个节点的长度<code>＜254字节</code>, 则 <code>previous_entry_length</code> 的长度为1字节, 前一个节点的长度保存在这里; 若前一节点的长度<code>≥254字节</code>, 则<code>privous_entry_length</code> 的属性为 <code>5字节</code>, 其中第一字节的值为 <code>0xFE(254)</code></p>
+<p>因为节点的<code>previous_entry_length</code> 属性记录了前一个节点的长度, 所以程序可以通过指针运算、根据当前节点的起始地址计算前一个节点的起始地址, 压缩列表的 <code>从表尾向表头遍历</code> 操作是使用这一原理实现的. 完整过程如下:</p>
+<ul>
+<li>首先、我们拥有指向压缩列表表尾节点 <code>entry4</code> 起始地址的指针<code>p1</code>(指向表尾节点的指针可以通过指向压缩列表 <code>起始地址的指针 + zltail</code> 属性得到)</li>
+<li>通过 <code>p1 - entry4.previous_entry_lenght</code> 可以得到指向<code>entry4</code> 节点的前一节点<code>entry3</code> 的起始地址指针<code>p2</code></li>
+<li>同理可以得到 <code>entry2</code> 的起始指针 <code>p3</code> 和 <code>entry1</code> 的起始指针 <code>p4</code>, 完成整个压缩列表的遍历</li>
+</ul>
+<p><img src="/images/image-ziplistLoop.png" alt="表尾向表头遍历压缩列表"></p>
+<h5 id="encoding"><a href="#encoding" class="headerlink" title="encoding"></a>encoding</h5><p>节点的 <code>encoding</code> 属性记录了<code>content</code> 属性所保存的数据类型及长度, </p>
+<ol>
+<li><code>一字节</code>、<code>两字节</code>、<code>五字节</code> 长, 值的最高位为: <code>00</code>、<code>01</code> 或 <code>10</code> 的是 <code>字节数组编码</code>, 这种编码表示节点的 <code>content属性</code> 保存着的是 <code>字节数组</code>, 数组长度由 编码除去最高两位之后的其它位记录</li>
+<li><code>一字节长</code>, 值的最高位以<code>11</code>开头的是<code>整数编码</code>, 这种编码表示节点的 <code>content属性</code> 保存的是 <code>整数值</code>, 整数值的类型和长度由编码除去高两位之后的其它位记录</li>
+</ol>
+<p><img src="/images/image-ziplist-charArray.png" alt="image-20200428101636986"></p>
+<p> <img src="/images/image-ziplist-encoding-int.png" alt="image-20200428101704993"></p>
+<h5 id="content-属性"><a href="#content-属性" class="headerlink" title="content 属性"></a>content 属性</h5><p>节点的<code>content属性</code> 负责保存节点的值, 节点的值可以是一个字节数组或者整数、值的类型和长度由 <code>encoding属性</code> 来决定.</p>
+<p><img src="/images/image-ziplist-encoding-charArr-demo.png" alt="image-20200428101946729"></p>
+<ul>
+<li>编码的最高两位 00 表示节点保存的是一个字节数组</li>
+<li>编码的后六位 001011 记录字节数组的长度 11</li>
+<li>content属性保存着节点值 hello world</li>
+</ul>
+<p><img src="/images/image-ziplist-encoding-int-demo.png" alt="image-20200428102135871"></p>
+<ul>
+<li>编码 11000000 表示节点保存的是一个 int16_t 类型的整数值</li>
+<li>content 属性保存着节点的值 10086</li>
+</ul>
+<h4 id="连锁更新"><a href="#连锁更新" class="headerlink" title="连锁更新"></a>连锁更新</h4><p>每个节点的<code>previous_entry_length</code> 属性记录了前一个节点的长度, 若<code>&lt;254字节</code>, 需要1字节空间保存, 若<code>≥254字节</code>, 需要5字节空间保存, 假设现有1压缩列表, <code>e1 ~ eN</code> 节点的长度都在 <code>250~253</code>字节之间, 此时, 若需要插入一个长度<code>≥254字节</code>的节点<code>new</code>到表头, 那么<code>new</code>节点将成为<code>e1</code>的前置节点, 因为<code>e1</code>的<code>previous_entry_length</code>属性仅<code>1字节</code>, 无法保存<code>new</code>节点的属性, 需要重新对压缩列表执行空间分配, 扩展<code>e1</code>节点的<code>previous_entry_length</code>属性, 那么麻烦事儿来了…, <code>e1</code>原本的长度介于<code>250~253</code>之间, <code>e2.privous_entry_length</code>可以使用<code>1字节</code>, 现在<code>e1</code>的长度为 <code>250+4 ~ 253+4</code>, <code>e2</code>就需要5字节来记录<code>e1</code>的长度, …., 依次引起连锁更新, 程序需要不断扩展空间, 类似的、删除节点也可能早上连锁更新</p>
+<p>最坏情况下、需要对压缩列表执行N次空间重分配工作, 每次空间重分配的最坏复杂度为 O(N), 所以连锁更新的最坏复杂度为 O(N²), 复杂度非常高, 但真正造成性能问题的概率很小:</p>
+<ul>
+<li>压缩列表恰好有多个连续的、长度介于250~253字节之间的节点、连锁更新才可能被引发, 这种情况本身出现的概率较低</li>
+<li>即时出现连锁更新、但只要被更新的节点不多、就不会对性能造成影响, eg、三五个节点的连锁更新绝不会影响性能</li>
+</ul>
+<p>所以: ziplistPush的平均时间复杂度仅为 O(N), 可以放心的使用</p>
+<h4 id="重点回顾"><a href="#重点回顾" class="headerlink" title="重点回顾"></a>重点回顾</h4><ul>
+<li>压缩列表是一种为节约内存而开发的顺序型数据结构</li>
+<li>压缩列表是列表键和hash键的底层实现之一</li>
+<li>压缩列表可以包含多个节点、每个节点可以保存一个字节数组或者整数值</li>
+<li>添加新节点到压缩列表、或者从压缩列表删除节点，可能会引起连锁更新操作, 但概率较低</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/28/redis_object02/" rel="prev" title="Redis对象(二) - 对象实现">
+      <i class="fa fa-chevron-left"></i> Redis对象(二) - 对象实现
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩列表的组成"><span class="nav-number">1.</span> <span class="nav-text">压缩列表的组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩列表节点的构成"><span class="nav-number">2.</span> <span class="nav-text">压缩列表节点的构成</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#previous-entry-length"><span class="nav-number">2.1.</span> <span class="nav-text">previous_entry_length</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#encoding"><span class="nav-number">2.2.</span> <span class="nav-text">encoding</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#content-属性"><span class="nav-number">2.3.</span> <span class="nav-text">content 属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连锁更新"><span class="nav-number">3.</span> <span class="nav-text">连锁更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重点回顾"><span class="nav-number">4.</span> <span class="nav-text">重点回顾</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="niuniu"
+      src="/images/avator.jpeg">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : false,
+      appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
+      appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
+      placeholder: "欢迎一起来讨论^.^",
+      avatar     : '',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

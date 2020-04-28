@@ -268,16 +268,16 @@
       
         <ol>
 <li><p>可能在等待锁</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show process list;</span><br><span class="line">如果看到 State列为: waiting for table metata lock; 则证明在等待MDL表锁</span><br><span class="line"></span><br><span class="line">select blocking_pid from sys.schema_table_lock_waits 可以找到阻塞的pid</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> process <span class="keyword">list</span>;</span><br><span class="line">如果看到 State列为: waiting for table metata <span class="keyword">lock</span>; 则证明在等待MDL表锁</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> blocking_pid <span class="keyword">from</span> sys.schema_table_lock_waits 可以找到阻塞的pid</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>可能在等待flush</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">State列为: waiting for table flush</span><br></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">State列为: waiting <span class="keyword">for</span> <span class="keyword">table</span> flush</span><br></pre></td></tr></table></figure>
 <p>Mysql对表的flush一般有两种方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. flush tables t with read lock. - 只关闭表t</span><br><span class="line">2. flush tables with read lock. - 关闭所有表</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> flush <span class="keyword">tables</span> t <span class="keyword">with</span> <span class="keyword">read</span> <span class="keyword">lock</span>. - 只关闭表t</span><br><span class="line"><span class="number">2.</span> flush <span class="keyword">tables</span> <span class="keyword">with</span> <span class="keyword">read</span> <span class="keyword">lock</span>. - 关闭所有表</span><br></pre></td></tr></table></figure>
 <p>正常情况下、这两个操作都很快、除非被阻塞…</p>
 </li>
 <li><p>等行锁</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from t where id&#x3D;1 lock in share mode; </span><br><span class="line"></span><br><span class="line">&gt;5.7 版本可以通过看到被哪个sql阻塞了</span><br><span class="line">mysql&gt; select * from t sys.innodb_lock_waits where locked_table&#x3D;&#96;&#39;test&#39;.&#39;t&#39;&#96;\G</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">where</span> id=<span class="number">1</span> <span class="keyword">lock</span> <span class="keyword">in</span> <span class="keyword">share mode</span>; </span><br><span class="line"></span><br><span class="line">&gt;<span class="number">5.7</span> 版本可以通过看到被哪个<span class="keyword">sql</span>阻塞了</span><br><span class="line">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> t sys.innodb_lock_waits <span class="keyword">where</span> locked_table=`<span class="string">'test'</span>.<span class="string">'t'</span>`\G</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>sql慢</p>
 </li>
@@ -382,14 +382,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

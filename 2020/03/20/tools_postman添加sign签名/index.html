@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="安装postman插件1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;451e0d009304   常用功能使用1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;15f8dfaaecef   生成sign签名1234567891011121314151617181920211. 编写脚本    以order项">
+  <meta name="description" content="安装postman插件1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;451e0d009304   常用功能使用1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;15f8dfaaecef   生成sign签名1234567891011121314151617181920211. 编写脚本    以order项目为例(下边sign.js)2. 在请求中添加脚本   managerEnvir">
 <meta property="og:type" content="article">
 <meta property="og:title" content="postman添加sign签名">
 <meta property="og:url" content="http://yoursite.com/2020/03/20/tools_postman%E6%B7%BB%E5%8A%A0sign%E7%AD%BE%E5%90%8D/index.html">
 <meta property="og:site_name" content="牛牛的小窝">
-<meta property="og:description" content="安装postman插件1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;451e0d009304   常用功能使用1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;15f8dfaaecef   生成sign签名1234567891011121314151617181920211. 编写脚本    以order项">
+<meta property="og:description" content="安装postman插件1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;451e0d009304   常用功能使用1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;15f8dfaaecef   生成sign签名1234567891011121314151617181920211. 编写脚本    以order项目为例(下边sign.js)2. 在请求中添加脚本   managerEnvir">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-5337c8380fbe226e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-323bcf356a646c1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -273,13 +273,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="安装postman插件"><a href="#安装postman插件" class="headerlink" title="安装postman插件"></a>安装postman插件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;451e0d009304</span><br></pre></td></tr></table></figure>
+        <h4 id="安装postman插件"><a href="#安装postman插件" class="headerlink" title="安装postman插件"></a>安装postman插件</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>www.jianshu.com<span class="regexp">/p/</span><span class="number">451</span>e0d009304</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="常用功能使用"><a href="#常用功能使用" class="headerlink" title="常用功能使用"></a>常用功能使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;15f8dfaaecef</span><br></pre></td></tr></table></figure>
+<h4 id="常用功能使用"><a href="#常用功能使用" class="headerlink" title="常用功能使用"></a>常用功能使用</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>www.jianshu.com<span class="regexp">/p/</span><span class="number">15</span>f8dfaaecef</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="生成sign签名"><a href="#生成sign签名" class="headerlink" title="生成sign签名"></a>生成sign签名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1. 编写脚本 </span><br><span class="line">   以order项目为例(下边sign.js)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2. 在请求中添加脚本</span><br><span class="line">   managerEnvirenment -&gt; add -&gt; sign (值可以随便给、这个是用来给postman使用的、在发送请求时会替换为计算出来的sign值)</span><br><span class="line">   如下图所示</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3. 发送请求、可以发现签名是ok的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">4. 如果发现签名不对、可以调试脚本</span><br><span class="line">   在chrome地址栏中输入：chrome:&#x2F;&#x2F;flags&#x2F;#debug-packed-apps ，开启Debugging for packed app</span><br><span class="line">   输入chrome:&#x2F;&#x2F;inspect&#x2F;#apps，选择postman的inspect  会弹出调试框</span><br><span class="line">   </span><br><span class="line">   在弹出的调试框里、选择elements在下边可以看到console</span><br><span class="line">   可以查看签名的方式是否正确(配合idea调试、对比签名方式和签名结果)</span><br><span class="line">   idea调试：以debug模式运行、</span><br><span class="line">   在指定合适的位置打断点、代码逻辑运行到断点处即会被中断掉、可以进行单步调试~~</span><br><span class="line">   查找问题出现的原因</span><br></pre></td></tr></table></figure>
+<h4 id="生成sign签名"><a href="#生成sign签名" class="headerlink" title="生成sign签名"></a>生成sign签名</h4><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 编写脚本 </span><br><span class="line">   以order项目为例(下边<span class="built_in">sign</span>.js)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 在请求中添加脚本</span><br><span class="line">   <span class="function"><span class="title">managerEnvirenment</span> -&gt;</span> <span class="function"><span class="title">add</span> -&gt;</span> <span class="built_in">sign</span> (值可以随便给、这个是用来给postman使用的、在发送请求时会替换为计算出来的<span class="built_in">sign</span>值)</span><br><span class="line">   如下图所示</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 发送请求、可以发现签名是ok的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. 如果发现签名不对、可以调试脚本</span><br><span class="line">   在chrome地址栏中输入：chrome:<span class="comment">//flags/#debug-packed-apps ，开启Debugging for packed app</span></span><br><span class="line">   输入chrome:<span class="comment">//inspect/#apps，选择postman的inspect  会弹出调试框</span></span><br><span class="line">   </span><br><span class="line">   在弹出的调试框里、选择elements在下边可以看到console</span><br><span class="line">   可以查看签名的方式是否正确(配合idea调试、对比签名方式和签名结果)</span><br><span class="line">   idea调试：以debug模式运行、</span><br><span class="line">   在指定合适的位置打断点、代码逻辑运行到断点处即会被中断掉、可以进行单步调试~~</span><br><span class="line">   查找问题出现的原因</span><br></pre></td></tr></table></figure>
 
 
 
@@ -388,14 +388,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

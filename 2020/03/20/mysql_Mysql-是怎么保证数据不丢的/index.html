@@ -22,7 +22,7 @@
 
   <meta name="description" content="一、binlog的写入机制  binlog写入逻辑:1) 事务执行过程中、先写日志导binlog cache、事务提交时、再把binlog cache写入到binlog文件中.2) 一个事务的binlog不能被拆开、因此不论事务有多大、也要确保一次性写入. 系统给binlog cache每个线程分配一片内存(binlog_cache_size大小), 超过会先暂存到磁盘.3) 事务提交时、执行器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql-是怎么保证数据不丢的">
+<meta property="og:title" content="Mysql是怎么保证数据不丢的">
 <meta property="og:url" content="http://yoursite.com/2020/03/20/mysql_Mysql-%E6%98%AF%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E7%9A%84/index.html">
 <meta property="og:site_name" content="牛牛的小窝">
 <meta property="og:description" content="一、binlog的写入机制  binlog写入逻辑:1) 事务执行过程中、先写日志导binlog cache、事务提交时、再把binlog cache写入到binlog文件中.2) 一个事务的binlog不能被拆开、因此不论事务有多大、也要确保一次性写入. 系统给binlog cache每个线程分配一片内存(binlog_cache_size大小), 超过会先暂存到磁盘.3) 事务提交时、执行器">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-c93a7e2e48dc724e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-1044eab2470e5e22.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240">
 <meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-21T12:02:09.000Z">
+<meta property="article:modified_time" content="2020-04-28T13:58:49.327Z">
 <meta property="article:author" content="niuniu">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>Mysql-是怎么保证数据不丢的 | 牛牛的小窝</title>
+  <title>Mysql是怎么保证数据不丢的 | 牛牛的小窝</title>
   <meta name="referrer" content="no-referrer"/>
   
 
@@ -209,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Mysql-是怎么保证数据不丢的
+          Mysql是怎么保证数据不丢的
         </h1>
 
         <div class="post-meta">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 21:58:49" itemprop="dateModified" datetime="2020-04-28T21:58:49+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,7 +239,7 @@
             </span>
 
           
-            <span id="/2020/03/20/mysql_Mysql-%E6%98%AF%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E7%9A%84/" class="post-meta-item leancloud_visitors" data-flag-title="Mysql-是怎么保证数据不丢的" title="阅读次数">
+            <span id="/2020/03/20/mysql_Mysql-%E6%98%AF%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E7%9A%84/" class="post-meta-item leancloud_visitors" data-flag-title="Mysql是怎么保证数据不丢的" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -322,8 +322,8 @@
       <i class="fa fa-chevron-left"></i> SQL执行
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/" rel="next" title="Mysql-是如何保障高可用的">
-      Mysql-是如何保障高可用的 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/" rel="next" title="Mysql是如何保障高可用的">
+      Mysql是如何保障高可用的 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -400,14 +400,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

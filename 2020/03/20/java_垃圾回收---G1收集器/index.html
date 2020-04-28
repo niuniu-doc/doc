@@ -269,7 +269,7 @@
 
       
         <h4 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h4><p>上篇文章简单介绍了七种垃圾回收器、既然G1是最前沿的、有必要补充说明一下:<br>     1. <code>横跨整个堆内存</code>: 在G1之前的其它收集器收集范围都是整个新生代或者老年代<br>         G1在使用时、将整个Java堆划分为多个大小相等的<code>独立区域(Region)</code><br>         保留新生代和老年代的概念、但不再物理隔离、都是一部分<code>Region</code>(不需要连续)的集合<br>     2. <code>建立可预测的时间模型</code>: G1跟踪各个Region里垃圾堆积的价值大小(回收可获得空间大小及回收所需时间的经验值)<br>         在后台维护一个优先级列表, 每次根据允许的收集时间、优先回收价值最大的Region(Garbage First)<br>         这种实验Region划分内存空间及有优先级的区域回收方式、保证了G1在有限时间内的收集效率<br>     3. <code>避免全堆扫描</code>: G1将堆分为多个Region、就是化整为零、单Region不可能是孤立的、一个对象分配在某个Region中<br>         可能与整个Java堆任意的对象发生引用关系、在做可达性分析确定对象是否存活时、需要扫整个Java堆保证准确性<br>         严重损耗GC效率，<br>        <code>注意：</code><br>为了避免全堆扫描、虚拟机为每个Region维护了一个对应的<code>Remembered Set</code>、虚拟机发现程序对在<code>Reference</code>类型的<br>         数据进行写操作时、会产生一个<code>Writer Barrier</code>暂时中断写操作、检测<code>Reference引用的对象</code>是否<code>在不同的Region中</code><br>         (在分代的例子中就是检测老年代对象是否引用了新生代对象)、若是则通过<code>CardTable</code>把相关引用记录到被引用对象所属的<br>         Region的<code>Remembered Set</code>中、垃圾回收时，在GC根节点的枚举范围内<code>加入Remembered Set</code>即可保证不用全堆扫描也能不遗漏</p>
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">若不计算维护Remembered Set的操作、G1大致步骤为：</span><br><span class="line">1) 初始标记：initial mark仅标记GC Roots能直接关联的对象、并且修改TAMS(Nest top mark start)的值</span><br><span class="line">   让下阶段用户程序并发运行时、可在正确可以的Region中创建对象、此阶段需要停顿用户线程、但时间较短</span><br><span class="line">   </span><br><span class="line">2) 并发标记: concurrent Marking 从GC Root开始对堆中对象做可达性分析、找到存活对象</span><br><span class="line">   耗时较长、但可与用户线程&#96;并发执行&#96;</span><br><span class="line"></span><br><span class="line">3) 最终标记: Final Marking 为了修正标记期间因用户程序继续运行导致标记产生变化的对象、</span><br><span class="line">   虚拟机将这段时间内对象变化记录在线程的&#96;Remembered Set Logs&#96;里、最终标记阶段需要将这部分数据合并</span><br><span class="line">   到 Remembered Set 中、需要&#96;停顿线程&#96;、但可&#96;并行执行&#96;</span><br><span class="line"></span><br><span class="line">4) 筛选回收: Live Data and Evacuation 先对各个Region中的回收价值和成本进行排序</span><br><span class="line">   根据用户所期望的GC停顿时间来定制回收计划、此阶段也&#96;可以&#96;做到与用户线程&#96;并发执行&#96;、但因为只回收</span><br><span class="line">   一部分Region、且时间是用户可控制的、&#96;停顿用户线程&#96;将大幅度&#96;提高收集效率&#96;</span><br></pre></td></tr></table></figure>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">若不计算维护Remembered Set的操作、G1大致步骤为：</span><br><span class="line"><span class="number">1</span>) 初始标记：initial mark仅标记GC Roots能直接关联的对象、并且修改TAMS(Nest top mark start)的值</span><br><span class="line">   让下阶段用户程序并发运行时、可在正确可以的Region中创建对象、此阶段需要停顿用户线程、但时间较短</span><br><span class="line">   </span><br><span class="line"><span class="number">2</span>) 并发标记: concurrent Marking 从GC Root开始对堆中对象做可达性分析、找到存活对象</span><br><span class="line">   耗时较长、但可与用户线程`并发执行`</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>) 最终标记: Final Marking 为了修正标记期间因用户程序继续运行导致标记产生变化的对象、</span><br><span class="line">   虚拟机将这段时间内对象变化记录在线程的`Remembered Set Logs`里、最终标记阶段需要将这部分数据合并</span><br><span class="line">   到 Remembered Set 中、需要`停顿线程`、但可`并行执行`</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>) 筛选回收: Live Data <span class="literal">and</span> Evacuation 先对各个Region中的回收价值和成本进行排序</span><br><span class="line">   根据用户所期望的GC停顿时间来定制回收计划、此阶段也`可以`做到与用户线程`并发执行`、但因为只回收</span><br><span class="line">   一部分Region、且时间是用户可控制的、`停顿用户线程`将大幅度`提高收集效率`</span><br></pre></td></tr></table></figure>
 <h5 id="G1适用分析"><a href="#G1适用分析" class="headerlink" title="G1适用分析"></a>G1适用分析</h5><pre><code>场景Scense：
    1. 多核多CPU而且大内存
    2. 要求低停顿
@@ -316,7 +316,7 @@ Humongous Objects的分配和回收:
     1) 存活的线程
     2) 虚拟机栈(栈桢中的本地变量表)中的引用的对象
     3) 方法区中的类静态属性以及常量引用的对象
-    4) 本地方法栈中JNI引用的局部变量以及全局变量</code></pre><h5 id="G1调优"><a href="#G1调优" class="headerlink" title="G1调优"></a>G1调优</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. -XX:MaxGCPauseMillis</span><br><span class="line">   最大STW时间、参数设置过小会频繁GC、设置过大、吞吐量会降低、所以要合理的设置来保证 </span><br><span class="line">   &#96;最大停顿时间&#96;和&#96;最大吞吐量&#96;的平衡</span><br><span class="line">2. -XX:InitiatingHeapOccupancyPercent &amp; -XX:+G1UseAdaptiveHop</span><br><span class="line">   InitiatingHeapOccupancyPercent简称IHOP</span><br><span class="line">   -XX:+G1UseAdaptiveIHOP是默认值，也就是说IHOP是adaptive的</span><br><span class="line">   -XX:InitiatingHeapOccupancyPercent是初始值</span><br></pre></td></tr></table></figure>
+    4) 本地方法栈中JNI引用的局部变量以及全局变量</code></pre><h5 id="G1调优"><a href="#G1调优" class="headerlink" title="G1调优"></a>G1调优</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. <span class="selector-tag">-XX</span><span class="selector-pseudo">:MaxGCPauseMillis</span></span><br><span class="line">   最大<span class="selector-tag">STW</span>时间、参数设置过小会频繁<span class="selector-tag">GC</span>、设置过大、吞吐量会降低、所以要合理的设置来保证 </span><br><span class="line">   `最大停顿时间`和`最大吞吐量`的平衡</span><br><span class="line">2. <span class="selector-tag">-XX</span><span class="selector-pseudo">:InitiatingHeapOccupancyPercent</span> &amp; <span class="selector-tag">-XX</span><span class="selector-pseudo">:+G1UseAdaptiveHop</span></span><br><span class="line">   <span class="selector-tag">InitiatingHeapOccupancyPercent</span>简称<span class="selector-tag">IHOP</span></span><br><span class="line">   <span class="selector-tag">-XX</span><span class="selector-pseudo">:+G1UseAdaptiveIHOP</span>是默认值，也就是说<span class="selector-tag">IHOP</span>是<span class="selector-tag">adaptive</span>的</span><br><span class="line">   <span class="selector-tag">-XX</span><span class="selector-pseudo">:InitiatingHeapOccupancyPercent</span>是初始值</span><br></pre></td></tr></table></figure>
 
 <h5 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h5><pre><code>1. 跟cms一样、无法避免浮动垃圾的产生和溢出
     可以增加堆大小、或者GC线程`-XX:ConcGCThreads`来尽量避免
@@ -411,12 +411,12 @@ Humongous Objects的分配和回收:
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JDK%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/" rel="prev" title="垃圾回收---JDK监控工具">
-      <i class="fa fa-chevron-left"></i> 垃圾回收---JDK监控工具
+    <a href="/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/" rel="prev" title="java秒级定时任务的实现">
+      <i class="fa fa-chevron-left"></i> java秒级定时任务的实现
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" rel="next" title="zk使用">
-      zk使用 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/java_solr%E4%BD%BF%E7%94%A8IK%E5%88%86%E8%AF%8D%E5%99%A8/" rel="next" title="solr使用IK分词器">
+      solr使用IK分词器 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -494,14 +494,14 @@ Humongous Objects的分配和回收:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

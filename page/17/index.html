@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source Code Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/17/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content=" Mysql">
+<meta property="article:tag" content=" Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/17/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  <meta name="referrer" content="no-referrer"/>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">牛牛的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_mysql%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_mysql%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">mysql问题梳理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/mysql_mysql%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="mysql问题梳理" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/mysql_mysql%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_mysql%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 备份一般都会在备库上执行，在用–single-<span class="keyword">transaction</span> 方法做逻辑备份的过程中</span><br><span class="line">   若主库的一个小表做了DDL、eg 添加一列</span><br><span class="line">   在从库会看到什么样的现象 ？</span><br><span class="line">   </span><br><span class="line">   Q1:<span class="keyword">SET</span> <span class="keyword">SESSION</span> <span class="keyword">TRANSACTION</span> <span class="keyword">ISOLATION</span> <span class="keyword">LEVEL</span> <span class="keyword">REPEATABLE</span> <span class="keyword">READ</span>;</span><br><span class="line">   Q2:<span class="keyword">START</span> <span class="keyword">TRANSACTION</span>  <span class="keyword">WITH</span> CONSISTENT <span class="keyword">SNAPSHOT</span>；</span><br><span class="line">   <span class="comment">/* other tables */</span></span><br><span class="line">   Q3:<span class="keyword">SAVEPOINT</span> sp;</span><br><span class="line">   <span class="comment">/* 时刻 1 */</span></span><br><span class="line">   Q4:<span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> `t1`;</span><br><span class="line">   <span class="comment">/* 时刻 2 */</span></span><br><span class="line">   Q5:<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> `t1`;</span><br><span class="line">   <span class="comment">/* 时刻 3 */</span></span><br><span class="line">   Q6:<span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> <span class="keyword">SAVEPOINT</span> sp;</span><br><span class="line">   <span class="comment">/* 时刻 4 */</span></span><br><span class="line">   <span class="comment">/* other tables */</span></span><br><span class="line"></span><br><span class="line">   Q1、确保事务隔离级别为可重复读</span><br><span class="line">   Q2、确保得到一个一致性视图</span><br><span class="line">   Q3、设置一个保存点、Q6 回滚到这个保存点</span><br><span class="line">   </span><br><span class="line">   若DDL语句在Q4之前到达、无影响、备份表结构为修改后的表结构</span><br><span class="line">   若在Q5之前到达、则<span class="keyword">insert</span>和<span class="keyword">create</span>的结构不一致、会提示 <span class="keyword">Table</span> definition has changed, </span><br><span class="line">   retry <span class="keyword">transaction</span>、mysqldump终止</span><br><span class="line">   若在时刻<span class="number">2</span>和<span class="number">3</span>之间到达、会造成主从延时 </span><br><span class="line">   若在Q6之前到达、不影响、备份结构是修改前的表结构</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 删除表数据的比较好的方式？</span><br><span class="line">   <span class="number">1</span>) <span class="keyword">delete</span> <span class="keyword">from</span> T <span class="keyword">limit</span> <span class="number">100000</span>；</span><br><span class="line">   <span class="number">2</span>）<span class="keyword">delete</span> <span class="keyword">from</span> T <span class="keyword">limit</span> <span class="number">5000</span>；执行<span class="number">20</span>次</span><br><span class="line">   <span class="number">3</span>）分<span class="number">20</span>个线程去执行</span><br><span class="line">   <span class="number">1</span>会造成大事务、单语句占用时间长、锁的时间比较长、可能造成主从延迟</span><br><span class="line">   <span class="number">3</span>可能会人为造成锁冲突</span><br><span class="line">   <span class="number">2</span>相对比较好一些</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 唯一索引和普通索引如何选择？</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> change buffer 一开始是写内存的、然后写磁盘</span><br><span class="line">   假如刚写入内存就断电重启、会不会导致change buffer丢失 ？</span><br><span class="line">   不会丢失、虽然只是更新内存、但在事务提交的时候、把change buffer的操作也记录在了redo <span class="keyword">log</span>里、崩溃恢复的时候可以找回</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line"><span class="number">5.</span> 扫描行数如何判断 ？</span><br><span class="line">   mysql在真正执行前并不能精确的知道满足条件的记录有多少条、只能根据统计信息来预估</span><br><span class="line">   这个统计信息就是索引的区分度、称为 索引基数(cardinality)、也就是索引基数越大、索引的区分度越好</span><br><span class="line">   <span class="keyword">show</span> <span class="keyword">index</span> <span class="keyword">from</span> tt; </span><br><span class="line">   可以看到索引信息</span><br><span class="line">   </span><br><span class="line"><span class="number">6.</span> mysql是如何得到索引基数的呢 ？</span><br><span class="line">   将整张表取出来一行行统计 - 可以得到精确值、单代价太高</span><br><span class="line">   所以采用 采样统计、当表数据持续变更的时候、变更的数据行超过 <span class="number">1</span>/M 时、自动触发索引重新统计</span><br><span class="line">   <span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">'innodb_stats_persistent'</span>; 查看存储索引统计方式</span><br><span class="line">   <span class="keyword">on</span> 代表统计信息会持久化存储、默认 N=<span class="number">20</span> M=<span class="number">10</span></span><br><span class="line">   <span class="keyword">off</span> 的时候、代表统计信息只存储在内存中， 默认 N=<span class="number">8</span> M=<span class="number">16</span></span><br><span class="line">   由于是采样统计、不管N是多少、基数都很容易不准</span><br><span class="line">   索引统计值虽然不够精准、大体上还是差不多的、选错索引还有别的原因</span><br><span class="line">   </span><br><span class="line"><span class="number">7.</span> 如何修正索引？</span><br><span class="line">   <span class="number">1</span> 使用force <span class="keyword">index</span> 强制选择一个索引</span><br><span class="line">   <span class="number">2</span> 使用语句引导索引 <span class="keyword">order</span> <span class="keyword">by</span> b, a</span><br><span class="line">   <span class="number">3</span> 新建更合适的索引或者删掉无用索引</span><br><span class="line"></span><br><span class="line"><span class="number">8.</span> 何时会出现mysql抖动、平时很快执行的<span class="keyword">sql</span>在某些瞬间执行很慢？</span><br><span class="line">   <span class="number">1.</span> redo <span class="keyword">log</span> <span class="keyword">log</span>大小超过配置值时、需要刷新到磁盘、此时系统会停止所有的更新操作、应尽可能的避免</span><br><span class="line">   <span class="number">2.</span> 系统内存不足的时候、当需要新的内存页、内存不够用的时候、就淘汰一些数据页、给别的数据页使用、</span><br><span class="line">      若淘汰的是脏页、就需要将脏页写到磁盘</span><br><span class="line">      innodb使用缓冲池 buffer pool来管理内存、缓冲池中的内存页有<span class="number">3</span>种状态</span><br><span class="line">      <span class="number">1</span>）暂未使用的  <span class="number">2</span>）使用了、并且是干净页(内存数据页和磁盘数据页内容一致) <span class="number">3</span>）使用了、并且是脏页</span><br><span class="line">      innodb的策略是尽量使用内存、对一个长时间运行的库来说、未被使用的页面很少</span><br><span class="line">      当要读入的数据页没有在内存的时候、要到缓冲池申请一个数据页、只能把最久不使用的数据页从内存淘汰</span><br><span class="line">      若淘汰掉的是一个干净页、就直接释放出来复用、若淘汰的是脏页、就先刷新到磁盘</span><br><span class="line">      </span><br><span class="line">      所以：</span><br><span class="line">      <span class="number">1.</span> 一个查询要淘汰的脏页个数过多的时候、会导致查询时间明显变长</span><br><span class="line">      <span class="number">2.</span> 日志写满会将更新全部堵塞、写性能跌为<span class="number">0</span>、应尽可能的避免</span><br><span class="line">      </span><br><span class="line">      那么innodb是如何控制刷脏页的策略的呢 ？</span><br><span class="line">      一个是系统io能力、可以使用  fio -filename=$filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randrw -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">500</span>M -numjobs=<span class="number">10</span> -runtime=<span class="number">10</span> -group_reporting -<span class="type">name</span>=mytest 来测试</span><br><span class="line">      一个是脏页比例上限：<span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">'innodb_max_dirty_pages_pct'</span>; 默认<span class="number">75</span>%</span><br><span class="line">      </span><br><span class="line">      另外：mysql在刷脏页的时候、若 innodb_flush_neighbors = <span class="number">1</span> 恰好连着的页也是脏页</span><br><span class="line">      会被一起刷掉、若 情况不妙、连着的连着页也是脏页。。。。会导致你的查询更慢</span><br><span class="line">      这个策略在机械硬盘时代是有意义的、可以减少io、但SSD设备的话、可以设置为<span class="number">0</span> 减少<span class="keyword">sql</span>执行时间</span><br><span class="line">      <span class="number">8.0</span> 已默认为<span class="number">0</span></span><br><span class="line">      </span><br><span class="line">   <span class="number">3.</span> mysql认为系统空闲的时候、</span><br><span class="line">   <span class="number">4.</span> mysql正常关闭的时候</span><br><span class="line"></span><br><span class="line"><span class="number">9.</span> 为什么数据删除、表空间确没有释放</span><br><span class="line">   数据删除流程：假如删除 <span class="number">2</span>、<span class="number">10</span>之间的<span class="number">6</span>记录、它只被标记删除、并不会之间删除</span><br><span class="line">   之后需要<span class="keyword">insert</span> <span class="number">1</span>~<span class="number">10</span>之间的数据时、会复用这个位置</span><br><span class="line">   若删掉了一个数据页上的所有记录、整个数据页可以被直接复用</span><br><span class="line">   记录的复用 只限于符合范围条件的数据、</span><br><span class="line">   页的复用、可以用于任何数据</span><br><span class="line">   若相邻页利用率都很小、系统会把这两个页合并到其中一个数据页、另外一个标记为可复用</span><br><span class="line">   这些可以被复用、而未被复用的空间、称为空洞</span><br><span class="line">   </span><br><span class="line">   不止<span class="keyword">delete</span>会造成空洞、<span class="keyword">insert</span>也会、随机插入会造成索引的数据页分裂</span><br><span class="line">   所以、大量增删改的表是可能存在空洞的、若能去掉空洞、就可以达到收缩表空间的目的</span><br><span class="line">   <span class="number">1.</span> 重建表 可以新建一个与表A结构相同的表B、按照主键ID递增的顺序、把数据行一行一行的从表A读出、再插入到B</span><br><span class="line">      若将B作为临时表、数据从A导入B的操作完成后、用B替换A、就起到了收缩表A空间的作用</span><br><span class="line">      可以使用 <span class="keyword">alter</span> <span class="keyword">table</span> A engine=innodb 来重建、</span><br><span class="line">      执行流程类似、只是不需要自己创建临时表(是在<span class="keyword">server</span>完成的、需要数据导入)、mysql自己完成转存数据、交换表名、删除旧表</span><br><span class="line">      </span><br><span class="line">      显然整个过程最耗时的是、插入数据、在整个DDL过程、A表不能有更新、非online</span><br><span class="line">      </span><br><span class="line">      mysql <span class="number">5.6</span> 版本引入 online ddl</span><br><span class="line">      流程：新建临时表、扫描A主键的所有数据页、</span><br><span class="line">           使用数据页中的A的记录生成B+树、存储到临时文件(存储引擎创建、整个DDL过程在innodb内部完成、无需数据挪到临时表、是原地操作)</span><br><span class="line">           生成临时文件的过程中、将所有对A的操作记录在一个日志文件中、<span class="keyword">row</span> <span class="keyword">log</span>、</span><br><span class="line">           临时文件生成后、将日志文件中的操作应用到临时文件、得到一个逻辑数据上与表A相同的数据文件、</span><br><span class="line">           用临时文件替换表A的数据文件</span><br><span class="line">      </span><br><span class="line">      iplace和online是同一概念 ？？</span><br><span class="line">      <span class="keyword">no</span>、只是ddl过程若是 online 的、一定是 inplace 的</span><br><span class="line">      若、inplace的DDL、可能不是online的、</span><br><span class="line">      eg 给一个innodb的表字段加fulltext索引、整个过程是inplace的、会阻塞 增删改查操作、不是online的</span><br><span class="line">      </span><br><span class="line">            </span><br><span class="line"><span class="number">10.</span> <span class="keyword">alter</span> <span class="keyword">table</span> t engine=innodb 其实是 recreate 重建表的过程、非online</span><br><span class="line">    <span class="keyword">analyze</span> <span class="keyword">table</span> t 不是重建表、不修改数据、只是对表的索引信息进行重新统计、会加MDL 读锁</span><br><span class="line">    optimize <span class="keyword">table</span> t =&gt; recreate + <span class="keyword">analyze</span></span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line"><span class="number">11.</span> 若一个高配的机器、redo <span class="keyword">log</span>设置的太小、会发生什么 ？</span><br><span class="line">    每次事务提交都有些redo <span class="keyword">log</span>、若设置太小、会被很快写满、系统不得不停止所有更新、去刷新redo <span class="keyword">log</span></span><br><span class="line">    同时、change buffer的优化作用也会失效、因为<span class="keyword">checkpoint</span>一直往前推进、会触发merge操作、然后又进一步的触发脏页刷新</span><br><span class="line">    看到的现象会是 磁盘压力小、但是数据库出现间歇性的性能下降</span><br><span class="line">    </span><br><span class="line"><span class="number">12.</span> count(*) 是怎么工作的 ？</span><br><span class="line">    mysiam将数据总行记录在了磁盘上、所以查询 count(*) 会直接返回</span><br><span class="line">    innodb 因为考虑事务的原因、不能这么记录、是从记录一条条遍历出来的、但是会遍历最小的那颗树</span><br><span class="line">    </span><br><span class="line">    so：</span><br><span class="line">    mysiam count(*) 快、但是不支持事务、</span><br><span class="line">    <span class="keyword">show</span> <span class="keyword">table</span> status 返回快、但不准确</span><br><span class="line">    count(*) 会遍历全表、导致性能问题</span><br><span class="line">    </span><br><span class="line">    那么如何自己实现计数？</span><br><span class="line">    <span class="number">1</span>）使用缓存系统 - 数据易丢失、统计不精准(先写redis、记录未插入、则多<span class="number">1</span>、先写db redis未写入 则少<span class="number">1</span>)</span><br><span class="line">    <span class="number">2</span>）使用统计表 使用事务保存</span><br><span class="line">    </span><br><span class="line">    count(*)、count(id)、count(<span class="number">1</span>) 都标识返回满足条件的结果集的总行数</span><br><span class="line">    count(field)表示 filed不为<span class="keyword">null</span>的总个数</span><br><span class="line">    </span><br><span class="line">    count(id) innodb会遍历整张表、取出每行的id值、返回给<span class="keyword">server</span>层、<span class="keyword">server</span>拿到id后、判断不为空、累计行</span><br><span class="line">    count(<span class="number">1</span>) inndb会遍历整张表、但不取值、<span class="keyword">server</span>对于返回的每一行、放数字<span class="number">1</span>进去、判断不为空、按行累加</span><br><span class="line">    所以、count(<span class="number">1</span>)比count(id)快、因为从引擎返回id会涉及到数据行解析、及<span class="keyword">copy</span>字段值得操作</span><br><span class="line">    </span><br><span class="line">    count(field) <span class="keyword">not</span> <span class="keyword">null</span>字段、独处记录、判断不能为<span class="keyword">null</span>、按行累加</span><br><span class="line">    允许为<span class="keyword">null</span>的字段、执行的时候判断到有可能为<span class="keyword">null</span>、会先取出值、判断、不为<span class="keyword">null</span>才累加</span><br><span class="line">    </span><br><span class="line">    count(*) 不会取出全部字段、专门做了优化、不取值</span><br><span class="line">    所以 效率： count(field) &lt; count(主键) &lt; count(<span class="number">1</span>) ~ count(*)    </span><br><span class="line">    </span><br><span class="line"><span class="number">13.</span> mysql 怎么知道binlog是完整的 ？</span><br><span class="line">    一个事务的binlog是有完整格式的、<span class="keyword">statement</span>格式的binlog最后会有<span class="keyword">commit</span></span><br><span class="line">    raw格式的binlog、最后会有一个 xid</span><br><span class="line">    <span class="number">5.6</span>之后的版本、还引入了 binlog-checksum 来保证内容的正确性</span><br><span class="line">    </span><br><span class="line"><span class="number">14.</span> redo <span class="keyword">log</span> 和 binlog 如何关联：</span><br><span class="line">    有一个共同的数据段、xid、崩溃修复的时候会按顺序扫描 redo <span class="keyword">log</span></span><br><span class="line">    若既有<span class="keyword">prepare</span>又有<span class="keyword">commit</span>、则直接提交</span><br><span class="line">    若只有<span class="keyword">prepare</span> 则拿 xid去找binlog 对应的事务</span><br><span class="line">    </span><br><span class="line">    处于<span class="keyword">prepare</span>阶段的redo <span class="keyword">log</span> + 完整binlog 重启就能恢复、why ？</span><br><span class="line">    binlog写完之后、mysql崩溃、此时binlog已经写入、就会被从库使用</span><br><span class="line">    所以在主库上也要提交这个事务、保证主从数据的一致性</span><br><span class="line">    </span><br><span class="line">    为何不是先写 redo <span class="keyword">log</span>再写binlog、然后直接两个<span class="keyword">log</span>完整时才恢复数据 ？</span><br><span class="line">    对于innodb来说、redo <span class="keyword">log</span>提交完成、事务就不能回滚(会覆盖到别的事务的更新)、</span><br><span class="line">    而如果redo <span class="keyword">log</span> 直接提交、然后binlog失败的时候、inndo回滚不了、数据和binlog就又不一致了</span><br><span class="line">    两阶段提交就是为了给所有人一个机会、啊哈~</span><br><span class="line">    </span><br><span class="line"><span class="number">15.</span> 对于正常运行的实例、数据写入后的最终落盘、是从redo <span class="keyword">log</span>更新的还是buffer pool ？</span><br><span class="line">    redo <span class="keyword">log</span> 并未记录数据页的完整数据、所以、没有能力自己去更新磁盘数据页、不存在redo <span class="keyword">log</span>更新进去的情况</span><br><span class="line">    a.若数据页被修改之后、跟磁盘的数据页不一致、称为脏页、最终数据落盘就是把内存中的数据页写盘</span><br><span class="line">    b.若在崩溃恢复的场景中、innodb判断到一个数据页可能在崩溃中丢失了更新、就将其读到内存、</span><br><span class="line">    然后让redo <span class="keyword">log</span>更新内存内容、回到 a 的情况</span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">   fio -filename=$filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randrw -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">500</span>M -numjobs=<span class="number">10</span> -runtime=<span class="number">10</span> -group_reporting -<span class="type">name</span>=mytest </span><br><span class="line"> </span><br><span class="line"><span class="number">16.</span> <span class="keyword">order</span> <span class="keyword">by</span> 是如何工作的 ？</span><br><span class="line">    <span class="keyword">explain</span> 中的 <span class="keyword">using</span> filesort 代表需要排序</span><br><span class="line">    mysql 会给每个线程分配一块内存用于排序、称为 sort_buffer</span><br><span class="line">    </span><br><span class="line">    <span class="number">1</span>) 初始化sort_buffer 确定放入 <span class="type">name</span> city age 三个字段、</span><br><span class="line">    <span class="number">2</span>) 从索引 city 找到 第一个满足 city=xx 条件的主键id</span><br><span class="line">    <span class="number">3</span>) 从主键id索引取出整行、取<span class="type">name</span> city age 三个字段的值、写入 sort_buffer 中</span><br><span class="line">    <span class="number">4</span>) 从索引city取下一条满足条件的记录id</span><br><span class="line">    <span class="number">5</span>) 重复<span class="number">3</span>、<span class="number">4</span> 直到无满足条件的记录</span><br><span class="line">    <span class="number">6</span>) 对sort buffer中的数据按照<span class="type">name</span>进行快排</span><br><span class="line">    <span class="number">7</span>) 取结果集前<span class="number">1000</span>行返回给client</span><br><span class="line">    </span><br><span class="line">    若单行数据超过 max_length_for_sort_data 的值、则会先排序、再回表取数据</span><br><span class="line">    <span class="number">1</span>) 初始化sort_buffer 确定放入 <span class="type">name</span> city age 三个字段、</span><br><span class="line">    <span class="number">2</span>) 从索引 city 找到 第一个满足 city=xx 条件的主键id</span><br><span class="line">    <span class="number">3</span>) 从主键id索引取出整行、取<span class="type">name</span> &amp; id 两个个字段的值、写入 sort_buffer 中</span><br><span class="line">    <span class="number">4</span>) 从索引city取下一条满足条件的记录id</span><br><span class="line">    <span class="number">5</span>) 重复<span class="number">3</span>、<span class="number">4</span> 直到无满足条件的记录</span><br><span class="line">    <span class="number">6</span>) 对sort buffer中的数据按照<span class="type">name</span>进行快排</span><br><span class="line">    <span class="number">7</span>) 取结果集前<span class="number">1000</span>行、回原表扫描city、<span class="type">name</span>和age三个字段值 返回给client  </span><br><span class="line">    </span><br><span class="line">    此时假如 <span class="type">name</span>本身有索引、天然有序、则不需要额外排序、会变成</span><br><span class="line">    <span class="number">1</span>) 从索引 city <span class="type">name</span> 找到满足 city=杭州的 条件的主键</span><br><span class="line">    <span class="number">2</span>) 回主键id索引查出正行、取<span class="type">name</span>、city、age的值 作为结果集的一部分直接返回</span><br><span class="line">    <span class="number">3</span>) 从索引 <span class="type">name</span> city取出下一个满足记录的主键id</span><br><span class="line">    <span class="number">4</span>) 重复<span class="number">2</span>、<span class="number">3</span>、直到足够<span class="number">1000</span>条记录、或者无满足条件的记录</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    使用 optimizer_trace 进行<span class="keyword">sql</span>追踪、一般情况下、一个新的跟踪会覆盖掉以前的跟踪</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 打开 optimizer_trace，只对本线程有效 */</span></span><br><span class="line">    <span class="keyword">SET</span> optimizer_trace=<span class="string">'enabled=on'</span>; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* @a 保存 Innodb_rows_read 的初始值 */</span></span><br><span class="line">    <span class="keyword">select</span> VARIABLE_VALUE <span class="keyword">into</span> @a <span class="keyword">from</span>  performance_schema.session_status <span class="keyword">where</span> variable_name = <span class="string">'Innodb_rows_read'</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 执行语句 */</span></span><br><span class="line">    <span class="keyword">select</span> city, <span class="type">name</span>,age <span class="keyword">from</span> t <span class="keyword">where</span> city=<span class="string">'杭州'</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="type">name</span> <span class="keyword">limit</span> <span class="number">1000</span>; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 查看 OPTIMIZER_TRACE 输出 */</span></span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> `information_schema`.`OPTIMIZER_TRACE`\G</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* @b 保存 Innodb_rows_read 的当前值 */</span></span><br><span class="line">    <span class="keyword">select</span> VARIABLE_VALUE <span class="keyword">into</span> @b <span class="keyword">from</span> performance_schema.session_status <span class="keyword">where</span> variable_name = <span class="string">'Innodb_rows_read'</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 计算 Innodb_rows_read 差值 */</span></span><br><span class="line">    <span class="keyword">select</span> @b-@a;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `tt` (</span><br><span class="line">     `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">     `a` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">     `b` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">     <span class="keyword">PRIMARY KEY</span> (`id`),</span><br><span class="line">     KEY `a` (`a`),</span><br><span class="line">     KEY `b` (`b`)</span><br><span class="line">   ) ENGINE=InnoDB；</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">delimiter</span> ;;</span><br><span class="line">   <span class="keyword">create</span> <span class="keyword">procedure</span> idata()</span><br><span class="line">   <span class="keyword">begin</span></span><br><span class="line">     <span class="keyword">declare</span> i <span class="type">int</span>;</span><br><span class="line">     <span class="keyword">set</span> i=<span class="number">1</span>;</span><br><span class="line">     <span class="keyword">while</span>(i&lt;=<span class="number">100000</span>)<span class="keyword">do</span></span><br><span class="line">       <span class="keyword">insert</span> <span class="keyword">into</span> tt <span class="keyword">values</span>(i, i, i);</span><br><span class="line">       <span class="keyword">set</span> i=i+<span class="number">1</span>;</span><br><span class="line">     <span class="keyword">end</span> <span class="keyword">while</span>;</span><br><span class="line">   <span class="keyword">end</span>;;</span><br><span class="line">   <span class="keyword">delimiter</span>;</span><br><span class="line">   <span class="keyword">call</span> idata();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">where</span> a <span class="keyword">between</span> <span class="number">10000</span> <span class="keyword">and</span> <span class="number">20000</span>;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">set</span> long_query_time=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">where</span> a <span class="keyword">between</span> <span class="number">10000</span> <span class="keyword">and</span> <span class="number">20000</span>; <span class="comment">/*Q1*/</span></span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> t force <span class="keyword">index</span>(a) <span class="keyword">where</span> a <span class="keyword">between</span> <span class="number">10000</span> <span class="keyword">and</span> <span class="number">20000</span>;<span class="comment">/*Q2*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> IFNULL(driver_id, <span class="number">0</span>) driverId, count(*) serviceCnt, MAX(booking_start_time) lastBookingDate <span class="keyword">FROM</span> car_order_finished_collect_2018 <span class="keyword">WHERE</span> driver_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>  <span class="keyword">AND</span> order_status &gt; <span class="number">43</span> <span class="keyword">AND</span> order_status &lt; <span class="number">60</span> <span class="keyword">AND</span> booking_user_id = <span class="number">1148735</span> <span class="keyword">AND</span> driver_id <span class="keyword">in</span> (<span class="number">25311</span>)  <span class="keyword">GROUP</span> <span class="keyword">BY</span> driver_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> COUNT(*) <span class="keyword">DESC</span>, MAX(booking_start_time) <span class="keyword">DESC</span>\G;</span><br><span class="line"><span class="keyword">SELECT</span> IFNULL(driver_id, <span class="number">0</span>) driverId, count(*) serviceCnt, MAX(booking_start_time) lastBookingDate <span class="keyword">FROM</span> car_order_finished_collect_2018 <span class="keyword">WHERE</span> driver_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>  <span class="keyword">AND</span> order_status &gt; <span class="number">43</span> <span class="keyword">AND</span> order_status &lt; <span class="number">60</span> <span class="keyword">AND</span> booking_user_id = <span class="number">80004692</span> <span class="keyword">AND</span> driver_id <span class="keyword">in</span> (<span class="number">10101406</span>)  <span class="keyword">GROUP</span> <span class="keyword">BY</span> driver_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> COUNT(*) <span class="keyword">DESC</span>, MAX(booking_start_time) <span class="keyword">DESC</span>\G;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/" class="post-title-link" itemprop="url">冒险和预测(21~26讲)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="冒险和预测(21~26讲)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="CPU流水线设计"><a href="#CPU流水线设计" class="headerlink" title="CPU流水线设计"></a>CPU流水线设计</h4><p><code>指令流水线</code>: 若把指令执行拆分成<code>取指令</code> -&gt; <code>指令译码</code> -&gt; <code>指令执行</code> 三个部分、这就是一个三级的流水线、若把指令执行进一步拆分成 <code>ALU
+计算(指令执行)</code> -&gt; <code>内存访问</code> -&gt; <code>数据写回</code> 就变成了5级流水线、</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">五级流水线:</span><br><span class="line">表示在同一个时钟周期里、同时运行<span class="number">5</span>条指令的不同阶段, 虽然执行一条指令的时钟周期变成<span class="number">5</span>、但可以提高CPU的主频, 只需要保证最复杂的一个流水线级的操作在一个时钟周期内完成、无需确保最复杂的那条指令在时钟周期里执行完成</span><br></pre></td></tr></table></figure>
+
+<h4 id="超长流水线性能瓶颈"><a href="#超长流水线性能瓶颈" class="headerlink" title="超长流水线性能瓶颈"></a>超长流水线性能瓶颈</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">增加流水线的深度是有性能成本的</span><br><span class="line">用来同步时钟周期的、不再是指令级别, 而是流水线级别、每一个流水线对应的输出、都要放到流水线寄存器(Pipeline Register) 然后在下一个时钟周期交给下一个流水线级处理、so. 增加流水线级、就要多出一级写入流水线寄存器的操作、虽然很快、假设<span class="number">20</span>ps、但不断增加流水线深度、这些操作占整个指令的执行时间的比例就会不断增加</span><br><span class="line"></span><br><span class="line">eg. 指令执行<span class="number">3</span>ns(<span class="number">3000</span>ps)、设计<span class="number">20</span>级的流水线、流水线的操作就需要 <span class="number">20</span>ps * <span class="number">20</span> = <span class="number">400</span>ps 占比 <span class="number">400</span>/<span class="number">3000</span>超过<span class="number">10</span>% 、也就是但从的增加流水线级数、会带来更多的额外开销、</span><br><span class="line"></span><br><span class="line">所以要合理的设计流水线级数</span><br></pre></td></tr></table></figure>
+
+<h4 id="流水线设计的冒险"><a href="#流水线设计的冒险" class="headerlink" title="流水线设计的冒险"></a>流水线设计的冒险</h4><p>流水线设计需要解决的三大冒险: <code>结构冒险</code>, <code>数据冒险</code> 和 <code>控制冒险</code><br><code>结构冒险</code>: 本质上是硬件层面的资源竞争问题、CPU在同一个时钟周期、同时在运行两条计算机指令的不同阶段、但可能会用到同样的硬件了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-878133ae5032eb4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="同一时钟周期、两个指令访问同一资源.png"></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如上所示: 在第一条指令执行到访存(MEM)阶段的时候、流水线里的第<span class="number">4</span>条指令、在执行指令Fetch的操作、访存和取指令、都要进行内存数据的读取, 内存只有一个地址译码器的作为地址输入、就只能在一个时钟周期里读取一条数据、无法同时执行第一条指令的读取内存数据和第<span class="number">4</span>条指令的读取指令的操作</span><br><span class="line"></span><br><span class="line">类似的资源冲突: </span><br><span class="line">常用的键盘、不是每个键的背后都有一根独立的线路、而是多个键公用一个线路、如果在同一时间、按下两个共用一个线路的按键、这两个按键的信号都没办法传输出去、就出现了按下键却不生效的情况</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在CPU的结构冒险里、对于内存访问和取指令的冲突、直观的解决方案是把内存拆成2部分、让他们有各自的地址译码器、分别是存放指令的程序内存和存放数据的数据内存(对应体系结构叫 哈佛架构(Harvard Architecture)), 但这样拆对于指令和数据需要的内存空间、就无法根据实际的应用动态分配了、解决了资源冲突问题、也失去了灵活性<br>现代CPU架构借鉴了哈佛架构的思路、采用了普林斯顿架构、在高速缓存方面拆分成指令缓存和数据缓存<br>内存的访问速度远比CPU慢、所以现代的CPU不会直接读取主内存、会从主内存把指令和数据加载到高速缓存中、这样后续访问都是访问高速缓存、而指令缓存和数据缓存的拆分使得CPU在进行数据访问和取指令的时候、不会发生资源冲突了</p>
+</blockquote>
+<p><code>数据冒险</code>: 三种不同的依赖关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据冒险就是多个指令间有数据依赖的情况、可以分为 先读后写、先写后读和写后再写、如果满足不了依赖关系、最终结果就会出错</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过流水线停顿(Pipeline Stall):插入nop操作 来解决数据冒险</p>
+</blockquote>
+<h4 id="操作数前推"><a href="#操作数前推" class="headerlink" title="操作数前推"></a>操作数前推</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add </span>$<span class="built_in">t0</span>, $<span class="built_in">s2</span>,$<span class="built_in">s1</span></span><br><span class="line"><span class="keyword">add </span>$<span class="built_in">s2</span>, $<span class="built_in">s1</span>,$<span class="built_in">t0</span></span><br><span class="line"><span class="number">1</span>. 第一条指令 将<span class="built_in">s1</span> 和 <span class="built_in">s2</span> 寄存器里的数据相加、写入 <span class="built_in">t0</span> 寄存器</span><br><span class="line"><span class="number">2</span>. 第二条指令 将 <span class="built_in">s1</span> 和 <span class="built_in">t0</span> 的数据相加、写入 <span class="built_in">s2</span> 寄存器</span><br><span class="line">指令<span class="number">2</span> 的执行、依赖<span class="built_in">t0</span>的值、而<span class="built_in">t0</span>的值来自于前一条指令的计算结果、所以指令<span class="number">2</span>需要等前一指令的数据写回之后才能执行、就遇到了数据依赖冒险、</span><br><span class="line">使用插入<span class="keyword">nop来解决、可以解决、但是会浪费两个时钟周期</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">其实、如果第一条指令的执行结果可以直接传给第二条指令的执行输入、在第一条指令的执行阶段完成之后、直接将数据传输给下一条指令的ALU、下一指令就不需要插入两个nop阶段、就可以继续执行阶段, </span>如下图所示、这种方案就叫操作数前推</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-54ea7826a6b70dad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="乱序执行"><a href="#乱序执行" class="headerlink" title="乱序执行"></a>乱序执行</h4><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">即使综合运用流水线停顿、操作数前推、增加资源等解决结构冒险和数据冒险的问题、仍然会遇到不得不停下整个流水线等待前一指令完成的情况、但是: 如果后边有指令不需要依赖前边指令的执行结果就可以不必等待前边指令完成、直接占用<span class="keyword">nop即可、这样的解决方案、在计算机里叫 </span>乱序执行</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4d24af97f6f2a623.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不得不nop填充.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7b98287e4db1bca0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="nop占用.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-2b24ee6d961e9f88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="乱序执行的CPU.png"></p>
+<h4 id="乱序执行的步骤"><a href="#乱序执行的步骤" class="headerlink" title="乱序执行的步骤"></a>乱序执行的步骤</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 取指令和指令译码阶段、同其它CPU、会一级一级顺序进行Fetch和Decode</span><br><span class="line"><span class="number">2.</span> 指令译码完成后、CPU不会直接进行指令执行、而是进行指令分发、把指令发到保留站(Reservation Stations)、类似火车站、指令类似列车</span><br><span class="line"><span class="number">3.</span> 指令不会立即执行、而是等待依赖数据完成才执行. 类似火车要等乘客到齐才出发</span><br><span class="line"><span class="number">4.</span> 依赖数据到齐之后、指令可以交给后边的功能单元(Function Unit, FU)、就是ALU来执行、很多功能单元可以并行运行、但不同功能单元可以执行的指令不同、类似铁轨可以从上海北上、到北京或者哈尔滨;有些是南下、到广州或者深圳</span><br><span class="line"><span class="number">5.</span> 指令执行的阶段完成后、不能立即把结果写回寄存器、而是把结果写入指令重排区(Re-Order buffer, ROB).</span><br><span class="line"><span class="number">6.</span> 在重排缓冲区、CPU会按照取指令的顺序、对指令的计算结果重新排序、 只有排在前边的指令都完成才会提交指令、完成整改指令的运算结果</span><br><span class="line"><span class="number">7.</span> 实际的指令计算结果不直接写入内存或者高速缓存、而是先写入存储缓冲区(Store Buffer)，最终才写入高速缓存和内存</span><br><span class="line">so. 在乱序执行的情况下、只有CPU内部指令的执行层面、可能乱序、只要在指令的译码阶段正确的分析出指令之间的数据依赖关系、乱序就只会在无相互影响的指令间发生</span><br></pre></td></tr></table></figure>
+
+<h4 id="分支预测"><a href="#分支预测" class="headerlink" title="分支预测"></a>分支预测</h4><blockquote>
+<p>缩短分支延迟: 将调解判断、地址调整 提前到指令译码阶段进行、无需放到指令执行阶段. 这种方式本质上和数据冒险的操作数前推方案类似、就是在硬件电路层面讲一些计算结果更早的反馈到流水线中、反馈更快、后边指令的等待时间就变短了</p>
+</blockquote>
+<blockquote>
+<p>分支预测: 1) 静态预测、假装分支不发生. 分支预测失败的代价是: 丢弃已取出的指令&amp;清空已使用的寄存器的操作<br>2) 动态分支预测:<br>a. 一级分支预测: 用1比特、记录当前分支的比较清空、来预测下一次分支时候的比较情况<br>b. 双模态预测器: 从2byte记录对应状态、提高预测的准确度</p>
+</blockquote>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">CPU</span>的流水线设计里、会遇到eg. 指令依赖等的情况、使得下一条指令不能正确执行. 但是通过抢跑的方式、可以得到提升指令 吞吐率 的机会、流水线架构的<span class="meta">CPU</span>、是主动的冒险选择</span><br></pre></td></tr></table></figure>
+
+<h4 id="流水线设计总结"><a href="#流水线设计总结" class="headerlink" title="流水线设计总结"></a>流水线设计总结</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为了不浪费<span class="meta">CPU</span>的性能、把指令执行的过程切分成一个个的流水线、来提升<span class="meta">CPU</span>的吞吐率, 而每增加一级的流水线、也会增加overhead、同样因为指令不是顺序执行</span><br><span class="line"></span><br><span class="line">数据冒险和分支冒险: 通过插入<span class="keyword">nop</span>来解决</span><br><span class="line"></span><br><span class="line"><span class="keyword">nop</span>空转: 通过乱序执行来解决</span><br><span class="line"></span><br><span class="line">乱序执行: 是在指令执行阶段通过一个类似线程池的保留站、让系统之家动态调度先执行哪些指令、前提是不破坏数据依赖性. <span class="meta">CPU</span>只要等到在指令结果的最终提交阶段、再通过重排序的方式、确保指令是顺序执行的</span><br><span class="line"></span><br><span class="line">超标量: (Superscalar) 和 多发射(Multi issue) 在同一时间把多条指令发射到不同的译码器</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/" class="post-title-link" itemprop="url">建立数据通路(17-19讲)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/" class="post-meta-item leancloud_visitors" data-flag-title="建立数据通路(17-19讲)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="指令周期"><a href="#指令周期" class="headerlink" title="指令周期"></a>指令周期</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">计算机每执行一条指令的过程、可以分解为:</span><br><span class="line"><span class="number">1.</span> Fetch(取得指令), 也就是从PC寄存器找到对应的指令地址、根据指令地址从内存找到具体指令、加载到指令寄存器、然后将PC寄存器自增、好在未来执行下一条指令</span><br><span class="line"><span class="number">2.</span> Decode(指令译码): 根据指令寄存器里的指令、解析成将要进行什么样的操作、是R、I、J中的哪一种指令、具体要操作哪些寄存器、数据或者内存地址</span><br><span class="line"><span class="number">3.</span> Execute(执行指令), 也就是实际运行对应的R、I、J这些特定的指令、进行算术逻辑操作、数据传输或者直接的地址跳转</span><br><span class="line"><span class="number">4.</span> 重复<span class="number">1</span>~<span class="number">3</span>的步骤</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>Machine Cycle</code>: 又称为<code>机器周期</code>或者<code>CPU周期</code>, CPU的内部操作速度很快、但是访问内存的速度却慢很多、每一条指令都从内存中加载而来、所以一般把从内存中读取一条指令的最短时间称为<code>CPU周期</code></p>
+<p><code>Clock Cycle</code>: 也就是时钟周期及机器的主频、一个CPU周期通常是几个时钟周期的积累、一个CPU周期的时间、就是这几个时钟周期的总和</p>
+<blockquote>
+<p> 对于一个指令周期来说、取出一条指令、然后执行、至少需要两个CPU周期、取出指令至少需要一个CPU周期、执行也至少需要一个CPU周期、复杂的指令需要更多的CPU周期</p>
+<p>so. 一个指令周期包含多个CPU周期、而一个CPU周期又包含多个时钟周期</p>
+</blockquote>
+<h4 id="建立数据通路"><a href="#建立数据通路" class="headerlink" title="建立数据通路"></a>建立数据通路</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">一般来说、数据通路就是处理器单元、通常有两类元件组成</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 操作元件: 也叫组合逻辑单元、就是ALU、功能就是在特定的输入下、根据下面的组合电路的逻辑、生成特定的输出</span><br><span class="line"><span class="number">2.</span> 存储元件: 也叫状态原件, eg. 计算过程中需要用到的寄存器、无论是通用寄存器还是状态寄存器、其实都是存储原件</span><br><span class="line"></span><br><span class="line">通过数据总线的方式、将操作元件和存储元件连接起来、就可以完成数据的存储、处理和传输了、这就是所谓的建立数据通路</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>控制器: 可以看成只是机械的重复 Fetch -&gt; Decode -&gt; Execute 循环中的前两个步骤、然后将最后一个步骤通过控制器产生的信号、交给ALU去处理</p>
+</blockquote>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">控制器电路听起来很简单、其实特别复杂,</span><br><span class="line"><span class="number">1.</span> 所有CPU支持的指令、都会在控制器里边被解析成不同的输出信号、eg. Intel CPU支持<span class="number">2000</span>个以上的指令、意味着: 控制器输出的控制信号、至少有<span class="number">2000</span>种不同的组合</span><br><span class="line">控制器里的ALU和各种组合逻辑电路、可以认为是一个固定功能的电路、控制器翻译出来的、就是不同的控制信号、这些控制信号、告诉ALU去做不同的计算</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CPU所需要的硬件电路"><a href="#CPU所需要的硬件电路" class="headerlink" title="CPU所需要的硬件电路"></a>CPU所需要的硬件电路</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">要想搭建CPU、需要再数字电路层面、实现一些功能.</span><br><span class="line">一、ALU: 实际就是一个没有状态的、根据输入计算输出结果的一个电路</span><br><span class="line">二、需要一个寄存器<span class="comment">(可进行状态读写的电路元件)</span></span><br><span class="line">   需要一个电路<span class="comment">(可存储上次计算的结果)</span>、这个计算结果不一定立刻能拿到电路的下游使用、但可在需要的时候拿出来使用、常见能够进行状态读写的电路有: 锁存器<span class="comment">(Latch)</span> 和 D触发器<span class="comment">(Data / Delay Flip-flop)</span></span><br><span class="line">三、需要有一个`自动`的电路: 可按照固定的周期、不停地实现呢PC寄存器自增、自动的执行 Fetch-Decode-Execute的步骤</span><br><span class="line">四、需要一个译码电路: 无论是decode还是对于拿到的内存地址去获对应的数据或者指令、都需要通过一个电路找到对应的数据、这个就是译码器电路</span><br><span class="line"></span><br><span class="line">虽然CPU已经是有几十亿个晶体管组成的及其复杂的电路、但 仍然是由一个个的基本功能的电路组成的</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="时序逻辑电路"><a href="#时序逻辑电路" class="headerlink" title="时序逻辑电路"></a>时序逻辑电路</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">解决了以下问题:</span><br><span class="line"><span class="number">1.</span> 自动运行, 时序电路接通后可以不停的开启和关闭开关、进入下一个自动运行的状态、使得控制器不停的让PC寄存器自增读取下一条指令成为可能</span><br><span class="line"><span class="number">2.</span> 存储问题, 通过时序电路实现的触发器、可以把计算结果存储在特定的电路里、而不是像组合逻辑电路、一旦输入变化、对应的输出也会变化</span><br><span class="line"><span class="number">3.</span> 时序协调问题, 无论是程序实现的软件指令还是硬件层面、各种指令的操作都有先后的顺序要求、时序电路使得不同的事件按照时间顺序发生</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="时钟信号的硬件实现"><a href="#时钟信号的硬件实现" class="headerlink" title="时钟信号的硬件实现"></a>时钟信号的硬件实现</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">时钟: CPU的祝您是又一个晶体振荡器实现的、而这个晶体振荡器生成的电路信号、就是时钟信号</span></span><br><span class="line"><span class="section">反馈电路: 将电路的输出信号作为输入信号的电路构造方式、叫做反馈电路</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="通过D触发器实现存储功能"><a href="#通过D触发器实现存储功能" class="headerlink" title="通过D触发器实现存储功能"></a>通过D触发器实现存储功能</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">将R和S两个信号通过一个反相器合并、可以通过一个数据信号D进行Q的写入操作</span><br><span class="line"></span><br><span class="line">只要CLK信号是<span class="number">1</span>、R和S就可以设置输出Q、而当CLK信号是<span class="number">0</span>的时候、无论R和S怎么设置、输出信号Q是不变的、这样、整个电路就成了我们最常用的D型触发器、用来控制R和S这两个开关的信号、可以视为一个输入的数据信号D、也就是Data、这就是D型触发器的由来</span><br><span class="line"></span><br><span class="line">一个D型触发器、只能控制<span class="number">1</span>bit的读写、若同时拿出多个D型触发器并列在一起、并且把用同一个CLK信号控制作为所有D型触发器的开关、就变成了一个N位的D型触发器、可以同时控制N位的读写</span><br><span class="line"></span><br><span class="line">CPU中的寄存器可以直接通过D型触发器来构造、可以在D触发器的基础上、加上更多的开关、来实现清<span class="number">0</span>或者全置位这样的操作</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="PC寄存器所需要的计数器"><a href="#PC寄存器所需要的计数器" class="headerlink" title="PC寄存器所需要的计数器"></a>PC寄存器所需要的计数器</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PC寄存器还有个名字叫程序计数器、为什么呢 ?</span><br><span class="line">有了时钟信号、可以提供定时的输入、有了D型触发器、可以在时钟信号控制的时间点写入数据、将这两个功能组合起来、就可以实现一个自动的计数器了</span><br><span class="line"></span><br><span class="line">加法器的两个输入、一个始终设置为<span class="number">1</span>、另外一个个来自于一个D型触发器A、将加法器的输出结果、写到这个D触发器的A里边、于是 D型触发器里边的数据就会在固定的时钟信号为<span class="number">1</span>的时候更新一次</span><br><span class="line"></span><br><span class="line">加法计数、内存取值、乃至后边的命令执行、最终其实都是由时钟信号来控制执行时间点和先后顺序的、这也是需要时序电路最核心的原因</span><br><span class="line"></span><br><span class="line">在最简单的情况下、需要让每一条指令、从程序计数器、到获取指令、执行指令、都在一个时钟周期内完成、若PC计数器增长太快、程序就会出错, 因为此时前一次运算的结果还没写回对应的寄存器</span><br><span class="line">在这种情况下、需要在一个时钟周期里、确保执行完成一条最复杂的<span class="meta">CPU</span>指令、即: 耗时最长的一条<span class="meta">CPU</span>指令、这样的<span class="meta">CPU</span>设计、称为 单指令周期处理器</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="读写数据所需要的译码器"><a href="#读写数据所需要的译码器" class="headerlink" title="读写数据所需要的译码器"></a>读写数据所需要的译码器</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">现在数据可以存储在D触发器里了、若将多个D触发器放在一起、就可以形成很大的一块存储空间、甚至可以当成一块内存来使用、</span><br><span class="line">eg. 现在的电脑内存可能有<span class="number">8</span>G、<span class="number">16</span>G、那么怎么才能知道写入和读取的数据是这块大的内存里、哪几个bit呢 ?</span><br><span class="line">于是: 我们需要一个电路来完成寻址的工作、就是 译码器</span><br><span class="line">将寻址退化到最简单的模型、就是两个地址中选择一个、称为 <span class="number">2</span><span class="number">-1</span>选择器、</span><br><span class="line">若输入的信号有三个不同的开关、就可以从 <span class="number">2</span>³=<span class="number">8</span>中选择一个地址了、即<span class="number">3</span><span class="number">-8</span>译码器</span><br><span class="line">现代计算机是<span class="number">64</span>位的、寻址空间是<span class="number">2</span>的<span class="number">64</span>次方、需要一个有<span class="number">64</span>个开关的译码器</span><br><span class="line"></span><br><span class="line">所以: 译码器的本质、就是从输出的多个位的信号中、根据一定的开关和电路组合、选择自己想要的信号、除了可以寻址、还可以将对应的需要运行的指令码同样通过译码器、找出我们期望执行的指令、也就是opcode及后边对应的操作数或者寄存器地址</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>因为从内存取指令的时间很长、若使用单指令周期处理器、意味着我们的指令都要去等待一些慢速操作、这些不同指令执行速度的差异、也正是计算机指令有指令周期、CPU周期和时钟周期之分的原因、因此, 优化现代CPU性能时、用的CPU都不是单指令周期处理器、而是通过流水线、分支预测等技术、来实现在一个周期里同时执行多个指令</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E5%86%8D%E5%BF%86%E9%99%88%E6%83%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E5%86%8D%E5%BF%86%E9%99%88%E6%83%85/" class="post-title-link" itemprop="url">再忆陈情</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E5%86%8D%E5%BF%86%E9%99%88%E6%83%85/" class="post-meta-item leancloud_visitors" data-flag-title="再忆陈情" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E5%86%8D%E5%BF%86%E9%99%88%E6%83%85/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E5%86%8D%E5%BF%86%E9%99%88%E6%83%85/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>年关、慵懒极了、想看看电视剧、读读小说、结束一年的忙忙碌碌.<br>看了庆余年、看评论提到了 <a href="https://v.qq.com/detail/v/vbb35hm6m6da1wc.html" target="_blank" rel="noopener"><strong>陈情令</strong></a>、初播便得到很多好评的一部电视剧, 彼时未得闲暇、未曾顾及, 此时看到、不免心生欢喜. </p>
+</blockquote>
+<pre><code>回忆开头、未懂, 不明所以, 剧情渐入回忆, 我渐渐沉迷...
+想以人物为主线、理理自己的思绪、乱七八糟、若不慎入眼、看看且过即可...
+
+绵绵: 善良正直真性情的小女孩、也算是剧中最幸福的一个, 地位不高、
+      首次出现在与金子轩一起去云深不知处听学时、那时结识魏无羡. 
+      后在被温氏要挟、去不夜天听训时、被魏婴救过(挡下烙铁). 
+      射日之征后, 魏婴被诬陷、绵绵挺身而出、直言 魏婴不是这样的人, 遂脱离金家氏族. 
+      最后一场戏是魏婴、蓝忘机再次去乱葬岗时路过山野小屋、竟是绵绵与丈夫、还有一个乖巧的女儿、
+      也叫绵绵, 只怕是绵绵无尽的思念也未可知~
+      结局也算美好、在告别金家氏族、告别蓝忘机之后、远离了`正义`, 活成了自己喜欢的样子.
+      戏份不多、确是活的最洒脱的女子.
+
+薛洋: 作恶多端、却无法相恨, 他坏、但坏的明明白白, 恨不起来大概是因为他受过的那许多的苦.
+      从小遭受了太多世界的冰冷、从未感受过暖、世界不曾教过他、又缘何怪他不懂 ？晓星尘给他点滴的爱、
+      他就把晓星尘放在心头, 若他成长的道路上有阳光、他何尝不会是一个好孩子 ？ 
+      或许有很多朋友愿意说、魏婴也遭受了很多打击与诬陷, 区别就在于所有的遭遇处于人生哪个阶段罢了.
+      三观构建完成、就有了判断力、忍耐力、有了思考. 偏偏薛洋在人生最关键的时候遭受的都是冰冷, 
+      从未有一米阳光, 对这个很坏的孩子更多的是同情吧、愿下一世、有阳光普照、有温暖与美好、
+      带着你的聪慧、做个阳光明媚的孩子、一如你喜欢的晓星尘...
+
+晓星尘、宋岚: 明月清风晓星尘，傲雪凌霜宋子琛, 开场被他们深深吸引、可惜戏份不多, 再出现已难回首...
+     愿悲情的你们、下一世真正的活成明月清风. 也愿彼此间多一些信任， 就如 蓝湛和魏婴 ~
+
+魏婴: 魏无羡 (夷陵老祖)、年少时经过几年流离生活、后被江枫眠带回江家、收为弟子、初始、
+      江澄不喜欢他、但孩童总是天真、很快就成为好友、又有阿姐的悉心照料, 生活也算幸福、自身天赋极高、
+      很快成为同辈里的佼佼者、排名仅在姑苏双壁之下, 修为极高、性格跳脱、善良随性、师姐的话就是
+      `阿羡大事从不胡闹`, 佩剑取名`随意`、可见一般、活脱脱已调皮任性的小公子、但为人极善良、
+      很多细节、他应该是将师姐看作母亲一般、在她面前任性、一副小孩子的模样、惹得江澄嫉妒, 
+      后在云深不知处结识蓝二公子、调侃他`披麻戴孝`、偏生又爱挑逗他、此后接下不解之缘, 后在玄武洞
+      救下绵绵、还惹得蓝二公子一身醋意, 身受重伤的他、挑逗忘玑、他要听歌、忘玑创作 `忘羡`, 
+      随后温氏不满、欲灭江氏一族、为救江澄、舍弃自身金丹, 后被丢入乱葬岗、创造阴虎符. 
+      射日后、力保温情族人、与众人为敌; 后与温氏族人一起在乱葬岗生活了一段时间, 也就是在此时、
+      温宁开始对他不离不弃. 后金子轩惨死、温宁温情姐弟不忍拖累他、然后去自首、被挫骨扬灰(后证实宁未死)、
+      接近崩溃的魏婴孤身来到不夜天与众人对峙, 师姐又为挡剑而死、当场崩溃、心如死灰
+      十六年后、魏婴重生、亦是蓝湛的重生, 那个问灵十三载的少年郎...
+      后师姐问及笛子叫何名字、遂取`陈情`, 且不乱猜、各人心想吧; 从`随意`到`陈情`, 承载了多少苦难？
+      还好本心善良的魏婴和蓝湛一起重生、蓝湛将内心疮痍的`夷陵老祖`又养成了一个`小可爱`, 
+      会撒娇、会调侃、会躲在身后~~~. 他知道蓝湛哥哥一定会护他周全...
+      愿来生、还是那个偏偏白衣少年郎~~~
+
+江澄: 江晚吟, 背负太多家族使命, 性格里有很多怯懦、也有许多坚强、从小被魏婴的光环笼罩、
+       内心好强、想要胜过魏婴、却处处比不过、但也是从心底里心疼魏婴, 在乱葬岗为了家族、
+      一剑刺在乱石上、这一剑、又何尝不是救了魏婴 ？ 若不是他、必是别人、那时候怕刺的不再是石头...
+      莲花坞被侵占时、身心俱碎、发现外出为姐姐买药的魏婴将要被温氏发现时、挺身而出、
+      让自己成为目标, 后被化丹手化去金丹, 一心好强的他、痛不欲生 ...
+      这些何尝不是坚强？何尝不是关爱？有时对魏婴的挑剔怕是来源于亲昵的任性、心底的依赖...
+      在穷奇道、魏婴就走温清族人、在乱葬岗下、魏婴带着温情族人一起生活、他气愤, 又怎么不是
+      来自于想要被魏婴保护的渴望 ？ 姐姐虽对他们万般宠爱、终究帮不了太多、一个十几岁的孩子
+      突然成为偌大的江氏家主、心中不免惶恐, 重建莲花坞、保护家族的重任就落在了他的肩上、
+      注定不能成为魏婴一般潇潇洒洒的人....
+      十六年后、与魏婴重聚、他生气、为何不先来找他、也是源自心底那份情吧？ 有些话说得不合适、
+      但难掩心中的善、不是如同魏婴那般孤注一掷的善、彻彻底底的善、因为背负了太多的使命吧.....
+      愿你来生、只做个任性的小公子、哎、你又这么好强、该如何是好？
+
+江厌离: 暖情小姐姐、若得此姐、此生足矣. 在虞紫鸢强势的性格下居然能长出如此温婉的性格、着实不易、
+       从小就保护阿羡、阿澄, 给他们煲汤、调节他们的不愉快. 无论是师姐的身份还是姐姐的身份, 
+       他都是合格的、江澄和魏婴对她也都是依赖的, 在去往云深不知处时、偶遇未来夫婿金子轩, 
+       开始喜欢他, 但此时子轩并不喜欢厌离、一番波折、总算是相互欢喜, 不料、在孩子满月酒宴时, 
+       由于金光瑶捣乱、苏涉乱吹笛、导致温宁失控、误杀金子轩. 暖心的姐姐并没有恨魏婴、她相信他
+       是发自心底的信任, 一刻也不曾动摇. 在她心里、羡羡和阿澄是最好的弟弟. 有次夜猎、
+       魏婴被金家人侮辱`家仆之子`, 厌离挺身而出、一改柔弱、说`他是我弟弟、不是外人`, 要求对方道歉. 
+       愿来生, 所爱之人携手白头、疼爱的弟弟膝下承欢, 愿小小心愿都能称心如意...
+
+蓝湛: 蓝忘机, 含光君, 也是剧中称呼最多的一个(都是羡羡给的~~~), 有很多坎坷、也有很多甜美、
+      雅正端方、严于律己、逢乱必出...
+      遇到魏婴之前、清冷如冰, 遇见之后慢慢的因为知己、后深不可离...
+      从最初的高傲冰冷变得调皮、玄武洞内调侃魏婴的情节、大概暖到了很多人. 魏婴帮他包扎伤口、
+      上凝血草时、他突然抓住魏婴的手、将凝血草敷在了救绵绵时留下的烫伤上、顺便来了一句: 不用谢、哈哈~
+      羡羡救绵绵、恐怕含光君还吃了一潭子醋、正经答道 `你要是没那个意思、不要随便撩拨别人`
+      没忍住笑喷了, 含光君居然会这么可爱~, 一本正经的可爱这么好玩儿~~~
+      他们也经历了很多的磨难、玄武洞、不夜城、穷奇道、乱葬岗...
+      心一点点的被揪着, 不敢放松. 
+      魏婴出事后、第一次违反家规、被罚3年禁闭、出来之后、无时不在寻找. 问灵十三载、等一不归人
+      大部分剧友都觉得刻骨难忘吧 ？待到被问时、只轻轻一句、我有悔, 不夜天没有和你站在一起. 
+      十六年里、受过魏无羡受的伤, 喝过魏无羡喝过的酒, 种魏无羡种过的思追, 气魏无羡气过的蓝启仁, 
+      违反过魏无羡违反的家规, 将阿苑带回云深不知处、取字思追(思君不可追), 将思追养成了魏无羡、
+      一样善良肆意洒脱、敢于做自己, 一样的善良热血、将破魔咒珍藏了16年.
+      十六年后、魏婴复生、成为魏婴最真切的守护神、凭借`忘羡` 立即认出魏婴、此后对魏婴可谓无微不至的
+      关怀、不允许别人对他丝毫的伤害、魏婴怕狗、躲在忘玑身后的情节也是温暖了很多剧友~~~, 
+      醉酒抓鸡的情节也是深入人心. 魏婴被欺负时、他对哥哥说、我想带一人回云深不知处、藏起来..., 
+     被人戏称`护妻狂魔`,^.^~
+      愿来生, 温润如玉、有母爱陪伴、多些笑容、早遇知己, 愿给你所有的美好
+
+
+蓝涣: 蓝曦臣, 泽芜君. 与弟弟含光君一起并称`姑苏双壁`, 清煦温雅、永远都是那么善良、那么温柔、理智
+      修为极高、从不欺负弱小、若他称谦谦公子第二、怕是没人敢居第一吧？整部剧除了两个情节失态、
+      一直是温润如玉、长者之风、十分疼爱弟弟忘玑、初见魏婴、觉得适合做弟弟的朋友、便各种暗示
+      可以猜透忘玑心中所想, 魏婴身死魂消后、一直陪伴在侧. 道出忘玑身上戒鞭痕来历、
+      又在云梦观音庙吐露忘玑对魏婴的13年苦守、促使二人心意相通
+      一直拿金光瑶当成最好的朋友、聂明玦和金光瑶关系不和、他居中调节、魏婴回归后、发现金光瑶
+      所做的事情、他不愿相信、对忘玑说: 你相信魏婴、我相信阿瑶、他是你的知己、阿瑶也是我的知己(非原话). 
+      又将随意出入云深不知处的令牌给金光瑶, 可见信任非同一般. 可惜、金光瑶却真实的死在了他手上、
+      恐怕心中的痛无人能晓吧 ？愿有人将你温暖、替你扛下一些使命...
+      之前温氏毁掉云深不知处、打伤他最疼爱的弟弟、害他狼狈出逃、在清缴温氏时、
+      他依然冷静的将温情与温家分开、仗义执言、不迁怒于人、难能可贵.
+      借言百度百科:
+      1. 蓝曦臣沉吟道：&quot;这位温情的大名我知晓几分，似乎没听说她参与过射日之征中任何一场凶案的。&quot;
+      聂明玦道：&quot;可她也没有阻拦过. &quot;
+      蓝曦臣道：&quot;温情是温若寒的亲信之一，如何能阻拦？&quot;
+      2. 聂明玦道：&quot;英魂长存&quot; 蓝曦臣道：&quot;愿安息. &quot;
+      他的心底相信魏婴做的不算冤枉吧？只是敌人、仇人死了、他依然愿意安静的道一声&quot;愿安息&quot;.
+      来生、愿你仍为翩翩君子、温润如玉、愿你有属于自己的幸福、有人疼、有人爱、不用一人担尽天下心.
+
+蓝思追: 阿苑, 从小漂泊、经历不夜城被毁、同族人一起经历不幸、后被魏婴救出、带领他们生活在乱葬岗下.
+    还好、余生皆是暖情. 小小年纪、还不知凄苦悲凉、有族人陪伴、魏婴逗玩、在乱葬岗依然生活的快乐、
+    被魏婴当成萝卜种在地里的情节好暖心, 后被蓝二哥哥效仿羡羡当成小兔子种、哈哈哈、好温暖~~~
+    小时候称蓝二哥哥有钱哥哥、喜欢抱大腿儿(~.~), 魏婴出事后、被蓝二哥哥悄悄收养、改名 蓝苑、字思追. 
+    在蓝湛的培养下、变成一个谦谦君子、又糅合了魏婴的灵动、善良、恣意洒脱、挺招人喜欢的, 初见鬼将军很怕、
+    但不让人伤害他, 初见十六年后的魏婴、不让别人欺负他、善良的孩子~~~
+    愿来生、满满的岁月静好 ....
+
+温晁: 温若寒小公子, 嚣张跋扈、高傲自大、行径恶劣. 喜欢显摆、因为不满江家不服从温家的指令，
+      所以找了个借口把江家灭门。魏无羡和江澄虽然有幸逃过一命，但是江澄的金丹被温逐流炼化，
+      彻底丢失了灵力。而魏无羡在把金丹给了江澄后，被温晁丢进乱葬岗里
+      剧中、我真心找不到他的一点儿善良...
+      就算在最后、都还在斥责温逐流、彻彻底底很可恶的一个人, 愿来生、学会善良、读懂温暖...
+
+温情: 岐山温氏人、一个旁支、高傲能干的妙手神医, 内心善良. 倾尽全力的保护族人、保护弟弟, 
+     不夜天听训时、被温若寒恐吓、为了弟弟安危、告诉弟弟不要乱跑、不要和魏婴混在一起,  自己却逮着机会就帮助魏婴,
+     后莲花坞被温氏侵占、江枫眠和虞紫鸢被害、收留江家姐弟并为他们疗伤, 又帮助魏婴实现换丹. 
+     最悲情的角色、天性善良、不作恶、却是剧中唯一被挫骨扬灰的一个...
+     来生、愿安好、与自己的族人过着静美的小日子 ~~~
+
+温宁: 暖心的小天使、从小被抽去一部分灵识、显得呆呆傻傻, 因魏婴在云深不知处赏识、
+      内心孤僻的温宁从此感恩、在不夜城救过魏婴、在莲花坞被毁时帮过魏婴, 射日后、魏婴在穷奇道救下
+      温宁及其族人、后成为`鬼将军`(傀儡)但保留了意识、功力大增、听魏婴吹笛杀人、后被金光瑶控制
+      十六年后重逢与魏婴重逢、拔出他头部的铁钉、更加只听魏婴一个人的、称他为`公子`. 
+      整部剧一直感觉他是一个温暖的小天使, 呆萌可爱 ...
+      愿来生, 他可以生的美好、做一个暖情的小公子, 弥补此生的孤独.
+      愿来生只做白衣少年温琼林...
+
+金子轩: 金家公子、为人高傲、但心底善良、敢于追求内心的爱、人物着墨不多. 来生, 愿幸福~~~
+
+金光瑶: 人物性格比较复杂、表面温和、内心阴暗、但真心帮助蓝曦臣. 剧里做了很多坏事、最终也只是
+        为他人做嫁衣、母亲虽为艺伎、不多的着笔、却让人难忘、是一个温和、知书识礼的好母亲
+       后来利用蓝曦臣(清心音)设计杀害聂明玦、并做成凶尸. 为了得到秦仓业支持、娶同父异母
+       妹妹秦愫、又为免受非议、杀死亲生子金如松. 为了夺取金家地位、杀死父亲金光善. 与薛洋一般、
+       是一个缺少温暖的孩子、内心有太多的恨与恶、千般不该、设计杀死聂明玦、那个曾经给他支持、
+       拿他当亲兄弟对待的人. 就算知道他放走薛洋、也只是把他赶出去、并未伤害他、这样的人都伤害、
+       心中有个无法原谅的坎儿....
+       来生、愿其母觅得良人、给他一个温暖的家, 愿多些温暖、少些心中阴霾. 
+
+聂怀桑: 初时、同魏婴一般、算是志趣相投. 修为不高、成为家主之后被称为: 三不知、然而看似柔弱无害
+       的他, 确是藏的最深的一个、剧中有很多伏笔, 比如: 十六年后说书人说到夷陵老祖时的回头一看
+       大梵山假的舞天女重生
+       温家墓前的扫墓老丈其实是聂怀桑...
+       从魏婴十六年后重生到后续的情节、由他一人策划、只为复兄仇, 算不
+       得坏、不是大奸大恶之人、亦无泽芜君的容人之量、终究是被内心的情感左右、算不得对、算不得错、
+       好在、此后任逍遥~~~, 也没什么野心、亦真心喜欢和魏婴做朋友.
+       来生、愿有哥哥一生庇佑、只做恣意山水的快活少年.</code></pre><p>好多情节、令人禁不住落泪、或是真情流露、或是温暖荡漾、或者是悲情感慨, 人物是复杂的、性格是综合的、确也更符合现实的人性吧. 世上人心终是横看成火、侧看成冰. 本着不讨论的原则写文、可能还是注入了不少自己的感情、魏婴和蓝湛的爱情也实在太感人了耶、^*^ 、闲来无事可以看看<del>~</del></p>
+<p>附图册:<br><img src="https://upload-images.jianshu.io/upload_images/14027542-820ea7d77fee68d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="绵绵.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-a8df6e357a7eed1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="温情.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-4c78adb0ad0aa9b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="江厌离..png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-9e2a3cd49e1d6dec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="羡羡和忘玑.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4a13722b0f5c8922.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="羡羡和忘玑.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-27e948953c0e8834.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="羡羡和忘玑.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-9f673870dbd02b47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="蓝曦臣.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-805db79586c26cc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="魏婴和聂怀桑.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-04623bbab6fc3eda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="晓星尘.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/19/mq_mq%E9%80%89%E6%8B%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/19/mq_mq%E9%80%89%E6%8B%A9/" class="post-title-link" itemprop="url">mq选择</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-19 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-19T00:00:00+08:00">2020-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/19/mq_mq%E9%80%89%E6%8B%A9/" class="post-meta-item leancloud_visitors" data-flag-title="mq选择" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/19/mq_mq%E9%80%89%E6%8B%A9/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/19/mq_mq%E9%80%89%E6%8B%A9/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="基本标准"><a href="#基本标准" class="headerlink" title="基本标准"></a>基本标准</h4><ol>
+<li>开源:  遇到有问题的bug可以通过修改源码的方式来修复或者规避、而不是只能等待下一个官方版本发版来修复</li>
+<li>产品社区有一定活跃度: 遇到问题的时候、可以快速找到类似场景、快速修复, 相比于每一个bug都需要自己通过阅读源码来解决、毕竟线上问题挂着的的成本很高<br>社区活跃度较高的产品、与周边应用的兼容性也会比较好、省去很多造轮子的时间</li>
+<li>性能要求:<br> 1) 确保消息可靠传递、不丢失消息<br> 2) 支持集群、确保某个节点宕掉不会影响整个服务<br> 3) 性能、能满足大部分实际需求场景的需要</li>
+</ol>
+<h4 id="目前可选方案"><a href="#目前可选方案" class="headerlink" title="目前可选方案"></a>目前可选方案</h4><h5 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h5><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">源码实现 : Erlang</span><br><span class="line">特点: 轻量级、性能好、方便部署和使用、维护简单</span><br><span class="line">         支持灵活的路由配置、相对其它MQ、在Producer和Queue之间增加Exchange模块、可根据配置规则将生产者发出的Msg发送到不同队列</span><br><span class="line">         Client支持多种语言</span><br><span class="line"></span><br><span class="line">短处: </span><br><span class="line"><span class="number">1.</span> 消息堆积处理支持不好、消息大量堆积时会导致MQ的性能急速下降</span><br><span class="line"><span class="number">2.</span> 处理消息的性能比较一般、根据硬件配置不同、每秒大概可以处理的消息数量为: 几w ~ 十几w</span><br><span class="line"><span class="number">3.</span> 源码语言为Erlang、比较小众、扩展开发成本增加</span><br></pre></td></tr></table></figure>
+
+<h5 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2012年阿里开源出来的产品、17年交给apache维护</span><br><span class="line"><span class="section">源码: Java</span></span><br><span class="line"><span class="section">性能: 稳定性、可靠性和性能都不错、对响应延迟也做了优化、大多数情况可以做到ms级的响应、每秒可处理消息 几十万(性能比RabbitMQ高一个数量级)</span></span><br><span class="line"></span><br><span class="line"><span class="section">短处: 相比国外同类产品、与周边生态系统的集成度和兼容性稍低</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">最初设计是为了处理海量日志、早期版本不保证消息可靠性、也不支持集群、但对于处理海量日志这个诉求是比较好的选择</span><br><span class="line"></span><br><span class="line">近期版本、在数据可靠性、稳定性和功能特性上都可以满足大多数的场景需求</span><br><span class="line"></span><br><span class="line"><span class="section">源码实现: Java + Scala</span></span><br><span class="line"><span class="section">优势:</span></span><br><span class="line">1. 与周边生态系统的兼容性最好、尤其是大数据和流计算领域、几乎所有相关开源软件都优先支持Kafka</span><br><span class="line">2.  异步收发性能最好、在服务器配置高时、极限情况每秒可处理2000w消息</span><br><span class="line"></span><br><span class="line"><span class="section">短处:</span></span><br><span class="line"><span class="section">异步批量处理带来的问题是: 同步收发响应延时较高、它是攒一批然后批量发送、每秒消息数没那么高的时候、kafka的延时反而会高、</span></span><br><span class="line"></span><br><span class="line">不适合在线业务场景</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二梯队mq"><a href="#第二梯队mq" class="headerlink" title="第二梯队mq"></a>第二梯队mq</h4><h5 id="ZeroMQ"><a href="#ZeroMQ" class="headerlink" title="ZeroMQ"></a>ZeroMQ</h5><p>严格来说不能算是消息队列、而是一个基于消息队列的多线程网络库<br>如果需求是将消息队列的功能集成到系统进程中、可以考虑ZeroMQ</p>
+<h5 id="ActiveMQ"><a href="#ActiveMQ" class="headerlink" title="ActiveMQ"></a>ActiveMQ</h5><p>社区已经不活跃、进入了老年期</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/tools_hexo_use/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/18/tools_hexo_use/" class="post-title-link" itemprop="url">使用 hexo 框架搭建网站</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-18 14:53:42" itemprop="dateCreated datePublished" datetime="2020-03-18T14:53:42+08:00">2020-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 21:58:49" itemprop="dateModified" datetime="2020-04-28T21:58:49+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/18/tools_hexo_use/" class="post-meta-item leancloud_visitors" data-flag-title="使用 hexo 框架搭建网站" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/18/tools_hexo_use/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/18/tools_hexo_use/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="使用-hexo-框架搭建网站"><a href="#使用-hexo-框架搭建网站" class="headerlink" title="使用 hexo 框架搭建网站"></a>使用 hexo 框架搭建网站</h4><h5 id="先搭建基础环境"><a href="#先搭建基础环境" class="headerlink" title="先搭建基础环境"></a>先搭建基础环境</h5>   <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install <span class="keyword">node</span> <span class="title">// 安装node</span></span><br><span class="line"><span class="keyword">node</span> <span class="title">-v</span> // 检查npm是否安装成功</span><br><span class="line">npm -v // 查看npm版本</span><br></pre></td></tr></table></figure>
+<h5 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h5>   <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-<span class="keyword">cli</span>-<span class="keyword">g</span> <span class="comment">// 安装hexo</span></span><br><span class="line">hexo init xxx <span class="comment">// 初始化hexo站点目录</span></span><br><span class="line"><span class="keyword">cd</span> xxx <span class="comment">// 进入目录</span></span><br><span class="line">hexo clean</span><br><span class="line">hexo <span class="keyword">g</span> <span class="comment">// 生成站点, g -&gt; generate</span></span><br><span class="line">hexo s <span class="comment">// 运行网站, s -&gt; server</span></span><br></pre></td></tr></table></figure>
+<p>   此时、本地网站已经搭建完成, 访问 <code>localhost:4000</code> 即可.</p>
+<h5 id="配置文件-config-yml"><a href="#配置文件-config-yml" class="headerlink" title="配置文件 _config.yml"></a>配置文件 <code>_config.yml</code></h5>   <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">title:</span> 牛牛的Blog</span><br><span class="line"><span class="string">subtitle:</span> 不奢望岁月静好 只希望点滴积累</span><br><span class="line"><span class="string">description:</span> <span class="string">'多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣'</span></span><br><span class="line"><span class="string">keywords:</span> Java, Mysql, Linux</span><br><span class="line"><span class="string">author:</span> niuniu</span><br><span class="line"><span class="string">language:</span> zh</span><br><span class="line"><span class="string">timezone:</span> <span class="string">''</span></span><br><span class="line"><span class="string">theme:</span> next <span class="comment">// 定义主题</span></span><br></pre></td></tr></table></figure>
+<h5 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h5>   <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">下载: https:<span class="regexp">//</span>hexo.io<span class="regexp">/themes/</span> </span><br><span class="line">theme: <span class="keyword">next</span> <span class="regexp">//</span> 定义主题 _config.yml</span><br><span class="line">hexo g <span class="regexp">//</span> 重新生成站点</span><br><span class="line">hexo s <span class="regexp">//</span> 重新运行站点</span><br></pre></td></tr></table></figure>
+<h5 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h5>   <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new file-name (file-name是你的文章名, 也可以直接在 spurce/_post 文件夹下新建md文件)</span><br><span class="line">hexo new<span class="built_in"> page </span>tags</span><br></pre></td></tr></table></figure>
+<p>   打开 source/tags/index.md、修改为:<br>   <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">type:</span> <span class="string">"tags"</span></span><br><span class="line"><span class="symbol">comments:</span> flase</span><br></pre></td></tr></table></figure></p>
+   <figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="type">page</span> categories <span class="comment">// 打开分类功能</span></span><br></pre></td></tr></table></figure>
+<p>   打开 <code>source/categories/index.md</code>、修改为:<br>   <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">type:</span> <span class="string">categories</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<p>   使用:<br>   <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> 在文章头部添加</span><br><span class="line"> tags:</span><br><span class="line"><span class="bullet">   - </span>tag1</span><br><span class="line"><span class="bullet">- </span>tag2</span><br><span class="line"><span class="bullet">- </span>tag3</span><br><span class="line"> categories:</span><br><span class="line"><span class="bullet">   - </span>cat1</span><br><span class="line"><span class="bullet">- </span>cat2</span><br></pre></td></tr></table></figure></p>
+<h5 id="修改hexo侧边栏标签"><a href="#修改hexo侧边栏标签" class="headerlink" title="修改hexo侧边栏标签"></a>修改hexo侧边栏标签</h5>  <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">menu:</span></span><br><span class="line"><span class="symbol">home:</span> / || home</span><br><span class="line"><span class="symbol">about:</span> <span class="meta-keyword">/about/</span> || user</span><br><span class="line"><span class="symbol">tags:</span> <span class="meta-keyword">/tags/</span> || tags</span><br><span class="line"><span class="symbol">categories:</span> <span class="meta-keyword">/categories/</span> || th</span><br><span class="line"><span class="symbol">archives:</span> <span class="meta-keyword">/archives/</span> || archive</span><br><span class="line"><span class="symbol">MySQL:</span> <span class="meta-keyword">/categories/</span>MySQL || database</span><br><span class="line"><span class="symbol">Redis:</span> <span class="meta-keyword">/categories/</span>Redis || database</span><br><span class="line"><span class="meta">#schedule: /schedule/ || calendar</span></span><br><span class="line"><span class="meta">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line"><span class="meta">#commonweal: /404/ || heartbeat</span></span><br></pre></td></tr></table></figure>
+<p>   注意: <code>:</code>前边展示的是侧边栏显示名称<br>         <code>/xxx/</code> 展示的是分类名称<br>         <code>||</code> 后边是图标<br>         图标从 <a href="https://fontawesome.com/icons?d=gallery&m=free" target="_blank" rel="noopener">fontawesome.com</a> 获取</p>
+<h5 id="将链接修改为蓝色"><a href="#将链接修改为蓝色" class="headerlink" title="将链接修改为蓝色"></a>将链接修改为蓝色</h5><p>打开<code>themes/next/source/css/_common/components/post/post.styl</code> 文件, 将下面的代码复制到文件最后</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.post-body</span> <span class="selector-tag">p</span> <span class="selector-tag">a</span>&#123;</span><br><span class="line">     <span class="attribute">color</span>: <span class="number">#0593d3</span>;</span><br><span class="line">     <span class="attribute">border-bottom</span>: none;</span><br><span class="line">     &amp;:hover &#123;</span><br><span class="line">       <span class="selector-tag">color</span>: <span class="selector-id">#0477ab</span>;</span><br><span class="line">       <span class="selector-tag">text-decoration</span>: <span class="selector-tag">underline</span>;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改代码块样式"><a href="#修改代码块样式" class="headerlink" title="修改代码块样式"></a>修改代码块样式</h5><p>打开 <code>themes/next/_config.yml</code>, 搜索 <code>custom_file_path</code>, 去掉 <code>style</code> 前边的注释, 然后新建或者打开 <code>{blog_root}/source/_date/styles.styl</code> 文件 </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">code</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#D1082D</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#E8E5E6</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2px</span>;</span><br><span class="line">   // font-size: 14px; // 设置你的字体大小</span><br><span class="line">   // font-family: Source Corde Pro; // 设置你喜欢的字体</span><br><span class="line">&#125;</span><br><span class="line">// 大代码块的自定义样式</span><br><span class="line"><span class="selector-class">.highlight</span>, <span class="selector-tag">pre</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.highlight</span>, <span class="selector-tag">code</span>, <span class="selector-tag">pre</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#d6d6d6</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用valine评论系统"><a href="#使用valine评论系统" class="headerlink" title="使用valine评论系统"></a>使用valine评论系统</h4><p>新版本的 <a href="https://valine.js.org/" target="_blank" rel="noopener">https://valine.js.org/</a> 支持npm安装</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install leancloud's js-sdk</span></span><br><span class="line">npm <span class="keyword">install</span> leancloud-<span class="keyword">storage</span> <span class="comment">--save</span></span><br><span class="line"><span class="comment"># Install valine</span></span><br><span class="line">npm <span class="keyword">install</span> valine <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+
+<p>新的版本next主题已经默认支持, 需要注册leanCloud账号 <a href="https://leancloud.cn/" target="_blank" rel="noopener">https://leancloud.cn/</a>， 获取<code>appId</code>和<code>appKey</code>, 然后修改配置文件 <code>**themes/hexo-theme-next/_config.yml**</code>, 搜索 <code>valine</code>, 修改配置项:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Valine.</span></span><br><span class="line"><span class="comment"># You can get your appid and appkey from https://leancloud.cn</span></span><br><span class="line"><span class="comment"># more info please open https://valine.js.org</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">appid:</span>  <span class="comment"># your leancloud application appid</span></span><br><span class="line">  <span class="attr">appkey:</span>  <span class="comment"># your leancloud application appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier , https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br></pre></td></tr></table></figure>
+
+<p>将 <code>enable</code> 改为 <code>true</code>, 将刚刚申请的 <code>appId</code> 和 <code>appKey</code> 填入,</p>
+<p>leancloud appId申请请参考: <a href="https://valine.js.org/quickstart.html" target="_blank" rel="noopener">https://valine.js.org/quickstart.html</a></p>
+<h5 id="评论头像显示"><a href="#评论头像显示" class="headerlink" title="评论头像显示"></a>评论头像显示</h5><ol>
+<li><p>注册 <a href="http://cn.gravatar.com/" target="_blank" rel="noopener">gravatar</a>, valine 默认使用 gravatar的头像管理</p>
+</li>
+<li><p>进行评论, 注意要在评论时填写自己注册后绑定的邮箱、才会显示头像</p>
+<p>如下图所示</p>
+</li>
+</ol>
+<p><img src="/images/image-20200322112148688.png" alt="image-20200322112148688"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/tools_multi_terminal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/18/tools_multi_terminal/" class="post-title-link" itemprop="url">如何同时登陆两个github账号</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-18 14:53:42" itemprop="dateCreated datePublished" datetime="2020-03-18T14:53:42+08:00">2020-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-22 11:40:18" itemprop="dateModified" datetime="2020-03-22T11:40:18+08:00">2020-03-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/18/tools_multi_terminal/" class="post-meta-item leancloud_visitors" data-flag-title="如何同时登陆两个github账号" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/18/tools_multi_terminal/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/18/tools_multi_terminal/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="生成一个新的ssh-key"><a href="#生成一个新的ssh-key" class="headerlink" title="生成一个新的ssh key"></a>生成一个新的ssh key</h4><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">nj:~ nj$ cd ~/.ssh</span><br><span class="line">nj:.ssh nj$ ls</span><br><span class="line">id_rsa        id_rsa.pub  known_hosts</span><br><span class="line">nj:.ssh nj$ ssh-keygen -t rsa -C <span class="string">"iMac_personnal_publicKey"</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/nj/.ssh/id_rsa):               </span><br><span class="line">/Users/nj/.ssh/id_rsa_personal</span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /Users/nj/.ssh/id_rsa_personal.</span><br><span class="line">Your public key has been saved in /Users/nj/.ssh/id_rsa_personal.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:1gepuxDHwJRnFbKvc0Zq/NGrFGE9kEXS06jxatPPrSQ iMac_personnal_publicKey</span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|<span class="string">      ....=*oo   </span>|</span><br><span class="line">|<span class="string">     o. ooo=+ .  </span>|</span><br><span class="line">|<span class="string">      oo. =+o.   </span>|</span><br><span class="line">|<span class="string">       o =.o..   </span>|</span><br><span class="line">|<span class="string">      . S =o.    </span>|</span><br><span class="line">|<span class="string">       = =++.    </span>|</span><br><span class="line">|<span class="string">      . B.=.Eo.. </span>|</span><br><span class="line">|<span class="string">       o B . +o .</span>|</span><br><span class="line">|<span class="string">          . o.. .. </span>|</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line">njdeiMac:.ssh nj$ ls</span><br><span class="line">id_rsa            id_rsa_personal     known_hosts</span><br><span class="line">id_rsa.pub        id_rsa_personal.pub`</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>打开新生村的 <code>~/.ssh/id_rsa_personal.pub</code> 文件、将内容添加到 github 后台</li>
+<li>打开 <code>~/.ssh/config</code> 文件<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Host</span> <span class="string">xxx //你的host别名</span></span><br><span class="line">  <span class="attr">HostName</span> <span class="string">github.com</span></span><br><span class="line">  <span class="attr">User</span> <span class="string">yyy //github的注册用户名</span></span><br><span class="line">  <span class="attr">IdentityFile</span> <span class="string">~/.ssh/id_rsa_personal</span></span><br></pre></td></tr></table></figure></li>
+<li>将github ssh仓库中的 <a href="mailto:git@github.com">git@github.com</a> 替换成新建的Host别名<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eg. git<span class="variable">@github</span>.<span class="symbol">com:</span>hbxn740150254/BestoneGitHub.git</span><br><span class="line"> -&gt; git<span class="variable">@xxx</span><span class="symbol">:hbxn740150254/BestoneGitHub</span>.git</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="niuniu"
+      src="/images/avator.jpeg">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : false,
+      appId      : 'NCVc4jFTPAHsPnNCSIsoLliU-gzGzoHsz',
+      appKey     : 'usw9Q5rb522wbAEFHRmd0oXo',
+      placeholder: "欢迎一起来讨论^.^",
+      avatar     : '',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

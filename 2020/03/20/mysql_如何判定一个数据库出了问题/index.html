@@ -282,7 +282,7 @@
 <blockquote>
 <p>Mysql会什么设计锁等待不计入并发线程数呢 ?</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">假设以下场景:</span><br><span class="line">1. 线程1 执行begin; update t set c&#x3D;c+1 where id&#x3D;1; 启动事务trx1, 然后保持、此时线程处于空闲</span><br><span class="line">状态、不计入并发线程</span><br><span class="line">2.  线程2~129执行 update t set c&#x3D;c+1 where id&#x3D;1; 由于等行锁、进入等待、这样就有128个</span><br><span class="line">线程处于等待状态.</span><br><span class="line">3. 若处于等待状态线程计数不-1, innodb会认为线程用满、阻止其他查询语句进入引擎执行、线程1不能</span><br><span class="line">提交、而另外的128个线程又处于锁等待状态、整个系统就阻塞了. 如下图:</span><br><span class="line">此时innodb不能响应任何请求、且所有线程都处于等待状态、此时占用CPU为0, 很不合理、所以 </span><br><span class="line">设计进入锁等待、将并发线程的计数器-1, 是合理的.</span><br><span class="line"></span><br><span class="line">但: 若真的执行查询、还是计入并发线程的. eg. select sleep(100) from t;</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">假设以下场景:</span><br><span class="line"><span class="number">1.</span> 线程<span class="number">1</span> 执行begin; update t <span class="keyword">set</span> c=c+<span class="number">1</span> where id=<span class="number">1</span>; 启动事务trx1, 然后保持、此时线程处于空闲</span><br><span class="line">状态、不计入并发线程</span><br><span class="line"><span class="number">2.</span>  线程<span class="number">2</span>~<span class="number">129</span>执行 update t <span class="keyword">set</span> c=c+<span class="number">1</span> where id=<span class="number">1</span>; 由于等行锁、进入等待、这样就有<span class="number">128</span>个</span><br><span class="line">线程处于等待状态.</span><br><span class="line"><span class="number">3.</span> 若处于等待状态线程计数不<span class="number">-1</span>, innodb会认为线程用满、阻止其他查询语句进入引擎执行、线程<span class="number">1</span>不能</span><br><span class="line">提交、而另外的<span class="number">128</span>个线程又处于锁等待状态、整个系统就阻塞了. 如下图:</span><br><span class="line">此时innodb不能响应任何请求、且所有线程都处于等待状态、此时占用CPU为<span class="number">0</span>, 很不合理、所以 </span><br><span class="line">设计进入锁等待、将并发线程的计数器<span class="number">-1</span>, 是合理的.</span><br><span class="line"></span><br><span class="line">但: 若真的执行查询、还是计入并发线程的. eg. select sleep(<span class="number">100</span>) <span class="keyword">from</span> t;</span><br></pre></td></tr></table></figure>
 <p><img src="https://upload-images.jianshu.io/upload_images/14027542-facf6013361bf644.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="等待并发线程不减1, 系统锁死.png"></p>
 <p>二、查表判断<br>在系统库(mysql)新建一个表, eg. 命名为 health_check, 里边只放一行数据、定期检测, 可以发现由于并发线程数过多导致的db不可用.</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> mysql.health_check;</span><br></pre></td></tr></table></figure>
@@ -399,14 +399,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

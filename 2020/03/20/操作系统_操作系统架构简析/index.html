@@ -280,7 +280,7 @@
 <p>控制单元: 同一指挥中心、获取指令 &amp; 执行指令, 会指导运算单元取出数据单元中的某几个数据、计算出结果、然后存放在数据单元的某个地方</p>
 </blockquote>
 <p>CPU这么执行程序, 操作数据, 并将结果写回内存的呢 ？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CPU的控制单元里, 有一个指令指针寄存器、存放的是下一条指针的地址, 控制单元会不断将代码段的指令拿进来、写入指令寄存器</span><br><span class="line"></span><br><span class="line">当前指令分为: 做什么操作 ？ 操作哪些数据？</span><br><span class="line">数据单元根据数据地址、从数据段读到数据寄存器、然后参与运算、运算结果会暂存在数据单元的数据寄存器、最终会有指令将数据写回内存中的数据段</span><br><span class="line"></span><br><span class="line">CPU有两个寄存器, 专门保存当前处理的代码段的起始地址和数据段的起始地址.</span><br><span class="line">里边是哪个进程就执行哪个进程的指令、等切换成另一进程就会执行另一进程的额指令、这个过程叫 进程切换 Process Switch</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CPU的控制单元里, 有一个指令指针寄存器、存放的是下一条指针的地址, 控制单元会不断将代码段的指令拿进来、写入指令寄存器</span><br><span class="line"></span><br><span class="line">当前指令分为: 做什么操作 ？ 操作哪些数据？</span><br><span class="line">数据单元根据数据地址、从数据段读到数据寄存器、然后参与运算、运算结果会暂存在数据单元的数据寄存器、最终会有指令将数据写回内存中的数据段</span><br><span class="line"></span><br><span class="line">CPU有两个寄存器, 专门保存当前处理的代码段的起始地址和数据段的起始地址.</span><br><span class="line">里边是哪个进程就执行哪个进程的指令、等切换成另一进程就会执行另一进程的额指令、这个过程叫 进程切换 <span class="keyword">Process</span> <span class="keyword">Switch</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>CPU 和 内存进行数据交换、靠的是总线 <code>Bus</code>, 分为 <code>地址总线</code> 和 <code>数据总线</code></p>
@@ -305,7 +305,7 @@
 <p><code>CS</code>和<code>DS</code>都是16位的、即: 起始地址都是16位的、</p>
 <p>IP寄存器和通用寄存器都是16位的、即: 偏移量也是16位的</p>
 <p>但: 8086 的地址总线是20位、怎么做? </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">起始地址*16 + 偏移量, 即: 把CS和DS中的值、左移4位 + 16位的偏移量 得到20位的数据地址</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">起始地址*<span class="number">16</span> + 偏移量, 即: 把CS和DS中的值、左移<span class="number">4</span>位 + <span class="number">16</span>位的偏移量 得到<span class="number">20</span>位的数据地址</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p> so. 无论真正的内存是多大、对于只有20位地址总线的8086来说、能识别出的地址只有 2^20 = 1M</p>
@@ -342,8 +342,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" rel="prev" title="复杂度分析">
-      <i class="fa fa-chevron-left"></i> 复杂度分析
+    <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9D%82%E8%B0%88/" rel="prev" title="杂谈">
+      <i class="fa fa-chevron-left"></i> 杂谈
     </a></div>
       <div class="post-nav-item">
     <a href="/2020/03/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_Linux%E5%9F%BA%E6%9C%AC%E8%AE%A4%E7%9F%A5-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4&%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/" rel="next" title="Linux基本认知-常用命令&系统调用">
@@ -425,14 +425,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

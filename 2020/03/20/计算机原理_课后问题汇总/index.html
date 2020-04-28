@@ -270,10 +270,10 @@
 
       
         <p>一、图灵机和冯.诺依曼机是不同的计算机吗？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">简单来说: 图灵机更侧重于计算抽象、后者更侧重于硬件抽象</span><br></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">简单来说: 图灵机更侧重于计算抽象、后者更侧重于硬件抽象</span></span><br></pre></td></tr></table></figure>
 
 <p>二、time指令的返回分表代表什么?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">real time: 时钟时间(Wall clock time), 进从开始到结束所用的实际时间、包括其它进程使用的时间片和等待io完成的时间</span><br><span class="line"></span><br><span class="line">user time: 指进程执行用户态代码(核心之外)使用的时间、执行此进程实际消耗的CPU时间、其它进程和此进程阻塞时间不包含在内</span><br><span class="line"></span><br><span class="line">sys time: 指进程在内核态消耗的cpu时间</span><br><span class="line"></span><br><span class="line">为什么user+sys &gt; real ?</span><br><span class="line">1. user + sys 为实际的CPU时间、若有多个线程、则可能出现、user+sys包含子进程的时间</span><br><span class="line">2. 在多处理器系统上、可能出现、因为多进程或者线程可并行处理</span><br><span class="line">3. time的输出是由几个不同的系统调用得到的</span><br><span class="line">user time和sys time是从wait(2) 或 time(2) 得到的(根据系统不同决定)</span><br><span class="line">real time是从 ge&#39;t&#39;timeofday中结束时间和起始时间相减得到</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">real time: 时钟时间(Wall<span class="built_in"> clock </span>time), 进从开始到结束所用的实际时间、包括其它进程使用的时间片和等待io完成的时间</span><br><span class="line"></span><br><span class="line">user time: 指进程执行用户态代码(核心之外)使用的时间、执行此进程实际消耗的CPU时间、其它进程和此进程阻塞时间不包含在内</span><br><span class="line"></span><br><span class="line">sys time: 指进程在内核态消耗的cpu时间</span><br><span class="line"></span><br><span class="line">为什么user+sys &gt; real ?</span><br><span class="line">1.<span class="built_in"> user </span>+ sys 为实际的CPU时间、若有多个线程、则可能出现、user+sys包含子进程的时间</span><br><span class="line">2. 在多处理器系统上、可能出现、因为多进程或者线程可并行处理</span><br><span class="line">3. time的输出是由几个不同的系统调用得到的</span><br><span class="line">user time和sys time是从wait(2) 或 time(2) 得到的(根据系统不同决定)</span><br><span class="line">real time是从 ge<span class="string">'t'</span>timeofday中结束时间和起始时间相减得到</span><br></pre></td></tr></table></figure>
 
 <p>三、时钟周期是什么</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -282,12 +282,12 @@
 <blockquote>
 <p>因为两个系统下的可执行文件的格式不同</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-g 得到的是目标文件</span><br><span class="line">-o 得到的是可执行文件</span><br><span class="line"></span><br><span class="line">c -&gt; 汇编 -&gt; 机器码</span><br><span class="line">c-&gt;汇编: 编译、汇编、链接 3部分组成</span><br><span class="line">汇编-&gt; 机器码: 通过装载器Loader把可执行文件Load到内存中、CPU从内存读取指令和数据、开始真正的执行程序</span><br><span class="line"></span><br><span class="line">目标文件和可执行文件dump得到的内容差不多、因为linux下、都是使用elf(executable and linkable file format)的格式</span><br></pre></td></tr></table></figure>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-g 得到的是目标文件</span><br><span class="line">-o 得到的是可执行文件</span><br><span class="line"></span><br><span class="line">c -&gt; 汇编 -&gt; 机器码</span><br><span class="line">c-&gt;汇编: 编译、汇编、链接 <span class="number">3</span>部分组成</span><br><span class="line">汇编-&gt; 机器码: 通过装载器Loader把可执行文件<span class="keyword">Load</span>到内存中、CPU从内存读取指令和数据、开始真正的执行程序</span><br><span class="line"></span><br><span class="line">目标文件和可执行文件dump得到的内容差不多、因为linux下、都是使用elf(executable and linkable file format)的格式</span><br></pre></td></tr></table></figure>
 <p><img src="https://upload-images.jianshu.io/upload_images/14027542-f3fd1f4b38b519c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-39279b8724e3dacf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ELF 文件格式信息:</span><br><span class="line">1. text Section: 代码段 用来保存程序的代码和指令</span><br><span class="line">2. .data Section: 数据段 用来保存程序里边设置好的初始化数据信息</span><br><span class="line">3. .rel.text Section: 重定向表Relocation Table 保留的是当前文件里、哪些跳转地址是未知的</span><br><span class="line">4. .symtab Section: 符号表 保留了当前文件里定义的函数和对应的地址信息</span><br><span class="line">连接器会扫描所有的输入目标文件、把所有符号表里的信息收集起来、构成一个全局的符号表、把所有不确定要跳转地址的代码、根据符号表里存储的地址、进行一次修正, 最后 把所有的目标文件的对应段进行一次合并、变成了最终的可执行代码</span><br></pre></td></tr></table></figure>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ELF 文件格式信息:</span><br><span class="line"><span class="number">1</span>. text <span class="function"><span class="keyword">Section</span>: 代码段 用来保存程序的代码和指令</span></span><br><span class="line"><span class="number">2</span>. .data <span class="function"><span class="keyword">Section</span>: 数据段 用来保存程序里边设置好的初始化数据信息</span></span><br><span class="line"><span class="number">3</span>. .rel.text <span class="function"><span class="keyword">Section</span>: 重定向表Relocation Table 保留的是当前文件里、哪些跳转地址是未知的</span></span><br><span class="line"><span class="number">4</span>. .symtab <span class="function"><span class="keyword">Section</span>: 符号表 保留了当前文件里定义的函数和对应的地址信息</span></span><br><span class="line">连接器会扫描所有的输入目标文件、把所有符号表里的信息收集起来、构成一个全局的符号表、把所有不确定要跳转地址的代码、根据符号表里存储的地址、进行一次修正, 最后 把所有的目标文件的对应段进行一次合并、变成了最终的可执行代码</span><br></pre></td></tr></table></figure>
 
 <p>五、java这样使用虚拟机的编程语言里、程序是如何装载到内存的 ？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jvm是上层应用、无需考虑物理分页、一般是直接考虑对象本身的空间大小、物理硬件统一管理由承载jvm的操作系统来解决</span><br></pre></td></tr></table></figure>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">jvm</span>是上层应用、无需考虑物理分页、一般是直接考虑对象本身的空间大小、物理硬件统一管理由承载<span class="keyword">jvm</span>的操作系统来解决</span><br></pre></td></tr></table></figure>
 
 <p>六、CPU一直在取下一条指令、为什么还有满载和idle空闲状态呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -391,14 +391,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

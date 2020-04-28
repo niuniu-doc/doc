@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="概念123456database 数据库collection 数据表document 数据记录行&#x2F;文档filed 数据域index 索引primary key 主键、默认 _id  基本命令12345678910111213141. show dbs 查看所有数据的列表   db 显示当前数据库对象或者集合   use local 切换到local这个db2. use niuniu  d">
+  <meta name="description" content="概念123456database 数据库collection 数据表document 数据记录行&#x2F;文档filed 数据域index 索引primary key 主键、默认 _id  基本命令12345678910111213141. show dbs 查看所有数据的列表   db 显示当前数据库对象或者集合   use local 切换到local这个db2. use niuniu  db不存在时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装使用">
 <meta property="og:url" content="http://yoursite.com/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="牛牛的小窝">
-<meta property="og:description" content="概念123456database 数据库collection 数据表document 数据记录行&#x2F;文档filed 数据域index 索引primary key 主键、默认 _id  基本命令12345678910111213141. show dbs 查看所有数据的列表   db 显示当前数据库对象或者集合   use local 切换到local这个db2. use niuniu  d">
+<meta property="og:description" content="概念123456database 数据库collection 数据表document 数据记录行&#x2F;文档filed 数据域index 索引primary key 主键、默认 _id  基本命令12345678910111213141. show dbs 查看所有数据的列表   db 显示当前数据库对象或者集合   use local 切换到local这个db2. use niuniu  db不存在时">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
 <meta property="article:modified_time" content="2020-03-21T12:02:09.000Z">
@@ -266,11 +266,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">database 数据库</span><br><span class="line">collection 数据表</span><br><span class="line">document 数据记录行&#x2F;文档</span><br><span class="line">filed 数据域</span><br><span class="line">index 索引</span><br><span class="line">primary key 主键、默认 _id</span><br></pre></td></tr></table></figure>
+        <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">database</span> <span class="string">数据库</span></span><br><span class="line"><span class="attr">collection</span> <span class="string">数据表</span></span><br><span class="line"><span class="attr">document</span> <span class="string">数据记录行/文档</span></span><br><span class="line"><span class="attr">filed</span> <span class="string">数据域</span></span><br><span class="line"><span class="attr">index</span> <span class="string">索引</span></span><br><span class="line"><span class="attr">primary</span> <span class="string">key 主键、默认 _id</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. show dbs 查看所有数据的列表</span><br><span class="line">   db 显示当前数据库对象或者集合</span><br><span class="line">   use local 切换到local这个db</span><br><span class="line">2. use niuniu  db不存在时会自动创建</span><br><span class="line">3. db.dropDatabase() 删除一个db</span><br><span class="line"></span><br><span class="line">4. db.createCollection(&quot;niu&quot;) # 先创建集合、类似db中的表</span><br><span class="line">   show tables&#x2F;collections 查看所有的表</span><br><span class="line">   db.niu.drop() # 删除一个table</span><br><span class="line"></span><br><span class="line">5. db.niu.insert(&#123;&quot;name&quot;:&quot;niu&quot;&#125;) 插入文档</span><br><span class="line">6. db.niu.save() 若不指定id, 类似于insert、若指定、会执行更新</span><br><span class="line">7. db.help() 库的帮助信息</span><br><span class="line">8. db.table.help() 表的帮助文档</span><br></pre></td></tr></table></figure>
+<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. show dbs 查看所有数据的列表</span><br><span class="line">   <span class="keyword">db</span> 显示当前数据库对象或者集合</span><br><span class="line">   <span class="keyword">use</span> <span class="keyword">local</span> 切换到<span class="keyword">local</span>这个<span class="keyword">db</span></span><br><span class="line">2. <span class="keyword">use</span> niuniu  <span class="keyword">db</span>不存在时会自动创建</span><br><span class="line">3. <span class="keyword">db</span>.dropDatabase() 删除一个<span class="keyword">db</span></span><br><span class="line"></span><br><span class="line">4. <span class="keyword">db</span>.createCollection(<span class="string">"niu"</span>) # 先创建集合、类似<span class="keyword">db</span>中的表</span><br><span class="line">   show tables/collections 查看所有的表</span><br><span class="line">   <span class="keyword">db</span>.niu.<span class="keyword">drop</span>() # 删除一个<span class="keyword">table</span></span><br><span class="line"></span><br><span class="line">5. <span class="keyword">db</span>.niu.insert(&#123;<span class="string">"name"</span>:<span class="string">"niu"</span>&#125;) 插入文档</span><br><span class="line">6. <span class="keyword">db</span>.niu.<span class="keyword">save</span>() 若不指定id, 类似于insert、若指定、会执行更新</span><br><span class="line">7. <span class="keyword">db</span>.<span class="keyword">help</span>() 库的帮助信息</span><br><span class="line">8. <span class="keyword">db</span>.<span class="keyword">table</span>.<span class="keyword">help</span>() 表的帮助文档</span><br></pre></td></tr></table></figure>
 
-<h4 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo 192.168.1.100:27017&#x2F;test</span><br></pre></td></tr></table></figure>
+<h4 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo <span class="number">192.168</span><span class="number">.1</span><span class="number">.100</span>:<span class="number">27017</span>/test</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -289,12 +289,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/mongo_%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90/" rel="prev" title="查询计划简要分析">
-      <i class="fa fa-chevron-left"></i> 查询计划简要分析
+    <a href="/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="prev" title="常用命令">
+      <i class="fa fa-chevron-left"></i> 常用命令
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="next" title="常用命令">
-      常用命令 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" rel="next" title="curd操作">
+      curd操作 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -372,14 +372,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

@@ -388,7 +388,7 @@
 <p>过滤恶意的包<br>tcpdump ‘ip[6] &amp; 128 != 0’</p>
 </blockquote>
 <p><strong>理解报文内容</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">08:41:13.729687 IP 192.168.64.28.22 &gt; 192.168.64.1.41916: Flags [P.], seq 196:568, ack 1, win 309, options [nop,nop,TS val 117964079 ecr 816509256], length 372</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">08</span>:<span class="number">41</span>:<span class="number">13.729687</span> IP <span class="number">192.168</span><span class="number">.64</span><span class="number">.28</span><span class="number">.22</span> &gt; <span class="number">192.168</span><span class="number">.64</span><span class="number">.1</span><span class="number">.41916</span>: Flags [P.], seq <span class="number">196</span>:<span class="number">568</span>, ack <span class="number">1</span>, win <span class="number">309</span>, options [nop,nop,TS val <span class="number">117964079</span> ecr <span class="number">816509256</span>], length <span class="number">372</span></span><br></pre></td></tr></table></figure>
 <p><code>08:41:13.729687</code> 本地时间戳<br><code>ip</code> 协议是ipv4、若是ipv6会显示为 ip6<br><code>192.168.64.28.22</code> 源ip和端口<br><code>192.168.64.1.41916</code> 目的ip和端口<br><code>Flags [P.]</code> 报文标记段<br><code>seq 196:568</code> 代表该数据包包含该数据流的第 196 到 568 字节<br><code>ack 1</code> 该数据包是数据发送方，ack 值为 1。在数据接收方，该字段代表数据流上的下一个预期字节数据，例如，该数据流中下一个数据包的 ack 值应该是 568<br><code>win 309</code> 表示接收缓冲区中可用的字节数，后跟 TCP 选项如 MSS（最大段大小）或者窗口比例值<br><code>length 372</code> 代表数据包有效载荷字节长度</p>
 <blockquote>
 <p>flag描述<br>S SYN Connection Start<br>F FIN Connection Finish<br>P PUSH Data Push<br>. ACK Acknowledment</p>
@@ -493,14 +493,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

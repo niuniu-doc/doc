@@ -276,9 +276,9 @@
 <p><code>比较并交换</code>: <code>Compare and Swap</code> cas操作需要两个值, old and new、在操作期间会比较这<br>两个值、如果发生变化则不交换、未发生变化才交换</p>
 <p><code>CPU流水线</code>: <code>CPU pipeline</code>在CPU中由5、6个不同的电路单元组成一条指令处理流水线<br>然后一条X86指令分成5~6步后再由这些电路单元分别执行、就能实现在一个CPU周期内完成<br>一条指令、提高CPU的运算速率</p>
 <p><code>内存顺序冲突</code>: <code>memory order violation</code>一般是由假共享引起的、是指多个CPU同时修改<br>同一个缓存行的不同部分而引起其中一个CPU的操作无效、当出现这个内存顺序冲突时、CPU必须清空流水线</p>
-<h4 id="Lock前缀的指令"><a href="#Lock前缀的指令" class="headerlink" title="Lock前缀的指令"></a>Lock前缀的指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lock 前缀的指令、在多核处理器下会引发两件事:</span><br><span class="line">1. 将当期处理器的缓存行数据写回内存</span><br><span class="line">2. 这个写回内存操作会使在其它CPU里缓存了该地址的数据无效</span><br></pre></td></tr></table></figure>
+<h4 id="Lock前缀的指令"><a href="#Lock前缀的指令" class="headerlink" title="Lock前缀的指令"></a>Lock前缀的指令</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lock 前缀的指令、在多核处理器下会引发两件事:</span><br><span class="line"><span class="number">1.</span> 将当期处理器的缓存行数据写回内存</span><br><span class="line"><span class="number">2.</span> 这个写回内存操作会使在其它CPU里缓存了该地址的数据无效</span><br></pre></td></tr></table></figure>
 
-<h4 id="volatile的实现"><a href="#volatile的实现" class="headerlink" title="volatile的实现"></a>volatile的实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为了提高速度、CPU不直接和内存通信、而是先将系统内存的数据加载到内存缓存后再操作</span><br><span class="line">但: 操作完全不知道何时会被写回内存</span><br><span class="line"></span><br><span class="line">volatile声明的变量进行读写、JVM会向处理器发送一条Lock前缀的指令、精讲变量所在的</span><br><span class="line">缓存行数据写回到内存</span><br><span class="line"></span><br><span class="line">在多核处理器下、实现了缓存一致性协议、每个处理器通过嗅探在总线上传播的数据来检查</span><br><span class="line">自己的缓存是否已过期、当处理器发现自己缓存行对应的内存地址呗修改、会将当期处理器的</span><br><span class="line">缓存行状态设为无效、重新从系统内存读取</span><br></pre></td></tr></table></figure>
+<h4 id="volatile的实现"><a href="#volatile的实现" class="headerlink" title="volatile的实现"></a>volatile的实现</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为了提高速度、CPU不直接和内存通信、而是先将系统内存的数据加载到内存缓存后再操作</span><br><span class="line">但: 操作完全不知道何时会被写回内存</span><br><span class="line"></span><br><span class="line"><span class="keyword">volatile</span>声明的变量进行读写、JVM会向处理器发送一条<span class="keyword">Lock</span>前缀的指令、精讲变量所在的</span><br><span class="line">缓存行数据写回到内存</span><br><span class="line"></span><br><span class="line">在多核处理器下、实现了缓存一致性协议、每个处理器通过嗅探在总线上传播的数据来检查</span><br><span class="line">自己的缓存是否已过期、当处理器发现自己缓存行对应的内存地址呗修改、会将当期处理器的</span><br><span class="line">缓存行状态设为无效、重新从系统内存读取</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -380,14 +380,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

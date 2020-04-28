@@ -266,18 +266,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.version()</span><br><span class="line">mongo --version</span><br><span class="line">mongod --version</span><br></pre></td></tr></table></figure>
+        <h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">db</span>.<span class="keyword">version</span>()</span><br><span class="line">mongo --<span class="keyword">version</span></span><br><span class="line">mongod --<span class="keyword">version</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="查看各节点的健康状态"><a href="#查看各节点的健康状态" class="headerlink" title="查看各节点的健康状态"></a>查看各节点的健康状态</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制集状态查看  rs.status()</span><br><span class="line">查看oplog状态 rs.printReplicationInfo();</span><br><span class="line">查看复制延迟 rs.printSlaveReplicationInfo();</span><br><span class="line">查看服务状态详情 db.serverStatus();</span><br></pre></td></tr></table></figure>
-<h4 id="查看数据库空间大小"><a href="#查看数据库空间大小" class="headerlink" title="查看数据库空间大小"></a>查看数据库空间大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.stats() 默认返回字节</span><br><span class="line">&quot;dataSize&quot; : 20,  &#x2F;&#x2F;所有数据的总大小</span><br><span class="line">&quot;storageSize&quot; : 21, &#x2F;&#x2F;所有数据占的磁盘大小 </span><br><span class="line">&quot;fileSize&quot; : 23,  &#x2F;&#x2F;预分配给数据库的文件大小</span><br><span class="line"></span><br><span class="line">db.stats(1073741824) &#x2F;&#x2F; 得到的单位是 G</span><br><span class="line">这里的objects以及avgObjSize还是bytes为单位的，不受参数影响</span><br></pre></td></tr></table></figure>
+<h4 id="查看各节点的健康状态"><a href="#查看各节点的健康状态" class="headerlink" title="查看各节点的健康状态"></a>查看各节点的健康状态</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制集状态查看  <span class="selector-tag">rs</span><span class="selector-class">.status</span>()</span><br><span class="line">查看<span class="selector-tag">oplog</span>状态 <span class="selector-tag">rs</span><span class="selector-class">.printReplicationInfo</span>();</span><br><span class="line">查看复制延迟 <span class="selector-tag">rs</span><span class="selector-class">.printSlaveReplicationInfo</span>();</span><br><span class="line">查看服务状态详情 <span class="selector-tag">db</span><span class="selector-class">.serverStatus</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="查看数据库空间大小"><a href="#查看数据库空间大小" class="headerlink" title="查看数据库空间大小"></a>查看数据库空间大小</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.stats<span class="comment">()</span> 默认返回字节</span><br><span class="line"><span class="string">"dataSize"</span> : <span class="number">20</span>,  <span class="comment">//所有数据的总大小</span></span><br><span class="line"><span class="string">"storageSize"</span> : <span class="number">21</span>, <span class="comment">//所有数据占的磁盘大小 </span></span><br><span class="line"><span class="string">"fileSize"</span> : <span class="number">23</span>,  <span class="comment">//预分配给数据库的文件大小</span></span><br><span class="line"></span><br><span class="line">db.stats<span class="comment">(1073741824)</span> <span class="comment">// 得到的单位是 G</span></span><br><span class="line">这里的objects以及avgObjSize还是bytes为单位的，不受参数影响</span><br></pre></td></tr></table></figure>
 
-<h4 id="查看总的记录数"><a href="#查看总的记录数" class="headerlink" title="查看总的记录数"></a>查看总的记录数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.dbname.find().count()</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(); 会返回所有的记录数</span><br><span class="line">db.dbname.find().skip(n).limit(m).count(true); 会返回limit的记录数</span><br></pre></td></tr></table></figure>
+<h4 id="查看总的记录数"><a href="#查看总的记录数" class="headerlink" title="查看总的记录数"></a>查看总的记录数</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.dbname</span><span class="selector-class">.find</span>()<span class="selector-class">.count</span>()</span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.dbname</span><span class="selector-class">.find</span>()<span class="selector-class">.skip</span>(<span class="selector-tag">n</span>)<span class="selector-class">.limit</span>(<span class="selector-tag">m</span>)<span class="selector-class">.count</span>(); 会返回所有的记录数</span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.dbname</span><span class="selector-class">.find</span>()<span class="selector-class">.skip</span>(<span class="selector-tag">n</span>)<span class="selector-class">.limit</span>(<span class="selector-tag">m</span>)<span class="selector-class">.count</span>(<span class="selector-tag">true</span>); 会返回<span class="selector-tag">limit</span>的记录数</span><br></pre></td></tr></table></figure>
 
-<h4 id="查看数据库信息"><a href="#查看数据库信息" class="headerlink" title="查看数据库信息"></a>查看数据库信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getName 返回当前所在的db名称</span><br></pre></td></tr></table></figure>
+<h4 id="查看数据库信息"><a href="#查看数据库信息" class="headerlink" title="查看数据库信息"></a>查看数据库信息</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">db</span>.getName 返回当前所在的<span class="keyword">db</span>名称</span><br></pre></td></tr></table></figure>
 
-<h4 id="允许副本集上的查询"><a href="#允许副本集上的查询" class="headerlink" title="允许副本集上的查询"></a>允许副本集上的查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.slaveOk()</span><br></pre></td></tr></table></figure>
+<h4 id="允许副本集上的查询"><a href="#允许副本集上的查询" class="headerlink" title="允许副本集上的查询"></a>允许副本集上的查询</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">rs</span><span class="selector-class">.slaveOk</span>()</span><br></pre></td></tr></table></figure>
 
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.cnblogs.com&#x2F;kevingrace&#x2F;p&#x2F;8178549.html</span><br><span class="line">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;30088833&#x2F;strange-mongodb-and-mongoose-error-not-master-and-slaveok-false-error&#x2F;30089063</span><br></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h4><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">https:</span>/<span class="regexp">/www.cnblogs.com/kevingrace</span><span class="regexp">/p/</span><span class="number">8178549</span>.html</span><br><span class="line"><span class="symbol">https:</span>/<span class="regexp">/stackoverflow.com/questions</span><span class="regexp">/30088833/strange</span>-mongodb-and-mongoose-error-not-master-and-slaveok-<span class="literal">false</span>-error/<span class="number">30089063</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -296,12 +296,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" rel="prev" title="安装使用">
-      <i class="fa fa-chevron-left"></i> 安装使用
+    <a href="/2020/03/20/mongo_%E7%B4%A2%E5%BC%95%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" rel="prev" title="索引简单使用">
+      <i class="fa fa-chevron-left"></i> 索引简单使用
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" rel="next" title="curd操作">
-      curd操作 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" rel="next" title="安装使用">
+      安装使用 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -379,14 +379,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

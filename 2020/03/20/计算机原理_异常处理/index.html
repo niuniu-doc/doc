@@ -272,7 +272,7 @@
 <p>异常的发生和捕获是在硬件层面完成的、异常的处理是软件完成的</p>
 </blockquote>
 <h4 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h4><p><code>中断Interrupt</code> 触发CPU内部开关值发生变化的信号<br><code>陷阱 Trap</code> 主动触发的异常、比如调试断点<br><code>故障 Fault</code> 非主动的错误、处理完异常之后回来处理当前指令、而不是去执行程序中的下一条指令<br><code>终止 Abort</code> 故障的一直特殊情况、当CPU遇到故障、但无法恢复时、程序就必须终止了<br><img src="https://upload-images.jianshu.io/upload_images/14027542-9e29e130eb12f784.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="异常.png"></p>
-<h4 id="异常处理、上下文切换"><a href="#异常处理、上下文切换" class="headerlink" title="异常处理、上下文切换"></a>异常处理、上下文切换</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">类似异常处理函数调用、指令的控制权被切换到另外一个&#96;函数&#96;里、但比函数调用更复杂一些</span><br><span class="line">1. 因为异常情况往往发生在正常执行的预期之外、eg. 中断、故障发生的时候、所以、除了本来程序压桟要做的事情之外、还需要把CPU内当前运行程序用到的所有寄存器都放在桟里边. eg. 条件码寄存器的内容</span><br><span class="line"></span><br><span class="line">2. 类似陷阱这种异常、涉及程序指令在用户态和内核态之间的切换、对应压桟的时候、对应数据是压到内核栈、而不是程序桟</span><br><span class="line"></span><br><span class="line">3. 类似故障这样的异常、在异常处理执行完成之后、从桟里返回出来、继续执行的不是顺序的下一条指令、而是故障发生的当前指令、因为当前指令因为故障没有正常执行成功、必须重新执行一次</span><br><span class="line"></span><br><span class="line">对于异常这样的处理流程、不像是顺序执行的指令间的函数调用关系、更像是两个不同的独立进程之间在CPU层面的切换、称为 &#96;上下文切换&#96;</span><br></pre></td></tr></table></figure>
+<h4 id="异常处理、上下文切换"><a href="#异常处理、上下文切换" class="headerlink" title="异常处理、上下文切换"></a>异常处理、上下文切换</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">类似异常处理函数调用、指令的控制权被切换到另外一个<span class="code">`函数`</span>里、但比函数调用更复杂一些</span><br><span class="line"><span class="bullet">1. </span>因为异常情况往往发生在正常执行的预期之外、eg. 中断、故障发生的时候、所以、除了本来程序压桟要做的事情之外、还需要把CPU内当前运行程序用到的所有寄存器都放在桟里边. eg. 条件码寄存器的内容</span><br><span class="line"></span><br><span class="line"><span class="bullet">2. </span>类似陷阱这种异常、涉及程序指令在用户态和内核态之间的切换、对应压桟的时候、对应数据是压到内核栈、而不是程序桟</span><br><span class="line"></span><br><span class="line"><span class="bullet">3. </span>类似故障这样的异常、在异常处理执行完成之后、从桟里返回出来、继续执行的不是顺序的下一条指令、而是故障发生的当前指令、因为当前指令因为故障没有正常执行成功、必须重新执行一次</span><br><span class="line"></span><br><span class="line">对于异常这样的处理流程、不像是顺序执行的指令间的函数调用关系、更像是两个不同的独立进程之间在CPU层面的切换、称为 <span class="code">`上下文切换`</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -374,14 +374,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

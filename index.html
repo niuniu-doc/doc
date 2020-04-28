@@ -192,6 +192,1065 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/28/redis_zskiplist/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/28/redis_zskiplist/" class="post-title-link" itemprop="url">Reids数据结构学习 - 压缩列表(六)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-28 21:29:51 / 修改时间：21:33:11" itemprop="dateCreated datePublished" datetime="2020-04-28T21:29:51+08:00">2020-04-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/28/redis_zskiplist/" class="post-meta-item leancloud_visitors" data-flag-title="Reids数据结构学习 - 压缩列表(六)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/28/redis_zskiplist/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/28/redis_zskiplist/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>压缩列表是列表键和hash键的底层实现之一, 当一个键只包含少量列表项、且每个列表项要么是小整数值、要么是长度比较短的字符串、那么redis就会使用压缩列表作为底层实现</p>
+</blockquote>
+<h4 id="压缩列表的组成"><a href="#压缩列表的组成" class="headerlink" title="压缩列表的组成"></a>压缩列表的组成</h4><p>压缩列表是Redis为了节约内存开发的, 是一系列特殊编码的连续内存块组成的顺序型数据结构, </p>
+<p>一个压缩列表可以包含任意多个节点(entry), 每个节点可以保存一个字节数组或者一个整数值</p>
+<p><img src="/images/image-ziplist.png" alt="image-20200428095213572"></p>
+<p><code>zltytes</code>: 压缩列表的总长度</p>
+<p><code>zltail</code>: 表示表头和表尾节点的位置偏移量</p>
+<p><code>zllen</code>: 表示压缩列表包含的节点数</p>
+<h4 id="压缩列表节点的构成"><a href="#压缩列表节点的构成" class="headerlink" title="压缩列表节点的构成"></a>压缩列表节点的构成</h4><p>每个压缩列表节点可以保存一个字节数组或者一个整数值, 字节数组可以是下边任意一种:</p>
+<ol>
+<li>长度小于等于63(2<sup>6</sup>-1)字节的字节数组</li>
+<li>长度小于等于16383 (2<sup>14</sup>-1)字节的字节数组</li>
+<li>长度小于等于 4294964295 (2<sup>32</sup>-1)字节的字节数组</li>
+</ol>
+<p>而整数值则可以是下边六种长度的一种:</p>
+<ol>
+<li>4位, 介于 0~12 之间的无符号整数</li>
+<li>1字节长的有符号整数</li>
+<li>3字节长的有符号整数</li>
+<li>int16_t 类型的整数</li>
+<li>int32_t 类型的整数</li>
+<li>int64_t 类型的整数</li>
+</ol>
+<p>每个压缩列表节点由 <code>previous_entry_length</code>、<code>encoding</code>、<code>content</code> 三个部分组成</p>
+<p><img src="/images/image-ziplistNode.png" alt="image-20200428095909275"></p>
+<h5 id="previous-entry-length"><a href="#previous-entry-length" class="headerlink" title="previous_entry_length"></a>previous_entry_length</h5><p>节点的<code>previous_entry_length</code> 属性以字节为单位, 记录压缩列表前一个节点的长度, 可以是<code>1字节</code> 或者 <code>5字节</code>, 若前一个节点的长度<code>＜254字节</code>, 则 <code>previous_entry_length</code> 的长度为1字节, 前一个节点的长度保存在这里; 若前一节点的长度<code>≥254字节</code>, 则<code>privous_entry_length</code> 的属性为 <code>5字节</code>, 其中第一字节的值为 <code>0xFE(254)</code></p>
+<p>因为节点的<code>previous_entry_length</code> 属性记录了前一个节点的长度, 所以程序可以通过指针运算、根据当前节点的起始地址计算前一个节点的起始地址, 压缩列表的 <code>从表尾向表头遍历</code> 操作是使用这一原理实现的. 完整过程如下:</p>
+<ul>
+<li>首先、我们拥有指向压缩列表表尾节点 <code>entry4</code> 起始地址的指针<code>p1</code>(指向表尾节点的指针可以通过指向压缩列表 <code>起始地址的指针 + zltail</code> 属性得到)</li>
+<li>通过 <code>p1 - entry4.previous_entry_lenght</code> 可以得到指向<code>entry4</code> 节点的前一节点<code>entry3</code> 的起始地址指针<code>p2</code></li>
+<li>同理可以得到 <code>entry2</code> 的起始指针 <code>p3</code> 和 <code>entry1</code> 的起始指针 <code>p4</code>, 完成整个压缩列表的遍历</li>
+</ul>
+<p><img src="/images/image-ziplistLoop.png" alt="表尾向表头遍历压缩列表"></p>
+<h5 id="encoding"><a href="#encoding" class="headerlink" title="encoding"></a>encoding</h5><p>节点的 <code>encoding</code> 属性记录了<code>content</code> 属性所保存的数据类型及长度, </p>
+<ol>
+<li><code>一字节</code>、<code>两字节</code>、<code>五字节</code> 长, 值的最高位为: <code>00</code>、<code>01</code> 或 <code>10</code> 的是 <code>字节数组编码</code>, 这种编码表示节点的 <code>content属性</code> 保存着的是 <code>字节数组</code>, 数组长度由 编码除去最高两位之后的其它位记录</li>
+<li><code>一字节长</code>, 值的最高位以<code>11</code>开头的是<code>整数编码</code>, 这种编码表示节点的 <code>content属性</code> 保存的是 <code>整数值</code>, 整数值的类型和长度由编码除去高两位之后的其它位记录</li>
+</ol>
+<p><img src="/images/image-ziplist-charArray.png" alt="image-20200428101636986"></p>
+<p> <img src="/images/image-ziplist-encoding-int.png" alt="image-20200428101704993"></p>
+<h5 id="content-属性"><a href="#content-属性" class="headerlink" title="content 属性"></a>content 属性</h5><p>节点的<code>content属性</code> 负责保存节点的值, 节点的值可以是一个字节数组或者整数、值的类型和长度由 <code>encoding属性</code> 来决定.</p>
+<p><img src="/images/image-ziplist-encoding-charArr-demo.png" alt="image-20200428101946729"></p>
+<ul>
+<li>编码的最高两位 00 表示节点保存的是一个字节数组</li>
+<li>编码的后六位 001011 记录字节数组的长度 11</li>
+<li>content属性保存着节点值 hello world</li>
+</ul>
+<p><img src="/images/image-ziplist-encoding-int-demo.png" alt="image-20200428102135871"></p>
+<ul>
+<li>编码 11000000 表示节点保存的是一个 int16_t 类型的整数值</li>
+<li>content 属性保存着节点的值 10086</li>
+</ul>
+<h4 id="连锁更新"><a href="#连锁更新" class="headerlink" title="连锁更新"></a>连锁更新</h4><p>每个节点的<code>previous_entry_length</code> 属性记录了前一个节点的长度, 若<code>&lt;254字节</code>, 需要1字节空间保存, 若<code>≥254字节</code>, 需要5字节空间保存, 假设现有1压缩列表, <code>e1 ~ eN</code> 节点的长度都在 <code>250~253</code>字节之间, 此时, 若需要插入一个长度<code>≥254字节</code>的节点<code>new</code>到表头, 那么<code>new</code>节点将成为<code>e1</code>的前置节点, 因为<code>e1</code>的<code>previous_entry_length</code>属性仅<code>1字节</code>, 无法保存<code>new</code>节点的属性, 需要重新对压缩列表执行空间分配, 扩展<code>e1</code>节点的<code>previous_entry_length</code>属性, 那么麻烦事儿来了…, <code>e1</code>原本的长度介于<code>250~253</code>之间, <code>e2.privous_entry_length</code>可以使用<code>1字节</code>, 现在<code>e1</code>的长度为 <code>250+4 ~ 253+4</code>, <code>e2</code>就需要5字节来记录<code>e1</code>的长度, …., 依次引起连锁更新, 程序需要不断扩展空间, 类似的、删除节点也可能早上连锁更新</p>
+<p>最坏情况下、需要对压缩列表执行N次空间重分配工作, 每次空间重分配的最坏复杂度为 O(N), 所以连锁更新的最坏复杂度为 O(N²), 复杂度非常高, 但真正造成性能问题的概率很小:</p>
+<ul>
+<li>压缩列表恰好有多个连续的、长度介于250~253字节之间的节点、连锁更新才可能被引发, 这种情况本身出现的概率较低</li>
+<li>即时出现连锁更新、但只要被更新的节点不多、就不会对性能造成影响, eg、三五个节点的连锁更新绝不会影响性能</li>
+</ul>
+<p>所以: ziplistPush的平均时间复杂度仅为 O(N), 可以放心的使用</p>
+<h4 id="重点回顾"><a href="#重点回顾" class="headerlink" title="重点回顾"></a>重点回顾</h4><ul>
+<li>压缩列表是一种为节约内存而开发的顺序型数据结构</li>
+<li>压缩列表是列表键和hash键的底层实现之一</li>
+<li>压缩列表可以包含多个节点、每个节点可以保存一个字节数组或者整数值</li>
+<li>添加新节点到压缩列表、或者从压缩列表删除节点，可能会引起连锁更新操作, 但概率较低</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/28/redis_object02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/28/redis_object02/" class="post-title-link" itemprop="url">Redis对象(二) - 对象实现</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-28 21:27:41 / 修改时间：21:33:50" itemprop="dateCreated datePublished" datetime="2020-04-28T21:27:41+08:00">2020-04-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/28/redis_object02/" class="post-meta-item leancloud_visitors" data-flag-title="Redis对象(二) - 对象实现" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/28/redis_object02/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/28/redis_object02/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>redis中的五种数据对象都使用了不同的底层编码方式、那相互之间是如何转化的呢 ?</p>
+</blockquote>
+<h4 id="字符串对象"><a href="#字符串对象" class="headerlink" title="字符串对象"></a>字符串对象</h4><p>字符串对象的编码可以是<code>int</code>, <code>raw</code> 或者 <code>embstr</code></p>
+<p>若一个字符串对象保存的是整数值, 且这个整数值可以使用<code>long类型</code>来表示、则 字符串对象会将整数值保存在<code>ptr属性</code> (<code>将 void * 转换成 long</code>), 将字符串的编码设置为 <code>int</code>.</p>
+<p><img src="/images/image-int%E7%BC%96%E7%A0%81.png" alt="image-20200428161427290"></p>
+<p>若一个字符串对象保存的是一个字符串值, 且长度<code>＞ 32字节</code>, 那么该字符串对象会使用一个简单动态字符串 <code>SDS</code> 来保存、并将对象的编码设置为 raw</p>
+<p><img src="/images/image-raw%E7%BC%96%E7%A0%81.png" alt="image-20200428161402502"></p>
+<p>若字符串值的长度<code>≤32字节</code>, 会使用<code>embstr</code>来保存, 它和raw编码一样、都使用<code>redisObject</code>结构和<code>sdshdr</code>结构来表示字符串对象, 但<code>raw编码</code>会调用两次内存分配来分表创建<code>redisObject</code>结构和<code>sdshdr</code>结构, 而<code>embstr</code>编码则调用一次内存分配分配一块连续的空间, 依次包含<code>redisObject</code> 和 <code>embstr</code>结构</p>
+<p><img src="/images/image-embstr%E5%86%85%E5%AD%98%E5%9D%97.png" alt="image-20200428161335183"></p>
+<p>embstr编码的字符串对象在执行命令时、产生的效果与raw编码一致, 但获得的好处是:</p>
+<ol>
+<li>emstr编码将创建对象时需要的内存分配次数从raw编码的两次降为1次</li>
+<li>释放时、也只需要调用一次内存释放函数, raw编码需要两次</li>
+<li>embstr编码的字符串对象保存在连续空间, 比raw编码更好的利用缓存带来的优势</li>
+</ol>
+<h5 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h5><p>int编码的字符串对象和embstr编码的字符串对象在满足条件的情况下, 会被转换为raw编码的字符串对象, 对于int编码的字符串对象来说、若向对象执行了一些明朗、使对象保存的不再是整数值、编码会从 int -&gt; raw</p>
+<p>eg. 通过append命令、向整数值的字符串对象追加一个字符串值, 因为追加操作指南对字符串值执行、所以会转为raw类型编码</p>
+<p>因为redis没有为embstr编码的字符串对象编写修改程序(只有int和raw编码的字符串对象才有), 所以embstr编码的对象实际上是只读的, 当执行任何修改时、程序会先将对象的编码从embstr转化成raw, 再执行修改, 所以: embstr编码的对象在执行修改后、总会变成raw编码</p>
+<h5 id="字符串命令的实现"><a href="#字符串命令的实现" class="headerlink" title="字符串命令的实现"></a>字符串命令的实现</h5><p><img src="/images/image-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%91%BD%E4%BB%A4%E7%9A%84%E5%AE%9E%E7%8E%B0.png" alt="image-20200428162725261"></p>
+<h4 id="列表对象"><a href="#列表对象" class="headerlink" title="列表对象"></a>列表对象</h4><p>列表对象的编码可以是<code>ziplist</code> 或者<code>linkedlist</code></p>
+<p><code>ziplist</code> 编码的列表对象使用压缩列表作为底层实现, 每个压缩列表节点保存了一个列表元素, eg. 执行<code>rpush命令</code></p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; rpush numbers <span class="number">1</span> <span class="string">"three"</span> <span class="number">5</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>若使用的是<code>ziplist</code>编码、则值对象如下所示:</p>
+<p><img src="/images/image-ziplist%E7%BC%96%E7%A0%81%E7%9A%84%E5%88%97%E8%A1%A8%E5%AF%B9%E8%B1%A1.png" alt="image-20200428163032315"></p>
+<p>另外, <code>linkedlist</code>编码的列表对象使用双端链表作为底层实现, 每个双端链表节点保存一个字符串对象, 而每个字符串对象都保存了一个列表元素, eg. 上边numbers使用linkedlist编码如下:</p>
+<p><img src="/images/image-linkedlist%E7%BC%96%E7%A0%81%E7%9A%84%E5%88%97%E8%A1%A8%E5%AF%B9%E8%B1%A1.png" alt="image-20200428163252437"></p>
+<p>linkedlist编码的列表对象在底层的双端链表结构中包含了多个字符串对象</p>
+<p><strong>注意:</strong></p>
+<p>为了简化字符串对象的表示, 使用了 <code>StringObject</code>来标记, 完整表示如下:</p>
+<p><img src="/images/image-%E5%AE%8C%E6%95%B4%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AF%B9%E8%B1%A1%E8%A1%A8%E7%A4%BA.png" alt="image-20200428163504679"></p>
+<h5 id="编码转换-1"><a href="#编码转换-1" class="headerlink" title="编码转换"></a>编码转换</h5><p>列表对象满足下边两个条件时、使用<code>ziplist编码</code></p>
+<ol>
+<li>列表对象保存的所有字符串元素的长度都<code>＜64字节</code></li>
+<li>列表对象保存的元素数量<code>小于512个</code></li>
+</ol>
+<p>否则: 使用<code>linkedlist编码</code></p>
+<p><strong>注意:</strong></p>
+<p>上限值可配置, <code>list-max-ziplist-value</code> 和 <code>list-max-ziplist-entries</code> 选项.</p>
+<h5 id="列表命令的实现"><a href="#列表命令的实现" class="headerlink" title="列表命令的实现"></a>列表命令的实现</h5><p>列表键的值为列表对象, 用于键操作的所有命令都是针对列表对象来构建的, 下边是部分实现</p>
+<p><img src="/images/image-%E5%88%97%E8%A1%A8%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0.png" alt="image-20200428163928536"></p>
+<h4 id="hash对象"><a href="#hash对象" class="headerlink" title="hash对象"></a>hash对象</h4><p>hash对象的编码可以是<code>ziplist</code>或者<code>hashtable</code></p>
+<p><code>ziplist</code>编码的hash对象使用压缩列表作为底层实现, 当有新的键值对要加入到hash对象时, 程序会先将保存了键的压缩列表节点推入表尾, 然后将保存了值的压缩列表节点推入到压缩列表表尾, 所以:</p>
+<ol>
+<li>保存了统一键值对的两个节点总是紧挨在一起, 保存键的节点在前、保存值的节点在后</li>
+<li>先添加到hash对象中的键值对会被放在压缩列表的表头方向, 后添加到hash对象中的键值对被放到表尾方向</li>
+</ol>
+<p>eg. 执行hset命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">redis&gt;</span><span class="bash"> hset profile name <span class="string">"test"</span></span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta">redis&gt;</span><span class="bash"> hset profile age 25</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta">redis&gt;</span><span class="bash"> hset profile career <span class="string">"programmer"</span></span></span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+
+<p>若profile使用的是<code>ziplist编码</code>, 值对象如下所示:</p>
+<p><img src="/images/image-profile%E5%AF%B9%E8%B1%A1.png" alt="image-20200428164612919"></p>
+<p><img src="/images/image-profile%E5%AF%B9%E8%B1%A1ziplist%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0.png" alt="image-20200428164638956"></p>
+<p>另一方面: hashtable编码的hash对象使用字典作为底层实现, hash对象中的每个键值对都使用一个字典键值对保存, </p>
+<ol>
+<li>字典的每个键是一个字符串对象、保存了键值对中的键</li>
+<li>字典的每个值都是字符串对象、保存了键值对的值</li>
+</ol>
+<p><img src="/images/image-hash%E7%BC%96%E7%A0%81%E7%9A%84profile%E5%AF%B9%E8%B1%A1.png" alt="image-20200428164910460"></p>
+<h5 id="编码转换-2"><a href="#编码转换-2" class="headerlink" title="编码转换"></a>编码转换</h5><p>当hash对象可以同时满足下边条件时、使用<code>ziplist编码</code>:</p>
+<ol>
+<li>hash对象保存的所有键值对的键和值的长度都<code>＜64字节</code></li>
+<li>hash对象保存的键值对的数量<code>＜512个</code></li>
+</ol>
+<p><strong>注意:</strong></p>
+<p>上限值可以使用<code>hash-max-ziplist-value</code> 和 <code>hash-max-ziplist-entries</code>选项配置</p>
+<p>键和值的长度不满足、都会引起编码的转换.</p>
+<h5 id="hash命令的实现"><a href="#hash命令的实现" class="headerlink" title="hash命令的实现"></a>hash命令的实现</h5><p>因为hash键的值作为hash对象, 用于hash键的所有命令都是针对hash对象来构建的, 部分实现如下:</p>
+<p><img src="/images/image-%E9%83%A8%E5%88%86hash%E5%91%BD%E4%BB%A4%E7%9A%84%E5%AE%9E%E7%8E%B0.png" alt="image-20200428165510157"></p>
+<h4 id="集合对象"><a href="#集合对象" class="headerlink" title="集合对象"></a>集合对象</h4><p>集合对象的编码可以是<code>intset</code> 或者 <code>hashtable</code></p>
+<p><code>intset</code>编码的集合对象使用整数集合作为底层实现, 集合对象包含的所有元素都被保存在整数集合里.  eg. </p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SADD numbers <span class="number">1</span> <span class="number">3</span> <span class="number">5</span></span><br><span class="line">(<span class="built_in">int</span>eger) <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>另一方面, hashtable编码的集合对象使用字典作为底层实现, 字典的每个键都是一个字符串对象、每个字符串对象包含了一个集合元素, 而字典的值全部被设置为 <code>NULL</code></p>
+<p>eg. 以下代码将创建一个如图示的hashtable编码集合对象</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; sadd fruits <span class="string">"apple"</span> <span class="string">"banana"</span> <span class="string">"cherry"</span></span><br><span class="line">(<span class="name">integer</span>) <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-intset%E7%BC%96%E7%A0%81%E7%9A%84%E9%9B%86%E5%90%88%E5%AF%B9%E8%B1%A1.png" alt="image-20200428194515141"></p>
+<p><img src="/images/image-hashtable%E7%BC%96%E7%A0%81%E7%9A%84%E9%9B%86%E5%90%88%E5%AF%B9%E8%B1%A1.png" alt="image-20200428194545048"></p>
+<h5 id="编码的转换"><a href="#编码的转换" class="headerlink" title="编码的转换"></a>编码的转换</h5><p>当集合对象满足下边两个条件时、使用<code>intset编码</code>:</p>
+<ol>
+<li>集合对象保存的所有元素都是整数值</li>
+<li>集合对象保存的元素数量不超过<code>512个</code></li>
+</ol>
+<p><strong>注意:</strong></p>
+<p>第二个条件上限值可修改, <code>set-max-intset-entries</code> 选项, 当intset编码的集合对象任意条件不满足时、会执行对象的编码转换操作, 原本保存在整数集合中的所有元素会被转移并保存到字典里, 编码从<code>intset</code> -&gt; <code>hashtable</code>, eg.</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; eval <span class="string">"for i=1, 512 do redis.call('sadd', keys[1], i) end"</span> <span class="number">1</span> <span class="built_in">int</span>egers</span><br><span class="line">(nil)</span><br><span class="line">redis&gt; scard <span class="built_in">int</span>egers</span><br><span class="line">(<span class="built_in">int</span>eger) <span class="number">512</span></span><br><span class="line">redis&gt; object encoding <span class="built_in">int</span>egers</span><br><span class="line"><span class="string">"intset"</span></span><br><span class="line"></span><br><span class="line">redis&gt; sadd <span class="built_in">int</span>egers <span class="number">10086</span> <span class="comment">// 再添加一个元素</span></span><br><span class="line">(<span class="built_in">int</span>eger) <span class="number">1</span></span><br><span class="line">redis&gt; scard <span class="built_in">int</span>egers</span><br><span class="line">(<span class="built_in">int</span>eger) <span class="number">513</span></span><br><span class="line">redis&gt; object encoding <span class="built_in">int</span>egers</span><br><span class="line"><span class="string">"hashtable"</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="集合命令的实现"><a href="#集合命令的实现" class="headerlink" title="集合命令的实现"></a>集合命令的实现</h5><p><img src="/images/image-%E9%9B%86%E5%90%88%E5%91%BD%E4%BB%A4%E7%9A%84%E5%AE%9E%E7%8E%B0.png" alt="image-20200428195428417"></p>
+<h4 id="有序集合对象"><a href="#有序集合对象" class="headerlink" title="有序集合对象"></a>有序集合对象</h4><p>有序集合的编码可以是<code>ziplist</code> 或者 <code>skiplist</code></p>
+<p><code>ziplist</code>编码的压缩列表对象使用压缩列表作为底层实现, 每个集合元素使用两个紧挨着的压缩列表节点保存, 第一个节点保存元素的成员, 第二个元素保存元素的分值</p>
+<p>压缩列表内的集合元素按照分值从小到大排序, 分值较小的元素放在靠近表头的方向.</p>
+<p>eg. 执行 <code>zadd</code>命令、服务器将创建一个有序集合对象作为price键的值</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; zadd price <span class="number">8.5</span> apple <span class="number">5.0</span> banana <span class="number">6.0</span> cherry </span><br><span class="line">(<span class="built_in">int</span>eger) <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>若压缩列表的值对象使用的是ziplist编码, 则结构如下:</p>
+<p><img src="/images/image-ziplist%E7%BC%96%E7%A0%81%E7%9A%84%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E5%AF%B9%E8%B1%A1.png" alt="image-20200428201438276"></p>
+<p><code>skiplist</code>编码的有序集合对象使用zset结构作为底层实现, 一个zset结构同时包含一个字典和一个跳表:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">zset</span> &#123;</span></span><br><span class="line">   zskiplist *zsl;</span><br><span class="line">   dict *dict;</span><br><span class="line">&#125; zset;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-zset%E5%85%83%E7%B4%A0%E5%9C%A8zskiplist%E4%B8%AD%E6%8C%89%E5%88%86%E5%80%BC%E6%8E%92%E5%BA%8F.png" alt="image-20200428203444483"></p>
+<p><code>zset</code>结构中的<code>zsl跳表</code>按照分值从小到大保存了所有集合元素, 每个跳表节点都保存了一个集合元素, 跳表节点的 <code>object属性</code> 保存了元素的成员, 跳表节点的<code>score属性</code> 保存了元素的分值, 通过跳表可以对有序集合进行范围型操作, eg. <code>zrank</code>, <code>zrange</code> 等就是基于跳表实现的</p>
+<p>此外, zset 结构中的dict字典为有序集合创建了一个从成员到分值的映射, 字典中的每个键值对都保存了一个集合元素: 字典的键保存了元素的成员, 字典的值保存了元素的分值, 通过字典, 程序可以使用 O(1) 复杂度查找给的成员的分支, <code>zscore</code> 命令就是根据这一特性实现的</p>
+<p>有序集合每个元素的成员都是一个字符串对象, 而每个元素的分值都是一个double类型的浮点数, 注意: 虽然zset结构同时使用跳表和字典来保存有序集合元素, 但两者会通过指针共享相同元素的成员和分值, 所以不会产生重复的成员或者分值、也不存在额外的内存浪费</p>
+<p>思考:</p>
+<blockquote>
+<p>为什么有序集合需要同时使用跳跃表和字典来实现 ?</p>
+</blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">理论上, 有序集合可以单独使用字典或者跳表其中一种结构实现, 但无论使用字典还是跳表、都有各自的缺陷. </span><br><span class="line">eg. 若只使用字典实现, 以<span class="constructor">O(1)</span>时间复杂度查找成员分值的特性会被保留、但因为字典以无序的方式来保存集合元素, 在执行`zrank`, `zrange` 时、需要对所有元素排序, 至少需要 <span class="constructor">O(Nlog N)</span>的时间复杂度、及 <span class="constructor">O(<span class="params">n</span>)</span>的空间复杂度(创建一个数组保存排序后的元素).</span><br><span class="line"></span><br><span class="line">若只是有跳表实现, 跳表执行范围查询的操作优点会被保留, 但因为没有字典, 根据成员查找分值的复杂度会从 <span class="constructor">O(1)</span> 上升到 <span class="constructor">O(<span class="params">log</span> N)</span>, 所以 redis选择了同时使用两种数据结构完成.</span><br></pre></td></tr></table></figure>
+
+<p>若price键创建的有序集合对象使用的是skiplist编码、结构如下:</p>
+<p><img src="/images/image-skiplsit%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E5%AF%B9%E8%B1%A1.png" alt="image-20200428205729349"></p>
+<p><img src="/images/image-%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0%E5%90%8C%E6%97%B6%E4%BF%9D%E5%AD%98%E5%9C%A8dict%E5%92%8Cskiplist%E4%B8%AD.png" alt="image-20200428205805589"></p>
+<p>*<em>注意: *</em></p>
+<p>为展示方便、上图在字典和跳表中重复展示了各个元素的成员和分值、但在实际中、字典和跳跃表会共享元素的成员和分值、不会造成任何内存浪费</p>
+<h5 id="编码的转化"><a href="#编码的转化" class="headerlink" title="编码的转化"></a>编码的转化</h5><p>有序集合对象同时满足下边条件时、使用ziplist编码</p>
+<ol>
+<li>有序集合保存的元素数量<code>＜128个</code></li>
+<li>有序集合保存的所有元素成员长度<code>＜64字节</code></li>
+</ol>
+<p><strong>注意</strong></p>
+<p>条件上限值可配置, <code>zset-max-ziplist-entries</code> 和 <code>zset-max-ziplist-value</code> 选项.</p>
+<h5 id="有序集合的命令实现"><a href="#有序集合的命令实现" class="headerlink" title="有序集合的命令实现"></a>有序集合的命令实现</h5><p>有序集合键的值为hash对象、用于有序集合键的所有命令都是针对hash键来构建的, 下边是部分实现:</p>
+<p><img src="/images/image-%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E7%9A%84%E5%AE%9E%E7%8E%B0.png" alt="image-20200428210532386"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/28/redis_object01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/28/redis_object01/" class="post-title-link" itemprop="url">redis对象(一) - 类型和编码</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-28 21:24:06 / 修改时间：21:34:14" itemprop="dateCreated datePublished" datetime="2020-04-28T21:24:06+08:00">2020-04-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reids/" itemprop="url" rel="index"><span itemprop="name">Reids</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/28/redis_object01/" class="post-meta-item leancloud_visitors" data-flag-title="redis对象(一) - 类型和编码" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/28/redis_object01/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/28/redis_object01/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>前边学习了Redis底层实现的各种数据结构, 包括<code>SDS</code>, <code>list</code>, <code>skiplist</code>, <code>dict</code>, <code>intset</code>, <code>ziplist</code>等, 但redis并未直接使用这些数据结构来构建数据库、而是基于这些数据结构构建了一个<code>对象系统</code>, 这个系统包括 <code>字符串对象</code>, <code>列表对象</code>, <code>hash对象</code>,  <code>集合对象</code>, <code>有序集合对象</code>这五种类型的对象. </p>
+<p>通过这5种不同的对象、Redis可以在执行命令前, 根据对象的类型来判断一个对象是否可以执行给定的命令, 使用对象的另一个好处是, 可以针对不同的使用场景、为对象设置不同的数据结构的实现、优化对象在不同使用场景下的使用效率.</p>
+<p>此外、Redis的对象系统还实现了基于引用计数技术的内存回收机制、当程序不再使用某个对象时、对象占用的内存会被自动释放, 且: Redis 还通过引用计数技术实现了对象共享机制, 可以在适当调节下、让多个数据库键共享同一个对象来节约内存</p>
+<p>Redis的对象带有访问时间记录信息, 该信息可以用于计算数据库键的空转时长, 在服务器启用了 <code>maxmemory</code>功能的情况下、空转时长较大的键会被优先删除</p>
+<h4 id="对象的类型和编码"><a href="#对象的类型和编码" class="headerlink" title="对象的类型和编码"></a>对象的类型和编码</h4><p>Redis使用对象表示数据库中的键和值, 当在redis数据库中创建一个键值对时、至少会创建两个对象: 键对象 和 值对象. eg. Set 命令在数据库中创建一个键值对</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; <span class="keyword">set</span> msg <span class="comment">"hello world"</span></span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>就包含了一个键对象<code>msg</code>的字符串对象 和 一个值对象 <code>hello world</code></p>
+<p>Redis中每个对象由一个<code>redisObject</code>结构表示, 和保存数据有关的3个属性分表是 <code>type属性</code>、<code>encoding属性</code> 和 <code>ptr</code>属性</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisObject</span> &#123;</span></span><br><span class="line">  <span class="keyword">unsigned</span> type:<span class="number">4</span>; <span class="comment">// 类型</span></span><br><span class="line">  <span class="keyword">unsigned</span> encoding:<span class="number">4</span>; <span class="comment">// 编码</span></span><br><span class="line">  <span class="keyword">void</span> *ptr; <span class="comment">// 指向底层实现数据结构的指针</span></span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h5><p>对象的<code>type属性</code>记录了对象的类型, 属性值可以是下边任何一个</p>
+<table>
+<thead>
+<tr>
+<th>类型常量</th>
+<th>对象名称</th>
+<th>type命令输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>REDIS_STRING</td>
+<td>字符串对象</td>
+<td>String</td>
+</tr>
+<tr>
+<td>REDIS_LIST</td>
+<td>列表对象</td>
+<td>List</td>
+</tr>
+<tr>
+<td>REDIS_HASH</td>
+<td>hash对象</td>
+<td>Hash</td>
+</tr>
+<tr>
+<td>REDIS_SET</td>
+<td>集合对象</td>
+<td>Set</td>
+</tr>
+<tr>
+<td>REDIS_ZSET</td>
+<td>有序集合对象</td>
+<td>Zset</td>
+</tr>
+</tbody></table>
+<p>对于Redis保存的键值对来说、键总是一个字符串对象, 而值则可以是上边任意一种对象, 所以:</p>
+<ol>
+<li>当我们称呼一个键为<code>字符串键</code>时, 指的是<code>对应的值是字符串对象</code></li>
+<li>当我们称呼一个键为<code>列表键</code>时, 指的是<code>对应的值是列表对象</code></li>
+</ol>
+<p><code>type命令</code>的实现方式与此类似, 执行type命令返回的是值对象的类型, 而不是键对象的类型</p>
+<h5 id="编码和底层实现"><a href="#编码和底层实现" class="headerlink" title="编码和底层实现"></a>编码和底层实现</h5><p>对象的<code>ptr指针</code>指向对象的底层实现数据结构, 而这些数据结构由对象的<code>encoding</code>属性决定, </p>
+<p><code>encoding</code>属性记录了对象使用的编码, 即 对象使用了什么数据结构作为对象的底层实现, 可以是下表的任意一个</p>
+<table>
+<thead>
+<tr>
+<th>编码常量</th>
+<th>编码对应的底层数据结构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>REDIS_ENCODING_INT</td>
+<td>long类型的整数</td>
+</tr>
+<tr>
+<td>REDIS_ENCODING_EMBSTR</td>
+<td>embstr编码的简单动态字符串</td>
+</tr>
+<tr>
+<td>REDIS_ENCODING_RAW</td>
+<td>简单动态字符串</td>
+</tr>
+<tr>
+<td>REDIS_ENCODING_HT</td>
+<td>字典</td>
+</tr>
+<tr>
+<td>REDIS_ENCODING_LIKEDLIST</td>
+<td>双端链表</td>
+</tr>
+<tr>
+<td>REDIS_ENCODING_ZIPLIST</td>
+<td>压缩列表</td>
+</tr>
+<tr>
+<td>REDIS_ENCODING_INTSET</td>
+<td>整数集合</td>
+</tr>
+<tr>
+<td>REDIS_ENCODING_SKIPLIST</td>
+<td>跳表</td>
+</tr>
+</tbody></table>
+<p>Reids每种类型的对象都至少使用了2种不同的编码</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>编码</th>
+<th>对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>redis_string</td>
+<td>redis_encoding_int<br />redis_encoding_embstr<br/>redis_encoding_raw</td>
+<td>使用整数值实现的字符串对象<br />使用embstr编码的简单动态字符串<br/>用简单动态字符串实现的字符串对象</td>
+</tr>
+<tr>
+<td>redis_list</td>
+<td>redis_encoding_ziplist<br />redis_encoding_linkedlist</td>
+<td>使用压缩列表实现的列表对象<br />使用双端链表实现的列表对象</td>
+</tr>
+<tr>
+<td>redis_hash</td>
+<td>redis_encoding_ziplist<br />redis_encoind_ht</td>
+<td>使用压缩列表实现的hash对象<br />使用字典实现的hash对象</td>
+</tr>
+<tr>
+<td>redis_set</td>
+<td>redis_encoding_intset<br />redis_encoding_ht</td>
+<td>使用整数集合实现的集合对象<br />使用字典实现的集合</td>
+</tr>
+<tr>
+<td>redis_zset</td>
+<td>Redis_encoding_ziplist<br/>redis_encoding_skiplist</td>
+<td>使用压缩列表实现的有序集合对象<br/>使用跳表实现的有序集合对象</td>
+</tr>
+</tbody></table>
+<p>使用<code>object encoding</code>命令可以查看一个数据库键的值对象编码</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; <span class="keyword">set</span> msg <span class="comment">"hello world"</span></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">redis&gt; object <span class="comment">encoding msg</span></span><br><span class="line"><span class="string">"embstr"</span></span><br><span class="line"></span><br><span class="line">redis&gt; <span class="keyword">set</span> <span class="comment">story</span> <span class="comment">"long long long ..."</span></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">redis&gt; object <span class="comment">encoding story</span></span><br><span class="line"><span class="string">"raw"</span></span><br></pre></td></tr></table></figure>
+
+<p>通过encoding属性来设定对象使用的编码、而不是为特定类型的对象关联一种固定的编码、极大的提高了redis的灵活性和效率, 允许redis在特定场景下未一个对象设置不同的编码, 优化使用效率.</p>
+<p>eg. 在列表包含对象较少时, redis使用压缩列表作为底层实现, 因为:</p>
+<ol>
+<li>压缩列表比双端链表节省内存, 且元素数量少时、在内存中连续存储的压缩列表比双端链表可以更快的载入缓存</li>
+<li>随元素增多、使用压缩列表保存元素的优势消失时、对象会将底层实现从压缩列表转向功能更强、也适合保存大量元素的双端链表上</li>
+</ol>
+<p>其它类型的对象也会使用不同类型的编码进行类似的优化</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/redis_dict/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/24/redis_dict/" class="post-title-link" itemprop="url">Redis数据结构-字典</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-24 19:25:45" itemprop="dateCreated datePublished" datetime="2020-04-24T19:25:45+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 21:58:49" itemprop="dateModified" datetime="2020-04-28T21:58:49+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/24/redis_dict/" class="post-meta-item leancloud_visitors" data-flag-title="Redis数据结构-字典" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/24/redis_dict/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/24/redis_dict/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>字典又称<code>符号表</code>, <code>关联数组</code>, <code>映射</code>, 是一种用于保存键值对的抽象数据结构</p>
+<p>Redis构建了自己的字典实现, eg. set msg ‘test’会构建<code>key</code>为<code>msg</code>, <code>value</code>为<code>test</code>的键值对.</p>
+<p>除了表示数据库之外, 字典还是hash键的底层实现之一(另外一种是ziplist)</p>
+</blockquote>
+<h4 id="字典实现"><a href="#字典实现" class="headerlink" title="字典实现"></a>字典实现</h4><h5 id="hash表"><a href="#hash表" class="headerlink" title="hash表"></a>hash表</h5><p>Redis字典所使用的哈希表由 dict.h/dictht 结构定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictht</span> &#123;</span></span><br><span class="line">  dictEntry **table; <span class="comment">// hash表数组</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="built_in">size</span>; <span class="comment">// hash表大小</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> sizemask; <span class="comment">// hash表大小掩码, 用于计算hash索引值, 总是=size-1</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> used; <span class="comment">// 已有节点数量</span></span><br><span class="line">&#125;dictht;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-hash.png" alt="空hash表结构示意"></p>
+<h5 id="hash表节点"><a href="#hash表节点" class="headerlink" title="hash表节点"></a>hash表节点</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictEntry</span> &#123;</span></span><br><span class="line">  <span class="keyword">void</span> *key; <span class="comment">// 键</span></span><br><span class="line">  <span class="keyword">union</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> *val;</span><br><span class="line">    unit64_tu64;</span><br><span class="line">    int64_ts64;</span><br><span class="line">  &#125;v; <span class="comment">// 值</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">dictEntry</span> *<span class="title">next</span>;</span><span class="comment">// 指向下个hash节点、形成链表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>key</code>属性保存着键值对中的键、而<code>v</code>属性则保存着键值对中的值, 它可以是一个<code>指针</code>, 或者是<code>uint64_t</code>类型的整数, 或者是 <code>int64_t</code>的整数</p>
+<p><code>next</code>属性是指向另一个节点的指针, 这个指针可以将多个hash值相同的键值对连接在一起, 解决键冲突问题</p>
+<h5 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h5><p>Redis中的字典由 <code>dict.h/dict</code> 结构定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dict</span> &#123;</span></span><br><span class="line">  dictType *type; <span class="comment">// 类型特定函数</span></span><br><span class="line">  <span class="keyword">void</span> *privdata; <span class="comment">// 私有数据</span></span><br><span class="line">  dictht ht[<span class="number">2</span>]; <span class="comment">// hash表</span></span><br><span class="line">  in trehashidx; <span class="comment">// rehash索引, 当rehash不在进行时、值为-1</span></span><br><span class="line">&#125; dict;</span><br></pre></td></tr></table></figure>
+
+<p><code>type</code>属性是一个指向 <code>dictType</code>结构的指针, 每个 dictType结构保存了一簇用于操作特定类型键值对的函数, Redis会为不同类型的字典设置不同类型的特定函数</p>
+<p><code>privdata</code>属性则保存了需要传给那些特定类型函数的可选参数</p>
+<p><code>type</code>和<code>privdata</code>是针对不同类型的键值对, 为创建多态字典设置的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictType</span> &#123;</span></span><br><span class="line">  <span class="function"><span class="keyword">unsigned</span> <span class="title">int</span> <span class="params">(*hashFunction)</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *key)</span></span>; <span class="comment">// 计算hash值的函数</span></span><br><span class="line">  <span class="keyword">void</span> *(*keyDup)(<span class="keyword">void</span> *privdata, <span class="keyword">const</span> <span class="keyword">void</span> *key); <span class="comment">// 复制键的函数</span></span><br><span class="line">  <span class="keyword">void</span> *(valDup)(<span class="keyword">void</span> *privdata, <span class="keyword">const</span> <span class="keyword">void</span> *obj); <span class="comment">// 复制值的函数</span></span><br><span class="line">  <span class="keyword">int</span> (*keyCompare)(<span class="keyword">void</span> *privdata, <span class="keyword">const</span> <span class="keyword">void</span> *key1, <span class="keyword">const</span> <span class="keyword">void</span> *key2); <span class="comment">// 对比键的函数</span></span><br><span class="line">  <span class="keyword">void</span> (*keyDestructor)(<span class="keyword">void</span> *privdata, <span class="keyword">void</span> *key); <span class="comment">// 销毁键的函数</span></span><br><span class="line">  <span class="keyword">void</span> (*valDestructor)(<span class="keyword">void</span> *privdata, <span class="keyword">void</span> *obj); <span class="comment">// 销毁值的函数</span></span><br><span class="line">&#125;dictType;</span><br></pre></td></tr></table></figure>
+
+<p><code>ht</code>属性是一个包含两个项的数组, 数组中的每个项都是一个dictht哈希表, 一般只使用ht[0], ht[1]只会在对ht[0] 进行<code>rehash</code>时使用.</p>
+<p><code>rehashidx</code>记录当前<code>rehash</code>的进度, 若没有在进行<code>rehash</code>, 则值为 <code>-1</code></p>
+<h5 id="完整的dict结构"><a href="#完整的dict结构" class="headerlink" title="完整的dict结构"></a>完整的dict结构</h5><p><img src="/images/image-dict.png" alt="dict结构示意"></p>
+<h4 id="hash算法"><a href="#hash算法" class="headerlink" title="hash算法"></a>hash算法</h4><p>Redis计算hash值的方式如下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hash = dict-&gt;type-&gt;hashFunction(key); <span class="comment">// 使用hash字典设置的hash函数、计算key的hash值</span></span><br><span class="line">index = hash &amp; dict-&gt;ht[x].sizemask; <span class="comment">// 根据sizemask和hash值、计算出hash索引</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="解决键冲突"><a href="#解决键冲突" class="headerlink" title="解决键冲突"></a>解决键冲突</h4><p>当有两个或以上数量的键被分配到hash表数组同一个索引上时, 称为<code>键冲突 collision</code>, Redis的hash表使用 <code>链地址法</code>(<code>separate chaining</code>)来解决冲突, 每个hash表节点上有一个next指针, 多个hash表节点使用next指针构成单链表</p>
+<p><code>dictEntry</code>总是将新增节点添加到链表头部(时间复杂度为 O(1)), 因为没有tail指针.</p>
+<h4 id="rehash"><a href="#rehash" class="headerlink" title="rehash"></a>rehash</h4><p>随着操作的不断进行、hash表维护的键值对会增加或减少, 为了让hash表的负载因子(load factor)维持在一个合理的额范围, 当hash表保存键值对数量太大或太小时, 程序需要对hash表扩容或缩容, 扩容或缩容通过<code>rehash</code>进行, <code>Rehash</code>步骤如下:</p>
+<ol>
+<li>为字典的ht[1]hash表分配空间, hash表的空间大小取决于要执行的操作, 及ht[0]当前包含的键值对的数量(即: ht[0].used 属性值), 若为扩容, ht[1] 为第一个大于等于 (ht[0].used<code>*</code>2)d的*2<sup>n</sup>; 若为缩容, ht[1] 为第一个大于等于 (ht[0].used) 的 2<sup>n</sup> </li>
+<li>将ht[0]中的所有键值对rehash到ht[1]上, <code>rehash</code>是指: 重新计算键的hash值和索引值, 然后将键值对放到ht[1]hash表的对应位置</li>
+<li>当ht[0]包含的所有键值对迁移到ht[1]之后(ht[0]变为空表), 释放ht[0], 将ht[1]设置为 ht[0], 并在 ht[1]新创建一个空白hash表, 为下一次rehash做准备</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">eg. 扩容操作:</span><br><span class="line">ht[<span class="number">0</span>].used = <span class="number">4</span>, <span class="number">4</span>*<span class="number">2</span>=<span class="number">8</span>, 恰好是第一个大于等于<span class="number">4</span>的<span class="number">2</span>的n次方, 所以rehash后、ht[<span class="number">1</span>]size为<span class="number">8</span></span><br><span class="line"></span><br><span class="line">缩容操作:</span><br><span class="line">ht[<span class="number">0</span>].used = <span class="number">4</span>, <span class="number">4</span>=<span class="number">2</span>², 恰好是第一个大于等于<span class="number">4</span>的<span class="number">2</span>的n次方, rehash后 ht[<span class="number">1</span>].size = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="hash表的扩展与收缩"><a href="#hash表的扩展与收缩" class="headerlink" title="hash表的扩展与收缩"></a>hash表的扩展与收缩</h5><p>满足下述任意条件时, 会自动扩展:</p>
+<ol>
+<li><p>server 当前未执行<code>bgsave</code> 或者 <code>bgrewriteaof</code>, 且hash表的负载因子大于等于1</p>
+</li>
+<li><p>server 当前正在执行<code>bgsave</code> 或者 <code>bgrewriteaof</code>, 且 hash表的负载因子大于等于 5</p>
+<p>(持久化时、优先持久化操作)</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load_factor = ht[<span class="number">0</span>].used / ht[<span class="number">0</span>].<span class="built_in">size</span>; <span class="comment">// 负载因子 = hash表已保存节数量 / hash表大小</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>若<code>bgsave</code>或者<code>bgrewriteaof</code>执行时, Redis需要创建当前服务器进程的子进程, 大多数操作系统使用写时复制(<code>copy-on-write</code>)优化子进程使用效率, 所以子进程存在期间, Server会提高rehash操作的负载因子, 尽可能避免此时rehash, 避免不必要的内存写入操作, 最大限度的节省内存.</strong></p>
+<p><strong>另外:</strong></p>
+<p>hash表的负载因子小于<code>0.1</code>时, 程序会自动缩容</p>
+<h4 id="渐进式rehash"><a href="#渐进式rehash" class="headerlink" title="渐进式rehash"></a>渐进式rehash</h4><blockquote>
+<p>其实, hash表的rehash操作、不是一次集中完成的, 而是多次迭代进行的. 因为若 ht[0]里保存的key有百万计, 甚至更多, 一次rehash导ht[1], 庞大的计算量可能会导致Server一段时间的停止服务.</p>
+</blockquote>
+<p>渐进式rehash步骤如下:</p>
+<ol>
+<li>为ht[1]分配空间, 让字典同时持有ht[0] 和 ht[1]两个hash表</li>
+<li>在字典中维护一个索引计数器变量 <code>rehashidx</code>, 设置为0, 表示<code>rehash</code>已经开始</li>
+<li>在<code>rehash</code>期间, 每次对字典<code>add</code>, <code>del</code>, <code>find</code> or <code>update</code>操作, 程序除了执行指定操作外, 还会顺带将 ht[0] hash表在 <code>rehashidx</code>索引上的所有键值对 rehash 到 ht[1], rehash完成、将<code>rehashidx++</code>.</li>
+<li>随字典操作的不断执行、某个时间点, ht[0]的所有键值对rehash到ht[1], rehash完成、将 <code>rehashidx</code>设为 <code>-1</code>.</li>
+</ol>
+<p>渐进式rehash过程中会维护 ht[0] 和 ht[1] 两个hash表, 字典的删除、查找、更新等操作都会在两个hash表上进行, eg. 查找: 会先在 ht[0] 上查找、若未找到则 到 ht[1] 上查找</p>
+<p>但: 插入操作只会在 ht[1] 上操作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ht = dictIsRehashing(d) ? &amp;d-&gt;ht[<span class="number">1</span>] : &amp;d-&gt;ht[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="字典API"><a href="#字典API" class="headerlink" title="字典API"></a>字典API</h5><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dictCreate</td>
+<td>创建一个新的字典</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictAdd</td>
+<td>将给定键值对添加到字典</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictReplace</td>
+<td>添加or替换</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictFetchValue</td>
+<td>返回给定键的值</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictGetRandomKey</td>
+<td>随机返回一个键值对</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictRelease</td>
+<td>释放给定字典, 及字典中包含的所有键值对</td>
+<td>O(N), N为值的数量</td>
+</tr>
+</tbody></table>
+<h4 id="dict总结"><a href="#dict总结" class="headerlink" title="dict总结"></a>dict总结</h4><ul>
+<li>广泛用于实现Redis的各种功能, 包括数据库和hash键</li>
+<li>作为hash表的底层实现, 每个字典有两个hash表、一个平时使用, 一个 rehash 时使用</li>
+<li>使用 <code>Murmurhash2</code> 计算key的hash值</li>
+<li>使用链地址法解决键冲突、同一个索引上的多个键值对连接成一个单链表</li>
+<li>rehash是渐进式完成、非一次性工作</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/redis_list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/24/redis_list/" class="post-title-link" itemprop="url">Redis数据结构-链表</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-24 19:25:32" itemprop="dateCreated datePublished" datetime="2020-04-24T19:25:32+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 21:58:49" itemprop="dateModified" datetime="2020-04-28T21:58:49+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/24/redis_list/" class="post-meta-item leancloud_visitors" data-flag-title="Redis数据结构-链表" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/24/redis_list/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/24/redis_list/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>链表提供了高效的节点重排能力, 及顺序性节点访问方式, Redis构建了自己的链表实现</p>
+</blockquote>
+<h4 id="链表和链表节点的实现"><a href="#链表和链表节点的实现" class="headerlink" title="链表和链表节点的实现"></a>链表和链表节点的实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span>&#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> *<span class="title">prev</span>;</span> <span class="comment">// 前置节点</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> *<span class="title">next</span>;</span> <span class="comment">// 后置节点</span></span><br><span class="line">  <span class="keyword">void</span> *value; <span class="comment">// 节点值</span></span><br><span class="line">&#125;listNode;</span><br></pre></td></tr></table></figure>
+
+<p>多个<code>listNode</code>节点通过 <code>prev</code> 和 <code>next</code>指针组成双端链表, 虽然仅使用多个listNode就可以组成链表, 使用 <code>adlist.h/list</code> 来持有链表会更方便操作.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">list</span>&#123;</span></span><br><span class="line">  listNode *head; <span class="comment">// 表头节点</span></span><br><span class="line">  listNode *tail; <span class="comment">// 表尾结点</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> len; <span class="comment">// 链表包含的节点数量</span></span><br><span class="line">  <span class="keyword">void</span> *(*dup)(<span class="keyword">void</span> *ptr); <span class="comment">// 节点值复制函数</span></span><br><span class="line">  <span class="keyword">void</span> (*<span class="built_in">free</span>)(<span class="keyword">void</span> *ptr); <span class="comment">// 节点值释放函数</span></span><br><span class="line">  <span class="keyword">int</span> (*match)(<span class="keyword">void</span> *ptr, <span class="keyword">void</span> *key); 节点值对比函数</span><br><span class="line">&#125; <span class="built_in">list</span>;</span><br></pre></td></tr></table></figure>
+
+<p>list结构为链表提供了表头指针head、表尾指针tail, 及链表长度计数器len, 而udp, free, match成员则用于实现多态链表所需特定函数.</p>
+<h5 id="Redis-链表实现特性总结"><a href="#Redis-链表实现特性总结" class="headerlink" title="Redis 链表实现特性总结"></a>Redis 链表实现特性总结</h5><ul>
+<li>双端: 有<code>prev</code>和<code>next</code>指针, 获取前置和后置节点的复杂度都是O(1)</li>
+<li>无环: 表头的<code>prev</code>和表尾的<code>next</code>都指向<code>NULL</code>, 对链表的访问以<code>NULL</code>为终点</li>
+<li>带表头和表尾指针: 通过list结构的head和tail指针获取链表的头结点和尾结点复杂度为 O(1)</li>
+<li>带长度计数器: 程序使用list结构的len属性对list节点计数, 获取节点数量的复杂度O(1)</li>
+<li>多态: 链表节点使用 <code>void *</code>指针保存节点值, 可通过list结构的<code>dup</code>, <code>free</code>, <code>match</code>三个属性为节点值设置类型特定的函数, 所以链表可用来保存不同类型的节点值</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/redis_sds/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/24/redis_sds/" class="post-title-link" itemprop="url">Redis数据结构实现-SDS</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-24 19:25:09" itemprop="dateCreated datePublished" datetime="2020-04-24T19:25:09+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 21:58:49" itemprop="dateModified" datetime="2020-04-28T21:58:49+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/24/redis_sds/" class="post-meta-item leancloud_visitors" data-flag-title="Redis数据结构实现-SDS" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/24/redis_sds/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/24/redis_sds/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="SDS-定义"><a href="#SDS-定义" class="headerlink" title="SDS 定义"></a>SDS 定义</h4><p>每个sds.h/sdshdr 结构表示一个SDS值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> len; <span class="comment">// 记录buf数组中已使用字节的数量 (=SDS所保存字符串的长度)</span></span><br><span class="line">  <span class="keyword">int</span> <span class="built_in">free</span>; <span class="comment">// 记录buf数组中未使用的字节的数量</span></span><br><span class="line">  <span class="keyword">char</span> buf[]; <span class="comment">// 字节数组, 保存字符串  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-SDS.png" alt="SDS结构示例"></p>
+<ul>
+<li>free属性值为0, 表示 SDS 未分配 <code>未使用空间</code></li>
+<li>len 属性为5, 表示 SDS 保存了一个5字节长的字符串</li>
+<li>buf 属性是一个char类型的数组, 数组的前5个字节保存了 <code>R</code>, <code>e</code>,<code>d</code>,<code>i</code>, <code>s</code>, 五个字符, 最后一个字节保存了空字符串<code>\0</code></li>
+</ul>
+<h4 id="为什么不使用C原生字符串呢"><a href="#为什么不使用C原生字符串呢" class="headerlink" title="为什么不使用C原生字符串呢 ?"></a>为什么不使用<code>C</code>原生字符串呢 ?</h4><ol>
+<li><code>C</code>字符串获取长度需要遍历, <code>SDS</code>则记录了自身长度(<code>len</code>), 将获取字符串长度的时间复杂度从<code>O(N)</code>降低到了<code>O(1)</code>, 即使反复执行<code>strlen</code>, 也不会对系统造成任何影响</li>
+<li><code>C</code>字符串不记录自身长度, 容易造成缓冲区溢出, eg. strcat可以将字符串拼接, 执行这一操作时, 系统假定用户已分配了足够长度的内存, 假设不成立时, 就会造成缓冲区溢出(覆盖后边的字符)</li>
+<li><code>C</code>的实现是一个<code>N+1</code>字符长的数组, 每次增长或缩短一个C字符串, 都会重新分配内存<ul>
+<li>若增长, eg. <code>append</code>、需要先扩容, 否则会产生内存溢出</li>
+<li>若缩容, eg. <code>trim</code>、需要先缩容, 否则会造成内存泄露</li>
+</ul>
+</li>
+<li>为避免C字符串的缺陷, <code>SDS</code>通过未使用空间分配, 实现了<code>空间预分配</code>和<code>惰性空间释放</code>来优化.<ul>
+<li>空间预分配: 当字符串扩展时, 不仅分配必须空间, 还会分配额外空间(len&lt;1M时, free=len, len&gt;=1M时, free=1M), 来减少连续执行字符串增长需要的内存分配次数, 将字符串连续增长N次需要的内存重分配次数从必定N次, 降低到最多N次</li>
+<li>惰性释放: 用free来标记被释放的空间, 而不真正操作内存, 也提供了API, 在需要时释放free空间, 不必担心惰性释放造成的空间浪费</li>
+</ul>
+</li>
+<li>C字符串用<code>\0</code>标记字符串结尾, 字符串本身不能包含空字符, 使得<code>C</code>字符串只能保存文本数据, 而不能保存图片、音频、视频、压缩文件等二进制数据. 而redis SDS字符靠len属性来判断字符串结尾, 是二进制安全的.</li>
+<li>兼容部分C字符. <code>SDS</code>总在结尾多分配一个字符<code>\0</code> 是为了保证C函数可以正常使用, 避免不必要的代码重复</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
+<thead>
+<tr>
+<th align="left">C字符串</th>
+<th>SDS字符串</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">获取字符串长度时间复杂度 O(N)</td>
+<td>获取字符串长度时间复杂度 O(1)</td>
+</tr>
+<tr>
+<td align="left">API非安全, 可能造成缓冲区溢出</td>
+<td>API安全, 不会操作缓冲区溢出</td>
+</tr>
+<tr>
+<td align="left">修改字符串会造成NN次内存分配</td>
+<td>修改字符串最多N次内存分配</td>
+</tr>
+<tr>
+<td align="left">只保存文本数据</td>
+<td>可以保存文本及二进制数据</td>
+</tr>
+<tr>
+<td align="left">可以使用 &lt;string.h&gt; 库中的函数</td>
+<td>可以使用部分 &lt;string.h&gt; 库中的函数</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/05/jike/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -550,6 +1609,180 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/tools_iptables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/30/tools_iptables/" class="post-title-link" itemprop="url">iptables学习</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-30 18:04:17" itemprop="dateCreated datePublished" datetime="2020-03-30T18:04:17+08:00">2020-03-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 21:58:49" itemprop="dateModified" datetime="2020-04-28T21:58:49+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/30/tools_iptables/" class="post-meta-item leancloud_visitors" data-flag-title="iptables学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/30/tools_iptables/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/30/tools_iptables/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h4><h5 id="基础说明"><a href="#基础说明" class="headerlink" title="基础说明"></a>基础说明</h5><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">iptables并不是真正的防火墙、它只是位于用户空间的一个命令行工具,</span> <span class="string">netfilter 才是真正的安全框架、iptables只是将我们定义的规则转交给netfilter. </span></span><br><span class="line"><span class="attr">netfilter</span> <span class="string">是Linux操作系统核心层的一个数据包处理模块</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="规则链名称"><a href="#规则链名称" class="headerlink" title="规则链名称"></a>规则链名称</h5><p>规则链名称包括以下5个、也被称为5个钩子函数:</p>
+<p><code>INPUT链</code>: 处理输入数据包</p>
+<p><code>OUTPUT链</code>: 处理输出数据包</p>
+<p><code>FORWARD链</code>: 处理转发数据</p>
+<p><code>PREROUTING链</code>: 用于目的地址转换(DNAT)</p>
+<p><code>POSTROUTING链</code>: 用于源地址转换(SNAT)</p>
+<h5 id="报文流向"><a href="#报文流向" class="headerlink" title="报文流向"></a>报文流向</h5><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">本机到某进程: <span class="function"><span class="title">prerouting</span> -&gt;</span> input</span><br><span class="line">本机转发: <span class="function"><span class="title">prerouting</span> -&gt;</span> <span class="function"><span class="title">forward</span> -&gt;</span> postrouting (直接在内核空间转发)</span><br><span class="line">本机进程发出(通常为响应报文): <span class="function"><span class="title">output</span> -&gt;</span> postrouting</span><br><span class="line">即: 当启用你过来防火墙功能时、报文需要经过不同的关卡(链)、但根据情况的不同、会经过不同的链</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="为什么称为链"><a href="#为什么称为链" class="headerlink" title="为什么称为链"></a>为什么称为链</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">防火墙的作用就在于对经过的报文进行规则匹配、然后执行对应的动作、但是每个关卡上可能有很多规则、这些规则按照配置顺序从上到下执行、看起来就像是一个链</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="表"><a href="#表" class="headerlink" title="表"></a>表</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">这么多的链都放了一系列的规则、但是有些很类似、比如A类规则是对ip或者短裤过滤; B类规则是修改报文<span class="built_in">..</span>. , 那么这些类似功能的规则能不能放在一起呢 ?</span><br><span class="line">答案是可以的、iptables提供了如下规则的分类(表):</span><br><span class="line">filter表: 负责过滤功能 , 防火墙; 内核模块 iptable_filter</span><br><span class="line">nat表: 网络地址转换; 内核模块: iptable_nat</span><br><span class="line">mangle表: 解析报文、修改报文、并重新封装 内核模块: iptable_mangle</span><br><span class="line">raw表: 关闭nat表上启用的连接追踪机制; 内核模块: iptable_raw</span><br><span class="line"></span><br><span class="line">当这些表处于同一条链时优先级如下:</span><br><span class="line">raw -&gt;<span class="built_in"> mangle </span>-&gt;<span class="built_in"> nat </span>-&gt; filter</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="防火墙的策略"><a href="#防火墙的策略" class="headerlink" title="防火墙的策略"></a>防火墙的策略</h5><p><code>通</code>: 默认不允许、需要定义谁可以进入</p>
+<p><code>堵</code>: 默认允许、但需要证明自己的身份</p>
+<p>filter功能: 定义允许或者不允许的策略, 工作在 input / output / forward 链</p>
+<p>nat选项: 定义地址转换功能, 工作在 prerouting / output / postrouting 链</p>
+<p>为了让这些功能都工作、制定了<code>表</code>的定义, 来区分不同的工作功能和处理方式</p>
+<h5 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h5><p><code>filter</code> 定义允许或者不允许、工作在 <code>input</code>, <code>output</code>, <code>forward</code> 链上</p>
+<p><code>nat</code> 定义地址转换, 工作在 <code>prerouting</code>, <code>output</code>, <code>postrouting</code> 链上</p>
+<p><code>mangle</code> 修改报文原数据, 5个链都可以工作</p>
+<p>注意: 设置多个规则链时、要把规则严格的放在前边、因为它是从上到下检查的~</p>
+<h5 id="规则动作"><a href="#规则动作" class="headerlink" title="规则动作"></a>规则动作</h5><p><code>accept</code>: 接收数据包</p>
+<p><code>drop</code>: 丢弃数据包</p>
+<p><code>redirect</code>: 重定向、映射、透明代理</p>
+<p><code>snat</code>: 源地址转换</p>
+<p><code>dnat</code>: 目标地址转换</p>
+<p><code>masquerade</code>: ip伪装(nat), 用于ADSL</p>
+<p><code>log</code>: 日志记录</p>
+<h5 id="思考"><a href="#思考" class="headerlink" title="思考:"></a>思考:</h5><p>其实iptables就是帮我们实现了网络包选择、地址转换、报文修改这些功能、为了实现这些功能、它划分了很多链、包括 prerouting、input、forward、output、postrouting, 定义了规则动作 accept、drop、redirect、snat、dnat、log、masquerade来实现这些功能.</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><h5 id="清空当前所有规则和计数"><a href="#清空当前所有规则和计数" class="headerlink" title="清空当前所有规则和计数"></a>清空当前所有规则和计数</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">iptables</span> -F <span class="comment"># 清空所有防火墙规则</span></span><br><span class="line">iptables -X <span class="comment"># 删除用户自定义的空链</span></span><br><span class="line">iptables -Z <span class="comment"># 清空计数</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="配置允许ssh端口连接"><a href="#配置允许ssh端口连接" class="headerlink" title="配置允许ssh端口连接"></a>配置允许ssh端口连接</h5><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s <span class="number">192.168</span><span class="number">.1</span><span class="number">.0</span>/<span class="number">24</span> -p tcp --dport <span class="number">22</span> -j ACCEPT</span><br><span class="line"># <span class="number">22</span>: ssh端口 -s <span class="number">192.168</span><span class="number">.1</span><span class="number">.0</span>/<span class="number">24</span> 被允许的网段、 -j accept 接受这种类型的请求</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="允许本地回环地址可以正常使用"><a href="#允许本地回环地址可以正常使用" class="headerlink" title="允许本地回环地址可以正常使用"></a>允许本地回环地址可以正常使用</h5><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -<span class="built_in">i</span> lo -<span class="built_in">j</span> accept</span><br><span class="line">iptables -A INPUT -o lo -<span class="built_in">j</span> accept</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="设置默认规则"><a href="#设置默认规则" class="headerlink" title="设置默认规则"></a>设置默认规则</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT <span class="keyword">DROP</span> <span class="comment"># 配置默认的不让进</span></span><br><span class="line">iptables -P FORWARD <span class="keyword">DROP</span> <span class="comment"># 默认的不允许转发</span></span><br><span class="line">iptables -P <span class="keyword">OUTPUT</span> <span class="keyword">ACCEPT</span> <span class="comment"># 默认的可以出去</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="配置白名单"><a href="#配置白名单" class="headerlink" title="配置白名单"></a>配置白名单</h5><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p all -s <span class="number">192.168</span><span class="number">.1</span><span class="number">.0</span>/<span class="number">24</span> -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p all -s <span class="number">192.168</span><span class="number">.140</span><span class="number">.0</span>/<span class="number">24</span> -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p tcp -s <span class="number">183.121</span><span class="number">.3</span><span class="number">.7</span> --dport <span class="number">3380</span> -j ACCEPT </span><br><span class="line"># 允许<span class="number">183.121</span><span class="number">.3</span><span class="number">.7</span>访问本机的<span class="number">3380</span>端口</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="开启相应的服务端口"><a href="#开启相应的服务端口" class="headerlink" title="开启相应的服务端口"></a>开启相应的服务端口</h5><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport <span class="number">80</span> -j ACCEPT <span class="comment"># 开启80端口，因为web对外都是这个端口</span></span><br><span class="line">iptables -A INPUT -p icmp --icmp-type <span class="number">8</span> -j ACCEPT <span class="comment"># 允许被ping</span></span><br><span class="line">iptables -A INPUT -m <span class="keyword">state</span> --state ESTABLISHED,RELATED -j ACCEPT <span class="comment"># 已经建立的连接得让它进来</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="保存规则到配置文件"><a href="#保存规则到配置文件" class="headerlink" title="保存规则到配置文件"></a>保存规则到配置文件</h5><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="meta-keyword">/etc/</span>sysconfig/iptables <span class="meta-keyword">/etc/</span>sysconfig/iptables.bak <span class="meta"># 任何改动之前先备份，请保持这一优秀的习惯</span></span><br><span class="line">iptables-save &gt; <span class="meta-keyword">/etc/</span>sysconfig/iptables</span><br><span class="line">cat <span class="meta-keyword">/etc/</span>sysconfig/iptables</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="列出已设置规则"><a href="#列出已设置规则" class="headerlink" title="列出已设置规则"></a>列出已设置规则</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iptables -L [-t 表名] [链名]</span><br><span class="line"></span><br><span class="line">iptables -L -t<span class="built_in"> nat </span>                 # 列出<span class="built_in"> nat </span>上面的所有规则</span><br><span class="line"><span class="comment">#            ^ -t 参数指定，必须是 raw， nat，filter，mangle 中的一个</span></span><br><span class="line">iptables -L -t<span class="built_in"> nat </span> --line-numbers  # 规则带编号</span><br><span class="line">iptables -L INPUT</span><br><span class="line"></span><br><span class="line">iptables -L -nv  # 查看，这个列表看起来更详细</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -t<span class="built_in"> nat </span>-A PREROUTING -d 210.14.67.127 -p tcp --dport 2222  -j DNAT --to-dest 192.168.188.115:22</span><br><span class="line"><span class="comment"># 将本机的 2222端口 映射到虚拟机的 22端口</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="防止SYN洪水攻击"><a href="#防止SYN洪水攻击" class="headerlink" title="防止SYN洪水攻击"></a>防止SYN洪水攻击</h5><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A <span class="keyword">INPUT</span> -p tcp --syn -m <span class="keyword">limit</span> --<span class="keyword">limit</span> <span class="number">5</span>/second -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><blockquote>
+<p>iptables –help 可以看到更多的选项、可以看到每一个选项的解释、本文列出了一些简单使用、欢迎指正、交流~</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/k8s_%E5%A5%91%E6%9C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -658,7 +1891,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_jianshu_migrate/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E4%B8%8D%E8%BF%9E%E7%BB%AD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -672,7 +1905,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/tools_jianshu_migrate/" class="post-title-link" itemprop="url">简书文章迁移hexo</a>
+            <a href="/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E4%B8%8D%E8%BF%9E%E7%BB%AD/" class="post-title-link" itemprop="url">为什么自增主键不连续</a>
         </h1>
 
         <div class="post-meta">
@@ -682,14 +1915,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-20 20:31:49" itemprop="dateCreated datePublished" datetime="2020-03-20T20:31:49+08:00">2020-03-20</time>
+              <time title="创建时间：2020-03-25 09:36:03" itemprop="dateCreated datePublished" datetime="2020-03-25T09:36:03+08:00">2020-03-25</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 21:58:49" itemprop="dateModified" datetime="2020-04-28T21:58:49+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -697,12 +1930,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/03/20/tools_jianshu_migrate/" class="post-meta-item leancloud_visitors" data-flag-title="简书文章迁移hexo" title="阅读次数">
+            <span id="/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E4%B8%8D%E8%BF%9E%E7%BB%AD/" class="post-meta-item leancloud_visitors" data-flag-title="为什么自增主键不连续" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -717,8 +1950,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/tools_jianshu_migrate/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/tools_jianshu_migrate/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E4%B8%8D%E8%BF%9E%E7%BB%AD/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E4%B8%8D%E8%BF%9E%E7%BB%AD/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -733,770 +1966,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="导出markdown文件"><a href="#导出markdown文件" class="headerlink" title="导出markdown文件"></a>导出markdown文件</h4><p>首先登陆简书后台, 下载所有源文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我 -&gt; 设置 -&gt; 账号管理 -&gt; 下载所有文章</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="将源文件替换成我们需要的格式"><a href="#将源文件替换成我们需要的格式" class="headerlink" title="将源文件替换成我们需要的格式"></a>将源文件替换成我们需要的格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 简书文件存放路径</span></span><br><span class="line">src=/Users/xx/Downloads/jianshu</span><br><span class="line">dsc=/Users/xx/Downloads/jianshu-m</span><br><span class="line">date=$(date "+%Y-%m-%d")</span><br><span class="line"></span><br><span class="line">for f in $src/*/*; do</span><br><span class="line">   base=$(basename $f .md)</span><br><span class="line">   catgories=$(basename $(dirname $f) $PWD)</span><br><span class="line">   insert="---\ntitle: $&#123;base&#125;\ndate: $date\ncategories:\n  - $&#123;catgories&#125;\ntags:\n  - $&#123;catgories&#125;\n---\n"</span><br><span class="line">   echo "$&#123;insert&#125;$(cat $f)" &gt; $f  # 将hexo需要的头部内容插入</span><br><span class="line">   lower=$(echo $catgories|tr '[A-Z]' '[a-z]') # 可根据个人需要、这里是为了生成指定分类开头的文件名</span><br><span class="line">   srcFile=$dsc"/"$lower"_"$base".md"</span><br><span class="line">   mv $f $srcFile # 将源文件放到一个文件夹下、统一copy到 _post 文件夹下即可</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="临时解决简书图片链接无法加载"><a href="#临时解决简书图片链接无法加载" class="headerlink" title="临时解决简书图片链接无法加载"></a>临时解决简书图片链接无法加载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">找到主题文件夹下 -&gt; layout文件夹下 -&gt; 有 &lt;head&gt; 标记的文件、</span><br><span class="line">eg. hexo-theme-next主题为:</span><br><span class="line">themes&#x2F;hexo-theme-next&#x2F;layout&#x2F;_layout.swig</span><br><span class="line"></span><br><span class="line">添加meta:</span><br><span class="line">&lt;meta name&#x3D;&quot;referrer&quot; content&#x3D;&quot;no-referrer&quot;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">^.^仅为权宜之计、不想盗链...., 有好的替换方式后更新....</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="本地新增文件图片链接"><a href="#本地新增文件图片链接" class="headerlink" title="本地新增文件图片链接"></a>本地新增文件图片链接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">利用电脑上的各种工具、剪切的图片直接粘贴到 Typora上、会有 copy至 选项, 直接copy到我们的资源目录(你存放image的地方)即可</span><br><span class="line">eg. 如果使用默认配置、应该是 source&#x2F;images&#x2F;</span><br><span class="line">若开启 post_asset_folder: true 则每篇文章的图片会单独存放在一个与文件同名的文件夹内</span><br><span class="line">![1.jpg](&#x2F;images&#x2F;image-20200320205834941.png)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/Tools_idea-leetcode-plugin/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/Tools_idea-leetcode-plugin/" class="post-title-link" itemprop="url">Idea使用leetcode插件</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-12 18:47:25" itemprop="dateModified" datetime="2020-04-12T18:47:25+08:00">2020-04-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/Tools_idea-leetcode-plugin/" class="post-meta-item leancloud_visitors" data-flag-title="Idea使用leetcode插件" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/Tools_idea-leetcode-plugin/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/Tools_idea-leetcode-plugin/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h4><p>这种方式相对比较简单, <code>idea</code> -&gt; <code>Preference</code> -&gt; <code>Plugins</code>, 在跳出界面 <code>Marketplace</code> 选项卡下输入<code>leetcode</code>， 就可以看到 <code>leetcode editor</code>这个插件, 点击 <code>Install</code> 安装后重启即可</p>
-<h4 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h4><p><a href="https://plugins.jetbrains.com/plugin/12132-leetcode-editor" target="_blank" rel="noopener">https://plugins.jetbrains.com/plugin/12132-leetcode-editor</a></p>
-<p>下载插件安装包、idea -&gt; Preference -&gt; Plugins, 设置(齿轮型⚙)的图标, 点击选择 <code>Install from Disk</code>, 找到刚刚下载的插件安装, 然后重启即可</p>
-<p>(PS: 我一般喜欢把插件包放在统一目录下、防止文件清理时误删、放哪里不影响使用)</p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><a href="https://plugins.jetbrains.com/plugin/12132-leetcode-editor" target="_blank" rel="noopener">https://plugins.jetbrains.com/plugin/12132-leetcode-editor</a> 可以参考官方说明.</p>
-<p>0.0 需要先注册leetcode账户, 将idea与leetcode关联起来. 然后、在右侧导航那里就可以看到 leetcode的小图标了.</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-02dfa5bfc0947db3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>点击图中1处: 展开leetcode设置面板,<br>点击图中2处: 设置leetcode账户关联</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6fa76302691112a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="账户设置.png"><br>其中: </p>
-<p>1) URL要选择你注册的地址 leetcode-cn.com 是中文leetcode网站、<br>          leetcode.com 是英文版的网站、与注册要一致、不然会登录失败<br>2) Code Type 是编程语言<br>3) LoginName 和 Password 就是leetcode的账号、密码了~</p>
-<p>点击图中3处: 登录leetcode账户<br>点击图中4处: 拉取题目列表</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-02c9d72dadee990e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="代码模版设置.png"></p>
-<p>代码模版设置:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$&#123;question.content&#125;</span><br><span class="line"></span><br><span class="line">public class P$&#123;question.frontendQuestionId&#125;$!velocityTool.camelCaseName($&#123;question.titleSlug&#125;) &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Solution solution &#x3D; new P$&#123;question.frontendQuestionId&#125;$!velocityTool.camelCaseName($&#123;question.titleSlug&#125;);</span><br><span class="line">        &#x2F;&#x2F; todo </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">      $&#123;question.code&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样就可以愉快的用起来了<sub>~</sub></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/" class="post-title-link" itemprop="url">Hystrix-MDC跟踪</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/" class="post-meta-item leancloud_visitors" data-flag-title="Hystrix-MDC跟踪" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一、实现HystrixConcurrencyStrategy</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MdcHystrixConcurrencyStrategy</span> <span class="keyword">extends</span> <span class="title">HystrixConcurrencyStrategy</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">Callable&lt;T&gt; <span class="title">wrapCallable</span><span class="params">(Callable&lt;T&gt; callable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MdcAwareCallable(callable, MDC.getCopyOfContextMap());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">MdcAwareCallable</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Callable&lt;T&gt; delegate;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, String&gt; contextMap;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MdcAwareCallable</span><span class="params">(Callable&lt;T&gt; callable, Map&lt;String, String&gt; contextMap)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.delegate = callable;</span><br><span class="line">            <span class="keyword">this</span>.contextMap = contextMap != <span class="keyword">null</span> ? contextMap : <span class="keyword">new</span> HashMap();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> T <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                MDC.setContextMap(contextMap);</span><br><span class="line">                <span class="keyword">return</span> delegate.call();</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                MDC.clear();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>二、注册一个插件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HystrixConfig</span> </span>&#123;</span><br><span class="line">    <span class="comment">//用来拦截处理HystrixCommand注解</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HystrixCommandAspect <span class="title">hystrixAspect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HystrixCommandAspect();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        HystrixPlugins.getInstance().registerConcurrencyStrategy(<span class="keyword">new</span> MdcHystrixConcurrencyStrategy());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>三、mq producer 和 consumer之间的trace跟踪</p>
-<blockquote>
-<p>正常情况下、用msgId就可以了、有些数据分析需要trace来全局跟踪</p>
-</blockquote>
+          <h4 id="自增值保存在哪儿"><a href="#自增值保存在哪儿" class="headerlink" title="自增值保存在哪儿"></a>自增值保存在哪儿</h4><p>实际上表的结构定义保存在 .frm 文件里、但是不会保存自增值、自增值的保存跟具体引擎有关:<br>MySIAM 引擎保存在数据文件中.<br>Innodb的自增保存在内存, 8.0版本之后、提供持久化.<br>8.0 之前的版本只保存在内存中、每次重启、第一次打开表的时候、会找自增值的最大值 max(id), 将 max(id) + 1, 作为当前表的自增值.<br>8.0将自增值的变更记录在了redo log中、重启时依靠redo log恢复重启之前的值.</p>
+<h4 id="自增值修改机制"><a href="#自增值修改机制" class="headerlink" title="自增值修改机制"></a>自增值修改机制</h4><p>MySQL、若字段id被定义为 auto_increment, 在插入一行数据的时候、自增值的行为如下:</p>
 <ol>
-<li><p>在生产者的消息属性中加入traceId</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SendResult result = <span class="keyword">null</span>;</span><br><span class="line"> Message msg = <span class="keyword">new</span> Message(topic, tag, key, val.getBytes());</span><br><span class="line"> msg.putUserProperty(<span class="string">"traceId"</span>, MDC.get(TraceConst.TRACE_KEY));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在消费者中取出traceId、放入MDC</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MessageExt msgExt = msgs.get(i);</span><br><span class="line">                        String msgId = msgExt.getMsgId();</span><br><span class="line">                        String msgBody = <span class="keyword">new</span> String(msgExt.getBody());</span><br><span class="line">                        MDC.put(TraceConst.TRACE_KEY, msgExt.getUserProperty(<span class="string">"traceId"</span>));</span><br><span class="line">                        logger.info(<span class="string">"msgs-size=&#123;&#125;, msgId=&#123;&#125;, msgBody=&#123;&#125;"</span>, msgs.size(), msgId, msgBody);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>部分源码<br><img src="https://upload-images.jianshu.io/upload_images/14027542-44bfdc7e5e6f2949.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-</li>
+<li>若插入数据时id字段指定为0、null或者未指定值、那么就把这个表当前 auto_increment值填到自增字段.</li>
+<li>若插入数据时、id字段指定了具体值 、直接使用语句指定值.<br>若待插入值是 X、当前自增是 Y<br>1) X&lt;Y, 自增保持不变<br>2) 若X&gt;=Y, 将自增修改为新的值<br>从auto_increment_offset 开始、以 auto_increment_increment为步长、持续叠加、直到找到第一个大于X的值、作为新的自增值</li>
 </ol>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-87639bf3513c1838.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>文章参考<br><a href="https://my.oschina.net/u/3748347/blog/1823392" target="_blank" rel="noopener">https://my.oschina.net/u/3748347/blog/1823392</a><br><a href="https://wanghaolistening.github.io/2019/01/26/Hystrix-%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" target="_blank" rel="noopener">https://wanghaolistening.github.io/2019/01/26/Hystrix-%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java元注解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="Java元注解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Java中元注解有4个：<code>@Retention</code>, <code>@Target</code>, <code>@Document</code>, <code>@Inherited</code></p>
-<p><code>@Retention</code>注解的保留位置：<br><code>@Retention(RetentionPolicy.SOURCE)</code> 注解仅存在于源码中、在class字节码文件中不存在<br><code>@Retention(RetentionPolicy.CLASS)</code> 默认保留策略、注解会在class文件中存在、但、运行时无法获得<br><code>@Retention(RetentionPolicy.RUNTIME)</code> 注解会在class文件中存在、并且可以通过反射得到</p>
-<p><code>@Target</code> 注解的作用目标<br><code>@Target(ElementType.TYPE)</code> 接口、类、枚举、注解<br><code>@Target(ElementType.FIELD)</code> 字段、枚举的常量<br><code>@Target(ElementType.METHOD)</code> 方法<br><code>@Target(ElementType.PARAMETER)</code> 方法参数<br><code>@Target(ElementType.CONSTRUCTOR)</code> 构造函数<br><code>@Target(ElementType.LOCAL_VARIABLE)</code> 局部变量<br><code>@Target(ElementType.ANNTATION_TYPE)</code> 注解<br><code>@Target(ElementType.PACKAGE)</code> 包</p>
-<p><code>@Document</code> 说明该注解将会被包含在javadoc中</p>
-<p><code>@Inherited</code> 说明子类可以继承父类中的该注解</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" class="post-title-link" itemprop="url">Java多线程实现基础(一)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" class="post-meta-item leancloud_visitors" data-flag-title="Java多线程实现基础(一)" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="CPU-的术语介绍"><a href="#CPU-的术语介绍" class="headerlink" title="CPU 的术语介绍"></a>CPU 的术语介绍</h4><p><code>内存屏障</code>: <code>memory barriers</code> 一组处理器指令、用于实现对内存操作的顺序限制</p>
-<p><code>缓冲行</code>: <code>cache line</code> cpu高速缓冲中可以分配的最小存储单位<br>         处理器填写缓冲行时、会加载整个缓存行、现代CPU需要执行几百次CPU指令</p>
-<p><code>原子操作</code>: <code>atomic operations</code> 不可中断的一个或者一系列操作</p>
-<p><code>缓冲行填充</code>: <code>cache line fill</code>当处理器识别到从内存中读取的操作数是可缓存的,<br>        处理器读取整个高速缓存行到适当的缓存(L1,L2,L3或者所有)</p>
-<p><code>缓存命中</code>: <code>cache hit</code>如果进行高速缓存行填充操作的内存位置仍然是下次处理器访问的<br>地址时、处理器从缓存行读取而不是从内存读取</p>
-<p><code>写命中</code>: <code>write hit</code> 当处理器将操作数写回到内存缓存时、会先检查这个缓存的内存地址<br>是否在缓存行中、如果存在一个有效的缓存行、处理器会将这个操作数歇会到缓存、而不是内存</p>
-<p><code>写缺失</code>: <code>write misses the cache</code> 一个有效的缓存行被写入到不存在的内存区域</p>
-<p><code>比较并交换</code>: <code>Compare and Swap</code> cas操作需要两个值, old and new、在操作期间会比较这<br>两个值、如果发生变化则不交换、未发生变化才交换</p>
-<p><code>CPU流水线</code>: <code>CPU pipeline</code>在CPU中由5、6个不同的电路单元组成一条指令处理流水线<br>然后一条X86指令分成5~6步后再由这些电路单元分别执行、就能实现在一个CPU周期内完成<br>一条指令、提高CPU的运算速率</p>
-<p><code>内存顺序冲突</code>: <code>memory order violation</code>一般是由假共享引起的、是指多个CPU同时修改<br>同一个缓存行的不同部分而引起其中一个CPU的操作无效、当出现这个内存顺序冲突时、CPU必须清空流水线</p>
-<h4 id="Lock前缀的指令"><a href="#Lock前缀的指令" class="headerlink" title="Lock前缀的指令"></a>Lock前缀的指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lock 前缀的指令、在多核处理器下会引发两件事:</span><br><span class="line">1. 将当期处理器的缓存行数据写回内存</span><br><span class="line">2. 这个写回内存操作会使在其它CPU里缓存了该地址的数据无效</span><br></pre></td></tr></table></figure>
-
-<h4 id="volatile的实现"><a href="#volatile的实现" class="headerlink" title="volatile的实现"></a>volatile的实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为了提高速度、CPU不直接和内存通信、而是先将系统内存的数据加载到内存缓存后再操作</span><br><span class="line">但: 操作完全不知道何时会被写回内存</span><br><span class="line"></span><br><span class="line">volatile声明的变量进行读写、JVM会向处理器发送一条Lock前缀的指令、精讲变量所在的</span><br><span class="line">缓存行数据写回到内存</span><br><span class="line"></span><br><span class="line">在多核处理器下、实现了缓存一致性协议、每个处理器通过嗅探在总线上传播的数据来检查</span><br><span class="line">自己的缓存是否已过期、当处理器发现自己缓存行对应的内存地址呗修改、会将当期处理器的</span><br><span class="line">缓存行状态设为无效、重新从系统内存读取</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="post-title-link" itemprop="url">Java多线程实现基础(二)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="post-meta-item leancloud_visitors" data-flag-title="Java多线程实现基础(二)" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h4><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. 线程通信</span><br><span class="line">   线程之间以何种方式进行消息传递</span><br><span class="line">   共享内存 &amp; 消息传递</span><br><span class="line">   </span><br><span class="line">2. 线程同步</span><br><span class="line">   程序间用于控制不同线程间操作发生相对顺序的机制</span><br><span class="line">   </span><br><span class="line">   java是共享内存模型】采用的是隐式通信、显式修改</span><br><span class="line">   </span><br><span class="line">   jvm定义了线程和主内存(Main Memory)之间的关系:</span><br><span class="line">   1) 线程之间的共享变量存储在主内存中</span><br><span class="line">   2) 线程私有变量存储在私有本地内存 Local Memory中、</span><br><span class="line">      本地内存是jvm的一个抽象概念、并非真实存在、涵盖缓存、缓冲区、寄存器及其它硬件及编译器优化</span><br><span class="line">   Java同步原语(synchronize volatile  final)</span><br></pre></td></tr></table></figure>
-
-<h3 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 编译器重排</span><br><span class="line">   在不改变单线程语义的条件下、编译器可以重排指令的执行顺序</span><br><span class="line">2. 指令重排 </span><br><span class="line">   现代cpu采用了指令级并行技术、可以同时执行多条指令、若无数据依赖、</span><br><span class="line">   处理器可以改变机器指令的执行顺序</span><br><span class="line">3. 内存系统的重排</span><br><span class="line">   由于处理器采用缓存和读写缓冲区、使得加载和存储操作看上去是乱序的、</span><br><span class="line">   可能在乱序执行</span><br></pre></td></tr></table></figure>
-
-<h4 id="jvm-指令执行"><a href="#jvm-指令执行" class="headerlink" title="jvm 指令执行"></a>jvm 指令执行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">未使用同步的程序在jvm中的执行基本无序、</span><br><span class="line">1. jvm不保证单线程内的操作会按照程序代码顺序执行、临界区指令重排</span><br><span class="line">2. jvm不保证所有线程看到的执行顺序一致</span><br><span class="line">3. jvm不保证64位的long、double类型写操作具有原子性</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_Java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">Java类的加载和继承实现</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_Java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0/" class="post-meta-item leancloud_visitors" data-flag-title="Java类的加载和继承实现" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_Java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="类方法-amp-实例方法"><a href="#类方法-amp-实例方法" class="headerlink" title="类方法 &amp; 实例方法"></a>类方法 &amp; 实例方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">类方法:(静态方法) static修饰、可以通过类名直接访问、</span><br><span class="line">实例方法: 无static修饰、必须通过创建的实例才能访问</span><br><span class="line"></span><br><span class="line">类变量和实例变量同理</span><br><span class="line"></span><br><span class="line">实例方法可以直接访问实例变量 ?</span><br><span class="line">因为在实例方法中、有一个隐含的参数(当前操作的对象本身)</span><br><span class="line">1. 类方法只能调用类方法、访问类变量, 不能访问实例方法和实例变量</span><br><span class="line">2. 实例方法可以访问类方法、类变量、实例方法、实例变量</span><br></pre></td></tr></table></figure>
-<p><strong>可以将类看成自定义数据类型</strong></p>
-<h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1. 定义一个类本身、什么都不会做、不会分配内存、也不会执行代码</span><br><span class="line">2. 声明变量本身只分配存放位置的内存空间、这块空间还未指向任何实际内容</span><br><span class="line">3. p &#x3D; new Point(); </span><br><span class="line">   1) 分配内存、以存储新对象的数据(这个对象的属性、包括实例变量x|y)</span><br><span class="line">   2) 给实例变量设置默认值、int-&gt;0 boolean-&gt;false char-&gt;\u000 refer-&gt;null</span><br><span class="line"></span><br><span class="line">4. 修改变量默认值</span><br><span class="line">   1) 定义的同时、初始化 private int x &#x3D; 1;</span><br><span class="line">   2) 初始化代码块 private int y; &#123;y&#x3D;2&#125;  </span><br><span class="line">   3) 构造方法 </span><br><span class="line">   调用顺序 1) -&gt; 2) -&gt; 3)  所以、若多种方式定义了默认值、前边的会被后边的覆盖</span><br><span class="line"></span><br><span class="line">5. final修饰类变量、实例变量、表示变量只能被赋值一次、final也可以修饰实例方法</span><br></pre></td></tr></table></figure>
-
-<h4 id="类和对象的生命周期"><a href="#类和对象的生命周期" class="headerlink" title="类和对象的生命周期"></a>类和对象的生命周期</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. 程序运行时、第一次通过new创建一个类的对象的时候、or 直接通过类名访问类变量&#x2F;类方法的时候、</span><br><span class="line">   Java会讲类加载进内场、为这个类分配一块空间、保护类的定义、有哪些变量和方法、</span><br><span class="line">   还有类的静态变量、并对静态变量赋初值</span><br><span class="line">   </span><br><span class="line">   类加载进内存后一般不会释放、直到程序结束、一般情况下、只加载一次(静态变量在内存中只存在一份)</span><br><span class="line">   </span><br><span class="line">2. 对象 每次new、都会产生一个新的实例、会有一份独立的实例变量</span><br><span class="line">   每个对象除了保存实例变量的值、还保存着对应类的地址、即: 通过对象可以知道类、就能访问到类的变量和方法</span><br><span class="line">   实例方法可以理解为多了this参数的静态方法</span><br><span class="line">   </span><br><span class="line">   对象的释放是被Java的垃圾回收机制管理的</span><br><span class="line">   a. 保存地址的部分分配在桟上、函数调用入栈就分配、出栈就释放</span><br><span class="line">   b. 保存内容的部分分配在堆上、无活跃变量指向对象的时候(已加载的类的类变量和桟中所有的变量)、</span><br><span class="line">      就可能被释放</span><br></pre></td></tr></table></figure>
-
-<h4 id="类继承"><a href="#类继承" class="headerlink" title="类继承"></a>类继承</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1. java 使用extends表明继承关系、一个类只有一个父类</span><br><span class="line">2. 子类不可访问父类的私有属性和方法、可以访问 protected 和 public 的</span><br><span class="line"></span><br><span class="line">3. 向上转型: 子类对象赋值给父类引用变量(转换为父类类型)、</span><br><span class="line"></span><br><span class="line">4. 多态: 变量shape可以引用任何Shape子类类型的对象、即一种类型的变量、可以引用多种实际类型对象</span><br><span class="line">   变量shape有两种类型、类型Shape: 称为shape的静态类型、circle&#x2F;line&#x2F;arrowLine 称为shape的动态类型</span><br><span class="line">   </span><br><span class="line">5. 动态绑定: shapes[i].draw() 调用的是其对应动态类型的draw方法、称为方法的动态绑定</span><br><span class="line"></span><br><span class="line">6. 若父类只有一个带参数的构造方法、则所有子类都必须通过super调用base的带参构造</span><br><span class="line"></span><br><span class="line">7. 若父类构造方法调用了可被重写的方法、可能会出现意想不到的结果</span><br><span class="line"></span><br><span class="line">8. 静态绑定: 在类的内部、访问的是当前类</span><br><span class="line">   在类的外部、要看如何访问、静态类型是父类、则访问的是父类</span><br><span class="line"></span><br><span class="line">9. 静态变量和方法、一般通过类名直接访问、也可以通过实例对象来访问</span><br><span class="line"></span><br><span class="line">10. 在有多个重名函数的时候、首先按照参数类型进行匹配、然后才看变量的动态类型、进行动态绑定</span><br><span class="line"></span><br><span class="line">11. 模板方法: 在父类定义一个实现的模板、具体实现由子类提供</span><br><span class="line"></span><br><span class="line">12. 子类可以升级父类的可见性、不可降低</span><br></pre></td></tr></table></figure>
-
-<h4 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">在Java中、类的加载时将类的相关信息加载到内存、Java是动态加载的、第一次使用时才会加载</span><br><span class="line">加载一个类时、会查看其父类是否已加载、若没有、会加载其父类</span><br><span class="line"></span><br><span class="line">类初始化代码:</span><br><span class="line">1. 定义静态变量时的赋值语句</span><br><span class="line">2. 静态初始化代码块</span><br><span class="line"></span><br><span class="line">实例初始化代码:</span><br><span class="line">1. 定义实例变量时的赋值语句</span><br><span class="line">2. 实例初始化代码块</span><br><span class="line">3. 构造方法</span><br><span class="line"></span><br><span class="line">类加载过程:</span><br><span class="line">1. 分配内存保存类的信息</span><br><span class="line">2. 给类变量赋默认值</span><br><span class="line">3. 加载父类</span><br><span class="line">4. 设置父子关系</span><br><span class="line">5. 执行类初始化代码(先执行父类 -&gt; 子类、不过父类执行时、子类静态变量是有值的、默认值)</span><br><span class="line"></span><br><span class="line">内存分为堆(存放动态分配的对象)和桟(存放函数的局部变量)、还有一个内存区: 方法区(存放类的信息)</span><br><span class="line"></span><br><span class="line">创建对象:</span><br><span class="line">1. 分配内存</span><br><span class="line">   包括本类和父类的所有实例变量、但不包括任何静态变量</span><br><span class="line">   实例化代码从父类开始、再执行子类</span><br><span class="line">   但: 在任何类执行初始化代码之前、所有的实例变量都已设置完默认值</span><br><span class="line">   </span><br><span class="line">2. 对所有的实例变量赋默认值</span><br><span class="line">3. 执行实例初始化代码</span><br><span class="line"></span><br><span class="line">**Note** </span><br><span class="line">每个对象除了保存类的实例变量之外、还保存着实际类信息的引用</span><br></pre></td></tr></table></figure>
-
-<h4 id="虚方法表"><a href="#虚方法表" class="headerlink" title="虚方法表"></a>虚方法表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在类加载的时候、为每个类创建一个表、包括类的对象所有动态绑定的方法及地址、包括父类的方法</span><br><span class="line">但同一个方法只有一条记录、子类重写之后就只会保留子类的</span><br></pre></td></tr></table></figure>
-
-<h4 id="疑问"><a href="#疑问" class="headerlink" title="疑问:"></a>疑问:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Q. 实例变量的初始化是在new的时候进行的、类变量的初始化呢 ？(MyNumber.class)</span><br><span class="line">A. Java对静态类的初始化</span><br><span class="line">   1) 为类里边的静态变量分配内存空间、并赋初值</span><br><span class="line">   2) 按照初始化的代码顺序对类变量进行初始化</span><br><span class="line">   </span><br><span class="line">Q: 父子类、同名静态变量在内存中如何保存 ？</span><br><span class="line">   同名实例变量呢 ？</span><br><span class="line">A: 对于子类来说、会保存两份、静态类型是哪个的时候、访问的就是哪个</span><br></pre></td></tr></table></figure>
-
-<p>参考：<br><a href="https://mp.weixin.qq.com/s/u_WmkE5meMWuZ81G5gHhBQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/u_WmkE5meMWuZ81G5gHhBQ</a></p>
-<p>代码整理:<br><a href="https://github.com/niujing1/javaLearn/tree/master" target="_blank" rel="noopener">https://github.com/niujing1/javaLearn/tree/master</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">Java线程池初探</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" class="post-meta-item leancloud_visitors" data-flag-title="Java线程池初探" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="线程池类型"><a href="#线程池类型" class="headerlink" title="线程池类型"></a>线程池类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1. newSingleThreadExecutor </span><br><span class="line">   -&gt; return new ThreadPoolExecutor(1, 1, 0L, </span><br><span class="line">                                      TimeUnit.MILLISECONDS, new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">   只使用一个线程、使用无界队列 LinkedBlockingQueue, 线程创建后不会超时终止、该线程顺序执行所有任务</span><br><span class="line">   适用于需要确保所有任务呗顺序执行的场合</span><br><span class="line"></span><br><span class="line">1. newFixedThreadPool </span><br><span class="line">   -&gt; ThreadPoolExecutor(nThreads, nThreads, 0L, </span><br><span class="line">                         TimeUnit.MILLISECONDS,new LinkedBlockingQueue&lt;Runnable&gt;())</span><br><span class="line">   保持固定线程数、新的任务进入、会放进任务队列                       </span><br><span class="line">   </span><br><span class="line">2. newCachedThreadPool </span><br><span class="line">   -&gt; ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, </span><br><span class="line">                         TimeUnit.SECONDS, new SynchronousQueue&lt;Runnable&gt;())</span><br><span class="line">   任务到达、有空闲线程就复用、无空闲线程就创建</span><br><span class="line">   任务执行完、线程最大空闲时间60s、超过60s会被销毁                     </span><br><span class="line">                         </span><br><span class="line">3. new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 3,</span><br><span class="line">                          200, 1,TimeUnit.MINUTES, new ArrayBlockingQueue&lt;Runnable&gt;(100000), new DefaultThreadFactory())</span><br></pre></td></tr></table></figure>
-
-<h4 id="核心参数"><a href="#核心参数" class="headerlink" title="核心参数"></a>核心参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">corePoolSize: 线程池中维护的核心线程数、空闲依然存在、除非设置了 allowCoreThreadTimeOut 参数</span><br><span class="line">maximumPoolSize: 最大线程数</span><br><span class="line">keepAliveTime: 线程池中的线程数 &gt; 核心线程数的时候、空闲线程最大idle的时间</span><br><span class="line">workQueue: 任务队列</span><br></pre></td></tr></table></figure>
-
-<h4 id="Queue类型"><a href="#Queue类型" class="headerlink" title="Queue类型"></a>Queue类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. LinkedBlockingQueue</span><br><span class="line">2. SynchronousQueue</span><br><span class="line">3. ArrayBlockingQueue</span><br><span class="line">4.</span><br></pre></td></tr></table></figure>
-
-<h4 id="reject"><a href="#reject" class="headerlink" title="reject"></a>reject</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. ThreadPoolExecutor.AbortPolicy：这就是默认的方式，抛出异常</span><br><span class="line">2. ThreadPoolExecutor.DiscardPolicy：静默处理，忽略新任务，不抛异常，也不执行</span><br><span class="line">3. ThreadPoolExecutor.DiscardOldestPolicy：将等待时间最长的任务扔掉，然后自己排队</span><br><span class="line">4. ThreadPoolExecutor.CallerRunsPolicy：在任务提交者线程中执行任务，而不是交给线程池中的线程执行</span><br><span class="line"></span><br><span class="line">拒绝策略只有在队列有界，且maximumPoolSize有限的情况下才会触发</span><br><span class="line">如果队列无界，服务不了的任务总是会排队，但这不见得是期望的，因为请求处理队列可能会消耗非常大的内存，甚至引发内存不够的异常</span><br><span class="line">如果队列有界但maximumPoolSize无限，可能会创建过多的线程，占满CPU和内存，使得任何任务都难以完成</span><br><span class="line">在任务量非常大的场景中，让拒绝策略有机会执行是保证系统稳定运行很重要的方面</span><br></pre></td></tr></table></figure>
-
-<h4 id="线程池的选择"><a href="#线程池的选择" class="headerlink" title="线程池的选择"></a>线程池的选择</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 在系统负载很高的情况下、newFixedThreadPool可以通过队列对新任务排队、保证有足够的资源处理实际任务</span><br><span class="line">   而newCachedThreadPool会为每一个任务创建一个线程、导致创建过多的线程竞争CPU和内存资源、</span><br><span class="line">   使得任何任务都难以完成、此时使用newFixedThreadPool更合适</span><br><span class="line">2. 若系统负载不太高、单个任务执行时间也比较短、newCachedThreadPool 因为不用排队、效率可能更高</span><br><span class="line"></span><br><span class="line">3. 系统负载可能极高的情况下、两者都不是最好的选择</span><br><span class="line">   newFiexedThreadPool的问题是: 队列过长、占用更多内存</span><br><span class="line">   newCachedThreadPool的问题是: 线程数过多、导致过多线程竞争CPU和内存资源</span><br></pre></td></tr></table></figure>
-
-<h4 id="线程池的死锁"><a href="#线程池的死锁" class="headerlink" title="线程池的死锁"></a>线程池的死锁</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">若任务之间有依赖、可能会出现线程池的死锁</span><br><span class="line">eg. 线程池的大小为5、taskA 提交了5个任务、taskA会提交5个taskB、taskB因为无法创建新的线程只能在等待队列进行等待</span><br><span class="line">    而taskA一直在等待taskB的处理结果、这样就会造成线程池的死锁</span><br><span class="line">    </span><br><span class="line">resolve: </span><br><span class="line">1. 使用 newCachedThreadPool 替代 fixed: 这样、有新的任务提交就会创建新的线程</span><br><span class="line">2. 使用 SynchronousQueue 这样、入队成功就意味着有线程接受处理、若入队失败、就会触发reject机制、不管怎么样、都不会死锁了</span><br><span class="line">   static ExecutorService executor &#x3D; new ThreadPoolExecutor(</span><br><span class="line">        THREAD_NUM, THREAD_NUM, 0, TimeUnit.SECONDS, </span><br><span class="line">        new SynchronousQueue&lt;Runnable&gt;());</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="note"><a href="#note" class="headerlink" title="note"></a>note</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 核心线程不会预先创建，只有当有任务时才会创建</span><br><span class="line">2. 核心线程不会因为空闲而被终止，keepAliveTime参数不适用于它</span><br><span class="line">3. 核心线程干预</span><br><span class="line">   1) public int prestartAllCoreThreads() 预先创建所有的核心线程</span><br><span class="line">   2) public boolean prestartCoreThread() 创建一个核心线程，如果所有核心线程都已创建，返回false</span><br><span class="line">   3) public void allowCoreThreadTimeOut(boolean value) 如果参数为true，则keepAliveTime参数也适用于核心线程</span><br></pre></td></tr></table></figure>
+<h4 id="自增值的修改时机"><a href="#自增值的修改时机" class="headerlink" title="自增值的修改时机"></a>自增值的修改时机</h4><p>若表t已有记录(1,1,1)、再执行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(<span class="literal">null</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>语句执行流程是:</p>
+<ol>
+<li>调用innodb引擎接口、写入一行、传入值(0, 1, 1);</li>
+<li>innodb发现用户没有指定自增id值、获取表t当前的自增值为2;</li>
+<li>将传入行的值改为 (2,1,1);</li>
+<li>将表的自增改为3</li>
+<li>继续执行插入、由于已经存在c=1的记录、出现唯一键冲突、报错返回.<br>所以、主键自增修改是在真正的插入操作之前、真正执行的时候唯一键冲突、id=2插入失败、但自增值不会回退. 这之后的数据插入自增基础就是3、所以, 唯一键冲突是导致自增id不连续的第一种原因.</li>
+</ol>
+<p>事务回滚也会产生类似的现象、这是第二种原因.</p>
+<h4 id="那么为什么MySQL不设计自增值可以回滚呢"><a href="#那么为什么MySQL不设计自增值可以回滚呢" class="headerlink" title="那么为什么MySQL不设计自增值可以回滚呢 ?"></a>那么为什么MySQL不设计自增值可以回滚呢 ?</h4><p>假设有两个并行事务、在申请自增值的时候、为了避免两个事务申请到相同的自增id、就需要加锁、顺序申请.</p>
+<ol>
+<li>假设事务A申请到id=2、事务B申请到id=3, 此时表t的自增值是4, 之后继续执行</li>
+<li>事务B正确提交、事务A出现唯一键冲突.</li>
+<li>若允许事务A将自增值回退、则出现、表里已有id=3的行、而当前自增是2 的现象</li>
+<li>接下来其它语句申请到 id=2、然后再申请到id=3、就会出现主键冲突.<br>解决这个冲突有两个办法:</li>
+<li>每次申请id之前、先判断表里是否已存在这个id、若存在、就跳过、但成本较高、本来申请id是一个很快的操作、现在还要去主键索引上判断id是否存在</li>
+<li>把自增id的锁范围扩大、必须等上一个事务执行完成、下一个才能申请. 但会大大的影响并发性能.<br>所以、MySQL放弃了自增值回退、只保证自增、不保证连续.</li>
+</ol>
+<h4 id="自增锁优化"><a href="#自增锁优化" class="headerlink" title="自增锁优化"></a>自增锁优化</h4><p>自增锁并不是事务锁、每次申请完就释放、以便别的事务再申请. 一起看下自增锁演进的过程:</p>
+<p>5.0版本、自增锁是语句级别、若一个语句申请了一个表自增锁、锁会等语句结束才释放. 影响并发度.<br>5.1.22新增参数 innodb_autoinc_lock_mode, 默认1<br>设为0: 表示采用5.0版本策略、语句执行结束释放锁<br>设为1: 普通insert、自增锁申请之后、立即释放; 类似insert…select批量插入语句、要等语句结束才释放<br>设为2: 所有语句都是申请后就释放.</p>
+<p>批量插入语句、预先不知道要申请多少个自增id、一种直接想法是: 需要是就申请一个. 但若需要10w个自增的话、就需要申请10w次、会速度很慢、且影响并发插入性能.所以、批量申请的话、Mysql会使用指数级分配.</p>
+<p>这是自增出现不连续的第三个原因.</p>
 
       
     </div>
@@ -1516,7 +2015,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1584,14 +2083,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

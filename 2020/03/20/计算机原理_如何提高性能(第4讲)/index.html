@@ -277,10 +277,10 @@
 <p><code>程序的cpu执行时间</code> = <code>cpu时钟周期数</code> x <code>时钟周期时间</code><br>cpu 时钟周期时间越小、散热的压力也就越大<br><code>cpu时钟周期数</code> = <code>指令数</code> x <code>cpi</code> x <code>Clock Circle Time</code><br><code>cpi</code> : 每条指令的平均时钟周期数 Cycles Per Instruction</p>
 <p>时钟周期时间: 取决于硬件<br>CPI: 取决于一条指令需要多少CPU周期、<br>指令数: 代表程序执行需要多少指令、用哪些指令</p>
 <p><code>功耗</code> ~= <code>1/2</code> x <code>负载电容</code> x <code>电压的平方</code> x <code>开关频率</code> x <code>晶体管数量</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">所以: </span><br><span class="line">1.为了提升性能、需要增加晶体管数量, 同样面积、就要把体积造的小、  就是提升&#96;制程&#96;</span><br><span class="line">2.但是 功耗增加太多、会导致CPU散热跟不上、就需要降低电压、</span><br><span class="line">   而功耗是和电压的平方成正比的、意味着电压下降到原来的 1&#x2F;5 、功耗就会变成原来的 1&#x2F;25.</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">所以: </span><br><span class="line"><span class="number">1.</span>为了提升性能、需要增加晶体管数量, 同样面积、就要把体积造的小、  就是提升`制程`</span><br><span class="line"><span class="number">2.</span>但是 功耗增加太多、会导致CPU散热跟不上、就需要降低电压、</span><br><span class="line">   而功耗是和电压的平方成正比的、意味着电压下降到原来的 <span class="number">1</span>/<span class="number">5</span> 、功耗就会变成原来的 <span class="number">1</span>/<span class="number">25.</span></span><br></pre></td></tr></table></figure>
 
 <p>提升计算机性能的方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1. 摩尔定律: 增加晶体管数量(主频)</span><br><span class="line">2. 并行原理: 多CPU</span><br><span class="line">3. 加速大概率事件: gpu替代cpu</span><br><span class="line">4. 通过流水线提升性能: 把cpu执行指令的过程细分</span><br><span class="line">5. 通过预测提高性能: 分支和冒险, 局部性原理</span><br><span class="line"></span><br><span class="line">应用：</span><br><span class="line">加速大概率事件: 缓存(内存、CDN缓存)</span><br><span class="line">流水线: 并发编程、异步编程、音频播放器边放边缓冲</span><br><span class="line">预测: 下一页预加载、cdn预热、指令预加载</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 摩尔定律: 增加晶体管数量(主频)</span><br><span class="line"><span class="number">2.</span> 并行原理: 多CPU</span><br><span class="line"><span class="number">3.</span> 加速大概率事件: gpu替代cpu</span><br><span class="line"><span class="number">4.</span> 通过流水线提升性能: 把cpu执行指令的过程细分</span><br><span class="line"><span class="number">5.</span> 通过预测提高性能: 分支和冒险, 局部性原理</span><br><span class="line"></span><br><span class="line">应用：</span><br><span class="line">加速大概率事件: 缓存(内存、CDN缓存)</span><br><span class="line">流水线: 并发编程、异步编程、音频播放器边放边缓冲</span><br><span class="line">预测: 下一页预加载、cdn预热、指令预加载</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -381,14 +381,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
