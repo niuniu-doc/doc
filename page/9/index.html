@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -206,7 +206,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/" class="post-title-link" itemprop="url">读写分离有哪些坑</a>
+            <a href="/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Redis读书笔记</a>
         </h1>
 
         <div class="post-meta">
@@ -223,7 +223,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-28 21:58:49" itemprop="dateModified" datetime="2020-04-28T21:58:49+08:00">2020-04-28</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,12 +231,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/" class="post-meta-item leancloud_visitors" data-flag-title="读写分离有哪些坑" title="阅读次数">
+            <span id="/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="Redis读书笔记" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -251,8 +251,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -267,63 +267,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-9443eea1ca9ff032.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="读写分离基本架构.png"></p>
-<blockquote>
-<p>读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.</p>
-</blockquote>
-<p>两种负载方式的差异:</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="built_in">Client</span>负载、少了一层proxy转发、查询性能稍微好一些、且整体架构简单、排查问题方便、</span><br><span class="line">但与DB层耦合性高、若出现主备切换或者库迁移、<span class="built_in">Client</span>需要调整连接信息</span><br><span class="line"><span class="number">2.</span> proxy负载. 对<span class="built_in">Client</span>友好、但proxy本身也需要高可用架构、整体架构设计较复杂.</span><br></pre></td></tr></table></figure>
-<p>不管采用哪种负载方式, 都会存在<code>从库读到系统过期状态</code>的现象, 称为<code>过期读</code>.<br>那么、如何解决过期读呢 ?<br>一、强制走主库<br>其实就是将查询分类、对于必须拿到最新结果的请求、强制转发到主库; 对于可以接受稍微延迟的请求、转发给从库. 但: 极端情况下、可能所有的请求都不能接受延迟、这样所有请求都打到主库、就失去了扩展性.</p>
-<p>二、sleep一段时间<br>eg. 查询数据之前、先强制等待一段时间、但会失去用户体验度. 不过可以折中、用Ajax将客户端输入内容直接展示在页面上、而不去查询DB.<br>存在的问题是: </p>
-<ol>
-<li>若查询本可以0.5s就从从库拿到结果、也会等1s</li>
-<li>若延迟超过1s、还是会出现过期读.</li>
-</ol>
-<p>三、判断主备无延迟</p>
-<ol>
-<li><p>每次从库查询前、先判断<code>seconds_behind_master</code>值、直到=0、才执行查询请求.</p>
-</li>
-<li><p>对比位点、确保主备无延迟<br><code>master_log_file</code> 和 <code>read_master_log_pos</code>, 表示读到的主库的最新位点<br><code>relay_master_log_file</code> 和 <code>exec_master_log_pos</code>表示备库执行的最新位点<br>这两组值完全相同时、表示接收的日志已完成同步.</p>
-</li>
-<li><p>对比gtid<br><code>auto_position</code>=1, 表示主备关系使用了gtid协议<br><code>retrieved_gtid_set</code>, 表示的是备库收到的所有日志gtid集合<br><code>executed_gtid_set</code>, 是备库已经执行完成的gtid集合<br>这两个集合相同、表示接收到的日志已同步完成.</p>
-<p> 2、3两个方案都是基于<code>备库接收到的日志</code>执行完成了、但还有一部分日志是: Client已经收到提交确认、但备库还未收到日志的状态、所以, 比1要好些、但未达到精准的程度.</p>
-</li>
-</ol>
-<p>四、配合semi-sync方案<br>对于上边的问题、可以解决不? 利用版同步复制、<code>semi-sync replication</code>可以.<br><code>semi-sync</code>设计:</p>
-<ol>
-<li>事务提交时、将binlog发给从库</li>
-<li>从库收到binlog、给主库发送一个ack、代表收到了</li>
-<li>主库收到ack以后、才返回给客户端<code>事务完成</code>的确认.<br>这样, 使用semi-sync配合前边的位点判断、就可以确定从库上执行的查询请求、避免过期读</li>
-</ol>
-<p>但: 一主多从的场景下、主库只要等到一个从库的ack、就开始对Client返回确认、这时可能会存在过期读(查询请求落到了非确认的从库上)</p>
-<p>判断同步位点还有一个潜在问题: 若业务更新的高峰期、可能出现主库的位点或者GTID集合更新很快、导致位点等着判断一直不成立、从库迟迟无法响应的情况. 其实、我们并不需要完全同步、只希望要查询的数据已经同步即可.</p>
-<p>五、等主库位点<br>可以解决上边两个问题:</p>
-<ol>
-<li>一主多从时、部分从库过期读</li>
-<li>过度等待<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">master_pos_wait</span>(<span class="keyword">file</span>, pos[, <span class="keyword">timeout</span>]);</span><br></pre></td></tr></table></figure>
-执行逻辑:</li>
-<li>从库上执行</li>
-<li>file 和 pos 指主库上的文件名 和 位置</li>
-<li>timeout 可选、设为正整数N表示这个函数最多等待N秒<br>正常返回一个正整数M、表示从命令开始执行、到应用完file和pos代表的binlog位置、执行了多少事务.<br>其它返回值:</li>
-<li>null、表示执行期间、备库同步线程发生异常</li>
-<li>-1、超过等待时间Ns</li>
-<li>0、刚开始执行时、发现该位置已经执行过了.<br>则、查询逻辑变成了:<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> trx1更新完成后、马上执行 show master status 得到当前主库执行到的File 和 Pos</span><br><span class="line"><span class="number">2.</span> 选择一个从库执行查询语句</span><br><span class="line"><span class="number">3.</span> 在从库上执行 select master_pos_wait(File, Pos, <span class="number">1</span>);</span><br><span class="line"><span class="number">4.</span> 若返回值是&gt;=<span class="number">0</span>的正整数、则在该从库查询、否则到主库查询</span><br><span class="line">同样存在的问题是: 若所有从库都延迟了、查询压力会打到主库</span><br></pre></td></tr></table></figure>
-一般对于不允许过期读的要求、有两种方案: 超时放弃 和 转到主库, 要根据业务选择.</li>
-</ol>
-<p>六、等GTID<br>若开启GTID模式、同样有等待GTID的方案</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> wait_for_executed_gtid_set(gtid_set, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-<p>执行逻辑:</p>
-<ol>
-<li>等待、直到该库执行的事务中包含传入的gtid_set、返回0</li>
-<li>超时返回1</li>
-<li>7.6版本开始、可以把事务的gtid返回给客户端<br>此时、等GTID的执行流程就变成:<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> trx1事务更新完后、从返回包之间获取事务的gtid、记为gtid1</span><br><span class="line"><span class="number">2.</span> 选定一个从库执行查询语句</span><br><span class="line"><span class="number">3.</span> 在从库上执行 select wait_for_Executed_gtid_set(gtid1, <span class="number">1</span>);</span><br><span class="line"><span class="number">4.</span> 若返回<span class="number">0</span>、则在该从库执行查询、否则、到主库执行查询.</span><br></pre></td></tr></table></figure>
-问题跟等位点的一样、选择超时放弃还是转到主库查询、要根据业务场景选择.</li>
-</ol>
-<p>思考:</p>
-<blockquote>
-<p>若系统采用的是等待GTID的方案、此时要对一个大表做DDL、可能会出现什么情况呢? 为避免这种情况、改怎么做呢 ?</p>
-</blockquote>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    这是一个典型的大事务的场景、若该DDL语句在主库执行了<span class="number">10</span>min、提交到备库、也需要执行<span class="number">10</span>min、</span><br><span class="line">那么在主库DDL之后再提交的事务的GTID、去备库查的时候、就会等待<span class="number">10</span>min才出现. 这样这个读写分离机制</span><br><span class="line">至少<span class="number">10</span>min内都会超时、既然是预期内的操作、应该在业务低峰期进行、确保主库可以支撑所有的业务查询、</span><br><span class="line">然后把请求都切到主库、再在主库上做DDL.</span><br></pre></td></tr></table></figure>
+          <!-- MarkdownTOC -->
+
+<ul>
+<li>一些说明</li>
+<li>书籍资源</li>
+</ul>
+<!-- /MarkdownTOC -->
+
+
+<h4 id="一些说明"><a href="#一些说明" class="headerlink" title="一些说明"></a>一些说明</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">最近读了一本书、感觉有些部分还不错、希望分享出来、</span><br><span class="line">是读书笔记、可能提炼度不够、希望以后的自己做的越来越好~~.~~</span><br><span class="line">书籍：Redis<span class="number">-4.</span>x CookBook</span><br><span class="line">除特别说明外、本系列文档都是针对 redis <span class="number">4.</span>x 的版本</span><br></pre></td></tr></table></figure>
+
+<h4 id="书籍资源"><a href="#书籍资源" class="headerlink" title="书籍资源"></a>书籍资源</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">原项目代码git托管地址：</span><br><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/PacktPublishing/</span>Redis-<span class="number">4</span>.x-Cookbook</span><br><span class="line"></span><br><span class="line">书中相关图文：</span><br><span class="line">https:<span class="regexp">//</span>www.packtpub.com<span class="regexp">/sites/</span>default<span class="regexp">/files/</span>downloads<span class="regexp">/Redis4xCookbook_ColorImages.pdf</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -374,7 +329,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -469,7 +424,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -565,7 +520,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -660,7 +615,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -765,7 +720,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -869,7 +824,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -943,6 +898,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">google访问助手安装</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/" class="post-meta-item leancloud_visitors" data-flag-title="google访问助手安装" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>悄悄的<del>~</del>😝</p>
+<p>链接:<a href="https://pan.baidu.com/s/1BlNBd2xGUMJ7LYF1UYqvwg" target="_blank" rel="noopener">https://pan.baidu.com/s/1BlNBd2xGUMJ7LYF1UYqvwg</a>  密码:4u3t</p>
+<p>下载以上地址压缩包</p>
+<p>chrome浏览器访问 chrome://extensions/<br>把解压后的文件夹拖进去、如下图</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-761560184bd3cab4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_idea%E5%AE%89%E8%A3%85%E7%A6%BB%E7%BA%BF%E6%8F%92%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -974,7 +1028,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1050,105 +1104,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">google访问助手安装</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/" class="post-meta-item leancloud_visitors" data-flag-title="google访问助手安装" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>悄悄的<del>~</del>😝</p>
-<p>链接:<a href="https://pan.baidu.com/s/1BlNBd2xGUMJ7LYF1UYqvwg" target="_blank" rel="noopener">https://pan.baidu.com/s/1BlNBd2xGUMJ7LYF1UYqvwg</a>  密码:4u3t</p>
-<p>下载以上地址压缩包</p>
-<p>chrome浏览器访问 chrome://extensions/<br>把解压后的文件夹拖进去、如下图</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-761560184bd3cab4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_idea%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1180,7 +1135,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1320,7 +1275,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -206,7 +206,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="post-title-link" itemprop="url">Java多线程实现基础(二)</a>
+            <a href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" class="post-title-link" itemprop="url">Java多线程实现基础(一)</a>
         </h1>
 
         <div class="post-meta">
@@ -223,7 +223,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +236,7 @@
             </span>
 
           
-            <span id="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="post-meta-item leancloud_visitors" data-flag-title="Java多线程实现基础(二)" title="阅读次数">
+            <span id="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" class="post-meta-item leancloud_visitors" data-flag-title="Java多线程实现基础(一)" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -251,8 +251,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -267,11 +267,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h4><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 线程通信</span><br><span class="line">   线程之间以何种方式进行消息传递</span><br><span class="line">   共享内存 &amp; 消息传递</span><br><span class="line">   </span><br><span class="line"><span class="number">2.</span> 线程同步</span><br><span class="line">   程序间用于控制不同线程间操作发生相对顺序的机制</span><br><span class="line">   </span><br><span class="line">   java是共享内存模型】采用的是隐式通信、显式修改</span><br><span class="line">   </span><br><span class="line">   jvm定义了线程和主内存(Main Memory)之间的关系:</span><br><span class="line">   <span class="number">1</span>) 线程之间的共享变量存储在主内存中</span><br><span class="line">   <span class="number">2</span>) 线程私有变量存储在私有本地内存 Local Memory中、</span><br><span class="line">      本地内存是jvm的一个抽象概念、并非真实存在、涵盖缓存、缓冲区、寄存器及其它硬件及编译器优化</span><br><span class="line">   Java同步原语(synchronize volatile  <span class="keyword">final</span>)</span><br></pre></td></tr></table></figure>
+          <h4 id="CPU-的术语介绍"><a href="#CPU-的术语介绍" class="headerlink" title="CPU 的术语介绍"></a>CPU 的术语介绍</h4><p><code>内存屏障</code>: <code>memory barriers</code> 一组处理器指令、用于实现对内存操作的顺序限制</p>
+<p><code>缓冲行</code>: <code>cache line</code> cpu高速缓冲中可以分配的最小存储单位<br>         处理器填写缓冲行时、会加载整个缓存行、现代CPU需要执行几百次CPU指令</p>
+<p><code>原子操作</code>: <code>atomic operations</code> 不可中断的一个或者一系列操作</p>
+<p><code>缓冲行填充</code>: <code>cache line fill</code>当处理器识别到从内存中读取的操作数是可缓存的,<br>        处理器读取整个高速缓存行到适当的缓存(L1,L2,L3或者所有)</p>
+<p><code>缓存命中</code>: <code>cache hit</code>如果进行高速缓存行填充操作的内存位置仍然是下次处理器访问的<br>地址时、处理器从缓存行读取而不是从内存读取</p>
+<p><code>写命中</code>: <code>write hit</code> 当处理器将操作数写回到内存缓存时、会先检查这个缓存的内存地址<br>是否在缓存行中、如果存在一个有效的缓存行、处理器会将这个操作数歇会到缓存、而不是内存</p>
+<p><code>写缺失</code>: <code>write misses the cache</code> 一个有效的缓存行被写入到不存在的内存区域</p>
+<p><code>比较并交换</code>: <code>Compare and Swap</code> cas操作需要两个值, old and new、在操作期间会比较这<br>两个值、如果发生变化则不交换、未发生变化才交换</p>
+<p><code>CPU流水线</code>: <code>CPU pipeline</code>在CPU中由5、6个不同的电路单元组成一条指令处理流水线<br>然后一条X86指令分成5~6步后再由这些电路单元分别执行、就能实现在一个CPU周期内完成<br>一条指令、提高CPU的运算速率</p>
+<p><code>内存顺序冲突</code>: <code>memory order violation</code>一般是由假共享引起的、是指多个CPU同时修改<br>同一个缓存行的不同部分而引起其中一个CPU的操作无效、当出现这个内存顺序冲突时、CPU必须清空流水线</p>
+<h4 id="Lock前缀的指令"><a href="#Lock前缀的指令" class="headerlink" title="Lock前缀的指令"></a>Lock前缀的指令</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lock 前缀的指令、在多核处理器下会引发两件事:</span><br><span class="line"><span class="number">1.</span> 将当期处理器的缓存行数据写回内存</span><br><span class="line"><span class="number">2.</span> 这个写回内存操作会使在其它CPU里缓存了该地址的数据无效</span><br></pre></td></tr></table></figure>
 
-<h3 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 编译器重排</span><br><span class="line">   在不改变单线程语义的条件下、编译器可以重排指令的执行顺序</span><br><span class="line"><span class="number">2.</span> 指令重排 </span><br><span class="line">   现代cpu采用了指令级并行技术、可以同时执行多条指令、若无数据依赖、</span><br><span class="line">   处理器可以改变机器指令的执行顺序</span><br><span class="line"><span class="number">3.</span> 内存系统的重排</span><br><span class="line">   由于处理器采用缓存和读写缓冲区、使得加载和存储操作看上去是乱序的、</span><br><span class="line">   可能在乱序执行</span><br></pre></td></tr></table></figure>
-
-<h4 id="jvm-指令执行"><a href="#jvm-指令执行" class="headerlink" title="jvm 指令执行"></a>jvm 指令执行</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">未使用同步的程序在jvm中的执行基本无序、</span><br><span class="line"><span class="number">1.</span> jvm不保证单线程内的操作会按照程序代码顺序执行、临界区指令重排</span><br><span class="line"><span class="number">2.</span> jvm不保证所有线程看到的执行顺序一致</span><br><span class="line"><span class="number">3.</span> jvm不保证<span class="number">64</span>位的long、<span class="built_in">double</span>类型写操作具有原子性</span><br></pre></td></tr></table></figure>
+<h4 id="volatile的实现"><a href="#volatile的实现" class="headerlink" title="volatile的实现"></a>volatile的实现</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为了提高速度、CPU不直接和内存通信、而是先将系统内存的数据加载到内存缓存后再操作</span><br><span class="line">但: 操作完全不知道何时会被写回内存</span><br><span class="line"></span><br><span class="line"><span class="keyword">volatile</span>声明的变量进行读写、JVM会向处理器发送一条<span class="keyword">Lock</span>前缀的指令、精讲变量所在的</span><br><span class="line">缓存行数据写回到内存</span><br><span class="line"></span><br><span class="line">在多核处理器下、实现了缓存一致性协议、每个处理器通过嗅探在总线上传播的数据来检查</span><br><span class="line">自己的缓存是否已过期、当处理器发现自己缓存行对应的内存地址呗修改、会将当期处理器的</span><br><span class="line">缓存行状态设为无效、重新从系统内存读取</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -322,7 +330,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -401,6 +409,114 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">Java线程池初探</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" class="post-meta-item leancloud_visitors" data-flag-title="Java线程池初探" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="线程池类型"><a href="#线程池类型" class="headerlink" title="线程池类型"></a>线程池类型</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">new</span><span class="type">SingleThreadExecutor</span> </span><br><span class="line">   -&gt; <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>L, </span><br><span class="line">                                      TimeUnit.MILLISECONDS, <span class="keyword">new</span> <span class="type">LinkedBlockingQueue</span>&lt;Runnable&gt;());</span><br><span class="line">   只使用一个线程、使用无界队列 LinkedBlockingQueue, 线程创建后不会超时终止、该线程顺序执行所有任务</span><br><span class="line">   适用于需要确保所有任务呗顺序执行的场合</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> <span class="keyword">new</span><span class="type">FixedThreadPool</span> </span><br><span class="line">   -&gt; ThreadPoolExecutor(nThreads, nThreads, <span class="number">0</span>L, </span><br><span class="line">                         TimeUnit.MILLISECONDS,<span class="keyword">new</span> <span class="type">LinkedBlockingQueue</span>&lt;Runnable&gt;())</span><br><span class="line">   保持固定线程数、新的任务进入、会放进任务队列                       </span><br><span class="line">   </span><br><span class="line"><span class="number">2.</span> <span class="keyword">new</span><span class="type">CachedThreadPool</span> </span><br><span class="line">   -&gt; ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE, <span class="number">60</span>L, </span><br><span class="line">                         TimeUnit.SECONDS, <span class="keyword">new</span> <span class="type">SynchronousQueue</span>&lt;Runnable&gt;())</span><br><span class="line">   任务到达、有空闲线程就复用、无空闲线程就创建</span><br><span class="line">   任务执行完、线程最大空闲时间<span class="number">60</span>s、超过<span class="number">60</span>s会被销毁                     </span><br><span class="line">                         </span><br><span class="line"><span class="number">3.</span> <span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(Runtime.getRuntime().availableProcessors() * <span class="number">3</span>,</span><br><span class="line">                          <span class="number">200</span>, <span class="number">1</span>,TimeUnit.MINUTES, <span class="keyword">new</span> <span class="type">ArrayBlockingQueue</span>&lt;Runnable&gt;(<span class="number">100000</span>), <span class="keyword">new</span> <span class="type">DefaultThreadFactory</span>())</span><br></pre></td></tr></table></figure>
+
+<h4 id="核心参数"><a href="#核心参数" class="headerlink" title="核心参数"></a>核心参数</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">corePoolSize:</span> 线程池中维护的核心线程数、空闲依然存在、除非设置了 allowCoreThreadTimeOut 参数</span><br><span class="line"><span class="symbol">maximumPoolSize:</span> 最大线程数</span><br><span class="line"><span class="symbol">keepAliveTime:</span> 线程池中的线程数 &gt; 核心线程数的时候、空闲线程最大idle的时间</span><br><span class="line"><span class="symbol">workQueue:</span> 任务队列</span><br></pre></td></tr></table></figure>
+
+<h4 id="Queue类型"><a href="#Queue类型" class="headerlink" title="Queue类型"></a>Queue类型</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> LinkedBlockingQueue</span><br><span class="line"><span class="number">2.</span> SynchronousQueue</span><br><span class="line"><span class="number">3.</span> ArrayBlockingQueue</span><br><span class="line"><span class="number">4.</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="reject"><a href="#reject" class="headerlink" title="reject"></a>reject</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> ThreadPoolExecutor.AbortPolicy：这就是默认的方式，抛出异常</span><br><span class="line"><span class="number">2.</span> ThreadPoolExecutor.DiscardPolicy：静默处理，忽略新任务，不抛异常，也不执行</span><br><span class="line"><span class="number">3.</span> ThreadPoolExecutor.DiscardOldestPolicy：将等待时间最长的任务扔掉，然后自己排队</span><br><span class="line"><span class="number">4.</span> ThreadPoolExecutor.CallerRunsPolicy：在任务提交者线程中执行任务，而不是交给线程池中的线程执行</span><br><span class="line"></span><br><span class="line">拒绝策略只有在队列有界，且maximumPoolSize有限的情况下才会触发</span><br><span class="line">如果队列无界，服务不了的任务总是会排队，但这不见得是期望的，因为请求处理队列可能会消耗非常大的内存，甚至引发内存不够的异常</span><br><span class="line">如果队列有界但maximumPoolSize无限，可能会创建过多的线程，占满CPU和内存，使得任何任务都难以完成</span><br><span class="line">在任务量非常大的场景中，让拒绝策略有机会执行是保证系统稳定运行很重要的方面</span><br></pre></td></tr></table></figure>
+
+<h4 id="线程池的选择"><a href="#线程池的选择" class="headerlink" title="线程池的选择"></a>线程池的选择</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 在系统负载很高的情况下、<span class="keyword">new</span><span class="type">FixedThreadPool</span>可以通过队列对新任务排队、保证有足够的资源处理实际任务</span><br><span class="line">   而<span class="keyword">new</span><span class="type">CachedThreadPool</span>会为每一个任务创建一个线程、导致创建过多的线程竞争CPU和内存资源、</span><br><span class="line">   使得任何任务都难以完成、此时使用<span class="keyword">new</span><span class="type">FixedThreadPool</span>更合适</span><br><span class="line"><span class="number">2.</span> 若系统负载不太高、单个任务执行时间也比较短、<span class="keyword">new</span><span class="type">CachedThreadPool</span> 因为不用排队、效率可能更高</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 系统负载可能极高的情况下、两者都不是最好的选择</span><br><span class="line">   <span class="keyword">new</span><span class="type">FiexedThreadPool</span>的问题是: <span class="type"></span>队列过长、占用更多内存</span><br><span class="line">   <span class="keyword">new</span><span class="type">CachedThreadPool</span>的问题是: <span class="type"></span>线程数过多、导致过多线程竞争CPU和内存资源</span><br></pre></td></tr></table></figure>
+
+<h4 id="线程池的死锁"><a href="#线程池的死锁" class="headerlink" title="线程池的死锁"></a>线程池的死锁</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">若任务之间有依赖、可能会出现线程池的死锁</span><br><span class="line">eg. 线程池的大小为<span class="number">5</span>、taskA 提交了<span class="number">5</span>个任务、taskA会提交<span class="number">5</span>个taskB、taskB因为无法创建新的线程只能在等待队列进行等待</span><br><span class="line">    而taskA一直在等待taskB的处理结果、这样就会造成线程池的死锁</span><br><span class="line">    </span><br><span class="line">resolve: <span class="type"></span></span><br><span class="line"><span class="type">1</span>. 使用 <span class="keyword">new</span><span class="type">CachedThreadPool</span> 替代 fixed: <span class="type"></span>这样、有新的任务提交就会创建新的线程</span><br><span class="line"><span class="number">2.</span> 使用 SynchronousQueue 这样、入队成功就意味着有线程接受处理、若入队失败、就会触发reject机制、不管怎么样、都不会死锁了</span><br><span class="line">   <span class="keyword">static</span> ExecutorService executor = <span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(</span><br><span class="line">        THREAD_NUM, THREAD_NUM, <span class="number">0</span>, TimeUnit.SECONDS, </span><br><span class="line">        <span class="keyword">new</span> <span class="type">SynchronousQueue</span>&lt;Runnable&gt;());</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="note"><a href="#note" class="headerlink" title="note"></a>note</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 核心线程不会预先创建，只有当有任务时才会创建</span><br><span class="line"><span class="number">2.</span> 核心线程不会因为空闲而被终止，keepAliveTime参数不适用于它</span><br><span class="line"><span class="number">3.</span> 核心线程干预</span><br><span class="line">   <span class="number">1</span>) <span class="keyword">public</span> <span class="built_in">int</span> prestartAllCoreThreads() 预先创建所有的核心线程</span><br><span class="line">   <span class="number">2</span>) <span class="keyword">public</span> <span class="built_in">bool</span>ean prestartCoreThread() 创建一个核心线程，如果所有核心线程都已创建，返回<span class="literal">false</span></span><br><span class="line">   <span class="number">3</span>) <span class="keyword">public</span> <span class="built_in">void</span> allowCoreThreadTimeOut(<span class="built_in">bool</span>ean value) 如果参数为<span class="literal">true</span>，则keepAliveTime参数也适用于核心线程</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Solr%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -432,7 +548,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -516,7 +632,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -530,7 +646,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">Java线程池初探</a>
+            <a href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">effective-java笔记</a>
         </h1>
 
         <div class="post-meta">
@@ -547,7 +663,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -560,7 +676,7 @@
             </span>
 
           
-            <span id="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" class="post-meta-item leancloud_visitors" data-flag-title="Java线程池初探" title="阅读次数">
+            <span id="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="effective-java笔记" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -575,8 +691,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -591,20 +707,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="线程池类型"><a href="#线程池类型" class="headerlink" title="线程池类型"></a>线程池类型</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">new</span><span class="type">SingleThreadExecutor</span> </span><br><span class="line">   -&gt; <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>L, </span><br><span class="line">                                      TimeUnit.MILLISECONDS, <span class="keyword">new</span> <span class="type">LinkedBlockingQueue</span>&lt;Runnable&gt;());</span><br><span class="line">   只使用一个线程、使用无界队列 LinkedBlockingQueue, 线程创建后不会超时终止、该线程顺序执行所有任务</span><br><span class="line">   适用于需要确保所有任务呗顺序执行的场合</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> <span class="keyword">new</span><span class="type">FixedThreadPool</span> </span><br><span class="line">   -&gt; ThreadPoolExecutor(nThreads, nThreads, <span class="number">0</span>L, </span><br><span class="line">                         TimeUnit.MILLISECONDS,<span class="keyword">new</span> <span class="type">LinkedBlockingQueue</span>&lt;Runnable&gt;())</span><br><span class="line">   保持固定线程数、新的任务进入、会放进任务队列                       </span><br><span class="line">   </span><br><span class="line"><span class="number">2.</span> <span class="keyword">new</span><span class="type">CachedThreadPool</span> </span><br><span class="line">   -&gt; ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE, <span class="number">60</span>L, </span><br><span class="line">                         TimeUnit.SECONDS, <span class="keyword">new</span> <span class="type">SynchronousQueue</span>&lt;Runnable&gt;())</span><br><span class="line">   任务到达、有空闲线程就复用、无空闲线程就创建</span><br><span class="line">   任务执行完、线程最大空闲时间<span class="number">60</span>s、超过<span class="number">60</span>s会被销毁                     </span><br><span class="line">                         </span><br><span class="line"><span class="number">3.</span> <span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(Runtime.getRuntime().availableProcessors() * <span class="number">3</span>,</span><br><span class="line">                          <span class="number">200</span>, <span class="number">1</span>,TimeUnit.MINUTES, <span class="keyword">new</span> <span class="type">ArrayBlockingQueue</span>&lt;Runnable&gt;(<span class="number">100000</span>), <span class="keyword">new</span> <span class="type">DefaultThreadFactory</span>())</span><br></pre></td></tr></table></figure>
-
-<h4 id="核心参数"><a href="#核心参数" class="headerlink" title="核心参数"></a>核心参数</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">corePoolSize:</span> 线程池中维护的核心线程数、空闲依然存在、除非设置了 allowCoreThreadTimeOut 参数</span><br><span class="line"><span class="symbol">maximumPoolSize:</span> 最大线程数</span><br><span class="line"><span class="symbol">keepAliveTime:</span> 线程池中的线程数 &gt; 核心线程数的时候、空闲线程最大idle的时间</span><br><span class="line"><span class="symbol">workQueue:</span> 任务队列</span><br></pre></td></tr></table></figure>
-
-<h4 id="Queue类型"><a href="#Queue类型" class="headerlink" title="Queue类型"></a>Queue类型</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> LinkedBlockingQueue</span><br><span class="line"><span class="number">2.</span> SynchronousQueue</span><br><span class="line"><span class="number">3.</span> ArrayBlockingQueue</span><br><span class="line"><span class="number">4.</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="reject"><a href="#reject" class="headerlink" title="reject"></a>reject</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> ThreadPoolExecutor.AbortPolicy：这就是默认的方式，抛出异常</span><br><span class="line"><span class="number">2.</span> ThreadPoolExecutor.DiscardPolicy：静默处理，忽略新任务，不抛异常，也不执行</span><br><span class="line"><span class="number">3.</span> ThreadPoolExecutor.DiscardOldestPolicy：将等待时间最长的任务扔掉，然后自己排队</span><br><span class="line"><span class="number">4.</span> ThreadPoolExecutor.CallerRunsPolicy：在任务提交者线程中执行任务，而不是交给线程池中的线程执行</span><br><span class="line"></span><br><span class="line">拒绝策略只有在队列有界，且maximumPoolSize有限的情况下才会触发</span><br><span class="line">如果队列无界，服务不了的任务总是会排队，但这不见得是期望的，因为请求处理队列可能会消耗非常大的内存，甚至引发内存不够的异常</span><br><span class="line">如果队列有界但maximumPoolSize无限，可能会创建过多的线程，占满CPU和内存，使得任何任务都难以完成</span><br><span class="line">在任务量非常大的场景中，让拒绝策略有机会执行是保证系统稳定运行很重要的方面</span><br></pre></td></tr></table></figure>
-
-<h4 id="线程池的选择"><a href="#线程池的选择" class="headerlink" title="线程池的选择"></a>线程池的选择</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 在系统负载很高的情况下、<span class="keyword">new</span><span class="type">FixedThreadPool</span>可以通过队列对新任务排队、保证有足够的资源处理实际任务</span><br><span class="line">   而<span class="keyword">new</span><span class="type">CachedThreadPool</span>会为每一个任务创建一个线程、导致创建过多的线程竞争CPU和内存资源、</span><br><span class="line">   使得任何任务都难以完成、此时使用<span class="keyword">new</span><span class="type">FixedThreadPool</span>更合适</span><br><span class="line"><span class="number">2.</span> 若系统负载不太高、单个任务执行时间也比较短、<span class="keyword">new</span><span class="type">CachedThreadPool</span> 因为不用排队、效率可能更高</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 系统负载可能极高的情况下、两者都不是最好的选择</span><br><span class="line">   <span class="keyword">new</span><span class="type">FiexedThreadPool</span>的问题是: <span class="type"></span>队列过长、占用更多内存</span><br><span class="line">   <span class="keyword">new</span><span class="type">CachedThreadPool</span>的问题是: <span class="type"></span>线程数过多、导致过多线程竞争CPU和内存资源</span><br></pre></td></tr></table></figure>
-
-<h4 id="线程池的死锁"><a href="#线程池的死锁" class="headerlink" title="线程池的死锁"></a>线程池的死锁</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">若任务之间有依赖、可能会出现线程池的死锁</span><br><span class="line">eg. 线程池的大小为<span class="number">5</span>、taskA 提交了<span class="number">5</span>个任务、taskA会提交<span class="number">5</span>个taskB、taskB因为无法创建新的线程只能在等待队列进行等待</span><br><span class="line">    而taskA一直在等待taskB的处理结果、这样就会造成线程池的死锁</span><br><span class="line">    </span><br><span class="line">resolve: <span class="type"></span></span><br><span class="line"><span class="type">1</span>. 使用 <span class="keyword">new</span><span class="type">CachedThreadPool</span> 替代 fixed: <span class="type"></span>这样、有新的任务提交就会创建新的线程</span><br><span class="line"><span class="number">2.</span> 使用 SynchronousQueue 这样、入队成功就意味着有线程接受处理、若入队失败、就会触发reject机制、不管怎么样、都不会死锁了</span><br><span class="line">   <span class="keyword">static</span> ExecutorService executor = <span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(</span><br><span class="line">        THREAD_NUM, THREAD_NUM, <span class="number">0</span>, TimeUnit.SECONDS, </span><br><span class="line">        <span class="keyword">new</span> <span class="type">SynchronousQueue</span>&lt;Runnable&gt;());</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="note"><a href="#note" class="headerlink" title="note"></a>note</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 核心线程不会预先创建，只有当有任务时才会创建</span><br><span class="line"><span class="number">2.</span> 核心线程不会因为空闲而被终止，keepAliveTime参数不适用于它</span><br><span class="line"><span class="number">3.</span> 核心线程干预</span><br><span class="line">   <span class="number">1</span>) <span class="keyword">public</span> <span class="built_in">int</span> prestartAllCoreThreads() 预先创建所有的核心线程</span><br><span class="line">   <span class="number">2</span>) <span class="keyword">public</span> <span class="built_in">bool</span>ean prestartCoreThread() 创建一个核心线程，如果所有核心线程都已创建，返回<span class="literal">false</span></span><br><span class="line">   <span class="number">3</span>) <span class="keyword">public</span> <span class="built_in">void</span> allowCoreThreadTimeOut(<span class="built_in">bool</span>ean value) 如果参数为<span class="literal">true</span>，则keepAliveTime参数也适用于核心线程</span><br></pre></td></tr></table></figure>
+          <ul>
+<li>考虑静态工厂方法代替构造器<ol>
+<li>含义更明确</li>
+<li></li>
+</ol>
+</li>
+<li></li>
+</ul>
 
       
     </div>
@@ -655,7 +765,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -736,108 +846,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">effective-java笔记</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="effective-java笔记" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>考虑静态工厂方法代替构造器<ol>
-<li>含义更明确</li>
-<li></li>
-</ol>
-</li>
-<li></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_java%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -869,7 +877,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -983,7 +991,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1052,7 +1060,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -1066,7 +1074,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">zk使用</a>
+            <a href="/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">java秒级定时任务的实现</a>
         </h1>
 
         <div class="post-meta">
@@ -1083,7 +1091,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1096,7 +1104,7 @@
             </span>
 
           
-            <span id="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="zk使用" title="阅读次数">
+            <span id="/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-meta-item leancloud_visitors" data-flag-title="java秒级定时任务的实现" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1111,8 +1119,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1127,15 +1135,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="参考配置项"><a href="#参考配置项" class="headerlink" title="参考配置项"></a>参考配置项</h1><p><code>tickTime</code> 用于计算的时间单元、eg. session超时、N*tickTime<br><code>initLimit</code> 用于集群、允许从节点连接、并同步到master节点的初始化连接时间、以tickTime的倍数来表示<br><code>syncLimit</code> 用于集群、master主节点与从节点之间发送消息、请求和应答的时间长度(心跳机制)<br><code>dataDir</code> 数据文件目录、必须<br><code>dataLogDir</code> 日志目录、非必须、默认<code>dataDir</code><br><code>clientPort</code> 连接服务器的端口、默认 <code>2181</code></p>
-<h1 id="client-连接"><a href="#client-连接" class="headerlink" title="client 连接"></a>client 连接</h1><p><code>zkCli.sh</code> 默认连接2181</p>
-<h1 id="client-命令"><a href="#client-命令" class="headerlink" title="client 命令"></a>client 命令</h1><p><code>ls</code> 与linux下<code>ls</code>同义<br><code>ls</code> 等同于  <code>ls</code> + <code>stat</code><br><code>stat</code> 状态显示 zZxid zookeeper为数据分配的id pZxid 子节点的id<br><code>get</code> 查看节点数据<br><code>create</code> 创建节点 -e 临时节点<br><code>set</code> 修改节点数据<br><code>delete</code> 删除节点数据</p>
-<h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><p>构成: scheme: 采用的权限机制<br>(word:anyone:[permissions] |<br>auth:user:password:[permissions] |<br>digest:user:BASE64(SHA1(pass)):[permissions])<br>(ip:192.168.1.1:[permission])<br>(super: 代表超管、拥有所有的权限)</p>
-<p>id: 代表允许访问的机制 </p>
-<p>permissons: 权限</p>
-<p>权限字符缩写 crdwa<br>create: 创建子节点<br>read: 获取节点、子节点<br>write: 设置节点数据<br>delete: 删除子节点<br>admin: 设置权限</p>
-<p><code>getAcl</code> 获取节点的acl权限信息<br><code>setAcl</code> 设置某个节点的acl权限信息<br><code>addAuth</code> 输入认证权限信息、注册时、输入明文密码(登录)、但在zk的系统里、是以密文存在的</p>
-<h1 id="four-letter-cmd"><a href="#four-letter-cmd" class="headerlink" title="four letter cmd"></a>four letter cmd</h1><p><code>stat</code> 当前节点的状态信息<br><code>ruok</code> 当前节点是否ok<br><code>conf</code> 查看服务器相关的配置<br><code>cons</code> 展示连接到server的client信息<br><code>envi</code> 打印环境变量信息<br><code>mntr</code> 监控zk的健康信息<br><code>wchs</code> watcher的信息<br><code>wchc</code> session与watch对应关系信息<br><code>wchp</code> path与watch对应关系</p>
+          <p><code>@Scheduled</code> 注解、简单轻量级task配置</p>
+<p><code>@Scheduled</code> 使用：</p>
+<ul>
+<li><code>@Scheduled(cron = &quot;0 5 * * * * ?&quot;)</code> 10分钟执行1次</li>
+<li><code>@Scheduled(fixedRate = 2000)</code> 每2s执行1次、不用等待上次执行完成</li>
+<li><code>@Scheduled(fixedDelay = 2000)</code> 等待上次请求结束后、delay 2s 执行下次任务</li>
+<li><code>@Scheduled(fixedDelay = 2000, initDelay = 2000)</code> 项目启动成功后、延迟2s执行任务 </li>
+</ul>
 
       
     </div>
@@ -1186,7 +1193,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 20:02:09" itemprop="dateModified" datetime="2020-03-21T20:02:09+08:00">2020-03-21</time>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1330,7 +1337,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
