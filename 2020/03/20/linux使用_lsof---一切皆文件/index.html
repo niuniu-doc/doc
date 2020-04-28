@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="lsof(list open files) 查看当前系统文件、Linux下任何事物都以文件的形式存在、通过文件不仅可以访问常规数据库、还可以访问网络连接(tcp、udp等)和硬件  lsof 打开文件可以是：  普通文件  目录 网络文件系统的文件 字符或设备文件 共享库 管道、命名管道 符号连接 网络文件 (eg. NFS file、网络socket、unix 域名socket等) 其它类型的">
@@ -134,6 +134,16 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-mysql">
+
+    <a href="/categories/MySQL" rel="section"><i class="fa fa-fw fa-database"></i>MySQL</a>
+
+  </li>
+        <li class="menu-item menu-item-redis">
+
+    <a href="/categories/Redis" rel="section"><i class="fa fa-fw fa-database"></i>Redis</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -303,12 +313,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/" rel="prev" title="如何了解自己的系统运行状态">
-      <i class="fa fa-chevron-left"></i> 如何了解自己的系统运行状态
+    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_tcpdump%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="prev" title="tcpdump基本使用">
+      <i class="fa fa-chevron-left"></i> tcpdump基本使用
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_tcpdump%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="next" title="tcpdump基本使用">
-      tcpdump基本使用 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7---vmstat/" rel="next" title="linux性能监控---vmstat">
+      linux性能监控---vmstat <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

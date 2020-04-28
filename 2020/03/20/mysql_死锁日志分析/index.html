@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="innodb基于系统参数开启监控1231. set global  innodb_status_output&#x3D;on; #开启innodb标准监控2. set global innodb_status_output_locks&#x3D;on; # 开启innodb锁监控3. set global innodb_print_all_deadlocks&#x3D;on; # 将死锁日志记录到错误日志文件  死锁分析123">
@@ -134,6 +134,16 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-mysql">
+
+    <a href="/categories/MySQL" rel="section"><i class="fa fa-fw fa-database"></i>MySQL</a>
+
+  </li>
+        <li class="menu-item menu-item-redis">
+
+    <a href="/categories/Redis" rel="section"><i class="fa fa-fw fa-database"></i>Redis</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -326,12 +336,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/" rel="prev" title="读写分离有哪些坑">
-      <i class="fa fa-chevron-left"></i> 读写分离有哪些坑
+    <a href="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" rel="prev" title="表数据删了一半、表大小不变">
+      <i class="fa fa-chevron-left"></i> 表数据删了一半、表大小不变
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" rel="next" title="表数据删了一半、表大小不变">
-      表数据删了一半、表大小不变 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/mysql_%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88,-%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98/" rel="next" title="幻读是什么,-幻读有什么问题">
+      幻读是什么,-幻读有什么问题 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

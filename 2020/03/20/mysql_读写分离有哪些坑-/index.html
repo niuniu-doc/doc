@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.  两种负载方式的差异: 1231. Client负载、少了一层proxy转发、查询性能稍微好一些、且整体架构简单、排查问题方便、但与DB层耦合性高、若出现主备切换或者库迁移、Client需要调整连接信息2. proxy负载. 对Client友好、但proxy本身也需要高可用架构、整体架构设计较">
@@ -136,6 +136,16 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-mysql">
+
+    <a href="/categories/MySQL" rel="section"><i class="fa fa-fw fa-database"></i>MySQL</a>
+
+  </li>
+        <li class="menu-item menu-item-redis">
+
+    <a href="/categories/Redis" rel="section"><i class="fa fa-fw fa-database"></i>Redis</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -347,8 +357,8 @@
       <i class="fa fa-chevron-left"></i> Redis读书笔记
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/mysql_%E6%AD%BB%E9%94%81%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="next" title="死锁日志分析">
-      死锁日志分析 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" rel="next" title="表数据删了一半、表大小不变">
+      表数据删了一半、表大小不变 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

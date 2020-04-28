@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
@@ -134,6 +134,16 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-mysql">
+
+    <a href="/categories/MySQL" rel="section"><i class="fa fa-fw fa-database"></i>MySQL</a>
+
+  </li>
+        <li class="menu-item menu-item-redis">
+
+    <a href="/categories/Redis" rel="section"><i class="fa fa-fw fa-database"></i>Redis</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -1054,116 +1064,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" class="post-title-link" itemprop="url">表数据删了一半、表大小不变</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" class="post-meta-item leancloud_visitors" data-flag-title="表数据删了一半、表大小不变" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>innodb表包含两部分: 表定义和表数据、在mysql8.0之前、表定义单独存放、.frm 文件、8.0之后允许把表结构定义放在系统数据表中了(表结构定义占用的空间很小)</p>
-</blockquote>
-<h4 id="innodb-file-per-table"><a href="#innodb-file-per-table" class="headerlink" title="innodb_file_per_table"></a>innodb_file_per_table</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">off</span>: 表数据放在系统共享表空间、跟数据字典放在一起</span><br><span class="line"><span class="keyword">on</span>: 每个innodb表数据存储在一个.ibd结尾的文件中(<span class="keyword">drop</span> <span class="keyword">table</span>时直接删除文件)</span><br></pre></td></tr></table></figure>
-
-<h4 id="数据删除流程"><a href="#数据删除流程" class="headerlink" title="数据删除流程"></a>数据删除流程</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-9ef7fd91e2dcd722.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="索引树示意图"></p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 假设删掉R4这个记录、innodb引擎只会把这个记录标记为已删除、之后再插入一个<span class="number">300</span><span class="number">-600</span>之间的记录时、可能会复用这个位置、但是空间不会释放</span><br><span class="line"><span class="number">2.</span> innodb的数据是按页存放的、如果删掉了一个数据页上的所有内容呢 ？</span><br><span class="line">    整个页可以复用</span><br><span class="line"><span class="number">3.</span> 数据页的复用: 可以复用到任意位置</span><br><span class="line">    记录复用: 插入数据若不在<span class="number">400</span><span class="number">-600</span>之间、无法复用</span><br><span class="line"><span class="number">4.</span> 若相邻两个数据页的利用率都很小、系统会把数据合并到一个页】另一个标记为可复用</span><br><span class="line"><span class="number">5.</span> delete删除整个表数据呢？所有数据页都被标记为可复用</span><br><span class="line">所以delete操作只是标记页面可复用、这些可复用但未被复用的空间、就像是空洞、空间不会回收</span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> 插入数据也会造成空洞</span><br><span class="line">    数据若不是顺序插入、如果需要在某个页的末尾插入一条记录、就会申请新的页、把要插入位置之后的数据转移到新的页去: 如下图</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-dede264180fcc1f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
-<h4 id="如何去除空洞"><a href="#如何去除空洞" class="headerlink" title="如何去除空洞"></a>如何去除空洞</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 重建表 alter table A engine=Innodb</span><br><span class="line"><span class="number">2.</span> <span class="number">5.6</span>之后的版本、引入Online DDL、重建流程变为: </span><br><span class="line">    <span class="number">1.</span> 建立一个临时文件、扫描表A主键的所有数据页、</span><br><span class="line">    <span class="number">2.</span> 用数据页中表A的记录生成B+树、存储到临时文件中、</span><br><span class="line">    <span class="number">3.</span> 生成临时文件过程中、所有表A的操作记录在日志文件(row log) 中、</span><br><span class="line">    <span class="number">4.</span> 临时文件生成后、将日志文件应用于临时文件、得到与表A逻辑相同的文件</span><br><span class="line">    <span class="number">5.</span> 用临时文件替换表A的数据文件</span><br><span class="line">    与以前不同之处在于: 在重建表的过程中允许对表A的操作</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-92ae8e30bfdb3194.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重建表流程.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/14027542-79acd12bb61357d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Online DDL.png"></p>
-<h4 id="完全Online-？"><a href="#完全Online-？" class="headerlink" title="完全Online ？"></a>完全Online ？</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">不是, DDL之前是要拿MDL锁的、但这个写锁会在<span class="keyword">copy</span><span class="bash">数据之前退化成读锁、就不会阻塞CURD操作了</span></span><br><span class="line">可以直接解锁？不行、为了保证自己在<span class="keyword">copy</span><span class="bash">的过程中表结构不会再次被修改、为了保护自己</span></span><br><span class="line">对大表来说、最耗时的是<span class="keyword">copy</span><span class="bash">文件、可以认为MDL读锁的时间可以忽略、但操作会比较消耗IO和CPU、安全操作可以使用 gh-ost来做</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="online和inplace"><a href="#online和inplace" class="headerlink" title="online和inplace"></a>online和inplace</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">图三中、表A导出数据存放位置叫tmp_table、是一个临时表、在server层创建</span><br><span class="line">图四种、表A重建的数据放在tmp_file、是innodb内部创建出来的、整个DDL过程在innodb内部完成、对server来说、没有挪到数据到临时表、是原地操作、inplace</span><br><span class="line"></span><br><span class="line">假如磁盘空间是1.2T、现有一个1T的表、可否完成一个inpalce的DDL？</span><br><span class="line">不能、inplace也是需要临时空间的、<span class="keyword">alter</span> <span class="keyword">table</span> t <span class="keyword">engine</span>=<span class="keyword">innodb</span>,ALGORITHM=inplace;</span><br><span class="line">copy表其实是: <span class="keyword">alter</span> <span class="keyword">table</span> t <span class="keyword">engine</span>=<span class="keyword">innodb</span>,ALGORITHM=copy; 对应图三</span><br><span class="line"></span><br><span class="line">inplace和online并无直接关系</span><br><span class="line">eg. 添加索引、是inplace操作、但不是online的</span><br></pre></td></tr></table></figure>
-
-<h4 id="alter-table、analyze-table-、-optimize-table"><a href="#alter-table、analyze-table-、-optimize-table" class="headerlink" title="alter table、analyze table 、 optimize table"></a>alter table、analyze table 、 optimize table</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="number">5.6</span>之后、默认上图四操作、就是recreate</span><br><span class="line"><span class="number">2.</span> analyze table不是重建表、是重新统计索引信息、过程会加MDL读锁</span><br><span class="line"><span class="number">3.</span> optimize = recreate+analyze</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E6%AD%BB%E9%94%81%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1281,6 +1181,116 @@
 
 
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html" target="_blank" rel="noopener">https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html</a><br><a href="https://www.aneasystone.com/archives/2017/12/solving-dead-locks-three.html" target="_blank" rel="noopener">https://www.aneasystone.com/archives/2017/12/solving-dead-locks-three.html</a><br><a href="https://blog.csdn.net/enweitech/article/details/52447006" target="_blank" rel="noopener">https://blog.csdn.net/enweitech/article/details/52447006</a><br><a href="https://blog.csdn.net/miyatang/article/details/78227344" target="_blank" rel="noopener">https://blog.csdn.net/miyatang/article/details/78227344</a><br><a href="https://time.geekbang.org/column/article/75659" target="_blank" rel="noopener">https://time.geekbang.org/column/article/75659</a><br><a href="https://my.oschina.net/u/2408025/blog/535941" target="_blank" rel="noopener">https://my.oschina.net/u/2408025/blog/535941</a><br><a href="https://dbarobin.com/2015/01/27/innodb-lock-wait-under-mysql-5.5/" target="_blank" rel="noopener">https://dbarobin.com/2015/01/27/innodb-lock-wait-under-mysql-5.5/</a><br><a href="https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html" target="_blank" rel="noopener">https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html</a><br><a href="https://www.cnblogs.com/LBSer/p/5183300.html" target="_blank" rel="noopener">https://www.cnblogs.com/LBSer/p/5183300.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" class="post-title-link" itemprop="url">表数据删了一半、表大小不变</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" class="post-meta-item leancloud_visitors" data-flag-title="表数据删了一半、表大小不变" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>innodb表包含两部分: 表定义和表数据、在mysql8.0之前、表定义单独存放、.frm 文件、8.0之后允许把表结构定义放在系统数据表中了(表结构定义占用的空间很小)</p>
+</blockquote>
+<h4 id="innodb-file-per-table"><a href="#innodb-file-per-table" class="headerlink" title="innodb_file_per_table"></a>innodb_file_per_table</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">off</span>: 表数据放在系统共享表空间、跟数据字典放在一起</span><br><span class="line"><span class="keyword">on</span>: 每个innodb表数据存储在一个.ibd结尾的文件中(<span class="keyword">drop</span> <span class="keyword">table</span>时直接删除文件)</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据删除流程"><a href="#数据删除流程" class="headerlink" title="数据删除流程"></a>数据删除流程</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-9ef7fd91e2dcd722.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="索引树示意图"></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 假设删掉R4这个记录、innodb引擎只会把这个记录标记为已删除、之后再插入一个<span class="number">300</span><span class="number">-600</span>之间的记录时、可能会复用这个位置、但是空间不会释放</span><br><span class="line"><span class="number">2.</span> innodb的数据是按页存放的、如果删掉了一个数据页上的所有内容呢 ？</span><br><span class="line">    整个页可以复用</span><br><span class="line"><span class="number">3.</span> 数据页的复用: 可以复用到任意位置</span><br><span class="line">    记录复用: 插入数据若不在<span class="number">400</span><span class="number">-600</span>之间、无法复用</span><br><span class="line"><span class="number">4.</span> 若相邻两个数据页的利用率都很小、系统会把数据合并到一个页】另一个标记为可复用</span><br><span class="line"><span class="number">5.</span> delete删除整个表数据呢？所有数据页都被标记为可复用</span><br><span class="line">所以delete操作只是标记页面可复用、这些可复用但未被复用的空间、就像是空洞、空间不会回收</span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> 插入数据也会造成空洞</span><br><span class="line">    数据若不是顺序插入、如果需要在某个页的末尾插入一条记录、就会申请新的页、把要插入位置之后的数据转移到新的页去: 如下图</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-dede264180fcc1f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<h4 id="如何去除空洞"><a href="#如何去除空洞" class="headerlink" title="如何去除空洞"></a>如何去除空洞</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 重建表 alter table A engine=Innodb</span><br><span class="line"><span class="number">2.</span> <span class="number">5.6</span>之后的版本、引入Online DDL、重建流程变为: </span><br><span class="line">    <span class="number">1.</span> 建立一个临时文件、扫描表A主键的所有数据页、</span><br><span class="line">    <span class="number">2.</span> 用数据页中表A的记录生成B+树、存储到临时文件中、</span><br><span class="line">    <span class="number">3.</span> 生成临时文件过程中、所有表A的操作记录在日志文件(row log) 中、</span><br><span class="line">    <span class="number">4.</span> 临时文件生成后、将日志文件应用于临时文件、得到与表A逻辑相同的文件</span><br><span class="line">    <span class="number">5.</span> 用临时文件替换表A的数据文件</span><br><span class="line">    与以前不同之处在于: 在重建表的过程中允许对表A的操作</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-92ae8e30bfdb3194.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重建表流程.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-79acd12bb61357d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Online DDL.png"></p>
+<h4 id="完全Online-？"><a href="#完全Online-？" class="headerlink" title="完全Online ？"></a>完全Online ？</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">不是, DDL之前是要拿MDL锁的、但这个写锁会在<span class="keyword">copy</span><span class="bash">数据之前退化成读锁、就不会阻塞CURD操作了</span></span><br><span class="line">可以直接解锁？不行、为了保证自己在<span class="keyword">copy</span><span class="bash">的过程中表结构不会再次被修改、为了保护自己</span></span><br><span class="line">对大表来说、最耗时的是<span class="keyword">copy</span><span class="bash">文件、可以认为MDL读锁的时间可以忽略、但操作会比较消耗IO和CPU、安全操作可以使用 gh-ost来做</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="online和inplace"><a href="#online和inplace" class="headerlink" title="online和inplace"></a>online和inplace</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">图三中、表A导出数据存放位置叫tmp_table、是一个临时表、在server层创建</span><br><span class="line">图四种、表A重建的数据放在tmp_file、是innodb内部创建出来的、整个DDL过程在innodb内部完成、对server来说、没有挪到数据到临时表、是原地操作、inplace</span><br><span class="line"></span><br><span class="line">假如磁盘空间是1.2T、现有一个1T的表、可否完成一个inpalce的DDL？</span><br><span class="line">不能、inplace也是需要临时空间的、<span class="keyword">alter</span> <span class="keyword">table</span> t <span class="keyword">engine</span>=<span class="keyword">innodb</span>,ALGORITHM=inplace;</span><br><span class="line">copy表其实是: <span class="keyword">alter</span> <span class="keyword">table</span> t <span class="keyword">engine</span>=<span class="keyword">innodb</span>,ALGORITHM=copy; 对应图三</span><br><span class="line"></span><br><span class="line">inplace和online并无直接关系</span><br><span class="line">eg. 添加索引、是inplace操作、但不是online的</span><br></pre></td></tr></table></figure>
+
+<h4 id="alter-table、analyze-table-、-optimize-table"><a href="#alter-table、analyze-table-、-optimize-table" class="headerlink" title="alter table、analyze table 、 optimize table"></a>alter table、analyze table 、 optimize table</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="number">5.6</span>之后、默认上图四操作、就是recreate</span><br><span class="line"><span class="number">2.</span> analyze table不是重建表、是重新统计索引信息、过程会加MDL读锁</span><br><span class="line"><span class="number">3.</span> optimize = recreate+analyze</span><br></pre></td></tr></table></figure>
 
       
     </div>

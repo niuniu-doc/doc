@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="异常的发生和捕获是在硬件层面完成的、异常的处理是软件完成的  异常分类中断Interrupt 触发CPU内部开关值发生变化的信号陷阱 Trap 主动触发的异常、比如调试断点故障 Fault 非主动的错误、处理完异常之后回来处理当前指令、而不是去执行程序中的下一条指令终止 Abort 故障的一直特殊情况、当CPU遇到故障、但无法恢复时、程序就必须终止了 异常处理、上下文切换12345678类似异常">
@@ -136,6 +136,16 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-mysql">
+
+    <a href="/categories/MySQL" rel="section"><i class="fa fa-fw fa-database"></i>MySQL</a>
+
+  </li>
+        <li class="menu-item menu-item-redis">
+
+    <a href="/categories/Redis" rel="section"><i class="fa fa-fw fa-database"></i>Redis</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -291,12 +301,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86(28%E8%AE%B2)/" rel="prev" title="异常处理(28讲)">
-      <i class="fa fa-chevron-left"></i> 异常处理(28讲)
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%90%86%E8%A7%A3IO_WAIT--IO%E6%80%A7%E8%83%BD%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%E5%84%BF/" rel="prev" title="理解IO_WAIT--IO性能到底怎么回事儿">
+      <i class="fa fa-chevron-left"></i> 理解IO_WAIT--IO性能到底怎么回事儿
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B8%B8%E7%94%A8%E6%9C%AF%E8%AF%AD/" rel="next" title="常用术语">
-      常用术语 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E6%80%BB%E7%BA%BF--%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%86%85%E9%83%A8%E7%9A%84%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF(42%E8%AE%B2)/" rel="next" title="总线--计算机内部的高速公路(42讲)">
+      总线--计算机内部的高速公路(42讲) <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
@@ -134,6 +134,16 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-mysql">
+
+    <a href="/categories/MySQL" rel="section"><i class="fa fa-fw fa-database"></i>MySQL</a>
+
+  </li>
+        <li class="menu-item menu-item-redis">
+
+    <a href="/categories/Redis" rel="section"><i class="fa fa-fw fa-database"></i>Redis</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -1113,6 +1123,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java元注解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="Java元注解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Java中元注解有4个：<code>@Retention</code>, <code>@Target</code>, <code>@Document</code>, <code>@Inherited</code></p>
+<p><code>@Retention</code>注解的保留位置：<br><code>@Retention(RetentionPolicy.SOURCE)</code> 注解仅存在于源码中、在class字节码文件中不存在<br><code>@Retention(RetentionPolicy.CLASS)</code> 默认保留策略、注解会在class文件中存在、但、运行时无法获得<br><code>@Retention(RetentionPolicy.RUNTIME)</code> 注解会在class文件中存在、并且可以通过反射得到</p>
+<p><code>@Target</code> 注解的作用目标<br><code>@Target(ElementType.TYPE)</code> 接口、类、枚举、注解<br><code>@Target(ElementType.FIELD)</code> 字段、枚举的常量<br><code>@Target(ElementType.METHOD)</code> 方法<br><code>@Target(ElementType.PARAMETER)</code> 方法参数<br><code>@Target(ElementType.CONSTRUCTOR)</code> 构造函数<br><code>@Target(ElementType.LOCAL_VARIABLE)</code> 局部变量<br><code>@Target(ElementType.ANNTATION_TYPE)</code> 注解<br><code>@Target(ElementType.PACKAGE)</code> 包</p>
+<p><code>@Document</code> 说明该注解将会被包含在javadoc中</p>
+<p><code>@Inherited</code> 说明子类可以继承父类中的该注解</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1229,7 +1338,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avator.jpeg">
@@ -1243,7 +1352,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java元注解</a>
+            <a href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" class="post-title-link" itemprop="url">Java多线程实现基础(一)</a>
         </h1>
 
         <div class="post-meta">
@@ -1273,7 +1382,7 @@
             </span>
 
           
-            <span id="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="Java元注解" title="阅读次数">
+            <span id="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" class="post-meta-item leancloud_visitors" data-flag-title="Java多线程实现基础(一)" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1288,8 +1397,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1304,110 +1413,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Java中元注解有4个：<code>@Retention</code>, <code>@Target</code>, <code>@Document</code>, <code>@Inherited</code></p>
-<p><code>@Retention</code>注解的保留位置：<br><code>@Retention(RetentionPolicy.SOURCE)</code> 注解仅存在于源码中、在class字节码文件中不存在<br><code>@Retention(RetentionPolicy.CLASS)</code> 默认保留策略、注解会在class文件中存在、但、运行时无法获得<br><code>@Retention(RetentionPolicy.RUNTIME)</code> 注解会在class文件中存在、并且可以通过反射得到</p>
-<p><code>@Target</code> 注解的作用目标<br><code>@Target(ElementType.TYPE)</code> 接口、类、枚举、注解<br><code>@Target(ElementType.FIELD)</code> 字段、枚举的常量<br><code>@Target(ElementType.METHOD)</code> 方法<br><code>@Target(ElementType.PARAMETER)</code> 方法参数<br><code>@Target(ElementType.CONSTRUCTOR)</code> 构造函数<br><code>@Target(ElementType.LOCAL_VARIABLE)</code> 局部变量<br><code>@Target(ElementType.ANNTATION_TYPE)</code> 注解<br><code>@Target(ElementType.PACKAGE)</code> 包</p>
-<p><code>@Document</code> 说明该注解将会被包含在javadoc中</p>
-<p><code>@Inherited</code> 说明子类可以继承父类中的该注解</p>
+          <h4 id="CPU-的术语介绍"><a href="#CPU-的术语介绍" class="headerlink" title="CPU 的术语介绍"></a>CPU 的术语介绍</h4><p><code>内存屏障</code>: <code>memory barriers</code> 一组处理器指令、用于实现对内存操作的顺序限制</p>
+<p><code>缓冲行</code>: <code>cache line</code> cpu高速缓冲中可以分配的最小存储单位<br>         处理器填写缓冲行时、会加载整个缓存行、现代CPU需要执行几百次CPU指令</p>
+<p><code>原子操作</code>: <code>atomic operations</code> 不可中断的一个或者一系列操作</p>
+<p><code>缓冲行填充</code>: <code>cache line fill</code>当处理器识别到从内存中读取的操作数是可缓存的,<br>        处理器读取整个高速缓存行到适当的缓存(L1,L2,L3或者所有)</p>
+<p><code>缓存命中</code>: <code>cache hit</code>如果进行高速缓存行填充操作的内存位置仍然是下次处理器访问的<br>地址时、处理器从缓存行读取而不是从内存读取</p>
+<p><code>写命中</code>: <code>write hit</code> 当处理器将操作数写回到内存缓存时、会先检查这个缓存的内存地址<br>是否在缓存行中、如果存在一个有效的缓存行、处理器会将这个操作数歇会到缓存、而不是内存</p>
+<p><code>写缺失</code>: <code>write misses the cache</code> 一个有效的缓存行被写入到不存在的内存区域</p>
+<p><code>比较并交换</code>: <code>Compare and Swap</code> cas操作需要两个值, old and new、在操作期间会比较这<br>两个值、如果发生变化则不交换、未发生变化才交换</p>
+<p><code>CPU流水线</code>: <code>CPU pipeline</code>在CPU中由5、6个不同的电路单元组成一条指令处理流水线<br>然后一条X86指令分成5~6步后再由这些电路单元分别执行、就能实现在一个CPU周期内完成<br>一条指令、提高CPU的运算速率</p>
+<p><code>内存顺序冲突</code>: <code>memory order violation</code>一般是由假共享引起的、是指多个CPU同时修改<br>同一个缓存行的不同部分而引起其中一个CPU的操作无效、当出现这个内存顺序冲突时、CPU必须清空流水线</p>
+<h4 id="Lock前缀的指令"><a href="#Lock前缀的指令" class="headerlink" title="Lock前缀的指令"></a>Lock前缀的指令</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lock 前缀的指令、在多核处理器下会引发两件事:</span><br><span class="line"><span class="number">1.</span> 将当期处理器的缓存行数据写回内存</span><br><span class="line"><span class="number">2.</span> 这个写回内存操作会使在其它CPU里缓存了该地址的数据无效</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="post-title-link" itemprop="url">Java多线程实现基础(二)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="post-meta-item leancloud_visitors" data-flag-title="Java多线程实现基础(二)" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h4><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 线程通信</span><br><span class="line">   线程之间以何种方式进行消息传递</span><br><span class="line">   共享内存 &amp; 消息传递</span><br><span class="line">   </span><br><span class="line"><span class="number">2.</span> 线程同步</span><br><span class="line">   程序间用于控制不同线程间操作发生相对顺序的机制</span><br><span class="line">   </span><br><span class="line">   java是共享内存模型】采用的是隐式通信、显式修改</span><br><span class="line">   </span><br><span class="line">   jvm定义了线程和主内存(Main Memory)之间的关系:</span><br><span class="line">   <span class="number">1</span>) 线程之间的共享变量存储在主内存中</span><br><span class="line">   <span class="number">2</span>) 线程私有变量存储在私有本地内存 Local Memory中、</span><br><span class="line">      本地内存是jvm的一个抽象概念、并非真实存在、涵盖缓存、缓冲区、寄存器及其它硬件及编译器优化</span><br><span class="line">   Java同步原语(synchronize volatile  <span class="keyword">final</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 编译器重排</span><br><span class="line">   在不改变单线程语义的条件下、编译器可以重排指令的执行顺序</span><br><span class="line"><span class="number">2.</span> 指令重排 </span><br><span class="line">   现代cpu采用了指令级并行技术、可以同时执行多条指令、若无数据依赖、</span><br><span class="line">   处理器可以改变机器指令的执行顺序</span><br><span class="line"><span class="number">3.</span> 内存系统的重排</span><br><span class="line">   由于处理器采用缓存和读写缓冲区、使得加载和存储操作看上去是乱序的、</span><br><span class="line">   可能在乱序执行</span><br></pre></td></tr></table></figure>
-
-<h4 id="jvm-指令执行"><a href="#jvm-指令执行" class="headerlink" title="jvm 指令执行"></a>jvm 指令执行</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">未使用同步的程序在jvm中的执行基本无序、</span><br><span class="line"><span class="number">1.</span> jvm不保证单线程内的操作会按照程序代码顺序执行、临界区指令重排</span><br><span class="line"><span class="number">2.</span> jvm不保证所有线程看到的执行顺序一致</span><br><span class="line"><span class="number">3.</span> jvm不保证<span class="number">64</span>位的long、<span class="built_in">double</span>类型写操作具有原子性</span><br></pre></td></tr></table></figure>
+<h4 id="volatile的实现"><a href="#volatile的实现" class="headerlink" title="volatile的实现"></a>volatile的实现</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为了提高速度、CPU不直接和内存通信、而是先将系统内存的数据加载到内存缓存后再操作</span><br><span class="line">但: 操作完全不知道何时会被写回内存</span><br><span class="line"></span><br><span class="line"><span class="keyword">volatile</span>声明的变量进行读写、JVM会向处理器发送一条<span class="keyword">Lock</span>前缀的指令、精讲变量所在的</span><br><span class="line">缓存行数据写回到内存</span><br><span class="line"></span><br><span class="line">在多核处理器下、实现了缓存一致性协议、每个处理器通过嗅探在总线上传播的数据来检查</span><br><span class="line">自己的缓存是否已过期、当处理器发现自己缓存行对应的内存地址呗修改、会将当期处理器的</span><br><span class="line">缓存行状态设为无效、重新从系统内存读取</span><br></pre></td></tr></table></figure>
 
       
     </div>

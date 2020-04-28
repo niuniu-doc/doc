@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
@@ -136,6 +136,16 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-mysql">
+
+    <a href="/categories/MySQL" rel="section"><i class="fa fa-fw fa-database"></i>MySQL</a>
+
+  </li>
+        <li class="menu-item menu-item-redis">
+
+    <a href="/categories/Redis" rel="section"><i class="fa fa-fw fa-database"></i>Redis</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -188,6 +198,119 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">lsof---一切皆文件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="lsof---一切皆文件" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>lsof(list open files) 查看当前系统文件、Linux下任何事物都以文件的形式存在、通过文件不仅可以访问常规数据库、还可以访问网络连接(tcp、udp等)和硬件</p>
+</blockquote>
+<p><strong>lsof 打开文件可以是：</strong></p>
+<ul>
+<li>普通文件 </li>
+<li>目录</li>
+<li>网络文件系统的文件</li>
+<li>字符或设备文件</li>
+<li>共享库</li>
+<li>管道、命名管道</li>
+<li>符号连接</li>
+<li>网络文件 (eg. NFS file、网络socket、unix 域名socket等)</li>
+<li>其它类型的文件</li>
+</ul>
+<p><strong>命令参数</strong></p>
+<blockquote>
+<p>-a 列出打开文件存在的进程<br>-c&lt;进程名&gt;</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -393,119 +516,6 @@
 <p><code>08:41:13.729687</code> 本地时间戳<br><code>ip</code> 协议是ipv4、若是ipv6会显示为 ip6<br><code>192.168.64.28.22</code> 源ip和端口<br><code>192.168.64.1.41916</code> 目的ip和端口<br><code>Flags [P.]</code> 报文标记段<br><code>seq 196:568</code> 代表该数据包包含该数据流的第 196 到 568 字节<br><code>ack 1</code> 该数据包是数据发送方，ack 值为 1。在数据接收方，该字段代表数据流上的下一个预期字节数据，例如，该数据流中下一个数据包的 ack 值应该是 568<br><code>win 309</code> 表示接收缓冲区中可用的字节数，后跟 TCP 选项如 MSS（最大段大小）或者窗口比例值<br><code>length 372</code> 代表数据包有效载荷字节长度</p>
 <blockquote>
 <p>flag描述<br>S SYN Connection Start<br>F FIN Connection Finish<br>P PUSH Data Push<br>. ACK Acknowledment</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">lsof---一切皆文件</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="lsof---一切皆文件" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/linux%E4%BD%BF%E7%94%A8_lsof---%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>lsof(list open files) 查看当前系统文件、Linux下任何事物都以文件的形式存在、通过文件不仅可以访问常规数据库、还可以访问网络连接(tcp、udp等)和硬件</p>
-</blockquote>
-<p><strong>lsof 打开文件可以是：</strong></p>
-<ul>
-<li>普通文件 </li>
-<li>目录</li>
-<li>网络文件系统的文件</li>
-<li>字符或设备文件</li>
-<li>共享库</li>
-<li>管道、命名管道</li>
-<li>符号连接</li>
-<li>网络文件 (eg. NFS file、网络socket、unix 域名socket等)</li>
-<li>其它类型的文件</li>
-</ul>
-<p><strong>命令参数</strong></p>
-<blockquote>
-<p>-a 列出打开文件存在的进程<br>-c&lt;进程名&gt;</p>
 </blockquote>
 
       
@@ -856,120 +866,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avator.jpeg">
-      <meta itemprop="name" content="niuniu">
-      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="牛牛的小窝">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">curd操作</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" class="post-meta-item leancloud_visitors" data-flag-title="curd操作" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><p><code>$sum</code>: 计算总和</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.mycol.aggregate([&#123;<span class="variable">$group</span> : &#123;_id:<span class="string">"<span class="variable">$f1</span>"</span>, num_tutorial:&#123;<span class="variable">$sum</span>:<span class="string">"<span class="variable">$f2</span>"</span>&#125;&#125;&#125;])</span><br><span class="line">-&gt; select count(1) <span class="keyword">from</span> table<span class="built_in"> group </span>by f1; </span><br><span class="line"></span><br><span class="line">db.mycol.aggregate([&#123;<span class="variable">$group</span> : &#123;_id:<span class="string">"<span class="variable">$f1</span>"</span>, num_tutorial:&#123;<span class="variable">$sum</span>:<span class="string">"<span class="variable">$f2</span>"</span>&#125;&#125;&#125;])</span><br><span class="line">-&gt;select field,sum(f2) <span class="keyword">from</span> table<span class="built_in"> group </span>by f1;</span><br></pre></td></tr></table></figure>
-<p><code>$avg</code>: 计算平均值</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;<span class="variable">$group</span>:&#123;_id:<span class="string">"<span class="variable">$field</span>"</span>, avg:&#123;<span class="variable">$avg</span>:<span class="variable">$f</span>&#125;&#125;&#125;])</span><br><span class="line">-&gt; select field,avg(f) <span class="keyword">from</span> table<span class="built_in"> group </span>by field;</span><br></pre></td></tr></table></figure>
-<p><code>$min</code>: 获取集合中所有文档对应的最小值</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;<span class="variable">$group</span>:&#123;_id:<span class="string">"<span class="variable">$field</span>"</span>,min:&#123;<span class="variable">$min</span>:<span class="string">"<span class="variable">$f2</span>"</span>&#125;&#125;&#125;])</span><br><span class="line">-&gt; select min(f2) <span class="keyword">from</span> table<span class="built_in"> group </span>by field;</span><br></pre></td></tr></table></figure>
-<p><code>$max</code>: 获取集合中所有文档对应的最大值</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考<span class="built_in">min</span></span><br></pre></td></tr></table></figure>
-<p><code>$push</code>: 在结果文档中插入值到一个数组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate([&#123;<span class="variable">$group</span>:&#123;_id:<span class="string">"<span class="variable">$by_user</span>"</span>,url:&#123;<span class="variable">$push</span>:<span class="string">"<span class="variable">$url</span>"</span>&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-<p><code>$first</code>: 根据资源文档的排序获取第一个文档数据</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate([&#123;<span class="variable">$group</span>:&#123;_id:<span class="string">"<span class="variable">$by_user</span>"</span>,first_url:&#123;<span class="variable">$first</span>:<span class="string">"<span class="variable">$url</span>"</span>&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-<p><code>$last</code>: 根据资源文档的排序获取最后一个文档数据</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考<span class="keyword">first</span></span><br></pre></td></tr></table></figure>
-
-<p><code>$project</code> 修改输出文档的结构<br><code>$match</code> 用于过滤数据、<br><code>$limit</code> 限制返回条数<br><code>$skip</code> 跳过指定条数的文档<br><code>$unwind</code> 将某个数组类型字段拆分成多条<br><code>$group</code> 将集合中的文档分组、可用于统计结果<br><code>$sort</code> 将文档排序后输出</p>
-<p>eg.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate(&#123;<span class="string">$project:</span>&#123;<span class="string">_id:</span><span class="number">0</span>,<span class="string">title:</span><span class="number">1</span>,<span class="string">tags:</span><span class="number">1</span>&#125;&#125;)</span><br><span class="line">db.t.aggregate(&#123;<span class="string">$project:</span>&#123;<span class="string">_id:</span><span class="number">0</span>,<span class="string">title:</span><span class="number">1</span>,<span class="string">tags:</span><span class="number">1</span>&#125;&#125;,[&#123;<span class="string">$match:</span>&#123;<span class="string">score:</span>&#123;<span class="string">$gt:</span><span class="number">70</span>,<span class="string">$lte:</span><span class="number">90</span>&#125;&#125;&#125;,&#123;<span class="string">$group:</span>&#123;<span class="string">_id:</span><span class="literal">null</span>,<span class="string">count:</span>&#123;<span class="string">$sum:</span><span class="number">1</span>&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
-
-<h4 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">map ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</span><br><span class="line">reduce 统计函数，reduce函数的任务就是将key-<span class="keyword">values</span>变成<span class="keyword">key</span>-<span class="keyword">value</span>，也就是把<span class="keyword">values</span>数组变成一个单一的值<span class="keyword">value</span>。。</span><br><span class="line"><span class="keyword">out</span> 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</span><br><span class="line"><span class="keyword">query</span> 一个筛选条件，只有满足条件的文档才会调用<span class="keyword">map</span>函数。（<span class="keyword">query</span>。<span class="keyword">limit</span>，<span class="keyword">sort</span>可以随意组合）</span><br><span class="line"><span class="keyword">sort</span> 和<span class="keyword">limit</span>结合的<span class="keyword">sort</span>排序参数（也是在发往<span class="keyword">map</span>函数前给文档排序），可以优化分组机制</span><br><span class="line"><span class="keyword">limit</span> 发往<span class="keyword">map</span>函数的文档数量的上限（要是没有<span class="keyword">limit</span>，单独使用<span class="keyword">sort</span>的用处不大）</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1120,6 +1016,120 @@ ROOT_DEV= 0x306
 <li>磁盘磁头<br>  利用特殊材料的电阻值会随磁场变化的原来来读写盘片数据、将硬盘盘片上的磁信号转化为电信号向外传输</li>
 </ol>
 </blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpeg">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">curd操作</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 22:22:19" itemprop="dateModified" datetime="2020-04-28T22:22:19+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" class="post-meta-item leancloud_visitors" data-flag-title="curd操作" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><p><code>$sum</code>: 计算总和</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.mycol.aggregate([&#123;<span class="variable">$group</span> : &#123;_id:<span class="string">"<span class="variable">$f1</span>"</span>, num_tutorial:&#123;<span class="variable">$sum</span>:<span class="string">"<span class="variable">$f2</span>"</span>&#125;&#125;&#125;])</span><br><span class="line">-&gt; select count(1) <span class="keyword">from</span> table<span class="built_in"> group </span>by f1; </span><br><span class="line"></span><br><span class="line">db.mycol.aggregate([&#123;<span class="variable">$group</span> : &#123;_id:<span class="string">"<span class="variable">$f1</span>"</span>, num_tutorial:&#123;<span class="variable">$sum</span>:<span class="string">"<span class="variable">$f2</span>"</span>&#125;&#125;&#125;])</span><br><span class="line">-&gt;select field,sum(f2) <span class="keyword">from</span> table<span class="built_in"> group </span>by f1;</span><br></pre></td></tr></table></figure>
+<p><code>$avg</code>: 计算平均值</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;<span class="variable">$group</span>:&#123;_id:<span class="string">"<span class="variable">$field</span>"</span>, avg:&#123;<span class="variable">$avg</span>:<span class="variable">$f</span>&#125;&#125;&#125;])</span><br><span class="line">-&gt; select field,avg(f) <span class="keyword">from</span> table<span class="built_in"> group </span>by field;</span><br></pre></td></tr></table></figure>
+<p><code>$min</code>: 获取集合中所有文档对应的最小值</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;<span class="variable">$group</span>:&#123;_id:<span class="string">"<span class="variable">$field</span>"</span>,min:&#123;<span class="variable">$min</span>:<span class="string">"<span class="variable">$f2</span>"</span>&#125;&#125;&#125;])</span><br><span class="line">-&gt; select min(f2) <span class="keyword">from</span> table<span class="built_in"> group </span>by field;</span><br></pre></td></tr></table></figure>
+<p><code>$max</code>: 获取集合中所有文档对应的最大值</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考<span class="built_in">min</span></span><br></pre></td></tr></table></figure>
+<p><code>$push</code>: 在结果文档中插入值到一个数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate([&#123;<span class="variable">$group</span>:&#123;_id:<span class="string">"<span class="variable">$by_user</span>"</span>,url:&#123;<span class="variable">$push</span>:<span class="string">"<span class="variable">$url</span>"</span>&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$first</code>: 根据资源文档的排序获取第一个文档数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate([&#123;<span class="variable">$group</span>:&#123;_id:<span class="string">"<span class="variable">$by_user</span>"</span>,first_url:&#123;<span class="variable">$first</span>:<span class="string">"<span class="variable">$url</span>"</span>&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$last</code>: 根据资源文档的排序获取最后一个文档数据</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考<span class="keyword">first</span></span><br></pre></td></tr></table></figure>
+
+<p><code>$project</code> 修改输出文档的结构<br><code>$match</code> 用于过滤数据、<br><code>$limit</code> 限制返回条数<br><code>$skip</code> 跳过指定条数的文档<br><code>$unwind</code> 将某个数组类型字段拆分成多条<br><code>$group</code> 将集合中的文档分组、可用于统计结果<br><code>$sort</code> 将文档排序后输出</p>
+<p>eg.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.t.aggregate(&#123;<span class="string">$project:</span>&#123;<span class="string">_id:</span><span class="number">0</span>,<span class="string">title:</span><span class="number">1</span>,<span class="string">tags:</span><span class="number">1</span>&#125;&#125;)</span><br><span class="line">db.t.aggregate(&#123;<span class="string">$project:</span>&#123;<span class="string">_id:</span><span class="number">0</span>,<span class="string">title:</span><span class="number">1</span>,<span class="string">tags:</span><span class="number">1</span>&#125;&#125;,[&#123;<span class="string">$match:</span>&#123;<span class="string">score:</span>&#123;<span class="string">$gt:</span><span class="number">70</span>,<span class="string">$lte:</span><span class="number">90</span>&#125;&#125;&#125;,&#123;<span class="string">$group:</span>&#123;<span class="string">_id:</span><span class="literal">null</span>,<span class="string">count:</span>&#123;<span class="string">$sum:</span><span class="number">1</span>&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">map ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</span><br><span class="line">reduce 统计函数，reduce函数的任务就是将key-<span class="keyword">values</span>变成<span class="keyword">key</span>-<span class="keyword">value</span>，也就是把<span class="keyword">values</span>数组变成一个单一的值<span class="keyword">value</span>。。</span><br><span class="line"><span class="keyword">out</span> 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</span><br><span class="line"><span class="keyword">query</span> 一个筛选条件，只有满足条件的文档才会调用<span class="keyword">map</span>函数。（<span class="keyword">query</span>。<span class="keyword">limit</span>，<span class="keyword">sort</span>可以随意组合）</span><br><span class="line"><span class="keyword">sort</span> 和<span class="keyword">limit</span>结合的<span class="keyword">sort</span>排序参数（也是在发往<span class="keyword">map</span>函数前给文档排序），可以优化分组机制</span><br><span class="line"><span class="keyword">limit</span> 发往<span class="keyword">map</span>函数的文档数量的上限（要是没有<span class="keyword">limit</span>，单独使用<span class="keyword">sort</span>的用处不大）</span><br></pre></td></tr></table></figure>
 
       
     </div>

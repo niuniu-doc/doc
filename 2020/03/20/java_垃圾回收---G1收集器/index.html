@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="G1收集器上篇文章简单介绍了七种垃圾回收器、既然G1是最前沿的、有必要补充说明一下:     1. 横跨整个堆内存: 在G1之前的其它收集器收集范围都是整个新生代或者老年代         G1在使用时、将整个Java堆划分为多个大小相等的独立区域(Region)         保留新生代和老年代的概念、但不再物理隔离、都是一部分Region(不需要连续)的集合     2. 建立可预测的时间模">
@@ -136,6 +136,16 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-mysql">
+
+    <a href="/categories/MySQL" rel="section"><i class="fa fa-fw fa-database"></i>MySQL</a>
+
+  </li>
+        <li class="menu-item menu-item-redis">
+
+    <a href="/categories/Redis" rel="section"><i class="fa fa-fw fa-database"></i>Redis</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -411,12 +421,12 @@ Humongous Objects的分配和回收:
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JVM%E5%8F%82%E6%95%B0%E5%B0%8F%E8%AE%B0/" rel="prev" title="垃圾回收---JVM参数小记">
-      <i class="fa fa-chevron-left"></i> 垃圾回收---JVM参数小记
+    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JDK%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/" rel="prev" title="垃圾回收---JDK监控工具">
+      <i class="fa fa-chevron-left"></i> 垃圾回收---JDK监控工具
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JDK%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/" rel="next" title="垃圾回收---JDK监控工具">
-      垃圾回收---JDK监控工具 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/java_solr%E4%BD%BF%E7%94%A8IK%E5%88%86%E8%AF%8D%E5%99%A8/" rel="next" title="solr使用IK分词器">
+      solr使用IK分词器 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

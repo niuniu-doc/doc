@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="开机加电 -&gt; main 函数执行 分3步完成、实现从启动盘加载操作系统、完成 main 函数加载所需要的准备工作  启动BIOS、完成实模式下的中断向量表和中断服务程序Q: RAM ？A: Random Access Memory. 随机存取存储器、eg. 内存条   特点是 在加电状态下、可随意读写、断电消失 Q: 加电瞬间、RAM中无任何程序、谁来完成 操作系统从软盘的加载 ？A: B">
@@ -138,6 +138,16 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-mysql">
+
+    <a href="/categories/MySQL" rel="section"><i class="fa fa-fw fa-database"></i>MySQL</a>
+
+  </li>
+        <li class="menu-item menu-item-redis">
+
+    <a href="/categories/Redis" rel="section"><i class="fa fa-fw fa-database"></i>Redis</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -363,12 +373,12 @@ ROOT_DEV= 0x306
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" rel="prev" title="安装使用">
-      <i class="fa fa-chevron-left"></i> 安装使用
+    <a href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" rel="prev" title="curd操作">
+      <i class="fa fa-chevron-left"></i> curd操作
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" rel="next" title="curd操作">
-      curd操作 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" rel="next" title="平均负载">
+      平均负载 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
