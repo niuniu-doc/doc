@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="内存表: 指的是使用Memory引擎的表、创建语法是: create table … engine&#x3D;memory. 这种表的数据都保存在内存里、系统重启的时候会被清空, 但表结构还在. 而、临时表是可以使用各种引擎类型. 若使用的是innodb引擎或者mysiam引擎、写数据的时候是写到磁盘的、当前, 临时表也可以使用memory引擎.  临时表的特性 创建语法是: create te">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么临时表可以重名">
+<meta property="og:url" content="http://yoursite.com/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%B4%E6%97%B6%E8%A1%A8%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%90%8D/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="内存表: 指的是使用Memory引擎的表、创建语法是: create table … engine&#x3D;memory. 这种表的数据都保存在内存里、系统重启的时候会被清空, 但表结构还在. 而、临时表是可以使用各种引擎类型. 若使用的是innodb引擎或者mysiam引擎、写数据的时候是写到磁盘的、当前, 临时表也可以使用memory引擎.  临时表的特性 创建语法是: create te">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-25T01:19:41.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.818Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%B4%E6%97%B6%E8%A1%A8%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%90%8D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>为什么临时表可以重名 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%B4%E6%97%B6%E8%A1%A8%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%90%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          为什么临时表可以重名
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-25 09:19:41" itemprop="dateCreated datePublished" datetime="2020-03-25T09:19:41+08:00">2020-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>内存表: 指的是使用Memory引擎的表、创建语法是: create table … engine&#x3D;memory. 这种表的数据都保存在内存里、系统重启的时候会被清空, 但表结构还在. 而、临时表是可以使用各种引擎类型. 若使用的是innodb引擎或者mysiam引擎、写数据的时候是写到磁盘的、当前, 临时表也可以使用memory引擎.</p>
+</blockquote>
+<h4 id="临时表的特性"><a href="#临时表的特性" class="headerlink" title="临时表的特性"></a>临时表的特性</h4><ol>
+<li><p>创建语法是: create temporary table…</p>
+</li>
+<li><p>一个临时表只能被创建它的session访问、对其它线程不可见. (A线程创建的临时表t、B线程不可见). 在session结束时自动删除.</p>
+</li>
+<li><p>临时表可以与普通表同名</p>
+</li>
+<li><p>session A内具有同名的临时表和普通表时、show create 语句、及增删改查语句、访问的是临时表</p>
+</li>
+<li><p>show tables. 不显示临时表.</p>
+</li>
+</ol>
+<h4 id="临时表的应用"><a href="#临时表的应用" class="headerlink" title="临时表的应用"></a>临时表的应用</h4><h5 id="分库分表的跨库查询"><a href="#分库分表的跨库查询" class="headerlink" title="分库分表的跨库查询."></a>分库分表的跨库查询.</h5><p>  一般分库分表的场景、就是要把一个逻辑上的大表分散到不同的数据库实例上. eg. 将大表ht、按照字段f、拆分成1024个分表、然后分布到32个DB实例</p>
+<p>  一般有两种查询场景. 1) 可直接定位分表. 2) 无法定位分表、需要多表数据重组.</p>
+<p>  此时一般有两种思路解决:</p>
+<ol>
+<li>在proxy层进行代码排序</li>
+</ol>
+<p>   优势: 处理速度快、拿到分库的数据后、直接在内存中参与计算. 但: </p>
+<p>   开发工作量大, eg. group by, join 等的操作、对中间层开发要求高.</p>
+<p>   对proxy的压力较大、容易出现内存不够用和CPU瓶颈问题.</p>
+<ol start="2">
+<li>将各表拿到的数据、汇总到一个MySQL实例的一个表、然后在汇总实例上进行逻辑操作.</li>
+</ol>
+<h5 id="join优化的场景"><a href="#join优化的场景" class="headerlink" title="join优化的场景"></a>join优化的场景</h5><ol>
+<li><p>不同session临时表命名是可以重复的、若有多个session同时执行join优化、无需担心表名重复建表失败.</p>
+</li>
+<li><p>无需担心数据删除问题. 若使用临时表、在执行流程过程中Client异常断开、或者DB异常重启、还需要专门清理中间过程生成的数据表、而临时表会自动回收、不需要这个额外的操作.</p>
+</li>
+</ol>
+<h4 id="为什么临时表可以重名"><a href="#为什么临时表可以重名" class="headerlink" title="为什么临时表可以重名 ?"></a>为什么临时表可以重名 ?</h4><p>在执行 create temporary table tmp(id int primary key)engine&#x3D;innodb; 这个语句时、Mysql会给innodb表创建一个 frm 文件保存表结构定义、还要有地方保存表数据. frm放在临时文件目录下 <code>#sql&#123;进程id&#125;_&#123;线程id&#125;_序列号</code>、 select @@temdir 可以查看临时文件目录.</p>
+<p>5.6之前、MySQL会在临时文件目录下创建一个相同前缀、.ibd 为后缀的文件、用来存放数据文件;</p>
+<p>5.7开始、MySQL引入临文件表空间、专门存放临时文件数据、不需要创建ibd文件.</p>
+<p>其实创建一个叫t1的innodb临时表、MySQL在存储上认为跟普通表t1不同、可以与普通表重名.</p>
+<p>MySQL维护数据表、除了物理上要有文件外、内存里也有一套机制区别不同的表、每个表对应一个table_def_key. 普通表的table_def_key是<code>库名 + 表名</code>得到、而临时表的table_def_key是<code>库名 + 表名 + server_id + thread_id</code>, 所以, 临时表不能重名而临时表是可以的.</p>
+<p>在实现上、每个线程都维护了自己的临时表链表. 这样每次session内操作表的时候、先遍历链表、检查是否有对应临时表、有: 优先操作、无: 再操作临时表; session结束时、对链表里的每个临时表都执行 <code>drop temporary table + tb_name</code>的操作. 此时会发现: binlog也记录了 drop temporary操作</p>
+<p>`&#96;&#96;</p>
+<p>SET TIMESTAMP&#x3D;1584267384&#x2F;<em>!</em>&#x2F;;</p>
+<p>SET @@session.pseudo_thread_id&#x3D;19&#x2F;<em>!</em>&#x2F;;</p>
+<p>DROP &#x2F;*!40005 TEMPORARY *&#x2F; TABLE IF EXISTS <code>x</code>,<code>tmp</code></p>
+<p>`&#96;&#96;</p>
+<p>临时表只有在县城内可以访问、为什么要写binlog呢 ? –这就需要考虑主备复制了.</p>
+<h4 id="临时表和主备复制"><a href="#临时表和主备复制" class="headerlink" title="临时表和主备复制."></a>临时表和主备复制.</h4><p>既然写binlog, 就意味着备库需要. eg. 下边的语句序列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_normal(id <span class="type">int</span> <span class="keyword">primary</span> key, c <span class="type">int</span>)engine<span class="operator">=</span>innodb; <span class="operator">/</span><span class="operator">/</span> Q1</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> tmp_t <span class="keyword">like</span> t_normal; <span class="operator">/</span><span class="operator">/</span> Q2</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tmp_t <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">1</span>); <span class="operator">/</span><span class="operator">/</span> Q3</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_normal <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tmp_t; <span class="operator">/</span><span class="operator">/</span> Q4</span><br></pre></td></tr></table></figure>
+
+
+
+<p>若关于临时表的操作不记录、在备库重放binlog时、就会报错: tmp_t不存在</p>
+<p>如果把binlog设为row格式能解决吗 ? binlog是row时、记录的是操作的数据 <code>插入一行数据(1,1)</code>. 确实如此、若binlog_format&#x3D;row、那么跟临时表有关的操作不会记录到binlog、</p>
+<p>即: 只有binlog_format&#x3D;statement &#x2F; mixed时、binlog才会记录临时表的操作.</p>
+<p>此时, 创建临时表的语句会传到备库执行、备库同步时也会创建临时表、所以、也需要在主库上记录 drop temporary table、传给备库.</p>
+<p>MySQL在记录binlog时、不论是create 还是 alter都会原样不变、但drop确会变成 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> `t_normal` <span class="comment">/*generated by server*/</span></span><br></pre></td></tr></table></figure>
+
+<p>也就是改成了标准格式. 为什么呢 ?</p>
+<p>因为 drop是可以一次删除多个表. eg. 若设置 binlog_format&#x3D;row, 若主库执行 <code>drop table t_normal,tmp_t</code>, 则binlog只记录 <code>drop table t_normal</code>; 因为备库无tmp_t、备库执行会出错、所以, 必须将语句改写.</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考:"></a>思考:</h4><h5 id="备库如何处理不同线程同名临时表"><a href="#备库如何处理不同线程同名临时表" class="headerlink" title="备库如何处理不同线程同名临时表"></a>备库如何处理不同线程同名临时表</h5><p>MySQL在记录binlog时、会把线程id写入binlog、这样备库的应用线程就能知道每个语句的主库线程id、并利用这个线程id来构造临时表的table_def_key. </p>
+<h5 id="临时表可使用-alter修改表名、不能使用rename"><a href="#临时表可使用-alter修改表名、不能使用rename" class="headerlink" title="临时表可使用 alter修改表名、不能使用rename ?"></a>临时表可使用 alter修改表名、不能使用rename ?</h5><p>因为在<code>rename table</code>时、是按照 db&#x2F;table.frm 的规则去磁盘找文件、但临时表在磁盘上的frm文件是放在tmpdir目录下的、并且命名规则是: <code>#sql&#123;进程id&#125;_&#123;线程id&#125;_序列号.frm</code>, 所以会找不到.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%9C%89kill%E4%B8%8D%E6%8E%89%E7%9A%84%E8%AF%AD%E5%8F%A5/" rel="prev" title="为什么还有kill不掉的语句">
+      <i class="fa fa-chevron-left"></i> 为什么还有kill不掉的语句
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/25/mysql_%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8%E5%86%85%E9%83%A8%E4%B8%B4%E6%97%B6%E8%A1%A8/" rel="next" title="什么时候使用内部临时表">
+      什么时候使用内部临时表 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E8%A1%A8%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">临时表的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E8%A1%A8%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">临时表的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%9A%84%E8%B7%A8%E5%BA%93%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.1.</span> <span class="nav-text">分库分表的跨库查询.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#join%E4%BC%98%E5%8C%96%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">2.2.</span> <span class="nav-text">join优化的场景</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%B4%E6%97%B6%E8%A1%A8%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%90%8D"><span class="nav-number">3.</span> <span class="nav-text">为什么临时表可以重名 ?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E8%A1%A8%E5%92%8C%E4%B8%BB%E5%A4%87%E5%A4%8D%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">临时表和主备复制.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">思考:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%87%E5%BA%93%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%B8%8D%E5%90%8C%E7%BA%BF%E7%A8%8B%E5%90%8C%E5%90%8D%E4%B8%B4%E6%97%B6%E8%A1%A8"><span class="nav-number">5.1.</span> <span class="nav-text">备库如何处理不同线程同名临时表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E8%A1%A8%E5%8F%AF%E4%BD%BF%E7%94%A8-alter%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%90%8D%E3%80%81%E4%B8%8D%E8%83%BD%E4%BD%BF%E7%94%A8rename"><span class="nav-number">5.2.</span> <span class="nav-text">临时表可使用 alter修改表名、不能使用rename ?</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

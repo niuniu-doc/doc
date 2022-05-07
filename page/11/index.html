@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/11/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/11/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_%E5%B8%B8%E7%94%A8shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_%E5%B8%B8%E7%94%A8shell/" class="post-title-link" itemprop="url">常用shell</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>AWK 多个分隔符</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">awk</span> -F <span class="string">&#x27;[sep1|sep2]&#x27;</span> <span class="string">&#x27;&#123;print <span class="variable">$0</span>&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>删除文件中包含指定字符串的行</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed -e <span class="string">&#x27;/abc/d&#x27;</span>  <span class="selector-tag">a</span><span class="selector-class">.txt</span>  &gt; <span class="selector-tag">a</span><span class="selector-class">.log</span>   <span class="comment">// 删除a.txt中含&quot;abc&quot;的行，将操作之后的结果保存到a.log</span></span><br><span class="line"></span><br><span class="line">sed <span class="string">&#x27;/abc/d;/efg/d&#x27;</span> <span class="selector-tag">a</span><span class="selector-class">.txt</span> &gt; <span class="selector-tag">a</span><span class="selector-class">.log</span>    <span class="comment">// 删除含字符串&quot;abc&quot;或“efg&quot;的行，将结果保存到a.log</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>替换指定字符串</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/reg/replace/g&#x27;</span> 将reg替换为replcace</span><br><span class="line">eg. sed -i <span class="string">&quot;s/aaa/bbb/g&quot;</span> <span class="regexp">/tmp/</span><span class="number">1</span> 将<span class="regexp">/tmp/</span><span class="number">1</span> 文件中的a替换为b</span><br></pre></td></tr></table></figure>
+
+
+<p>截取n到m列</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">head -<span class="number">3</span> /tmp/<span class="number">3</span> | cut -d<span class="symbol">&#x27;sep</span>&#x27; -f <span class="number">2</span>,<span class="number">7</span></span><br><span class="line">-d 指定分隔符</span><br><span class="line">-f 指定截取列</span><br><span class="line"></span><br><span class="line">cut 常用参数</span><br><span class="line">-d :分隔符 （ <span class="comment">--delimiter 按照指定分隔符分割列 ）</span></span><br><span class="line">-b : 表示字节</span><br><span class="line">-c : 表示字符</span><br><span class="line">-f : 表示字段(列号) （ <span class="comment">--field 提取第几列 ）</span></span><br><span class="line">N- : 从第<span class="type">N</span>个字节、字符、字段到结尾</span><br><span class="line">N-M : 从第<span class="type">N</span>个字节、字符、字段到第M个</span><br><span class="line">-M : 从第一个字节、字符、字段到第<span class="type">M</span>个</span><br><span class="line">eg. head -<span class="number">3</span> /tmp/<span class="number">3</span> | cut -c1-<span class="number">3</span> 截取字符串第<span class="number">1</span>到<span class="number">3</span>列</span><br></pre></td></tr></table></figure>
+
+<p>diff 文件差异</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. <span class="built_in">comm</span> 命令(需要先进行文件排序 <span class="built_in">sort</span> file1 )</span><br><span class="line">    <span class="built_in">comm</span> -23 file1 file2 &gt; /tmp/1 得到只在file1、不在file2中的数据</span><br><span class="line">      -1   不显示只在第1个文件里出现过的列。</span><br><span class="line">      -2   不显示只在第2个文件里出现过的列。</span><br><span class="line">      -3   不显示只在第1和第2个文件里出现过的列。</span><br><span class="line">2. diff 命令</span><br><span class="line">3. <span class="built_in">sort</span> 命令</span><br><span class="line">    <span class="built_in">sort</span> file2 file1 file1 | <span class="built_in">uniq</span> -u  &gt; /tmp/1</span><br></pre></td></tr></table></figure>
+
+<p>字符串截取</p>
+<blockquote>
+<p><code>$&#123;string: start :length&#125;</code> 左边开始计数<br><code>$&#123;string: start :length&#125;</code> 右边开始计数</p>
+</blockquote>
+<p>二进制文件查看</p>
+<blockquote>
+<p>xxd -b file</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_%E5%B8%B8%E7%94%A8sql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_%E5%B8%B8%E7%94%A8sql/" class="post-title-link" itemprop="url">常用sql</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>insert.. select<br>eg. insert into tb1 select * from tb2 ; </p>
+</li>
+<li><p>create … like<br>eg. create tb1 like tb2;</p>
+</li>
+<li><p>查看所有库中包含指定字段的所有表</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> information_schema <span class="keyword">where</span> <span class="built_in">column_name</span>=<span class="string">&#x27;xxx&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 指定db</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> information_schema <span class="keyword">where</span> <span class="built_in">column_name</span>=<span class="string">&#x27;xxx&#x27;</span> <span class="keyword">and</span> table_schema=<span class="string">&#x27;xxdb&#x27;</span>; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>批量修改表字段类型</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> CONCAT(<span class="string">&#x27;alter table  &#x27;</span>,TABLE_SCHEMA,<span class="string">&#x27;.&#x27;</span>,TABLE_NAME,<span class="string">&#x27;  </span></span><br><span class="line"><span class="string">modify `&#x27;</span>, COLUMN_NAME, <span class="string">&#x27;` bigint(20) &#x27;</span>,  </span><br><span class="line"><span class="string">&#x27; default &#x27;</span>, COLUMN_DEFAULT, <span class="string">&#x27; COMMENT  &#x27;&#x27; , COLUMN_COMMENT, &#x27;&#x27;;&#x27;</span>) </span><br><span class="line"><span class="keyword">from</span> information_schema.COLUMNS </span><br><span class="line"><span class="keyword">where</span>  COLUMN_NAME <span class="operator">=</span> <span class="string">&#x27;first_order_id&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDidea/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDidea/" class="post-title-link" itemprop="url">彻底卸载idea</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>完全卸载idea</p>
+<p>首先在应用里面右键移动到垃圾桶[先卸载应用]</p>
+<p>cd Users&#x2F;xxx&#x2F;Library&#x2F;</p>
+<p>上面的xxx对应你的用户名，然后输入</p>
+<p>rm -rf Logs&#x2F;IntelliJIdeaxxx&#x2F;</p>
+<p>rm -rf Preferences&#x2F;IntelliJIdeaxxx&#x2F;</p>
+<p>rm -rf Application\ Support&#x2F;IntelliJIdeaxxx&#x2F;</p>
+<p>rm -rf Caches&#x2F;IntelliJIdeaxxx<br>上面的对应xxx对应不同的版本号，注意开头是 IntelliJIdea就行</p>
+<p>把～&#x2F;下的.idea&#x2F;也删掉</p>
+<p>Idea 的缓存文件在</p>
+<p>&#x2F;Users&#x2F;xxxx&#x2F;Library&#x2F;Preferences<br>注意：以上方式会直接删除缓存文件，所以你重新安装的idea，没有任何插件【卸载前可导出配置setting.jar】</p>
+<p> <br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17213067/article/details/88226062">https://blog.csdn.net/qq_17213067/article/details/88226062</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/" class="post-title-link" itemprop="url">表数据删了一半、表大小不变</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>innodb表包含两部分: 表定义和表数据、在mysql8.0之前、表定义单独存放、.frm 文件、8.0之后允许把表结构定义放在系统数据表中了(表结构定义占用的空间很小)</p>
+</blockquote>
+<h4 id="innodb-file-per-table"><a href="#innodb-file-per-table" class="headerlink" title="innodb_file_per_table"></a>innodb_file_per_table</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">off</span>: 表数据放在系统共享表空间、跟数据字典放在一起</span><br><span class="line"><span class="keyword">on</span>: 每个innodb表数据存储在一个.ibd结尾的文件中(<span class="keyword">drop</span> <span class="keyword">table</span>时直接删除文件)</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据删除流程"><a href="#数据删除流程" class="headerlink" title="数据删除流程"></a>数据删除流程</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-9ef7fd91e2dcd722.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="索引树示意图"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 假设删掉R4这个记录、innodb引擎只会把这个记录标记为已删除、之后再插入一个300-600之间的记录时、可能会复用这个位置、但是空间不会释放</span><br><span class="line"><span class="bullet">2.</span> innodb的数据是按页存放的、如果删掉了一个数据页上的所有内容呢 ？</span><br><span class="line"><span class="code">    整个页可以复用</span></span><br><span class="line"><span class="code">3. 数据页的复用: 可以复用到任意位置</span></span><br><span class="line"><span class="code">    记录复用: 插入数据若不在400-600之间、无法复用</span></span><br><span class="line"><span class="code">4. 若相邻两个数据页的利用率都很小、系统会把数据合并到一个页】另一个标记为可复用</span></span><br><span class="line"><span class="code">5. delete删除整个表数据呢？所有数据页都被标记为可复用</span></span><br><span class="line"><span class="code">所以delete操作只是标记页面可复用、这些可复用但未被复用的空间、就像是空洞、空间不会回收</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="bullet">6.</span> 插入数据也会造成空洞</span><br><span class="line"><span class="code">    数据若不是顺序插入、如果需要在某个页的末尾插入一条记录、就会申请新的页、把要插入位置之后的数据转移到新的页去: 如下图</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-dede264180fcc1f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<h4 id="如何去除空洞"><a href="#如何去除空洞" class="headerlink" title="如何去除空洞"></a>如何去除空洞</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 重建表 alter table A engine=Innodb</span><br><span class="line"><span class="bullet">2.</span> 5.6之后的版本、引入Online DDL、重建流程变为: </span><br><span class="line"><span class="bullet">    1.</span> 建立一个临时文件、扫描表A主键的所有数据页、</span><br><span class="line"><span class="bullet">    2.</span> 用数据页中表A的记录生成B+树、存储到临时文件中、</span><br><span class="line"><span class="bullet">    3.</span> 生成临时文件过程中、所有表A的操作记录在日志文件(row log) 中、</span><br><span class="line"><span class="bullet">    4.</span> 临时文件生成后、将日志文件应用于临时文件、得到与表A逻辑相同的文件</span><br><span class="line"><span class="bullet">    5.</span> 用临时文件替换表A的数据文件</span><br><span class="line"><span class="code">    与以前不同之处在于: 在重建表的过程中允许对表A的操作</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-92ae8e30bfdb3194.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重建表流程.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-79acd12bb61357d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Online DDL.png"></p>
+<h4 id="完全Online-？"><a href="#完全Online-？" class="headerlink" title="完全Online ？"></a>完全Online ？</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">不是, DDL之前是要拿MDL锁的、但这个写锁会在<span class="keyword">copy</span>数据之前退化成读锁、就不会阻塞CURD操作了</span><br><span class="line">可以直接解锁？不行、为了保证自己在<span class="keyword">copy</span>的过程中表结构不会再次被修改、为了保护自己</span><br><span class="line">对大表来说、最耗时的是<span class="keyword">copy</span>文件、可以认为MDL读锁的时间可以忽略、但操作会比较消耗IO和CPU、安全操作可以使用 gh-ost来做</span><br></pre></td></tr></table></figure>
+
+<h4 id="online和inplace"><a href="#online和inplace" class="headerlink" title="online和inplace"></a>online和inplace</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">图三中、表A导出数据存放位置叫tmp_table、是一个临时表、在<span class="keyword">server</span>层创建</span><br><span class="line">图四种、表A重建的数据放在tmp_file、是innodb内部创建出来的、整个DDL过程在innodb内部完成、对<span class="keyword">server</span>来说、没有挪到数据到临时表、是原地操作、inplace</span><br><span class="line"></span><br><span class="line">假如磁盘空间是<span class="number">1.2</span>T、现有一个<span class="number">1</span>T的表、可否完成一个inpalce的DDL？</span><br><span class="line">不能、inplace也是需要临时空间的、<span class="keyword">alter</span> <span class="keyword">table</span> t engine=innodb,ALGORITHM=inplace;</span><br><span class="line"><span class="keyword">copy</span>表其实是: <span class="keyword">alter</span> <span class="keyword">table</span> t engine=innodb,ALGORITHM=<span class="keyword">copy</span>; 对应图三</span><br><span class="line"></span><br><span class="line">inplace和online并无直接关系</span><br><span class="line">eg. 添加索引、是inplace操作、但不是online的</span><br></pre></td></tr></table></figure>
+
+<h4 id="alter-table、analyze-table-、-optimize-table"><a href="#alter-table、analyze-table-、-optimize-table" class="headerlink" title="alter table、analyze table 、 optimize table"></a>alter table、analyze table 、 optimize table</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 5.6之后、默认上图四操作、就是recreate</span><br><span class="line"><span class="bullet">2.</span> analyze table不是重建表、是重新统计索引信息、过程会加MDL读锁</span><br><span class="line"><span class="bullet">3.</span> optimize = recreate+analyze</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/web-design_README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/web-design_README/" class="post-title-link" itemprop="url">README</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-design/" itemprop="url" rel="index"><span itemprop="name">Web-design</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E5%86%8D%E5%BF%86%E9%99%88%E6%83%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E5%86%8D%E5%BF%86%E9%99%88%E6%83%85/" class="post-title-link" itemprop="url">再忆陈情</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>年关、慵懒极了、想看看电视剧、读读小说、结束一年的忙忙碌碌.<br>看了庆余年、看评论提到了 <a target="_blank" rel="noopener" href="https://v.qq.com/detail/v/vbb35hm6m6da1wc.html"><strong>陈情令</strong></a>、初播便得到很多好评的一部电视剧, 彼时未得闲暇、未曾顾及, 此时看到、不免心生欢喜. </p>
+</blockquote>
+<pre><code>回忆开头、未懂, 不明所以, 剧情渐入回忆, 我渐渐沉迷...
+想以人物为主线、理理自己的思绪、乱七八糟、若不慎入眼、看看且过即可...
+
+绵绵: 善良正直真性情的小女孩、也算是剧中最幸福的一个, 地位不高、
+      首次出现在与金子轩一起去云深不知处听学时、那时结识魏无羡. 
+      后在被温氏要挟、去不夜天听训时、被魏婴救过(挡下烙铁). 
+      射日之征后, 魏婴被诬陷、绵绵挺身而出、直言 魏婴不是这样的人, 遂脱离金家氏族. 
+      最后一场戏是魏婴、蓝忘机再次去乱葬岗时路过山野小屋、竟是绵绵与丈夫、还有一个乖巧的女儿、
+      也叫绵绵, 只怕是绵绵无尽的思念也未可知~
+      结局也算美好、在告别金家氏族、告别蓝忘机之后、远离了`正义`, 活成了自己喜欢的样子.
+      戏份不多、确是活的最洒脱的女子.
+
+薛洋: 作恶多端、却无法相恨, 他坏、但坏的明明白白, 恨不起来大概是因为他受过的那许多的苦.
+      从小遭受了太多世界的冰冷、从未感受过暖、世界不曾教过他、又缘何怪他不懂 ？晓星尘给他点滴的爱、
+      他就把晓星尘放在心头, 若他成长的道路上有阳光、他何尝不会是一个好孩子 ？ 
+      或许有很多朋友愿意说、魏婴也遭受了很多打击与诬陷, 区别就在于所有的遭遇处于人生哪个阶段罢了.
+      三观构建完成、就有了判断力、忍耐力、有了思考. 偏偏薛洋在人生最关键的时候遭受的都是冰冷, 
+      从未有一米阳光, 对这个很坏的孩子更多的是同情吧、愿下一世、有阳光普照、有温暖与美好、
+      带着你的聪慧、做个阳光明媚的孩子、一如你喜欢的晓星尘...
+ 
+晓星尘、宋岚: 明月清风晓星尘，傲雪凌霜宋子琛, 开场被他们深深吸引、可惜戏份不多, 再出现已难回首...
+     愿悲情的你们、下一世真正的活成明月清风. 也愿彼此间多一些信任， 就如 蓝湛和魏婴 ~
+
+魏婴: 魏无羡 (夷陵老祖)、年少时经过几年流离生活、后被江枫眠带回江家、收为弟子、初始、
+      江澄不喜欢他、但孩童总是天真、很快就成为好友、又有阿姐的悉心照料, 生活也算幸福、自身天赋极高、
+      很快成为同辈里的佼佼者、排名仅在姑苏双壁之下, 修为极高、性格跳脱、善良随性、师姐的话就是
+      `阿羡大事从不胡闹`, 佩剑取名`随意`、可见一般、活脱脱已调皮任性的小公子、但为人极善良、
+      很多细节、他应该是将师姐看作母亲一般、在她面前任性、一副小孩子的模样、惹得江澄嫉妒, 
+      后在云深不知处结识蓝二公子、调侃他`披麻戴孝`、偏生又爱挑逗他、此后接下不解之缘, 后在玄武洞
+      救下绵绵、还惹得蓝二公子一身醋意, 身受重伤的他、挑逗忘玑、他要听歌、忘玑创作 `忘羡`, 
+      随后温氏不满、欲灭江氏一族、为救江澄、舍弃自身金丹, 后被丢入乱葬岗、创造阴虎符. 
+      射日后、力保温情族人、与众人为敌; 后与温氏族人一起在乱葬岗生活了一段时间, 也就是在此时、
+      温宁开始对他不离不弃. 后金子轩惨死、温宁温情姐弟不忍拖累他、然后去自首、被挫骨扬灰(后证实宁未死)、
+      接近崩溃的魏婴孤身来到不夜天与众人对峙, 师姐又为挡剑而死、当场崩溃、心如死灰
+      十六年后、魏婴重生、亦是蓝湛的重生, 那个问灵十三载的少年郎...
+      后师姐问及笛子叫何名字、遂取`陈情`, 且不乱猜、各人心想吧; 从`随意`到`陈情`, 承载了多少苦难？
+      还好本心善良的魏婴和蓝湛一起重生、蓝湛将内心疮痍的`夷陵老祖`又养成了一个`小可爱`, 
+      会撒娇、会调侃、会躲在身后~~~. 他知道蓝湛哥哥一定会护他周全...
+      愿来生、还是那个偏偏白衣少年郎~~~
+
+江澄: 江晚吟, 背负太多家族使命, 性格里有很多怯懦、也有许多坚强、从小被魏婴的光环笼罩、
+       内心好强、想要胜过魏婴、却处处比不过、但也是从心底里心疼魏婴, 在乱葬岗为了家族、
+      一剑刺在乱石上、这一剑、又何尝不是救了魏婴 ？ 若不是他、必是别人、那时候怕刺的不再是石头...
+      莲花坞被侵占时、身心俱碎、发现外出为姐姐买药的魏婴将要被温氏发现时、挺身而出、
+      让自己成为目标, 后被化丹手化去金丹, 一心好强的他、痛不欲生 ...
+      这些何尝不是坚强？何尝不是关爱？有时对魏婴的挑剔怕是来源于亲昵的任性、心底的依赖...
+      在穷奇道、魏婴就走温清族人、在乱葬岗下、魏婴带着温情族人一起生活、他气愤, 又怎么不是
+      来自于想要被魏婴保护的渴望 ？ 姐姐虽对他们万般宠爱、终究帮不了太多、一个十几岁的孩子
+      突然成为偌大的江氏家主、心中不免惶恐, 重建莲花坞、保护家族的重任就落在了他的肩上、
+      注定不能成为魏婴一般潇潇洒洒的人....
+      十六年后、与魏婴重聚、他生气、为何不先来找他、也是源自心底那份情吧？ 有些话说得不合适、
+      但难掩心中的善、不是如同魏婴那般孤注一掷的善、彻彻底底的善、因为背负了太多的使命吧.....
+      愿你来生、只做个任性的小公子、哎、你又这么好强、该如何是好？
+
+江厌离: 暖情小姐姐、若得此姐、此生足矣. 在虞紫鸢强势的性格下居然能长出如此温婉的性格、着实不易、
+       从小就保护阿羡、阿澄, 给他们煲汤、调节他们的不愉快. 无论是师姐的身份还是姐姐的身份, 
+       他都是合格的、江澄和魏婴对她也都是依赖的, 在去往云深不知处时、偶遇未来夫婿金子轩, 
+       开始喜欢他, 但此时子轩并不喜欢厌离、一番波折、总算是相互欢喜, 不料、在孩子满月酒宴时, 
+       由于金光瑶捣乱、苏涉乱吹笛、导致温宁失控、误杀金子轩. 暖心的姐姐并没有恨魏婴、她相信他
+       是发自心底的信任, 一刻也不曾动摇. 在她心里、羡羡和阿澄是最好的弟弟. 有次夜猎、
+       魏婴被金家人侮辱`家仆之子`, 厌离挺身而出、一改柔弱、说`他是我弟弟、不是外人`, 要求对方道歉. 
+       愿来生, 所爱之人携手白头、疼爱的弟弟膝下承欢, 愿小小心愿都能称心如意...
+    
+蓝湛: 蓝忘机, 含光君, 也是剧中称呼最多的一个(都是羡羡给的~~~), 有很多坎坷、也有很多甜美、
+      雅正端方、严于律己、逢乱必出...
+      遇到魏婴之前、清冷如冰, 遇见之后慢慢的因为知己、后深不可离...
+      从最初的高傲冰冷变得调皮、玄武洞内调侃魏婴的情节、大概暖到了很多人. 魏婴帮他包扎伤口、
+      上凝血草时、他突然抓住魏婴的手、将凝血草敷在了救绵绵时留下的烫伤上、顺便来了一句: 不用谢、哈哈~
+      羡羡救绵绵、恐怕含光君还吃了一潭子醋、正经答道 `你要是没那个意思、不要随便撩拨别人`
+      没忍住笑喷了, 含光君居然会这么可爱~, 一本正经的可爱这么好玩儿~~~
+      他们也经历了很多的磨难、玄武洞、不夜城、穷奇道、乱葬岗...
+      心一点点的被揪着, 不敢放松. 
+      魏婴出事后、第一次违反家规、被罚3年禁闭、出来之后、无时不在寻找. 问灵十三载、等一不归人
+      大部分剧友都觉得刻骨难忘吧 ？待到被问时、只轻轻一句、我有悔, 不夜天没有和你站在一起. 
+      十六年里、受过魏无羡受的伤, 喝过魏无羡喝过的酒, 种魏无羡种过的思追, 气魏无羡气过的蓝启仁, 
+      违反过魏无羡违反的家规, 将阿苑带回云深不知处、取字思追(思君不可追), 将思追养成了魏无羡、
+      一样善良肆意洒脱、敢于做自己, 一样的善良热血、将破魔咒珍藏了16年.
+      十六年后、魏婴复生、成为魏婴最真切的守护神、凭借`忘羡` 立即认出魏婴、此后对魏婴可谓无微不至的
+      关怀、不允许别人对他丝毫的伤害、魏婴怕狗、躲在忘玑身后的情节也是温暖了很多剧友~~~, 
+      醉酒抓鸡的情节也是深入人心. 魏婴被欺负时、他对哥哥说、我想带一人回云深不知处、藏起来..., 
+     被人戏称`护妻狂魔`,^.^~
+      愿来生, 温润如玉、有母爱陪伴、多些笑容、早遇知己, 愿给你所有的美好
+
+
+蓝涣: 蓝曦臣, 泽芜君. 与弟弟含光君一起并称`姑苏双壁`, 清煦温雅、永远都是那么善良、那么温柔、理智
+      修为极高、从不欺负弱小、若他称谦谦公子第二、怕是没人敢居第一吧？整部剧除了两个情节失态、
+      一直是温润如玉、长者之风、十分疼爱弟弟忘玑、初见魏婴、觉得适合做弟弟的朋友、便各种暗示
+      可以猜透忘玑心中所想, 魏婴身死魂消后、一直陪伴在侧. 道出忘玑身上戒鞭痕来历、
+      又在云梦观音庙吐露忘玑对魏婴的13年苦守、促使二人心意相通
+      一直拿金光瑶当成最好的朋友、聂明玦和金光瑶关系不和、他居中调节、魏婴回归后、发现金光瑶
+      所做的事情、他不愿相信、对忘玑说: 你相信魏婴、我相信阿瑶、他是你的知己、阿瑶也是我的知己(非原话). 
+      又将随意出入云深不知处的令牌给金光瑶, 可见信任非同一般. 可惜、金光瑶却真实的死在了他手上、
+      恐怕心中的痛无人能晓吧 ？愿有人将你温暖、替你扛下一些使命...
+      之前温氏毁掉云深不知处、打伤他最疼爱的弟弟、害他狼狈出逃、在清缴温氏时、
+      他依然冷静的将温情与温家分开、仗义执言、不迁怒于人、难能可贵.
+      借言百度百科:
+      1. 蓝曦臣沉吟道：&quot;这位温情的大名我知晓几分，似乎没听说她参与过射日之征中任何一场凶案的。&quot;
+      聂明玦道：&quot;可她也没有阻拦过. &quot;
+      蓝曦臣道：&quot;温情是温若寒的亲信之一，如何能阻拦？&quot;
+      2. 聂明玦道：&quot;英魂长存&quot; 蓝曦臣道：&quot;愿安息. &quot;
+      他的心底相信魏婴做的不算冤枉吧？只是敌人、仇人死了、他依然愿意安静的道一声&quot;愿安息&quot;.
+      来生、愿你仍为翩翩君子、温润如玉、愿你有属于自己的幸福、有人疼、有人爱、不用一人担尽天下心.
+
+蓝思追: 阿苑, 从小漂泊、经历不夜城被毁、同族人一起经历不幸、后被魏婴救出、带领他们生活在乱葬岗下.
+    还好、余生皆是暖情. 小小年纪、还不知凄苦悲凉、有族人陪伴、魏婴逗玩、在乱葬岗依然生活的快乐、
+    被魏婴当成萝卜种在地里的情节好暖心, 后被蓝二哥哥效仿羡羡当成小兔子种、哈哈哈、好温暖~~~
+    小时候称蓝二哥哥有钱哥哥、喜欢抱大腿儿(~.~), 魏婴出事后、被蓝二哥哥悄悄收养、改名 蓝苑、字思追. 
+    在蓝湛的培养下、变成一个谦谦君子、又糅合了魏婴的灵动、善良、恣意洒脱、挺招人喜欢的, 初见鬼将军很怕、
+    但不让人伤害他, 初见十六年后的魏婴、不让别人欺负他、善良的孩子~~~
+    愿来生、满满的岁月静好 ....
+
+温晁: 温若寒小公子, 嚣张跋扈、高傲自大、行径恶劣. 喜欢显摆、因为不满江家不服从温家的指令，
+      所以找了个借口把江家灭门。魏无羡和江澄虽然有幸逃过一命，但是江澄的金丹被温逐流炼化，
+      彻底丢失了灵力。而魏无羡在把金丹给了江澄后，被温晁丢进乱葬岗里
+      剧中、我真心找不到他的一点儿善良...
+      就算在最后、都还在斥责温逐流、彻彻底底很可恶的一个人, 愿来生、学会善良、读懂温暖...
+
+温情: 岐山温氏人、一个旁支、高傲能干的妙手神医, 内心善良. 倾尽全力的保护族人、保护弟弟, 
+     不夜天听训时、被温若寒恐吓、为了弟弟安危、告诉弟弟不要乱跑、不要和魏婴混在一起,  自己却逮着机会就帮助魏婴,
+     后莲花坞被温氏侵占、江枫眠和虞紫鸢被害、收留江家姐弟并为他们疗伤, 又帮助魏婴实现换丹. 
+     最悲情的角色、天性善良、不作恶、却是剧中唯一被挫骨扬灰的一个...
+     来生、愿安好、与自己的族人过着静美的小日子 ~~~
+
+温宁: 暖心的小天使、从小被抽去一部分灵识、显得呆呆傻傻, 因魏婴在云深不知处赏识、
+      内心孤僻的温宁从此感恩、在不夜城救过魏婴、在莲花坞被毁时帮过魏婴, 射日后、魏婴在穷奇道救下
+      温宁及其族人、后成为`鬼将军`(傀儡)但保留了意识、功力大增、听魏婴吹笛杀人、后被金光瑶控制
+      十六年后重逢与魏婴重逢、拔出他头部的铁钉、更加只听魏婴一个人的、称他为`公子`. 
+      整部剧一直感觉他是一个温暖的小天使, 呆萌可爱 ...
+      愿来生, 他可以生的美好、做一个暖情的小公子, 弥补此生的孤独.
+      愿来生只做白衣少年温琼林...
+
+金子轩: 金家公子、为人高傲、但心底善良、敢于追求内心的爱、人物着墨不多. 来生, 愿幸福~~~
+
+金光瑶: 人物性格比较复杂、表面温和、内心阴暗、但真心帮助蓝曦臣. 剧里做了很多坏事、最终也只是
+        为他人做嫁衣、母亲虽为艺伎、不多的着笔、却让人难忘、是一个温和、知书识礼的好母亲
+       后来利用蓝曦臣(清心音)设计杀害聂明玦、并做成凶尸. 为了得到秦仓业支持、娶同父异母
+       妹妹秦愫、又为免受非议、杀死亲生子金如松. 为了夺取金家地位、杀死父亲金光善. 与薛洋一般、
+       是一个缺少温暖的孩子、内心有太多的恨与恶、千般不该、设计杀死聂明玦、那个曾经给他支持、
+       拿他当亲兄弟对待的人. 就算知道他放走薛洋、也只是把他赶出去、并未伤害他、这样的人都伤害、
+       心中有个无法原谅的坎儿....
+       来生、愿其母觅得良人、给他一个温暖的家, 愿多些温暖、少些心中阴霾. 
+
+聂怀桑: 初时、同魏婴一般、算是志趣相投. 修为不高、成为家主之后被称为: 三不知、然而看似柔弱无害
+       的他, 确是藏的最深的一个、剧中有很多伏笔, 比如: 十六年后说书人说到夷陵老祖时的回头一看
+       大梵山假的舞天女重生
+       温家墓前的扫墓老丈其实是聂怀桑...
+       从魏婴十六年后重生到后续的情节、由他一人策划、只为复兄仇, 算不
+       得坏、不是大奸大恶之人、亦无泽芜君的容人之量、终究是被内心的情感左右、算不得对、算不得错、
+       好在、此后任逍遥~~~, 也没什么野心、亦真心喜欢和魏婴做朋友.
+       来生、愿有哥哥一生庇佑、只做恣意山水的快活少年.
+</code></pre>
+<p>好多情节、令人禁不住落泪、或是真情流露、或是温暖荡漾、或者是悲情感慨, 人物是复杂的、性格是综合的、确也更符合现实的人性吧. 世上人心终是横看成火、侧看成冰. 本着不讨论的原则写文、可能还是注入了不少自己的感情、魏婴和蓝湛的爱情也实在太感人了耶、^*^ 、闲来无事可以看看~~~</p>
+<p>附图册:<br><img src="https://upload-images.jianshu.io/upload_images/14027542-820ea7d77fee68d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="绵绵.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-a8df6e357a7eed1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="温情.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-4c78adb0ad0aa9b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="江厌离..png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-9e2a3cd49e1d6dec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="羡羡和忘玑.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4a13722b0f5c8922.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="羡羡和忘玑.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-27e948953c0e8834.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="羡羡和忘玑.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-9f673870dbd02b47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="蓝曦臣.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-805db79586c26cc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="魏婴和聂怀桑.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-04623bbab6fc3eda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="晓星尘.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%94%B6%E8%97%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%94%B6%E8%97%8F/" class="post-title-link" itemprop="url">收藏</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>文档：MySQL技术内幕 InnoDB存储引擎<br>链接：<a target="_blank" rel="noopener" href="http://note.youdao.com/noteshare?id=825861cad04ce2d9420b7c6949320dee">http://note.youdao.com/noteshare?id=825861cad04ce2d9420b7c6949320dee</a></p>
+<p>文档：从Paxos到zookeeper<br>链接：<a target="_blank" rel="noopener" href="http://note.youdao.com/noteshare?id=5c62699d4db431b25d73ff05bf500fbf">http://note.youdao.com/noteshare?id=5c62699d4db431b25d73ff05bf500fbf</a></p>
+<p>文档：深入理解Java虚拟机<br>链接：<a target="_blank" rel="noopener" href="http://note.youdao.com/noteshare?id=bca9a23c7db0031bc7a67010ffbab1bd">http://note.youdao.com/noteshare?id=bca9a23c7db0031bc7a67010ffbab1bd</a></p>
+<p>jvm工具收藏<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/noKing/p/9457541.html">https://www.cnblogs.com/noKing/p/9457541.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%A9%E5%AE%89%E3%80%81%E4%B8%96%E7%95%8C/" class="post-title-link" itemprop="url">早安、世界</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>啊哈</p>
+<!-- MarkdownTOC -->
+
+<ul>
+<li>缘起</li>
+<li>过往、感恩</li>
+<li>现在、enjoying~~</li>
+<li>未来、waiting~~</li>
+<li>接下来的日子</li>
+<li>Why</li>
+</ul>
+<!-- /MarkdownTOC -->
+
+<h4 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h4><figure class="highlight parser3"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml">起床、读书、做在窗边、抬头的那一刻、竟是万分温暖、初阳淡淡、轻洒墙角、沉睡了一晚的楼脚飘过</span></span><br><span class="line"><span class="language-xml">一抹明丽的淡红、不由自主想起那些游离于心间的美好、禁不住自我感动了一把</span><span class="keyword">^.</span><span class="language-xml">^</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">又想起最近种种、嗯嗯、新开的简书还是空白的、那么、让我开始一个新的篇章吧~~</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="过往、感恩"><a href="#过往、感恩" class="headerlink" title="过往、感恩"></a>过往、感恩</h4><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">普通的不能在普通的大学、好不经意流散的时光、无所事事面对将要毕业的我、无疑是失败的~~</span><br><span class="line"></span><br><span class="line">幸运、偶然的机会走近 <span class="keyword">IT</span> 的世界、从此打开一扇门、感谢曾经一路走来的小伙伴、给过我太多帮助</span><br><span class="line"></span><br><span class="line">幸运、<span class="number">16</span>年年初发现自己的世界如此之小、别离、来到北京、或许那时候只是觉得自己的世界太小了、想要一个更大的天地</span><br><span class="line"></span><br><span class="line">幸运、来到北京没有遇到太多别人描述里的坎坷与压力、有的是我想要的世界、有的是同事的热心帮助、</span><br><span class="line">差不多从没基础开始吧、从此我进入了一个喜欢而又迷茫着的世界、发现它的周边是如此的绚丽多彩、</span><br><span class="line">从此、匆匆忙忙、想要知道的多一点、再多一点、那时候不懂的东西太多、感觉是新鲜好奇的、于是尽自己最大努力去学、沉浸于这种成长的幸福</span><br><span class="line"></span><br><span class="line">要感谢的人很多、你们陪我成长、给我鼓励、~~心里默默一一谢过、而有些、我相信、我不说、你们也懂、</span><br><span class="line">懂我深深的感恩、亦懂我害怕让你们失望的忐忑、让我们一起加油、为我们喜欢的未来~.~</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="现在、enjoying"><a href="#现在、enjoying" class="headerlink" title="现在、enjoying~~"></a>现在、enjoying~~</h4><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   过往、就在那里、不管你喜不喜欢、都不会再变、我的过去不管是无知的苍白还是迷茫后的成长、</span><br><span class="line">   我都喜欢、它的身上流动着我的气息、无知的四年大学、我亦不后悔、一种经历、一种人生。</span><br><span class="line"></span><br><span class="line">   笃信、不喜欢的过去、就认真的作为借鉴、迷茫之后、世界是清晰的、却也更大更广、</span><br><span class="line">   很长一段时间的迷茫之后、不久前、选择了一条、在很多人眼里向下走的路、我却坚定不移、</span><br><span class="line">我相信自己的选择、我知道自己想要什么</span><br><span class="line">   en/就酱紫、自己决定了的、就认真的走下去、失败总比苍白更美好</span><br><span class="line"></span><br><span class="line">   换句话、既然一无所有、又何惧失败、~~</span><br><span class="line"></span><br><span class="line">   诚然、幸运之神再次眷顾了我、很顺利、下个月中旬可以转过去、开始java之旅、为了得到这次机会、</span><br><span class="line">   我同意php 和 java的项目一起做、精力稍有分散、会有<span class="number">2</span>份压力、但我愿意用这段时光见证自己的成长</span><br><span class="line">   enen~.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="未来、waiting"><a href="#未来、waiting" class="headerlink" title="未来、waiting~~"></a>未来、waiting~~</h4><figure class="highlight parser3"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml">生如逆旅单行道、哪有岁月可回头、既然如此、何不用心谱写未来、干嘛不让未来的自己感谢现在的自己</span><span class="keyword">^.</span><span class="language-xml">^</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"></span><span class="keyword">^.</span><span class="language-xml">^ enen、我还是那个小小小小的小女孩儿</span></span><br><span class="line"><span class="language-xml">那个每次有好事发生都把你们拿出来感谢一遍的小女生、你们告诉我那叫越努力越幸运、</span></span><br><span class="line"><span class="language-xml">我心底却始终认为该归功于你们、是你们不遗余力的帮助、so、不管是怎样的吧、愿我们的未来都是我们期待的模样</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">勇气不是不害怕、而是尽管害怕依然可以迎难而上～</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">愿我们都能带着一颗留白的心上路、在光阴里扮演一个最从容的角色～</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">愿我们都能带着最微薄的行李和最丰厚的自己、在时间里流浪、流梦为马、随处可栖～</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">Thanks、我的朋友们、你们才是我最宝贵的财富、愿我们永远是最幸福的模样~~</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="接下来的日子"><a href="#接下来的日子" class="headerlink" title="接下来的日子"></a>接下来的日子</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">还会喜欢看阳光飘落</span><br><span class="line">还会喜欢拿着洒水壶给我的小花儿们来一场甘霖</span><br><span class="line">还会喜欢晚上躺在床上什么都不思考、安静的放空自我</span><br><span class="line">还会喜欢抬眼的那一刻发现的诸多美好、一溜烟儿的跑出去浪上一会儿</span><br><span class="line">还会喜欢风轻轻吹过的日子、和朋友们做在一起聊聊天</span><br><span class="line">还会喜欢做在书桌前发发呆、思念我的朋友们</span><br><span class="line">还好喜欢周末去逛逛街、晚上跑跑步</span><br><span class="line">还会喜欢就算不论何时、都想要搞明白想要搞明白的东西、</span><br><span class="line"><span class="keyword">en</span>/我还是我、所有的都一如既往~~</span><br></pre></td></tr></table></figure>
+
+<h4 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h4><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">是的、我... 小神经有犯抽了、aha~、总是喜欢这种细碎的小美好、怀念下朋友们、然后发发神经、</span><br><span class="line"></span><br><span class="line">正经的、未来不可欺、让我们一起加油吧~~</span><br><span class="line"></span><br><span class="line">==<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%97%B6%E5%85%89%E8%AF%B4/" class="post-title-link" itemprop="url">时光说</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <pre><code>    愿我们心生玲珑、细品丝丝温情～
+    
+    愿我们心坚如铁、足御刺骨寒冷～
+    
+    不委屈每一份善意、亦不惧怕每一分寒意～
+    
+    愿我们有人吐槽、亦善聆听～
+    
+    愿我们有人宠爱、亦不骄横～
+    
+    不满亦不积怨、任性但不失理性～
+    
+    愿我们有机会倾听故事的全部～
+    
+    愿我们就算是被人认识万分之一亦不悲伤～
+    
+    不愤世嫉俗、也不过分张扬～
+    
+    愿我们的朋友不止是正向的、能有机会完整的成长～
+    
+    愿我们见惯所有的恶、亦能有发自内心的善～
+    
+    懂得拿起、又善于放下～
+    
+    但愿我们能把平凡乃至糟糕的日子过的精彩、也能在顺风顺水的日子保持谦和～
+    
+    但愿我们能耐得住所有成长的寂寞、也能在最得意的时候谦卑温和～
+    
+    ……
+    
+    嗯、不是在最好的日子里遇到了你们、
+    
+    而是遇到你们才有了这段最美好的时光～
+    
+    不愿时光不老、不求相伴永远、但愿我们相顾不言早已知其冷暖～
+    
+    ------
+    
+    人生就是一场修行. 成长毫无违和～
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9C%AA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%83%8A%E5%96%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E5%B0%8F%E7%A1%AE%E5%B9%B8_%E6%9C%AA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%83%8A%E5%96%9C/" class="post-title-link" itemprop="url">未知的小惊喜</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">小确幸</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>时光跳动、晴雨霾风哀愁喜, 无需计较、无需叹息、无需着急….</p>
+<p>属于你的、终归是属于你、想要的、只需努力、静静等待</p>
+<p>有人说, 机遇很重要、是的、很重要、前提是、当机遇到来的时候有足够的能力来把握<br>机遇才叫机遇、否则只能叫别人的机遇….</p>
+<p>有人说、背景很重要、是的、很重要、前提是、你只是芸芸众生中特别一般的一个<br>背景才能带来优越感、跳出一般人的圈子、背景可能只是润色….</p>
+<p>有人说、家境很重要、是的、很重要、有些人一出生就在你人生的终点线附近、<br>能说这话的、一定没有一个特别优秀的家庭背景、<br>为何不努力让自己的下一代出生就站在较好的起点线上?</p>
+<p>有人说、子孙自有子孙福、他们怎么样看自己的努力和造化、这话我不去反驳</p>
+<p>我只想能给自己想要的东西、输在了起跑线不可怕<br>就算是奋斗了10年才能和别人坐在一起聊天又如何？如果不奋斗、连一起聊天的机会都没有<br>世界是不公平的、也是公平的</p>
+<p>所有的努力不一定都能得到回报、不努力也不一定得不到回报<br>不管你选不选择、相不相信、事实就在这里</p>
+<p>路还是要自己走的~~~</p>
+<p>遇见小惊喜、迷惑了很久的东西、豁然开朗、感觉所有的努力都是值得的<br>有感而发</p>
+<p>愿每个人都能按自己最喜欢的方式去生活、感谢不曾放弃努力的自己~</p>
+<p>.^.^.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

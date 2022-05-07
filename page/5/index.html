@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">常用命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>cat /proc/cpuinfo | grep &#39;physical id&#39; |  sort| uniq| wc -l</code> 查看物理CPU的个数<br><code>cat /proc/cpuinfo| grep &quot;cpu cores&quot;| uniq</code> 查看每个物理CPU中cores的个数<br><code>cat /proc/cpuinfo| grep &quot;processor&quot;| wc -l</code> 查看逻辑CPU的个数</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/" class="post-title-link" itemprop="url">平均负载</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uptime:</span><br><span class="line"> 输出: <span class="number">11</span>:<span class="number">39</span>:<span class="number">32</span> up <span class="number">13</span> days,  <span class="number">1</span>:<span class="number">51</span>, <span class="number">18</span> users,  <span class="built_in">load</span> <span class="built_in">average</span>: <span class="number">6.21</span>, <span class="number">5.86</span>, <span class="number">4.91</span></span><br><span class="line"> 说明: 当前时间、系统运行时间、正在登陆用户数、最近<span class="number">1</span><span class="built_in">min</span>、<span class="number">5</span><span class="built_in">min</span>、<span class="number">15</span><span class="built_in">min</span>的平均负载 <span class="built_in">load</span> <span class="built_in">average</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>平均负载</code>: 是单位时间内、系统处于可运行状态和不可中断状态的平均进程数, 即: 平均活跃进程数、和CPU的使用率无直接关系</p>
+<p><code>可运行状态的进程</code>: 正在使用CPU或者等待CPU的进程、ps的R(Runnning &#x2F; Runable) 状态</p>
+<p><code>不可中断状态</code>: 正处于内核关键流程中的进程、且这些流程是不可打断的、eg. 等待硬件设备的IO响应、ps的D状态(Uninterruptible Sleep,即: Disk Sleep)</p>
+<blockquote>
+<p>eg. 当一个进程向磁盘写数据时, 为了保证数据一致性、在得到磁盘回复前、是不能被打断的、若被打断, 容易出现磁盘数据和进程数据不一致</p>
+<p>其实: 不可中断状态其实是系统堆进程和硬件设备的一种保护机制</p>
+</blockquote>
+<h4 id="平均负载合理性评估"><a href="#平均负载合理性评估" class="headerlink" title="平均负载合理性评估"></a>平均负载合理性评估</h4><p>平均负载为2怎么解读 ？</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 在只有<span class="number">2</span>个<span class="meta">CPU</span>的系统上、意味着<span class="meta">CPU</span>刚好可以全部占用</span><br><span class="line"><span class="number">2</span>. 在<span class="number">4</span>个<span class="meta">CPU</span>的系统上、意味着有<span class="number">50</span>%的空闲</span><br><span class="line"><span class="number">3</span>. 在<span class="number">1</span>个<span class="meta">CPU</span>的系统上、意外着会有一半的进程竞争不到<span class="meta">CPU</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>CPU核数查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/cpuinfo | grep <span class="string">&#x27;model name&#x27;</span> | <span class="built_in">wc</span> -l</span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>经验值: cpu 的负载到达70%的时候、就需要关注了</p>
+</blockquote>
+<p>平均负载与CPU使用率</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 平均负载: 单位时间内处于可运行状态和不可中断状态的进程数</span><br><span class="line">   包含 正在使用<span class="meta">CPU</span>的进程 + 等待<span class="meta">CPU</span>的进程 + 等待io的进程</span><br><span class="line"><span class="number">2</span>. <span class="meta">CPU</span>使用率: 单位时间内<span class="meta">CPU</span>繁忙情况的统计、不一定与平均负载对应</span><br><span class="line">   eg. <span class="meta">cpu</span>密集型、使用大量<span class="meta">CPU</span>会导致load升高、 - 变化趋势一致</span><br><span class="line">       io密集型、等待io也导致load升高、<span class="meta">CPU</span>使用率不一定很高</span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+
+
+
+<p>案例分析</p>
+<p>一、CPU密集型进程</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">终端一</span><span class="punctuation">:</span></span><br><span class="line"><span class="attribute">stress --cpu 1 --timeout 600</span></span><br><span class="line"><span class="attribute">--cpu CPU压力测试</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">终端二</span><span class="punctuation">:</span></span><br><span class="line"><span class="attribute">watch -d uptime </span></span><br><span class="line"><span class="attribute">-d</span><span class="punctuation">:</span> <span class="string">高亮显示变化区域</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">终端三</span><span class="punctuation">:</span></span><br><span class="line"><span class="attribute">mpstat -P ALL 5</span></span><br><span class="line"><span class="attribute">-P ALL</span><span class="punctuation">:</span> <span class="string">表示监控所有CPU</span></span><br><span class="line"><span class="attribute">5表示间隔5s输出一组数据</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">终端四</span><span class="punctuation">:</span></span><br><span class="line">pidstat -u 5 1 间隔5s输出一组数据、查找CPU高的线程</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e170f3f20c5f39de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
+<p>二、IO密集型进程</p>
+<p>查看方式同上</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/linux%E5%86%85%E6%A0%B8_Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0---1/" class="post-title-link" itemprop="url">Linux内核学习---1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E5%86%85%E6%A0%B8/" itemprop="url" rel="index"><span itemprop="name">Linux内核</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="开机加电-gt-main-函数执行"><a href="#开机加电-gt-main-函数执行" class="headerlink" title="开机加电 -&gt; main 函数执行"></a>开机加电 -&gt; main 函数执行</h4><blockquote>
+<p>分3步完成、实现从启动盘加载操作系统、完成 main 函数加载所需要的准备工作</p>
+</blockquote>
+<h5 id="启动BIOS、完成实模式下的中断向量表和中断服务程序"><a href="#启动BIOS、完成实模式下的中断向量表和中断服务程序" class="headerlink" title="启动BIOS、完成实模式下的中断向量表和中断服务程序"></a>启动BIOS、完成实模式下的中断向量表和中断服务程序</h5><p>Q: RAM ？<br>A: Random Access Memory. 随机存取存储器、eg. 内存条<br>   特点是 在加电状态下、可随意读写、断电消失</p>
+<p>Q: 加电瞬间、RAM中无任何程序、谁来完成 操作系统从软盘的加载 ？<br>A: BIOS</p>
+<p>Q: 为什么必须把操作系统从软盘加载到RAM ？<br>A: CPU的逻辑电路被设计为只能从内存中运行、无法直接从软盘运行</p>
+<p>Q: 为什么CPU的逻辑电路被设计为只能从内存运行 ？<br>A: … 暂未清楚</p>
+<p>Q: BIOS本身是如何启动的 ？<br>A: 固定地址: 0xFFFF0、<br>   CPU逻辑上被设计为、在加电的瞬间、强行将 CS设为 0xF000, IP 设为 0xFFF0<br>   这样、CS:IP 就指向 0xFFFF0(BIOS程序的入口地址、BIOS程序就开始运行)</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bc3706ad36a398b8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BIOS.jpg"></p>
+<h5 id="从启动盘加载操作系统到内存、加载操作系统的工作就是利用-中断服务程序来完成的"><a href="#从启动盘加载操作系统到内存、加载操作系统的工作就是利用-中断服务程序来完成的" class="headerlink" title="从启动盘加载操作系统到内存、加载操作系统的工作就是利用 中断服务程序来完成的"></a>从启动盘加载操作系统到内存、加载操作系统的工作就是利用 中断服务程序来完成的</h5><p>开始加载操作系统….</p>
+<blockquote>
+<p>对Linux 0.11而言、是分3步、<br>  1: 有BIOS中断 0x19 将第一扇区bootsect的内容加载到内存<br>  2: 在bootsect的引导下、将后边的4个扇区和240个扇区的内容依次加载到内存中</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-8467ab9c24c4efbc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BIOS程序加载.jpg"></p>
+<p>Q: 操作系统如何加载 ？<br>A: BIOS代码执行完毕、硬件完成开机自检、会和BIOS联手、让CPU收到 int 0x19中断、CPU在中断向量表中找到中断程序的位置(0x0E6F2)<br>   即: 启动记载服务程序的入口地址、<br>   so. in 0x19中断程序的作用就是把软盘第一扇区的代码512b加载到内存指定位置(BIOS设计、与操作系统无关) - 内存(0x07C00)处<br>   第一扇区的代码作用就是将软盘中的操作系统程序陆续加载到内存、所以称为引导程序(bootsect)<br>   第一扇区的载入、标记着操作系统代码要开始发挥作用<br><img src="https://upload-images.jianshu.io/upload_images/14027542-482d2aaafa61ffa8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="响应int0x19中断.jpg"></p>
+<h5 id="操作系统的内存规划"><a href="#操作系统的内存规划" class="headerlink" title="操作系统的内存规划"></a>操作系统的内存规划</h5><p>实模式下最大的寻址为1MB</p>
+<pre><code>//代码路径：boot/bootsect.s  
+    …  
+.globl begtext, begdata, begbss, endtext, enddata, endbss  
+.text  
+begtext:  
+.data  
+begdata:  
+.bss  
+begbss:  
+.text  
+ 
+SETUPLEN= 4    ! nr of setup-sectors  
+BOOTSEG = 0x07c0    ! original address of boot-sector  
+INITSEG = 0x9000    ! we move boot here-out of the way  
+SETUPSEG= 0x9020    ! setup starts here  
+SYSSEG  = 0x1000    ! system loaded at 0x10000 (65536).  
+ENDSEG  = SYSSEG + SYSSIZE  ! where to stop loading  
+ 
+! ROOT_DEV:0x000 - same type of floppy as boot.  
+!  0x301 - first partition on first drive etc  
+ROOT_DEV= 0x306 
+… 
+![实模式下的内存使用规划.jpg](https://upload-images.jianshu.io/upload_images/14027542-2fd3e1e6ef913630.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+</code></pre>
+<p><code>SETUPLEN</code> -&gt; <code>SETUPSEG 0x9020</code> (被加载到的位置)<br><code>BOOTSEG(0x07c0)</code>(BIOS加载的位置) -&gt; <code>INITSEG 0x9000</code>(被移动到的新的位置)<br><code>SYSSEG 0x1000</code> 内核被加载的位置<br><code>ENDSEG</code> 内核末尾位置<br><code>ROOT_DEV 0x306</code> 根文件设备号<br><strong>注意:</strong><br>CPU的段寄存器（CS）指向 <code>0x07C0</code> -&gt; 原来 BOOTSEG 所在的位置</p>
+<h5 id="为执行32位的main函数做过度工作"><a href="#为执行32位的main函数做过度工作" class="headerlink" title="为执行32位的main函数做过度工作"></a>为执行32位的main函数做过度工作</h5><h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><blockquote>
+<ol>
+<li>实模式: 兼容80286之后80x86的兼容CPU的模式、特性是一个20位的存储器地址空间(2^20 1MB的存储器空间可被寻址)<br>可以直接软件访问BIOS及周边硬件、无硬件支持的分页机制和实时多任务概念<br>80286 开始、所有的CPU开机都是 实模式 、之前的CPU只有一种模式、类似 实模式</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>CPU: 计算机所有的计算操作都由它完成、可以理解为 一个有输入和输出功能的集成电路</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>CPU寻址: 使用CS、IP两个寄存器<br>  CS: Code Segment Register 即代码段寄存器、指向CPU当前执行代码在内存中的位置(代码段的起始位置)、<br>  实模式为绝对地址、16位、保护模式为线性地址 需要结合GDT才能找到段基址<br>  IP&#x2F;EIP: Intruction Pointer. 指令寄存器、存在于CPU中、记录将要执行的代码在代码段中的偏移地址<br>  实模式为绝对地址、指令指针为16位、即IP、保护模式为32位、即EIP、<br>  CS:IP 寻址规则: 段基址*16 + 偏移地址</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>中断向量表建立<br>  BIOS在最开始的位置(0x00000)用1k内存(0x00000 - 0x003FF)构建中断向量表、接下来256k(0x00400～0x004FF)构建BIOS数据区<br>  大概57k后的位置(0x0E05B)加载了大概8k左右的与中断向量表相关的中断服务程序</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="5">
+<li>中断向量表<br>  记录所有中断向量对应中断程序的位置、实模式中断机制实现的重要部分</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="6">
+<li>中断服务程序<br>  通过中断向量表的索引对中断程序进行响应、是一些具有特殊功能的代码</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="7">
+<li>磁盘磁头<br>  利用特殊材料的电阻值会随磁场变化的原来来读写盘片数据、将硬盘盘片上的磁信号转化为电信号向外传输</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mongo_curd%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">curd操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><p><code>$sum</code>: 计算总和</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.mycol.<span class="keyword">aggregate</span>([&#123;$<span class="keyword">group</span> : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; <span class="keyword">select</span> count(<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">group</span> <span class="keyword">by</span> f1; </span><br><span class="line"></span><br><span class="line">db.mycol.<span class="keyword">aggregate</span>([&#123;$<span class="keyword">group</span> : &#123;_id:&quot;$f1&quot;, num_tutorial:&#123;$sum:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt;<span class="keyword">select</span> field,sum(f2) <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">group</span> <span class="keyword">by</span> f1;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>$avg</code>: 计算平均值</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;$<span class="keyword">group</span>:&#123;_id:<span class="string">&quot;$field&quot;</span>, <span class="keyword">avg</span>:&#123;$<span class="keyword">avg</span>:$f&#125;&#125;&#125;])</span><br><span class="line">-&gt; <span class="keyword">select</span> field,<span class="keyword">avg</span>(f) <span class="keyword">from</span> table <span class="keyword">group</span> <span class="keyword">by</span> field;</span><br></pre></td></tr></table></figure>
+<p><code>$min</code>: 获取集合中所有文档对应的最小值</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.test.<span class="keyword">aggregate</span>([&#123;$<span class="keyword">group</span>:&#123;_id:&quot;$field&quot;,min:&#123;$min:&quot;$f2&quot;&#125;&#125;&#125;])</span><br><span class="line">-&gt; <span class="keyword">select</span> min(f2) <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">group</span> <span class="keyword">by</span> field;</span><br></pre></td></tr></table></figure>
+<p><code>$max</code>: 获取集合中所有文档对应的最大值</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考<span class="built_in">min</span></span><br></pre></td></tr></table></figure>
+<p><code>$push</code>: 在结果文档中插入值到一个数组</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.<span class="title function_ invoke__">aggregate</span>([&#123;<span class="variable">$group</span>:&#123;<span class="attr">_id</span>:<span class="string">&quot;<span class="subst">$by_user</span>&quot;</span>,<span class="attr">url</span>:&#123;<span class="variable">$push</span>:<span class="string">&quot;<span class="subst">$url</span>&quot;</span>&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$first</code>: 根据资源文档的排序获取第一个文档数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.t.<span class="title function_ invoke__">aggregate</span>([&#123;<span class="variable">$group</span>:&#123;<span class="attr">_id</span>:<span class="string">&quot;<span class="subst">$by_user</span>&quot;</span>,<span class="attr">first_url</span>:&#123;<span class="variable">$first</span>:<span class="string">&quot;<span class="subst">$url</span>&quot;</span>&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p><code>$last</code>: 根据资源文档的排序获取最后一个文档数据</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考<span class="keyword">first</span></span><br></pre></td></tr></table></figure>
+
+<p><code>$project</code> 修改输出文档的结构<br><code>$match</code> 用于过滤数据、<br><code>$limit</code> 限制返回条数<br><code>$skip</code> 跳过指定条数的文档<br><code>$unwind</code> 将某个数组类型字段拆分成多条<br><code>$group</code> 将集合中的文档分组、可用于统计结果<br><code>$sort</code> 将文档排序后输出</p>
+<p>eg.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.t.<span class="title function_ invoke__">aggregate</span>(&#123;<span class="variable">$project</span>:&#123;<span class="attr">_id</span>:<span class="number">0</span>,<span class="attr">title</span>:<span class="number">1</span>,<span class="attr">tags</span>:<span class="number">1</span>&#125;&#125;)</span><br><span class="line">db.t.<span class="title function_ invoke__">aggregate</span>(&#123;<span class="variable">$project</span>:&#123;<span class="attr">_id</span>:<span class="number">0</span>,<span class="attr">title</span>:<span class="number">1</span>,<span class="attr">tags</span>:<span class="number">1</span>&#125;&#125;,[&#123;<span class="variable">$match</span>:&#123;<span class="attr">score</span>:&#123;<span class="variable">$gt</span>:<span class="number">70</span>,<span class="variable">$lte</span>:<span class="number">90</span>&#125;&#125;&#125;,&#123;<span class="variable">$group</span>:&#123;<span class="attr">_id</span>:<span class="literal">null</span>,<span class="attr">count</span>:&#123;<span class="variable">$sum</span>:<span class="number">1</span>&#125;&#125;&#125;])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span> ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</span><br><span class="line">reduce 统计函数，reduce函数的任务就是将<span class="built_in">key</span>-<span class="built_in">values</span>变成<span class="built_in">key</span>-value，也就是把<span class="built_in">values</span>数组变成一个单一的值value。。</span><br><span class="line">out 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</span><br><span class="line">query 一个筛选条件，只有满足条件的文档才会调用<span class="built_in">map</span>函数。（query。<span class="built_in">limit</span>，<span class="built_in">sort</span>可以随意组合）</span><br><span class="line"><span class="built_in">sort</span> 和<span class="built_in">limit</span>结合的<span class="built_in">sort</span>排序参数（也是在发往<span class="built_in">map</span>函数前给文档排序），可以优化分组机制</span><br><span class="line"><span class="built_in">limit</span> 发往<span class="built_in">map</span>函数的文档数量的上限（要是没有<span class="built_in">limit</span>，单独使用<span class="built_in">sort</span>的用处不大）</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mongo_%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">安装使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">database 数据库</span><br><span class="line">collection 数据表</span><br><span class="line">document 数据记录行/文档</span><br><span class="line">filed 数据域</span><br><span class="line"><span class="keyword">index</span> 索引</span><br><span class="line"><span class="keyword">primary</span> <span class="keyword">key</span> 主键、默认 _id</span><br></pre></td></tr></table></figure>
+
+<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. show dbs 查看所有数据的列表</span><br><span class="line">   <span class="keyword">db</span> 显示当前数据库对象或者集合</span><br><span class="line">   <span class="keyword">use</span> <span class="keyword">local</span> 切换到<span class="keyword">local</span>这个<span class="keyword">db</span></span><br><span class="line">2. <span class="keyword">use</span> niuniu  <span class="keyword">db</span>不存在时会自动创建</span><br><span class="line">3. <span class="keyword">db</span>.dropDatabase() 删除一个<span class="keyword">db</span></span><br><span class="line"></span><br><span class="line">4. <span class="keyword">db</span>.createCollection(<span class="string">&quot;niu&quot;</span>) # 先创建集合、类似<span class="keyword">db</span>中的表</span><br><span class="line">   show tables/collections 查看所有的表</span><br><span class="line">   <span class="keyword">db</span>.niu.<span class="keyword">drop</span>() # 删除一个<span class="keyword">table</span></span><br><span class="line"></span><br><span class="line">5. <span class="keyword">db</span>.niu.insert(&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;niu&quot;</span>&#125;) 插入文档</span><br><span class="line">6. <span class="keyword">db</span>.niu.<span class="keyword">save</span>() 若不指定id, 类似于insert、若指定、会执行更新</span><br><span class="line">7. <span class="keyword">db</span>.<span class="keyword">help</span>() 库的帮助信息</span><br><span class="line">8. <span class="keyword">db</span>.<span class="keyword">table</span>.<span class="keyword">help</span>() 表的帮助文档</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mongo</span> <span class="number">192.168.1.100:27017</span>/test</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mongo_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">常用命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">db</span>.<span class="keyword">version</span>()</span><br><span class="line">mongo --<span class="keyword">version</span></span><br><span class="line">mongod --<span class="keyword">version</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看各节点的健康状态"><a href="#查看各节点的健康状态" class="headerlink" title="查看各节点的健康状态"></a>查看各节点的健康状态</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制集状态查看  rs<span class="selector-class">.status</span>()</span><br><span class="line">查看oplog状态 rs<span class="selector-class">.printReplicationInfo</span>();</span><br><span class="line">查看复制延迟 rs<span class="selector-class">.printSlaveReplicationInfo</span>();</span><br><span class="line">查看服务状态详情 db<span class="selector-class">.serverStatus</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="查看数据库空间大小"><a href="#查看数据库空间大小" class="headerlink" title="查看数据库空间大小"></a>查看数据库空间大小</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.stats() 默认返回字节</span><br><span class="line"><span class="string">&quot;dataSize&quot;</span> : <span class="number">20</span>,  <span class="regexp">//</span>所有数据的总大小</span><br><span class="line"><span class="string">&quot;storageSize&quot;</span> : <span class="number">21</span>, <span class="regexp">//</span>所有数据占的磁盘大小 </span><br><span class="line"><span class="string">&quot;fileSize&quot;</span> : <span class="number">23</span>,  <span class="regexp">//</span>预分配给数据库的文件大小</span><br><span class="line"></span><br><span class="line">db.stats(<span class="number">1073741824</span>) <span class="regexp">//</span> 得到的单位是 G</span><br><span class="line">这里的objects以及avgObjSize还是bytes为单位的，不受参数影响</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看总的记录数"><a href="#查看总的记录数" class="headerlink" title="查看总的记录数"></a>查看总的记录数</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db<span class="selector-class">.dbname</span><span class="selector-class">.find</span>()<span class="selector-class">.count</span>()</span><br><span class="line">db<span class="selector-class">.dbname</span><span class="selector-class">.find</span>()<span class="selector-class">.skip</span>(n)<span class="selector-class">.limit</span>(m)<span class="selector-class">.count</span>(); 会返回所有的记录数</span><br><span class="line">db<span class="selector-class">.dbname</span><span class="selector-class">.find</span>()<span class="selector-class">.skip</span>(n)<span class="selector-class">.limit</span>(m)<span class="selector-class">.count</span>(true); 会返回limit的记录数</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看数据库信息"><a href="#查看数据库信息" class="headerlink" title="查看数据库信息"></a>查看数据库信息</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">db</span>.getName 返回当前所在的<span class="keyword">db</span>名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="允许副本集上的查询"><a href="#允许副本集上的查询" class="headerlink" title="允许副本集上的查询"></a>允许副本集上的查询</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.slaveOk<span class="comment">()</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>www.cnblogs.com<span class="regexp">/kevingrace/</span>p/<span class="number">8178549</span>.html</span><br><span class="line">https:<span class="regexp">//</span>stackoverflow.com<span class="regexp">/questions/</span><span class="number">30088833</span><span class="regexp">/strange-mongodb-and-mongoose-error-not-master-and-slaveok-false-error/</span><span class="number">30089063</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mongo_%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mongo_%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">查询计划简要分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mongo/" itemprop="url" rel="index"><span itemprop="name">Mongo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="查看sql执行计划"><a href="#查看sql执行计划" class="headerlink" title="查看sql执行计划"></a>查看sql执行计划</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在查询语句后添加 explain 即可</span><br><span class="line">eg. db.collection.find().explain()</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回信息解读"><a href="#返回信息解读" class="headerlink" title="返回信息解读"></a>返回信息解读</h4><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">queryPlanner (查询计划)</span><span class="punctuation">:</span> <span class="string">查询优化选择的计划细节和被拒绝的计划</span></span><br><span class="line">    <span class="attribute">namespace 运行查询的指定命名空间</span></span><br><span class="line"><span class="attribute">    indexFilterSet Boolean值、表示mongodb在查询中是否使用索引过滤</span></span><br><span class="line"><span class="attribute">    winningPlan 由查询优化选择的计划文档</span></span><br><span class="line"><span class="attribute">         stage</span><span class="punctuation">:</span> <span class="string">表示查询阶段的字符串</span></span><br><span class="line">         <span class="attribute">inputStage</span><span class="punctuation">:</span> <span class="string">表示子查询的文档</span></span><br><span class="line">         <span class="attribute">inputStages</span><span class="punctuation">:</span> <span class="string">表示子过程的文档数组</span></span><br><span class="line"><span class="attribute">executionStats(执行状态)</span><span class="punctuation">:</span> <span class="string">被选中执行计划和被拒绝执行计划的详细说明</span></span><br><span class="line">     queryPlanner.nReturned－匹配查询条件的文档数</span><br><span class="line">     queryPlanner.executionTimeMillis－计划选择和查询执行所需的总时间（毫秒数）</span><br><span class="line">     queryPlanner.totalKeysExamined－扫描的索引总数</span><br><span class="line">     queryPlanner.totalDocsExamined－扫描的文档总数</span><br><span class="line">     queryPlanner.executionStages－显示执行成功细节的查询阶段树</span><br><span class="line">          executionStages.works－指定查询执行阶段执行的“工作单元”的数量</span><br><span class="line">          executionStages.advanced－返回的中间结果数</span><br><span class="line">          executionStages.needTime－未将中间结果推进到其父级的工作周期数</span><br><span class="line">          executionStages.needYield－存储层要求查询系统产生的锁的次数</span><br><span class="line">          executionStages.isEOF－指定执行阶段是否已到达流结束</span><br><span class="line">     queryPlanner.allPlansExecution－包含在计划选择阶段期间捕获的部分执行信息，包括选择计划和拒绝计划</span><br><span class="line"> serverInfo,（服务器信息）：MongoDB实例的相关信息：</span><br><span class="line">     winningPlan－使用的执行计划</span><br><span class="line">          shards－包括每个访问片的queryPlanner和serverInfo的文档数组</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_MQ%E6%80%A7%E8%83%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mq_MQ%E6%80%A7%E8%83%BD/" class="post-title-link" itemprop="url">MQ性能</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="MQ消息积压如何处理"><a href="#MQ消息积压如何处理" class="headerlink" title="MQ消息积压如何处理"></a>MQ消息积压如何处理</h3><h4 id="优化性能避免消息积压"><a href="#优化性能避免消息积压" class="headerlink" title="优化性能避免消息积压"></a>优化性能避免消息积压</h4><p>MQ本身的处理能力是远大于业务系统的处理能力的、主流消息队列的单个节点、消息收发的性能可以达到每秒几万到几十万的水平、水平扩展Broker的实例数可以成倍的提升处理能力、应该更多的关注在消息的收发两端、让业务代码和MQ配合、达到最佳性能</p>
+<ul>
+<li>发送端性能优化<br>若代码发送消息的性能较弱、很可能是发MQ之前的逻辑太耗时导致、一般设置合理的并发和批量大小、就可以达到很好的性能</li>
+</ul>
+<p>MQ的完整交互: P -&gt; Broker -&gt; R<br>假设单线程发送、每秒处理请求 1000ms&#x2F;1ms*1条&#x2F;1ms &#x3D; 1000 条msg、并不能发挥MQ的实力</p>
+<ol>
+<li>增加batch大小、2. 并发请求 都可以提升性能<br>对于关注延时的RPC系统、可以选择增加并发量<br>对于关注吞吐量的离线分析系统、它不关心时延、可以选择批量发送</li>
+</ol>
+<ul>
+<li>消费端性能优化<br>若消费的速度跟不上msg生产的速度、MQ存储被填满之后就会造成无法提供服务、消息丢失、对于整个系统都是严重故障</li>
+</ul>
+<p>消费端的性能优化除了优化消费业务逻辑之外、还可以通过简单的水平扩容来增加消费端的并发数来提高整体的消费性能<br><em>注意</em><br>在扩容consumer实例的同时、必须同步扩容主题中的分区(队列)数量、确保consumer的实例数和分区数相等、因为每个分区只支持单线程消费</p>
+<ul>
+<li>消息积压了如何处理？</li>
+</ul>
+<ol>
+<li>若单位时间内发送的消息增多、最快的办法就是通过扩容消费端的实例来提升总体的消费能力，或者可以通过系统降级、减少生产者发送数据</li>
+<li>若是消费和生产速度都无明显变化、需要检查消费端、数不胜数消费失败导致反复消费</li>
+<li>若是消费变慢、可以快速排查消费日志、看看消费线程是不是卡着不动了</li>
+</ol>
+<h4 id="疑问点记录"><a href="#疑问点记录" class="headerlink" title="疑问点记录"></a>疑问点记录</h4><p>假如、有一个topic、Q为5、Broker为2</p>
+<ol>
+<li><p>有3个生产者实例、如何对应到5个Q ?<br> 不用对应、随便发或者指定Q选取规则</p>
+</li>
+<li><p>每个消费组都是单独的订阅、拥有队列的全部消息、消费完后消息不会删除</p>
+</li>
+<li><p>多个消费组订阅同一个topic彼此不影响、<br>eg. 消费组G0 | G1 、G0挂掉、积压很多消息、对G1也没有任何影响</p>
+</li>
+<li><p>消费位置<br> 每个消费组会维护一组消费位置、每个队列对应一个消费位置、并且消费位置和消费者无关、保存在服务端</p>
+</li>
+<li><p>如何实现单个队列的并行消费<br>eg. MQ中有10条消息、对应的编号是0-9、当前消费位置是5、同时有5、6、7三个消费者拉取消息、5、6、7三个消息给每个消费者一人一条、理想情况下、3个消费者成功响应、消费位置更新为8 实现并行消费<br>假如5卡着某个环节不动了、位置5就是消息空洞、为了避免整个队列卡住、将5复制到一个重试队列、然后更新消费位置、消费时优先给出重试队列的数据<br>这是实现并行消费的一种实现方式、但是开销很大、不应该作为常规手段、若需要增加消费者的并发数、还是需要扩容队列数</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_RocketMQ%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mq_RocketMQ%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">RocketMQ简介</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>组件:</p>
+<p>nameSrv作用: </p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.加载kv配置、创建nettyServer网络处理对象、</span><br><span class="line"><span class="number">2</span>.开启定时任务进行心跳监测</span><br><span class="line"><span class="symbol">task1:</span> nameSrv 每<span class="number">10</span>s扫描一次<span class="keyword">broker、移除处于不激活状态的broker</span></span><br><span class="line"><span class="keyword"></span><span class="symbol">task2:</span> nameSrv 每<span class="number">10</span>min打印一次kv配置</span><br><span class="line"><span class="number">3</span>.注册<span class="keyword">jvm钩子函数、监听broker、消息生产者的请求</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">broker如果挂掉、producer向broker的消息发送是否失败 </span>？ 如何处理 ？</span><br><span class="line"><span class="number">10</span>s之后才会更新nameSrv信息、producer才可以检测到</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>NameSrv功能实现</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 路由注册、故障剔除</span><br><span class="line">nameSrv 测主要作用是为Producer和Consumer提供topic信息、所以需要存储路由的基础信息、能够管理<span class="keyword">Broker节点、包括路由注册、故障剔除等</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">元信息:</span><br><span class="line"><span class="symbol">topicQueueTable:</span> topic 消息队列路由信息、消息发送时进行负载均衡</span><br><span class="line"><span class="keyword">brokerAddrTable: </span><span class="keyword">broker基础信息、包含BrokerName、所属集群地址、主备broker地址</span></span><br><span class="line"><span class="keyword"></span><span class="symbol">clusterAddrTable:</span> <span class="keyword">broker集群信息、存储集群中brokerName</span></span><br><span class="line"><span class="keyword"></span><span class="keyword">brokerLiveTable: </span><span class="keyword">broker状态信息、nameServer每次收到心跳包时更新</span></span><br><span class="line"><span class="keyword"></span><span class="symbol">filterServerTable:</span> <span class="keyword">broker上的FilterServer列表、用于消息过滤</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">一个topic有多个Queue、一个<span class="keyword">broker默认为每个topic创建4个读Q </span>和 <span class="number">4</span>个写Q、多个<span class="keyword">broker组成一个集群、多台相同brokerName的broker机器组成M-S架构、brokerId=0代表M、</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">BrokerLiveInfo中的lastUpdateTimestamp存储上次收到broker心跳包的时间</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">路由注册通过<span class="keyword">broker和nameSrv的心跳实现、broker每隔30s向所有nameSrv发送心跳、nameSrv收到心跳包更新brokerLiveTable中的BrokerLiveInfo的心跳时间、10s扫描一次brokerLiveTable、若连续120s未收到心跳包、nameSrv会移除该broker</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">路由删除:</span><br><span class="line"><span class="number">1</span>. nameSrv定时扫描 <span class="keyword">brokerLiveTable、超过120s未收到心跳包、会移除broker信息</span></span><br><span class="line"><span class="keyword"></span><span class="number">2</span>. <span class="keyword">broker正常关闭时、主动调用unregisterBroker</span></span><br><span class="line"><span class="keyword"></span><span class="number">1</span>) 从<span class="keyword">brokerLiveTable、filterServerTable移除该broker</span></span><br><span class="line"><span class="keyword"></span><span class="number">2</span>) 维护<span class="keyword">brokerAddrList信息</span></span><br><span class="line"><span class="keyword"></span><span class="number">3</span>) 维护clusterAddrTable信息</span><br><span class="line"><span class="number">4</span>) 遍历topic、从路由信息移除该<span class="keyword">broker</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">路由发现:</span><br><span class="line"><span class="number">1</span>. 非实时、topic路由信息变化、nameSrv不会主动推送、而是client主动定时拉取、</span><br><span class="line">从topicQueueTable、<span class="keyword">brokerAddrTable、filterServerTable中填充TopicQueueData的QueueData、BrokerData、filterServer地址表</span></span><br><span class="line"><span class="keyword"></span><span class="number">2</span>. 若从topic找到对应的路由信息为顺序消息、则从nameServer kvConfig中获取关于顺序消息相关的配置填充路由信息</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Borker:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">提供消息存储、</span><br><span class="line">对于mq的消息存储、一般考虑 消息堆积能力 和 消息存储能力</span><br><span class="line">rocketmq 引入内存映射机制、所有主题的消息顺序存储在同一文件</span><br><span class="line">引入 消息文件过期机制 和 文件存储空间报警机制 - 避免消息无限堆积</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Producer启动流程</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 检查producerGroup是否符合要求、改变生产者的instanceName为进程id</span><br><span class="line"><span class="bullet">2.</span> 创建MQClientInstance实例、整个jvm中只存在一个MQClientManager实例、维护一个MQClientInstance的hashMap表、即: 同一个clientID只会创建一个MQClientInstance</span><br><span class="line">   instance是封装了rocketMQ的网络处理API、是Producer、Consumer与NameSrv、Broker打交道的网络通道</span><br><span class="line"><span class="bullet">3.</span> 将producer注册到MQClientInstance管理中、方便后续进行网络请求、心跳检测等</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>消息发送过程</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">支持<span class="number">3</span>种方式: 同步<span class="keyword">sync、异步async、单向oneway</span></span><br><span class="line"><span class="keyword"></span><span class="keyword">sync: </span>同步等待<span class="keyword">broker将结果返回</span></span><br><span class="line"><span class="keyword"></span><span class="symbol">async:</span> 指定回调函数、不阻塞producer线程、消息结果通过回调通知</span><br><span class="line"><span class="symbol">oneway:</span> 不等待消息存储结果、亦不提供回调函数、不关心是否存储成功</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 消息长度验证、消息长度最大<span class="number">4</span>M</span><br><span class="line"><span class="number">2</span>. 查找路由信息</span><br><span class="line">   首次发msg时、本地未缓存topic路由信息、查询nameSrv获取、未找到时会尝试创建、若路由信息变化则更新<span class="keyword">broker地址列表</span></span><br><span class="line"><span class="keyword"></span><span class="number">3</span>. queue选择</span><br><span class="line">若<span class="number">2</span>m<span class="number">-2</span>s架构、queueNum=<span class="number">4</span>、rocketmq会如何选择 ？</span><br><span class="line">消息发送时会多次执行queue选择算法、lastBrokerName是上次send failed的<span class="keyword">broker、第一次执行Q选择时、last为null、直接在所有Q中选择、</span></span><br><span class="line"><span class="keyword"></span>再次执行时、会先判断、选择<span class="keyword">brokerName!=lastBrokerName的来进行规避</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">如果再次选择、得到的依然是不可用的Queue呢 ？会再次重试、造成资源浪费</span><br><span class="line"><span class="keyword">broker故障不会立即摘除(nameSrv </span><span class="number">10</span>s才检测一次、Producer也是<span class="number">30</span>s才更新路由信息、最快感知也需要<span class="number">30</span>s)、</span><br><span class="line"></span><br><span class="line"><span class="keyword">broker延迟故障机制</span></span><br><span class="line"><span class="keyword"></span><span class="number">1</span>) 获取一个小小队列</span><br><span class="line"><span class="number">2</span>) 验证是否可用</span><br><span class="line"><span class="number">3</span>) 若可用、移除latencyFaultTolerance关于该topic的条目、表明<span class="keyword">broker故障恢复</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">消息发送</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 消息队列如何负载 ？</span><br><span class="line"><span class="number">2</span>. 如何实现高可用？</span><br><span class="line"><span class="number">3</span>. 批量消息如何实现一致性？</span><br></pre></td></tr></table></figure>
+
+<p>Consumer消息消费</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">集群模式: 同一topic下一条消息只能允许被其中一个消费者消费、消费进度保存在broker端</span></span><br><span class="line"><span class="section">广播模式: 同一topic下一条消息可以被同一消费组的所有消费者消费、消息消费进度保存在消费端</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">消息队列负载与重新分布</span><br><span class="line">消息消费模式</span><br><span class="line">消息拉取方式</span><br><span class="line">消息进度反馈</span><br><span class="line">消息过滤</span><br><span class="line">顺序消息</span><br></pre></td></tr></table></figure>
+<p>消费者启动流程</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 构建订阅主题信息SubscriptionData并加入到RebalanceImpl的订阅消息中、订阅关系来自:</span><br><span class="line">   1) 调用subscribe方法</span><br><span class="line">   2) 订阅重试主题消息 以消费组为单位 命名: %RETRY%+消费组名</span><br><span class="line"><span class="bullet">2.</span> 初始化MQClientInstance、RebalanceImpl等</span><br><span class="line"><span class="bullet">3.</span> 初始化消费进度、broadcast保存在broker、cluster保存在consumer</span><br><span class="line"><span class="bullet">4.</span> 根据是否顺序消费、创建消费端消费线程服务、ConsumeMessageService主要负责消息消费、内部维护一个线程池</span><br><span class="line"><span class="bullet">5.</span> 向MQClientInstance注册消费者、并启动MQInstance、在一个JVM中的所有消费者、生产者持有同一个MQClientInstance、只启动一次</span><br></pre></td></tr></table></figure>
+
+<p>消息可用性保障</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> Broker 正常关机</span><br><span class="line"><span class="bullet">2.</span> Broker 异常Crash</span><br><span class="line"><span class="bullet">3.</span> OS Crash</span><br><span class="line"><span class="bullet">4.</span> 机器断电、可立即恢复供电</span><br><span class="line"><span class="bullet">5.</span> 机器无法开机、可能是CPU、主板、内存等关键设备损坏</span><br><span class="line"><span class="bullet">6.</span> 磁盘设备损坏</span><br><span class="line"></span><br><span class="line">1-4 在同步刷盘机制下、可以确保不丢失消息、异步刷盘模式下丢失少量消息</span><br><span class="line">5、6属于单点故障、一旦发生、节点上的消息全部丢失、若开启了异步复制可保证只丢失少量消息、双写机制下 不会丢失消息</span><br></pre></td></tr></table></figure>
+
+<p>消息延迟</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在正常不发生消息堆积的情况下、以长轮询方式实现准实时消息推送</span><br></pre></td></tr></table></figure>
+
+<p>消息堆积</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rocketmq</span>消息存储使用磁盘文件(内存映射)并且在物理布局上为多个大小相等的文件组成逻辑文件组、可无限循环使用、提供消息过期机制、默认保留<span class="number">3</span>天</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>消息过滤:</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> broker端过滤、</span><br><span class="line"><span class="bullet">2.</span> consumer过滤、</span><br></pre></td></tr></table></figure>
+
+<p>msg status 说明:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SEND_OK, <span class="regexp">//</span> 发送成功</span><br><span class="line">FLUSH_DISK_TIMEOUT, <span class="regexp">//</span> 在规定时间内没有完成刷盘、在 flushDiskType 为 SYNC_FLUSH 时才出现 </span><br><span class="line">FLUSH_SLAVE_TIMEOUT, <span class="regexp">//</span> 在主备方式下、broker被设置为 sync_master方式时、未在指定时间内完成主从同步</span><br><span class="line">SLAVE_NOT_AVAILABLE, <span class="regexp">//</span> 在主备方式下、broker被设置为 sync_master方式时、未找到slave</span><br></pre></td></tr></table></figure>
+
+<p>疑问</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> broker收到消息会先写commitlog、为什么producer发消息的时候会选择一个Queue去发 ？而不是broker ？再由broker分发到Queue ？</span><br><span class="line"></span><br><span class="line"><span class="bullet">2.</span> 写commitlog的时候、同步刷盘指针和异步刷盘指针写的是同一个commitlog文件、如何保证消息的有序存储？</span><br><span class="line"></span><br><span class="line"><span class="bullet">3.</span> 文件清除何时进行 ？</span><br><span class="line"></span><br><span class="line"><span class="bullet">4.</span> 消息队列如何进行负载均衡？</span><br><span class="line"></span><br><span class="line"><span class="bullet">5.</span> 消息发送如何保证高可用</span><br><span class="line"></span><br><span class="line"><span class="bullet">6.</span> 批量消息如何保持一致性</span><br><span class="line"></span><br><span class="line"><span class="bullet">7.</span> broker失效后120s才能将该broker从路由表中移除、若生产者获取到的路由信息包含已宕机的broker如何处理？</span><br><span class="line"></span><br><span class="line"><span class="bullet">8.</span> </span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">MQ的消息模型和事务</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="消息队列架构演进"><a href="#消息队列架构演进" class="headerlink" title="消息队列架构演进"></a>消息队列架构演进</h4><p><strong>早期mq就是按照队列的数据结构来设计的</strong><br><img src="https://upload-images.jianshu.io/upload_images/14027542-7491db81233d4005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="早期MQ架构"></p>
+<p>若有多个生产者往同一队列发送消息、这个队列可以消费到生产者消息的集合、顺序为生产者发送消息的自然顺序<br>若多个消费者消费一个队列、这些消费者是竞争关系、只消费到队列的一部分数据<br>需要每个消费者消费全量消息时、只能创建多个Queue、让生产者发送多份数据、并且生产者必须知道有多少消费者、违背了消息队列解耦的初衷</p>
+<p><strong>演进架构</strong><br>发布 - 订阅模型(Publish-Subscribe Pattern)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-83faa4bba38ebc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发布-订阅模型"></p>
+<p>在P-S架构中、msg发送方称为发布者Publisher、接收方称为订阅者Subscriber、服务端存放消息的容器称为主题Topic、消费之前必须先订阅主题</p>
+<p>其实和队列模式没有本质区别、最大的区别在于: 一份数据能不能被消费多次</p>
+<h4 id="RabbitMQ的消息模型"><a href="#RabbitMQ的消息模型" class="headerlink" title="RabbitMQ的消息模型"></a>RabbitMQ的消息模型</h4><p>RabbitMQ是少数坚持使用队列模型的产品之一、它如何解决多个消费者的问题呢 ？<br>Exchange: 位于生产者和队列之间、生产者不关心将消息发送给哪个队列、而是将消息发送给Exchange、由Exchange上配置的策略来决定将消息投递到哪些队列中<br><img src="https://upload-images.jianshu.io/upload_images/14027542-9c144b17627ba919.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RabbitMQ消息模型"></p>
+<p>同一份消息需要被多个消费者消费时、需要配置exchange将消息发送到多个队列、每个队列中存放一份完整的消息数据、</p>
+<h4 id="RocketMQ的消息模型"><a href="#RocketMQ的消息模型" class="headerlink" title="RocketMQ的消息模型"></a>RocketMQ的消息模型</h4><p>RocketMQ使用的是标准的发布-订阅模型、</p>
+<p>普通的MQ都是使用的请求-确认机制、确保消息不会再传递过程中由于网络故障或服务器故障丢失. 在生产端、生产者将消息发给服务端Broker、Broker在收到消息并将消息写入主题或者队列后、会给生产者发送确认的响应、若生产者未收到服务端的确认或者收到失败的响应、会重新发消息; 在消费端、消费者收到消息并完成消费逻辑后也会给服务端发送消费成功的确认、服务端只有在收到消费确认后、才会认为一条消息被成功消费、否则会重发消息</p>
+<p>为了保证消息有序性、在消息被成功消费前、下一条消息不能被消费、否则就出现了消息空洞、违背了有序性的原则、所以 MQ增加了队列的概念、只在队列层面保证消息的有序性、主题层面不保证</p>
+<p>消息会被不同消费组消费、消费完的消息不会立即删除、MQ为每个队列维护了一个消费位置Consumer Offset、每成功消费一条消息、位置就+1</p>
+<h4 id="Kafka的消息模型"><a href="#Kafka的消息模型" class="headerlink" title="Kafka的消息模型"></a>Kafka的消息模型</h4><p>Kafka的消费模型和RocketMQ的模型是完全一样的、唯一的区别是 在Kafka中队列这个概念的名称不同、Kafka对应的概念叫 <code>分区</code> - <code>Partition</code> </p>
+<p>注意:<br>RocketMQ 和 Kafka 的业务模型一样、不代表实现一致、其实实现是完全不同的、就像MySQL和hbase存放数据的单元都是表、实现完全不同、MySQL使用B+树来存储、HBase 使用KV结构存储</p>
+<h4 id="MQ的事务实现"><a href="#MQ的事务实现" class="headerlink" title="MQ的事务实现"></a>MQ的事务实现</h4><p>Kafka 和 RocketMQ 都提供了事务的实现<br>在消息队列上开启一个事务、给服务器发送一个<code>半消息</code>状态、它包含完整的消息内容、但对于消费者不可见、本地事务提交后再提交消息事务<br>但: 如果提交消息事务失败怎么办 ？</p>
+<ol>
+<li>kafka的方案简单粗暴、直接抛异常、用户自行处理</li>
+<li>RocketMQ提供了事务反查机制、若Broker未收到提交或者回滚的请求、Broker会定期去Producer上反查本地事务对应状态、来决定事务提交还是回滚<br><img src="https://upload-images.jianshu.io/upload_images/14027542-40c0cd530d78849e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ol>
+<h4 id="消息可靠性保证"><a href="#消息可靠性保证" class="headerlink" title="消息可靠性保证"></a>消息可靠性保证</h4><p><strong>检测消息丢失</strong><br>1.若基础设施比较完善、一般会有分布式链路追踪系统、可以追踪消息流<br>2.利用消息有序性校验: 给每个发出的消息附加一个连续的序号、若序号不连续、就可以判定为消息丢失<br>注意: 多个producer 和 多个consumer的情况、需要判定每个分区的序列有效性<br><strong>如何保证</strong><br>1.生产阶段、根据不同mq的确认机制、进行对应的处理 eg: kafka -&gt; 捕获异常<br>2.存储阶段、正常broker运行的时候、不会出现消息丢失、但若broker出现了故障或者宕机、是可能丢消息的. 单节点broker可以配置broker在收到消息后立即落盘、broker是集群的时候、可以配置至少2个节点收到消息再确认<br>3.消费阶段、同生产阶段、消费端<em>业务逻辑</em>成功后再回传确认<br>有可能消息再网络传输过程中发生错误、发送方收不到确认就会重发消息、所以Broker 和 Consumer 都可能会收到重复消息、需要注意接口的幂等性</p>
+<p><strong>业务变相实现</strong><br>1.利用数据库的唯一约束实现幂等、<br>2.为更新的数据设置前置条件、满足某种条件才更新<br>3.记录并检查操作(需要考虑唯一ID的生成和多步操作的原子性)</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>幂等方案、不止是可以解决消息重复的问题、也同样适用于其它场景.eg: 将HTTP服务设计成幂等的、解决前端或者APP重复提交表单数据问题、也可以将一个微服务设计成幂等的、解决RPC框架自动重试导致的重复调用问题</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

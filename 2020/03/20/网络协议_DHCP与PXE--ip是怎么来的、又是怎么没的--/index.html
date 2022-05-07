@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="如何配置ip地址 使用net-tools12$ sudo ifconfig eth1 10.0.0.1&#x2F;24$ sudo ifconfig eth1 up 使用iprote212$ sudo ip addr add 10.0.0.1&#x2F;24 dev eth1$ sudo ip link set up eth1 但: 是可以随意配置的吗 ? 显然不是. 只要在网络上的包、都是完整的、可以有下层无上层、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DHCP与PXE--ip是怎么来的、又是怎么没的--">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_DHCP%E4%B8%8EPXE--ip%E6%98%AF%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%E3%80%81%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E6%B2%A1%E7%9A%84--/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="如何配置ip地址 使用net-tools12$ sudo ifconfig eth1 10.0.0.1&#x2F;24$ sudo ifconfig eth1 up 使用iprote212$ sudo ip addr add 10.0.0.1&#x2F;24 dev eth1$ sudo ip link set up eth1 但: 是可以随意配置的吗 ? 显然不是. 只要在网络上的包、都是完整的、可以有下层无上层、">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.842Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="网络协议">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_DHCP%E4%B8%8EPXE--ip%E6%98%AF%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%E3%80%81%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E6%B2%A1%E7%9A%84--/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>DHCP与PXE--ip是怎么来的、又是怎么没的-- | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_DHCP%E4%B8%8EPXE--ip%E6%98%AF%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%E3%80%81%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E6%B2%A1%E7%9A%84--/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DHCP与PXE--ip是怎么来的、又是怎么没的--
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">网络协议</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="如何配置ip地址"><a href="#如何配置ip地址" class="headerlink" title="如何配置ip地址"></a>如何配置ip地址</h4><ol>
+<li>使用net-tools<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo ifconfig eth1 <span class="number">10.0</span>.<span class="number">0.1</span>/<span class="number">24</span></span><br><span class="line"><span class="variable">$ </span>sudo ifconfig eth1 up</span><br></pre></td></tr></table></figure></li>
+<li>使用iprote2<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo<span class="built_in"> ip </span>addr <span class="built_in">add</span> 10.0.0.1/24 dev eth1</span><br><span class="line">$ sudo<span class="built_in"> ip </span>link <span class="built_in">set</span> up eth1</span><br></pre></td></tr></table></figure>
+但: 是可以随意配置的吗 ?<blockquote>
+<p>显然不是. 只要在网络上的包、都是完整的、可以有下层无上层、不能反之.<br>若配置为不同网段, 发送请求包时、linux的默认逻辑是: 跨网段调用、不会直接将包发送到网络上、而是企图发送到网关.<br>若配置同网段呢? – 会配置失败</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="动态主机配置协议-DHCP"><a href="#动态主机配置协议-DHCP" class="headerlink" title="动态主机配置协议(DHCP)"></a>动态主机配置协议(DHCP)</h4><p><code>DHCP</code>: 动态主机配置协议(Dynamic Host Configuration Protocol)<br>有了DHCP、网络管理员只需要配置一段共享的ip地址. 每一台新接入的机器会通过DHCP协议去共享的ip地址里申请、然后自动配置 </p>
+<blockquote>
+<p>若数据中心里的服务器、ip一旦配置好、基本不会改变、相当于自己买房、自己装修. DHCP的方式类似于租房、临时借用、用完归还即可.</p>
+</blockquote>
+<h4 id="解析DHCP的工作方式"><a href="#解析DHCP的工作方式" class="headerlink" title="解析DHCP的工作方式"></a>解析DHCP的工作方式</h4><p>刚加入网络的机器、暂无ip地址、处于<code>DHCP Discover</code>的状态.</p>
+<p>它会使用ip地址 0.0.0.0 发送广播包、目的地址为: 255.255.255.255. 广播包封装了UDP、UDP封装了BOOTP. 若网络里配置了DHCP Server, Server会分配ip地址给该MAC地址、同时记录(不会分配给其它机器). 这个过程称为 <code>DHCP Offer</code>.</p>
+<p>若收到多个DHCP Server回复、一般会选择接受第一个到达的、且向网络发送一个DHCP Request广播数据包, 包含Clineet的MAC地址、接受的ip地址、提供该ip的HDCP Server地址等, 告诉其它server它接受了哪一台server提供的ip、请求他们撤销提供的ip、以提供给下一个ip租用者.</p>
+<p>DHCP Server 接收到Client的request后、会广播返回一个ACK消息.</p>
+<p>client会在租期过去50%时、向为其提供ip地址的server发送request消息包, client 再根据接收到server回应的ack消息包中提供的新的租期及其他已更新的tcp&#x2F;ip参数更新自己的配置.</p>
+<h4 id="预启动执行环境-PXE"><a href="#预启动执行环境-PXE" class="headerlink" title="预启动执行环境(PXE)"></a>预启动执行环境(PXE)</h4><p>预启动执行环境: </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" rel="tag"># 网络协议</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_ifconfig/" rel="prev" title="ifconfig">
+      <i class="fa fa-chevron-left"></i> ifconfig
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8_%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/" rel="next" title="浏览器渲染流程">
+      浏览器渲染流程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEip%E5%9C%B0%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text">如何配置ip地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE-DHCP"><span class="nav-number">2.</span> <span class="nav-text">动态主机配置协议(DHCP)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90DHCP%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">解析DHCP的工作方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E5%90%AF%E5%8A%A8%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83-PXE"><span class="nav-number">4.</span> <span class="nav-text">预启动执行环境(PXE)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

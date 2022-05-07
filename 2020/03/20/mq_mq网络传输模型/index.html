@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="实现通过网络来传输数据、需要网络通信类库, 大部分网络通信基础类库都是同步的. 一个TCP连接建立后、用户代码会得到用于收发数据的通道、每个通道会在内存开辟两片区域用于收发数据的缓存 发数据比较简单:用户代码在发送时写入的数据会暂存在缓存中、然后操作系统会通过网卡、把发送缓存中的数据传输到对端的服务器上       只要缓存不满、或者发送数据的速度未超过网卡传输速度的上限、发送数据的操作耗时就只是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mq网络传输模型">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mq_mq%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="实现通过网络来传输数据、需要网络通信类库, 大部分网络通信基础类库都是同步的. 一个TCP连接建立后、用户代码会得到用于收发数据的通道、每个通道会在内存开辟两片区域用于收发数据的缓存 发数据比较简单:用户代码在发送时写入的数据会暂存在缓存中、然后操作系统会通过网卡、把发送缓存中的数据传输到对端的服务器上       只要缓存不满、或者发送数据的速度未超过网卡传输速度的上限、发送数据的操作耗时就只是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-31618a43c52ff67d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.808Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-31618a43c52ff67d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mq_mq%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%9E%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>mq网络传输模型 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_mq%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mq网络传输模型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>实现通过网络来传输数据、需要网络通信类库, 大部分网络通信基础类库都是同步的. 一个TCP连接建立后、用户代码会得到用于收发数据的通道、每个通道会在内存开辟两片区域用于收发数据的缓存</p>
+<p>发数据比较简单:<br>用户代码在发送时写入的数据会暂存在缓存中、然后操作系统会通过网卡、把发送缓存中的数据传输到对端的服务器上<br>       只要缓存不满、或者发送数据的速度未超过网卡传输速度的上限、发送数据的操作耗时就只是写入一次内存的时间、同步发送即可、无需异步</p>
+<p>接收数据比较麻烦、它不知道什么时候会收到数据<br><code>同步IO</code>: 用一个线程阻塞、等待数据、数据到来、操作系统会先把数据写入到接收缓存、然后给接收数据的线程发通知、接收线程收到通知结束等待、开始读取数据、处理完将继续阻塞、等待下次数据到来<br><img src="https://upload-images.jianshu.io/upload_images/14027542-31618a43c52ff67d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>同步IO处理少量连接没问题、但同时处理大量连接的时候、每个连接都会阻塞一个线程来等待数据、这些连接都在收发数据的时候就会有大量的线程来抢占CPU的世界、造成频繁的CPU上下文切换、导致CPU的负载升高、系统性能下降</p>
+<p>期望值:<br>事先定义好收到数据后的处理逻辑、将它作为一个回调方法、收到数据后、网络通信框架直接回调这个方法就好</p>
+<h4 id="Java网络模型"><a href="#Java网络模型" class="headerlink" title="Java网络模型"></a>Java网络模型</h4><p>极客时间留言区看到一个很不错的评论、收藏下<br>举例: 有一个养鸡的农场、里边养着各个农户Thread的鸡Socket、每个农户都在农场中建立了自己的鸡舍SocketCahnnel</p>
+<ol>
+<li><code>BIO</code>: Bolck IO, 每个农户盯着自己的鸡舍、有下蛋、就去捡</li>
+<li><code>NIO</code>: No-Block IO, 单 Selector、农户们花钱请了一个饲养员 <code>Selector</code>, 并且告诉饲养员Register 若哪家的鸡下蛋要向农户报告 select keys</li>
+<li><code>NIO</code>: No-Block IO - 多Selector、鸡舍增多时、一个饲养员巡视(轮询)一次的时间增大、延迟较大、多请几个、每个饲养员分配几个鸡舍管理、减小延迟</li>
+<li><code>epoll</code>: 饲养员不巡查鸡舍、听到有鸡打鸣(活跃连接)就知道下单了</li>
+<li><code>AIO</code>: Asynchronous IO、鸡下单后、饲养员负责取蛋、通知农户来取即可、不需要农户自己到鸡舍取蛋</li>
+</ol>
+<h4 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h4><p>TCP连接上、传输数据的基本形式是二进制流、0和1、在一般编程语言或者框架提供的api中、传输数据的基本形式是字节Byte、本质上是二进制流</p>
+<p>编写的程序是结构化的数据, eg. 类或者结构体<br><strong>显然, 要使用网络框架的API来传输结构化的数据、必须先实现结构化的数据和字节流之间的双向转换</strong></p>
+<p>文件内保存数据的形式也是二进制序列、所以、也需要序列化结构化数据才能实现</p>
+<h4 id="如何选择序列化方式"><a href="#如何选择序列化方式" class="headerlink" title="如何选择序列化方式"></a>如何选择序列化方式</h4><p>需要权衡的因素:</p>
+<ul>
+<li>序列化后的数据易于阅读</li>
+<li>实现复杂度低</li>
+<li>序列化和发序列化越快越好</li>
+<li>序列化后的信息密度越大越好、即同一个结构化刷数据、序列化后占用的空间越小越好</li>
+</ul>
+<p>而 1和4 是矛盾的、2 和 3是矛盾的、所以需要根据业务场景合理选择</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>在内存中存放的数据、最基础的存储单元也是二进制比特、也就是说应用程序操作的对象、在内存中也是使用二进制存储的、既然都是二进制、为什么不直接把二进制数据通过网络发送出去 ？</p>
+<p>内存里的内容、不通用、不同系统不同语言的组织可能都是不一样的、而且存在很多引用、指针、并不是直接数据块<br>序列化、反序列化其实是约定一种标准、大家都遵守就能实现跨语言、跨平台</p>
+<h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><p><strong>高并发下的内存管理技巧</strong></p>
+<ol>
+<li><p>优化代码中处理请求的业务逻辑、减少创建一次性对象、eg. 可以将受到请求的Request对象在业务流程中尽量传递下去、而不是执行一个步骤就创建一个内容和Request对象差不多的新对象</p>
+</li>
+<li><p>使用频繁的对象、可以考虑建立一个对象池、收到请求后在对象池内申请一个对象、使用完放回对象池</p>
+</li>
+<li><p>可能的话、直接使用更大内存的服务器、也可以非常有效的缓解这个问题</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MQ/" rel="tag"># MQ</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mq_rocketMQ%E5%AE%9E%E4%BE%8B%E4%B8%8A%E7%9A%84%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" rel="prev" title="rocketMQ实例上的定时任务">
+      <i class="fa fa-chevron-left"></i> rocketMQ实例上的定时任务
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mq_mq%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/" rel="next" title="mq本地搭建">
+      mq本地搭建 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">Java网络模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">序列化和反序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%BA%8F%E5%88%97%E5%8C%96%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">如何选择序列化方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">内存管理</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

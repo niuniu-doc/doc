@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="存储器系统是一个通过各种不同的方法和设备、一层层组合起来的系统.  SRAM12静态存储器, 只要通电、保存的数据就一直存在、断电则丢失, 1bit 数据、大概需要6~8个晶体管, 密度不高、同样物理空间下、存储的数据有限、不过, 由于电路简单、访问速度特别快  1234在CPU中、通常有L1、L2、L3三层高速缓存每个CPU有一块属于自己的L1缓存(&#96;指令缓存&#96;和&#96;数据缓存&#96; )L2缓存也是每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="存储器层次结构">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="存储器系统是一个通过各种不同的方法和设备、一层层组合起来的系统.  SRAM12静态存储器, 只要通电、保存的数据就一直存在、断电则丢失, 1bit 数据、大概需要6~8个晶体管, 密度不高、同样物理空间下、存储的数据有限、不过, 由于电路简单、访问速度特别快  1234在CPU中、通常有L1、L2、L3三层高速缓存每个CPU有一块属于自己的L1缓存(&#96;指令缓存&#96;和&#96;数据缓存&#96; )L2缓存也是每">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-bffe7a74d40dae20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-d9ca803938888292.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-04e233a82ad956b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.847Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-bffe7a74d40dae20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>存储器层次结构 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          存储器层次结构
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>存储器系统是一个通过各种不同的方法和设备、一层层组合起来的系统.</p>
+</blockquote>
+<h4 id="SRAM"><a href="#SRAM" class="headerlink" title="SRAM"></a>SRAM</h4><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">静态存储器, 只要通电、保存的数据就一直存在、断电则丢失, <span class="number">1</span><span class="keyword">bit</span> 数据、大概需要<span class="number">6</span>~<span class="number">8</span>个晶体管, </span><br><span class="line">密度不高、同样物理空间下、存储的数据有限、不过, 由于电路简单、访问速度特别快</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bffe7a74d40dae20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6个晶体管组成SRAM的一个bit.png"></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在<span class="meta">CPU</span>中、通常有L1、L2、L3三层高速缓存</span><br><span class="line">每个<span class="meta">CPU</span>有一块属于自己的L1缓存(<span class="string">`指令缓存`</span>和<span class="string">`数据缓存`</span> )</span><br><span class="line">L2缓存也是每个<span class="meta">CPU</span>有一块、但不在<span class="meta">CPU</span>内部、访问速度比L1稍慢</span><br><span class="line">L3 Cache通常是多个<span class="meta">CPU</span>核心共用的、尺寸更大、访问更慢一些</span><br></pre></td></tr></table></figure>
+
+<h4 id="DRAM"><a href="#DRAM" class="headerlink" title="DRAM"></a>DRAM</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">比<span class="keyword">SRAM来说、DRAM的密度更高、容量更大、价格也便宜、CPU一般使用的是SRAM、内存一般使用的是DRAM</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">DRAM被称为动态存储器、是因为DRAM需要不断刷新、才能保持数据被存储起来</span><br><span class="line">DRAM的一个<span class="keyword">bit、只需要一个晶体管和一个电容就可以、同样物理空间、存储数据更多、即: </span>存储密度更大</span><br><span class="line">但: 数据是存储在电容里的、电容会不断漏电、需要定时刷新充电、才能保持数据不丢失</span><br><span class="line">DRAM的数据访问电路和刷新电路都比<span class="keyword">SRAM更复杂、so. </span>访问延时更长</span><br></pre></td></tr></table></figure>
+
+<h4 id="存储器的层次结构"><a href="#存储器的层次结构" class="headerlink" title="存储器的层次结构"></a>存储器的层次结构</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">整个存储器的层次结构、都类似于SRAM和DRAM在性能和价格上的差异、SRAM更贵、速度更快</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-d9ca803938888292.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="存储器的层次关系图.png"></p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 从<span class="keyword">Cache</span>、内存、到SSD和HDD硬盘、计算机用到了所有存储设备、其中, 容量越小的设备速度越快、且: CPU不是直接合每一种存储设备打交道、而是只与相邻设备打交道.</span><br><span class="line">eg. CPU <span class="keyword">Cache</span>是从内存加载而来、数据需要写回内存、并不会直接写回数据到硬盘、也不会直接从硬盘加载数据到CPU <span class="keyword">Cache</span>、而是先加载到内存、再从内存加载到<span class="keyword">Cache</span>中</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这样、每个存储器只喝相邻的一层存储器打交道、且随着一层层向下、存储器的容量逐渐增大、访问速度逐层变慢、且单位存储成本也在逐层下降、就构成了存储器的层次结构</p>
+</blockquote>
+<h4 id="如何权衡价格和性能"><a href="#如何权衡价格和性能" class="headerlink" title="如何权衡价格和性能"></a>如何权衡价格和性能</h4><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">存储器在不同层级之间的性能和价格差异、都至少在一个数量级以上、</span><br><span class="line">eg. L1 <span class="keyword">Cache</span>的访问延时是<span class="number">1</span>ns、内存是<span class="number">100</span>ns、在价格上也差出了<span class="number">400</span>倍</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-04e233a82ad956b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="存储器性能和价格对比图.png"></p>
+<blockquote>
+<p>一台惠普战66的笔记本配置如下:</p>
+</blockquote>
+<ol>
+<li>Intel i5-8265U 的CPU (4核)</li>
+</ol>
+<ul>
+<li>每个核有有32K、共128KB的L1指令Cache 和 128KB 的数据Cache、采用8路组相连的放置策略</li>
+<li>每个核有256KB、共1M的L2 Cache、采用的是4路组相连的放置策略</li>
+<li>多个核心共用的12MB 的L3 Cache、采用的是12路组相连的放置策略</li>
+</ul>
+<ol start="2">
+<li>8G的内存</li>
+<li>128GB 的SSD硬盘</li>
+<li>1T的HDD硬盘<blockquote>
+<p>可以看到，在一台实际的计算机里面，越是速度快的设备，容量就越小。这里一共十多兆的 Cache，成本只是几十美元。而 8GB 的内存、128G 的 SSD 以及 1T 的 HDD，大概零售价格加在一起，也就和我们的高速缓存的价格差不多</p>
+</blockquote>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86(36%E8%AE%B2)/" rel="prev" title="局部性原理(36讲)">
+      <i class="fa fa-chevron-left"></i> 局部性原理(36讲)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD(%E7%AC%AC4%E8%AE%B2)/" rel="next" title="如何提高性能(第4讲)">
+      如何提高性能(第4讲) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SRAM"><span class="nav-number">1.</span> <span class="nav-text">SRAM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DRAM"><span class="nav-number">2.</span> <span class="nav-text">DRAM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">存储器的层次结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9D%83%E8%A1%A1%E4%BB%B7%E6%A0%BC%E5%92%8C%E6%80%A7%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">如何权衡价格和性能</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

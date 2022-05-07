@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、主备延迟数据同步的关键时间节点:  主库A执行完一个事务、写入binlog、记为 T1; 传给备库B、将备库B接收完binlog的时刻记为 T2; 备库B执行完事务的时刻记为 T3;主备延迟: 同一个事务在备库执行完的时间和主库执行完的时间之间的差值: T3 - T1show slave status; - seconds_behind_master表示当前备库延迟时间  注: 主备机的系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql是如何保障高可用的">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="一、主备延迟数据同步的关键时间节点:  主库A执行完一个事务、写入binlog、记为 T1; 传给备库B、将备库B接收完binlog的时刻记为 T2; 备库B执行完事务的时刻记为 T3;主备延迟: 同一个事务在备库执行完的时间和主库执行完的时间之间的差值: T3 - T1show slave status; - seconds_behind_master表示当前备库延迟时间  注: 主备机的系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-242e0ecf16d359cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.811Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-242e0ecf16d359cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Mysql是如何保障高可用的 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mysql是如何保障高可用的
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/14027542-242e0ecf16d359cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MySQL主备切换流程.png"></p>
+<p>一、主备延迟<br>数据同步的关键时间节点:</p>
+<ol>
+<li>主库A执行完一个事务、写入binlog、记为 T1;</li>
+<li>传给备库B、将备库B接收完binlog的时刻记为 T2;</li>
+<li>备库B执行完事务的时刻记为 T3;<br>主备延迟: 同一个事务在备库执行完的时间和主库执行完的时间之间的差值: T3 - T1<br>show slave status; - seconds_behind_master表示当前备库延迟时间</li>
+</ol>
+<p>注: 主备机的系统时间不一致时、会不会导致主备延迟值不准 ?<br>不会. 备库连接主库时、会通过执行 select unix_timestamp 获得当前主库的系统时间、与本机不一致时、会在执行 seconds_behind_master 时扣除差值</p>
+<p>二、主备延迟的来源</p>
+<ol>
+<li>有些部署条件下、备库所在机器的性能较差<br>此时一般将备库设为<code>非双1模式</code>. 现在一般会使用对称部署(主备规格相同).</li>
+<li>使用对称部署、为何仍然存在主备延迟 ?<br>备库可能压力较大、存在一些慢查询、导致备库查询消耗大量CPU资源、影响数据同步、造成主备延迟.<br>解决: <ol>
+<li>使用一主多从、分担读压力 </li>
+<li>通过binlog输出到外部系统、如: hadoop, 提供统计类查询</li>
+</ol>
+</li>
+<li>采用了一主多从、备库的压力不超过主库的情况下、还有什么情况会导致主备延迟呢 ?<ol>
+<li>可能存在大的事务, 因为主库上必须等事务执行完成才会写入binlog、再传给备库、若一个SQL执行10min、这个事务就很可能会导致从库延迟10min.(所以最好不要一次delete太多数据)</li>
+<li>大表DDL也是一个大事务的场景</li>
+</ol>
+</li>
+<li>如果备库上也不做大事务了、还有什么原因会导致主备延迟吗 ?<br>备库的并行复制能力.</li>
+</ol>
+<p>三、主备切换策略:</p>
+<ol>
+<li><p>可靠性优先.</p>
+<ol>
+<li>先判断备库B的 seconds_behind_master 是否小于指定值, 若否、持续观察</li>
+<li>把主库A改成只读状态, readonly设为true.</li>
+<li>判断备库B的 seconds_behind_master 值、直到变为0</li>
+<li>把备库B改为可写入, readonly设为false.</li>
+<li>将业务请求切到B<br>2~5 的过程、系统处于不可用状态.</li>
+</ol>
+</li>
+<li><p>可用性优先<br>将1中、4)、5) 调整到最开始执行、直接让备库可读写、系统就无不可用时间、但会产生数据不一致. 暂时称为<code>可用性优先策略</code><br>此时若 binlog_format 为: statement、则会发生数据不一致的线下<br>若 binlog_format 为: row、会提示错误</p>
+</li>
+</ol>
+<p>所以、MySQL高可用系统的可用性是依赖于主备延迟的、延迟的时间越小、在主库故障时、服务恢复需要的时间就越短, 可用性就越高.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_MySQL%E6%9C%89%E5%93%AA%E4%BA%9B%60%E9%A5%AE%E9%B8%A9%E6%AD%A2%E6%B8%B4%60%E7%9A%84%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E6%96%B9%E6%B3%95/" rel="prev" title="MySQL有哪些`饮鸩止渴`的提高性能的方法">
+      <i class="fa fa-chevron-left"></i> MySQL有哪些`饮鸩止渴`的提高性能的方法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mq_rocketMq%E5%85%A5%E9%97%A8/" rel="next" title="rocketMq入门">
+      rocketMq入门 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

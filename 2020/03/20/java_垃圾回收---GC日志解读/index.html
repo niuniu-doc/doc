@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="年轻代log解读年轻代以ParNew收集器为例, 采用的是复制算法, log如下： 12345678910112019-02-01T21:18:15:00.382+0800: 718675.758: Application time: 0.7177964 seconds&amp;#123;Heap before GC invocations&#x3D;65632 (full 18): par new generat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="垃圾回收---GC日志解读">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---GC%E6%97%A5%E5%BF%97%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="年轻代log解读年轻代以ParNew收集器为例, 采用的是复制算法, log如下： 12345678910112019-02-01T21:18:15:00.382+0800: 718675.758: Application time: 0.7177964 seconds&amp;#123;Heap before GC invocations&#x3D;65632 (full 18): par new generat">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-4695c4709d665059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-550f1b5ef67f99d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-b3d7a48abe067d6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-c040c645b1abbe18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-2fd204c365b46807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-d560490b0613a37e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.791Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-4695c4709d665059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---GC%E6%97%A5%E5%BF%97%E8%A7%A3%E8%AF%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>垃圾回收---GC日志解读 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---GC%E6%97%A5%E5%BF%97%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          垃圾回收---GC日志解读
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="年轻代log解读"><a href="#年轻代log解读" class="headerlink" title="年轻代log解读"></a>年轻代log解读</h4><p>年轻代以ParNew收集器为例, 采用的是复制算法, log如下：<br><img src="https://upload-images.jianshu.io/upload_images/14027542-4695c4709d665059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2019</span><span class="operator">-</span><span class="number">02</span><span class="operator">-</span><span class="number">01</span><span class="variable">T21</span><span class="operator">:</span><span class="number">18</span><span class="operator">:</span><span class="number">15</span><span class="operator">:</span><span class="number">00.382</span><span class="operator">+</span><span class="number">0800</span><span class="operator">:</span> <span class="number">718675.758</span><span class="operator">:</span> <span class="variable">Application</span> <span class="variable">time</span><span class="operator">:</span> <span class="number">0.7177964</span> <span class="variable">seconds</span></span><br><span class="line"><span class="punctuation">&#123;</span><span class="variable">Heap</span> <span class="variable">before</span> <span class="variable">GC</span> <span class="variable">invocations</span><span class="operator">=</span><span class="number">65632</span> <span class="punctuation">(</span><span class="variable">full</span> <span class="number">18</span><span class="punctuation">)</span><span class="operator">:</span></span><br><span class="line"> <span class="variable">par</span> <span class="variable">new</span> <span class="variable">generation</span>   <span class="variable">total</span> <span class="number">471872</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">used</span> <span class="number">421490</span><span class="built_in">K</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x0000000080000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000a0000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000a0000000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">eden</span> <span class="variable">space</span> <span class="number">419456</span><span class="built_in">K</span><span class="operator">,</span> <span class="number">100</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x0000000080000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000999a0000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000999a0000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">from</span> <span class="variable">space</span> <span class="number">52416</span><span class="built_in">K</span><span class="operator">,</span>   <span class="number">3</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x00000000999a0000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x0000000099b9c830</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x000000009ccd0000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">to</span>   <span class="variable">space</span> <span class="number">52416</span><span class="built_in">K</span><span class="operator">,</span>   <span class="number">0</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x000000009ccd0000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x000000009ccd0000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000a0000000</span><span class="punctuation">)</span></span><br><span class="line"> <span class="variable">concurrent</span> <span class="variable">mark</span><span class="operator">-</span><span class="variable">sweep</span> <span class="variable">generation</span> <span class="variable">total</span> <span class="number">1572864</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">used</span> <span class="number">905696</span><span class="built_in">K</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x00000000a0000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x0000000100000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x0000000100000000</span><span class="punctuation">)</span></span><br><span class="line"> <span class="variable">Metaspace</span>       <span class="variable">used</span> <span class="number">104594</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">capacity</span> <span class="number">113116</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">committed</span> <span class="number">113664</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">reserved</span> <span class="number">1148928</span><span class="built_in">K</span></span><br><span class="line">  <span class="variable">class</span> <span class="variable">space</span>    <span class="variable">used</span> <span class="number">12280</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">capacity</span> <span class="number">13738</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">committed</span> <span class="number">13824</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">reserved</span> <span class="number">1048576</span><span class="built_in">K</span></span><br><span class="line"></span><br><span class="line"><span class="number">2019</span><span class="operator">-</span><span class="number">02</span><span class="operator">-</span><span class="number">01</span><span class="variable">T18</span><span class="operator">:</span><span class="number">15</span><span class="operator">:</span><span class="number">00.383</span><span class="operator">+</span><span class="number">0800</span><span class="operator">:</span> <span class="number">718675.758</span><span class="operator">:</span> <span class="punctuation">[</span><span class="variable">GC</span> <span class="punctuation">(</span><span class="variable">Allocation</span> <span class="built_in">Failure</span><span class="punctuation">)</span> <span class="number">2019</span><span class="operator">-</span><span class="number">02</span><span class="operator">-</span><span class="number">01</span><span class="variable">T18</span><span class="operator">:</span><span class="number">15</span><span class="operator">:</span><span class="number">00.384</span><span class="operator">+</span><span class="number">0800</span><span class="operator">:</span> <span class="number">718675.759</span><span class="operator">:</span> <span class="punctuation">[</span><span class="variable">ParNew</span><span class="operator">:</span> <span class="number">109872</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">5255</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">118016</span><span class="built_in">K</span><span class="punctuation">)</span><span class="operator">,</span> <span class="number">0.0211147</span> <span class="variable">secs</span><span class="punctuation">]</span> <span class="number">142365</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">37748</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">511232</span><span class="built_in">K</span><span class="punctuation">)</span><span class="operator">,</span> <span class="number">0.0212949</span> <span class="variable">secs</span><span class="punctuation">]</span> <span class="punctuation">[</span><span class="built_in">Times</span><span class="operator">:</span> <span class="variable">user</span><span class="operator">=</span><span class="number">0.26</span> <span class="variable">sys</span><span class="operator">=</span><span class="number">0.04</span><span class="operator">,</span> <span class="variable">real</span><span class="operator">=</span><span class="number">0.02</span> <span class="variable">secs</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p>其中:<br>*<code>Heap before GC invocations=65632 (full 18)</code>: <code> invocations=65632</code>表示经历的gc的次数 <code>full 18</code>表示经历的full gc的次数</p>
+<ul>
+<li><code>2019-02-01T18:15:00.383</code>：发生<code>minor gc</code>的时间</li>
+<li><code>718675.758</code>：GC时、相对GVM启动时间的偏移量</li>
+<li><code>ParNew</code> 收集器的名称 , 会<code>STW</code>(<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d07194a20ec1">https://www.jianshu.com/p/d07194a20ec1</a>)</li>
+<li><code>109872K-&gt;5255K</code>：收集前后年轻代的使用情况</li>
+<li><code>118016K</code>：整个年轻代的容量</li>
+<li><code>0.0211147 secs</code>： stw的时间</li>
+<li><code>142365K-&gt;37748K</code>：GC前后整个堆的使用情况</li>
+<li><code>511232K</code>：整个堆的容量</li>
+<li><code>0.0212949 secs</code>：ParNew 收集器标记和复制年轻代活着的对象所花费的时间(包括和老年代通信的开销、对象晋升到老年代开销、垃圾收集周期结束一些最后的清理对象等的花销)</li>
+<li><code>user</code>：GC 线程在垃圾收集期间所使用的 CPU 总时间</li>
+<li><code>sys</code>：系统调用或者等待系统事件花费的时间</li>
+<li><code>real</code>: 应用被暂停的时钟时间、由于GC是多线程的、<code>real</code>可能会<code>小于</code> <code>user+sys</code>, 如果是单线程的、real是接近 <code>user+sys</code>的时间的</li>
+</ul>
+<h4 id="CMS-log-大致解读"><a href="#CMS-log-大致解读" class="headerlink" title="CMS log 大致解读"></a>CMS log 大致解读</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">233</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">148</span>:<span class="meta"> [GC [1 CMS-initial-mark: 6294851K(20971520K)] 6354687K(24746432K), 0.0466580 secs] [Times: user=0.04 sys=0.00, real=0.04 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">280</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">195</span>:<span class="meta"> [CMS-concurrent-mark-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">418</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">333</span>:<span class="meta"> [CMS-concurrent-mark: 0.138/0.138 secs] [Times: user=1.01 sys=0.21, real=0.14 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">418</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">334</span>:<span class="meta"> [CMS-concurrent-preclean-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">476</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">391</span>:<span class="meta"> [CMS-concurrent-preclean: 0.056/0.057 secs] [Times: user=0.20 sys=0.12, real=0.06 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">476</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">391</span>:<span class="meta"> [CMS-concurrent-abortable-preclean-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">29</span>.<span class="number">989</span>+<span class="number">0800</span>: <span class="number">15581</span>.<span class="number">905</span>:<span class="meta"> [CMS-concurrent-abortable-preclean: 3.506/3.514 secs] [Times: user=11.93 sys=6.77, real=3.51 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">29</span>.<span class="number">991</span>+<span class="number">0800</span>: <span class="number">15581</span>.<span class="number">906</span>:<span class="meta"> [GC[YG occupancy: 1805641 K (3774912 K)]2018-04-12T13:48:29.991+0800: 15581.906: [GC2018-04-12T13:48:29.991+0800: 15581.906: [ParNew: 1805641K-&gt;48395K(3774912K), 0.0826620 secs] 8100493K-&gt;6348225K(24746432K), 0.0829480 secs] [Times: user=0.81 sys=0.00, real=0.09 secs]2018-04-12T13:48:30.074+0800: 15581.989: [Rescan (parallel) , 0.0429390 secs]2018-04-12T13:48:30.117+0800: 15582.032: [weak refs processing, 0.0027800 secs]2018-04-12T13:48:30.119+0800: 15582.035: [class unloading, 0.0033120 secs]2018-04-12T13:48:30.123+0800: 15582.038: [scrub symbol table, 0.0016780 secs]2018-04-12T13:48:30.124+0800: 15582.040: [scrub string table, 0.0004780 secs] [1 CMS-remark: 6299829K(20971520K)] 6348225K(24746432K), 0.1365130 secs] [Times: user=1.24 sys=0.00, real=0.14 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">30</span>.<span class="number">128</span>+<span class="number">0800</span>: <span class="number">15582</span>.<span class="number">043</span>:<span class="meta"> [CMS-concurrent-sweep-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">36</span>.<span class="number">638</span>+<span class="number">0800</span>: <span class="number">15588</span>.<span class="number">553</span>:<span class="meta"> [GC2018-04-12T13:48:36.638+0800: 15588.554: [ParNew: 3403915K-&gt;52142K(3774912K), 0.0874610 secs] 4836483K-&gt;1489601K(24746432K), 0.0877490 secs] [Times: user=0.84 sys=0.00, real=0.09 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">412</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">327</span>:<span class="meta"> [CMS-concurrent-sweep: 8.193/8.284 secs] [Times: user=30.34 sys=16.44, real=8.28 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">419</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">334</span>:<span class="meta"> [CMS-concurrent-reset-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">462</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">377</span>:<span class="meta"> [CMS-concurrent-reset: 0.044/0.044 secs] [Times: user=0.15 sys=0.10, real=0.04 secs]</span></span><br></pre></td></tr></table></figure>
+<p>由于CMS涉及的阶段比较多、分阶段来说下~</p>
+<h5 id="初始标记-initial-mark阶段"><a href="#初始标记-initial-mark阶段" class="headerlink" title="初始标记 initial mark阶段"></a>初始标记 initial mark阶段</h5><p><code>STW</code>中的一次、为了标记直接被<code>GC root引用</code>或者<code>年轻代</code> <code>存活对象引用</code>的所有对象(<a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep</a>)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-550f1b5ef67f99d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>上述示例的对应信息为：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">233</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">148</span>:<span class="meta"> [GC [1 CMS-initial-mark: 6294851K(20971520K)] 6354687K(24746432K), 0.0466580 secs] [Times: user=0.04 sys=0.00, real=0.04 secs]</span></span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>2018-04-12T13:48:26.233+0800</code>：GC开始时间(同 ParNew收集器)</li>
+<li><code>15578.148</code>：JVM运行时间(同 ParNew收集器)</li>
+<li><code>CMS-initial-mark</code>：CMS当前阶段(这里代表 <code>初始标记</code>)</li>
+<li><code>6294851K</code>：当前老年代使用的容量</li>
+<li><code>(20971520K)</code>：老年代可使用的最大容量</li>
+<li><code>6354687K</code>：整个堆目前使用的情况</li>
+<li><code>(24746432K)</code>：整个堆当前可用情况</li>
+<li><code>0.0466580 secs</code>：该阶段持续时间</li>
+<li><code>[Times: user=0.04 sys=0.00, real=0.04 secs]</code> 同 <code>ParNew</code>收集器</li>
+</ul>
+<h5 id="并发标记阶段-Concurrent-Mark"><a href="#并发标记阶段-Concurrent-Mark" class="headerlink" title="并发标记阶段(Concurrent Mark)"></a>并发标记阶段(Concurrent Mark)</h5><p>遍历老年代，然后标记所有存活的对象、会根据上个阶段找到的 GC Roots 遍历查找，与用户的应用程序<code>并发运行</code><br><code>注意</code>不是所有的老年代存活对象都会被标记、因为在标记期间引用关系可能会发生改变(<a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep)%E3%80%81">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep)、</a><br><img src="https://upload-images.jianshu.io/upload_images/14027542-b3d7a48abe067d6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>与上图对比可用发现已经有一个对象的引用关系发生了改变</p>
+<p>本阶段log如下：</p>
+<blockquote>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">26</span>.<span class="number">280+0800</span>: <span class="number">15578.195</span>: [CMS-concurrent-mark-start]</span><br><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">26</span>.<span class="number">418+0800</span>: <span class="number">15578.333</span>: [CMS-concurrent-mark: <span class="number">0.138/0.138</span> secs] [Times: user=<span class="number">1</span>.<span class="number">01</span> sys=<span class="number">0</span>.<span class="number">21</span>, real=<span class="number">0</span>.<span class="number">14</span> secs]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>CMS-concurrent-mark</code>: <code>并发收集</code>阶段, 遍历老年代、标记所有存活对象</li>
+<li><code>0.138/0.138 secs</code>这个阶段的<code>持续时间</code>与<code>时钟时间</code></li>
+<li><code>[Times: user=1.01 sys=0.21, real=0.14 secs]</code>：同上、但是从并发标记的开始时间计算的、期间是并发进行、所以参考意义不大(包含的不仅仅是gc线程的工作)</li>
+</ul>
+</blockquote>
+<h5 id="并发预清理-concurrent-preclean"><a href="#并发预清理-concurrent-preclean" class="headerlink" title="并发预清理(concurrent preclean)"></a>并发预清理(concurrent preclean)</h5><p>也是一个并发阶段，与应用的线程<code>并发运行</code>，<code>不会 stop </code>应用的线程<br>在并发运行的过程中、一些对象的引用可能会发生变化、发生这种情况时、jvm会将这个对象的区域<code>Card</code>标记为<code>Dirty</code>，也就是<code>Card Marking</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c040c645b1abbe18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>在 <code>preclean</code>阶段、能够从Dirty对象可到达的对象也会被标记、标记完成之后、<code>Dirty Card</code>就会被清除了、<br><img src="https://upload-images.jianshu.io/upload_images/14027542-2fd204c365b46807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>这个阶段的log如下：</p>
+<blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">418</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">334</span>:<span class="meta"> [CMS-concurrent-preclean-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">476</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">391</span>:<span class="meta"> [CMS-concurrent-preclean: 0.056/0.057 secs] [Times: user=0.20 sys=0.12, real=0.06 secs]</span></span><br></pre></td></tr></table></figure>
+<p><code>CMS-concurrent-preclean</code> 阶段名称、对前边并发标记阶段中引用发生变化的对象进行标记<br><code>0.056/0.057 secs</code> 这个阶段持续的时间与时钟时间<br><code>[Times: user=0.20 sys=0.12, real=0.06 secs]</code> 同<code>并发标记</code>阶段</p>
+</blockquote>
+<h5 id="可中止的并发预清理-Concurrent-Abortable-Preclean"><a href="#可中止的并发预清理-Concurrent-Abortable-Preclean" class="headerlink" title="可中止的并发预清理(Concurrent Abortable Preclean)"></a>可中止的并发预清理(Concurrent Abortable Preclean)</h5><p><code>并发</code> &amp; <code>不影响</code>用户线程, 是为了 尽量承担STW中的最终标记阶段的工作， 这个阶段是在重复做很多相同的工作，直接满足一些条件（比如：重复迭代的次数、完成的工作量或者时钟时间等）<br>log如下：</p>
+<blockquote>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">26</span>.<span class="number">476+0800</span>: <span class="number">15578.391</span>: [CMS-concurrent-abortable-preclean-start]</span><br><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">29</span>.<span class="number">989+0800</span>: <span class="number">15581.905</span>: [CMS-concurrent-abortable-preclean: <span class="number">3.506/3</span>.<span class="number">514</span> secs] [Times: user=<span class="number">11</span>.<span class="number">93</span> sys=<span class="number">6</span>.<span class="number">77</span>, real=<span class="number">3</span>.<span class="number">51</span> secs]</span><br></pre></td></tr></table></figure>
+<p><code>CMS-concurrent-abortable-preclean</code>阶段名称<br><code>3.506/3.514 secs</code>通常在<code>5s</code>左右、<br><code>[Times: user=11.93 sys=6.77, real=3.51 secs]</code>同预清理阶段<br>主要做了两件事：</p>
+</blockquote>
+<ul>
+<li>处理 From 和 To 区的对象，标记可达的老年代对象</li>
+<li>和上一个阶段一样，扫描处理Dirty Card中的对象</li>
+</ul>
+<p>具体执行多久，取决于许多因素，满足其中一个条件将会中止运行：</p>
+<ul>
+<li>执行循环次数达到了阈值</li>
+<li>执行时间达到了阈值</li>
+<li>新生代Eden区的内存使用率达到了阈值</li>
+</ul>
+<h5 id="最终标记阶段-Final-Remark"><a href="#最终标记阶段-Final-Remark" class="headerlink" title="最终标记阶段(Final Remark)"></a>最终标记阶段(Final Remark)</h5><p>第二个 <code>STW </code>阶段, 也是最后一个、目标是标记所有老年代所有的存活对象，由于之前的阶段是并发执行的，gc 线程可能跟不上应用程序的变化，为了完成标记老年代所有存活对象的目标，STW 就非常有必要了， 通常 CMS 的 Final Remark 阶段会在年轻代尽可能干净的时候运行，目的是为了减少连续 STW 发生的可能性（年轻代存活对象过多的话，也会导致老年代涉及的存活对象会很多）。这个阶段会比前面的几个阶段更复杂一些，相关日志如下：</p>
+<blockquote>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">29</span>.<span class="number">991+0800</span>: <span class="number">15581.906</span>: </span><br><span class="line">&gt;[GC[YG occupancy: <span class="number">1805641</span> K (<span class="number">3774912</span> K)]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">29</span>.<span class="number">991+0800</span>: <span class="number">15581.906</span>: [GC20<span class="number">18-04-12T13</span>:<span class="number">48:29.991</span>+<span class="number">0800</span>: <span class="number">15581.906</span>: [ParNew: <span class="number">1805641</span>K-&gt;<span class="number">48395</span>K(<span class="number">3774912</span>K), <span class="number">0.0826620</span> secs] <span class="number">8100493</span>K-&gt;<span class="number">6348225</span>K(<span class="number">24746432</span>K), <span class="number">0.0829480</span> secs] [Times: user=<span class="number">0</span>.<span class="number">81</span> sys=<span class="number">0</span>.<span class="number">00</span>, real=<span class="number">0</span>.<span class="number">09</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30</span>.<span class="number">074+0800</span>: <span class="number">15581.989</span>: [Rescan (parallel) , <span class="number">0.0429390</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30.117+0800</span>: <span class="number">15582.032</span>: [weak refs processing, <span class="number">0.0027800</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30.119+0800</span>: <span class="number">15582.035</span>: [class unloading, <span class="number">0.0033120</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30.123+0800</span>: <span class="number">15582.038</span>: [scrub symbol table, <span class="number">0.0016780</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30.124+0800</span>: <span class="number">15582.040</span>: [scrub string table, <span class="number">0.0004780</span> secs] [<span class="number">1</span> CMS-remark: <span class="number">6299829</span>K(<span class="number">20971520</span>K)] <span class="number">6348225</span>K(<span class="number">24746432</span>K), <span class="number">0.1365130</span> secs] [Times: user=<span class="number">1</span>.<span class="number">24</span> sys=<span class="number">0</span>.<span class="number">00</span>, real=<span class="number">0</span>.<span class="number">14</span> secs]</span><br></pre></td></tr></table></figure>
+<p><code>YG occupancy: 1805641 K (3774912 K)</code> 年轻代当前占用量及容量<br><code>ParNew:...</code>触发了一次<code>young gc</code>, 触发的原因是为了减少 年轻代的存活对象、尽量是年前代干净一些<br><code>[Rescan (parallel) , 0.0429390 secs]</code> 这个 Rescan 是当应用暂停的情况下完成对所有存活对象的标记，这个阶段是<code>并行</code>处理的，这里花费了 0.0429390s<br><code>[weak refs processing, 0.0027800 secs]</code> 第一个子阶段，它的工作是处理弱引用<br><code>[class unloading, 0.0033120 secs]</code> 删除无用class<br><code>[scrub symbol table, 0.0016780 secs] ... [scrub string table, 0.0004780 secs]</code> 最后一个子阶段, cleaning up symbol and string tables which hold class-level metadata and internalized string respectively<br><code>6299829K(20971520K)</code> 这个阶段之后，老年代的使用量与总量<br><code>6348225K(24746432K)</code>这个阶段后，堆的使用量与总量<br><code>0.1365130 secs</code>阶段持续时长<br><code>[Times: user=1.24 sys=0.00, real=0.14 secs]</code>对应时间信息</p>
+</blockquote>
+<h5 id="并发清理-Concurrent-Sweep"><a href="#并发清理-Concurrent-Sweep" class="headerlink" title="并发清理(Concurrent Sweep)"></a>并发清理(Concurrent Sweep)</h5><p>不需要 STW，它是与用户的应用程序<code>并发运行</code>, 清除那些不再使用的对象，回收它们的占用空间为将来使用(<a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep</a>)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-d560490b0613a37e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>log如下(这中间又发生了一次 Young GC)：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">30</span>.<span class="number">128</span>+<span class="number">0800</span>: <span class="number">15582</span>.<span class="number">043</span>:<span class="meta"> [CMS-concurrent-sweep-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">36</span>.<span class="number">638</span>+<span class="number">0800</span>: <span class="number">15588</span>.<span class="number">553</span>:<span class="meta"> [GC2018-04-12T13:48:36.638+0800: 15588.554: [ParNew: 3403915K-&gt;52142K(3774912K), 0.0874610 secs] 4836483K-&gt;1489601K(24746432K), 0.0877490 secs] [Times: user=0.84 sys=0.00, real=0.09 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">412</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">327</span>:<span class="meta"> [CMS-concurrent-sweep: 8.193/8.284 secs] [Times: user=30.34 sys=16.44, real=8.28 secs]</span></span><br></pre></td></tr></table></figure>
+<p>*<code>CMS-concurrent-sweep</code> 阶段名称: 主要是清除那些没有被标记的对象，回收它们的占用空间</p>
+<ul>
+<li><code>8.193/8.284 secs</code> 这个阶段的持续时间与时钟时间</li>
+<li><code>[Times: user=30.34 sys=16.44, real=8.28 secs]</code> 同上</li>
+</ul>
+<h5 id="并发重置-Concurrent-Reset"><a href="#并发重置-Concurrent-Reset" class="headerlink" title="并发重置(Concurrent Reset)"></a>并发重置(Concurrent Reset)</h5><p>这个阶段也是并发执行的，它会重设 CMS 内部的数据结构，为下次的 GC 做准备</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">419</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">334</span>:<span class="meta"> [CMS-concurrent-reset-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">462</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">377</span>:<span class="meta"> [CMS-concurrent-reset: 0.044/0.044 secs] [Times: user=0.15 sys=0.10, real=0.04 secs]</span></span><br></pre></td></tr></table></figure>
+<p>*<code>CMS-concurrent-reset</code> 阶段名称</p>
+<ul>
+<li><code>0.044/0.044 secs</code> 这个阶段的持续时间与时钟时间</li>
+<li><code>[Times: user=0.15 sys=0.10, real=0.04 secs]</code> 同上</li>
+</ul>
+<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p>CMS 通过将大量工作分散到并发处理阶段来在减少 STW 时间，在这块做得非常优秀，但是 CMS 也有一些其他的问题：</p>
+<ul>
+<li>CMS 收集器无法处理浮动垃圾（ Floating Garbage），可能出现 “Concurrnet Mode Failure” 失败而导致另一次 Full GC 的产生，可能引发串行 Full GC；</li>
+<li>空间碎片，导致无法分配大对象，CMS 收集器提供了一个 -XX:+UseCMSCompactAtFullCollection 开关参数（默认就是开启的），用于在 CMS 收集器顶不住要进行 Full GC 时开启内存碎片的合并整理过程，内存整理的过程是无法并发的，空间碎片问题没有了，但停顿时间不得不变长；</li>
+<li>对于堆比较大的应用上，GC 的时间难以预估</li>
+</ul>
+<p>so. G1开始兴起、</p>
+<blockquote>
+<ul>
+<li>由于<code>G1</code>采用复制算法、很好的避免了 <code>空间碎片</code></li>
+<li>采用region分区思想、解决了停顿时长可控</li>
+<li>不过貌似并没有从根源上解决 浮动垃圾的问题~~</li>
+</ul>
+</blockquote>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><ul>
+<li><a target="_blank" rel="noopener" href="http://matt33.com/2018/07/28/jvm-cms/">http://matt33.com/2018/07/28/jvm-cms/</a></li>
+<li><a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhanjia.iteye.com/blog/2435266">https://zhanjia.iteye.com/blog/2435266</a><br>等</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JDK%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/" rel="prev" title="垃圾回收---JDK监控工具">
+      <i class="fa fa-chevron-left"></i> 垃圾回收---JDK监控工具
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" rel="next" title="zk使用">
+      zk使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B4%E8%BD%BB%E4%BB%A3log%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.</span> <span class="nav-text">年轻代log解读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMS-log-%E5%A4%A7%E8%87%B4%E8%A7%A3%E8%AF%BB"><span class="nav-number">2.</span> <span class="nav-text">CMS log 大致解读</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E6%A0%87%E8%AE%B0-initial-mark%E9%98%B6%E6%AE%B5"><span class="nav-number">2.1.</span> <span class="nav-text">初始标记 initial mark阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E9%98%B6%E6%AE%B5-Concurrent-Mark"><span class="nav-number">2.2.</span> <span class="nav-text">并发标记阶段(Concurrent Mark)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E9%A2%84%E6%B8%85%E7%90%86-concurrent-preclean"><span class="nav-number">2.3.</span> <span class="nav-text">并发预清理(concurrent preclean)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AF%E4%B8%AD%E6%AD%A2%E7%9A%84%E5%B9%B6%E5%8F%91%E9%A2%84%E6%B8%85%E7%90%86-Concurrent-Abortable-Preclean"><span class="nav-number">2.4.</span> <span class="nav-text">可中止的并发预清理(Concurrent Abortable Preclean)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%A0%87%E8%AE%B0%E9%98%B6%E6%AE%B5-Final-Remark"><span class="nav-number">2.5.</span> <span class="nav-text">最终标记阶段(Final Remark)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%B8%85%E7%90%86-Concurrent-Sweep"><span class="nav-number">2.6.</span> <span class="nav-text">并发清理(Concurrent Sweep)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E9%87%8D%E7%BD%AE-Concurrent-Reset"><span class="nav-number">2.7.</span> <span class="nav-text">并发重置(Concurrent Reset)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">小结：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

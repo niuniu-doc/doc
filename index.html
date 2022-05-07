@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/redis_dict/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/24/redis_dict/" class="post-title-link" itemprop="url">Redis数据结构-字典</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-24 19:25:45" itemprop="dateCreated datePublished" datetime="2020-04-24T19:25:45+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>字典又称<code>符号表</code>, <code>关联数组</code>, <code>映射</code>, 是一种用于保存键值对的抽象数据结构</p>
+<p>Redis构建了自己的字典实现, eg. set msg ‘test’会构建<code>key</code>为<code>msg</code>, <code>value</code>为<code>test</code>的键值对.</p>
+<p>除了表示数据库之外, 字典还是hash键的底层实现之一(另外一种是ziplist)</p>
+</blockquote>
+<h4 id="字典实现"><a href="#字典实现" class="headerlink" title="字典实现"></a>字典实现</h4><h5 id="hash表"><a href="#hash表" class="headerlink" title="hash表"></a>hash表</h5><p>Redis字典所使用的哈希表由 dict.h&#x2F;dictht 结构定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictht</span> &#123;</span></span><br><span class="line">  dictEntry **table; <span class="comment">// hash表数组</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> size; <span class="comment">// hash表大小</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> sizemask; <span class="comment">// hash表大小掩码, 用于计算hash索引值, 总是=size-1</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> used; <span class="comment">// 已有节点数量</span></span><br><span class="line">&#125;dictht;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-hash.png" alt="空hash表结构示意"></p>
+<h5 id="hash表节点"><a href="#hash表节点" class="headerlink" title="hash表节点"></a>hash表节点</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictEntry</span> &#123;</span></span><br><span class="line">  <span class="type">void</span> *key; <span class="comment">// 键</span></span><br><span class="line">  <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    <span class="type">void</span> *val;</span><br><span class="line">    unit64_tu64;</span><br><span class="line">    int64_ts64;</span><br><span class="line">  &#125;v; <span class="comment">// 值</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">dictEntry</span> *<span class="title">next</span>;</span><span class="comment">// 指向下个hash节点、形成链表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>key</code>属性保存着键值对中的键、而<code>v</code>属性则保存着键值对中的值, 它可以是一个<code>指针</code>, 或者是<code>uint64_t</code>类型的整数, 或者是 <code>int64_t</code>的整数</p>
+<p><code>next</code>属性是指向另一个节点的指针, 这个指针可以将多个hash值相同的键值对连接在一起, 解决键冲突问题</p>
+<h5 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h5><p>Redis中的字典由 <code>dict.h/dict</code> 结构定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dict</span> &#123;</span></span><br><span class="line">  dictType *type; <span class="comment">// 类型特定函数</span></span><br><span class="line">  <span class="type">void</span> *privdata; <span class="comment">// 私有数据</span></span><br><span class="line">  dictht ht[<span class="number">2</span>]; <span class="comment">// hash表</span></span><br><span class="line">  in trehashidx; <span class="comment">// rehash索引, 当rehash不在进行时、值为-1</span></span><br><span class="line">&#125; dict;</span><br></pre></td></tr></table></figure>
+
+<p><code>type</code>属性是一个指向 <code>dictType</code>结构的指针, 每个 dictType结构保存了一簇用于操作特定类型键值对的函数, Redis会为不同类型的字典设置不同类型的特定函数</p>
+<p><code>privdata</code>属性则保存了需要传给那些特定类型函数的可选参数</p>
+<p><code>type</code>和<code>privdata</code>是针对不同类型的键值对, 为创建多态字典设置的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictType</span> &#123;</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="title function_">int</span> <span class="params">(*hashFunction)</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *key)</span>; <span class="comment">// 计算hash值的函数</span></span><br><span class="line">  <span class="type">void</span> *(*keyDup)(<span class="type">void</span> *privdata, <span class="type">const</span> <span class="type">void</span> *key); <span class="comment">// 复制键的函数</span></span><br><span class="line">  <span class="type">void</span> *(valDup)(<span class="type">void</span> *privdata, <span class="type">const</span> <span class="type">void</span> *obj); <span class="comment">// 复制值的函数</span></span><br><span class="line">  <span class="type">int</span> (*keyCompare)(<span class="type">void</span> *privdata, <span class="type">const</span> <span class="type">void</span> *key1, <span class="type">const</span> <span class="type">void</span> *key2); <span class="comment">// 对比键的函数</span></span><br><span class="line">  <span class="type">void</span> (*keyDestructor)(<span class="type">void</span> *privdata, <span class="type">void</span> *key); <span class="comment">// 销毁键的函数</span></span><br><span class="line">  <span class="type">void</span> (*valDestructor)(<span class="type">void</span> *privdata, <span class="type">void</span> *obj); <span class="comment">// 销毁值的函数</span></span><br><span class="line">&#125;dictType;</span><br></pre></td></tr></table></figure>
+
+<p><code>ht</code>属性是一个包含两个项的数组, 数组中的每个项都是一个dictht哈希表, 一般只使用ht[0], ht[1]只会在对ht[0] 进行<code>rehash</code>时使用.</p>
+<p><code>rehashidx</code>记录当前<code>rehash</code>的进度, 若没有在进行<code>rehash</code>, 则值为 <code>-1</code></p>
+<h5 id="完整的dict结构"><a href="#完整的dict结构" class="headerlink" title="完整的dict结构"></a>完整的dict结构</h5><p><img src="/images/image-dict.png" alt="dict结构示意"></p>
+<h4 id="hash算法"><a href="#hash算法" class="headerlink" title="hash算法"></a>hash算法</h4><p>Redis计算hash值的方式如下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hash = dict-&gt;type-&gt;hashFunction(key); <span class="comment">// 使用hash字典设置的hash函数、计算key的hash值</span></span><br><span class="line">index = hash &amp; dict-&gt;ht[x].sizemask; <span class="comment">// 根据sizemask和hash值、计算出hash索引</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="解决键冲突"><a href="#解决键冲突" class="headerlink" title="解决键冲突"></a>解决键冲突</h4><p>当有两个或以上数量的键被分配到hash表数组同一个索引上时, 称为<code>键冲突 collision</code>, Redis的hash表使用 <code>链地址法</code>(<code>separate chaining</code>)来解决冲突, 每个hash表节点上有一个next指针, 多个hash表节点使用next指针构成单链表</p>
+<p><code>dictEntry</code>总是将新增节点添加到链表头部(时间复杂度为 O(1)), 因为没有tail指针.</p>
+<h4 id="rehash"><a href="#rehash" class="headerlink" title="rehash"></a>rehash</h4><p>随着操作的不断进行、hash表维护的键值对会增加或减少, 为了让hash表的负载因子(load factor)维持在一个合理的额范围, 当hash表保存键值对数量太大或太小时, 程序需要对hash表扩容或缩容, 扩容或缩容通过<code>rehash</code>进行, <code>Rehash</code>步骤如下:</p>
+<ol>
+<li>为字典的ht[1]hash表分配空间, hash表的空间大小取决于要执行的操作, 及ht[0]当前包含的键值对的数量(即: ht[0].used 属性值), 若为扩容, ht[1] 为第一个大于等于 (ht[0].used<code>*</code>2)d的*2<sup>n</sup>; 若为缩容, ht[1] 为第一个大于等于 (ht[0].used) 的 2<sup>n</sup> </li>
+<li>将ht[0]中的所有键值对rehash到ht[1]上, <code>rehash</code>是指: 重新计算键的hash值和索引值, 然后将键值对放到ht[1]hash表的对应位置</li>
+<li>当ht[0]包含的所有键值对迁移到ht[1]之后(ht[0]变为空表), 释放ht[0], 将ht[1]设置为 ht[0], 并在 ht[1]新创建一个空白hash表, 为下一次rehash做准备</li>
+</ol>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">eg. 扩容操作:</span><br><span class="line">ht<span class="selector-attr">[0]</span><span class="selector-class">.used</span> = <span class="number">4</span>, <span class="number">4</span>*<span class="number">2</span>=<span class="number">8</span>, 恰好是第一个大于等于<span class="number">4</span>的<span class="number">2</span>的n次方, 所以rehash后、ht<span class="selector-attr">[1]</span>size为<span class="number">8</span></span><br><span class="line"></span><br><span class="line">缩容操作:</span><br><span class="line">ht<span class="selector-attr">[0]</span><span class="selector-class">.used</span> = <span class="number">4</span>, <span class="number">4</span>=<span class="number">2</span>², 恰好是第一个大于等于<span class="number">4</span>的<span class="number">2</span>的n次方, rehash后 ht<span class="selector-attr">[1]</span><span class="selector-class">.size</span> = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="hash表的扩展与收缩"><a href="#hash表的扩展与收缩" class="headerlink" title="hash表的扩展与收缩"></a>hash表的扩展与收缩</h5><p>满足下述任意条件时, 会自动扩展:</p>
+<ol>
+<li><p>server 当前未执行<code>bgsave</code> 或者 <code>bgrewriteaof</code>, 且hash表的负载因子大于等于1</p>
+</li>
+<li><p>server 当前正在执行<code>bgsave</code> 或者 <code>bgrewriteaof</code>, 且 hash表的负载因子大于等于 5</p>
+<p>(持久化时、优先持久化操作)</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load_factor = ht[<span class="number">0</span>].used / ht[<span class="number">0</span>].size; <span class="comment">// 负载因子 = hash表已保存节数量 / hash表大小</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>若<code>bgsave</code>或者<code>bgrewriteaof</code>执行时, Redis需要创建当前服务器进程的子进程, 大多数操作系统使用写时复制(<code>copy-on-write</code>)优化子进程使用效率, 所以子进程存在期间, Server会提高rehash操作的负载因子, 尽可能避免此时rehash, 避免不必要的内存写入操作, 最大限度的节省内存.</strong></p>
+<p><strong>另外:</strong></p>
+<p>hash表的负载因子小于<code>0.1</code>时, 程序会自动缩容</p>
+<h4 id="渐进式rehash"><a href="#渐进式rehash" class="headerlink" title="渐进式rehash"></a>渐进式rehash</h4><blockquote>
+<p>其实, hash表的rehash操作、不是一次集中完成的, 而是多次迭代进行的. 因为若 ht[0]里保存的key有百万计, 甚至更多, 一次rehash导ht[1], 庞大的计算量可能会导致Server一段时间的停止服务.</p>
+</blockquote>
+<p>渐进式rehash步骤如下:</p>
+<ol>
+<li>为ht[1]分配空间, 让字典同时持有ht[0] 和 ht[1]两个hash表</li>
+<li>在字典中维护一个索引计数器变量 <code>rehashidx</code>, 设置为0, 表示<code>rehash</code>已经开始</li>
+<li>在<code>rehash</code>期间, 每次对字典<code>add</code>, <code>del</code>, <code>find</code> or <code>update</code>操作, 程序除了执行指定操作外, 还会顺带将 ht[0] hash表在 <code>rehashidx</code>索引上的所有键值对 rehash 到 ht[1], rehash完成、将<code>rehashidx++</code>.</li>
+<li>随字典操作的不断执行、某个时间点, ht[0]的所有键值对rehash到ht[1], rehash完成、将 <code>rehashidx</code>设为 <code>-1</code>.</li>
+</ol>
+<p>渐进式rehash过程中会维护 ht[0] 和 ht[1] 两个hash表, 字典的删除、查找、更新等操作都会在两个hash表上进行, eg. 查找: 会先在 ht[0] 上查找、若未找到则 到 ht[1] 上查找</p>
+<p>但: 插入操作只会在 ht[1] 上操作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ht = dictIsRehashing(d) ? &amp;d-&gt;ht[<span class="number">1</span>] : &amp;d-&gt;ht[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="字典API"><a href="#字典API" class="headerlink" title="字典API"></a>字典API</h5><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dictCreate</td>
+<td>创建一个新的字典</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictAdd</td>
+<td>将给定键值对添加到字典</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictReplace</td>
+<td>添加or替换</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictFetchValue</td>
+<td>返回给定键的值</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictGetRandomKey</td>
+<td>随机返回一个键值对</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictRelease</td>
+<td>释放给定字典, 及字典中包含的所有键值对</td>
+<td>O(N), N为值的数量</td>
+</tr>
+</tbody></table>
+<h4 id="dict总结"><a href="#dict总结" class="headerlink" title="dict总结"></a>dict总结</h4><ul>
+<li>广泛用于实现Redis的各种功能, 包括数据库和hash键</li>
+<li>作为hash表的底层实现, 每个字典有两个hash表、一个平时使用, 一个 rehash 时使用</li>
+<li>使用 <code>Murmurhash2</code> 计算key的hash值</li>
+<li>使用链地址法解决键冲突、同一个索引上的多个键值对连接成一个单链表</li>
+<li>rehash是渐进式完成、非一次性工作</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/redis_list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/24/redis_list/" class="post-title-link" itemprop="url">Redis数据结构-链表</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-24 19:25:32" itemprop="dateCreated datePublished" datetime="2020-04-24T19:25:32+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>链表提供了高效的节点重排能力, 及顺序性节点访问方式, Redis构建了自己的链表实现</p>
+</blockquote>
+<h4 id="链表和链表节点的实现"><a href="#链表和链表节点的实现" class="headerlink" title="链表和链表节点的实现"></a>链表和链表节点的实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span>&#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> *<span class="title">prev</span>;</span> <span class="comment">// 前置节点</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> *<span class="title">next</span>;</span> <span class="comment">// 后置节点</span></span><br><span class="line">  <span class="type">void</span> *value; <span class="comment">// 节点值</span></span><br><span class="line">&#125;listNode;</span><br></pre></td></tr></table></figure>
+
+<p>多个<code>listNode</code>节点通过 <code>prev</code> 和 <code>next</code>指针组成双端链表, 虽然仅使用多个listNode就可以组成链表, 使用 <code>adlist.h/list</code> 来持有链表会更方便操作.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">list</span>&#123;</span></span><br><span class="line">  listNode *head; <span class="comment">// 表头节点</span></span><br><span class="line">  listNode *tail; <span class="comment">// 表尾结点</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> len; <span class="comment">// 链表包含的节点数量</span></span><br><span class="line">  <span class="type">void</span> *(*dup)(<span class="type">void</span> *ptr); <span class="comment">// 节点值复制函数</span></span><br><span class="line">  <span class="type">void</span> (*<span class="built_in">free</span>)(<span class="type">void</span> *ptr); <span class="comment">// 节点值释放函数</span></span><br><span class="line">  <span class="type">int</span> (*match)(<span class="type">void</span> *ptr, <span class="type">void</span> *key); 节点值对比函数</span><br><span class="line">&#125; <span class="built_in">list</span>;</span><br></pre></td></tr></table></figure>
+
+<p>list结构为链表提供了表头指针head、表尾指针tail, 及链表长度计数器len, 而udp, free, match成员则用于实现多态链表所需特定函数.</p>
+<h5 id="Redis-链表实现特性总结"><a href="#Redis-链表实现特性总结" class="headerlink" title="Redis 链表实现特性总结"></a>Redis 链表实现特性总结</h5><ul>
+<li>双端: 有<code>prev</code>和<code>next</code>指针, 获取前置和后置节点的复杂度都是O(1)</li>
+<li>无环: 表头的<code>prev</code>和表尾的<code>next</code>都指向<code>NULL</code>, 对链表的访问以<code>NULL</code>为终点</li>
+<li>带表头和表尾指针: 通过list结构的head和tail指针获取链表的头结点和尾结点复杂度为 O(1)</li>
+<li>带长度计数器: 程序使用list结构的len属性对list节点计数, 获取节点数量的复杂度O(1)</li>
+<li>多态: 链表节点使用 <code>void *</code>指针保存节点值, 可通过list结构的<code>dup</code>, <code>free</code>, <code>match</code>三个属性为节点值设置类型特定的函数, 所以链表可用来保存不同类型的节点值</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/redis_sds/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/24/redis_sds/" class="post-title-link" itemprop="url">Redis数据结构实现-SDS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-24 19:25:09" itemprop="dateCreated datePublished" datetime="2020-04-24T19:25:09+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="SDS-定义"><a href="#SDS-定义" class="headerlink" title="SDS 定义"></a>SDS 定义</h4><p>每个sds.h&#x2F;sdshdr 结构表示一个SDS值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> &#123;</span></span><br><span class="line">  <span class="type">int</span> len; <span class="comment">// 记录buf数组中已使用字节的数量 (=SDS所保存字符串的长度)</span></span><br><span class="line">  <span class="type">int</span> <span class="built_in">free</span>; <span class="comment">// 记录buf数组中未使用的字节的数量</span></span><br><span class="line">  <span class="type">char</span> buf[]; <span class="comment">// 字节数组, 保存字符串  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-SDS.png" alt="SDS结构示例"></p>
+<ul>
+<li>free属性值为0, 表示 SDS 未分配 <code>未使用空间</code></li>
+<li>len 属性为5, 表示 SDS 保存了一个5字节长的字符串</li>
+<li>buf 属性是一个char类型的数组, 数组的前5个字节保存了 <code>R</code>, <code>e</code>,<code>d</code>,<code>i</code>, <code>s</code>, 五个字符, 最后一个字节保存了空字符串<code>\0</code></li>
+</ul>
+<h4 id="为什么不使用C原生字符串呢"><a href="#为什么不使用C原生字符串呢" class="headerlink" title="为什么不使用C原生字符串呢 ?"></a>为什么不使用<code>C</code>原生字符串呢 ?</h4><ol>
+<li><code>C</code>字符串获取长度需要遍历, <code>SDS</code>则记录了自身长度(<code>len</code>), 将获取字符串长度的时间复杂度从<code>O(N)</code>降低到了<code>O(1)</code>, 即使反复执行<code>strlen</code>, 也不会对系统造成任何影响</li>
+<li><code>C</code>字符串不记录自身长度, 容易造成缓冲区溢出, eg. strcat可以将字符串拼接, 执行这一操作时, 系统假定用户已分配了足够长度的内存, 假设不成立时, 就会造成缓冲区溢出(覆盖后边的字符)</li>
+<li><code>C</code>的实现是一个<code>N+1</code>字符长的数组, 每次增长或缩短一个C字符串, 都会重新分配内存<ul>
+<li>若增长, eg. <code>append</code>、需要先扩容, 否则会产生内存溢出</li>
+<li>若缩容, eg. <code>trim</code>、需要先缩容, 否则会造成内存泄露</li>
+</ul>
+</li>
+<li>为避免C字符串的缺陷, <code>SDS</code>通过未使用空间分配, 实现了<code>空间预分配</code>和<code>惰性空间释放</code>来优化.<ul>
+<li>空间预分配: 当字符串扩展时, 不仅分配必须空间, 还会分配额外空间(len&lt;1M时, free&#x3D;len, len&gt;&#x3D;1M时, free&#x3D;1M), 来减少连续执行字符串增长需要的内存分配次数, 将字符串连续增长N次需要的内存重分配次数从必定N次, 降低到最多N次</li>
+<li>惰性释放: 用free来标记被释放的空间, 而不真正操作内存, 也提供了API, 在需要时释放free空间, 不必担心惰性释放造成的空间浪费</li>
+</ul>
+</li>
+<li>C字符串用<code>\0</code>标记字符串结尾, 字符串本身不能包含空字符, 使得<code>C</code>字符串只能保存文本数据, 而不能保存图片、音频、视频、压缩文件等二进制数据. 而redis SDS字符靠len属性来判断字符串结尾, 是二进制安全的.</li>
+<li>兼容部分C字符. <code>SDS</code>总在结尾多分配一个字符<code>\0</code> 是为了保证C函数可以正常使用, 避免不必要的代码重复</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
+<thead>
+<tr>
+<th align="left">C字符串</th>
+<th>SDS字符串</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">获取字符串长度时间复杂度 O(N)</td>
+<td>获取字符串长度时间复杂度 O(1)</td>
+</tr>
+<tr>
+<td align="left">API非安全, 可能造成缓冲区溢出</td>
+<td>API安全, 不会操作缓冲区溢出</td>
+</tr>
+<tr>
+<td align="left">修改字符串会造成NN次内存分配</td>
+<td>修改字符串最多N次内存分配</td>
+</tr>
+<tr>
+<td align="left">只保存文本数据</td>
+<td>可以保存文本及二进制数据</td>
+</tr>
+<tr>
+<td align="left">可以使用 &lt;string.h&gt; 库中的函数</td>
+<td>可以使用部分 &lt;string.h&gt; 库中的函数</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/tools_iptables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/30/tools_iptables/" class="post-title-link" itemprop="url">iptables学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-30 18:04:17" itemprop="dateCreated datePublished" datetime="2020-03-30T18:04:17+08:00">2020-03-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h4><h5 id="基础说明"><a href="#基础说明" class="headerlink" title="基础说明"></a>基础说明</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables并不是真正的防火墙、它只是位于用户空间的一个命令行工具, netfilter 才是真正的安全框架、iptables只是将我们定义的规则转交给netfilter. </span><br><span class="line">netfilter 是Linux操作系统核心层的一个数据包处理模块</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="规则链名称"><a href="#规则链名称" class="headerlink" title="规则链名称"></a>规则链名称</h5><p>规则链名称包括以下5个、也被称为5个钩子函数:</p>
+<p><code>INPUT链</code>: 处理输入数据包</p>
+<p><code>OUTPUT链</code>: 处理输出数据包</p>
+<p><code>FORWARD链</code>: 处理转发数据</p>
+<p><code>PREROUTING链</code>: 用于目的地址转换(DNAT)</p>
+<p><code>POSTROUTING链</code>: 用于源地址转换(SNAT)</p>
+<h5 id="报文流向"><a href="#报文流向" class="headerlink" title="报文流向"></a>报文流向</h5><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">本机到某进程: <span class="function"><span class="title">prerouting</span> -&gt;</span> input</span><br><span class="line">本机转发: <span class="function"><span class="title">prerouting</span> -&gt;</span> <span class="function"><span class="title">forward</span> -&gt;</span> postrouting (直接在内核空间转发)</span><br><span class="line">本机进程发出(通常为响应报文): <span class="function"><span class="title">output</span> -&gt;</span> postrouting</span><br><span class="line">即: 当启用你过来防火墙功能时、报文需要经过不同的关卡(链)、但根据情况的不同、会经过不同的链</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="为什么称为链"><a href="#为什么称为链" class="headerlink" title="为什么称为链"></a>为什么称为链</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">防火墙的作用就在于对经过的报文进行规则匹配、然后执行对应的动作、但是每个关卡上可能有很多规则、这些规则按照配置顺序从上到下执行、看起来就像是一个链</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="表"><a href="#表" class="headerlink" title="表"></a>表</h5><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">这么多的链都放了一系列的规则、但是有些很类似、比如A类规则是对ip或者短裤过滤<span class="comment">; B类规则是修改报文... , 那么这些类似功能的规则能不能放在一起呢 ?</span></span><br><span class="line">答案是可以的、iptables提供了如下规则的分类(表):</span><br><span class="line"><span class="keyword">filter</span>表: 负责过滤功能 <span class="punctuation">,</span> 防火墙<span class="comment">; 内核模块 iptable_filter</span></span><br><span class="line">nat表: 网络地址转换<span class="comment">; 内核模块: iptable_nat</span></span><br><span class="line">mangle表: 解析报文、修改报文、并重新封装 内核模块: iptable_mangle</span><br><span class="line">raw表: 关闭nat表上启用的连接追踪机制<span class="comment">; 内核模块: iptable_raw</span></span><br><span class="line"></span><br><span class="line">当这些表处于同一条链时优先级如下:</span><br><span class="line">raw -&gt; mangle -&gt; nat -&gt; <span class="keyword">filter</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="防火墙的策略"><a href="#防火墙的策略" class="headerlink" title="防火墙的策略"></a>防火墙的策略</h5><p><code>通</code>: 默认不允许、需要定义谁可以进入</p>
+<p><code>堵</code>: 默认允许、但需要证明自己的身份</p>
+<p>filter功能: 定义允许或者不允许的策略, 工作在 input &#x2F; output &#x2F; forward 链</p>
+<p>nat选项: 定义地址转换功能, 工作在 prerouting &#x2F; output &#x2F; postrouting 链</p>
+<p>为了让这些功能都工作、制定了<code>表</code>的定义, 来区分不同的工作功能和处理方式</p>
+<h5 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h5><p><code>filter</code> 定义允许或者不允许、工作在 <code>input</code>, <code>output</code>, <code>forward</code> 链上</p>
+<p><code>nat</code> 定义地址转换, 工作在 <code>prerouting</code>, <code>output</code>, <code>postrouting</code> 链上</p>
+<p><code>mangle</code> 修改报文原数据, 5个链都可以工作</p>
+<p>注意: 设置多个规则链时、要把规则严格的放在前边、因为它是从上到下检查的~</p>
+<h5 id="规则动作"><a href="#规则动作" class="headerlink" title="规则动作"></a>规则动作</h5><p><code>accept</code>: 接收数据包</p>
+<p><code>drop</code>: 丢弃数据包</p>
+<p><code>redirect</code>: 重定向、映射、透明代理</p>
+<p><code>snat</code>: 源地址转换</p>
+<p><code>dnat</code>: 目标地址转换</p>
+<p><code>masquerade</code>: ip伪装(nat), 用于ADSL</p>
+<p><code>log</code>: 日志记录</p>
+<h5 id="思考"><a href="#思考" class="headerlink" title="思考:"></a>思考:</h5><p>其实iptables就是帮我们实现了网络包选择、地址转换、报文修改这些功能、为了实现这些功能、它划分了很多链、包括 prerouting、input、forward、output、postrouting, 定义了规则动作 accept、drop、redirect、snat、dnat、log、masquerade来实现这些功能.</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><h5 id="清空当前所有规则和计数"><a href="#清空当前所有规则和计数" class="headerlink" title="清空当前所有规则和计数"></a>清空当前所有规则和计数</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">iptables</span> -F <span class="comment"># 清空所有防火墙规则</span></span><br><span class="line">iptables -X <span class="comment"># 删除用户自定义的空链</span></span><br><span class="line">iptables -Z <span class="comment"># 清空计数</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="配置允许ssh端口连接"><a href="#配置允许ssh端口连接" class="headerlink" title="配置允许ssh端口连接"></a>配置允许ssh端口连接</h5><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">iptables</span> -A INPUT -s <span class="number">192.168.1.0</span>/<span class="number">24</span> -p tcp --dport <span class="number">22</span> -j ACCEPT</span><br><span class="line"><span class="comment"># 22: ssh端口 -s 192.168.1.0/24 被允许的网段、 -j accept 接受这种类型的请求</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="允许本地回环地址可以正常使用"><a href="#允许本地回环地址可以正常使用" class="headerlink" title="允许本地回环地址可以正常使用"></a>允许本地回环地址可以正常使用</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">i</span> lo -j accept</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -o lo -j accept</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="设置默认规则"><a href="#设置默认规则" class="headerlink" title="设置默认规则"></a>设置默认规则</h5><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT <span class="built_in">DROP</span> <span class="meta"># 配置默认的不让进</span></span><br><span class="line">iptables -P FORWARD <span class="built_in">DROP</span> <span class="meta"># 默认的不允许转发</span></span><br><span class="line">iptables -P <span class="keyword">OUTPUT</span> ACCEPT <span class="meta"># 默认的可以出去</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="配置白名单"><a href="#配置白名单" class="headerlink" title="配置白名单"></a>配置白名单</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> <span class="attribute">all</span> -s <span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span> -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> <span class="attribute">all</span> -s <span class="number">192.168</span>.<span class="number">140.0</span>/<span class="number">24</span> -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> tcp -s <span class="number">183.121</span>.<span class="number">3.7</span> <span class="attr">--dport</span> <span class="number">3380</span> -j ACCEPT </span><br><span class="line"># 允许<span class="number">183.121</span>.<span class="number">3.7</span>访问本机的<span class="number">3380</span>端口</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="开启相应的服务端口"><a href="#开启相应的服务端口" class="headerlink" title="开启相应的服务端口"></a>开启相应的服务端口</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> tcp <span class="attr">--dport</span> <span class="number">80</span> -j ACCEPT # 开启<span class="number">80</span>端口，因为web对外都是这个端口</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> icmp <span class="attr">--icmp-type</span> <span class="number">8</span> -j ACCEPT # 允许被ping</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -m state <span class="attr">--state</span> ESTABLISHED,RELATED -j ACCEPT # 已经建立的连接得让它进来</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="保存规则到配置文件"><a href="#保存规则到配置文件" class="headerlink" title="保存规则到配置文件"></a>保存规则到配置文件</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="regexp">/etc/</span>sysconfig<span class="regexp">/iptables /</span>etc<span class="regexp">/sysconfig/i</span>ptables.bak <span class="comment"># 任何改动之前先备份，请保持这一优秀的习惯</span></span><br><span class="line">iptables-save &gt; <span class="regexp">/etc/</span>sysconfig/iptables</span><br><span class="line">cat <span class="regexp">/etc/</span>sysconfig/iptables</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="列出已设置规则"><a href="#列出已设置规则" class="headerlink" title="列出已设置规则"></a>列出已设置规则</h5><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iptables -L [-t 表名] [链名]</span><br><span class="line"></span><br><span class="line">iptables -L -t nat                  <span class="meta"># 列出 nat 上面的所有规则</span></span><br><span class="line"><span class="meta">#            ^ -t 参数指定，必须是 raw， nat，filter，mangle 中的一个</span></span><br><span class="line">iptables -L -t nat  --<span class="keyword">line</span>-numbers  <span class="meta"># 规则带编号</span></span><br><span class="line">iptables -L <span class="keyword">INPUT</span></span><br><span class="line"></span><br><span class="line">iptables -L -nv  <span class="meta"># 查看，这个列表看起来更详细</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h5><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">iptables</span> -t nat -A PREROUTING -d <span class="number">210.14.67.127</span> -p tcp --dport <span class="number">2222</span>  -j DNAT --to-dest <span class="number">192.168.188.115:22</span></span><br><span class="line"><span class="comment"># 将本机的 2222端口 映射到虚拟机的 22端口</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="防止SYN洪水攻击"><a href="#防止SYN洪水攻击" class="headerlink" title="防止SYN洪水攻击"></a>防止SYN洪水攻击</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> tcp <span class="attr">--syn</span> -m limit <span class="attr">--limit</span> <span class="number">5</span>/second -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><blockquote>
+<p>iptables –help 可以看到更多的选项、可以看到每一个选项的解释、本文列出了一些简单使用、欢迎指正、交流~</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/k8s_%E5%A5%91%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/26/k8s_%E5%A5%91%E6%9C%BA/" class="post-title-link" itemprop="url">k8s出现的契机</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-26 17:42:25" itemprop="dateCreated datePublished" datetime="2020-03-26T17:42:25+08:00">2020-03-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>以 <code>Colud Foundry</code> 为代表的开源PaaS项目、在2013年已经度过了最艰难的概念普及和用户教育阶段、吸引了包括京东、华为、百度、IBM等一大批国内外技术厂商, 开启了以开源PaaS为核心构建平台服务能力的变革、而此时 Docker 项目却意外的出现了. Dot Cloud 公司开源了Docker项目. </p>
+<p>PaaS平台被接纳的主要原因是提供了 <code>应用托管能力</code>, <code>Cloud Foundry</code> 最核心的组件是应用的打包和分发机制.  <code>cf push</code> 基本上等同于将应用的可执行文件和启动脚本打进一个压缩包内, 上传到cf的存储中. 接着, 会通过调度器选择一个可运行该应用的虚拟机、通知虚拟机上的agent把应用压缩包下载启动.</p>
+<p>若需要启动很多个来自不同用户的应用呢 ? </p>
+<p>cf 会调用操作系统的 <code>Cgroups</code> 和 <code>Namespace</code> 机制来为每一个应用单独创建一个称为 <code>沙盒</code>的隔离环境、分别在隔离环境中运行. </p>
+<p><code>Docker</code> 实际上跟<code>Cloud Foundry</code> 基本类似、大部分功能和实现原理都一样. 然而、正是这一点点差异 造就了<code>Docker</code>, 它在几个月内快速崛起.</p>
+<p><code>Docker image</code> 就是这一点点的差异.  PaaS之所以能帮助大规模用户部署应用到集群里、是因为提供了打包的功能、偏偏也就是<code>打包</code>这个功能、却成了一个软肋. 因为一旦用上PaaS、就必须为每种语言、每种框架甚至每个版本都得维护一个包, 比较麻烦的是本地运行很好的项目、需要修改很多东西和配置才能在PaaS里运行. 为了 <code>cf push</code> 这个一键部署的工作、<code>打包</code>这个前置工作特别麻烦</p>
+<p><code>Docker image</code> 从根本上解决了这个问题. 所谓 Docker 镜像, 其实就是一个压缩包. 大多数Docker 镜像包含一个完整的操作系统和所有文件、目录, 这个压缩包的环境、与本地完全一致. 那么、如果本地环境是 CentOS 7.2, 使用CentOS 7.2 的ISO做一个压缩包、再把应用可执行文件也压缩进去, 就可以得到一个与本地完全一致的环境了. 它包含了应用运行的所有依赖.</p>
+<p>这就是 Docker 镜像的精髓.</p>
+<p><code>docker build &quot;image name&quot;</code> 就可以制作成一个压缩包.</p>
+<p><code>docker run &quot;image name&quot;</code> 就是用Docker创建一个<code>沙盒</code>来解压镜像、然后在其中运行应用.</p>
+<p><code>docker run</code> 创建的<code>沙盒</code>, 也是使用 <code>Cgroups</code> 和 <code>namespace</code>创建的隔离环境.</p>
+<h4 id="Docker崛起"><a href="#Docker崛起" class="headerlink" title="Docker崛起"></a>Docker崛起</h4><p>Docker解决了应用打包和发布的问题, 且将一个存后端的技术概念通过友好的设计和封装、交给了广大的开发者. 得以迅速受到青睐.  一个以容器为中心的全新云计算市场、即将呼之欲出, 此时 dotCloud 公司、却突然改名 <code>Docker</code>, 意味着, 任何公司都不能在商业活动中再使用这个词及鲸鱼的logo. 14年, 又发布了 <code>Swarm</code> 项目. 兜兜转转, Docker 公司还是回到了<code>如何让开发者把应用部署到我的项目</code>这个主题上. </p>
+<p>此时, PaaS 已经变成了一套以 Docker 容器为技术核心、以Docker镜像为打包标准的、全新的容器化思路. </p>
+<p>这、正是 Docker 项目从开始悉心运作<code>容器化</code>概念和努力经营 Docker 生态系统的目的. 而 <code>Swarm</code> 项目、正是承载Docker接下来所有这些努力的关键.</p>
+<p>综合来说、Docker的崛起有3个因素:</p>
+<ol>
+<li>Docker镜像通过技术手段解决了 PaaS平台的根本性问题.</li>
+<li>Docker 容器和开发者之间与生俱来的密切关系</li>
+<li>PaaS概念已深入人心的完美契机.</li>
+</ol>
+<h4 id="群雄并起"><a href="#群雄并起" class="headerlink" title="群雄并起"></a>群雄并起</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E4%B8%8D%E8%BF%9E%E7%BB%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E4%B8%8D%E8%BF%9E%E7%BB%AD/" class="post-title-link" itemprop="url">为什么自增主键不连续</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-25 09:36:03" itemprop="dateCreated datePublished" datetime="2020-03-25T09:36:03+08:00">2020-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="自增值保存在哪儿"><a href="#自增值保存在哪儿" class="headerlink" title="自增值保存在哪儿"></a>自增值保存在哪儿</h4><p>实际上表的结构定义保存在 .frm 文件里、但是不会保存自增值、自增值的保存跟具体引擎有关:<br>MySIAM 引擎保存在数据文件中.<br>Innodb的自增保存在内存, 8.0版本之后、提供持久化.<br>8.0 之前的版本只保存在内存中、每次重启、第一次打开表的时候、会找自增值的最大值 max(id), 将 max(id) + 1, 作为当前表的自增值.<br>8.0将自增值的变更记录在了redo log中、重启时依靠redo log恢复重启之前的值.</p>
+<h4 id="自增值修改机制"><a href="#自增值修改机制" class="headerlink" title="自增值修改机制"></a>自增值修改机制</h4><p>MySQL、若字段id被定义为 auto_increment, 在插入一行数据的时候、自增值的行为如下:</p>
+<ol>
+<li>若插入数据时id字段指定为0、null或者未指定值、那么就把这个表当前 auto_increment值填到自增字段.</li>
+<li>若插入数据时、id字段指定了具体值 、直接使用语句指定值.<br>若待插入值是 X、当前自增是 Y</li>
+</ol>
+<ol>
+<li>X&lt;Y, 自增保持不变</li>
+<li>若X&gt;&#x3D;Y, 将自增修改为新的值<br>从auto_increment_offset 开始、以 auto_increment_increment为步长、持续叠加、直到找到第一个大于X的值、作为新的自增值</li>
+</ol>
+<h4 id="自增值的修改时机"><a href="#自增值的修改时机" class="headerlink" title="自增值的修改时机"></a>自增值的修改时机</h4><p>若表t已有记录(1,1,1)、再执行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(<span class="keyword">null</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>语句执行流程是:</p>
+<ol>
+<li>调用innodb引擎接口、写入一行、传入值(0, 1, 1);</li>
+<li>innodb发现用户没有指定自增id值、获取表t当前的自增值为2;</li>
+<li>将传入行的值改为 (2,1,1);</li>
+<li>将表的自增改为3</li>
+<li>继续执行插入、由于已经存在c&#x3D;1的记录、出现唯一键冲突、报错返回.<br>所以、主键自增修改是在真正的插入操作之前、真正执行的时候唯一键冲突、id&#x3D;2插入失败、但自增值不会回退. 这之后的数据插入自增基础就是3、所以, 唯一键冲突是导致自增id不连续的第一种原因.</li>
+</ol>
+<p>事务回滚也会产生类似的现象、这是第二种原因.</p>
+<h4 id="那么为什么MySQL不设计自增值可以回滚呢"><a href="#那么为什么MySQL不设计自增值可以回滚呢" class="headerlink" title="那么为什么MySQL不设计自增值可以回滚呢 ?"></a>那么为什么MySQL不设计自增值可以回滚呢 ?</h4><p>假设有两个并行事务、在申请自增值的时候、为了避免两个事务申请到相同的自增id、就需要加锁、顺序申请.</p>
+<ol>
+<li>假设事务A申请到id&#x3D;2、事务B申请到id&#x3D;3, 此时表t的自增值是4, 之后继续执行</li>
+<li>事务B正确提交、事务A出现唯一键冲突.</li>
+<li>若允许事务A将自增值回退、则出现、表里已有id&#x3D;3的行、而当前自增是2 的现象</li>
+<li>接下来其它语句申请到 id&#x3D;2、然后再申请到id&#x3D;3、就会出现主键冲突.<br>解决这个冲突有两个办法:</li>
+<li>每次申请id之前、先判断表里是否已存在这个id、若存在、就跳过、但成本较高、本来申请id是一个很快的操作、现在还要去主键索引上判断id是否存在</li>
+<li>把自增id的锁范围扩大、必须等上一个事务执行完成、下一个才能申请. 但会大大的影响并发性能.<br>所以、MySQL放弃了自增值回退、只保证自增、不保证连续.</li>
+</ol>
+<h4 id="自增锁优化"><a href="#自增锁优化" class="headerlink" title="自增锁优化"></a>自增锁优化</h4><p>自增锁并不是事务锁、每次申请完就释放、以便别的事务再申请. 一起看下自增锁演进的过程:</p>
+<p>5.0版本、自增锁是语句级别、若一个语句申请了一个表自增锁、锁会等语句结束才释放. 影响并发度.<br>5.1.22新增参数 innodb_autoinc_lock_mode, 默认1<br>设为0: 表示采用5.0版本策略、语句执行结束释放锁<br>设为1: 普通insert、自增锁申请之后、立即释放; 类似insert…select批量插入语句、要等语句结束才释放<br>设为2: 所有语句都是申请后就释放.</p>
+<p>批量插入语句、预先不知道要申请多少个自增id、一种直接想法是: 需要是就申请一个. 但若需要10w个自增的话、就需要申请10w次、会速度很慢、且影响并发插入性能.所以、批量申请的话、Mysql会使用指数级分配.</p>
+<p>这是自增出现不连续的第三个原因.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/mysql_innodb%E8%BF%98%E6%98%AFmemory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/25/mysql_innodb%E8%BF%98%E6%98%AFmemory/" class="post-title-link" itemprop="url">innodb还是memory</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-25 09:32:53" itemprop="dateCreated datePublished" datetime="2020-03-25T09:32:53+08:00">2020-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p> 都说innodb好、还要不要用memory引擎 ?</p>
+</blockquote>
+<h4 id="内存表的数据组织结构"><a href="#内存表的数据组织结构" class="headerlink" title="内存表的数据组织结构"></a>内存表的数据组织结构</h4><p>innodb表的数据就放在主键索引树上、主键索引是 B+ 树、主键索引上是有序存储的, 在执行select  * 时、会按照叶子节点从左到右扫描、得到的结果 0 出现在第一行</p>
+<p>memory引擎的数据和索引是分开的. 主键id的索引里、存放的是每个数据的位置. 主键id是hash索引、索引上的key是乱序的. select * 也是全表扫描、也是顺序扫描数组、0就是最后一个被读到、并放入结果集的数据. </p>
+<p>innodb把数据放到主键索引上、其它索引保存的是主键id、是索引组织表(Index Organizied Table)<br>memory引擎采用的是数据单独存放、是堆组织表(Heap Organizied Table)</p>
+<p>两者之间的差异:</p>
+<ol>
+<li>innodb的数据总是有序存储的、内存表的数据是按照写入顺序存储的.</li>
+<li>当数据文件有空洞的时候、innodb表在插入新数据时、为了保证数据有序性、只能在固定位置写入新值, 而内存表找到空位置就可以插入新值.</li>
+<li>数据位置发生变化的时候、innodb表只需要修改主键索引、而内存表需要修改所有索引.s</li>
+<li>innodb表用主键索引查询时、需要走一次索引查询、普通索引查询时、要走两次索引查找.<br>memory表无分别、所有的索引地位都是相同的.</li>
+<li>innodb支持变长数据类型、不同记录的长度可能不同、内存表不支持Blob和Text字段、并且即使定义varchar(N)实际也是char(N), 即固定长度存储、所以: 每行数据长度相同.</li>
+</ol>
+<p>所以: 内存表每行数据被删除以后、空出的位置可以被接下来要插入的数据复用.<br>注意: 内存表的索引是hash索引、范围查询 <code>select * from t1 where id&lt;5</code> 是无法用到主键索引的, 会全表扫描.</p>
+<h4 id="hash索引-和-B-Tree索引"><a href="#hash索引-和-B-Tree索引" class="headerlink" title="hash索引 和 B-Tree索引"></a>hash索引 和 B-Tree索引</h4><p>内存表也可以支持B-Tree索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> t1 <span class="keyword">add</span> index a_btree_index <span class="keyword">using</span> btree(id);</span><br></pre></td></tr></table></figure>
+<p>内存表优势是速度快. 一方面它支持hash索引、另一方面、它的数据都在内存; 那么、为什么不建议生产环境使用内存表呢 ?</p>
+<ol>
+<li>锁粒度问题</li>
+<li>数据持久化问题.</li>
+</ol>
+<h4 id="内存表的锁"><a href="#内存表的锁" class="headerlink" title="内存表的锁"></a>内存表的锁</h4><p>内存表不支持行锁、只支持表锁、导致并发性太低.</p>
+<h4 id="数据持久性问题"><a href="#数据持久性问题" class="headerlink" title="数据持久性问题"></a>数据持久性问题</h4><p>数据放在内存中是内存表的优势、也是劣势、因为DB重启时、所有的内存表都会被清空.</p>
+<h5 id="M-S-架构场景"><a href="#M-S-架构场景" class="headerlink" title="M-S 架构场景"></a>M-S 架构场景</h5><ol>
+<li>业务正常访问s主库</li>
+<li>备库硬件升级、备库重启、内存表t1内容被清空</li>
+<li>备库重启后、客户端发送一条update语句、修改表t1的数据行、此时备库应用线程就会找不到要更新的数据.</li>
+</ol>
+<h5 id="双M架构"><a href="#双M架构" class="headerlink" title="双M架构"></a>双M架构</h5><p>MySQL知道重启后、内存表的数据会丢失、所以担心主库重启后、出现主备不一致、在实现上、会在DB重启后写入一行 delete from t1的binlog记录.<br>备库重启时、备库的binlog里的delete语句就会传到主库、然后把主库内存表的内容删除, 出现主库内存表数据突然被清空的现象.</p>
+<p>所以不适合在生产上使用.</p>
+<ol>
+<li>若选择内存表是因为更新量大、那么并发度是重要的参考指标、innodb支持行锁、并发度更好</li>
+<li>若考虑读性能、一个读QPS很高、且数据量不大的表、即使是innodb、数据也都是缓存在buffer pool的、因此innodb表性能也不差.</li>
+</ol>
+<h4 id="一个适合用内存表的场景"><a href="#一个适合用内存表的场景" class="headerlink" title="一个适合用内存表的场景"></a>一个适合用内存表的场景</h4><p>内存临时表: 不会被其它线程访问、无并发问题; 重启需要删除、清空数据问题不存在; 备库的临时表不影响主库用户线程, 所以刚好可以无视内存表的两个不足.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/mysql_%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8%E5%86%85%E9%83%A8%E4%B8%B4%E6%97%B6%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/25/mysql_%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8%E5%86%85%E9%83%A8%E4%B8%B4%E6%97%B6%E8%A1%A8/" class="post-title-link" itemprop="url">什么时候使用内部临时表</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-25 09:30:23" itemprop="dateCreated datePublished" datetime="2020-03-25T09:30:23+08:00">2020-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="union执行流程"><a href="#union执行流程" class="headerlink" title="union执行流程"></a>union执行流程</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t1(id <span class="type">int</span> <span class="keyword">primary</span> key, a <span class="type">int</span>, b <span class="type">int</span>, index(a));</span><br><span class="line"></span><br><span class="line">delimiter ;;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> idata()</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">declare</span> i <span class="type">int</span>;</span><br><span class="line">  <span class="keyword">set</span> i<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line">  while(i<span class="operator">&lt;=</span><span class="number">1000</span>) do</span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t1 <span class="keyword">values</span>(i, i, i);</span><br><span class="line">    <span class="keyword">set</span> i<span class="operator">=</span>i<span class="operator">+</span><span class="number">1</span>;</span><br><span class="line">  <span class="keyword">end</span> while;</span><br><span class="line"><span class="keyword">end</span>;;</span><br><span class="line">delimiter ;</span><br><span class="line"><span class="keyword">call</span> idata();</span><br></pre></td></tr></table></figure>
+<p>然后执行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">select</span> <span class="number">1000</span> <span class="keyword">as</span> f) <span class="keyword">union</span> (<span class="keyword">select</span> id <span class="keyword">from</span> t1 <span class="keyword">order</span> <span class="keyword">by</span> id <span class="keyword">desc</span> limit <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>获取两个子查询结果的并集(非重复).</p>
+<p>使用explain分析发现:<br>在做union的时候、使用了临时表(Using temporary)</p>
+<p>执行流程如下:</p>
+<ol>
+<li>创建一个内存临时表、只有一个整型字段f、且f是主键字段</li>
+<li>执行第一个子查询、得到1000这个值、写入临时表</li>
+<li>执行第二个子查询:<br>获取id&#x3D;1000, 插入临时表、由于主键冲突、插入失败、取id&#x3D;999.</li>
+<li>从临时表按行取出数据、返回结果、并清除临时表、结果中包含的两行数据 1000 和 999.</li>
+</ol>
+<p>若union改成union all、无需去重、就不需要临时表了.</p>
+<h4 id="group-by执行流程"><a href="#group-by执行流程" class="headerlink" title="group by执行流程"></a>group by执行流程</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id<span class="operator">%</span><span class="number">10</span> <span class="keyword">as</span> m, <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> c <span class="keyword">from</span> t1 <span class="keyword">group</span> <span class="keyword">by</span> m;</span><br></pre></td></tr></table></figure>
+
+<p>explain的extra字段、可以看到三个信息:<br>using index, 表示语句使用了覆盖索引、选择了索引a、不需要回表;<br>uusing temporary, 表示使用了临时表<br>using filesort, 表示需要排序.</p>
+<p>SQL执行流程:</p>
+<ol>
+<li>创建内存临时表、表里有两个字段 m 和 c, 主键是 m;</li>
+<li>扫描表t1的索引a、依次取出叶子节点上id的值、计算 id%10的结果、记为x;<br>若临时表没有主键为x的行、就插入一个记录(x,1);<br>若表中有主键x的行、就将c的值+1;</li>
+<li>遍历完成后、根据字段m做排序、得到结果集返回给客户端.</li>
+</ol>
+<p>若实际需求不需要排序、可以加上 order by null. 这样就会跳过排序阶段.</p>
+<h4 id="group-by优化方法-–-索引"><a href="#group-by优化方法-–-索引" class="headerlink" title="group by优化方法 – 索引"></a>group by优化方法 – 索引</h4><p>不论是内存临时表还是磁盘临时表、group by逻辑都需要构造一个带唯一索引的表、执行代价较高.<br>group by为什么需要临时表呢 ? group by是统计不同值出现的次数, 但每一行的 id%100 的结果是无序的、所以需要一个临时表、记录统计结果. 如果保证 出现的数据是有序的呢 ?<br>就不需要额外排序了. 索引, 可以通过添加冗余字段、记录 id%10 的值、并在该列 添加索引来优化.</p>
+<p>四、group by优化方法 – 直接排序<br>若碰到无法使用加索引完成group by的逻辑、就只能老老实实排序, 此时 group by如何优化呢 ?<br>若明知group by 语句的结果集很大、依然要 先存到内存临时表、插入部分数据后、发现临时内存不够再转成磁盘临时表、这样倒不如直接使用磁盘临时表.</p>
+<p>在group by中加入 sql_big_result 可以告诉优化器、结果集很大、直接使用磁盘临时表就好. 磁盘临时表使用的是 B+ 树存储、存储效率不如数组. 既然数据量大、那不如使用数组存储.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> sql_big_result id<span class="operator">%</span><span class="number">100</span> <span class="keyword">as</span> m, <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> c <span class="keyword">from</span> t1 <span class="keyword">group</span> <span class="keyword">by</span> m;</span><br></pre></td></tr></table></figure>
+
+<p>执行流程如下:</p>
+<ol>
+<li>初始化 sort_buffer、确定放入一个整型字段m;</li>
+<li>扫描t1的索引a、依次取出id的值、将id%100 的值、存入sort_buffer;</li>
+<li>扫描完成后、对sort_buffer的字段m做排序(若sort_buffer不够用、就利用磁盘临时文件辅助排序)</li>
+<li>排序完成、得到有序数组.</li>
+</ol>
+<p>那么、MySQL什么时候会使用内部临时表呢 ?</p>
+<ol>
+<li>若语句执行过程是一边读数据、一边直接得到结果、是不需要额外内存的、否则就需要额外内存存储中间结果.</li>
+<li>join_buffer是无序数组、sort_buffer是有序数据、临时表是二维表结构.</li>
+<li>若执行逻辑需要用到二维表特性、就要优先考虑临时表.</li>
+</ol>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考:"></a>思考:</h4><p>为什么同样是使用 order by null. 内存临时表得到的结果 0在最后一行、而使用磁盘临时表得到的结果、0在第一行 ?</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%B4%E6%97%B6%E8%A1%A8%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%90%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%B4%E6%97%B6%E8%A1%A8%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%90%8D/" class="post-title-link" itemprop="url">为什么临时表可以重名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-25 09:19:41" itemprop="dateCreated datePublished" datetime="2020-03-25T09:19:41+08:00">2020-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>内存表: 指的是使用Memory引擎的表、创建语法是: create table … engine&#x3D;memory. 这种表的数据都保存在内存里、系统重启的时候会被清空, 但表结构还在. 而、临时表是可以使用各种引擎类型. 若使用的是innodb引擎或者mysiam引擎、写数据的时候是写到磁盘的、当前, 临时表也可以使用memory引擎.</p>
+</blockquote>
+<h4 id="临时表的特性"><a href="#临时表的特性" class="headerlink" title="临时表的特性"></a>临时表的特性</h4><ol>
+<li><p>创建语法是: create temporary table…</p>
+</li>
+<li><p>一个临时表只能被创建它的session访问、对其它线程不可见. (A线程创建的临时表t、B线程不可见). 在session结束时自动删除.</p>
+</li>
+<li><p>临时表可以与普通表同名</p>
+</li>
+<li><p>session A内具有同名的临时表和普通表时、show create 语句、及增删改查语句、访问的是临时表</p>
+</li>
+<li><p>show tables. 不显示临时表.</p>
+</li>
+</ol>
+<h4 id="临时表的应用"><a href="#临时表的应用" class="headerlink" title="临时表的应用"></a>临时表的应用</h4><h5 id="分库分表的跨库查询"><a href="#分库分表的跨库查询" class="headerlink" title="分库分表的跨库查询."></a>分库分表的跨库查询.</h5><p>  一般分库分表的场景、就是要把一个逻辑上的大表分散到不同的数据库实例上. eg. 将大表ht、按照字段f、拆分成1024个分表、然后分布到32个DB实例</p>
+<p>  一般有两种查询场景. 1) 可直接定位分表. 2) 无法定位分表、需要多表数据重组.</p>
+<p>  此时一般有两种思路解决:</p>
+<ol>
+<li>在proxy层进行代码排序</li>
+</ol>
+<p>   优势: 处理速度快、拿到分库的数据后、直接在内存中参与计算. 但: </p>
+<p>   开发工作量大, eg. group by, join 等的操作、对中间层开发要求高.</p>
+<p>   对proxy的压力较大、容易出现内存不够用和CPU瓶颈问题.</p>
+<ol start="2">
+<li>将各表拿到的数据、汇总到一个MySQL实例的一个表、然后在汇总实例上进行逻辑操作.</li>
+</ol>
+<h5 id="join优化的场景"><a href="#join优化的场景" class="headerlink" title="join优化的场景"></a>join优化的场景</h5><ol>
+<li><p>不同session临时表命名是可以重复的、若有多个session同时执行join优化、无需担心表名重复建表失败.</p>
+</li>
+<li><p>无需担心数据删除问题. 若使用临时表、在执行流程过程中Client异常断开、或者DB异常重启、还需要专门清理中间过程生成的数据表、而临时表会自动回收、不需要这个额外的操作.</p>
+</li>
+</ol>
+<h4 id="为什么临时表可以重名"><a href="#为什么临时表可以重名" class="headerlink" title="为什么临时表可以重名 ?"></a>为什么临时表可以重名 ?</h4><p>在执行 create temporary table tmp(id int primary key)engine&#x3D;innodb; 这个语句时、Mysql会给innodb表创建一个 frm 文件保存表结构定义、还要有地方保存表数据. frm放在临时文件目录下 <code>#sql&#123;进程id&#125;_&#123;线程id&#125;_序列号</code>、 select @@temdir 可以查看临时文件目录.</p>
+<p>5.6之前、MySQL会在临时文件目录下创建一个相同前缀、.ibd 为后缀的文件、用来存放数据文件;</p>
+<p>5.7开始、MySQL引入临文件表空间、专门存放临时文件数据、不需要创建ibd文件.</p>
+<p>其实创建一个叫t1的innodb临时表、MySQL在存储上认为跟普通表t1不同、可以与普通表重名.</p>
+<p>MySQL维护数据表、除了物理上要有文件外、内存里也有一套机制区别不同的表、每个表对应一个table_def_key. 普通表的table_def_key是<code>库名 + 表名</code>得到、而临时表的table_def_key是<code>库名 + 表名 + server_id + thread_id</code>, 所以, 临时表不能重名而临时表是可以的.</p>
+<p>在实现上、每个线程都维护了自己的临时表链表. 这样每次session内操作表的时候、先遍历链表、检查是否有对应临时表、有: 优先操作、无: 再操作临时表; session结束时、对链表里的每个临时表都执行 <code>drop temporary table + tb_name</code>的操作. 此时会发现: binlog也记录了 drop temporary操作</p>
+<p>`&#96;&#96;</p>
+<p>SET TIMESTAMP&#x3D;1584267384&#x2F;<em>!</em>&#x2F;;</p>
+<p>SET @@session.pseudo_thread_id&#x3D;19&#x2F;<em>!</em>&#x2F;;</p>
+<p>DROP &#x2F;*!40005 TEMPORARY *&#x2F; TABLE IF EXISTS <code>x</code>,<code>tmp</code></p>
+<p>`&#96;&#96;</p>
+<p>临时表只有在县城内可以访问、为什么要写binlog呢 ? –这就需要考虑主备复制了.</p>
+<h4 id="临时表和主备复制"><a href="#临时表和主备复制" class="headerlink" title="临时表和主备复制."></a>临时表和主备复制.</h4><p>既然写binlog, 就意味着备库需要. eg. 下边的语句序列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_normal(id <span class="type">int</span> <span class="keyword">primary</span> key, c <span class="type">int</span>)engine<span class="operator">=</span>innodb; <span class="operator">/</span><span class="operator">/</span> Q1</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> tmp_t <span class="keyword">like</span> t_normal; <span class="operator">/</span><span class="operator">/</span> Q2</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tmp_t <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">1</span>); <span class="operator">/</span><span class="operator">/</span> Q3</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_normal <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tmp_t; <span class="operator">/</span><span class="operator">/</span> Q4</span><br></pre></td></tr></table></figure>
+
+
+
+<p>若关于临时表的操作不记录、在备库重放binlog时、就会报错: tmp_t不存在</p>
+<p>如果把binlog设为row格式能解决吗 ? binlog是row时、记录的是操作的数据 <code>插入一行数据(1,1)</code>. 确实如此、若binlog_format&#x3D;row、那么跟临时表有关的操作不会记录到binlog、</p>
+<p>即: 只有binlog_format&#x3D;statement &#x2F; mixed时、binlog才会记录临时表的操作.</p>
+<p>此时, 创建临时表的语句会传到备库执行、备库同步时也会创建临时表、所以、也需要在主库上记录 drop temporary table、传给备库.</p>
+<p>MySQL在记录binlog时、不论是create 还是 alter都会原样不变、但drop确会变成 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> `t_normal` <span class="comment">/*generated by server*/</span></span><br></pre></td></tr></table></figure>
+
+<p>也就是改成了标准格式. 为什么呢 ?</p>
+<p>因为 drop是可以一次删除多个表. eg. 若设置 binlog_format&#x3D;row, 若主库执行 <code>drop table t_normal,tmp_t</code>, 则binlog只记录 <code>drop table t_normal</code>; 因为备库无tmp_t、备库执行会出错、所以, 必须将语句改写.</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考:"></a>思考:</h4><h5 id="备库如何处理不同线程同名临时表"><a href="#备库如何处理不同线程同名临时表" class="headerlink" title="备库如何处理不同线程同名临时表"></a>备库如何处理不同线程同名临时表</h5><p>MySQL在记录binlog时、会把线程id写入binlog、这样备库的应用线程就能知道每个语句的主库线程id、并利用这个线程id来构造临时表的table_def_key. </p>
+<h5 id="临时表可使用-alter修改表名、不能使用rename"><a href="#临时表可使用-alter修改表名、不能使用rename" class="headerlink" title="临时表可使用 alter修改表名、不能使用rename ?"></a>临时表可使用 alter修改表名、不能使用rename ?</h5><p>因为在<code>rename table</code>时、是按照 db&#x2F;table.frm 的规则去磁盘找文件、但临时表在磁盘上的frm文件是放在tmpdir目录下的、并且命名规则是: <code>#sql&#123;进程id&#125;_&#123;线程id&#125;_序列号.frm</code>, 所以会找不到.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%9C%89kill%E4%B8%8D%E6%8E%89%E7%9A%84%E8%AF%AD%E5%8F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%9C%89kill%E4%B8%8D%E6%8E%89%E7%9A%84%E8%AF%AD%E5%8F%A5/" class="post-title-link" itemprop="url">为什么还有kill不掉的语句</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-25 08:54:45" itemprop="dateCreated datePublished" datetime="2020-03-25T08:54:45+08:00">2020-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>为什么还要kill不掉的语句 ?</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Mysql 中有两个<span class="built_in">kill</span>命令: </span><br><span class="line"><span class="built_in">kill</span> query + 线程<span class="built_in">id</span>; // 终止线程中正在执行的语句; </span><br><span class="line"><span class="built_in">kill</span> connection + 线程<span class="built_in">id</span>; // 断开线程的连接、里边若有语句郑州执行、也会停止执行</span><br><span class="line">那么什么情况下、会出现: 使用了<span class="built_in">kill</span>命令、未断开连接、show processlist显示的是killed状态的现象呢 ?</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="收到kill以后、线程做什么"><a href="#收到kill以后、线程做什么" class="headerlink" title="收到kill以后、线程做什么 ?"></a>收到kill以后、线程做什么 ?</h4><p>kill 若直接终止、退出、会导致原来占有的锁无法释放、所以: kill 不会马上停止、而是告诉线程<code>可以执行停止的逻辑了</code>. 实际上执行<code>kull query thread_id_B</code>时、处理了两件事:</p>
+<ol>
+<li><p>将session B的运行状态改成 THD::KILL_QUERY(将killed赋值为THD::KILL_QUERY);</p>
+</li>
+<li><p>给session B的执行线程发一个信号.</p>
+</li>
+</ol>
+<h4 id="kill不掉的场景"><a href="#kill不掉的场景" class="headerlink" title="kill不掉的场景"></a>kill不掉的场景</h4><h5 id="线程并发数不够"><a href="#线程并发数不够" class="headerlink" title="线程并发数不够"></a>线程并发数不够</h5><p> innodb_thread_concurrency 不够用、线程未执行到判断线程逻辑的状态.</p>
+<p>  此时command列会显示killed, 但实际上服务端该语句还在执行中. 为什么不会直接退出呢 ?</p>
+<ol>
+<li>执行kill query时、</li>
+</ol>
+<p>  在实现上、等行锁、使用的是pthread_cond_timedwait函数、这个等待状态可以被唤醒. 虽然线程状态已经被置为kill_query, 但在这个等待进入innodb的循环过程中、并未判断线程状态、所以不会进入终止逻辑</p>
+<ol start="2">
+<li>kill connection</li>
+</ol>
+<p>  将线程状态置为 kill_connection、关掉线程的网络连接、所以被kill的session收到断开连接的提示. 为什么command列会显示为killed呢 ?</p>
+<p>  show processlist 有一个特别逻辑: 若线程状态为 kill_connection、就显示为 killed.</p>
+<p>  所以、即使Client退出了、线程状态仍然是等待中、直到满足进入innodb的条件后 session C才继续执行、然后才有可能判断到线程状态已经变成了kill_query 或者 kil_connection状态、再进入终止逻辑.</p>
+<h5 id="终止逻辑耗时长"><a href="#终止逻辑耗时长" class="headerlink" title="终止逻辑耗时长."></a>终止逻辑耗时长.</h5><p>  此时从processlist结果列上来看也是Killed、需要等终止逻辑完成、才算真正完成. 场景:</p>
+<ol>
+<li><p>超大事务执行期间被Kill、此时回滚事务需要对事务执行期间生成的所有数据版本做回收操作、耗时很长</p>
+</li>
+<li><p>大查询回滚、若查询过程中生成了较大的临时文件、加上此时文件系统压力大、删除临时文件可能需要等待IO资源、导致耗时较长</p>
+</li>
+<li><p>DDL命令执行到最后阶段、若被Kill、需要删除中间过程的临时文件、可能也要受到IO资源耗时久的影响.</p>
+</li>
+</ol>
+<h5 id="直接在客户端Ctrl-C是否可以终止线程呢"><a href="#直接在客户端Ctrl-C是否可以终止线程呢" class="headerlink" title="直接在客户端Ctrl+C是否可以终止线程呢 ?"></a>直接在客户端Ctrl+C是否可以终止线程呢 ?</h5><p>  不可以. 客户端只能操作客户端线程、Client和Server通过网络交互、不可能操作Server线程.</p>
+<p>  而由于MySQL是停等协议、所以、线程执行的语句还未返回的时候、再往连接发命令也是无效的. 实际上、Ctrl+C时、Mysql Client是另外启动一个连接、发送 kill query 命令.</p>
+<h4 id="两个关于Client的误解"><a href="#两个关于Client的误解" class="headerlink" title="两个关于Client的误解"></a>两个关于Client的误解</h4><h5 id="若库里包含的表特别多、连接就会很慢"><a href="#若库里包含的表特别多、连接就会很慢" class="headerlink" title="若库里包含的表特别多、连接就会很慢."></a>若库里包含的表特别多、连接就会很慢.</h5><p>  实际上、每个Client和Server建立连接时、需要做的事情就是 TCP握手、用户校验、获取权限、与库里表的数量无关. 但: 使用默认参数连接时、Mysql Client会提供本地库名和表名补全功能. 为了实现这个功能、Client在连接成功后、需要多一些操作:</p>
+<ol>
+<li><p>show databases;</p>
+</li>
+<li><p>切到db1、执行show tables;</p>
+</li>
+<li><p>将两个命令的结果构建一个本地hash表.</p>
+</li>
+</ol>
+<p>  最耗时的是操作(3). 所以、我们感知到的连接过程慢、其实不是连接慢、也不是Server慢、而是Client慢. 若不使用 或者很少使用 自动补全的话、建议默认加 -A</p>
+<p>  其实-quick(-q) 也可以跳过这个阶段. 但这个参数可能会降低Server性能. Mysql 发送请求后、接收Sever返回结果的方式有两种:</p>
+<ol>
+<li><p>本地缓存: 在本地开一片内存、将结果缓存、若使用API开发、对应:mysql_store_result.</p>
+</li>
+<li><p>不缓存: 读一个处理一个、若使用API、对应: mysql_use_result.</p>
+</li>
+</ol>
+<p>  MySQL默认采用本地缓存、若加上-quick会采用第二种. 此时、若本地处理的较慢、就会导致服务端发送结果被阻塞、让服务端变慢.</p>
+<h5 id="为什么叫-quick呢"><a href="#为什么叫-quick呢" class="headerlink" title="为什么叫 -quick呢 ?"></a>为什么叫 -quick呢 ?</h5><ol>
+<li><p>可以跳过表名自动补全</p>
+</li>
+<li><p>mysql_store_result需要申请本地内存来缓存查询结果、若结果太大、会耗费较多本地内存、影响Client本机性能.</p>
+</li>
+<li><p>不会把执行命令结果记录到本地的命令历史文件.</p>
+</li>
+</ol>
+<p>  所以: -quick 是让Client变得更快.</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考:"></a>思考:</h4><p>若碰到一个被Killed的事务一直处于回滚状态、应该把Mysql进程强制重启、还是让它执行完呢 ?</p>
+<p>因为重启后依然会继续回滚操作、所以 从恢复速度的角度来说、应该让它自己执行结束.</p>
+<p>若这个语句可能会占用别的锁、或者由于占用IO资源过多、影响到别的语句执行、就需要做主备切换、切到新的主库提供服务. 切换之后别的线程都断开了连接、自动停止执行, 接下来还是等它自己执行完成(减少系统压力、加速终止逻辑).</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

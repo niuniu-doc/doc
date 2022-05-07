@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="安装postman插件1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;451e0d009304   常用功能使用1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;15f8dfaaecef   生成sign签名123456789101112131415161718192021221. 编写脚本    以order项目为例(下边sign.js)2. 在请求中添加脚本   managerEnv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="postman添加sign签名">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/tools_postman%E6%B7%BB%E5%8A%A0sign%E7%AD%BE%E5%90%8D/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="安装postman插件1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;451e0d009304   常用功能使用1https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;15f8dfaaecef   生成sign签名123456789101112131415161718192021221. 编写脚本    以order项目为例(下边sign.js)2. 在请求中添加脚本   managerEnv">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-5337c8380fbe226e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-323bcf356a646c1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-2cf8d68e2ad29999.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-6f2ffb4315989907.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-066f5d87bcf85312.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-5e0888d32e2590c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.834Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-5337c8380fbe226e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/tools_postman%E6%B7%BB%E5%8A%A0sign%E7%AD%BE%E5%90%8D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>postman添加sign签名 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_postman%E6%B7%BB%E5%8A%A0sign%E7%AD%BE%E5%90%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          postman添加sign签名
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="安装postman插件"><a href="#安装postman插件" class="headerlink" title="安装postman插件"></a>安装postman插件</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>www.jianshu.com<span class="regexp">/p/</span><span class="number">451</span>e0d009304</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="常用功能使用"><a href="#常用功能使用" class="headerlink" title="常用功能使用"></a>常用功能使用</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>www.jianshu.com<span class="regexp">/p/</span><span class="number">15</span>f8dfaaecef</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="生成sign签名"><a href="#生成sign签名" class="headerlink" title="生成sign签名"></a>生成sign签名</h4><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 编写脚本 </span><br><span class="line">   以order项目为例(下边<span class="built_in">sign</span>.js)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 在请求中添加脚本</span><br><span class="line">   <span class="function"><span class="title">managerEnvirenment</span> -&gt;</span> <span class="function"><span class="title">add</span> -&gt;</span> <span class="built_in">sign</span> (值可以随便给、这个是用来给postman使用的、在发送请求时会替换为计算出来的<span class="built_in">sign</span>值)</span><br><span class="line">   如下图所示</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 发送请求、可以发现签名是ok的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. 如果发现签名不对、可以调试脚本</span><br><span class="line">   在chrome地址栏中输入：chrome:<span class="comment">//flags/#debug-packed-apps ，开启Debugging for packed app</span></span><br><span class="line">   输入chrome:<span class="comment">//inspect/#apps，选择postman的inspect  会弹出调试框</span></span><br><span class="line">   </span><br><span class="line">   在弹出的调试框里、选择elements在下边可以看到console</span><br><span class="line">   可以查看签名的方式是否正确(配合idea调试、对比签名方式和签名结果)</span><br><span class="line">   idea调试：以debug模式运行、</span><br><span class="line">   在指定合适的位置打断点、代码逻辑运行到断点处即会被中断掉、可以进行单步调试~~</span><br><span class="line">   查找问题出现的原因</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+
+
+
+
+<h4 id="sign-js"><a href="#sign-js" class="headerlink" title="sign.js"></a>sign.js</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> appkey = <span class="string">&#x27;6615be7b44ca4ab9ac03060088202792&#x27;</span>; <span class="comment">// 自动化测试的key</span></span><br><span class="line"> <span class="comment">//获取当前时间</span></span><br><span class="line"> <span class="keyword">function</span> <span class="title function_">createTime</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="keyword">return</span> (<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">valueOf</span>();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">var</span> time = <span class="title function_">createTime</span>();</span><br><span class="line"> <span class="keyword">var</span> method = request.<span class="property">method</span>;</span><br><span class="line"> <span class="keyword">delete</span> request.<span class="property">data</span>[<span class="string">&quot;sign&quot;</span>];</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;request data is : &quot;</span> + request.<span class="property">data</span>);</span><br><span class="line"> <span class="keyword">var</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(request.<span class="property">data</span>), i, len = keys.<span class="property">length</span>;</span><br><span class="line"> keys.<span class="title function_">sort</span>();</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;sortedKeys is : &quot;</span> + keys)</span><br><span class="line"> <span class="comment">// Build the request body string from the Postman request.data object</span></span><br><span class="line"> <span class="keyword">var</span> requestBody = <span class="string">&quot;&quot;</span>;</span><br><span class="line"> <span class="keyword">var</span> firstpass = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 构造数据为 key=param&amp;key=param....字符串</span></span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">var</span> index <span class="keyword">in</span> keys)&#123;</span><br><span class="line"> <span class="keyword">if</span> (keys[index] == <span class="string">&quot;sign&quot;</span>) &#123;</span><br><span class="line"> 	<span class="keyword">continue</span>;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">if</span>(!firstpass)&#123;</span><br><span class="line">    requestBody += <span class="string">&quot;&amp;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span>(keys[index]==<span class="string">&quot;create_time&quot;</span>)&#123;</span><br><span class="line">    request.<span class="property">data</span>[keys[index]]=time;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(request.<span class="property">data</span>[keys[index]]);</span><br><span class="line">    &#125;</span><br><span class="line">    requestBody += keys[index] + <span class="string">&quot;=&quot;</span> + request.<span class="property">data</span>[keys[index]];</span><br><span class="line">    firstpass = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">requestBody += <span class="string">&#x27;&amp;key=&#x27;</span> + appkey;   </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;request body is : &quot;</span> + requestBody);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> md5=<span class="title class_">CryptoJS</span>.<span class="title class_">MD5</span>(requestBody, appkey);</span><br><span class="line"><span class="keyword">var</span> base64md5 = <span class="title class_">CryptoJS</span>.<span class="property">enc</span>.<span class="property">Base64</span>.<span class="title function_">stringify</span>(md5);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(base64md5);</span><br><span class="line">postman.<span class="title function_">setEnvironmentVariable</span>(<span class="string">&#x27;sign&#x27;</span>, base64md5); <span class="comment">// 将变量放入postman 变量中;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>图一、添加postman环境变量<br><img src="https://upload-images.jianshu.io/upload_images/14027542-5337c8380fbe226e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-323bcf356a646c1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-2cf8d68e2ad29999.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>图二、postman脚本调试<br><img src="https://upload-images.jianshu.io/upload_images/14027542-6f2ffb4315989907.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-066f5d87bcf85312.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-5e0888d32e2590c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Tools/" rel="tag"># Tools</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/tools_vim/" rel="prev" title="vim">
+      <i class="fa fa-chevron-left"></i> vim
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/tools_postman%E5%8A%9F%E8%83%BD%E6%94%AF%E6%8C%81%E8%AE%B0%E5%BD%95/" rel="next" title="postman功能支持记录">
+      postman功能支持记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85postman%E6%8F%92%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">安装postman插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">常用功能使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90sign%E7%AD%BE%E5%90%8D"><span class="nav-number">3.</span> <span class="nav-text">生成sign签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sign-js"><span class="nav-number">4.</span> <span class="nav-text">sign.js</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

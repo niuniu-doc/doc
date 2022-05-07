@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="回顾  超标量: 可以让取指令及指令译码并行进行、 VLIW: 可以搞定指令先后依赖关系、使得一次取一个指令包  最后两个提升CPU性能的设计: 超线程 和 SIMD(单指令多数据流) 超线程1234567891011121314151617奔腾4处理器失败的重要原因: CPU的流水线级数太深、高达20级、而后期Prescott更是达到了31级、超长流水线、使得各种冒险、并发的方案都用不上解决冒险">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超线程和SIMD(27讲)">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%B6%85%E7%BA%BF%E7%A8%8B%E5%92%8CSIMD(27%E8%AE%B2)/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="回顾  超标量: 可以让取指令及指令译码并行进行、 VLIW: 可以搞定指令先后依赖关系、使得一次取一个指令包  最后两个提升CPU性能的设计: 超线程 和 SIMD(单指令多数据流) 超线程1234567891011121314151617奔腾4处理器失败的重要原因: CPU的流水线级数太深、高达20级、而后期Prescott更是达到了31级、超长流水线、使得各种冒险、并发的方案都用不上解决冒险">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-3b63d476f142a99f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-f32a5c0c67a98d4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.853Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-3b63d476f142a99f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%B6%85%E7%BA%BF%E7%A8%8B%E5%92%8CSIMD(27%E8%AE%B2)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>超线程和SIMD(27讲) | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%B6%85%E7%BA%BF%E7%A8%8B%E5%92%8CSIMD(27%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          超线程和SIMD(27讲)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>回顾</strong></p>
+<blockquote>
+<p><code>超标量</code>: 可以让取指令及指令译码并行进行、</p>
+<p><code>VLIW</code>: 可以搞定指令先后依赖关系、使得一次取一个指令包</p>
+</blockquote>
+<p>最后两个提升CPU性能的设计: <code>超线程</code> 和 <code>SIMD(单指令多数据流)</code></p>
+<h4 id="超线程"><a href="#超线程" class="headerlink" title="超线程"></a>超线程</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">奔腾<span class="number">4</span>处理器失败的重要原因: <span class="meta">CPU</span>的流水线级数太深、高达<span class="number">20</span>级、而后期Prescott更是达到了<span class="number">31</span>级、超长流水线、使得各种冒险、并发的方案都用不上</span><br><span class="line"></span><br><span class="line">解决冒险、提升并发的方案, 本质上是一种 <span class="string">`指令级并行(Instruction-level parallelism)`</span></span><br><span class="line">即: <span class="meta">CPU</span> 想要在同一个时间、并行的执行两条指令、而代码原本是有先后顺序的、流水线太深的话、之前的分支预测、乱序执行等优化方式都无法起到很好的效果、</span><br><span class="line"></span><br><span class="line"><span class="number">2002</span>年底、Pentium4的<span class="meta">CPU</span>、第一次引入了超线程(Hyper-Threading技术)</span><br><span class="line"><span class="string">`超线程`</span>: 既然<span class="meta">CPU</span>运行在代码层面有前后依赖关系的指令、会遇到各种冒险问题、如果运行完全独立的程序呢? 指令间是没有依赖关系的、那么跟多个<span class="meta">CPU</span>运行不同任务、或者多进程、多线程技术有什么区别呢 ?</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>.多个<span class="meta">CPU</span>上运行不同的程序、单个<span class="meta">CPU</span>核心里切换运行不同的线程任务、在同一时间点上、其实一个物理的<span class="meta">CPU</span>核心只运行一个线程的指令、所以, 并没有真正做到指令级并行</span><br><span class="line"><span class="number">2</span>. 超线程 是把一个物理<span class="meta">CPU</span>核心、伪装成两个逻辑<span class="meta">CPU</span>、这个<span class="meta">CPU</span>会在硬件层面增加很多电路、使得我们可以在一个<span class="meta">CPU</span>核心内部、维护两个不同线程的指令状态信息</span><br><span class="line">eg. 在一个物理<span class="meta">CPU</span>核心内部、有双份PC寄存器、指令寄存器及条件码寄存器、可以维护两条并行指令的状态、在外面看起来、好像有两个逻辑层面的<span class="meta">CPU</span>同时在运行、也叫<span class="string">`同时多线程`</span>(Simultanneous Multi-Threading, 简称SMT)技术</span><br><span class="line"></span><br><span class="line">但: 在<span class="meta">CPU</span>其它的功能组件上、eg. 指令译码器和ALU 依然只有一份、因为超线程并不真正运行两个指令、它的目的在于 一个线程A的指令、在流水线停顿的时候、让线程B与执行、利用此时<span class="meta">CPU</span>译码器和ALU的空闲来处理、提高<span class="meta">CPU</span>利用率</span><br><span class="line"></span><br><span class="line">通过很小的<span class="meta">CPU</span>代价、实现了同时运行多个线程的效果、通常只要在<span class="meta">CPU</span>核心添加<span class="number">10</span>%左右的逻辑功能、增加可以忽略不计的晶体管数量、就可以实现、但同样只能应用在特殊的额应用场景下(线程等待时间较长)</span><br><span class="line">eg. 需要对很多请求的数据库应用、就很适合、各个指令都需要等待访问内存数据，<span class="meta">CPU</span>计算并未跑满、但当前指令往往要停顿在流水线上、等待内存数据返回、这时、让<span class="meta">CPU</span>里的各个功能单元、处理另一个<span class="built_in">db</span>查询的案例就很好</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-3b63d476f142a99f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="SIMD-如何加速矩阵算法"><a href="#SIMD-如何加速矩阵算法" class="headerlink" title="SIMD: 如何加速矩阵算法"></a>SIMD: 如何加速矩阵算法</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">SIMD:</span> 单指令多数据流(Single <span class="keyword">Instruction </span><span class="keyword">Multiple </span>Data)</span><br><span class="line"><span class="symbol">SISD:</span> 单指令单数据(Single <span class="keyword">Instruction </span>Single Data)</span><br><span class="line">多核CPU可以实现MIMD(<span class="keyword">Multiple </span><span class="keyword">Instruction </span><span class="keyword">Multiple </span>Data)</span><br><span class="line"></span><br><span class="line">为什么SIMD指令可以提高代码执行效率呢? </span><br><span class="line"><span class="number">1</span>.因为SIMD在获取数据和执行指令的时候都是并行的、从内存读数据的时候、SIMD是一次性读多个数据</span><br><span class="line">Intel在引入SSE指令集的时候、在CPU里添加了<span class="number">8</span>个<span class="number">128</span>Bits的寄存器、即 <span class="number">16</span>Bytes、一个寄存器一次性可以加载<span class="number">4</span>个整数、比起循环加载、时间就节省了</span><br><span class="line"><span class="number">2</span>. 指令执行层面、<span class="number">4</span>个整数加法、相互之间完全无依赖、也就没有冒险问题要处理、有足够多的FU即可并行执行、这个加法就是<span class="number">4</span>路同时并行的、也会节省时间</span><br><span class="line"></span><br><span class="line">基于SIMD的向量计算指令、正是在Intel发布Pentium处理器的时候、被引入的指令集、当时的指令集叫 `MMX`, 即: `Matrix Math <span class="keyword">eXtensions`的英文缩写、中文名字叫 </span>矩阵数学扩展</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-f32a5c0c67a98d4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>超线程技术是线程级并行的解决方案、很多场景下不一定能带来性能的提升</p>
+<p>SIMD是指令级并行的解决方案、在处理向量计算的情况下、同一个向量的不同维度之间的计算是相互独立的、</p>
+<p>两者都优化了CPU的使用</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98(37~38%E8%AE%B2)/" rel="prev" title="高速缓存(37~38讲)">
+      <i class="fa fa-chevron-left"></i> 高速缓存(37~38讲)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E6%BC%AB%E8%B0%88/" rel="next" title="计算机概念漫谈">
+      计算机概念漫谈 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B6%85%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">超线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SIMD-%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F%E7%9F%A9%E9%98%B5%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">SIMD: 如何加速矩阵算法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="GPU的历史进程123456GPU是随着需要在计算机里渲染三维图形、而发展起来的设备到90年代中期、随个人电脑的性能越来越好、开始有了3D显卡的需求、那个时代之前的3D游戏、都是伪3D从不同视角看到的是8副不同的贴图、并不是通过图形学渲染出来的多边形为什么CPU的性能已经大幅度提升、还需要单独的GPU呢 ？    图形渲染的流程1234567891011现在电脑显示的3D画面、其实是通过多边形组合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPU的产生和发展(第30、31讲)">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_GPU%E7%9A%84%E4%BA%A7%E7%94%9F%E5%92%8C%E5%8F%91%E5%B1%95(%E7%AC%AC30%E3%80%8131%E8%AE%B2)/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="GPU的历史进程123456GPU是随着需要在计算机里渲染三维图形、而发展起来的设备到90年代中期、随个人电脑的性能越来越好、开始有了3D显卡的需求、那个时代之前的3D游戏、都是伪3D从不同视角看到的是8副不同的贴图、并不是通过图形学渲染出来的多边形为什么CPU的性能已经大幅度提升、还需要单独的GPU呢 ？    图形渲染的流程1234567891011现在电脑显示的3D画面、其实是通过多边形组合">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-f713259807500f3e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-c61ffb172e910ccf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-4a8944f4e16eae26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-a8845384202d495f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.844Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-f713259807500f3e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_GPU%E7%9A%84%E4%BA%A7%E7%94%9F%E5%92%8C%E5%8F%91%E5%B1%95(%E7%AC%AC30%E3%80%8131%E8%AE%B2)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>GPU的产生和发展(第30、31讲) | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_GPU%E7%9A%84%E4%BA%A7%E7%94%9F%E5%92%8C%E5%8F%91%E5%B1%95(%E7%AC%AC30%E3%80%8131%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GPU的产生和发展(第30、31讲)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="GPU的历史进程"><a href="#GPU的历史进程" class="headerlink" title="GPU的历史进程"></a>GPU的历史进程</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GPU是随着需要在计算机里渲染三维图形、而发展起来的设备</span><br><span class="line"></span><br><span class="line">到<span class="number">90</span>年代中期、随个人电脑的性能越来越好、开始有了<span class="number">3D</span>显卡的需求、那个时代之前的<span class="number">3D</span>游戏、都是伪<span class="number">3D</span></span><br><span class="line">从不同视角看到的是<span class="number">8</span>副不同的贴图、并不是通过图形学渲染出来的多边形</span><br><span class="line"></span><br><span class="line">为什么<span class="meta">CPU</span>的性能已经大幅度提升、还需要单独的GPU呢 ？</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="图形渲染的流程"><a href="#图形渲染的流程" class="headerlink" title="图形渲染的流程"></a>图形渲染的流程</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">现在电脑显示的3D画面、其实是通过多边形组合出来的. 现在各种游戏人物的脸、不是相机或者摄像头拍出来的、而是通过多边形建模创建出来的</span><br><span class="line"></span><br><span class="line">实际这些人物在画面里的移动、动作、乃至根据光线发生的变化、都是通过计算机根据图形学的各种计算、实时渲染出来的</span><br><span class="line"></span><br><span class="line">图像实时渲染、可拆解为:</span><br><span class="line"><span class="bullet">1.</span> 定点处理 (Vertex Processing)</span><br><span class="line"><span class="bullet">2.</span> 图元处理 (Primitive Processing)</span><br><span class="line"><span class="bullet">3.</span> 栅格化 (Rasteerization)</span><br><span class="line"><span class="bullet">4.</span> 片段处理 (Fragement Processing)</span><br><span class="line"><span class="bullet">5.</span> 像素操作 (Pixel Operations)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="解放图像渲染的GPU"><a href="#解放图像渲染的GPU" class="headerlink" title="解放图像渲染的GPU"></a>解放图像渲染的GPU</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">若使用<span class="meta">CPU</span>渲染、需要多少资源来处理 ?</span><br><span class="line">上世纪<span class="number">90</span>年代、屏幕分辨率大概: <span class="number">640</span>*<span class="number">480</span>, 约30w, 为了眼睛看到的画面不眩晕、希望画面有<span class="number">60</span>帧、即:</span><br><span class="line">每秒重新渲染<span class="number">60</span>次(<span class="number">1800</span>万次单个像素的渲染), 从栅格化开始、每个像素有<span class="number">3</span>个流水线步骤、假设每个步骤只有<span class="number">1</span>个指令、也需要5400w条指令</span><br><span class="line"></span><br><span class="line"><span class="number">90</span>年代的<span class="meta">CPU</span>性能是多少呢 ? <span class="number">93</span>年第一代Pentium处理器、主频60MHZ、后续逐步推出了 66MHZ、75MHZ、100MHZ的处理器、以这个性能来看、用<span class="meta">CPU</span>来渲染<span class="number">3D</span>图形、就基本上把<span class="meta">CPU</span>的性能耗光了、因为实际的每一个渲染步骤不可能只包含一个指令、所以、<span class="meta">CPU</span>跑不动<span class="number">3D</span>图形渲染</span><br><span class="line"></span><br><span class="line">既然图形渲染的流程是固定的、直接使用硬件来处理、不用<span class="meta">CPU</span>计算是不是可以呢 ? Voodoo FX这样的图形加速器出现了、显然、硬件会比制造通用计算性能的<span class="meta">cpu</span>要便宜的多、因为整个计算过程是固定的、不需要流水线停顿、乱序执行等各类导致<span class="meta">CPU</span>计算变的复杂的问题、也不需要可编程能力、只让硬件按照谢浩的逻辑进行运算即可</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="现代GPU的三个核心创意"><a href="#现代GPU的三个核心创意" class="headerlink" title="现代GPU的三个核心创意"></a>现代GPU的三个核心创意</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">现代CPU里的晶体管越来越多、越来越复杂、其实已经不是用来实现`计算`这个核心功能、而是拿来实现乱序执行、分支预测及存储器高速缓存</span><br><span class="line"></span><br><span class="line">而 对于GPU、这些电路就很多余了、GPU的整个处理过程是一个流式处理的过程(Stream Processing), </span><br><span class="line"><span class="title">因为没有太多分支条件或者复杂的依赖关系、可以把GPU的对应电路都省掉、只保留取指令、指令译码、ALU以及执行这些计算需要的寄存器和缓存、一般会抽象为如下图三部分:</span> 取指令、指令译码、ALU和执行上下文(乱序执行、分支预测、高速缓存... 都被省掉)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-f713259807500f3e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="SIMT和多核并行"><a href="#SIMT和多核并行" class="headerlink" title="SIMT和多核并行"></a>SIMT和多核并行</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">这样一来、GPU的电路就比<span class="meta">CPU</span>简化很多了、于是可以在一个GPU里、塞很多并行的GPU来实现计算、好像<span class="meta">CPU</span>里的多核<span class="meta">CPU</span>一样、和<span class="meta">CPU</span>不同的是、不需要单独实现多线程的计算、GPU的计算是天然并行的</span><br><span class="line"></span><br><span class="line">上节提到:</span><br><span class="line">无论是对多边形里的顶点进行处理还是对屏幕里的每一个像素、每个点的计算都是独立的、所以:</span><br><span class="line">简单的添加多核的GGPU、就能做到并行加速、</span><br><span class="line">另外: <span class="meta">CPU</span>的SIMD技术: 在向量计算的时候、要执行的指令是一样的、只是同一个指令的数据有所不同、在GPU的渲染管里、无论是顶点线性变换还是屏幕上临近像素点的光照和上色、都是在用相同指令流程进行计算、GPU就借鉴了SIMD、用来一种叫SIMT的技术,</span><br><span class="line"></span><br><span class="line">SIMT比SIMD更加灵活、在SIMD里、<span class="meta">CPU</span>一次性取出了多个固定长度的数据、放在寄存器里、用同一个指令去执行、而SIMT可以将多条数据、交给不同的线程来处理</span><br><span class="line"></span><br><span class="line">各个线程里执行的指令流程是相同的、但可能根据数据的不同、走到不同的条件分支、这样相同的代码和相同的流程、可能执行不同的具体的指令、于是GPU可以进一步简化、取指的时候可以交给后面多个不同的ALU并行计算、这样一个GPU的核里就可以放下更多的ALU、同时进行更多的并行运算了</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c61ffb172e910ccf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="多核并行.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4a8944f4e16eae26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SIMT并行-多个ALU.png"></p>
+<h4 id="GPU里的超线程"><a href="#GPU里的超线程" class="headerlink" title="GPU里的超线程"></a>GPU里的超线程</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GPU里的指令、可能会遇到和CPU类似的流水线停顿问题、是不是可以想到优化方案`超线程` ?</span><br><span class="line"><span class="title">在GPU里一样可以有类似的优化. 即:</span> 遇到流水线停顿时、调度一些别的计算任务给当前的ALU</span><br><span class="line"></span><br><span class="line">和超线程一样、既然要调度一个不同的任务执行、就需要针对这个任务、提供更多的执行上下文、so. 一个Core里的执行上下文的数量、需要比 ALU 多</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-a8845384202d495f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="GPU在深度学习上的性能差异"><a href="#GPU在深度学习上的性能差异" class="headerlink" title="GPU在深度学习上的性能差异"></a>GPU在深度学习上的性能差异</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">通过芯片瘦身、SIMT和更多的执行上下文、GPU更擅长并行进行暴力运算、恰好适合深度学习的应用场景</span><br><span class="line"></span><br><span class="line"><span class="section">一方面: GPU是一个可以进行通用计算的框架、可以通过编程、在GPU上实现不同的算法、</span></span><br><span class="line"><span class="section">另一方面: 现在的深度学习计算、都是超大的向量和矩阵、海量的训练样本的计算、整个过程没有复杂的逻辑和分支、非常适合GPU这样并行、计算能力强的架构</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" rel="prev" title="IO设备(43讲)">
+      <i class="fa fa-chevron-left"></i> IO设备(43讲)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_FPGA%E5%92%8CASIC(32%E8%AE%B2)/" rel="next" title="FPGA和ASIC(32讲)">
+      FPGA和ASIC(32讲) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU%E7%9A%84%E5%8E%86%E5%8F%B2%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">GPU的历史进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">图形渲染的流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%94%BE%E5%9B%BE%E5%83%8F%E6%B8%B2%E6%9F%93%E7%9A%84GPU"><span class="nav-number">3.</span> <span class="nav-text">解放图像渲染的GPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3GPU%E7%9A%84%E4%B8%89%E4%B8%AA%E6%A0%B8%E5%BF%83%E5%88%9B%E6%84%8F"><span class="nav-number">4.</span> <span class="nav-text">现代GPU的三个核心创意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SIMT%E5%92%8C%E5%A4%9A%E6%A0%B8%E5%B9%B6%E8%A1%8C"><span class="nav-number">5.</span> <span class="nav-text">SIMT和多核并行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU%E9%87%8C%E7%9A%84%E8%B6%85%E7%BA%BF%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">GPU里的超线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU%E5%9C%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%8A%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%AE%E5%BC%82"><span class="nav-number">7.</span> <span class="nav-text">GPU在深度学习上的性能差异</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

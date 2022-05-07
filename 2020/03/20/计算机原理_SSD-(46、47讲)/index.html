@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="SSD的读写原理12345678910111213141516171819202122232425262728下边性能对比图显示: SSD的耐用性很差、若需要频繁的写入&#x2F;删除数据、则机械硬盘比SSD性价比要高很多.之前我们知道、CPU Cahe 是SRAM 用一个电容来存放一个比特的数据、对于SSD、也可先简单认为, 是一个电容+一个电压计、记录一个或多个比特&#96;SLC&#96;、&#96;MLC&#96;、&#96;TLC&#96;、&#96;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSD-(46、47讲)">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_SSD-(46%E3%80%8147%E8%AE%B2)/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="SSD的读写原理12345678910111213141516171819202122232425262728下边性能对比图显示: SSD的耐用性很差、若需要频繁的写入&#x2F;删除数据、则机械硬盘比SSD性价比要高很多.之前我们知道、CPU Cahe 是SRAM 用一个电容来存放一个比特的数据、对于SSD、也可先简单认为, 是一个电容+一个电压计、记录一个或多个比特&#96;SLC&#96;、&#96;MLC&#96;、&#96;TLC&#96;、&#96;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-277084bb88844b36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-dbd383714531b895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-25a82b2bc13b5e1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.845Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-277084bb88844b36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_SSD-(46%E3%80%8147%E8%AE%B2)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SSD-(46、47讲) | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_SSD-(46%E3%80%8147%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SSD-(46、47讲)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="SSD的读写原理"><a href="#SSD的读写原理" class="headerlink" title="SSD的读写原理"></a>SSD的读写原理</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">下边性能对比图显示:</span> SSD的耐用性很差、若需要频繁的写入/删除数据、则机械硬盘比SSD性价比要高很多.</span><br><span class="line"></span><br><span class="line">之前我们知道、CPU Cahe 是SRAM 用一个电容来存放一个比特的数据、对于SSD、也可先简单认为, </span><br><span class="line">是一个电容+一个电压计、记录一个或多个比特</span><br><span class="line"></span><br><span class="line">`SLC`、`MLC`、`TLC`、`QLC`</span><br><span class="line">给电容充电时、电压就是<span class="number">1</span><span class="comment">; 放电后,里边没电、就是0. 采用这种方式存储的SSD硬盘、称`使用了SLC的颗粒`,</span></span><br><span class="line"><span class="title">全称`Single-Level Cell`, 即:</span> 一个存储单元只有一位数据.</span><br><span class="line"><span class="title">但: 这样就会遇到与CPU Cache相同的问题:</span> 相同面积下、由于存放的元器件有限、存储容量上不去.</span><br><span class="line">于是, 有了`MLC`(Multi-Level Cell)、`TLC`(Triple-Level Cell)及`QLC`(Quad-Level Cell), </span><br><span class="line"><span class="title">即:</span> 一个电容可存<span class="number">2</span>、<span class="number">3</span>乃至<span class="number">4</span>个bit</span><br><span class="line">同时, 由于对精度的要求更高、QLC的读写速度比SLC要慢好几倍</span><br><span class="line"></span><br><span class="line">P/E擦写问题</span><br><span class="line">SSD同其它IO设备、有对应接口和控制电路、控制电路中一个很重要的模块叫`TFL`(Flush Transaction Layer)</span><br><span class="line">闪存转换层. SSD磁盘性能的好坏、很大程度上取决于FTL算法的好坏.</span><br><span class="line"></span><br><span class="line">实际的IO设备和机械硬盘很像、有很多裸片叠在一起<span class="comment">;</span></span><br><span class="line">一张裸片上可放多个平面(Plane), 一个平面的存储容量大概在GB级别<span class="comment">; </span></span><br><span class="line">一个平面上会划分成很多块(Block), 一般一个块的存储大小在几百KB到几MB<span class="comment">;</span></span><br><span class="line">一个块、还会分为很多页(Page), 大小通常是<span class="number">4</span>KB.</span><br><span class="line"></span><br><span class="line">SSD读取和写入的基本单位是`页`， 擦除单位是`块`.</span><br><span class="line">SSD的使用寿命、其实就是每一个块的擦除次数.</span><br><span class="line">`SLC`的擦除次数大概在<span class="number">10</span>w次、`MLC`就<span class="number">1</span>w次左右、`TLC`和`QLC`只有几千次.</span><br><span class="line"></span><br><span class="line">SSD特别适合读多、写少的应用、在日常应用里、系统盘适合使用SSD.</span><br><span class="line">但若使用SSD做下载盘、一直下载各种影音数据、就不好了、特别是现在QLC的SSD, 只有几千次的擦写寿命.</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-277084bb88844b36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SSD和HDD性能对比.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-dbd383714531b895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SSD物理结构.png"></p>
+<h4 id="如何最大化利用SSD"><a href="#如何最大化利用SSD" class="headerlink" title="如何最大化利用SSD"></a>如何最大化利用SSD</h4><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`磨损均衡`</span>: 实现的核心办法、类似虚拟内存、添加一个间接层<span class="string">`FTL`</span>， 像通过一个页表映射虚拟内存和物理页</span><br><span class="line">一样、在<span class="symbol">FLT</span>里存放了逻辑块地址(<span class="symbol">Logic</span> <span class="symbol">Block</span> <span class="symbol">Address</span>, <span class="symbol">LBA</span>)到物理块地址(<span class="symbol">Physical</span> <span class="symbol">Block</span> <span class="symbol">Address</span>, </span><br><span class="line"><span class="symbol">PBA</span>)的映射.</span><br><span class="line"></span><br><span class="line">操作系统所有对<span class="symbol">SSD</span>的读写请求、都要经过<span class="symbol">FLT</span>、<span class="symbol">FTL</span>里又有逻辑块对应的物理块、这样<span class="symbol">FTL</span>可以记录每个物理块</span><br><span class="line">被擦写的次数. 若一个物理块被擦写较多、<span class="symbol">FTL</span>就将它挪到一个擦写少的物理块上,逻辑块不动、操作系统无感.</span><br><span class="line"></span><br><span class="line"><span class="string">`TRIM`</span>指令支持</span><br><span class="line">操作系统不关心底层硬件是什么、在<span class="symbol">SSD</span>的使用上也会带来一个问题:</span><br><span class="line">操作系统的逻辑层和<span class="symbol">SSD</span>的逻辑层里的块状态是不匹配的.</span><br><span class="line"></span><br><span class="line">在操作系统里删除一个文件、其实并没有真正在物理层操作删除、只在文件系统里把对应的inode元信息清理掉, </span><br><span class="line">这个inode还可以继续使用, 写入新的数据, 在物理层面对应的存储空间、在操作系统里被标示可写入.</span><br><span class="line">所以: 日常文件删除、只是操作系统层面的逻辑删除、不小心误删文件时、还可以通过恢复软件、恢复出来,</span><br><span class="line">想彻底删除数据、需要使用文件粉碎功能.</span><br><span class="line"></span><br><span class="line">这个删除的逻辑在机械硬盘上可行、后续的写入可直接覆写该位置. 但在<span class="symbol">SSD</span>上不行. </span><br><span class="line"></span><br><span class="line">eg. 在操作系统里删除一个刚下载的文件 a.txt, 在操作系统里、对应的inode里、就没有文件的元信息,</span><br><span class="line">但 <span class="symbol">SSD</span>的逻辑块层面、并不知道这个事情, a.txt 依然占用了空间、对应的物理页、也是被占用的.</span><br><span class="line">此时: 若要对<span class="symbol">SSD</span>进行垃圾回收、a.txt 对应的物理页、让要被搬运到其它<span class="symbol">Block</span>中去、只有当操作系统再</span><br><span class="line">在刚才的inode写入数据时、才会知道原来的数据已无用, 才会标记删除这种现象导致, 为了磨损均衡、</span><br><span class="line">可能搬运了很多已删除的数据、导致很多不必要的数据读写和擦除, 损耗<span class="symbol">SSD</span>性能.</span><br><span class="line"></span><br><span class="line">为了解决这个问题、现在的操作系统和<span class="symbol">SSD</span>的主控芯片都支持<span class="string">`TRIM`</span>命令、可在文件删除时、让操作系统通知</span><br><span class="line"><span class="symbol">SSD</span>, 标记对应逻辑块为已删除.</span><br><span class="line"></span><br><span class="line"><span class="string">`写入放大`</span>:</span><br><span class="line"><span class="symbol">TRIM</span> 命令的发明，也反应了一个使用 <span class="symbol">SSD</span> 硬盘的问题，那就是，<span class="symbol">SSD</span> 硬盘容易越用越慢.</span><br><span class="line"><span class="symbol">SSD</span>存储空间被越占越多时、每次数据写入可能都没有足够空间, 不得不进行垃圾回收、合并块里的页、</span><br><span class="line">然后擦除一些页. 此时, 从操作系统层看、可能只是写入<span class="number">4</span>k或者<span class="number">4</span><span class="symbol">M</span>的数据、通过<span class="symbol">FTL</span>后、可能要搬运<span class="number">8</span><span class="symbol">MB</span>、<span class="number">16</span><span class="symbol">MB</span>甚至更多的数据</span><br><span class="line"></span><br><span class="line"><span class="string">`实际的闪存写入的数据量 / 系统通过 FTL 写入的数据量 = 写入放大`</span></span><br><span class="line">写入放大越多、<span class="symbol">SSD</span>的性能也就越差.</span><br><span class="line">解决写入放大、需要在后台定时进行垃圾回收.在磁盘较闲时、把搬运数据、擦除数据、留出空白的工作做完.</span><br><span class="line">实际数据写入时、就不会有这么多的性能损耗了.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-25a82b2bc13b5e1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="AeroSpike-如何最大化SSD的使用效率"><a href="#AeroSpike-如何最大化SSD的使用效率" class="headerlink" title="AeroSpike: 如何最大化SSD的使用效率"></a>AeroSpike: 如何最大化SSD的使用效率</h4><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.AeroSpike 操作SSD硬盘、未通过操作系统的文件系统、而是直接操作SSD里的块和页.</span><br><span class="line"><span class="number">2</span>.AeroSpike 在读写数据时有<span class="number">2</span>个优化.</span><br><span class="line">  <span class="number">1</span>) 写数据时、尽可能写一个较大的块, 而不是频繁的写很多小的数据块, 这样磁盘就不太容易出现磁盘碎片.</span><br><span class="line">     也更好的理由磁盘的顺序写入优势.</span><br><span class="line">  <span class="number">2</span>) 读取时、可以读取小数据, 因为SSD的随机读取性能很好、也不像写入数据一样有擦除寿命问题. </span><br><span class="line">     且一次性读较大数据、需要在网络间传输时、可能导致带宽不够.</span><br><span class="line"></span><br><span class="line">另: 由于AeroSpike是一个对响应时间要求很高的实时KV数据库、若出现严重的写放大效应、会导致数据写入</span><br><span class="line">响应时长大幅度变长. 所以做了下边的优化:</span><br><span class="line"><span class="number">1</span>. 持续进行磁盘碎片整理. 使用高水位算法, 其实就是: 一旦一个物理块的数据碎片超过<span class="number">50</span><span class="comment">%, 就将其搬运</span></span><br><span class="line">压缩、然后进行数据擦除、确保始终有足够空间写入.</span><br><span class="line"><span class="number">2</span>.为保障数据库性能,建议只用SSD硬盘容量一半, 即: 人为预留SSD50<span class="comment">%空间、确保SSD的写放大效应尽可能小.</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_TPU--%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%8B%86%E8%A7%A3ASIC%E8%8A%AF%E7%89%87/" rel="prev" title="TPU--设计和拆解ASIC芯片">
+      <i class="fa fa-chevron-left"></i> TPU--设计和拆解ASIC芯片
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_RISC%E5%92%8CCISC/" rel="next" title="RISC和CISC">
+      RISC和CISC <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SSD%E7%9A%84%E8%AF%BB%E5%86%99%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">SSD的读写原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9C%80%E5%A4%A7%E5%8C%96%E5%88%A9%E7%94%A8SSD"><span class="nav-number">2.</span> <span class="nav-text">如何最大化利用SSD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AeroSpike-%E5%A6%82%E4%BD%95%E6%9C%80%E5%A4%A7%E5%8C%96SSD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%88%E7%8E%87"><span class="nav-number">3.</span> <span class="nav-text">AeroSpike: 如何最大化SSD的使用效率</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/9/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Redis读书笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- MarkdownTOC -->
+
+<ul>
+<li>一些说明</li>
+<li>书籍资源</li>
+</ul>
+<!-- /MarkdownTOC -->
+
+
+<h4 id="一些说明"><a href="#一些说明" class="headerlink" title="一些说明"></a>一些说明</h4><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">最近读了一本书、感觉有些部分还不错、希望分享出来、</span><br><span class="line">是读书笔记、可能提炼度不够、希望以后的自己做的越来越好~~.~~</span><br><span class="line">书籍：Redis<span class="number">-4</span>.<span class="keyword">x</span> CookBook</span><br><span class="line">除特别说明外、本系列文档都是针对 redis <span class="number">4</span>.<span class="keyword">x</span> 的版本</span><br></pre></td></tr></table></figure>
+
+<h4 id="书籍资源"><a href="#书籍资源" class="headerlink" title="书籍资源"></a>书籍资源</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">原项目代码git托管地址：</span><br><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/PacktPublishing/</span>Redis-<span class="number">4</span>.x-Cookbook</span><br><span class="line"></span><br><span class="line">书中相关图文：</span><br><span class="line">https:<span class="regexp">//</span>www.packtpub.com<span class="regexp">/sites/</span>default<span class="regexp">/files/</span>downloads/Redis4xCookbook_ColorImages.pdf</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/" class="post-title-link" itemprop="url">读写分离有哪些坑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-9443eea1ca9ff032.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="读写分离基本架构.png"></p>
+<blockquote>
+<p>读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.</p>
+</blockquote>
+<p>两种负载方式的差异:</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="built_in">Client</span>负载、少了一层proxy转发、查询性能稍微好一些、且整体架构简单、排查问题方便、</span><br><span class="line">但与DB层耦合性高、若出现主备切换或者库迁移、<span class="built_in">Client</span>需要调整连接信息</span><br><span class="line"><span class="number">2.</span> proxy负载. 对<span class="built_in">Client</span>友好、但proxy本身也需要高可用架构、整体架构设计较复杂.</span><br></pre></td></tr></table></figure>
+<p>不管采用哪种负载方式, 都会存在<code>从库读到系统过期状态</code>的现象, 称为<code>过期读</code>.<br>那么、如何解决过期读呢 ?<br>一、强制走主库<br>其实就是将查询分类、对于必须拿到最新结果的请求、强制转发到主库; 对于可以接受稍微延迟的请求、转发给从库. 但: 极端情况下、可能所有的请求都不能接受延迟、这样所有请求都打到主库、就失去了扩展性.</p>
+<p>二、sleep一段时间<br>eg. 查询数据之前、先强制等待一段时间、但会失去用户体验度. 不过可以折中、用Ajax将客户端输入内容直接展示在页面上、而不去查询DB.<br>存在的问题是: </p>
+<ol>
+<li>若查询本可以0.5s就从从库拿到结果、也会等1s</li>
+<li>若延迟超过1s、还是会出现过期读.</li>
+</ol>
+<p>三、判断主备无延迟</p>
+<ol>
+<li><p>每次从库查询前、先判断<code>seconds_behind_master</code>值、直到&#x3D;0、才执行查询请求.</p>
+</li>
+<li><p>对比位点、确保主备无延迟<br><code>master_log_file</code> 和 <code>read_master_log_pos</code>, 表示读到的主库的最新位点<br><code>relay_master_log_file</code> 和 <code>exec_master_log_pos</code>表示备库执行的最新位点<br>这两组值完全相同时、表示接收的日志已完成同步.</p>
+</li>
+<li><p>对比gtid<br><code>auto_position</code>&#x3D;1, 表示主备关系使用了gtid协议<br><code>retrieved_gtid_set</code>, 表示的是备库收到的所有日志gtid集合<br><code>executed_gtid_set</code>, 是备库已经执行完成的gtid集合<br>这两个集合相同、表示接收到的日志已同步完成.</p>
+<p> 2、3两个方案都是基于<code>备库接收到的日志</code>执行完成了、但还有一部分日志是: Client已经收到提交确认、但备库还未收到日志的状态、所以, 比1要好些、但未达到精准的程度.</p>
+</li>
+</ol>
+<p>四、配合semi-sync方案<br>对于上边的问题、可以解决不? 利用版同步复制、<code>semi-sync replication</code>可以.<br><code>semi-sync</code>设计:</p>
+<ol>
+<li>事务提交时、将binlog发给从库</li>
+<li>从库收到binlog、给主库发送一个ack、代表收到了</li>
+<li>主库收到ack以后、才返回给客户端<code>事务完成</code>的确认.<br>这样, 使用semi-sync配合前边的位点判断、就可以确定从库上执行的查询请求、避免过期读</li>
+</ol>
+<p>但: 一主多从的场景下、主库只要等到一个从库的ack、就开始对Client返回确认、这时可能会存在过期读(查询请求落到了非确认的从库上)</p>
+<p>判断同步位点还有一个潜在问题: 若业务更新的高峰期、可能出现主库的位点或者GTID集合更新很快、导致位点等着判断一直不成立、从库迟迟无法响应的情况. 其实、我们并不需要完全同步、只希望要查询的数据已经同步即可.</p>
+<p>五、等主库位点<br>可以解决上边两个问题:</p>
+<ol>
+<li>一主多从时、部分从库过期读</li>
+<li>过度等待<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> master_pos_wait(file, pos[, timeout]);</span><br></pre></td></tr></table></figure>
+执行逻辑:</li>
+<li>从库上执行</li>
+<li>file 和 pos 指主库上的文件名 和 位置</li>
+<li>timeout 可选、设为正整数N表示这个函数最多等待N秒<br>正常返回一个正整数M、表示从命令开始执行、到应用完file和pos代表的binlog位置、执行了多少事务.<br>其它返回值:</li>
+<li>null、表示执行期间、备库同步线程发生异常</li>
+<li>-1、超过等待时间Ns</li>
+<li>0、刚开始执行时、发现该位置已经执行过了.<br>则、查询逻辑变成了:<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> trx1更新完成后、马上执行 show master status 得到当前主库执行到的File 和 Pos</span><br><span class="line"><span class="bullet">2.</span> 选择一个从库执行查询语句</span><br><span class="line"><span class="bullet">3.</span> 在从库上执行 select master<span class="emphasis">_pos_</span>wait(File, Pos, 1);</span><br><span class="line"><span class="bullet">4.</span> 若返回值是&gt;=0的正整数、则在该从库查询、否则到主库查询</span><br><span class="line">同样存在的问题是: 若所有从库都延迟了、查询压力会打到主库</span><br></pre></td></tr></table></figure>
+一般对于不允许过期读的要求、有两种方案: 超时放弃 和 转到主库, 要根据业务选择.</li>
+</ol>
+<p>六、等GTID<br>若开启GTID模式、同样有等待GTID的方案</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> wait_for_executed_gtid_set(gtid_set, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>执行逻辑:</p>
+<ol>
+<li>等待、直到该库执行的事务中包含传入的gtid_set、返回0</li>
+<li>超时返回1<br>5.7.6版本开始、可以把事务的gtid返回给客户端<br>此时、等GTID的执行流程就变成:<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> trx1事务更新完后、从返回包之间获取事务的gtid、记为gtid1</span><br><span class="line"><span class="bullet">2.</span> 选定一个从库执行查询语句</span><br><span class="line"><span class="bullet">3.</span> 在从库上执行 select wait<span class="emphasis">_for_</span>Executed<span class="emphasis">_gtid_</span>set(gtid1, 1);</span><br><span class="line"><span class="bullet">4.</span> 若返回0、则在该从库执行查询、否则、到主库执行查询.</span><br></pre></td></tr></table></figure>
+问题跟等位点的一样、选择超时放弃还是转到主库查询、要根据业务场景选择.</li>
+</ol>
+<p>思考:</p>
+<blockquote>
+<p>若系统采用的是等待GTID的方案、此时要对一个大表做DDL、可能会出现什么情况呢? 为避免这种情况、改怎么做呢 ?</p>
+</blockquote>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    这是一个典型的大事务的场景、若该DDL语句在主库执行了<span class="number">10</span><span class="built_in">min</span>、提交到备库、也需要执行<span class="number">10</span><span class="built_in">min</span>、</span><br><span class="line">那么在主库DDL之后再提交的事务的GTID、去备库查的时候、就会等待<span class="number">10</span><span class="built_in">min</span>才出现. 这样这个读写分离机制</span><br><span class="line">至少<span class="number">10</span><span class="built_in">min</span>内都会超时、既然是预期内的操作、应该在业务低峰期进行、确保主库可以支撑所有的业务查询、</span><br><span class="line">然后把请求都切到主库、再在主库上做DDL.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/redis_redis%E5%8A%9F%E8%83%BD%E6%A2%B3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/redis_redis%E5%8A%9F%E8%83%BD%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">redis功能梳理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-36a967723586a0bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/redis_redis%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/redis_redis%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">redis基础命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="redis基础命令"><a href="#redis基础命令" class="headerlink" title="redis基础命令"></a>redis基础命令</h4><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 返回给定pattern的所<span class="built_in">有key</span></span><br><span class="line">   keys *</span><br><span class="line">   keys list*</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 确<span class="built_in">认key</span>是否存在</span><br><span class="line">  <span class="built_in"> exists</span><span class="built_in"> key</span></span><br><span class="line">   </span><br><span class="line"><span class="number">3</span>. 删<span class="built_in">除key</span></span><br><span class="line">   del<span class="built_in"> key</span></span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. 设<span class="built_in">置key</span>过期</span><br><span class="line">   expire<span class="built_in"> key</span> expire</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>. 将当期数据库的某<span class="built_in">个key</span>转移到另外一个db</span><br><span class="line">   move<span class="built_in"> key</span> dbindex</span><br><span class="line"></span><br><span class="line"><span class="number">6</span>. 移除给<span class="built_in">定key</span>的过期时间</span><br><span class="line">   persist<span class="built_in"> key</span></span><br><span class="line"></span><br><span class="line"><span class="number">7</span>. randomkey 随机返回一<span class="built_in">个key</span></span><br><span class="line"></span><br><span class="line"><span class="number">8</span>. <span class="keyword">rename</span><span class="built_in"> key</span> newname 重新命名一<span class="built_in">个key</span></span><br><span class="line"></span><br><span class="line"><span class="number">9</span>. type<span class="built_in"> key</span> 查<span class="built_in">看key</span>的数据类型</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>. dump<span class="built_in"> key</span> 返回序列化后<span class="built_in">的key</span></span><br><span class="line"></span><br><span class="line"><span class="number">11</span>. restore<span class="built_in"> key</span> 反序列化为redis键</span><br><span class="line"></span><br><span class="line"><span class="number">12</span>. expireat 和expire类型、接受的参数为 unix时间戳</span><br><span class="line"></span><br><span class="line"><span class="number">13</span>. migrate host port<span class="built_in"> key</span> destination-db timout [<span class="keyword">copy</span>] [repalce]</span><br><span class="line">    <span class="built_in">将key</span>原子性的从当前实例转移到目标实例的指定db上、一旦传送成功<span class="built_in">、key</span>会出现在目标实例、当前实例<span class="built_in">的key</span>会被删除</span><br><span class="line">    eg. redis-cli -h host migrate des_host <span class="number">6379</span> operateKey <span class="number">0</span> <span class="number">1000</span></span><br><span class="line">    </span><br><span class="line"><span class="number">14</span>. Object 从内部观察redis对象</span><br><span class="line">    Object encoding<span class="built_in"> key</span> </span><br><span class="line">    (str: raw &amp; int(为了节省内存) list: ziplist &amp; linkedlist set: intset &amp; hashtable</span><br><span class="line">     hash: zipmap &amp; hashtable zset: ziplist &amp; skiplist)</span><br><span class="line">    Object refcount<span class="built_in"> key</span></span><br><span class="line">    object idletime<span class="built_in"> key</span></span><br><span class="line"></span><br><span class="line"><span class="number">15</span>. renamenx<span class="built_in"> key</span> 当且仅当newkey不存在时、改名为newkey</span><br><span class="line"></span><br><span class="line"><span class="number">16</span>.<span class="built_in"> sort</span> 对列表、集合、有序集合中<span class="built_in">的key</span>进行排序</span><br><span class="line">    alpha对字符串进行排序 <span class="built_in"> sort</span> list alpha</span><br><span class="line">    limit offset<span class="built_in"> count</span> 跳过offset个元素、返<span class="built_in">回count</span>个元素</span><br><span class="line">   <span class="built_in"> sort</span> list limit offset<span class="built_in"> count</span></span><br><span class="line">    </span><br><span class="line"><span class="number">17</span>. scan、sscan、hscan、zscan 迭代元素</span><br><span class="line">    scan cursor 迭代获取元素</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/redis_redis%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/redis_redis%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">redis运维命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>平时觉得没什么用的命令、关键时候救命、😁~~~</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1</span>. 查看db大小</span><br><span class="line">   redis-cli -h host -p port -a password dbsize</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. cat a.txt | redis-cli 从文件读入redis</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. redis-cli -a password --csv lrange mylist offset count</span><br><span class="line">    从redis中快速读取一些key</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. n command 重复执行n次command</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">5</span>. help @</span><br><span class="line">  @generic  @list  @hash  @set  @sorted_set @string  @hyperloglog、@server、@connection、@scripting、@pubsub、@transactions</span><br><span class="line"></span><br><span class="line">help &lt;command&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">6</span>. redis-cli --<span class="keyword">stat</span> 实时监控redis运行状况</span><br><span class="line">   redis-cli monitor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">7</span>. redis-cli --bigkeys 查看redis中比较大的key</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">8</span>. redis-cli --scan --pattern <span class="string">&#x27;*my*&#x27;</span> 用scan来查找key、并过滤</span><br><span class="line">   redis-cli --scan --pattern <span class="string">&#x27;*my*&#x27;</span> |wc -l  直接使用管道作为下个命令的输入</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">9</span>.  redis-cli -h host --rdb /tmp/dump.rdb</span><br><span class="line">    备份远程redis数据到本地文件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">10</span>. maxmemory size 设置redis使用的最大内存</span><br><span class="line">      超过最大内存时、key过期策略</span><br><span class="line"></span><br><span class="line">     <span class="comment"># volatile-lru -&gt; remove the key with an expire set using an LRU algorithm</span></span><br><span class="line">   <span class="comment"># allkeys-lru -&gt; remove any key accordingly to the LRU algorithm</span></span><br><span class="line">   <span class="comment"># volatile-random -&gt; remove a random key with an expire set</span></span><br><span class="line">   <span class="comment"># allkeys-random -&gt; remove a random key, any key</span></span><br><span class="line">   <span class="comment"># volatile-ttl -&gt; remove the key with the nearest expire time (minor TTL)</span></span><br><span class="line">   <span class="comment"># noeviction -&gt; don&#x27;t expire at all, just return an error on write operations</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">11</span>. 使用客户端查看redis配置</span><br><span class="line">     redis-cli -h host config get key</span><br><span class="line">     redis-cli -h host config get slowlog-<span class="keyword">log</span>-slower-than 单位 微秒</span><br><span class="line">     redis-cli -h host config get slowlog-<span class="keyword">log</span>-slower-than 慢操作日志队列大小</span><br><span class="line">     redis-cli -h host slowlog get <span class="number">10</span> 查看最近<span class="number">10</span>条慢日志</span><br><span class="line">     hash-max-ziplist-entries 配置使用hashmap编码的最大字节数</span><br><span class="line">     redis-cli -h host get client-output-buffer-limit 客户端buffer控制、在server与client的交互中、</span><br><span class="line"></span><br><span class="line">每个连接都会有一个buffer关联、此buffer用来队列化等待被client接受的响应信息、若client不及时响应、</span><br><span class="line">buffer中积压的数据达到阈值、将会导致连接失败、buffer被移除</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">12</span>. redis以指定配置文件启动</span><br><span class="line">      redis-server redis.conf &amp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">13</span>. redis-cli --lru-test <span class="number">10000000</span> 模拟<span class="number">1000</span>w <span class="keyword">keys</span>的执行情况</span><br><span class="line">     在maxmemory无限制的情况下、测试时无意义的、因为内存无限制、命中率会是<span class="number">100</span>%、计算机的ram会被耗尽</span><br><span class="line">    记得配置key的过期策略</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_Mac%E5%AE%89%E8%A3%85mat%E7%8B%AC%E7%AB%8B%E5%B7%A5%E5%85%B7%E6%8A%A5%E9%94%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_Mac%E5%AE%89%E8%A3%85mat%E7%8B%AC%E7%AB%8B%E5%B7%A5%E5%85%B7%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">Mac安装mat独立工具报错</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>####问题描述<br>官网下载、安装<br><img src="https://upload-images.jianshu.io/upload_images/14027542-0d8d68043d36538d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">An error has occurred. </span><br><span class="line">See the log <span class="keyword">file</span> </span><br><span class="line"><span class="regexp">/Users/</span>%username%<span class="regexp">/.eclipse/</span><span class="number">1899417313</span>_macosx_cocoa_x86_64<span class="regexp">/configuration/</span><span class="number">1507391541586</span>.log.</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-56ee81ed27935fe5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">!ENTRY org.eclipse.osgi <span class="number">4</span> <span class="number">0</span> <span class="number">2019</span><span class="number">-07</span><span class="number">-26</span> <span class="number">21</span>:<span class="number">12</span>:<span class="number">08.965</span></span><br><span class="line">!MESSAGE Application error</span><br><span class="line">!STACK <span class="number">1</span></span><br><span class="line">java.lang.IllegalStateException: The <span class="built_in">platform</span> metadata area could <span class="keyword">not</span> be written: /<span class="keyword">private</span>/var/<span class="built_in">folders</span>/kc/cc7tcgrx6_1d355s45t1q3nh0000gn/T/AppTranslocation/<span class="number">9361422</span>A<span class="number">-8</span>DF8<span class="number">-482</span>D<span class="number">-873</span>B<span class="number">-8</span>C030C46FB6E/d/mat.app/Contents/MacOS/workspace/.metadata.  By default <span class="keyword">the</span> <span class="built_in">platform</span> writes its content</span><br><span class="line">under <span class="keyword">the</span> current working <span class="built_in">directory</span> when <span class="keyword">the</span> <span class="built_in">platform</span> is launched.  Use <span class="keyword">the</span> -data parameter <span class="built_in">to</span></span><br><span class="line">specify <span class="keyword">a</span> different content area <span class="keyword">for</span> <span class="keyword">the</span> <span class="built_in">platform</span>.</span><br><span class="line">        <span class="keyword">at</span> org.eclipse.core.internal.runtime.DataArea.assertLocationInitialized(DataArea.java:<span class="number">70</span>)</span><br><span class="line">        <span class="keyword">at</span> org.eclipse.core.internal.runtime.DataArea.getStateLocation(DataArea.java:<span class="number">138</span>)</span><br><span class="line">        <span class="keyword">at</span> org.eclipse.core.internal.preferences.InstancePreferences.getBaseLocation(InstancePreferences.java:<span class="number">44</span>)</span><br><span class="line">        <span class="keyword">at</span> org.eclipse.core.internal.preferences.InstancePreferences.initializeChildren(InstancePreferences.java:<span class="number">209</span>)</span><br><span class="line">        <span class="keyword">at</span> org.eclipse.core.internal.preferences.InstancePreferences.&lt;init&gt;(InstancePreferences.java:<span class="number">59</span>)</span><br><span class="line">        <span class="keyword">at</span> org.eclipse.core.internal.preferences.InstancePreferences.internalCreate(InstancePreferences.java:<span class="number">220</span>)</span><br><span class="line">        <span class="keyword">at</span> org.eclipse.core.internal.preferences.EclipsePreferences.<span class="built_in">create</span>(EclipsePreferences.java:<span class="number">349</span>)</span><br><span class="line">@       </span><br></pre></td></tr></table></figure>
+
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用命令行打开MemoryAnalyzer.ini，添加-data参数 </span><br><span class="line"><span class="regexp">/Users/</span>nj<span class="regexp">/package/m</span>at.app<span class="regexp">/Contents/</span>Eclipse/MemoryAnalyzer.ini</span><br><span class="line">如：</span><br><span class="line">-data</span><br><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/var/</span>log<span class="regexp">/mat/</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-<span class="class"><span class="keyword">data</span> 放在 launcher前、</span></span><br><span class="line">-<span class="class"><span class="keyword">data</span> 和 value要放在两行</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-360b39a7c35efd15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_git%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_git%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">git相关</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>分支merge错了、需要撤回merge<br> git merge –abort</p>
+</li>
+<li><p>查看某段时间段内某个用户的提交<br>git log -p –author&#x3D;{name} –since&#x3D;{start-time} –until&#x3D;{end-time}<br>eg. git log -p –author&#x3D;nj –since&#x3D;2019-09-24 –until&#x3D;2019-09-24</p>
+</li>
+<li><p>查看某次提交属于哪个分支<br>  git br -r –contains commitId<br>  eg. git br -r –contains ca4efc1a</p>
+</li>
+<li><p>tag删除<br> git tag -d tag_name  删除本地tag<br> git push origin :refs&#x2F;tags&#x2F;tag_name 删除远程tag</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_google%E5%8E%BB%E6%8E%89%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E7%BC%A9%E7%95%A5%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_google%E5%8E%BB%E6%8E%89%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E7%BC%A9%E7%95%A5%E5%9B%BE/" class="post-title-link" itemprop="url">google去掉新标签页缩略图</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- MarkdownTOC -->
+
+<ul>
+<li>隐藏新标签页最近访问</li>
+<li>mac下禁用 chrome 自动更新</li>
+</ul>
+<!-- /MarkdownTOC -->
+
+<h4 id="隐藏新标签页最近访问"><a href="#隐藏新标签页最近访问" class="headerlink" title="隐藏新标签页最近访问"></a>隐藏新标签页最近访问</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 尝试过 <span class="keyword">new</span> tab direct.. &amp; 其它插件</span><br><span class="line">感觉不够爽、网络慢时、tab页有延时、可以看到明显的<span class="keyword">new</span> tab跳转过程...</span><br><span class="line">啊哈、心里还是不爽的~~~~</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 继续 google. 找到手动解决方式、~~</span><br><span class="line">    <span class="number">1</span>) 下载pak打包解压小工具  链接:https:<span class="comment">//pan.baidu.com/s/1TDp614rex0h0U5t2ShZE6g   密码:gtno</span></span><br><span class="line">    <span class="number">2</span>) 将pak文件小工具解压、备用</span><br><span class="line">       eg. 将pak文件解压</span><br><span class="line">           pak_tools -c=unpack -f=<span class="regexp">/Users/</span>aha<span class="regexp">/Package/</span>resources.pak </span><br><span class="line"></span><br><span class="line">           重新打包为pak文件 </span><br><span class="line">           pak_tools -c=repack -f=<span class="regexp">/Users/</span>aha<span class="regexp">/Package/</span>resources.json </span><br><span class="line"></span><br><span class="line">    <span class="number">3</span>) 找到google安装目录</span><br><span class="line">      Mac：</span><br><span class="line">      <span class="regexp">/Applications/G</span>oogle Chrome.app<span class="regexp">/Contents/</span>Versions/</span><br><span class="line">      -------------------------------------------------------------------------</span><br><span class="line">       (如果安装过多个版本的话、可以看到多个版本命名的文件夹、so... 接下来查看自己正在使用的版本</span><br><span class="line">      Chrome -&gt; 右上角... -&gt; 帮助 -&gt; 关于google chrome -&gt; 可以看到正在使用的版本)</span><br><span class="line">      -------------------------------------------------------------------------</span><br><span class="line">      进入对应版本目录下：</span><br><span class="line">      eg. 我的是：</span><br><span class="line">      <span class="regexp">/Applications/G</span>oogle Chrome.app<span class="regexp">/Contents/</span>Versions<span class="regexp">/&#123;&#123;69.0.3497.92&#125;&#125;/G</span>oogle Chrome Framework.framework<span class="regexp">/Versions/</span>A/Resources</span><br><span class="line">      然后可以看到有个文件叫：resource.pak </span><br><span class="line"></span><br><span class="line">    <span class="number">3</span>) 找到它之后、复制一份到自己方便找到的地方、把这里的重命名为 resource.pak-bak</span><br><span class="line">       eg. 我把它放到<span class="keyword">package</span>下、</span><br><span class="line">       然后、使用上边的命令解压、</span><br><span class="line">       pak_tools -c=unpack -f=<span class="regexp">/Users/</span>aha<span class="regexp">/Package/</span>resources.pak </span><br><span class="line">       解压后会生成 rasource.json 和 resource 文件夹</span><br><span class="line">       用sublime或者其它的文本编辑器在 resources文件夹中搜索 </span><br><span class="line">       &lt;<span class="keyword">div</span> id=<span class="string">&quot;most-visited&quot;</span>&gt;可以看到两处</span><br><span class="line">        enen、干脆点儿、都注释掉吧~~</span><br><span class="line"></span><br><span class="line">      然后、重新生成pak文件</span><br><span class="line">      pak_tools -c=repack -f=<span class="regexp">/Users/</span>aha<span class="regexp">/Package/</span>resources.json </span><br><span class="line"></span><br><span class="line">      将重新生成的 resources.pak 放回 ：</span><br><span class="line">      <span class="regexp">/Applications/G</span>oogle Chrome.app<span class="regexp">/Contents/</span>Versions<span class="regexp">/&#123;&#123;69.0.3497.92&#125;&#125;/G</span>oogle Chrome Framework.framework<span class="regexp">/Versions/</span>A/Resources</span><br><span class="line">      </span><br><span class="line">    <span class="number">4</span>) 退出google chrome、然后重新启动、可以看到 那八个缩略图从我们的世界中消失了、</span><br><span class="line">       enen / 干净的感觉真爽~~</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="mac下禁用-chrome-自动更新"><a href="#mac下禁用-chrome-自动更新" class="headerlink" title="mac下禁用 chrome 自动更新"></a>mac下禁用 chrome 自动更新</h4><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 来个干脆的吧</span><br><span class="line">   找到update程序、直接删除或者重命名</span><br><span class="line">   我的是在 ~<span class="regexp">/Library/</span>Chrome/下</span><br><span class="line">   文件夹的名字叫： GoogleSoftwareUpdate</span><br><span class="line">   eg. 我的完整路径是 ~<span class="regexp">/Library/</span>Chrome/GoogleSoftwareUpdate 直接将它重命名、就不会自动更新了</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_google%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">google访问助手安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>悄悄的~~~😝</p>
+<p>链接:<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1BlNBd2xGUMJ7LYF1UYqvwg">https://pan.baidu.com/s/1BlNBd2xGUMJ7LYF1UYqvwg</a>  密码:4u3t</p>
+<p>下载以上地址压缩包</p>
+<p>chrome浏览器访问 chrome:&#x2F;&#x2F;extensions&#x2F;<br>把解压后的文件夹拖进去、如下图</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-761560184bd3cab4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_idea%E5%AE%89%E8%A3%85%E7%A6%BB%E7%BA%BF%E6%8F%92%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_idea%E5%AE%89%E8%A3%85%E7%A6%BB%E7%BA%BF%E6%8F%92%E4%BB%B6/" class="post-title-link" itemprop="url">idea安装离线插件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>查看idea版本<br> <img src="https://upload-images.jianshu.io/upload_images/14027542-5ead294f44819a44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-44591f7bab73a3a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>查找对应插件<br>以 lombok 为例：<br><a target="_blank" rel="noopener" href="https://github.com/mplushnikov/lombok-intellij-plugin/releases/">https://github.com/mplushnikov/lombok-intellij-plugin/releases/</a></p>
+</li>
+<li><p>下载对应版本</p>
+</li>
+<li><p>不用解压、直接安装<br> <img src="https://upload-images.jianshu.io/upload_images/14027542-62469994e086f308.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>重新启动idea、离线插件安装即可生效</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

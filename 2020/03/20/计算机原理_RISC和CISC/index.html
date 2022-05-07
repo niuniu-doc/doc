@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="CISC: Complex Insturction Set Computing , 即: 复杂指令集 RISC: Reduced Instruction Set Computing, 即: 精简指令集  123456789101112131415161718192021早期、所有的CPU都是 CISC、并无 CISC 和 RISC 之分 CPU指令集的设计、需要考虑硬件限制、为了性能考虑、很多功">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RISC和CISC">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_RISC%E5%92%8CCISC/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="CISC: Complex Insturction Set Computing , 即: 复杂指令集 RISC: Reduced Instruction Set Computing, 即: 精简指令集  123456789101112131415161718192021早期、所有的CPU都是 CISC、并无 CISC 和 RISC 之分 CPU指令集的设计、需要考虑硬件限制、为了性能考虑、很多功">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.845Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_RISC%E5%92%8CCISC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>RISC和CISC | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_RISC%E5%92%8CCISC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RISC和CISC
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p><code>CISC</code>: <code>Complex Insturction Set Computing </code>, 即: 复杂指令集</p>
+<p><code>RISC</code>: <code>Reduced Instruction Set Computing</code>, 即: 精简指令集</p>
+</blockquote>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">早期、所有的CPU都是 CISC、并无 CISC 和 RISC 之分 </span><br><span class="line">CPU指令集的设计、需要考虑硬件限制、为了性能考虑、很多功能直接通过硬件电路完成、为了减少内存、指令的长度也是可变的, 常用指令的长度短一些、不常用指令长度可以长一些</span><br><span class="line"></span><br><span class="line">随历史发展、计算机性能和存储都在发展、当时 大卫*帕特森教授发现: 实际在CPU运行的程序里、<span class="number">80</span>%都是在使用 <span class="number">20</span>% 的简单指令、提出 RISC的理念</span><br><span class="line"></span><br><span class="line">RISC的CPU想法其实很直观、既然<span class="number">80</span>%的时间都在使用<span class="number">20</span>%的简单指令、那只使用<span class="number">20</span>%的简单指令呢？ - 因为指令数量很多、计算机科学家在软硬件两方面都受到了很大的挑战</span><br><span class="line"></span><br><span class="line">在硬件层面、想支持更多的复杂指令、CPU里的电路就要越复杂、在散热和功耗上也就会带来更大的挑战、</span><br><span class="line">在软件层面、支持更多的复杂指令、编译器的优化就更难</span><br><span class="line"></span><br><span class="line">于是在RISC架构里、CPU选择将指令精简到<span class="number">20</span>%的简单指令、而原先的复杂指令 则用简单指令组合起来实现、让软件实现硬件的功能、这样CPU的硬件设计就更简单了、性能提升也会变的容易</span><br><span class="line"></span><br><span class="line">RISC的CPU里完成指令的电路变简单了、就腾出了更多空间、这个空间、常被拿来放通用寄存器、因为RISC完成同样的功能、执行的指令数要比CISC多、所以、若需要反复从内存读取指令或者数据到寄存器、很多时间就会花在访问内存上、于是, RISC架构的CPU往往有更多的通用寄存器、</span><br><span class="line"></span><br><span class="line">除了寄存器这样的存储空间、RISC的CPU也可以把更多的晶体管、用来实现更好的分支预测等相关功能、进一步提升CPU的实际利用率</span><br><span class="line"></span><br><span class="line"><span class="string">`CPU执行时间`</span> = <span class="string">`指令数`</span> * <span class="string">`CPI`</span> * <span class="string">`Clock Cycle Time`</span></span><br><span class="line"></span><br><span class="line">CISC的架构其实就是通过优化指令数、来减少CPU的执行时间、而RISC的架构、其实是在优化CPI</span><br><span class="line">指令比较简单、需要的时钟周期就很少</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="微指令架构"><a href="#微指令架构" class="headerlink" title="微指令架构"></a>微指令架构</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">在微指令架构的<span class="meta">CPU</span>里、编译器编译出来的机器码和汇编代码没发生变化、但: 在指令译码阶段、指令译码器翻译出来的、不再是某一条<span class="meta">CPU</span>指令、译码器会把一条机器码、翻译成好几条微指令、这一条条的微指令就变成了固定长度的RISC风格的了</span><br><span class="line"></span><br><span class="line">这些RISC风格的微指令、会被放在一个微指令缓冲区里、然后再从缓冲区里边、分发给后边的超标量、且乱序执行的流水线架构里(精简指令)、在这个架构里、指令译码器相当于变成了<span class="string">`适配器`</span>, 填平； CISC和RISC之间的指令差异</span><br><span class="line"></span><br><span class="line">但: 这样一个可以把CISC的指令译码成RISC指令的指令译码器、比原来的译码器要复杂、就意味着更复杂的电路和更长的译码时间, 本来以为可以通过RISC提升的性能、又有一部分浪费在了指令译码上、怎么解决呢?</span><br><span class="line"></span><br><span class="line">由于<span class="number">80</span>%运行的代码、只包含<span class="number">20</span>%的常用指令、这个很强的局部性、可以使用缓存来解决.</span><br><span class="line">Intel在<span class="meta">CPU</span>里加了一层 L0 Cache、这个Cache保存的就是指令译码器把CISC的指令翻译RISC的微指令的结果、于是大部分情况、<span class="meta">CPU</span>可以从Cache拿到译码结果、而不用实际译码, 不仅优化了性能、因为译码器的开关动作变少了、还减少了功耗</span><br><span class="line"></span><br><span class="line">由于Intel本身在<span class="meta">CPU</span>层上做过大量优化: 分支预测、乱序执行等、X86的<span class="meta">CPU</span>始终在功耗上还是要超过RISC架构的ARM、所以最终在智能手机崛起替代PC的时代、落在了ARM后面</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CPU的现在和未来"><a href="#CPU的现在和未来" class="headerlink" title="CPU的现在和未来"></a>CPU的现在和未来</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">现在、CISC和RISC架构的分界已经不明显了、Intel和AMD的<span class="meta">CPU</span>也都是采用译码成RISC风格的微指令来运行、而ARM的芯片、一条指令通用需要多个时钟周期、有乱序执行和多发射</span><br><span class="line"></span><br><span class="line">未来的<span class="meta">CPU</span>、多半会像Linux一样、逐渐成为一个业界的主流选择、若想打造一个属于自己的<span class="meta">CPU</span>、可以关注下 RISC-V开源项目的发展</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_SSD-(46%E3%80%8147%E8%AE%B2)/" rel="prev" title="SSD-(46、47讲)">
+      <i class="fa fa-chevron-left"></i> SSD-(46、47讲)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" rel="next" title="IO设备(43讲)">
+      IO设备(43讲) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E6%8C%87%E4%BB%A4%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">微指令架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU%E7%9A%84%E7%8E%B0%E5%9C%A8%E5%92%8C%E6%9C%AA%E6%9D%A5"><span class="nav-number">2.</span> <span class="nav-text">CPU的现在和未来</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

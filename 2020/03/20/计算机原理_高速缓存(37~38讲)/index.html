@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="为什么需要高速缓存 按照摩尔定律、CPU的访问速度每18个月便会翻一番、相当于每年增长60%、内存的访问速度也在增长、但只有7%左右、使内存和CPU的性能差距不断拉大. 现在一次内存的访问需要120个CPU周期、即: 访问速度有120倍的差距为了弥补两者的性能差异、真实的把CPU使用起来、现代CPU引入了高速缓存   12345678从CPU Cache 被加入CPU开始、内存中的指令、数据会先加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高速缓存(37~38讲)">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98(37~38%E8%AE%B2)/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="为什么需要高速缓存 按照摩尔定律、CPU的访问速度每18个月便会翻一番、相当于每年增长60%、内存的访问速度也在增长、但只有7%左右、使内存和CPU的性能差距不断拉大. 现在一次内存的访问需要120个CPU周期、即: 访问速度有120倍的差距为了弥补两者的性能差异、真实的把CPU使用起来、现代CPU引入了高速缓存   12345678从CPU Cache 被加入CPU开始、内存中的指令、数据会先加">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-63ffb060446bf2df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-665111aecb317bc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-0e3d70cab102d106.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-bdbd1ecdec2570de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-daf2deb032fab327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-ead03578a6a2f4d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.853Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-63ffb060446bf2df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98(37~38%E8%AE%B2)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>高速缓存(37~38讲) | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98(37~38%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          高速缓存(37~38讲)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="为什么需要高速缓存"><a href="#为什么需要高速缓存" class="headerlink" title="为什么需要高速缓存"></a>为什么需要高速缓存</h4><blockquote>
+<p>按照摩尔定律、CPU的访问速度每18个月便会翻一番、相当于每年增长60%、内存的访问速度也在增长、但只有7%左右、使内存和CPU的性能差距不断拉大. 现在一次内存的访问需要120个CPU周期、即: 访问速度有120倍的差距<br>为了弥补两者的性能差异、真实的把CPU使用起来、现代CPU引入了高速缓存</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-63ffb060446bf2df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="CPU和内存的性能差距会越来越大.png"></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">从CPU <span class="keyword">Cache </span>被加入CPU开始、内存中的指令、数据会先加载到L1</span><br><span class="line">-L3 <span class="keyword">Cache中、而不是直接由CPU访问内存去拿、</span></span><br><span class="line"><span class="keyword"></span>在<span class="number">95</span>%的情况下、CPU只需要访问L1-L3 <span class="keyword">Cache、从里边读取指令和数据、无需访问内存</span></span><br><span class="line"><span class="keyword"></span>注意: CPU <span class="keyword">Cache不是单存概念上的Cache(eg. </span>之前说的以内存作为硬盘的缓存)、而是指特定的由<span class="keyword">SRAM组成的物理芯片</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">CPU从内存中读取数据到CPU <span class="keyword">Cache的过程中、是一小块、一小块读取的、不是按照单个数组元素读取的、</span></span><br><span class="line"><span class="keyword"></span>这样一小块一小块的数据、在CPU <span class="keyword">Cache里、称为 </span>`<span class="keyword">Cache </span>Line`(缓存块)</span><br><span class="line">通常Intel的服务器或者PC里、<span class="keyword">Cache </span>Line的大小通常是<span class="number">64</span>字节</span><br></pre></td></tr></table></figure>
+
+<h4 id="Cache的数据结构和读取过程是什么样的"><a href="#Cache的数据结构和读取过程是什么样的" class="headerlink" title="Cache的数据结构和读取过程是什么样的"></a>Cache的数据结构和读取过程是什么样的</h4><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">现代CPU在数据读取时、无论数据是否已经存储在<span class="keyword">Cache</span>中、都会先访问<span class="keyword">Cache</span>、</span><br><span class="line">只有<span class="keyword">Cache</span>中找不到时、才会访问内存、并且将读到的数据写入<span class="keyword">Cache</span>中、根据时间局部性原理、这样CPU花在等待内存访问上的时间就会大大缩短</span><br><span class="line">通常在基准测试和实际场景中、CPU <span class="keyword">Cache</span>的命中率可以达到<span class="number">95</span>%以上</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-665111aecb317bc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="与应用相似的架构.png"></p>
+<p>思考: 那么CPU是如何知道要访问的内存数据、存储在Cache的哪个位置呢 ?</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CPU访问内存数据、是一小块一小块数据来读取的、对于读取内存中的数据、首先拿到的是数据所在的`内存块(Block)`的地址</span><br><span class="line">而直接映射<span class="built_in">Cache</span>(Direct Mapped Cache)采用的策略就是确保任何一个内存块的地址、</span><br><span class="line">始终映射到一个固定的CPU Cache地址(Cache Line), 而这个映射关系、通常用<span class="built_in">mod</span>(求余)计算来实现</span><br><span class="line">eg. 将主内存分成<span class="number">0</span>~<span class="number">31</span>共<span class="number">32</span>个块、共有<span class="number">8</span>个缓存块、用户需要访问第<span class="number">21</span>号内存块、</span><br><span class="line">若<span class="number">21</span>号内存块内容在缓存块中的话、一定在<span class="number">5</span>号缓存块(<span class="number">21%</span><span class="number">8</span> = <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-0e3d70cab102d106.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cache采用mod方式、将内存块映射到对应的CPU Cache.png"></p>
+<p>思考:<br>现在13号、5号和21号都应该在5号缓存块中、那如何区分、当前缓存块中是几号内存对应的数据呢 ？</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">对应的缓存块会存储一个组标记、记录当前缓存块内存储的数据对应的内存块、</span><br><span class="line">除组标记外、缓存块中还有两个数据<span class="operator">:</span></span><br><span class="line"><span class="number">1.</span> 从主内存中加载来的实际存放的数据、</span><br><span class="line"><span class="number">2.</span>有效位<span class="operator">:</span> 用来标记对应的缓存块中的数据是否是有效的、确保不是机器刚启动时的空数据<span class="operator">.</span> 有效位为<span class="number">0</span>时、<span class="variable">CPU</span>会直接访问内存、重新加载数据</span><br><span class="line"><span class="variable">CPU</span>在读取数据的时候、不是要读取医政股<span class="built_in">Block</span>、只读取一个需要的整数、称为<span class="variable">CPU</span>的一个字<span class="built_in">Word</span></span><br><span class="line">具体是哪个字、就用这个字在整个<span class="built_in">Block</span>中的位置来决定、这个位置称为偏移量<span class="built_in">Offset</span></span><br><span class="line">而内存地址对应到<span class="variable">Cache</span> <span class="built_in">Line</span>里的数据结构则多了一个有效位和对应的数据</span><br><span class="line">由 索引 <span class="operator">+</span> 有效位 <span class="operator">+</span> 组标记 <span class="operator">+</span> 数据组成</span><br><span class="line"></span><br><span class="line">若<span class="operator">:</span> 一个内存中的数据已经在<span class="variable">Cache</span>中、访问步骤为<span class="operator">:</span></span><br><span class="line"><span class="number">1.</span> 根据内存地址的地位、计算在<span class="variable">Cache</span>中的索引</span><br><span class="line"><span class="number">2.</span> 判断有效位、确认<span class="variable">Cache</span>中的数据是有效的</span><br><span class="line"><span class="number">3.</span> 对比内存访问地址的高位、和<span class="variable">Cache</span>中的组标记、确认<span class="variable">Cache</span>中的数据就是要访问的内存数据、从<span class="variable">Cache</span> <span class="built_in">Line</span>读取对应数据块</span><br><span class="line"><span class="number">4.</span> 根据内存地址的<span class="built_in">Offset</span>位、从<span class="variable">Data</span> <span class="built_in">Block</span>中读取所需内容</span><br><span class="line">若在<span class="number">2</span>、<span class="number">3</span>步骤中<span class="variable">CPU</span>发现数据不是要访问的数据、<span class="variable">CPU</span>会访问内存、将<span class="built_in">Block</span> <span class="variable">Data</span>更新到<span class="variable">Cache</span> <span class="built_in">Line</span>中、同时更新对应的有效位和组标记的数据</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bdbd1ecdec2570de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存地址到Cache Line的关系.png"></p>
+<p>思考:volitile 关键字的作用 ?</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">一种错误理解是 当成锁、认为类似sychronized 关键字、不同的线程对于特定变量的访问会加锁</span><br><span class="line">另一种误解是 当成原子化的操作机制、认为加了volitile、对于变量的自增操作就变成原子性的了</span><br><span class="line"></span><br><span class="line">其实: volitile 最核心的知识点要关系到<span class="keyword">Java内存模型(Java </span>Memory Model)上</span><br><span class="line">虽然<span class="keyword">JMM只是Java虚拟机这个进程级虚拟机里的一个内存模型、但这个内存模型和CPU、高速缓存和主内存组合在一起的硬件体系很相似</span></span><br><span class="line"><span class="keyword"></span>虽然<span class="keyword">Java内存模型是一个隔离了硬件实现的虚拟机内的抽象模型、但给了一个很好的缓存同步问题的示例.</span></span><br><span class="line"><span class="keyword"></span>即: 若我们的数据在不同的线程或者CPU核心里去更新、因为不同的线程或者CPU核有各自的缓存、有可能在A线程的更新<span class="keyword">B线程看不到</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="CPU高速缓存的写入"><a href="#CPU高速缓存的写入" class="headerlink" title="CPU高速缓存的写入"></a>CPU高速缓存的写入</h4><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">现在使用的Intel CPU、通常都是多核的、每一个CPU核里、都有独立属于自己的L1、L2的<span class="keyword">Cache</span> 和 多个CPU共用的L3的<span class="keyword">Cache</span>、主内存</span><br><span class="line">因为CPU <span class="keyword">Cache</span>的访问速度要比主内存快很多、L1/L2 <span class="keyword">Cache</span>的速度也比L3 快、所以、CPU都是尽可能的从CPU <span class="keyword">Cache</span>中获取数据、而不是每次从主内存获取</span><br><span class="line"></span><br><span class="line">Java内存模型里、每个线程都有自己的线程桟、每次数据读取其实是从本地线程桟的<span class="keyword">Cache</span>副本里读取、而不是主内存</span><br><span class="line">若对数据只读还好、但事实是读写同时存在的、这时思考两个问题:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>写Cache的性能也比写主内存快、那写入时应该写主内存还是Cache ?<br>2.若直接写主内存、Cache里的数据是否会失效呢 ?</li>
+</ol>
+</blockquote>
+<h4 id="写直达-Write-Through"><a href="#写直达-Write-Through" class="headerlink" title="写直达 Write-Through"></a>写直达 Write-Through</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-daf2deb032fab327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如上图、最简单的一种写入策略, 写直达. 在这个策略里、每一次数据都要写到主内存里、</span><br><span class="line">写入前, 先判断数据是否在<span class="keyword">Cache</span>中、若在、先更新<span class="keyword">Cache</span>、再写入主内存; 若不在、只更新主内存</span><br><span class="line">缺点是: 无论数据是否在<span class="keyword">Cache</span>里、都需要把数据写到主内存、效率较低</span><br><span class="line">类似volatile关键字、始终把数据同步到主内存里</span><br></pre></td></tr></table></figure>
+
+<h4 id="写回-Write-back"><a href="#写回-Write-back" class="headerlink" title="写回 Write-back"></a>写回 Write-back</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-ead03578a6a2f4d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">不把写入同步到主内存、只写CPU <span class="keyword">Cache呢？是否可行 </span>？</span><br><span class="line">如上图所示就是只写<span class="keyword">Cache的策略 </span>-&gt; 每次只把数据写回<span class="keyword">Cache、只有在CPU </span><span class="keyword">Cache里的数据要被替换的时候、才将数据写回主内存</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">过程: 若发现要写回的数据就在<span class="keyword">Cache中、只更新Cache里的数据即可、同时标记Cache里这个Block的数据是Dirty(与主存不一致)</span></span><br><span class="line"><span class="keyword"></span>若发现要写入的数据对应的<span class="keyword">Cache </span><span class="keyword">Block里、放的是别的内存地址的数据</span></span><br><span class="line"><span class="keyword"></span>check下数据是否是<span class="keyword">Dirty、</span></span><br><span class="line"><span class="keyword"></span>若是、先写回主内存然后把当前要写入的数据写入到<span class="keyword">Cache、同时把Cache </span><span class="keyword">Block标记成Dirty</span></span><br><span class="line"><span class="keyword"></span>若不是、直接将数据写入<span class="keyword">Cache、然后把Cache </span><span class="keyword">Block标记为Dirty</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">在使用`写回`这个策略的时候、加载内存数据到<span class="keyword">Cache里的时候、也要多一步同步脏Cache的动作</span></span><br><span class="line"><span class="keyword"></span>若加载内存里的数据到<span class="keyword">Cache的时候、发现Cache </span><span class="keyword">Block里有Dirty标记、需要先把Cache </span><span class="keyword">Block的数据写回主内存、才能加载数据覆盖掉Cache</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">在写回这个策略里、若大量的操作、都能命中缓存、大部分时间都不需要读写主内存、性能会比写直达好</span><br></pre></td></tr></table></figure>
+
+<p>然而、无论写直达还是写回、都未解决多线程或者多CPU缓存一致性问题….</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%9B%BE%E8%B0%B1/" rel="prev" title="计算机组成原理图谱">
+      <i class="fa fa-chevron-left"></i> 计算机组成原理图谱
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%B6%85%E7%BA%BF%E7%A8%8B%E5%92%8CSIMD(27%E8%AE%B2)/" rel="next" title="超线程和SIMD(27讲)">
+      超线程和SIMD(27讲) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">为什么需要高速缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cache%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E8%AF%BB%E5%8F%96%E8%BF%87%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84"><span class="nav-number">2.</span> <span class="nav-text">Cache的数据结构和读取过程是什么样的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98%E7%9A%84%E5%86%99%E5%85%A5"><span class="nav-number">3.</span> <span class="nav-text">CPU高速缓存的写入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E7%9B%B4%E8%BE%BE-Write-Through"><span class="nav-number">4.</span> <span class="nav-text">写直达 Write-Through</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E5%9B%9E-Write-back"><span class="nav-number">5.</span> <span class="nav-text">写回 Write-back</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

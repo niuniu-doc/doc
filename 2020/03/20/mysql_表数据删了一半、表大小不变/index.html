@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="innodb表包含两部分: 表定义和表数据、在mysql8.0之前、表定义单独存放、.frm 文件、8.0之后允许把表结构定义放在系统数据表中了(表结构定义占用的空间很小)  innodb_file_per_table12off: 表数据放在系统共享表空间、跟数据字典放在一起on: 每个innodb表数据存储在一个.ibd结尾的文件中(drop table时直接删除文件)  数据删除流程 123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="表数据删了一半、表大小不变">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="innodb表包含两部分: 表定义和表数据、在mysql8.0之前、表定义单独存放、.frm 文件、8.0之后允许把表结构定义放在系统数据表中了(表结构定义占用的空间很小)  innodb_file_per_table12off: 表数据放在系统共享表空间、跟数据字典放在一起on: 每个innodb表数据存储在一个.ibd结尾的文件中(drop table时直接删除文件)  数据删除流程 123">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-9ef7fd91e2dcd722.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-dede264180fcc1f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-92ae8e30bfdb3194.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-79acd12bb61357d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.822Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-9ef7fd91e2dcd722.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>表数据删了一半、表大小不变 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E4%BA%86%E4%B8%80%E5%8D%8A%E3%80%81%E8%A1%A8%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          表数据删了一半、表大小不变
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>innodb表包含两部分: 表定义和表数据、在mysql8.0之前、表定义单独存放、.frm 文件、8.0之后允许把表结构定义放在系统数据表中了(表结构定义占用的空间很小)</p>
+</blockquote>
+<h4 id="innodb-file-per-table"><a href="#innodb-file-per-table" class="headerlink" title="innodb_file_per_table"></a>innodb_file_per_table</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">off</span>: 表数据放在系统共享表空间、跟数据字典放在一起</span><br><span class="line"><span class="keyword">on</span>: 每个innodb表数据存储在一个.ibd结尾的文件中(<span class="keyword">drop</span> <span class="keyword">table</span>时直接删除文件)</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据删除流程"><a href="#数据删除流程" class="headerlink" title="数据删除流程"></a>数据删除流程</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-9ef7fd91e2dcd722.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="索引树示意图"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 假设删掉R4这个记录、innodb引擎只会把这个记录标记为已删除、之后再插入一个300-600之间的记录时、可能会复用这个位置、但是空间不会释放</span><br><span class="line"><span class="bullet">2.</span> innodb的数据是按页存放的、如果删掉了一个数据页上的所有内容呢 ？</span><br><span class="line"><span class="code">    整个页可以复用</span></span><br><span class="line"><span class="code">3. 数据页的复用: 可以复用到任意位置</span></span><br><span class="line"><span class="code">    记录复用: 插入数据若不在400-600之间、无法复用</span></span><br><span class="line"><span class="code">4. 若相邻两个数据页的利用率都很小、系统会把数据合并到一个页】另一个标记为可复用</span></span><br><span class="line"><span class="code">5. delete删除整个表数据呢？所有数据页都被标记为可复用</span></span><br><span class="line"><span class="code">所以delete操作只是标记页面可复用、这些可复用但未被复用的空间、就像是空洞、空间不会回收</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="bullet">6.</span> 插入数据也会造成空洞</span><br><span class="line"><span class="code">    数据若不是顺序插入、如果需要在某个页的末尾插入一条记录、就会申请新的页、把要插入位置之后的数据转移到新的页去: 如下图</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-dede264180fcc1f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<h4 id="如何去除空洞"><a href="#如何去除空洞" class="headerlink" title="如何去除空洞"></a>如何去除空洞</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 重建表 alter table A engine=Innodb</span><br><span class="line"><span class="bullet">2.</span> 5.6之后的版本、引入Online DDL、重建流程变为: </span><br><span class="line"><span class="bullet">    1.</span> 建立一个临时文件、扫描表A主键的所有数据页、</span><br><span class="line"><span class="bullet">    2.</span> 用数据页中表A的记录生成B+树、存储到临时文件中、</span><br><span class="line"><span class="bullet">    3.</span> 生成临时文件过程中、所有表A的操作记录在日志文件(row log) 中、</span><br><span class="line"><span class="bullet">    4.</span> 临时文件生成后、将日志文件应用于临时文件、得到与表A逻辑相同的文件</span><br><span class="line"><span class="bullet">    5.</span> 用临时文件替换表A的数据文件</span><br><span class="line"><span class="code">    与以前不同之处在于: 在重建表的过程中允许对表A的操作</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-92ae8e30bfdb3194.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重建表流程.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-79acd12bb61357d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Online DDL.png"></p>
+<h4 id="完全Online-？"><a href="#完全Online-？" class="headerlink" title="完全Online ？"></a>完全Online ？</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">不是, DDL之前是要拿MDL锁的、但这个写锁会在<span class="keyword">copy</span>数据之前退化成读锁、就不会阻塞CURD操作了</span><br><span class="line">可以直接解锁？不行、为了保证自己在<span class="keyword">copy</span>的过程中表结构不会再次被修改、为了保护自己</span><br><span class="line">对大表来说、最耗时的是<span class="keyword">copy</span>文件、可以认为MDL读锁的时间可以忽略、但操作会比较消耗IO和CPU、安全操作可以使用 gh-ost来做</span><br></pre></td></tr></table></figure>
+
+<h4 id="online和inplace"><a href="#online和inplace" class="headerlink" title="online和inplace"></a>online和inplace</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">图三中、表A导出数据存放位置叫tmp_table、是一个临时表、在<span class="keyword">server</span>层创建</span><br><span class="line">图四种、表A重建的数据放在tmp_file、是innodb内部创建出来的、整个DDL过程在innodb内部完成、对<span class="keyword">server</span>来说、没有挪到数据到临时表、是原地操作、inplace</span><br><span class="line"></span><br><span class="line">假如磁盘空间是<span class="number">1.2</span>T、现有一个<span class="number">1</span>T的表、可否完成一个inpalce的DDL？</span><br><span class="line">不能、inplace也是需要临时空间的、<span class="keyword">alter</span> <span class="keyword">table</span> t engine=innodb,ALGORITHM=inplace;</span><br><span class="line"><span class="keyword">copy</span>表其实是: <span class="keyword">alter</span> <span class="keyword">table</span> t engine=innodb,ALGORITHM=<span class="keyword">copy</span>; 对应图三</span><br><span class="line"></span><br><span class="line">inplace和online并无直接关系</span><br><span class="line">eg. 添加索引、是inplace操作、但不是online的</span><br></pre></td></tr></table></figure>
+
+<h4 id="alter-table、analyze-table-、-optimize-table"><a href="#alter-table、analyze-table-、-optimize-table" class="headerlink" title="alter table、analyze table 、 optimize table"></a>alter table、analyze table 、 optimize table</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 5.6之后、默认上图四操作、就是recreate</span><br><span class="line"><span class="bullet">2.</span> analyze table不是重建表、是重新统计索引信息、过程会加MDL读锁</span><br><span class="line"><span class="bullet">3.</span> optimize = recreate+analyze</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/web-design_README/" rel="prev" title="README">
+      <i class="fa fa-chevron-left"></i> README
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/tools_%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDidea/" rel="next" title="彻底卸载idea">
+      彻底卸载idea <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#innodb-file-per-table"><span class="nav-number">1.</span> <span class="nav-text">innodb_file_per_table</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%A0%E9%99%A4%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">数据删除流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%8E%BB%E9%99%A4%E7%A9%BA%E6%B4%9E"><span class="nav-number">3.</span> <span class="nav-text">如何去除空洞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8Online-%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">完全Online ？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#online%E5%92%8Cinplace"><span class="nav-number">5.</span> <span class="nav-text">online和inplace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alter-table%E3%80%81analyze-table-%E3%80%81-optimize-table"><span class="nav-number">6.</span> <span class="nav-text">alter table、analyze table 、 optimize table</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

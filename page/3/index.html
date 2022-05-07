@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_hbase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_hbase/" class="post-title-link" itemprop="url">hbase</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="hbase"><a href="#hbase" class="headerlink" title="hbase"></a>hbase</h3><h4 id="install"><a href="#install" class="headerlink" title="install"></a>install</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">1</span>. brew install hbase</span><br><span class="line"><span class="attribute">2</span>. http://hbase.apache.org/book.html#quickstart</span><br><span class="line">   <span class="attribute">tar</span> xzvf hbase-<span class="number">3</span>.<span class="number">0</span>.<span class="number">0</span>-SNAPSHOT-bin.tar.gz</span><br><span class="line">   <span class="attribute">cd</span> hbase-<span class="number">3</span>.<span class="number">0</span>.<span class="number">0</span>-SNAPSHOT/</span><br></pre></td></tr></table></figure>
+
+<h4 id="modify-config"><a href="#modify-config" class="headerlink" title="modify config"></a>modify config</h4><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1. conf/hbase-env.sh 添加Java jdk路径</span><br><span class="line">vim xxxx/libexec/conf/hbase-env.sh</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=<span class="string">&quot;/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home&quot;</span></span><br><span class="line"></span><br><span class="line">2. conf/hbase-site.xml 添加hbase文件存储路径</span><br><span class="line"></span><br><span class="line"><span class="variable">&lt;configuration&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hbase.rootdir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>file:///usr/local/var/hbase<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hbase.zookeeper.property.clientPort<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>2181<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hbase.zookeeper.property.dataDir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>/usr/local/var/zookeeper<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line"><span class="variable">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="start-server"><a href="#start-server" class="headerlink" title="start server"></a>start server</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>hbase<span class="regexp">/&#123;version&#125;/</span>libexec<span class="regexp">/bin/</span>start-hbase.sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="start-shell"><a href="#start-shell" class="headerlink" title="start shell"></a>start shell</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hbase <span class="keyword">shell</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="command"><a href="#command" class="headerlink" title="command"></a>command</h4><h4 id="base-command"><a href="#base-command" class="headerlink" title="base command"></a>base command</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">status 查询服务器的状态</span><br><span class="line"><span class="built_in">version</span> 查询hbase版本</span><br><span class="line">whoami 查看连接用户</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> 查询库中所有表</span><br></pre></td></tr></table></figure>
+
+<h4 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">create</span></span><br><span class="line">   <span class="keyword">create</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;cf1&#x27;</span>, <span class="string">&#x27;cf2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> <span class="keyword">drop</span></span><br><span class="line">   <span class="keyword">disable</span> <span class="string">&#x27;table_name&#x27;</span> 删除之前需要先让表失效、修改表结构是也是</span><br><span class="line">   <span class="keyword">drop</span> <span class="string">&#x27;table_name&#x27;</span> 删除</span><br><span class="line">   </span><br><span class="line"><span class="number">3.</span> <span class="keyword">exists</span></span><br><span class="line">   <span class="keyword">exists</span> <span class="string">&#x27;table_name&#x27;</span> 查看表是否存在</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> describe 查看表结构</span><br><span class="line">   describe <span class="string">&#x27;table_name&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> <span class="keyword">enable</span> 使表有效</span><br><span class="line">   <span class="keyword">enable</span> <span class="string">&#x27;table_name&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> modify <span class="keyword">table</span> structure</span><br><span class="line">   <span class="number">1</span>) <span class="keyword">alter</span> <span class="string">&#x27;table_name&#x27;</span> <span class="string">&#x27;cf3&#x27;</span>   # 新增列族</span><br><span class="line">   <span class="number">2</span>) <span class="keyword">alter</span> <span class="string">&#x27;test&#x27;</span>, &#123;<span class="type">NAME</span>=&gt;<span class="string">&#x27;cf3&#x27;</span>, <span class="keyword">METHOD</span>=&gt;<span class="string">&#x27;delete&#x27;</span>&#125; # 删除列族</span><br></pre></td></tr></table></figure>
+
+<h4 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">add</span></span><br><span class="line">put <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, <span class="string">&#x27;列族名 1: 列名 1&#x27;</span>, <span class="string">&#x27;value&#x27;</span> #同一个rowkey、执行两次put、认为是更新操作</span><br><span class="line">eg. put <span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;row_key1&#x27;</span>,<span class="string">&#x27;cf1:a&#x27;</span>,<span class="string">&#x27;a&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> incr</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> count 查询表的行数(比较耗时)</span><br><span class="line">   count <span class="string">&#x27;table_name&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> <span class="keyword">select</span></span><br><span class="line">    <span class="number">1</span>) <span class="keyword">get</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, <span class="string">&#x27;列族名：列名&#x27;</span> #查询指定列族的指定列的值</span><br><span class="line">       eg. <span class="keyword">get</span> <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;row_key1&#x27;</span>, <span class="string">&#x27;cf1:a,cf4&#x27;</span> </span><br><span class="line">       </span><br><span class="line">    <span class="number">2</span>) <span class="keyword">get</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span> #获取指定row_key的所有数据</span><br><span class="line">       eg. <span class="keyword">get</span> <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;row_key1&#x27;</span></span><br><span class="line">       </span><br><span class="line">    <span class="number">3</span>) <span class="keyword">get</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, &#123;COLUMN=&gt;<span class="string">&#x27;列族名：列&#x27;</span>, <span class="type">TIMESTAMP</span>=&gt;<span class="number">1373737746997</span>&#125; # 获取指定时间戳的数据</span><br><span class="line">        <span class="keyword">get</span> <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;row_key1&#x27;</span>, &#123;COLUMN=&gt;<span class="string">&#x27;cf1:a&#x27;</span>,<span class="type">TIMESTAMP</span>=&gt;<span class="number">1559367213477</span>&#125;</span><br><span class="line">        </span><br><span class="line">    <span class="number">4</span>) <span class="keyword">get</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, &#123;COLUMN =&gt; <span class="string">&#x27;列族名：列名&#x27;</span>, VERSIONS =&gt; <span class="number">2</span>&#125; 获取多个版本值、默认返回第一个</span><br><span class="line">       <span class="keyword">get</span> <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;row_key1&#x27;</span>, &#123;COLUMN=&gt;<span class="string">&#x27;cf1:a&#x27;</span>,VERSIONS=&gt;<span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> <span class="keyword">delete</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>) <span class="keyword">delete</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, <span class="string">&#x27;列族名：列名&#x27;</span> 删除指定rowkey的指定列族的列名数据</span><br><span class="line">   eg. <span class="keyword">delete</span> <span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;row_key1&#x27;</span>,<span class="string">&#x27;cf1:a&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>) <span class="keyword">delete</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, <span class="string">&#x27;列族名&#x27;</span>  删除指定rowkey指定列族的数据</span><br><span class="line">   eg. <span class="keyword">delete</span> <span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;row_key1&#x27;</span>,<span class="string">&#x27;cf1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">3</span>) deleteall <span class="string">&#x27;table_name&#x27;</span>, ’rowkey<span class="string">&#x27; 删除rowkey所有column的calue、删除整行数据</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">6. scan &#x27;</span>table_nam<span class="string">e&#x27; 全表扫描</span></span><br><span class="line"><span class="string">   scan &#x27;</span>test<span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">7. truncate &#x27;</span>table_nam<span class="string">e&#x27; 删除全表数据</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">8. hbase shell test.hbaseshell 执行shell脚本</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 行以 rowkey 作为唯一标识、最大长度 <span class="number">64</span>KB</span><br><span class="line">   不支持<span class="keyword">order</span> <span class="keyword">by</span>只能按照rowkey或者range或者全表扫描</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 列族是列的集合 列族:列</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> HBase 通过 <span class="keyword">row</span> 和 <span class="keyword">column</span> 确定一份数据</span><br><span class="line">   tableName + RowKey + ColumnKey + <span class="type">Timestamp</span> =&gt; <span class="keyword">value</span> 唯一确定。Cell 中数据没有类型，字节码存储</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><p><a target="_blank" rel="noopener" href="http://einverne.github.io/post/2017/02/hbase-introduction-and-use.html">http://einverne.github.io/post/2017/02/hbase-introduction-and-use.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://einverne.github.io/post/2017/02/hbase-shell-command.html">http://einverne.github.io/post/2017/02/hbase-shell-command.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_java%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_java%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">java基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">Spring的`scope` :</span></span><br><span class="line">`Singleton` 一个spring容器中、只有一个`bean` 的实例、spring默认配置</span><br><span class="line">`Prototype` 每次调用新建一个bean</span><br><span class="line">`Request` web项目中、给每个http request请求一个bean实例</span><br><span class="line">`Session` web项目中、给每个http session一个bean实例</span><br><span class="line">`GlobalSession` 只有在Portal应用中有、给每个global http request一个bean实例</span><br></pre></td></tr></table></figure>
+<h4 id="postConstructor"><a href="#postConstructor" class="headerlink" title="postConstructor"></a>postConstructor</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@PostConstruct</span> 在 construct之后执行、</span><br><span class="line">相当于java配置方式的 <span class="variable">@Bean</span>(initMethod=<span class="string">&#x27;xxx&#x27;</span>)、</span><br><span class="line">相当于xml配置方式的 init-method</span><br><span class="line"></span><br><span class="line"><span class="variable">@PreDestroy</span> 在bean销毁之前执行、</span><br><span class="line">相当于java配置方式的 <span class="variable">@Bean</span>(deatroyMethod=<span class="string">&#x27;xxx&#x27;</span>)</span><br><span class="line">相当于xml配置方式的 destroy-method</span><br></pre></td></tr></table></figure>
+
+<h4 id="profile"><a href="#profile" class="headerlink" title="profile"></a>profile</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">提供不同环境不同配置文件的支持</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Spring的事件为<span class="keyword">Bean与Bean之间的通信提供了支持、</span></span><br><span class="line"><span class="keyword"></span><span class="number">1</span>) 自定义事件  继承ApplicationEvent</span><br><span class="line"><span class="number">2</span>) 定义事件监听器  实现 ApplicationListener</span><br><span class="line"><span class="number">3</span>) 使用容器发布事件</span><br></pre></td></tr></table></figure>
+
+<h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 异步任务 <span class="meta">@Async</span> </span><br><span class="line"><span class="number">2.</span> 规划任务 <span class="meta">@Scheduled</span> 每隔固定时间执行</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="桟"><a href="#桟" class="headerlink" title="桟"></a>桟</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">主要用来存放函数调用所需要的数据<span class="comment">(函数参数、返回地址及函数内部的局部变量)</span>、但、返回值不在桟中、会有一个专门的返回值存储器、</span><br></pre></td></tr></table></figure>
+
+<h4 id="变量的生命周期"><a href="#变量的生命周期" class="headerlink" title="变量的生命周期"></a>变量的生命周期</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 函数中的参数和函数内定义的变量、都分配在桟上、在函数调用时被分配、调用结束释放</span><br><span class="line"><span class="bullet">2.</span> 数组和对象 存放变量地址的空间是分配在桟上的、存放变量内容的空间是分配在堆上的</span><br><span class="line">函数调用结束、存放变量地址的空间会被立即释放、而存放内容的空间不会、它会因为没有变量引用、而被垃圾回收机制回收掉</span><br></pre></td></tr></table></figure>
+
+<h4 id="类和对象的声明周期"><a href="#类和对象的声明周期" class="headerlink" title="类和对象的声明周期"></a>类和对象的声明周期</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类加载进内存后、一般不会释放、直到程序结束、一般情况下、类只会加载<span class="number">1</span>次、所以、静态变量在内存中只有一份</span><br><span class="line"></span><br><span class="line">对象：每次<span class="keyword">new</span><span class="type"></span>创建一个对象的时候、对象产生、在内存中、会存储这个对象的实例变量值、每<span class="keyword">new</span><span class="type"></span>一次、对象就会产生一个、就会有一份独立的实例变量</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">java常用注解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>@Controller</code> mvc中、声明一个控制器<br><code>@Component</code> 声明一个通用组件<br><code>@Repository</code> 声明一个dao组件<br><code>@Service</code> 声明一个service组件</p>
+<p><code>@Bean</code> 声明一个bean容器<br><code>@Configuration</code> 声明配置类<br><code>@ComponentScan</code> 包扫描</p>
+<p><code>@Async</code>声明一个异步方法<br><code>@EnableAsync</code> 开启异步任务支持<br><code>@Scheduled</code> 声明一个计划任务<br>       <code>fixdRate</code> 表明每隔固定时间间隔执行<br>      <code>cron</code>表明按照cron表达式在指定时间执行<br><code>@EnableScheduling</code> 开启计划任务支持<br><code>@EnableCaching</code> 开启注解式的缓存支持</p>
+<p><code>@RequestMapping</code> 配置url和方法之间的映射关系<br><code>@Conditional</code> 条件注解<br><code>@ResponseBody</code> 将返回值放在response返回体内、而不是返回一个页面<br><code>@RequestBody</code>允许将request参数放在request体中、而不是放在连接地址后边<br><code>@PathVariable</code>用来接收路径参数</p>
+<p>组合注解<br><code>@WiselyConfiguration</code> 代替 <code>@Configuration</code> + <code>@ComponentScan</code><br><code>@RestController</code> 代替 <code>@Controller</code> + <code>@ResponseBody</code><br><code>@SpringBootApplication</code> 组合了<br><code>@Configuration</code>+<code>@EnableAutoConfiguration</code>+<code>@ComponentScan</code></p>
+<p><code>@ConditionalOnBean</code>当容器里有指定的bean的条件下<br><code>@ConditionalOnClass</code> 当类路径下有指定的类的条件下<br><code>@ConditionalOnExpression</code>基于SpEL做判断<br><code>@ConditionalOnJava</code> 基于jvm版本做判断<br><code>@ConditionalOnMissingBean</code> 当容器中无指定bean的条件下<br><code>@ConditionalOnMissingClass</code> 类路径下无指定class的情况下<br><code>@ConditionalOnNotWebApplication</code> 当前项目不是web项目的情况下<br><code>@ConditionalOnWebApplication</code> 当前项目是web项目的情况下<br><code>@ConditionalOnProperty</code> 指定的属性是否有指定值<br><code>@ConditionalOnResource</code> 类路径是否有指定值</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_solr%E4%BD%BF%E7%94%A8IK%E5%88%86%E8%AF%8D%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_solr%E4%BD%BF%E7%94%A8IK%E5%88%86%E8%AF%8D%E5%99%A8/" class="post-title-link" itemprop="url">solr使用IK分词器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="下载分词器jar包"><a href="#下载分词器jar包" class="headerlink" title="下载分词器jar包"></a>下载分词器jar包</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">百度网盘地址：</span><br><span class="line">链接:https:<span class="regexp">//</span>pan.baidu.com<span class="regexp">/s/</span><span class="number">1</span>GHwv6uBcUhI7GpOpqFnl4g  密码:<span class="number">121</span>w</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 将压缩包解压、重命名为ik_analyzer</span><br><span class="line"><span class="number">2</span>. 将 ik-analyzer-solr6.jar 复制到 solr lib目录下</span><br><span class="line">    cp ~<span class="regexp">/Downloads/i</span>k_analyzer<span class="regexp">/ik-analyzer-solr6.jar ~/</span>www<span class="regexp">/Java/</span>solr<span class="regexp">/WEB-INF/</span>lib</span><br><span class="line"><span class="number">3</span>. 将相关包放入solr <span class="keyword">classpath</span></span><br><span class="line">    cp  ~<span class="regexp">/Downloads/i</span>k_analyzer<span class="regexp">/mydict.dic    ~/</span>Downloads<span class="regexp">/ik_analyzer/I</span>KAnalyzer.cfg.xml    ~<span class="regexp">/Downloads/i</span>k_analyzer<span class="regexp">/ext_stopword.dic  ~/</span>www<span class="regexp">/Java/</span>solr<span class="regexp">/WEB-INF/</span>classes</span><br><span class="line">  若~<span class="regexp">/www/</span>Java<span class="regexp">/solr/</span>WEB-INF/classes文件夹不存在、需要新建</span><br><span class="line"><span class="number">4</span>. 配置schema</span><br><span class="line">   </span><br><span class="line">    &lt;!-- IKAnalyzer--&gt;</span><br><span class="line">      &lt;fieldType name=<span class="string">&quot;text_ik&quot;</span> <span class="keyword">class</span>=<span class="string">&quot;solr.TextField&quot;</span>&gt;</span><br><span class="line">          &lt;analyzer <span class="keyword">class</span>=<span class="string">&quot;org.wltea.analyzer.lucene.IKAnalyzer&quot;</span>/&gt;</span><br><span class="line">      &lt;/fieldType&gt;</span><br><span class="line"></span><br><span class="line">      &lt;field name=<span class="string">&quot;item_title&quot;</span> type=<span class="string">&quot;text_ik&quot;</span> indexed=<span class="string">&quot;true&quot;</span> stored=<span class="string">&quot;true&quot;</span>/&gt;</span><br><span class="line">      &lt;field name=<span class="string">&quot;item_sell_point&quot;</span> type=<span class="string">&quot;text_ik&quot;</span> indexed=<span class="string">&quot;true&quot;</span> stored=<span class="string">&quot;true&quot;</span>/&gt;</span><br><span class="line">      &lt;field name=<span class="string">&quot;item_price&quot;</span>  type=<span class="string">&quot;plong&quot;</span> indexed=<span class="string">&quot;true&quot;</span> stored=<span class="string">&quot;true&quot;</span>/&gt;</span><br><span class="line">      &lt;field name=<span class="string">&quot;item_image&quot;</span> type=<span class="string">&quot;string&quot;</span> indexed=<span class="string">&quot;false&quot;</span> stored=<span class="string">&quot;true&quot;</span> /&gt;</span><br><span class="line">      &lt;field name=<span class="string">&quot;item_category_name&quot;</span> type=<span class="string">&quot;string&quot;</span> indexed=<span class="string">&quot;true&quot;</span> stored=<span class="string">&quot;true&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">      &lt;field name=<span class="string">&quot;item_keywords&quot;</span> type=<span class="string">&quot;text_ik&quot;</span> indexed=<span class="string">&quot;true&quot;</span> stored=<span class="string">&quot;false&quot;</span> multiValued=<span class="string">&quot;true&quot;</span>/&gt;</span><br><span class="line">      &lt;copyField <span class="keyword">source</span>=<span class="string">&quot;item_title&quot;</span> dest=<span class="string">&quot;item_keywords&quot;</span>/&gt;</span><br><span class="line">      &lt;copyField <span class="keyword">source</span>=<span class="string">&quot;item_sell_point&quot;</span> dest=<span class="string">&quot;item_keywords&quot;</span>/&gt;</span><br><span class="line">      &lt;copyField <span class="keyword">source</span>=<span class="string">&quot;item_category_name&quot;</span> dest=<span class="string">&quot;item_keywords&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">其中：copyfiled是将item_title、item_sell_point、item_category_name都作为后边的item_keywords来搜索</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>. 保存、重启tomcat、访问页面</span><br><span class="line">    http:<span class="comment">//localhost:8081/solr/index.html</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-25bef17f4a7bd4d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="analyzer.png"></p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如果遇到错误：java<span class="selector-class">.lang</span><span class="selector-class">.AbstractMethodError</span></span><br><span class="line">可以检查下分词器的版本是否过低</span><br><span class="line">当前这篇文章使用的solr是<span class="number">7.2</span>.<span class="number">1</span>的版本、使用的是网盘保存的分词器版本、是ok的、</span><br><span class="line">之前使用了 IKAnalyzer2012FF_u1<span class="selector-class">.jar</span> 这个版本、出现的上述错误~</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-733f055952b7cd35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_java%E7%A7%92%E7%BA%A7%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">java秒级定时任务的实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>@Scheduled</code> 注解、简单轻量级task配置</p>
+<p><code>@Scheduled</code> 使用：</p>
+<ul>
+<li><code>@Scheduled(cron = &quot;0 5 * * * * ?&quot;)</code> 10分钟执行1次</li>
+<li><code>@Scheduled(fixedRate = 2000)</code> 每2s执行1次、不用等待上次执行完成</li>
+<li><code>@Scheduled(fixedDelay = 2000)</code> 等待上次请求结束后、delay 2s 执行下次任务</li>
+<li><code>@Scheduled(fixedDelay = 2000, initDelay = 2000)</code> 项目启动成功后、延迟2s执行任务</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---G1%E6%94%B6%E9%9B%86%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---G1%E6%94%B6%E9%9B%86%E5%99%A8/" class="post-title-link" itemprop="url">垃圾回收---G1收集器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h4><p>上篇文章简单介绍了七种垃圾回收器、既然G1是最前沿的、有必要补充说明一下:<br>     1. <code>横跨整个堆内存</code>: 在G1之前的其它收集器收集范围都是整个新生代或者老年代<br>         G1在使用时、将整个Java堆划分为多个大小相等的<code>独立区域(Region)</code><br>         保留新生代和老年代的概念、但不再物理隔离、都是一部分<code>Region</code>(不需要连续)的集合<br>     2. <code>建立可预测的时间模型</code>: G1跟踪各个Region里垃圾堆积的价值大小(回收可获得空间大小及回收所需时间的经验值)<br>         在后台维护一个优先级列表, 每次根据允许的收集时间、优先回收价值最大的Region(Garbage First)<br>         这种实验Region划分内存空间及有优先级的区域回收方式、保证了G1在有限时间内的收集效率<br>     3. <code>避免全堆扫描</code>: G1将堆分为多个Region、就是化整为零、单Region不可能是孤立的、一个对象分配在某个Region中<br>         可能与整个Java堆任意的对象发生引用关系、在做可达性分析确定对象是否存活时、需要扫整个Java堆保证准确性<br>         严重损耗GC效率，<br>        <code>注意：</code><br>为了避免全堆扫描、虚拟机为每个Region维护了一个对应的<code>Remembered Set</code>、虚拟机发现程序对在<code>Reference</code>类型的<br>         数据进行写操作时、会产生一个<code>Writer Barrier</code>暂时中断写操作、检测<code>Reference引用的对象</code>是否<code>在不同的Region中</code><br>         (在分代的例子中就是检测老年代对象是否引用了新生代对象)、若是则通过<code>CardTable</code>把相关引用记录到被引用对象所属的<br>         Region的<code>Remembered Set</code>中、垃圾回收时，在GC根节点的枚举范围内<code>加入Remembered Set</code>即可保证不用全堆扫描也能不遗漏</p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">若不计算维护Remembered Set的操作、G1大致步骤为：</span><br><span class="line"><span class="number">1</span>) 初始标记：initial mark仅标记GC Roots能直接关联的对象、并且修改TAMS(Nest top mark start)的值</span><br><span class="line">   让下阶段用户程序并发运行时、可在正确可以的Region中创建对象、此阶段需要停顿用户线程、但时间较短</span><br><span class="line">   </span><br><span class="line"><span class="number">2</span>) 并发标记: concurrent Marking 从GC Root开始对堆中对象做可达性分析、找到存活对象</span><br><span class="line">   耗时较长、但可与用户线程`并发执行`</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>) 最终标记: Final Marking 为了修正标记期间因用户程序继续运行导致标记产生变化的对象、</span><br><span class="line">   虚拟机将这段时间内对象变化记录在线程的`Remembered Set Logs`里、最终标记阶段需要将这部分数据合并</span><br><span class="line">   到 Remembered Set 中、需要`停顿线程`、但可`并行执行`</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>) 筛选回收: Live Data <span class="literal">and</span> Evacuation 先对各个Region中的回收价值和成本进行排序</span><br><span class="line">   根据用户所期望的GC停顿时间来定制回收计划、此阶段也`可以`做到与用户线程`并发执行`、但因为只回收</span><br><span class="line">   一部分Region、且时间是用户可控制的、`停顿用户线程`将大幅度`提高收集效率`</span><br></pre></td></tr></table></figure>
+<h5 id="G1适用分析"><a href="#G1适用分析" class="headerlink" title="G1适用分析"></a>G1适用分析</h5><pre><code>场景Scense：
+   1. 多核多CPU而且大内存
+   2. 要求低停顿
+
+如何实现-XX:MaxGCPauseMillis所设置的目标？
+   1. 对于新生代来说，G1自动调整新生代的大小
+   2. 对于老年代来说，每次Mixed Garbage Collecttion的时候回收的Rigion个数会基于
+      Mixed Garbage Collection的目标次数，每个Region中的存活对象百分比，以及堆全局的垃圾比例来设定
+</code></pre>
+<h5 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h5><pre><code>如何实现避免碎片？
+   无论是新生代还是老年代，使用复制算法(将一批Region复制到另外一批Region中)
+
+如何避免可达性分析扫描整个堆？
+   每一个Region都有自己的RSets(Remembered Set) 用来记录对自己Region内对象的引用
+   
+在什么时机进行Mixed Garbage Collection?
+   在堆的使用率达到-XX:InitiatingHeapOccupancyPercent所设置的使用率(老年代使用的内存/整个堆内存)时
+   
+   判断的时机是? 每次Young GC结束的时候
+   
+   因为老年代空间中的使用内存发生变化只有一个情形：Young GC的时候
+
+G1的哪些过程需要STW？
+   1) young gc: 采用的是复制算法 - 会STW、多线程进行
+   2) mixed gc: 也是复制算法、mixed gc也包括对新生代的收集
+   3) global concurrent mark中的initial mark、remark、部分clean up
+
+既然有CMS，为什么要选择G1?
+   1. STW更加可控
+   2. 由于采用了标记-整理算法，不会产生内存碎片
+
+Humongous Objects的分配和回收:
+   1. 怎么算？大于Region的空间的一半的算Humongous Objects
+   2. 放哪里？Humongous Objects被分配在Humongous Region，直接在老年代
+   3. 回收：不在mixed gc，而在 global concurrent marking的最后一步：clean up中
+
+可达性分析：
+   找一组对象作为GC Root（根结点），并从根结点进行遍历，遍历结束后如果发现某个对象是不可达的,
+   那么它就会被标记为不可达对象，等待GC
+
+哪些对象可以作为GC Root
+    能作为GC Root的对象必定为可以存活的对象，
+    eg. 全局性的引用（静态变量和常量）以及某些方法的局部变量（栈帧中的本地变量表）
+    
+    以下对象通常可以作为GC Root：
+    1) 存活的线程
+    2) 虚拟机栈(栈桢中的本地变量表)中的引用的对象
+    3) 方法区中的类静态属性以及常量引用的对象
+    4) 本地方法栈中JNI引用的局部变量以及全局变量
+</code></pre>
+<h5 id="G1调优"><a href="#G1调优" class="headerlink" title="G1调优"></a>G1调优</h5><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. -<span class="variable constant_">XX</span><span class="symbol">:MaxGCPauseMillis</span></span><br><span class="line">   最大<span class="variable constant_">STW</span>时间、参数设置过小会频繁<span class="variable constant_">GC</span>、设置过大、吞吐量会降低、所以要合理的设置来保证 </span><br><span class="line">   <span class="string">`最大停顿时间`</span>和<span class="string">`最大吞吐量`</span>的平衡</span><br><span class="line"><span class="number">2</span>. -<span class="variable constant_">XX</span><span class="symbol">:InitiatingHeapOccupancyPercent</span> &amp; -<span class="variable constant_">XX</span><span class="symbol">:+G1UseAdaptiveHop</span></span><br><span class="line">   InitiatingHeapOccupancyPercent简称<span class="variable constant_">IHOP</span></span><br><span class="line">   -<span class="variable constant_">XX</span><span class="symbol">:+G1UseAdaptiveIHOP</span>是默认值，也就是说<span class="variable constant_">IHOP</span>是adaptive的</span><br><span class="line">   -<span class="variable constant_">XX</span><span class="symbol">:InitiatingHeapOccupancyPercent</span>是初始值</span><br></pre></td></tr></table></figure>
+<h5 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h5><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 跟cms一样、无法避免浮动垃圾的产生和溢出</span><br><span class="line">    可以增加堆大小、或者<span class="variable constant_">GC</span>线程<span class="string">`-XX:ConcGCThreads`</span>来尽量避免</span><br><span class="line"><span class="number">2</span>. 同样存在晋升失败的问题</span><br><span class="line">    可以提升<span class="string">`-XX:G1ReservePercent`</span>同时同比例的增加堆大小、</span><br><span class="line">    或者提前启动标记周期(减少-<span class="variable constant_">XX</span><span class="symbol">:InitiatingHeapOccupancyPercent</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="GC-收集器总结"><a href="#GC-收集器总结" class="headerlink" title="GC 收集器总结:"></a>GC 收集器总结:</h5><table>
+<thead>
+<tr>
+<th>收集器</th>
+<th>串行、并行or并发</th>
+<th>新生代&#x2F;老年代</th>
+<th>算法</th>
+<th>目标</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Serial</td>
+<td>串行</td>
+<td>新生代</td>
+<td>复制算法</td>
+<td>响应速度优先</td>
+<td>单CPU环境下的Client模式</td>
+</tr>
+<tr>
+<td>Serial Old</td>
+<td>串行</td>
+<td>老年代</td>
+<td>标记-整理</td>
+<td>响应速度优先</td>
+<td>单CPU环境下的Client模式、CMS的后备预案</td>
+</tr>
+<tr>
+<td>ParNew</td>
+<td>并行</td>
+<td>新生代</td>
+<td>复制算法</td>
+<td>响应速度优先</td>
+<td>多CPU环境时在Server模式下与CMS配合</td>
+</tr>
+<tr>
+<td>Parallel Scavenge</td>
+<td>并行</td>
+<td>新生代</td>
+<td>复制算法</td>
+<td>吞吐量优先</td>
+<td>在后台运算而不需要太多交互的任务</td>
+</tr>
+<tr>
+<td>Parallel Old</td>
+<td>并行</td>
+<td>老年代</td>
+<td>标记-整理	吞吐量优先</td>
+<td>在后台运算而不需要太多交互的任务</td>
+<td></td>
+</tr>
+<tr>
+<td>CMS</td>
+<td>并发</td>
+<td>老年代</td>
+<td>标记-清除</td>
+<td>响应速度优先</td>
+<td>集中在互联网站或B&#x2F;S系统服务端上的Java应用</td>
+</tr>
+<tr>
+<td>G1</td>
+<td>并发</td>
+<td>both</td>
+<td>标记-整理+复制算法</td>
+<td>响应速度优先</td>
+<td>面向服务端应用，将来替换CMS</td>
+</tr>
+</tbody></table>
+<h6 id="附："><a href="#附：" class="headerlink" title="附："></a>附：</h6><pre><code> 1. `可达性`: GC Root可以到达此对象
+ 2. `并行执行`: 多个线程同时执行gc
+ 3. `并发执行`: 用户线程和GC线程同时执行
+ 
+</code></pre>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-907fa5f1c490a4f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="G1.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_zk%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">zk使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="参考配置项"><a href="#参考配置项" class="headerlink" title="参考配置项"></a>参考配置项</h1><p><code>tickTime</code> 用于计算的时间单元、eg. session超时、N*tickTime<br><code>initLimit</code> 用于集群、允许从节点连接、并同步到master节点的初始化连接时间、以tickTime的倍数来表示<br><code>syncLimit</code> 用于集群、master主节点与从节点之间发送消息、请求和应答的时间长度(心跳机制)<br><code>dataDir</code> 数据文件目录、必须<br><code>dataLogDir</code> 日志目录、非必须、默认<code>dataDir</code><br><code>clientPort</code> 连接服务器的端口、默认 <code>2181</code></p>
+<h1 id="client-连接"><a href="#client-连接" class="headerlink" title="client 连接"></a>client 连接</h1><p><code>zkCli.sh</code> 默认连接2181</p>
+<h1 id="client-命令"><a href="#client-命令" class="headerlink" title="client 命令"></a>client 命令</h1><p><code>ls</code> 与linux下<code>ls</code>同义<br><code>ls</code> 等同于  <code>ls</code> + <code>stat</code><br><code>stat</code> 状态显示 zZxid zookeeper为数据分配的id pZxid 子节点的id<br><code>get</code> 查看节点数据<br><code>create</code> 创建节点 -e 临时节点<br><code>set</code> 修改节点数据<br><code>delete</code> 删除节点数据</p>
+<h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><p>构成: scheme: 采用的权限机制<br>(word:anyone:[permissions] |<br>auth:user:password:[permissions] |<br>digest:user:BASE64(SHA1(pass)):[permissions])<br>(ip:192.168.1.1:[permission])<br>(super: 代表超管、拥有所有的权限)</p>
+<p>id: 代表允许访问的机制 </p>
+<p>permissons: 权限</p>
+<p>权限字符缩写 crdwa<br>create: 创建子节点<br>read: 获取节点、子节点<br>write: 设置节点数据<br>delete: 删除子节点<br>admin: 设置权限</p>
+<p><code>getAcl</code> 获取节点的acl权限信息<br><code>setAcl</code> 设置某个节点的acl权限信息<br><code>addAuth</code> 输入认证权限信息、注册时、输入明文密码(登录)、但在zk的系统里、是以密文存在的</p>
+<h1 id="four-letter-cmd"><a href="#four-letter-cmd" class="headerlink" title="four letter cmd"></a>four letter cmd</h1><p><code>stat</code> 当前节点的状态信息<br><code>ruok</code> 当前节点是否ok<br><code>conf</code> 查看服务器相关的配置<br><code>cons</code> 展示连接到server的client信息<br><code>envi</code> 打印环境变量信息<br><code>mntr</code> 监控zk的健康信息<br><code>wchs</code> watcher的信息<br><code>wchc</code> session与watch对应关系信息<br><code>wchp</code> path与watch对应关系</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---GC%E6%97%A5%E5%BF%97%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---GC%E6%97%A5%E5%BF%97%E8%A7%A3%E8%AF%BB/" class="post-title-link" itemprop="url">垃圾回收---GC日志解读</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="年轻代log解读"><a href="#年轻代log解读" class="headerlink" title="年轻代log解读"></a>年轻代log解读</h4><p>年轻代以ParNew收集器为例, 采用的是复制算法, log如下：<br><img src="https://upload-images.jianshu.io/upload_images/14027542-4695c4709d665059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2019</span><span class="operator">-</span><span class="number">02</span><span class="operator">-</span><span class="number">01</span><span class="variable">T21</span><span class="operator">:</span><span class="number">18</span><span class="operator">:</span><span class="number">15</span><span class="operator">:</span><span class="number">00.382</span><span class="operator">+</span><span class="number">0800</span><span class="operator">:</span> <span class="number">718675.758</span><span class="operator">:</span> <span class="variable">Application</span> <span class="variable">time</span><span class="operator">:</span> <span class="number">0.7177964</span> <span class="variable">seconds</span></span><br><span class="line"><span class="punctuation">&#123;</span><span class="variable">Heap</span> <span class="variable">before</span> <span class="variable">GC</span> <span class="variable">invocations</span><span class="operator">=</span><span class="number">65632</span> <span class="punctuation">(</span><span class="variable">full</span> <span class="number">18</span><span class="punctuation">)</span><span class="operator">:</span></span><br><span class="line"> <span class="variable">par</span> <span class="variable">new</span> <span class="variable">generation</span>   <span class="variable">total</span> <span class="number">471872</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">used</span> <span class="number">421490</span><span class="built_in">K</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x0000000080000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000a0000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000a0000000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">eden</span> <span class="variable">space</span> <span class="number">419456</span><span class="built_in">K</span><span class="operator">,</span> <span class="number">100</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x0000000080000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000999a0000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000999a0000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">from</span> <span class="variable">space</span> <span class="number">52416</span><span class="built_in">K</span><span class="operator">,</span>   <span class="number">3</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x00000000999a0000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x0000000099b9c830</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x000000009ccd0000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">to</span>   <span class="variable">space</span> <span class="number">52416</span><span class="built_in">K</span><span class="operator">,</span>   <span class="number">0</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x000000009ccd0000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x000000009ccd0000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000a0000000</span><span class="punctuation">)</span></span><br><span class="line"> <span class="variable">concurrent</span> <span class="variable">mark</span><span class="operator">-</span><span class="variable">sweep</span> <span class="variable">generation</span> <span class="variable">total</span> <span class="number">1572864</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">used</span> <span class="number">905696</span><span class="built_in">K</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x00000000a0000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x0000000100000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x0000000100000000</span><span class="punctuation">)</span></span><br><span class="line"> <span class="variable">Metaspace</span>       <span class="variable">used</span> <span class="number">104594</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">capacity</span> <span class="number">113116</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">committed</span> <span class="number">113664</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">reserved</span> <span class="number">1148928</span><span class="built_in">K</span></span><br><span class="line">  <span class="variable">class</span> <span class="variable">space</span>    <span class="variable">used</span> <span class="number">12280</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">capacity</span> <span class="number">13738</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">committed</span> <span class="number">13824</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">reserved</span> <span class="number">1048576</span><span class="built_in">K</span></span><br><span class="line"></span><br><span class="line"><span class="number">2019</span><span class="operator">-</span><span class="number">02</span><span class="operator">-</span><span class="number">01</span><span class="variable">T18</span><span class="operator">:</span><span class="number">15</span><span class="operator">:</span><span class="number">00.383</span><span class="operator">+</span><span class="number">0800</span><span class="operator">:</span> <span class="number">718675.758</span><span class="operator">:</span> <span class="punctuation">[</span><span class="variable">GC</span> <span class="punctuation">(</span><span class="variable">Allocation</span> <span class="built_in">Failure</span><span class="punctuation">)</span> <span class="number">2019</span><span class="operator">-</span><span class="number">02</span><span class="operator">-</span><span class="number">01</span><span class="variable">T18</span><span class="operator">:</span><span class="number">15</span><span class="operator">:</span><span class="number">00.384</span><span class="operator">+</span><span class="number">0800</span><span class="operator">:</span> <span class="number">718675.759</span><span class="operator">:</span> <span class="punctuation">[</span><span class="variable">ParNew</span><span class="operator">:</span> <span class="number">109872</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">5255</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">118016</span><span class="built_in">K</span><span class="punctuation">)</span><span class="operator">,</span> <span class="number">0.0211147</span> <span class="variable">secs</span><span class="punctuation">]</span> <span class="number">142365</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">37748</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">511232</span><span class="built_in">K</span><span class="punctuation">)</span><span class="operator">,</span> <span class="number">0.0212949</span> <span class="variable">secs</span><span class="punctuation">]</span> <span class="punctuation">[</span><span class="built_in">Times</span><span class="operator">:</span> <span class="variable">user</span><span class="operator">=</span><span class="number">0.26</span> <span class="variable">sys</span><span class="operator">=</span><span class="number">0.04</span><span class="operator">,</span> <span class="variable">real</span><span class="operator">=</span><span class="number">0.02</span> <span class="variable">secs</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p>其中:<br>*<code>Heap before GC invocations=65632 (full 18)</code>: <code> invocations=65632</code>表示经历的gc的次数 <code>full 18</code>表示经历的full gc的次数</p>
+<ul>
+<li><code>2019-02-01T18:15:00.383</code>：发生<code>minor gc</code>的时间</li>
+<li><code>718675.758</code>：GC时、相对GVM启动时间的偏移量</li>
+<li><code>ParNew</code> 收集器的名称 , 会<code>STW</code>(<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d07194a20ec1">https://www.jianshu.com/p/d07194a20ec1</a>)</li>
+<li><code>109872K-&gt;5255K</code>：收集前后年轻代的使用情况</li>
+<li><code>118016K</code>：整个年轻代的容量</li>
+<li><code>0.0211147 secs</code>： stw的时间</li>
+<li><code>142365K-&gt;37748K</code>：GC前后整个堆的使用情况</li>
+<li><code>511232K</code>：整个堆的容量</li>
+<li><code>0.0212949 secs</code>：ParNew 收集器标记和复制年轻代活着的对象所花费的时间(包括和老年代通信的开销、对象晋升到老年代开销、垃圾收集周期结束一些最后的清理对象等的花销)</li>
+<li><code>user</code>：GC 线程在垃圾收集期间所使用的 CPU 总时间</li>
+<li><code>sys</code>：系统调用或者等待系统事件花费的时间</li>
+<li><code>real</code>: 应用被暂停的时钟时间、由于GC是多线程的、<code>real</code>可能会<code>小于</code> <code>user+sys</code>, 如果是单线程的、real是接近 <code>user+sys</code>的时间的</li>
+</ul>
+<h4 id="CMS-log-大致解读"><a href="#CMS-log-大致解读" class="headerlink" title="CMS log 大致解读"></a>CMS log 大致解读</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">233</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">148</span>:<span class="meta"> [GC [1 CMS-initial-mark: 6294851K(20971520K)] 6354687K(24746432K), 0.0466580 secs] [Times: user=0.04 sys=0.00, real=0.04 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">280</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">195</span>:<span class="meta"> [CMS-concurrent-mark-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">418</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">333</span>:<span class="meta"> [CMS-concurrent-mark: 0.138/0.138 secs] [Times: user=1.01 sys=0.21, real=0.14 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">418</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">334</span>:<span class="meta"> [CMS-concurrent-preclean-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">476</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">391</span>:<span class="meta"> [CMS-concurrent-preclean: 0.056/0.057 secs] [Times: user=0.20 sys=0.12, real=0.06 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">476</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">391</span>:<span class="meta"> [CMS-concurrent-abortable-preclean-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">29</span>.<span class="number">989</span>+<span class="number">0800</span>: <span class="number">15581</span>.<span class="number">905</span>:<span class="meta"> [CMS-concurrent-abortable-preclean: 3.506/3.514 secs] [Times: user=11.93 sys=6.77, real=3.51 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">29</span>.<span class="number">991</span>+<span class="number">0800</span>: <span class="number">15581</span>.<span class="number">906</span>:<span class="meta"> [GC[YG occupancy: 1805641 K (3774912 K)]2018-04-12T13:48:29.991+0800: 15581.906: [GC2018-04-12T13:48:29.991+0800: 15581.906: [ParNew: 1805641K-&gt;48395K(3774912K), 0.0826620 secs] 8100493K-&gt;6348225K(24746432K), 0.0829480 secs] [Times: user=0.81 sys=0.00, real=0.09 secs]2018-04-12T13:48:30.074+0800: 15581.989: [Rescan (parallel) , 0.0429390 secs]2018-04-12T13:48:30.117+0800: 15582.032: [weak refs processing, 0.0027800 secs]2018-04-12T13:48:30.119+0800: 15582.035: [class unloading, 0.0033120 secs]2018-04-12T13:48:30.123+0800: 15582.038: [scrub symbol table, 0.0016780 secs]2018-04-12T13:48:30.124+0800: 15582.040: [scrub string table, 0.0004780 secs] [1 CMS-remark: 6299829K(20971520K)] 6348225K(24746432K), 0.1365130 secs] [Times: user=1.24 sys=0.00, real=0.14 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">30</span>.<span class="number">128</span>+<span class="number">0800</span>: <span class="number">15582</span>.<span class="number">043</span>:<span class="meta"> [CMS-concurrent-sweep-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">36</span>.<span class="number">638</span>+<span class="number">0800</span>: <span class="number">15588</span>.<span class="number">553</span>:<span class="meta"> [GC2018-04-12T13:48:36.638+0800: 15588.554: [ParNew: 3403915K-&gt;52142K(3774912K), 0.0874610 secs] 4836483K-&gt;1489601K(24746432K), 0.0877490 secs] [Times: user=0.84 sys=0.00, real=0.09 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">412</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">327</span>:<span class="meta"> [CMS-concurrent-sweep: 8.193/8.284 secs] [Times: user=30.34 sys=16.44, real=8.28 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">419</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">334</span>:<span class="meta"> [CMS-concurrent-reset-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">462</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">377</span>:<span class="meta"> [CMS-concurrent-reset: 0.044/0.044 secs] [Times: user=0.15 sys=0.10, real=0.04 secs]</span></span><br></pre></td></tr></table></figure>
+<p>由于CMS涉及的阶段比较多、分阶段来说下~</p>
+<h5 id="初始标记-initial-mark阶段"><a href="#初始标记-initial-mark阶段" class="headerlink" title="初始标记 initial mark阶段"></a>初始标记 initial mark阶段</h5><p><code>STW</code>中的一次、为了标记直接被<code>GC root引用</code>或者<code>年轻代</code> <code>存活对象引用</code>的所有对象(<a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep</a>)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-550f1b5ef67f99d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>上述示例的对应信息为：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">233</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">148</span>:<span class="meta"> [GC [1 CMS-initial-mark: 6294851K(20971520K)] 6354687K(24746432K), 0.0466580 secs] [Times: user=0.04 sys=0.00, real=0.04 secs]</span></span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>2018-04-12T13:48:26.233+0800</code>：GC开始时间(同 ParNew收集器)</li>
+<li><code>15578.148</code>：JVM运行时间(同 ParNew收集器)</li>
+<li><code>CMS-initial-mark</code>：CMS当前阶段(这里代表 <code>初始标记</code>)</li>
+<li><code>6294851K</code>：当前老年代使用的容量</li>
+<li><code>(20971520K)</code>：老年代可使用的最大容量</li>
+<li><code>6354687K</code>：整个堆目前使用的情况</li>
+<li><code>(24746432K)</code>：整个堆当前可用情况</li>
+<li><code>0.0466580 secs</code>：该阶段持续时间</li>
+<li><code>[Times: user=0.04 sys=0.00, real=0.04 secs]</code> 同 <code>ParNew</code>收集器</li>
+</ul>
+<h5 id="并发标记阶段-Concurrent-Mark"><a href="#并发标记阶段-Concurrent-Mark" class="headerlink" title="并发标记阶段(Concurrent Mark)"></a>并发标记阶段(Concurrent Mark)</h5><p>遍历老年代，然后标记所有存活的对象、会根据上个阶段找到的 GC Roots 遍历查找，与用户的应用程序<code>并发运行</code><br><code>注意</code>不是所有的老年代存活对象都会被标记、因为在标记期间引用关系可能会发生改变(<a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep)%E3%80%81">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep)、</a><br><img src="https://upload-images.jianshu.io/upload_images/14027542-b3d7a48abe067d6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>与上图对比可用发现已经有一个对象的引用关系发生了改变</p>
+<p>本阶段log如下：</p>
+<blockquote>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">26</span>.<span class="number">280+0800</span>: <span class="number">15578.195</span>: [CMS-concurrent-mark-start]</span><br><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">26</span>.<span class="number">418+0800</span>: <span class="number">15578.333</span>: [CMS-concurrent-mark: <span class="number">0.138/0.138</span> secs] [Times: user=<span class="number">1</span>.<span class="number">01</span> sys=<span class="number">0</span>.<span class="number">21</span>, real=<span class="number">0</span>.<span class="number">14</span> secs]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>CMS-concurrent-mark</code>: <code>并发收集</code>阶段, 遍历老年代、标记所有存活对象</li>
+<li><code>0.138/0.138 secs</code>这个阶段的<code>持续时间</code>与<code>时钟时间</code></li>
+<li><code>[Times: user=1.01 sys=0.21, real=0.14 secs]</code>：同上、但是从并发标记的开始时间计算的、期间是并发进行、所以参考意义不大(包含的不仅仅是gc线程的工作)</li>
+</ul>
+</blockquote>
+<h5 id="并发预清理-concurrent-preclean"><a href="#并发预清理-concurrent-preclean" class="headerlink" title="并发预清理(concurrent preclean)"></a>并发预清理(concurrent preclean)</h5><p>也是一个并发阶段，与应用的线程<code>并发运行</code>，<code>不会 stop </code>应用的线程<br>在并发运行的过程中、一些对象的引用可能会发生变化、发生这种情况时、jvm会将这个对象的区域<code>Card</code>标记为<code>Dirty</code>，也就是<code>Card Marking</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c040c645b1abbe18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>在 <code>preclean</code>阶段、能够从Dirty对象可到达的对象也会被标记、标记完成之后、<code>Dirty Card</code>就会被清除了、<br><img src="https://upload-images.jianshu.io/upload_images/14027542-2fd204c365b46807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>这个阶段的log如下：</p>
+<blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">418</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">334</span>:<span class="meta"> [CMS-concurrent-preclean-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">26</span>.<span class="number">476</span>+<span class="number">0800</span>: <span class="number">15578</span>.<span class="number">391</span>:<span class="meta"> [CMS-concurrent-preclean: 0.056/0.057 secs] [Times: user=0.20 sys=0.12, real=0.06 secs]</span></span><br></pre></td></tr></table></figure>
+<p><code>CMS-concurrent-preclean</code> 阶段名称、对前边并发标记阶段中引用发生变化的对象进行标记<br><code>0.056/0.057 secs</code> 这个阶段持续的时间与时钟时间<br><code>[Times: user=0.20 sys=0.12, real=0.06 secs]</code> 同<code>并发标记</code>阶段</p>
+</blockquote>
+<h5 id="可中止的并发预清理-Concurrent-Abortable-Preclean"><a href="#可中止的并发预清理-Concurrent-Abortable-Preclean" class="headerlink" title="可中止的并发预清理(Concurrent Abortable Preclean)"></a>可中止的并发预清理(Concurrent Abortable Preclean)</h5><p><code>并发</code> &amp; <code>不影响</code>用户线程, 是为了 尽量承担STW中的最终标记阶段的工作， 这个阶段是在重复做很多相同的工作，直接满足一些条件（比如：重复迭代的次数、完成的工作量或者时钟时间等）<br>log如下：</p>
+<blockquote>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">26</span>.<span class="number">476+0800</span>: <span class="number">15578.391</span>: [CMS-concurrent-abortable-preclean-start]</span><br><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">29</span>.<span class="number">989+0800</span>: <span class="number">15581.905</span>: [CMS-concurrent-abortable-preclean: <span class="number">3.506/3</span>.<span class="number">514</span> secs] [Times: user=<span class="number">11</span>.<span class="number">93</span> sys=<span class="number">6</span>.<span class="number">77</span>, real=<span class="number">3</span>.<span class="number">51</span> secs]</span><br></pre></td></tr></table></figure>
+<p><code>CMS-concurrent-abortable-preclean</code>阶段名称<br><code>3.506/3.514 secs</code>通常在<code>5s</code>左右、<br><code>[Times: user=11.93 sys=6.77, real=3.51 secs]</code>同预清理阶段<br>主要做了两件事：</p>
+</blockquote>
+<ul>
+<li>处理 From 和 To 区的对象，标记可达的老年代对象</li>
+<li>和上一个阶段一样，扫描处理Dirty Card中的对象</li>
+</ul>
+<p>具体执行多久，取决于许多因素，满足其中一个条件将会中止运行：</p>
+<ul>
+<li>执行循环次数达到了阈值</li>
+<li>执行时间达到了阈值</li>
+<li>新生代Eden区的内存使用率达到了阈值</li>
+</ul>
+<h5 id="最终标记阶段-Final-Remark"><a href="#最终标记阶段-Final-Remark" class="headerlink" title="最终标记阶段(Final Remark)"></a>最终标记阶段(Final Remark)</h5><p>第二个 <code>STW </code>阶段, 也是最后一个、目标是标记所有老年代所有的存活对象，由于之前的阶段是并发执行的，gc 线程可能跟不上应用程序的变化，为了完成标记老年代所有存活对象的目标，STW 就非常有必要了， 通常 CMS 的 Final Remark 阶段会在年轻代尽可能干净的时候运行，目的是为了减少连续 STW 发生的可能性（年轻代存活对象过多的话，也会导致老年代涉及的存活对象会很多）。这个阶段会比前面的几个阶段更复杂一些，相关日志如下：</p>
+<blockquote>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">29</span>.<span class="number">991+0800</span>: <span class="number">15581.906</span>: </span><br><span class="line">&gt;[GC[YG occupancy: <span class="number">1805641</span> K (<span class="number">3774912</span> K)]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">29</span>.<span class="number">991+0800</span>: <span class="number">15581.906</span>: [GC20<span class="number">18-04-12T13</span>:<span class="number">48:29.991</span>+<span class="number">0800</span>: <span class="number">15581.906</span>: [ParNew: <span class="number">1805641</span>K-&gt;<span class="number">48395</span>K(<span class="number">3774912</span>K), <span class="number">0.0826620</span> secs] <span class="number">8100493</span>K-&gt;<span class="number">6348225</span>K(<span class="number">24746432</span>K), <span class="number">0.0829480</span> secs] [Times: user=<span class="number">0</span>.<span class="number">81</span> sys=<span class="number">0</span>.<span class="number">00</span>, real=<span class="number">0</span>.<span class="number">09</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30</span>.<span class="number">074+0800</span>: <span class="number">15581.989</span>: [Rescan (parallel) , <span class="number">0.0429390</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30.117+0800</span>: <span class="number">15582.032</span>: [weak refs processing, <span class="number">0.0027800</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30.119+0800</span>: <span class="number">15582.035</span>: [class unloading, <span class="number">0.0033120</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30.123+0800</span>: <span class="number">15582.038</span>: [scrub symbol table, <span class="number">0.0016780</span> secs]<span class="number">2018</span>-<span class="number">04-12T13:48</span>:<span class="number">30.124+0800</span>: <span class="number">15582.040</span>: [scrub string table, <span class="number">0.0004780</span> secs] [<span class="number">1</span> CMS-remark: <span class="number">6299829</span>K(<span class="number">20971520</span>K)] <span class="number">6348225</span>K(<span class="number">24746432</span>K), <span class="number">0.1365130</span> secs] [Times: user=<span class="number">1</span>.<span class="number">24</span> sys=<span class="number">0</span>.<span class="number">00</span>, real=<span class="number">0</span>.<span class="number">14</span> secs]</span><br></pre></td></tr></table></figure>
+<p><code>YG occupancy: 1805641 K (3774912 K)</code> 年轻代当前占用量及容量<br><code>ParNew:...</code>触发了一次<code>young gc</code>, 触发的原因是为了减少 年轻代的存活对象、尽量是年前代干净一些<br><code>[Rescan (parallel) , 0.0429390 secs]</code> 这个 Rescan 是当应用暂停的情况下完成对所有存活对象的标记，这个阶段是<code>并行</code>处理的，这里花费了 0.0429390s<br><code>[weak refs processing, 0.0027800 secs]</code> 第一个子阶段，它的工作是处理弱引用<br><code>[class unloading, 0.0033120 secs]</code> 删除无用class<br><code>[scrub symbol table, 0.0016780 secs] ... [scrub string table, 0.0004780 secs]</code> 最后一个子阶段, cleaning up symbol and string tables which hold class-level metadata and internalized string respectively<br><code>6299829K(20971520K)</code> 这个阶段之后，老年代的使用量与总量<br><code>6348225K(24746432K)</code>这个阶段后，堆的使用量与总量<br><code>0.1365130 secs</code>阶段持续时长<br><code>[Times: user=1.24 sys=0.00, real=0.14 secs]</code>对应时间信息</p>
+</blockquote>
+<h5 id="并发清理-Concurrent-Sweep"><a href="#并发清理-Concurrent-Sweep" class="headerlink" title="并发清理(Concurrent Sweep)"></a>并发清理(Concurrent Sweep)</h5><p>不需要 STW，它是与用户的应用程序<code>并发运行</code>, 清除那些不再使用的对象，回收它们的占用空间为将来使用(<a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep</a>)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-d560490b0613a37e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>log如下(这中间又发生了一次 Young GC)：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">30</span>.<span class="number">128</span>+<span class="number">0800</span>: <span class="number">15582</span>.<span class="number">043</span>:<span class="meta"> [CMS-concurrent-sweep-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">36</span>.<span class="number">638</span>+<span class="number">0800</span>: <span class="number">15588</span>.<span class="number">553</span>:<span class="meta"> [GC2018-04-12T13:48:36.638+0800: 15588.554: [ParNew: 3403915K-&gt;52142K(3774912K), 0.0874610 secs] 4836483K-&gt;1489601K(24746432K), 0.0877490 secs] [Times: user=0.84 sys=0.00, real=0.09 secs]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">412</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">327</span>:<span class="meta"> [CMS-concurrent-sweep: 8.193/8.284 secs] [Times: user=30.34 sys=16.44, real=8.28 secs]</span></span><br></pre></td></tr></table></figure>
+<p>*<code>CMS-concurrent-sweep</code> 阶段名称: 主要是清除那些没有被标记的对象，回收它们的占用空间</p>
+<ul>
+<li><code>8.193/8.284 secs</code> 这个阶段的持续时间与时钟时间</li>
+<li><code>[Times: user=30.34 sys=16.44, real=8.28 secs]</code> 同上</li>
+</ul>
+<h5 id="并发重置-Concurrent-Reset"><a href="#并发重置-Concurrent-Reset" class="headerlink" title="并发重置(Concurrent Reset)"></a>并发重置(Concurrent Reset)</h5><p>这个阶段也是并发执行的，它会重设 CMS 内部的数据结构，为下次的 GC 做准备</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">419</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">334</span>:<span class="meta"> [CMS-concurrent-reset-start]</span></span><br><span class="line"><span class="attribute">2018</span>-<span class="number">04</span>-<span class="number">12</span>T13:<span class="number">48</span>:<span class="number">38</span>.<span class="number">462</span>+<span class="number">0800</span>: <span class="number">15590</span>.<span class="number">377</span>:<span class="meta"> [CMS-concurrent-reset: 0.044/0.044 secs] [Times: user=0.15 sys=0.10, real=0.04 secs]</span></span><br></pre></td></tr></table></figure>
+<p>*<code>CMS-concurrent-reset</code> 阶段名称</p>
+<ul>
+<li><code>0.044/0.044 secs</code> 这个阶段的持续时间与时钟时间</li>
+<li><code>[Times: user=0.15 sys=0.10, real=0.04 secs]</code> 同上</li>
+</ul>
+<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p>CMS 通过将大量工作分散到并发处理阶段来在减少 STW 时间，在这块做得非常优秀，但是 CMS 也有一些其他的问题：</p>
+<ul>
+<li>CMS 收集器无法处理浮动垃圾（ Floating Garbage），可能出现 “Concurrnet Mode Failure” 失败而导致另一次 Full GC 的产生，可能引发串行 Full GC；</li>
+<li>空间碎片，导致无法分配大对象，CMS 收集器提供了一个 -XX:+UseCMSCompactAtFullCollection 开关参数（默认就是开启的），用于在 CMS 收集器顶不住要进行 Full GC 时开启内存碎片的合并整理过程，内存整理的过程是无法并发的，空间碎片问题没有了，但停顿时间不得不变长；</li>
+<li>对于堆比较大的应用上，GC 的时间难以预估</li>
+</ul>
+<p>so. G1开始兴起、</p>
+<blockquote>
+<ul>
+<li>由于<code>G1</code>采用复制算法、很好的避免了 <code>空间碎片</code></li>
+<li>采用region分区思想、解决了停顿时长可控</li>
+<li>不过貌似并没有从根源上解决 浮动垃圾的问题~~</li>
+</ul>
+</blockquote>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><ul>
+<li><a target="_blank" rel="noopener" href="http://matt33.com/2018/07/28/jvm-cms/">http://matt33.com/2018/07/28/jvm-cms/</a></li>
+<li><a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep">https://plumbr.io/handbook/garbage-collection-algorithms-implementations#concurrent-mark-and-sweep</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhanjia.iteye.com/blog/2435266">https://zhanjia.iteye.com/blog/2435266</a><br>等</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JDK%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JDK%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">垃圾回收---JDK监控工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="JDK监控工具"><a href="#JDK监控工具" class="headerlink" title="JDK监控工具"></a>JDK监控工具</h4><p><code>jps</code>: JVM Process Status Tool. 显示指定系统内所有HotSpot vm 进程<br><code>jstat</code>: JVM statistic Monitor Tool. 用于收集vm各方面的运行数据<br><code>jinfo</code>: Configuration Info For Java. 显示虚拟机配置信息<br><code>jmap</code>: Memory Map For Java. 生成内存转储快照文件(headdump文件)<br><code>jhat</code>: JVM Head Dump Browser. 用于分析dump文件、<br><code>jstack</code>: 显示虚拟机的线程快照</p>
+<h4 id="jps"><a href="#jps" class="headerlink" title="jps"></a><code>jps</code></h4><p><code>usage</code>: <code>jps [opt] [hostid]</code></p>
+<blockquote>
+<p><code>-q</code> 只输出LVMID 省略主类的名称<br><code>-m</code> 输出虚拟机的进程启动时传递给主类函数的参数<br><code>-l</code> 输出主类的全名、若主类注销的是jar包、输出jar包路径<br><code>-v</code> 输出虚拟机启动时的jvm参数</p>
+</blockquote>
+<h4 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a><code>jstat</code></h4><p><code>usage</code>: <code>jstat [opt vmid [interval][s|ms] [count]]</code></p>
+<blockquote>
+<p><code>-class</code> 监视类装载、卸载数量、总空间及类装载所需时间<br><code>-gc</code> 监视Java堆情况、包括Eden区、两个Survivor区、老年代、永久代的容量、已用空间、GC时间合计等信息<br><code>-gccapacity</code> 监视内容与<code>-gc</code>基本相同、主要关注java堆各个区域用到的最大、最小空间<br><code>-gcutil</code>  监视内容与<code>-gc</code>基本相同、主要关注已使用空间与总空间的比率<br><code>-gccause</code> 与<code>-gcutil</code>相同、会额外输出导致上次gc的原因<br><code>-gcnew</code> 监视新生代gc的状况<br><code>-gcnewcapacity</code> 与<code>gcnew</code>基本相同、输出主要关注最大、最小空间<br><code>-gcold</code> 监视老年代gc的状况<br><code>-gcoldcapacity</code> 与<code>gcold</code>基本相同、输出主要关注最大、最小空间<br><code>-gcpermcapacity</code> 输出永久代最大、最小空间<br><code>-compiler</code>  输出jit编译过的方法、耗时等信息<br><code>-printcompalition</code> 输出已被编译过的方法</p>
+</blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">eg</span>. jstat -gcutil  <span class="number">41610</span> <span class="number">250</span> <span class="number">3</span></span><br><span class="line">  <span class="attribute">S0</span>     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT   </span><br><span class="line">  <span class="attribute">0</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">00</span>   <span class="number">4</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">43</span>  <span class="number">62</span>.<span class="number">81</span>  <span class="number">65</span>.<span class="number">59</span>      <span class="number">1</span>    <span class="number">0</span>.<span class="number">002</span>     <span class="number">1</span>    <span class="number">0</span>.<span class="number">006</span>    <span class="number">0</span>.<span class="number">008</span></span><br><span class="line">  <span class="attribute">0</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">00</span>   <span class="number">4</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">43</span>  <span class="number">62</span>.<span class="number">81</span>  <span class="number">65</span>.<span class="number">59</span>      <span class="number">1</span>    <span class="number">0</span>.<span class="number">002</span>     <span class="number">1</span>    <span class="number">0</span>.<span class="number">006</span>    <span class="number">0</span>.<span class="number">008</span></span><br><span class="line">  <span class="attribute">0</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">00</span>   <span class="number">4</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">43</span>  <span class="number">62</span>.<span class="number">81</span>  <span class="number">65</span>.<span class="number">59</span>      <span class="number">1</span>    <span class="number">0</span>.<span class="number">002</span>     <span class="number">1</span>    <span class="number">0</span>.<span class="number">006</span>    <span class="number">0</span>.<span class="number">008</span></span><br><span class="line"><span class="attribute">S0</span>: survivor0区、都是空的</span><br><span class="line"><span class="attribute">S1</span>: survivor0区、都是空的</span><br><span class="line"><span class="attribute">E</span>: Eden区、<span class="number">4</span>%的使用率</span><br><span class="line"><span class="attribute">O</span>: Old区、<span class="number">0</span>.<span class="number">43</span>%的使用率</span><br><span class="line"><span class="attribute">M</span>:Perm区、<span class="number">62</span>.<span class="number">81</span>%的使用率</span><br><span class="line"><span class="attribute">CCS</span>: class Space、 <span class="number">65</span>.<span class="number">59</span>%的使用率</span><br><span class="line"><span class="attribute">YGC</span>: young gc、<span class="number">1</span>次</span><br><span class="line"><span class="attribute">YGCT</span>： young gc 耗时 <span class="number">0</span>.<span class="number">002</span>s</span><br><span class="line"><span class="attribute">FGC</span>: full gc <span class="number">1</span>次</span><br><span class="line"><span class="attribute">FGCT</span>: full  gc 耗时 <span class="number">0</span>.<span class="number">006</span>s</span><br><span class="line"><span class="attribute">GCT</span>: 总的gc耗时 <span class="number">0</span>.<span class="number">008</span>s</span><br></pre></td></tr></table></figure>
+
+<h4 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a><code>jinfo</code></h4><p><code>usage</code> : <code>jinfo [opt] pid</code></p>
+<blockquote>
+<p>实时查看和调整虚拟机启动参数<br>eg.  jinfo -flag CMSInitiatingOccupancyFraction 41610<br>使用<code> [+|-] name</code> 修改一部分运行时虚拟机参数值<br>也可以使用 <code>jps -v</code> 来查看启动时默认参数<br><code>-XX:+PrintFlagsFinal</code> 可以将参数打印出来</p>
+</blockquote>
+<h4 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a><code>jmap</code></h4><blockquote>
+<p><code>-dump</code> 生成快照文件<br>eg. jmap -dump:format&#x3D;b, file&#x3D;path pid<br><code>-finalizerinfo</code> 线上在F-Queue中等等Finalizer线程执行finalize方法的对象<br><code>-heap</code> 线上Java堆详细信息<br><code>-histo</code> 显示堆中对象的统计信息<br><code>-permstat</code> 以classLoader为统计路径、显示永久代内存使用情况<br><code>-F</code> 虚拟机不响应-dump时、使用-F强制生成dump文件</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jmap -histo[:live] <span class="keyword">pid</span> 显示堆中活跃对象</span><br><span class="line">jmap -dump:[live,], <span class="keyword">file</span>=<span class="keyword">filename</span> 生成java堆</span><br></pre></td></tr></table></figure>
+
+<h4 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a><code>jhat</code></h4><p><code>Usage:</code> <code>jhat -port 9000 dump-file</code></p>
+<blockquote>
+<p><code>-port</code> 指定端口<br>分析结果以<code>包</code>为单位、分析内存泄露时、可能会用到 Heap Histogram(与 jmap -histo 功能一致)</p>
+</blockquote>
+<h4 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h4><p><code>stack trace for java</code>生成虚拟机当前时刻的快照<br><code>Usage</code>: <code>jstack opt vmid</code></p>
+<blockquote>
+<p><code>-F</code> 正常的输出请求不被响应时、强制输出线程堆栈<br><code>-l</code> 除堆栈外、显示线程的锁信息<br><code>-m</code> 若调用本地方法、显示C&#x2F;C++的线程堆栈</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JVM%E5%8F%82%E6%95%B0%E5%B0%8F%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JVM%E5%8F%82%E6%95%B0%E5%B0%8F%E8%AE%B0/" class="post-title-link" itemprop="url">垃圾回收---JVM参数小记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="JVM参数解析"><a href="#JVM参数解析" class="headerlink" title="JVM参数解析"></a>JVM参数解析</h4><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>含义</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-Xms</td>
+<td>初始堆大小</td>
+<td>物理内存的1&#x2F;64(&lt;1G)</td>
+<td>默认(MinHeapFreeRatio参数可以调整)空余堆内存小于40%时，JVM就会增大堆直到-Xmx的最大限制.</td>
+</tr>
+<tr>
+<td>-Xmx</td>
+<td>最大堆大小</td>
+<td>物理内存的1&#x2F;4(&lt;1G)</td>
+<td>默认(MaxHeapFreeRatio参数可以调整)空余堆内存大于70%时，JVM会减少堆直到 -Xms的最小限制</td>
+</tr>
+<tr>
+<td>-Xmn</td>
+<td>年轻代大小</td>
+<td></td>
+<td><code>注意</code>：此处的大小是（eden+ 2 survivor space)与jmap -heap中显示的New gen是不同的。 整个堆大小&#x3D;年轻代大小 + 年老代大小 + 持久代大小.增大年轻代后,将会减小年老代大小.此值对系统性能影响较大,Sun官方推荐配置为整个堆的3&#x2F;8</td>
+</tr>
+<tr>
+<td>-Xss</td>
+<td>每个线程的堆栈大小</td>
+<td></td>
+<td>JDK5.0以后每个线程堆栈大小为1M,以前每个线程堆栈大小为256K.更具应用的线程所需内存大小进行 调整.在相同物理内存下,减小这个值能生成更多的线程.但是操作系统对一个进程内的线程数还是有限制的,不能无限生成,经验值在3000~5000左右，一般小的应用， 如果栈不是很深， 应该是128k够用的 大的应用建议使用256k。这个选项对性能影响比较大，需要严格的测试。（较长）和threadstacksize选项解释很类似,官方文档似乎没有解释,在论坛中有这样一句话:””Xss is translated in a VM flag named ThreadStackSize”一般设置这个值就可以了。</td>
+</tr>
+<tr>
+<td>-XX:NewRatio</td>
+<td>年轻代(包括Eden和两个Survivor区)与年老代的比值(除去持久代)</td>
+<td></td>
+<td>-XX:NewRatio&#x3D;4表示年轻代与年老代所占比值为1:4,年轻代占整个堆栈的1&#x2F;5 Xms&#x3D;Xmx并且设置了Xmn的情况下，该参数不需要进行设置。</td>
+</tr>
+<tr>
+<td>-XX:SurvivorRatio</td>
+<td>Eden区与Survivor区的大小比值</td>
+<td></td>
+<td>设置为8,则两个Survivor区与一个Eden区的比值为2:8,一个Survivor区占整个年轻代的1&#x2F;10</td>
+</tr>
+<tr>
+<td>-XX:MaxTenuringThreshold</td>
+<td>垃圾年龄的最大值</td>
+<td></td>
+<td>如果设置为0的话,则年轻代对象不经过Survivor区,直接进入年老代. 对于年老代比较多的应用,可以提高效率.如果将此值设置为一个较大值,则年轻代对象会在Survivor区进行多次复制,这样可以增加对象再年轻代的存活 时间,增加在年轻代即被回收的概率 该参数只有在串行GC时才有效</td>
+</tr>
+<tr>
+<td>-XX:PretenureSizeThreshold</td>
+<td>对象超过多大是直接在老年代分配</td>
+<td>0</td>
+<td>单位字节 新生代采用Parallel Scavenge GC时无效，另一种直接在老年代分配的情况是大的数组对象,且数组中无外部引用对象.</td>
+</tr>
+<tr>
+<td>-XX:LargePageSizeInBytes</td>
+<td>内存页的大小不可设置过大， 会影响Perm的大小</td>
+<td></td>
+<td>&#x3D;128m</td>
+</tr>
+<tr>
+<td>-XX:+CollectGen0First</td>
+<td>FullGC时是否先YGC</td>
+<td>false</td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:+UseFastAccessorMethods</td>
+<td>原始类型的快速优化</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:+UseBiasedLocking</td>
+<td>锁机制的性能改善</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:NewSize</td>
+<td>年轻代大小(JDK 1.3&#x2F;1.4)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:MaxNewSize</td>
+<td>年轻代最大值(JDK 1.3&#x2F;1.4)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:PermSize</td>
+<td>设置持久代(perm gen)初始值</td>
+<td>物理内存的1&#x2F;64</td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:MaxPermSize</td>
+<td>设置持久代最大值</td>
+<td>物理内存的1&#x2F;4</td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:ThreadStackSize</td>
+<td>Thread Stack Size</td>
+<td></td>
+<td>(0 means use default stack size) [Sparc: 512; Solaris x86: 320 (was 256 prior in 5.0 and earlier); Sparc 64 bit: 1024; Linux amd64: 1024 (was 0 in 5.0 and earlier); all others 0.]</td>
+</tr>
+<tr>
+<td>-XX:+AggressiveOpts</td>
+<td>加快编译</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id="并行收集器相关参数"><a href="#并行收集器相关参数" class="headerlink" title="并行收集器相关参数"></a>并行收集器相关参数</h5><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>含义</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-XX:+UseParallelGC</td>
+<td>Full GC采用parallel MSC(此项待验证)</td>
+<td></td>
+<td>选择垃圾收集器为并行收集器.此配置仅对年轻代有效.即上述配置下,年轻代使用并发收集,而年老代仍旧使用串行收集.(此项待验证)</td>
+</tr>
+<tr>
+<td>-XX:+UseParNewGC</td>
+<td>设置年轻代为并行收集</td>
+<td></td>
+<td>可与CMS收集同时使用, JDK5.0以上,JVM会根据系统配置自行设置,所以无需再设置此值</td>
+</tr>
+<tr>
+<td>-XX:ParallelGCThreads</td>
+<td>并行收集器的线程数</td>
+<td></td>
+<td>此值最好配置与处理器数目相等 同样适用于CMS</td>
+</tr>
+<tr>
+<td>-XX:+UseParallelOldGC</td>
+<td>年老代垃圾收集方式为并行收集(Parallel Compacting)</td>
+<td></td>
+<td>java6开始出现的参数</td>
+</tr>
+<tr>
+<td>-XX:MaxGCPauseMillis</td>
+<td>每次年轻代垃圾回收的最长时间(最大暂停时间)</td>
+<td></td>
+<td>如果无法满足此时间,JVM会自动调整年轻代大小,以满足此值.</td>
+</tr>
+<tr>
+<td>-XX:+UseAdaptiveSizePolicy</td>
+<td>自动选择年轻代区大小和相应的Survivor区比例</td>
+<td></td>
+<td>设置此选项后,并行收集器会自动选择年轻代区大小和相应的Survivor区比例,以达到目标系统规定的最低相应时间或者收集频率等,此值建议使用并行收集器时,一直打开.</td>
+</tr>
+<tr>
+<td>-XX:GCTimeRatio</td>
+<td>设置垃圾回收时间占程序运行时间的百分比</td>
+<td></td>
+<td>公式为1&#x2F;(1+n)</td>
+</tr>
+<tr>
+<td>-XX:+ScavengeBeforeFullGC</td>
+<td>Full GC前调用YGC</td>
+<td>true</td>
+<td>Do young generation GC prior to a full GC. (Introduced in 1.4.1.)</td>
+</tr>
+</tbody></table>
+<h5 id="CMS相关参数"><a href="#CMS相关参数" class="headerlink" title="CMS相关参数"></a>CMS相关参数</h5><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>含义</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-XX:+UseConcMarkSweepGC</td>
+<td>使用CMS内存收集</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:CMSFullGCsBeforeCompaction</td>
+<td>多少次后进行内存压缩</td>
+<td></td>
+<td>由于并发收集器不对内存空间进行压缩,整理,所以运行一段时间以后会产生”碎片”,使得运行效率降低.设置运行多少次GC以后对内存空间进行压缩,整理</td>
+</tr>
+<tr>
+<td>-XX:+CMSParallelRemarkEnabled</td>
+<td>降低标记停顿</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX+UseCMSCompactAtFullCollection</td>
+<td>在FULL GC的时候，对年老代进行压缩</td>
+<td></td>
+<td>CMS是不会移动内存的， 因此， 这个非常容易产生碎片， 导致内存不够用， 因此， 内存的压缩这个时候就会被启用</td>
+</tr>
+<tr>
+<td>-XX:+UseCMSInitiatingOccupancyOnly</td>
+<td>使用手动定义初始化定义开始CMS收集</td>
+<td></td>
+<td>禁止hostspot自行触发CMS GC</td>
+</tr>
+<tr>
+<td>-XX:CMSInitiatingOccupancyFraction&#x3D;70</td>
+<td>使用cms作为垃圾回收使用70％后开始CMS收集</td>
+<td>92</td>
+<td>为了保证不出现promotion failed错误、设置需要满足：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html#CMSInitiatingOccupancyFraction_value">http://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html#CMSInitiatingOccupancyFraction_value</a></td>
+</tr>
+<tr>
+<td>-XX:CMSInitiatingPermOccupancyFraction</td>
+<td>设置Perm Gen使用到达多少比率时触发</td>
+<td>92</td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:+CMSIncrementalMode</td>
+<td>设置为增量模式</td>
+<td></td>
+<td>适用于单CPU的情况</td>
+</tr>
+</tbody></table>
+<h5 id="辅助信息"><a href="#辅助信息" class="headerlink" title="辅助信息"></a>辅助信息</h5><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>含义</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-XX:+PrintGC</td>
+<td></td>
+<td></td>
+<td>[GC 118250K-&gt;113543K(130112K), 0.0094143 secs]</td>
+</tr>
+</tbody></table>
+<pre><code>               [Full GC 121376K-&gt;10414K(130112K), 0.0650971 secs] | 
+</code></pre>
+<p>|-XX:+PrintGCDetails| | | 输出形式:[GC [DefNew: 8614K-&gt;781K(9088K), 0.0123035 secs] 118250K-&gt;113543K(130112K), 0.0124633 secs] [GC [ParNew: 8614K-&gt;8614K(9088K), 0.0000665 secs][Tenured: 112761K-&gt;10414K(121024K), 0.0433488 secs] 121376K-&gt;10414K(130112K), 0.0436268 secs]|<br>|-XX:+PrintGCTimeStamps| | | 输出每个阶段的gc时间|<br>|-XX:+PrintGCApplicationStoppedTime|打印垃圾回收期间程序暂停的时间.可与上面混合使用| | 输出形式:Total time for which application threads were stopped: 0.0468229 seconds|<br>|-XX:+PrintGCApplicationConcurrentTime|打印每次垃圾回收前,程序未中断的执行时间.可与上面混合使用| |输出形式:Application time: 0.5291524 seconds |<br>|-XX:+PrintHeapAtGC|打印GC前后的详细堆栈信息| | |<br>|-Xloggc:filename|把相关日志信息记录到文件以便分析.与上面几个配合使用 | | |<br>|-XX:+PrintTLAB|查看TLAB空间的使用情况| | |<br>|-XX:+PrintTenuringDistribution|查看每次minor GC后新的存活周期的阈值| | Desired survivor size 1048576 bytes, new threshold 7 (max 15) new threshold 7即标识新的存周期的阈值为7|</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

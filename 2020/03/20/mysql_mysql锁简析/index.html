@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="mysql锁 根据加锁的范围、MySQL里边的锁可以分为全局锁、表级锁和行锁三类  全局锁12345678910111213141516171819202122全局锁: 就是要对整个db实例加锁. mysql提供了一个全局锁支持: flush tables with read lock;(FTWRL)此时: update、ddl、dml语句会被阻塞典型场景: 全库逻辑备份但是让整个db处于只读状态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql锁简析">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mysql_mysql%E9%94%81%E7%AE%80%E6%9E%90/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="mysql锁 根据加锁的范围、MySQL里边的锁可以分为全局锁、表级锁和行锁三类  全局锁12345678910111213141516171819202122全局锁: 就是要对整个db实例加锁. mysql提供了一个全局锁支持: flush tables with read lock;(FTWRL)此时: update、ddl、dml语句会被阻塞典型场景: 全库逻辑备份但是让整个db处于只读状态">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-94717b6aa177cad2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.817Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-94717b6aa177cad2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mysql_mysql%E9%94%81%E7%AE%80%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>mysql锁简析 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_mysql%E9%94%81%E7%AE%80%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql锁简析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="mysql锁"><a href="#mysql锁" class="headerlink" title="mysql锁"></a>mysql锁</h3><blockquote>
+<p>根据加锁的范围、MySQL里边的锁可以分为全局锁、表级锁和行锁三类</p>
+</blockquote>
+<h4 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">全局锁: 就是要对整个db实例加锁. mysql提供了一个全局锁支持: </span><br><span class="line">flush tables <span class="keyword">with</span> read <span class="keyword">lock</span>;(FTWRL)</span><br><span class="line">此时: update、ddl、dml语句会被阻塞</span><br><span class="line"></span><br><span class="line">典型场景: 全库逻辑备份</span><br><span class="line"></span><br><span class="line">但是让整个db处于只读状态、比较危险:</span><br><span class="line">若是操作主库、则在整个备份期间、都不能执行更新】整个业务基本上处于停滞状态</span><br><span class="line">若操作从库、则备份期间从库不能执行主库同步过来的binlog、会导致主从延迟</span><br><span class="line"></span><br><span class="line">那么、如果实现不影响业务的备份呢 ？</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> innodb引擎可以使用一致性读</span><br><span class="line">   mysql自带备份工具mysqldump使用参数 --single-transaction 时、mysql就好启动一个事务、来确保拿到一致性视图</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 为何不选择 <span class="keyword">set</span> <span class="keyword">global</span> <span class="keyword">readonly</span>=<span class="literal">true</span> ?</span><br><span class="line">   <span class="number">1</span>) 在某些系统中、<span class="keyword">readonly</span>可能被用来做其它逻辑、比如用来判断db是主还是备库 ？</span><br><span class="line">   <span class="number">2</span>) 在异常处理上的差异</span><br><span class="line">      若执行FTWRL之后、mysql异常断开、mysql会自动释放这个全局锁、整个库可以回到正常更新的状态</span><br><span class="line">      设置<span class="keyword">readonly</span>、若client异常、则db会一直保持<span class="keyword">readonly</span>状态、会导致整个库长时间不可写、风险较高</span><br><span class="line">   <span class="number">3</span>) MDL 在slave库上对super权限无效</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+
+<h4 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql的表级锁有<span class="number">2</span>种: mysql表锁 和 元数据锁(meta data <span class="keyword">lock</span>, MDL)</span><br><span class="line"></span><br><span class="line">表锁的语法是: <span class="keyword">lock</span> <span class="keyword">tables</span> .. <span class="keyword">read</span>/<span class="keyword">write</span>. 与FTWRL类似、使用unlock <span class="keyword">tables</span>主动释放锁、也可以在client断开时自动释放</span><br><span class="line">既限制别的线程、也限制本线程</span><br><span class="line">eg. 某个线程A中执行 <span class="keyword">lock</span> <span class="keyword">tables</span> t1 <span class="keyword">read</span>, t2 <span class="keyword">write</span>; </span><br><span class="line">则其它线程写t1, 读写t2 都会被阻塞、同时、线程A在执行unlock <span class="keyword">tables</span>之前、也只能执行读t1, 读写t2的操作</span><br><span class="line">但innodb可以支持行锁、一般就不使用 <span class="keyword">lock</span> <span class="keyword">tables</span>了、毕竟影响还是很大的</span><br><span class="line"></span><br><span class="line">元数据锁:</span><br><span class="line">不需要显式使用、在访问一个表的时候会被自动加上、MDL的作用是 保证读写的正确性</span><br><span class="line">eg. 正在遍历某表的数据、在执行期间另外一个线程对这个表的结构做了变更、减少了一列、查询结果就会有问题</span><br><span class="line"></span><br><span class="line">在mysql5<span class="number">.5</span>的版本中引入了MDL、当对表curd操作时、会加MDL读锁、对表结构变更时、会加MDL写锁</span><br><span class="line"></span><br><span class="line">* 读锁之间不互斥、可以同时对一张表增删改查</span><br><span class="line">* 写锁、读写锁之间互斥、用来保证表结构变更操作的安全性</span><br><span class="line">so. 两个线程同时对一个表做结构变更时、其中一个要等另外一个执行完才开始执行 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h5><p>case: 给一个小表加字段、却导致db挂掉</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">no<span class="symbol">te:</span> 给表加字段或者修改字段或者加索引、都会导致全表扫描数据</span><br><span class="line">在对大表操作时、都会特别小心、避免对线上造成影响、小表一般认为很快结束、会比较大意、其实、小表操作不当也会造成<span class="built_in">db</span>挂掉</span><br><span class="line"></span><br><span class="line">实验环境<span class="symbol">:</span> mysql5.<span class="number">6</span> <span class="built_in">t</span>是小表</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-94717b6aa177cad2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>可以看到: session A先启动、这时会对t加MDL读锁、session B操作不被影响<br>session C需要MDL写锁、blocked、此时db表现为 不可读写<br>若: 此时db的写十分频繁、且client有重试机制、超时后起一个新的session、这些session很快就会把连接打满</p>
+</blockquote>
+<p>Q: 那么如何安全的给表加字段呢 ？</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">首先要解决长事务、事务不提交、就会一直占着MDL锁. 在mysql的information_schema库的innodb_trx表中、可以看到当前</span><br><span class="line">正在执行的事务、若要做ddl变更的表刚好有长事务在执行、要考虑先暂停DDL或者kill掉事务</span><br><span class="line"></span><br><span class="line">若要变更的是热点表、请求频繁、虽然数据量不大、但请求特别频繁、而不得不加字段、如何做 ?</span><br><span class="line"></span><br><span class="line">此时kill未必管用、因为新的请求马上就进来了、此时比较理想的机制是: </span><br><span class="line">在<span class="keyword">alter</span> <span class="keyword">table</span>语句里设定等待时间、若在这个等待时间里能拿到MDL写锁最好、拿不到也不要阻塞后边的业务、先放弃</span><br><span class="line">之后再重复</span><br><span class="line"></span><br><span class="line">语法: </span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">table</span> nowait <span class="keyword">add</span> column...</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">table</span> wait n <span class="keyword">add</span> column...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="查看锁表情况"><a href="#查看锁表情况" class="headerlink" title="查看锁表情况"></a>查看锁表情况</h4><blockquote>
+<p>show status like ‘table%’;</p>
+</blockquote>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">table<span class="emphasis">_locks_immediate 指能够立即获取表级锁的次数</span></span><br><span class="line"><span class="emphasis">table_locks_</span>waited 指的是不能立即获取表级锁而需要等待的次数、num越大、锁等待越多、有锁争用的情况</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看正在被锁定的表"><a href="#查看正在被锁定的表" class="headerlink" title="查看正在被锁定的表"></a>查看正在被锁定的表</h4><blockquote>
+<p>show open tables where in_use&gt;0;</p>
+</blockquote>
+<h4 id="锁涉及表说明"><a href="#锁涉及表说明" class="headerlink" title="锁涉及表说明"></a>锁涉及表说明</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">information<span class="emphasis">_shcema库</span></span><br><span class="line"><span class="emphasis">innodb_trx 当前innodb内核中的活跃事务</span></span><br><span class="line"><span class="emphasis">innodb_locks 当前状态下产生的innodb锁、仅在有锁等待时打印</span></span><br><span class="line"><span class="emphasis">innodb_lock_</span>waits 当前状态产生的innodb锁等待 仅在有锁等待时打印</span><br></pre></td></tr></table></figure>
+
+<p><strong>innodb_trx表结构说明</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">字段名                 说明</span><br><span class="line"></span><br><span class="line">trx_id innodb          存储引擎内部唯一的事物ID </span><br><span class="line">trx_state              当前事务状态（running和<span class="keyword">lock</span> wait两种状态） </span><br><span class="line">trx_started            事务的开始时间 </span><br><span class="line">trx_requested_lock_id  等待事务的锁ID，如trx_state的状态为<span class="keyword">Lock</span> wait，那么该值带表当前事物等待之前事物占用资源的ID，若trx_state不是<span class="keyword">Lock</span> wait 则该值为<span class="keyword">NULL</span> </span><br><span class="line">trx_wait_started       事务等待的开始时间 </span><br><span class="line">trx_weight             事务的权重，在innodb存储引擎中，当发生死锁需要回滚的时，innodb存储引擎会选择该值最小的进行回滚 </span><br><span class="line">trx_mysql_thread_id     mysql中的线程id, 即<span class="keyword">show</span> processlist显示的结果 </span><br><span class="line">trx_query               事务运行的<span class="keyword">SQL</span>语句 </span><br></pre></td></tr></table></figure>
+
+<p><strong>innodb_locks表结构说明</strong></p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">字段名       说明</span><br><span class="line"></span><br><span class="line">lock_id      锁的ID </span><br><span class="line">lock_trx_id  事务的ID </span><br><span class="line">lock_mode    锁的模式（S锁与X锁两种模式） </span><br><span class="line">lock_type    锁的类型 表锁还是行锁（RECORD） </span><br><span class="line">lock_table   要加锁的表 </span><br><span class="line">lock_index   锁住的索引 </span><br><span class="line">lock_space   锁住对象的<span class="literal">space</span> id </span><br><span class="line">lock_page    事务锁定页的数量，若是表锁则该值为<span class="literal">NULL</span> </span><br><span class="line">lock_rec     事务锁定行的数量，若是表锁则该值为<span class="literal">NULL</span> </span><br><span class="line">lock_data    事务锁定记录主键值，若是表锁则该值为<span class="literal">NULL</span>（此选项不可信)</span><br></pre></td></tr></table></figure>
+
+<p><strong>innodb_lock_waits表结构说明</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">字段名             说明 </span><br><span class="line"></span><br><span class="line">requesting_trx_id  申请锁资源的事物ID </span><br><span class="line">requested_lock_id  申请的锁的ID </span><br><span class="line"><span class="keyword">blocking_trx_id </span>   阻塞其他事物的事物ID </span><br><span class="line"><span class="keyword">blocking_lock_id </span>  阻塞其他锁的锁ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="加锁的原则"><a href="#加锁的原则" class="headerlink" title="加锁的原则"></a>加锁的原则</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 基本单位 nex-key-lock</span><br><span class="line"><span class="bullet">2.</span> 查找过程中访问到的对象才加锁</span><br><span class="line"><span class="bullet">3.</span> 索引上的等值查询、给唯一错音加锁的时候、next-key lock退化为行锁</span><br><span class="line"><span class="bullet">4.</span> 索引上的等值查询、向右遍历时且最后一个值不满足等值条件时、退化为间隙锁</span><br><span class="line"><span class="bullet">5.</span> 唯一索引上的范围查询会访问到不满足条件的第一个值为止</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_mysql%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/" rel="prev" title="mysql问题梳理">
+      <i class="fa fa-chevron-left"></i> mysql问题梳理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_mysql%E9%94%81/" rel="next" title="mysql锁">
+      mysql锁 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql%E9%94%81"><span class="nav-number">1.</span> <span class="nav-text">mysql锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%94%81"><span class="nav-number">1.1.</span> <span class="nav-text">全局锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%BA%A7%E9%94%81"><span class="nav-number">1.2.</span> <span class="nav-text">表级锁</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">案例分析</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%94%81%E8%A1%A8%E6%83%85%E5%86%B5"><span class="nav-number">1.3.</span> <span class="nav-text">查看锁表情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%AD%A3%E5%9C%A8%E8%A2%AB%E9%94%81%E5%AE%9A%E7%9A%84%E8%A1%A8"><span class="nav-number">1.4.</span> <span class="nav-text">查看正在被锁定的表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E6%B6%89%E5%8F%8A%E8%A1%A8%E8%AF%B4%E6%98%8E"><span class="nav-number">1.5.</span> <span class="nav-text">锁涉及表说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E9%94%81%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-number">1.6.</span> <span class="nav-text">加锁的原则</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

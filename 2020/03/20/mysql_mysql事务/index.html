@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="mysql 事务 ACID原则: 1234Automicity: 原子性Consistency: 一致性Isolation: 隔离性Durability: 持久性   SQL隔离级别 12341. 读未提交: read uncommited, 事务未提交时、别的事务就能读到它的变更2. 读提交: read commited, 事务提交之后、才能被别的事务读到变更3. 可重复读: repeatabl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql事务">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mysql_mysql%E4%BA%8B%E5%8A%A1/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="mysql 事务 ACID原则: 1234Automicity: 原子性Consistency: 一致性Isolation: 隔离性Durability: 持久性   SQL隔离级别 12341. 读未提交: read uncommited, 事务未提交时、别的事务就能读到它的变更2. 读提交: read commited, 事务提交之后、才能被别的事务读到变更3. 可重复读: repeatabl">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-374aecc9f9ddf1bd.png?imageMogr2/auto-orient/strip%7CimageView2/1/w/240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-cd319103b6d27133.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-249460f611087ba6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-be120e1119794bcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-7602ef99ebe62a71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-9c0c0ec70b636639.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-11fddfc9015b0955.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-eae83ec8f3ccedc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-7b63a20e1a0be038.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.813Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-374aecc9f9ddf1bd.png?imageMogr2/auto-orient/strip%7CimageView2/1/w/240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mysql_mysql%E4%BA%8B%E5%8A%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>mysql事务 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_mysql%E4%BA%8B%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql事务
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="mysql-事务"><a href="#mysql-事务" class="headerlink" title="mysql 事务"></a>mysql 事务</h3><ol>
+<li><p>ACID原则:</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Automicity:</span> 原子性</span><br><span class="line"><span class="symbol">Consistency:</span> 一致性</span><br><span class="line"><span class="symbol">Isolation:</span> 隔离性</span><br><span class="line"><span class="symbol">Durability:</span> 持久性</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>SQL隔离级别</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 读未提交: read uncommited, 事务未提交时、别的事务就能读到它的变更</span><br><span class="line"><span class="bullet">2.</span> 读提交: read commited, 事务提交之后、才能被别的事务读到变更</span><br><span class="line"><span class="bullet">3.</span> 可重复读: repeatable read, 事务在执行过程中看到的数据、始终保持跟事务启动时看到的一致</span><br><span class="line"><span class="bullet">4.</span> 串行化: seriable, 对同一记录、写会加写锁、读会加读锁、读写锁冲突的时候、必须等到前一个锁释放才能执行</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-374aecc9f9ddf1bd.png?imageMogr2/auto-orient/strip%7CimageView2/1/w/240" alt="image.png"></p>
+<h4 id="不同事物隔离级别下、事物A的返回结果"><a href="#不同事物隔离级别下、事物A的返回结果" class="headerlink" title="不同事物隔离级别下、事物A的返回结果"></a>不同事物隔离级别下、事物A的返回结果</h4><ul>
+<li>若隔离级别是<code>读未提交</code>, 则 <code>V1</code> 的值是<code>2</code>、此时、B未提交A可以读到、<br><code>V2</code>, <code>V3</code> 的值也都是2</li>
+<li>若.. 是<code>读提交</code>, 则<code>V1</code>是1、<code>V2</code> 是2、事物B的更新在提交后可以被A读到、则<code>V3</code>的值也是2</li>
+<li>若隔离级别是<code>可重复读</code>、则<code>V1</code>, <code>V2</code>的值是1、<code>V3</code>的值2、因为<code>V2</code>在<code>事务A</code>提交之前、所以、<code>V1</code>, <code>V2</code> 的值为1</li>
+<li>若隔离级别是<code>可串行化</code> 则<code>事务B</code>在执行<code>1-&gt;2</code>的过程会被锁、直到A提交、所以<code>V1</code>, <code>V2</code>是1 、</li>
+</ul>
+<h4 id="查看事务隔离级别"><a href="#查看事务隔离级别" class="headerlink" title="查看事务隔离级别"></a>查看事务隔离级别</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">mysql&gt; show variables like &#x27;transaction_isolation&#x27;;</span></span><br><span class="line"><span class="section">+-----------------------+-----------------+</span></span><br><span class="line"><span class="section">| Variable_name         | Value           |</span></span><br><span class="line"><span class="section">+-----------------------+-----------------+</span></span><br><span class="line"><span class="section">| transaction_isolation | REPEATABLE-READ |</span></span><br><span class="line"><span class="section">+-----------------------+-----------------+</span></span><br><span class="line">1 row in set (0.04 sec)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">mysql&gt; select @@transaction_isolation;</span></span><br><span class="line"><span class="section">+-----------------+</span></span><br><span class="line"><span class="section">| @@transaction_isolation  |</span></span><br><span class="line"><span class="section">+-----------------+</span></span><br><span class="line"><span class="section">| REPEATABLE-READ |</span></span><br><span class="line"><span class="section">+-----------------+</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="mysql-全局事务隔离级别修改后、在本会话不会生效、只影响后续会话"><a href="#mysql-全局事务隔离级别修改后、在本会话不会生效、只影响后续会话" class="headerlink" title="mysql 全局事务隔离级别修改后、在本会话不会生效、只影响后续会话"></a>mysql 全局事务隔离级别修改后、在本会话不会生效、只影响后续会话</h5><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set global transaction isolation level read committed;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="section">mysql&gt; select @@transaction_isolation;</span></span><br><span class="line"><span class="section">+-------------------------+</span></span><br><span class="line"><span class="section">| @@transaction_isolation |</span></span><br><span class="line"><span class="section">+-------------------------+</span></span><br><span class="line"><span class="section">| REPEATABLE-READ         |</span></span><br><span class="line"><span class="section">+-------------------------+</span></span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="mysql-session级别事务修改、只影响当前会话"><a href="#mysql-session级别事务修改、只影响当前会话" class="headerlink" title="mysql session级别事务修改、只影响当前会话"></a>mysql session级别事务修改、只影响当前会话</h5><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set session  transaction isolation level read uncommitted;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="section">mysql&gt; select @@transaction_isolation;</span></span><br><span class="line"><span class="section">+-------------------------+</span></span><br><span class="line"><span class="section">| @@transaction_isolation |</span></span><br><span class="line"><span class="section">+-------------------------+</span></span><br><span class="line"><span class="section">| READ-UNCOMMITTED        |</span></span><br><span class="line"><span class="section">+-------------------------+</span></span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>*Q: </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.合适需要RR级别呢 ？</span><br><span class="line">   假设正在对数据做校对、是不是希望在校对过程中、用户产生的交易不会影响校对的结果 ？~~</span><br><span class="line"><span class="bullet">2.</span> 回滚日志什么时候删除？</span><br><span class="line">系统会判断当没有事务需要用到这些回滚日志的时候，回滚日志会被删除</span><br><span class="line"><span class="bullet">3.</span> 什么时候不需要了？</span><br><span class="line">  当系统里么有比这个回滚日志更早的read-view的时候</span><br><span class="line"><span class="bullet">4.</span> 为什么尽量不要使用长事务</span><br><span class="line">  长事务意味着系统里面会存在很老的事务视图，在这个事务提交之前，回滚记录都要保留，这会导致大量占用存储空间。除此之外，长事务还占用锁资源，可能会拖垮库</span><br><span class="line"><span class="bullet">5.</span> </span><br></pre></td></tr></table></figure>
+
+<h4 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">事务隔离的实现：每条记录在更新的时候都会同时记录一条回滚操作。同一条记录在系统中可以存在多个版本，这就是数据库的多版本并发控制（MVCC）</span><br></pre></td></tr></table></figure>
+
+<p>Q: 由上所述、若事务隔离级别为RR、事务T启动的时候会创建一个一致性视图read-view、执行期间、若有其它事务修改了数据、事务T看到的数据不变<br>但: 这个事务要更新R1时、恰好R1被T2占有行锁、则T会进入等待状态、此时: 当它拿到行锁、可以执行更新的时候、读到的值是什么呢 ？</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `t`(</span><br><span class="line">`id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="keyword">null</span> , </span><br><span class="line">`k` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">default</span> <span class="keyword">null</span> ,</span><br><span class="line"><span class="keyword">primary</span> key (`id`)</span><br><span class="line">)engine<span class="operator">=</span>innodb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t(id, k) <span class="keyword">values</span> (<span class="number">1</span>, <span class="number">1</span>),(<span class="number">2</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>SQL执行顺序如下：<br><img src="https://upload-images.jianshu.io/upload_images/14027542-cd319103b6d27133.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<p>那么两个查询语句得到的结果分表是什么呢？</p>
+<p>A: 先看下几个概念:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">begin</span><span class="operator">/</span><span class="keyword">start</span> transaction 并不是事务的七点、在执行到它们之后的第一个innodb表语句、事务才真正启动、马上执行事务、可以使用：</span><br><span class="line">   <span class="keyword">start</span> transaction <span class="keyword">with</span> consistent snapshot;</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> mysql中两个视图的概念</span><br><span class="line">   <span class="number">1</span>) <span class="keyword">view</span>: 是用查询语句创建的虚拟表、在调用的时候执行查询语句并生成结果、<span class="keyword">create</span> <span class="keyword">view</span> ... </span><br><span class="line">   <span class="number">2</span>) innodb在实现MVCC时用到的一致性读视图、即 cinsistent read <span class="keyword">view</span>, 用于执行 RC(Read Committed, 读提交)</span><br><span class="line">       和RR(Repeatable Read, 可重复读)隔离级别的实现</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>两种启动事务的方式<br>  1.一致性视图是在执行第一个快照语句时创建<br>  2 在执行 start transaction with consistent snapshot 时创建</p>
+</blockquote>
+<p>大前提:</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 事务隔离级别为RR</span><br><span class="line"><span class="bullet">2.</span> autocommit=1</span><br><span class="line"><span class="bullet">3.</span> 注意事务启动的时机</span><br></pre></td></tr></table></figure>
+<p>结果:</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">A</span> 查询得到<span class="number">1</span> B查询得到<span class="number">3</span> C更新成功</span><br></pre></td></tr></table></figure>
+
+<p>so. 一脸迷茫了、^.^…<br>来看下: 快照在MVCC里是如何工作的</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在RR级别下、事务在启动的时候就拍了个快照(基于db)</span><br><span class="line"></span><br><span class="line">快照如何实现？</span><br><span class="line"><span class="number">1.</span> innodb每个事务有一个唯一<span class="built_in">id</span>、叫 <span class="keyword">transaction</span> <span class="built_in">id</span>. 在事务开始时向事务系统申请、严格递增</span><br><span class="line"><span class="number">2.</span> 每行数据有多个版本、每次更新都会生成一个新的数据版本、并把trx <span class="built_in">id</span>赋值给这个数据版本的事务<span class="built_in">id</span>、记为: row trx_id</span><br><span class="line">   旧的数据版本要保留、且在新的数据版本中可以拿到、即: 表中一行记录、有多个版本row、每个版本有自己的row trx_id</span><br><span class="line">   一个记录被连续更新后的状态如下:</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-249460f611087ba6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">虚线内是同一行数据的<span class="number">4</span>个版本、当前最新版本是V4、k的值是<span class="number">22</span>、是被 <span class="keyword">transaction</span> <span class="built_in">id</span> 为<span class="number">25</span>的事务更新的</span><br><span class="line"></span><br><span class="line">undo <span class="built_in">log</span>呢? </span><br><span class="line">上图中的三个虚线就是undo <span class="built_in">log</span>、而V1 V2 V3 并不是物理存在的、而是在需要的时候根据当前版本和undo <span class="built_in">log</span>计算的</span><br><span class="line">事务只认、事务启动之前提交的内容、如果提交之后的并不认、必须要找到它的上一个版本、若上一个版本也不可见、则继续查找</span><br><span class="line"></span><br><span class="line">实现: </span><br><span class="line">innodb为每个事务构造了一个数组、用来保存事务启动的瞬间、当前正在活跃(启动但未提交)的所有事务<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">数组里<span class="built_in">id</span>的最小值即为 低水位、当前系统已创建过的事务<span class="built_in">id</span>的最大值+<span class="number">1</span> 即为 高水位</span><br><span class="line">视图数组和高水位组成了当前事务的一致性视图 <span class="built_in">read</span>-view</span><br><span class="line">数据版本的可见性规则、就是基于row trx_id和一致性视图的对比结果得到的</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-be120e1119794bcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">对于当前事务启动的瞬间、一个数据版本的<span class="built_in">row</span> trx_id有几种情况</span><br><span class="line"><span class="number">1</span>. 若落在绿色部分、表示已提交事务或当前事务自己生成的、可见</span><br><span class="line"><span class="number">2</span>. 红色部分、表示这个版本是将来启动的事务生成的、不可见</span><br><span class="line"><span class="number">3</span>. 黄色部分、</span><br><span class="line">   a. 若 <span class="built_in">row</span> trx_id 在数组中、表示由未提交的事务生成的、不可见</span><br><span class="line">   b. 若不在数组中、表示已提交事务生成、可见</span><br><span class="line">   </span><br><span class="line">   有了<span class="built_in">row</span> trx_id、事务的快照就是静态的了...</span><br></pre></td></tr></table></figure>
+
+<p>假设:</p>
+<ol>
+<li>事务开启前、系统只有一个活跃事务id 99</li>
+<li>事务A、B、C的版本号 100、101、102 且当前系统只有这4个事务</li>
+<li>事务开始前、(1,1)这行数据的 row trx_id是90</li>
+</ol>
+<p>事务查询逻辑图:<br><img src="https://upload-images.jianshu.io/upload_images/14027542-7602ef99ebe62a71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<p>所以、事务A的查询流程:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 找到(1,3) 判断<span class="attribute">trx_od</span>=101 比高水位大、处于红色区域、不可见</span><br><span class="line">2. 找到上个版本、row <span class="attribute">trx_id</span>=102 比高水位大、处于红色区域、不可见</span><br><span class="line">3. 继续、找到(1,1) row <span class="attribute">trx_id</span>=90、比低水位小、处于绿色区域、可见</span><br><span class="line"></span><br><span class="line">虽然这行数据被修改过、但事务A无论在何时查询、结果都是一致的、称为一致性读</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新逻辑"><a href="#更新逻辑" class="headerlink" title="更新逻辑"></a>更新逻辑</h4><p>那么是不是有个疑问:<br>按照一致性读、好像 事务B的update语句、是不对的 ？</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-9c0c0ec70b636639.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">B进行<span class="keyword">update</span>时、是不是看不到(<span class="number">1</span>,<span class="number">2</span>)？怎么计算出来的(<span class="number">1</span>,<span class="number">3</span>) ？</span><br><span class="line"></span><br><span class="line">是的: 如果在事务B更新之前查询一次数据、会发现、返回的 k 的确是<span class="number">1</span></span><br><span class="line">但是更新数据的时候、就不能再历史版本上更新了、否则、事务C的更新就丢失了</span><br><span class="line">so. 事务B此时的更新是在(<span class="number">1</span>,<span class="number">2</span>) 的基础上进行的操作</span><br><span class="line"></span><br><span class="line">规则:</span><br><span class="line">更新都是先读后写的、这个读是当前读(<span class="keyword">current</span> <span class="keyword">read</span>)、只能读当前的值</span><br><span class="line"></span><br><span class="line">其实、除了<span class="keyword">update</span>、若<span class="keyword">select</span>加锁、也是当前读</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">select</span> k <span class="keyword">from</span> t <span class="keyword">where</span> id=<span class="number">1</span> <span class="keyword">lock</span> <span class="keyword">in</span> <span class="keyword">share mode</span>; // 读锁(S锁、共享锁)</span><br><span class="line">mysql&gt; <span class="keyword">select</span> k <span class="keyword">from</span> t <span class="keyword">where</span> id=<span class="number">1</span> <span class="keyword">for</span> <span class="keyword">update</span>; // 写锁(X锁、排他锁)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>再往前一步：<br>若 C不是马上提交的、而是事务C’ 会如何？</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-11fddfc9015b0955.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">事务 c<span class="string">&#x27; 不同的是、未马上提交、在它提交前、事务B的更新发起、而此时 C&#x27;</span> 未提交、但是<span class="comment">(1,2)</span>这个版本也生成了、并且是当前最新版本</span><br><span class="line">那么B如何处理？</span><br><span class="line"></span><br><span class="line">此时就要考虑 两阶段锁协议、事务C<span class="string">&#x27;未提交、则写锁未释放、事务B是当前读、必须读最新版本、且必须加锁、</span></span><br><span class="line"><span class="string">则B被阻塞、必须等到C&#x27;</span>释放、才可继续</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Q: 为何表结构不支持 可重复读?</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">表结构无对应的数据行、也没有 <span class="built_in">row</span> trx_id 所以、只能遵循当前读</span><br></pre></td></tr></table></figure>
+
+<p>Q: 使用如下表结构和初始化语句作为实验环境、事务隔离级别是可重复读、想把 字段 c和id 等值的行 的c值清零、发现 并未改掉<br>解释这种情况出现的场景及原理, 及如何避免？</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `t`(</span><br><span class="line">`id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="keyword">null</span> ,</span><br><span class="line">`c` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">default</span> <span class="keyword">null</span> ,</span><br><span class="line"><span class="keyword">primary</span> key (`id`)</span><br><span class="line">)engine<span class="operator">=</span>innodb</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t(id, c) <span class="keyword">values</span> (<span class="number">1</span>,<span class="number">1</span>), (<span class="number">2</span>,<span class="number">2</span>), (<span class="number">3</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<p>A: 场景一</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">会话A</span><br><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="section">mysql&gt; select * from t;</span></span><br><span class="line"><span class="section">+----+------+</span></span><br><span class="line"><span class="section">| id | c    |</span></span><br><span class="line"><span class="section">+----+------+</span></span><br><span class="line">|  1 |    1 |</span><br><span class="line">|  2 |    2 |</span><br><span class="line">|  3 |    3 |</span><br><span class="line"><span class="section">|  4 |    4 |</span></span><br><span class="line"><span class="section">+----+------+</span></span><br><span class="line">4 rows in set (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; update t set c=0 whete id=c;</span><br><span class="line"></span><br><span class="line">会话B</span><br><span class="line">mysql&gt; update t set c=c+1;</span><br><span class="line">Query OK, 4 rows affected (0.01 sec)</span><br><span class="line">Rows matched: 4  Changed: 4  Warnings: 0</span><br><span class="line"></span><br><span class="line">会话A</span><br><span class="line"><span class="section">mysql&gt; select * from t;</span></span><br><span class="line"><span class="section">+----+------+</span></span><br><span class="line"><span class="section">| id | c    |</span></span><br><span class="line"><span class="section">+----+------+</span></span><br><span class="line">|  1 |    1 |</span><br><span class="line">|  2 |    2 |</span><br><span class="line">|  3 |    3 |</span><br><span class="line"><span class="section">|  4 |    4 |</span></span><br><span class="line"><span class="section">+----+------+</span></span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">会话A</span><br><span class="line">mysql&gt; commit;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="section">mysql&gt; select * from t;</span></span><br><span class="line"><span class="section">+----+------+</span></span><br><span class="line"><span class="section">| id | c    |</span></span><br><span class="line"><span class="section">+----+------+</span></span><br><span class="line">|  1 |    2 |</span><br><span class="line">|  2 |    3 |</span><br><span class="line">|  3 |    4 |</span><br><span class="line"><span class="section">|  4 |    5 |</span></span><br><span class="line"><span class="section">+----+------+</span></span><br><span class="line">4 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>即：<br><img src="https://upload-images.jianshu.io/upload_images/14027542-eae83ec8f3ccedc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<p>场景二：<br><img src="https://upload-images.jianshu.io/upload_images/14027542-7b63a20e1a0be038.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<p><strong>记住:update时、为当前读 current read</strong></p>
+<h4 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 在 可重复读 RR 隔离级别下、普通的查询是快照读、是不会看到别的事务插入数据的、</span><br><span class="line">   因此 幻读是在 当前读 下才会发生</span><br><span class="line"><span class="bullet">2.</span> 数据被修改、在当前读可以看到修改后的结果、这个不叫幻读、</span><br><span class="line">   幻读 专指 新插入的行被当前读读到</span><br></pre></td></tr></table></figure>
+
+<h4 id="间隙锁-gaps-lock"><a href="#间隙锁-gaps-lock" class="headerlink" title="间隙锁-gaps lock"></a>间隙锁-gaps lock</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">间隙锁: 锁的是两个值之间的空隙</span></span><br><span class="line"><span class="section">跟间隙锁存在冲突关系的是: 往这个间隙插入记录、间隙锁之间不存在冲突关系</span></span><br><span class="line"> </span><br><span class="line"><span class="section">行锁冲突关系: 读-读: no 读-写:no 写写: yes</span></span><br><span class="line"><span class="section">即: 跟间隙锁存在冲突关系的、是另外一个行锁</span></span><br><span class="line"></span><br><span class="line">间隙锁的引入会导致同样的语句锁住更大的范围、影响并发</span><br><span class="line">间隙锁只有在RR的隔离级别下才会生效、</span><br><span class="line"></span><br><span class="line">把隔离级别设为读提交的话、就没有间隙锁了、但是、要解决可能出现的数据和日志不一致的问题、</span><br><span class="line">需要把binlog的格式设置为row</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_mysql%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="prev" title="mysql常用命令">
+      <i class="fa fa-chevron-left"></i> mysql常用命令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_mysql-%E7%B4%A2%E5%BC%95/" rel="next" title="mysql索引">
+      mysql索引 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">mysql 事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E4%BA%8B%E7%89%A9%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8B%E3%80%81%E4%BA%8B%E7%89%A9A%E7%9A%84%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="nav-number">1.1.</span> <span class="nav-text">不同事物隔离级别下、事物A的返回结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">查看事务隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql-%E5%85%A8%E5%B1%80%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%BF%AE%E6%94%B9%E5%90%8E%E3%80%81%E5%9C%A8%E6%9C%AC%E4%BC%9A%E8%AF%9D%E4%B8%8D%E4%BC%9A%E7%94%9F%E6%95%88%E3%80%81%E5%8F%AA%E5%BD%B1%E5%93%8D%E5%90%8E%E7%BB%AD%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.2.1.</span> <span class="nav-text">mysql 全局事务隔离级别修改后、在本会话不会生效、只影响后续会话</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql-session%E7%BA%A7%E5%88%AB%E4%BA%8B%E5%8A%A1%E4%BF%AE%E6%94%B9%E3%80%81%E5%8F%AA%E5%BD%B1%E5%93%8D%E5%BD%93%E5%89%8D%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.2.2.</span> <span class="nav-text">mysql session级别事务修改、只影响当前会话</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">事务隔离的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E9%80%BB%E8%BE%91"><span class="nav-number">1.4.</span> <span class="nav-text">更新逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB"><span class="nav-number">1.5.</span> <span class="nav-text">幻读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%B4%E9%9A%99%E9%94%81-gaps-lock"><span class="nav-number">1.6.</span> <span class="nav-text">间隙锁-gaps lock</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

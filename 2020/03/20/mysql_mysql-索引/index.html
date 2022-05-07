@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="常见的索引模型123451. hash 一种key-value结构、k-v映射、写入、等值查询很快、但范围查询比较慢、但适用于 等值查询的场景2. 有序数组在等值查询和范围查询的性能表现上都很优秀   但在插入时必须要挪动后续所有记录、成本太高、   所以只适用于静态存储. eg. 城市信息表这种不经常变动的数据3. 树 在查询和写入的效率上都还不错  innodb的索引模型 在innodb中、表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql索引">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mysql_mysql-%E7%B4%A2%E5%BC%95/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="常见的索引模型123451. hash 一种key-value结构、k-v映射、写入、等值查询很快、但范围查询比较慢、但适用于 等值查询的场景2. 有序数组在等值查询和范围查询的性能表现上都很优秀   但在插入时必须要挪动后续所有记录、成本太高、   所以只适用于静态存储. eg. 城市信息表这种不经常变动的数据3. 树 在查询和写入的效率上都还不错  innodb的索引模型 在innodb中、表">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-378ce5505cc95e86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-4047d1069d4fce5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.812Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-378ce5505cc95e86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mysql_mysql-%E7%B4%A2%E5%BC%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>mysql索引 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_mysql-%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql索引
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="常见的索引模型"><a href="#常见的索引模型" class="headerlink" title="常见的索引模型"></a>常见的索引模型</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> hash 一种key-value结构、k-v映射、写入、等值查询很快、但范围查询比较慢、但适用于 等值查询的场景</span><br><span class="line"><span class="bullet">2.</span> 有序数组在等值查询和范围查询的性能表现上都很优秀</span><br><span class="line">   但在插入时必须要挪动后续所有记录、成本太高、</span><br><span class="line">   所以只适用于静态存储. eg. 城市信息表这种不经常变动的数据</span><br><span class="line"><span class="bullet">3.</span> 树 在查询和写入的效率上都还不错</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-378ce5505cc95e86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="hash表示意图.png"></p>
+<h4 id="innodb的索引模型"><a href="#innodb的索引模型" class="headerlink" title="innodb的索引模型"></a>innodb的索引模型</h4><blockquote>
+<p>在innodb中、表都是根据主键顺序、以索引的形式存放的, 这种存储方式的表称为索引组织表<br>innodb使用了B+树索引模型，数据都是存储在B+树的、每个索引对应一颗B+树</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> T<span class="operator">-</span>inx(</span><br><span class="line">id <span class="type">int</span> <span class="keyword">primary</span> key ,</span><br><span class="line">k <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> ,</span><br><span class="line">name <span class="type">varchar</span>(<span class="number">16</span>) ,</span><br><span class="line">index (k)</span><br><span class="line">)engine<span class="operator">=</span>innodb</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4047d1069d4fce5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="i索引树示意图.png"></p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">从图中可以看出、索引树分为主键索引和非主键索引两种类型、</span><br><span class="line">主键索引存储的是整行数据、在innodb里, 主键索引也被称为聚簇索引(clustered <span class="keyword">index</span>).</span><br><span class="line">非主键索引的叶子节点内容是主键值, 也称为二级索引(secondary <span class="keyword">index</span>).</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Q: 那么基于主键索引 和 基于普通索引的查询有什么区别 ?</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">若 <span class="keyword">sql</span> 是 <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> T <span class="keyword">where</span> ID<span class="operator">=</span><span class="number">500</span>; 即主键查询的方式、则只需要搜索ID这颗 B<span class="operator">+</span> 树</span><br><span class="line">若 <span class="keyword">sql</span> 是 <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> T <span class="keyword">where</span> k<span class="operator">=</span><span class="number">5</span>, 则需要先搜索k这颗索引树、得到id的值为<span class="number">500</span>, 再到ID索引树搜索一次、这个过程称为 回表</span><br><span class="line"></span><br><span class="line">也就是: 基于非主键索引的查询需要多扫描一颗索引树, 所以需要尽量的使用主键查询</span><br></pre></td></tr></table></figure>
+
+<p>Q: 索引维护</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">B+ 树为了维护索引有序性、在插入新值的时候需要做必要的维护.</span><br><span class="line">若插入的新值较大、只需要再最后插入新的记录、若插入的值为中间值、则相对麻烦,需要先挪动后边的数据、腾出位置</span><br><span class="line"><span class="section">更糟糕的是: 若最后一个数据所在的数据页已经满了、根据B+树的算法、需要申请一个新的数据页、然后挪动部分数据过去</span></span><br><span class="line">这个过程称为 页分裂, 除了性能外、页分裂还影响数据页的利用率</span><br><span class="line"></span><br><span class="line">当相邻页有数据删除之后、由于数据页的利用率很低、会进行页合并</span><br><span class="line"></span><br><span class="line"><span class="section">场景: 自增主键的作用？</span></span><br><span class="line">插入新的记录时、系统会获取当前最大值+1 作为下一条记录的id</span><br><span class="line"><span class="section">即: 自增主键的插入数据模式、正好符合了递增插入、不涉及挪动其它记录、也不会触发叶子节点的分裂</span></span><br><span class="line">而有业务逻辑的字段做主键、则往往不能保证有序写入、这样写数据的成本相对高</span><br><span class="line"></span><br><span class="line">从存储上看、主键长度越小、普通索引的叶子节点就越小、索引占用的空间也就越小</span><br><span class="line"></span><br><span class="line">so. 从性能和存储上来看、自增主键往往是最合理的选择</span><br></pre></td></tr></table></figure>
+
+
+<p>表初始化语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> T<span class="operator">-</span>index(</span><br><span class="line">ID <span class="type">int</span> <span class="keyword">primary</span> key, </span><br><span class="line">k <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">default</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">index k(k)</span><br><span class="line">)engine<span class="operator">=</span>Innodb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> T<span class="operator">-</span>index <span class="keyword">values</span> (<span class="number">100</span>, <span class="number">1</span>, <span class="string">&#x27;aa&#x27;</span>), (<span class="number">200</span>, <span class="number">2</span>, <span class="string">&#x27;bb&#x27;</span>), (<span class="number">300</span>, <span class="number">3</span>, <span class="string">&#x27;cc&#x27;</span>), , (<span class="number">500</span>, <span class="number">5</span>, <span class="string">&#x27;ee&#x27;</span>), (<span class="number">600</span>, <span class="number">6</span>,<span class="string">&#x27;ff&#x27;</span>),(<span class="number">700</span>,<span class="number">7</span>,<span class="string">&#x27;gg&#x27;</span>);</span><br><span class="line">                                                                                                     </span><br></pre></td></tr></table></figure>
+
+<p>Q: 执行sql<code>select * from T-index where k between 3 and 5</code>需要执行几次树的搜搜操作、会扫描多少行 ？<br>A: 执行流程:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 在 k 索引树上找到 <span class="attribute">k</span>=3 的记录、取得<span class="attribute">id</span>=300;</span><br><span class="line">2. 再到 id 索引树上查找 <span class="attribute">id</span>=300 对应的记录R3;</span><br><span class="line">3. 在 k 索引树上找到 下一个值 <span class="attribute">k</span>=5, 取得 <span class="attribute">id</span>=500;</span><br><span class="line">4. 再回到 id 索引树上找到 <span class="attribute">id</span>=500 对应的记录 R4;</span><br><span class="line">5. 在k索引树上取下一个值 <span class="attribute">k</span>=6, 不满足条件、循环两次.</span><br><span class="line"></span><br><span class="line">在步骤 2、4中、回到主键索引查找数据的过程、称为回表</span><br></pre></td></tr></table></figure>
+<p>所以、一共执行了 <code>3次</code>搜索、<code>2次</code>回表、扫描<code>3行</code></p>
+<h4 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h4><blockquote>
+<p>若执行的语句是<br>select ID from T-index where k between 3 and 5;<br>此时只需要查询 ID 的值、而ID的值已经在 K 索引树上了、可以直接提供查询结果、<br>无需回表、即: 在本次查询中、索引 k 已经覆盖了查询需求、<br>称为覆盖索引</p>
+</blockquote>
+<ul>
+<li>在引擎内部使用覆盖索引在索引 k 上其实读了3个记录、R3~R5、<br>但是对于 MySQL的server来说、只从引擎拿到了2条记录、认为扫描行是2</li>
+</ul>
+<p>so. 覆盖索引在一定程度上可以减少回表扫描的次数</p>
+<p>Q: 在一个市民表上、是否有必要将身份证和名字建立联合索引 ?</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span>  <span class="keyword">table</span> `<span class="keyword">user</span>` (</span><br><span class="line">`id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="keyword">null</span> ,</span><br><span class="line">`id_card` <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">default</span> <span class="keyword">null</span> ,</span><br><span class="line">`name` <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">default</span> <span class="keyword">null</span> ,</span><br><span class="line">`age` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">default</span> <span class="keyword">null</span> , </span><br><span class="line">`ismale` tinyint(<span class="number">1</span>) <span class="keyword">default</span> <span class="keyword">null</span> ,</span><br><span class="line"><span class="keyword">PRIMARY</span> key (`id`) ,</span><br><span class="line">key `id_card` (`id_card`),</span><br><span class="line">key `name_age` (`name`, `age`)</span><br><span class="line">) engine<span class="operator">=</span>Innodb</span><br></pre></td></tr></table></figure>
+<p>A: </p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">这种情况需要看实际的业务场景</span><span class="punctuation">:</span></span><br><span class="line"><span class="attribute">1. 若经常的查询需求是</span><span class="punctuation">: </span></span><br><span class="line">   <span class="attribute">根据身份证号查询市民信息、则 只需要在身份证字段上建立索引, 再建(id,name)的联合索引就会浪费空间</span></span><br><span class="line"><span class="attribute">   </span></span><br><span class="line"><span class="attribute">2. 若经常的查询需求是</span><span class="punctuation">:</span></span><br><span class="line">   根据身份证号查询name, 则建立联合索引就有很大的意义、它可以在这个高频请求上用到覆盖索引, </span><br><span class="line">   不在需要回表查询， 提高查询速度</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Q: 如果现在有一个非高频请求、根据身份证号查询家庭地址, 需要再设计一个联合索引么 ?<br>A: </p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">索引项是按照索引出现的字段排序的:</span><br><span class="line">eg. 利用(<span class="keyword">name</span>, age)的联合索引查找所有名字是 zhangsan 的人时, 可快速定位到 ID4, 然后向后遍历得到所有结果</span><br><span class="line">    不只是索引的全部定义. 只要满足最左前缀原则、就可以利用索引来加速检索</span><br><span class="line">所以: 基于已经建立了 (id_card, <span class="keyword">name</span>) 的联合索引、无需再建立 (id_card, addr)的联合索引、</span><br><span class="line">利用最左前缀的原则、它可以使用 (id_card, <span class="keyword">name</span>) 的联合索引</span><br></pre></td></tr></table></figure>
+
+<h4 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h4><p>思考:<br>以(name, age)联合索引为例、需要检索所有 <strong>名字第一个字为张,且年龄为10的男孩</strong><br>SQL如下:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> name <span class="keyword">like</span> `张<span class="operator">%</span>` <span class="keyword">and</span> age<span class="operator">=</span><span class="number">10</span> <span class="keyword">and</span> ismale<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>拿到记录行之后、还要进一步判断其它条件是否满足、这个怎么处理的呢?</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 在MySQL <span class="number">5.6</span> 之前、只能从 ID3 开始、一个个回表. 在主键索引上找到数据行、再对比字段值</span><br><span class="line"><span class="number">2</span>. 在<span class="number">5.6</span> 引入了索引下推(index condition pushdown), 可以在索引遍历的过程中对索引包含的字段优先判断</span><br><span class="line">   过滤掉不满足条件的记录、减少回表次数</span><br><span class="line">   </span><br><span class="line">   在无索引下推时、innodb不会看age的值、只是顺序把 `name`第一个字是`张`的记录取出、回表、需要回表<span class="number">4</span>次</span><br><span class="line">   有索引下推时、innodb在(name, age)内部就判断了age是否=<span class="number">10</span>，不等于<span class="number">10</span>的记录、直接判断并跳过</span><br><span class="line">   只需要取回ID4、ID5两条记录、所以只需要回表<span class="number">2</span>次</span><br></pre></td></tr></table></figure>
+<p>Q: 为什么需要重建索引？</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">索引因为删除、或者页分裂等原因、导致数据页有空洞、重建索引的过程会创建一个新的索引、把数据按顺序插入、这样页面的利用率最高、</span><br><span class="line">也就是索引更紧凑、更省空间</span><br></pre></td></tr></table></figure>
+<p>Q: </p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">场景:</span> DBA入职时、发现自己接手维护的库、有一个表定义：</span><br><span class="line"></span><br><span class="line">create table `geek`(</span><br><span class="line">`a` int(<span class="number">11</span>) <span class="literal">not</span> null,</span><br><span class="line">`b` int(<span class="number">11</span>) <span class="literal">not</span> null,</span><br><span class="line">`c` int(<span class="number">11</span>) <span class="literal">not</span> null,</span><br><span class="line">`d` int(<span class="number">11</span>) <span class="literal">not</span> null,</span><br><span class="line">primary key(`a`, `b`),</span><br><span class="line">key `c`(`c`),</span><br><span class="line">key `ca`(`c`, `a`),</span><br><span class="line">key `cb`(`c`, `b`)</span><br><span class="line">)engine=innodb<span class="comment">;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>为什么需要ca、cb这两个联合索引呢 ？同事的解释是: 因为业务常用下边的sql:</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> geek <span class="keyword">where</span> c<span class="operator">=</span>N <span class="keyword">order</span> <span class="keyword">by</span> a limit <span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> geek <span class="keyword">where</span> c<span class="operator">=</span>N <span class="keyword">order</span> <span class="keyword">by</span> b limit <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>那么这种解释对么 ？</p>
+</blockquote>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">主键<span class="selector-tag">a</span>、<span class="selector-tag">b</span>的聚簇索引组织顺序相当于 <span class="selector-tag">order</span> <span class="selector-tag">by</span> <span class="selector-tag">a</span>, <span class="selector-tag">b</span> 即: 先按<span class="selector-tag">a</span>排序、再按<span class="selector-tag">b</span>排序、<span class="selector-tag">c</span>无序</span><br><span class="line">索引 <span class="selector-tag">ca</span>的组织是先按<span class="selector-tag">c</span>排序、再按<span class="selector-tag">a</span>排序、同时记录主键<span class="selector-tag">b</span></span><br><span class="line">索引 <span class="selector-tag">cb</span>的组织是先按<span class="selector-tag">c</span>排序、再按<span class="selector-tag">b</span>排序、同时记录主键<span class="selector-tag">a</span></span><br><span class="line"><span class="selector-tag">so</span>. <span class="selector-tag">ca</span>可以去掉、<span class="selector-tag">cb</span>需要保留</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Q: using where的时候、需要回表查询数据、然后把数据传输给server层、server来过滤数据、那么这些数据是存在哪儿的呢 ？</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无需存储、就是一个临时表、读出来立马判断、然后扫描下一行是否可以复用</span><br></pre></td></tr></table></figure>
+
+<p>Q: limit起到限制扫描行数的作用、并且有using where的时候、limit这个操作在存储引擎层做的、还是在server层做的 ？</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">server</span>层、接上面一个Q、读完以后、顺便判断一下<span class="keyword">limit</span>够不够就可以了、够了就结束循环</span><br></pre></td></tr></table></figure>
+
+<p>Q: extra列线上 using index condition 代表使用了索引下推 ?</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ICP代表可以下推、但 &#x27;可以、不一定是&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>Q: 备库使用 –single-transaction 做逻辑备份的时候、若从主库的binlog传来一个DDL语句会如何?<br>A:备份关键语句:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Q1:<span class="keyword">SET</span> SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;</span><br><span class="line">Q2:<span class="keyword">START</span> TRANSACTION  <span class="keyword">WITH</span> CONSISTENT SNAPSHOT;</span><br><span class="line"><span class="comment">/* other tables */</span></span><br><span class="line">Q3:<span class="keyword">SAVEPOINT</span> sp;</span><br><span class="line"><span class="comment">/* 时刻 1 */</span></span><br><span class="line">Q4:<span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> `t1`;</span><br><span class="line"><span class="comment">/* 时刻 2 */</span></span><br><span class="line">Q5:<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `t1`;</span><br><span class="line"><span class="comment">/* 时刻 3 */</span></span><br><span class="line">Q6:<span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> <span class="keyword">SAVEPOINT</span> sp;</span><br><span class="line"><span class="comment">/* 时刻 4 */</span></span><br><span class="line"><span class="comment">/* other tables */</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">在备份开始的时候、为了确保RR(可重复读)、再设置一次隔离级别<span class="built_in">Q1</span></span><br><span class="line">启动事务、用 with consistent snapshot 来确保这个语句执行完可以得到一个一致性视图 <span class="built_in">Q2</span></span><br><span class="line">设置保存点 <span class="built_in">Q3</span></span><br><span class="line"><span class="symbol">show</span> create 是为了那点表结构 <span class="built_in">Q4</span>、正式导数据 <span class="built_in">Q5</span> 回滚到savepoint ap是为了释放t1的MDL锁 <span class="built_in">Q6</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">DDL</span>从主库传过来的时间不同、则影响不同</span><br><span class="line"><span class="number">1</span>. 若在<span class="built_in">Q4</span>之前到达: 无影响、那点的是DDL后的表结构</span><br><span class="line"><span class="number">2</span>. 若在时刻<span class="number">2</span>到达、表结构被修改过、<span class="built_in">Q5</span>执行的时候、报 Table definition has changed. please retry transaction. mysqldump 终止</span><br><span class="line"><span class="number">3</span>. 在时刻<span class="number">2</span> 和 <span class="number">3</span>之间到达、mysqldump占着t1的MDL锁、binlog被阻塞、现象: 主从延迟、直到 <span class="built_in">Q6</span> 完成.</span><br><span class="line"><span class="number">4</span>. 从时刻<span class="number">2</span>开始、mysqldump释放了 MDL锁、现象: 无影响、备份拿到的是 DDL前 的表结构</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Q: </p>
+<blockquote>
+<p>删除100000行表记录时,有3种做法</p>
+</blockquote>
+<ol>
+<li>直接delete from T limit 100000;</li>
+<li>在一个连接中 delete from T limit 5000; loop 20</li>
+<li>在20个连接中 delete from T limit 5000; 20 connections;<br>如何选择?</li>
+</ol>
+<p>A:</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">尽量的选择第二种方式</span><br><span class="line">1. 单个语句占用的时间较长、锁的时间也会较长、而且打的事务也会造成主从延迟</span><br><span class="line">3. 在20个连接中同时执行 <span class="keyword">delete</span> <span class="keyword">from</span> T <span class="keyword">limit</span> <span class="number">5000</span>, 可能会造成认为锁冲突</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_mysql%E4%BA%8B%E5%8A%A1/" rel="prev" title="mysql事务">
+      <i class="fa fa-chevron-left"></i> mysql事务
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_java-jdbc%E5%8F%82%E6%95%B0/" rel="next" title="java-jdbc参数">
+      java-jdbc参数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%B4%A2%E5%BC%95%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">常见的索引模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#innodb%E7%9A%84%E7%B4%A2%E5%BC%95%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">innodb的索引模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95"><span class="nav-number">3.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8"><span class="nav-number">4.</span> <span class="nav-text">索引下推</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="专业术语 Producer  消息生产者、负责生产消息、一般由业务系统负责生产消息  Consumer 消息消费者、负责消费消息、一般由后台系统负责异步消费  Push Consumer Consumer的一种、通常向consumer对象注册一个Listener接口、一旦收到消息、Consumer对象立即回调Listener接口方法  Pull Consumer Consumer的一种、应用通常主">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rocketMq入门">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mq_rocketMq%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="专业术语 Producer  消息生产者、负责生产消息、一般由业务系统负责生产消息  Consumer 消息消费者、负责消费消息、一般由后台系统负责异步消费  Push Consumer Consumer的一种、通常向consumer对象注册一个Listener接口、一旦收到消息、Consumer对象立即回调Listener接口方法  Pull Consumer Consumer的一种、应用通常主">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-720659236fc9c351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-0a5961f3b407c08b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.810Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-720659236fc9c351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mq_rocketMq%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>rocketMq入门 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_rocketMq%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          rocketMq入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h4><ul>
+<li><p><code>Producer</code> </p>
+<p>消息生产者、负责生产消息、一般由业务系统负责生产消息</p>
+</li>
+<li><p><code>Consumer</code></p>
+<p>消息消费者、负责消费消息、一般由后台系统负责异步消费</p>
+<ul>
+<li><p><code>Push Consumer</code></p>
+<p>Consumer的一种、通常向consumer对象注册一个Listener接口、一旦收到消息、Consumer对象立即回调Listener接口方法</p>
+</li>
+<li><p><code>Pull Consumer</code></p>
+<p>Consumer的一种、应用通常主动调用Consumer的拉取消息放啊从Broker拉取消息、主动权由应用控制</p>
+</li>
+</ul>
+</li>
+<li><p><code>Producer Group</code></p>
+<p>一类Producer的集合名称、这类Producer通常发送一类消息、且发送逻辑一致</p>
+</li>
+<li><p><code>Consumer Group</code></p>
+<p>一类Consumer的集合名称、消费同一类消息、消费逻辑一致</p>
+</li>
+<li><p><code>Broker</code></p>
+<p>消息中转角色、负责存储消息、转发消息、一般也称为<code>Server</code>、在JMS规范中称为<code>Provider</code></p>
+</li>
+<li><p><code>广播消费</code></p>
+<p>一条消息被多个Consumer消费、即使这些Consumer属于同一个group、可以认为在消息划分方面无意义</p>
+</li>
+<li><p><code>集群消费</code></p>
+<p>一个Consumer Group中的Consumer实例平均分摊消费消息、eg. 某个topic有9条消息、其中一个Consumer Group有3个实例、则 每个实例只消费其中的3条消息</p>
+</li>
+<li><p><code>顺序消息</code></p>
+<p>消费消息的顺序要同发送消息的顺序一致、在RocketMQ中、主要指的是局部顺序、即: 同一类消息为满足顺序性、必须Producer单线程顺序发送、且发送到同一个队列、</p>
+</li>
+<li><p><code>普通顺序消费</code></p>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-720659236fc9c351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RocketMQ物理部署结构.png"></p>
+<h4 id="RocketMQ网络部署特点"><a href="#RocketMQ网络部署特点" class="headerlink" title="RocketMQ网络部署特点"></a>RocketMQ网络部署特点</h4><ul>
+<li><p>NameServer 几乎无状态节点、可集群部署、节点间无任何信息同步</p>
+</li>
+<li><p>Broker部署相对复杂、分为master和slave、0表示master、非0表示slave、</p>
+<p>每个Broker与Name Server集群中的所有节点建立长连接、定时注册Topic信息到所有的Name Server</p>
+</li>
+<li><p>Producer 与NameServer中的随机一个节点建立长连接、定期从NameServer取topic信息、并向提供topic服务的Master建立长连接、定时向master发送心跳、Producer完全无状态、可集群部署</p>
+</li>
+<li><p>Consumer与NameServer中随机一个节点建立长连接、从NameServer取topic路由信息、并向提供topic服务的Master、Slave建立长连接、定时向master、slave发送心跳、即可以从master订阅消息、也可以从slave订阅消息</p>
+</li>
+</ul>
+<h4 id="RocketMQ逻辑部署结构"><a href="#RocketMQ逻辑部署结构" class="headerlink" title="RocketMQ逻辑部署结构"></a>RocketMQ逻辑部署结构</h4><p>(<img src="https://upload-images.jianshu.io/upload_images/14027542-0a5961f3b407c08b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="逻辑部署结构.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MQ/" rel="tag"># MQ</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_Mysql-%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84/" rel="prev" title="Mysql是如何保障高可用的">
+      <i class="fa fa-chevron-left"></i> Mysql是如何保障高可用的
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mq_rocketMQ%E6%B6%88%E6%81%AF%E5%AD%98%E5%82%A8/" rel="next" title="rocketMQ消息存储">
+      rocketMQ消息存储 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.</span> <span class="nav-text">专业术语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ%E7%BD%91%E7%BB%9C%E9%83%A8%E7%BD%B2%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">RocketMQ网络部署特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ%E9%80%BB%E8%BE%91%E9%83%A8%E7%BD%B2%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">RocketMQ逻辑部署结构</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

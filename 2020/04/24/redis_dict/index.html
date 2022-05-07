@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="字典又称符号表, 关联数组, 映射, 是一种用于保存键值对的抽象数据结构 Redis构建了自己的字典实现, eg. set msg ‘test’会构建key为msg, value为test的键值对. 除了表示数据库之外, 字典还是hash键的底层实现之一(另外一种是ziplist)  字典实现hash表Redis字典所使用的哈希表由 dict.h&#x2F;dictht 结构定义 123456t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis数据结构-字典">
+<meta property="og:url" content="http://yoursite.com/2020/04/24/redis_dict/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="字典又称符号表, 关联数组, 映射, 是一种用于保存键值对的抽象数据结构 Redis构建了自己的字典实现, eg. set msg ‘test’会构建key为msg, value为test的键值对. 除了表示数据库之外, 字典还是hash键的底层实现之一(另外一种是ziplist)  字典实现hash表Redis字典所使用的哈希表由 dict.h&#x2F;dictht 结构定义 123456t">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/image-hash.png">
+<meta property="og:image" content="http://yoursite.com/images/image-dict.png">
+<meta property="article:published_time" content="2020-04-24T11:25:45.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.823Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/image-hash.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/24/redis_dict/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis数据结构-字典 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/redis_dict/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis数据结构-字典
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-24 19:25:45" itemprop="dateCreated datePublished" datetime="2020-04-24T19:25:45+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>字典又称<code>符号表</code>, <code>关联数组</code>, <code>映射</code>, 是一种用于保存键值对的抽象数据结构</p>
+<p>Redis构建了自己的字典实现, eg. set msg ‘test’会构建<code>key</code>为<code>msg</code>, <code>value</code>为<code>test</code>的键值对.</p>
+<p>除了表示数据库之外, 字典还是hash键的底层实现之一(另外一种是ziplist)</p>
+</blockquote>
+<h4 id="字典实现"><a href="#字典实现" class="headerlink" title="字典实现"></a>字典实现</h4><h5 id="hash表"><a href="#hash表" class="headerlink" title="hash表"></a>hash表</h5><p>Redis字典所使用的哈希表由 dict.h&#x2F;dictht 结构定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictht</span> &#123;</span></span><br><span class="line">  dictEntry **table; <span class="comment">// hash表数组</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> size; <span class="comment">// hash表大小</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> sizemask; <span class="comment">// hash表大小掩码, 用于计算hash索引值, 总是=size-1</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> used; <span class="comment">// 已有节点数量</span></span><br><span class="line">&#125;dictht;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-hash.png" alt="空hash表结构示意"></p>
+<h5 id="hash表节点"><a href="#hash表节点" class="headerlink" title="hash表节点"></a>hash表节点</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictEntry</span> &#123;</span></span><br><span class="line">  <span class="type">void</span> *key; <span class="comment">// 键</span></span><br><span class="line">  <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    <span class="type">void</span> *val;</span><br><span class="line">    unit64_tu64;</span><br><span class="line">    int64_ts64;</span><br><span class="line">  &#125;v; <span class="comment">// 值</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">dictEntry</span> *<span class="title">next</span>;</span><span class="comment">// 指向下个hash节点、形成链表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>key</code>属性保存着键值对中的键、而<code>v</code>属性则保存着键值对中的值, 它可以是一个<code>指针</code>, 或者是<code>uint64_t</code>类型的整数, 或者是 <code>int64_t</code>的整数</p>
+<p><code>next</code>属性是指向另一个节点的指针, 这个指针可以将多个hash值相同的键值对连接在一起, 解决键冲突问题</p>
+<h5 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h5><p>Redis中的字典由 <code>dict.h/dict</code> 结构定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dict</span> &#123;</span></span><br><span class="line">  dictType *type; <span class="comment">// 类型特定函数</span></span><br><span class="line">  <span class="type">void</span> *privdata; <span class="comment">// 私有数据</span></span><br><span class="line">  dictht ht[<span class="number">2</span>]; <span class="comment">// hash表</span></span><br><span class="line">  in trehashidx; <span class="comment">// rehash索引, 当rehash不在进行时、值为-1</span></span><br><span class="line">&#125; dict;</span><br></pre></td></tr></table></figure>
+
+<p><code>type</code>属性是一个指向 <code>dictType</code>结构的指针, 每个 dictType结构保存了一簇用于操作特定类型键值对的函数, Redis会为不同类型的字典设置不同类型的特定函数</p>
+<p><code>privdata</code>属性则保存了需要传给那些特定类型函数的可选参数</p>
+<p><code>type</code>和<code>privdata</code>是针对不同类型的键值对, 为创建多态字典设置的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictType</span> &#123;</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="title function_">int</span> <span class="params">(*hashFunction)</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *key)</span>; <span class="comment">// 计算hash值的函数</span></span><br><span class="line">  <span class="type">void</span> *(*keyDup)(<span class="type">void</span> *privdata, <span class="type">const</span> <span class="type">void</span> *key); <span class="comment">// 复制键的函数</span></span><br><span class="line">  <span class="type">void</span> *(valDup)(<span class="type">void</span> *privdata, <span class="type">const</span> <span class="type">void</span> *obj); <span class="comment">// 复制值的函数</span></span><br><span class="line">  <span class="type">int</span> (*keyCompare)(<span class="type">void</span> *privdata, <span class="type">const</span> <span class="type">void</span> *key1, <span class="type">const</span> <span class="type">void</span> *key2); <span class="comment">// 对比键的函数</span></span><br><span class="line">  <span class="type">void</span> (*keyDestructor)(<span class="type">void</span> *privdata, <span class="type">void</span> *key); <span class="comment">// 销毁键的函数</span></span><br><span class="line">  <span class="type">void</span> (*valDestructor)(<span class="type">void</span> *privdata, <span class="type">void</span> *obj); <span class="comment">// 销毁值的函数</span></span><br><span class="line">&#125;dictType;</span><br></pre></td></tr></table></figure>
+
+<p><code>ht</code>属性是一个包含两个项的数组, 数组中的每个项都是一个dictht哈希表, 一般只使用ht[0], ht[1]只会在对ht[0] 进行<code>rehash</code>时使用.</p>
+<p><code>rehashidx</code>记录当前<code>rehash</code>的进度, 若没有在进行<code>rehash</code>, 则值为 <code>-1</code></p>
+<h5 id="完整的dict结构"><a href="#完整的dict结构" class="headerlink" title="完整的dict结构"></a>完整的dict结构</h5><p><img src="/images/image-dict.png" alt="dict结构示意"></p>
+<h4 id="hash算法"><a href="#hash算法" class="headerlink" title="hash算法"></a>hash算法</h4><p>Redis计算hash值的方式如下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hash = dict-&gt;type-&gt;hashFunction(key); <span class="comment">// 使用hash字典设置的hash函数、计算key的hash值</span></span><br><span class="line">index = hash &amp; dict-&gt;ht[x].sizemask; <span class="comment">// 根据sizemask和hash值、计算出hash索引</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="解决键冲突"><a href="#解决键冲突" class="headerlink" title="解决键冲突"></a>解决键冲突</h4><p>当有两个或以上数量的键被分配到hash表数组同一个索引上时, 称为<code>键冲突 collision</code>, Redis的hash表使用 <code>链地址法</code>(<code>separate chaining</code>)来解决冲突, 每个hash表节点上有一个next指针, 多个hash表节点使用next指针构成单链表</p>
+<p><code>dictEntry</code>总是将新增节点添加到链表头部(时间复杂度为 O(1)), 因为没有tail指针.</p>
+<h4 id="rehash"><a href="#rehash" class="headerlink" title="rehash"></a>rehash</h4><p>随着操作的不断进行、hash表维护的键值对会增加或减少, 为了让hash表的负载因子(load factor)维持在一个合理的额范围, 当hash表保存键值对数量太大或太小时, 程序需要对hash表扩容或缩容, 扩容或缩容通过<code>rehash</code>进行, <code>Rehash</code>步骤如下:</p>
+<ol>
+<li>为字典的ht[1]hash表分配空间, hash表的空间大小取决于要执行的操作, 及ht[0]当前包含的键值对的数量(即: ht[0].used 属性值), 若为扩容, ht[1] 为第一个大于等于 (ht[0].used<code>*</code>2)d的*2<sup>n</sup>; 若为缩容, ht[1] 为第一个大于等于 (ht[0].used) 的 2<sup>n</sup> </li>
+<li>将ht[0]中的所有键值对rehash到ht[1]上, <code>rehash</code>是指: 重新计算键的hash值和索引值, 然后将键值对放到ht[1]hash表的对应位置</li>
+<li>当ht[0]包含的所有键值对迁移到ht[1]之后(ht[0]变为空表), 释放ht[0], 将ht[1]设置为 ht[0], 并在 ht[1]新创建一个空白hash表, 为下一次rehash做准备</li>
+</ol>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">eg. 扩容操作:</span><br><span class="line">ht<span class="selector-attr">[0]</span><span class="selector-class">.used</span> = <span class="number">4</span>, <span class="number">4</span>*<span class="number">2</span>=<span class="number">8</span>, 恰好是第一个大于等于<span class="number">4</span>的<span class="number">2</span>的n次方, 所以rehash后、ht<span class="selector-attr">[1]</span>size为<span class="number">8</span></span><br><span class="line"></span><br><span class="line">缩容操作:</span><br><span class="line">ht<span class="selector-attr">[0]</span><span class="selector-class">.used</span> = <span class="number">4</span>, <span class="number">4</span>=<span class="number">2</span>², 恰好是第一个大于等于<span class="number">4</span>的<span class="number">2</span>的n次方, rehash后 ht<span class="selector-attr">[1]</span><span class="selector-class">.size</span> = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="hash表的扩展与收缩"><a href="#hash表的扩展与收缩" class="headerlink" title="hash表的扩展与收缩"></a>hash表的扩展与收缩</h5><p>满足下述任意条件时, 会自动扩展:</p>
+<ol>
+<li><p>server 当前未执行<code>bgsave</code> 或者 <code>bgrewriteaof</code>, 且hash表的负载因子大于等于1</p>
+</li>
+<li><p>server 当前正在执行<code>bgsave</code> 或者 <code>bgrewriteaof</code>, 且 hash表的负载因子大于等于 5</p>
+<p>(持久化时、优先持久化操作)</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load_factor = ht[<span class="number">0</span>].used / ht[<span class="number">0</span>].size; <span class="comment">// 负载因子 = hash表已保存节数量 / hash表大小</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>若<code>bgsave</code>或者<code>bgrewriteaof</code>执行时, Redis需要创建当前服务器进程的子进程, 大多数操作系统使用写时复制(<code>copy-on-write</code>)优化子进程使用效率, 所以子进程存在期间, Server会提高rehash操作的负载因子, 尽可能避免此时rehash, 避免不必要的内存写入操作, 最大限度的节省内存.</strong></p>
+<p><strong>另外:</strong></p>
+<p>hash表的负载因子小于<code>0.1</code>时, 程序会自动缩容</p>
+<h4 id="渐进式rehash"><a href="#渐进式rehash" class="headerlink" title="渐进式rehash"></a>渐进式rehash</h4><blockquote>
+<p>其实, hash表的rehash操作、不是一次集中完成的, 而是多次迭代进行的. 因为若 ht[0]里保存的key有百万计, 甚至更多, 一次rehash导ht[1], 庞大的计算量可能会导致Server一段时间的停止服务.</p>
+</blockquote>
+<p>渐进式rehash步骤如下:</p>
+<ol>
+<li>为ht[1]分配空间, 让字典同时持有ht[0] 和 ht[1]两个hash表</li>
+<li>在字典中维护一个索引计数器变量 <code>rehashidx</code>, 设置为0, 表示<code>rehash</code>已经开始</li>
+<li>在<code>rehash</code>期间, 每次对字典<code>add</code>, <code>del</code>, <code>find</code> or <code>update</code>操作, 程序除了执行指定操作外, 还会顺带将 ht[0] hash表在 <code>rehashidx</code>索引上的所有键值对 rehash 到 ht[1], rehash完成、将<code>rehashidx++</code>.</li>
+<li>随字典操作的不断执行、某个时间点, ht[0]的所有键值对rehash到ht[1], rehash完成、将 <code>rehashidx</code>设为 <code>-1</code>.</li>
+</ol>
+<p>渐进式rehash过程中会维护 ht[0] 和 ht[1] 两个hash表, 字典的删除、查找、更新等操作都会在两个hash表上进行, eg. 查找: 会先在 ht[0] 上查找、若未找到则 到 ht[1] 上查找</p>
+<p>但: 插入操作只会在 ht[1] 上操作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ht = dictIsRehashing(d) ? &amp;d-&gt;ht[<span class="number">1</span>] : &amp;d-&gt;ht[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="字典API"><a href="#字典API" class="headerlink" title="字典API"></a>字典API</h5><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dictCreate</td>
+<td>创建一个新的字典</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictAdd</td>
+<td>将给定键值对添加到字典</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictReplace</td>
+<td>添加or替换</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictFetchValue</td>
+<td>返回给定键的值</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictGetRandomKey</td>
+<td>随机返回一个键值对</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>dictRelease</td>
+<td>释放给定字典, 及字典中包含的所有键值对</td>
+<td>O(N), N为值的数量</td>
+</tr>
+</tbody></table>
+<h4 id="dict总结"><a href="#dict总结" class="headerlink" title="dict总结"></a>dict总结</h4><ul>
+<li>广泛用于实现Redis的各种功能, 包括数据库和hash键</li>
+<li>作为hash表的底层实现, 每个字典有两个hash表、一个平时使用, 一个 rehash 时使用</li>
+<li>使用 <code>Murmurhash2</code> 计算key的hash值</li>
+<li>使用链地址法解决键冲突、同一个索引上的多个键值对连接成一个单链表</li>
+<li>rehash是渐进式完成、非一次性工作</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/24/redis_list/" rel="prev" title="Redis数据结构-链表">
+      <i class="fa fa-chevron-left"></i> Redis数据结构-链表
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">字典实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hash%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">hash表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#hash%E8%A1%A8%E8%8A%82%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">hash表节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E5%85%B8"><span class="nav-number">1.3.</span> <span class="nav-text">字典</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84dict%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.</span> <span class="nav-text">完整的dict结构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hash%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">hash算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E9%94%AE%E5%86%B2%E7%AA%81"><span class="nav-number">3.</span> <span class="nav-text">解决键冲突</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rehash"><span class="nav-number">4.</span> <span class="nav-text">rehash</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hash%E8%A1%A8%E7%9A%84%E6%89%A9%E5%B1%95%E4%B8%8E%E6%94%B6%E7%BC%A9"><span class="nav-number">4.1.</span> <span class="nav-text">hash表的扩展与收缩</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%90%E8%BF%9B%E5%BC%8Frehash"><span class="nav-number">5.</span> <span class="nav-text">渐进式rehash</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E5%85%B8API"><span class="nav-number">5.1.</span> <span class="nav-text">字典API</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dict%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">dict总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

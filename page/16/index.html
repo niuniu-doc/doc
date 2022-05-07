@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/16/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/16/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%A7%A3%E6%9E%90TLB%E5%92%8C%E5%86%85%E5%AD%98%E5%8C%85%E5%90%AB(41%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%A7%A3%E6%9E%90TLB%E5%92%8C%E5%86%85%E5%AD%98%E5%8C%85%E5%90%AB(41%E8%AE%B2)/" class="post-title-link" itemprop="url">解析TLB和内存包含(41讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>机器指令里的地址都是虚拟内存地址、程序里的每一个进程、都有属于自己的内存地址空间<br>可通过地址转换得到最终的实际物理地址. 指令都放在内存里、数据页都在内存、<code>地址转换</code>是一个高频动作、必须保证性能问题</p>
+</blockquote>
+<h4 id="加速地址转换TLB"><a href="#加速地址转换TLB" class="headerlink" title="加速地址转换TLB"></a>加速地址转换TLB</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">从虚拟地址到物理地址的转换、可通过页表来处理、为节约存储空间、使用多级页表</span><br><span class="line">内存访问比Cache慢很多、简单的地址转换按照多级页表的设计会有很性能损失、怎么办呢? -- 加个缓存试试呢 ?</span><br><span class="line"></span><br><span class="line">程序需要的指令、都顺序放在虚拟内存里、执行的指令也是一条条顺序执行的</span><br><span class="line"><span class="title">即:</span>对于指令地址的访问、存在局部性(空间局部性和时间局部性)、需要的数据也是一样的</span><br><span class="line">连续执行<span class="number">5</span>条指令、因为地址都是连续的、所以这<span class="number">5</span>条指令通常在同一个虚拟页里</span><br><span class="line">因此、连续<span class="number">5</span>次的内存地址转换、其实都来自于同一个虚拟页号、转换的结果自然是同一个物理页号、</span><br><span class="line">就可以将之前的内存地址转换缓存下来、不需要反复访问内存来进行内存地址的转换</span><br><span class="line"></span><br><span class="line">于是、专门在CPU里放了一块缓存芯片、称为`TLB`(Translation-Lookaside Buffer)地址变换高速缓存</span><br><span class="line">存放已进行转换过的结果、同样的虚拟地址需进行地址转换的时候、可直接在TLB里查询结果、无需多次访问内存来完成转换</span><br><span class="line"></span><br><span class="line"><span class="title">TLB和CPU的高速缓存类似、可分为指令的TLB和数据的TLB、即:</span> ITLB</span><br><span class="line"> 和 DTLB、也可分级、变成L1、L2这样多层的TLB</span><br><span class="line"></span><br><span class="line">需要脏标记这样的标记位来实现`写回`这样缓存管理策略、也和高速缓存很类似</span><br><span class="line"></span><br><span class="line">为了性能、整个内存转换过程也由硬件来执行、CPU芯片里、封装了内存管理单元MMU(Memory Management Unit)来完成地址转换</span><br></pre></td></tr></table></figure>
+
+<h4 id="安全性和内存保护"><a href="#安全性和内存保护" class="headerlink" title="安全性和内存保护"></a>安全性和内存保护</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">虽然现代操作系统和CPU、有各种权限管控、通过虚拟内存和物理内存的区分、隔离了各个进程</span><br><span class="line"><span class="title">但:</span> 无论CPU这样的硬件还是操作系统这样的软件、都很复杂、难免会被黑客找到各种漏洞</span><br><span class="line"></span><br><span class="line">计算机最底层的安全保护机制称为内存保护、如`可执行空间保护`和`地址空间布局随机化`等</span><br></pre></td></tr></table></figure>
+
+<h4 id="可执行空间保护"><a href="#可执行空间保护" class="headerlink" title="可执行空间保护"></a>可执行空间保护</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">对一个进程使用的内存、只把指令部分设置成<span class="string">`可执行`</span>的、其它、如数据部分、不给予执行权限</span><br><span class="line">因为无论指令还是数据、在<span class="meta">CPU</span>看来、都是二进制的数据、直接将数据部分拿给<span class="meta">CPU</span>、数据解码后、也是合理的指令、即可执行的</span><br><span class="line"></span><br><span class="line">此时黑客们就想到了在程序的数据区、放入一些要执行的指令编码后的数据、让<span class="meta">CPU</span>当成指令去加载、</span><br><span class="line"><span class="meta">CPU</span>就能执行想执行的指令了、对内存空间的执行权限进行控制、就使得<span class="meta">CPU</span>只能执行指令区的代码、</span><br><span class="line">对数据区的内容、即时找到了其它漏洞想装成指令被执行也会因为没权限而被阻挡掉</span><br><span class="line">eg. php进行web开发时、通常会禁用php执行eval函数的执行权限</span><br><span class="line">sql注入攻击</span><br></pre></td></tr></table></figure>
+
+<h4 id="地址空间布局随机化"><a href="#地址空间布局随机化" class="headerlink" title="地址空间布局随机化"></a>地址空间布局随机化</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">内存层面的安全保护核心策略、是在可能有漏洞的情况下进行安全预防、可执行空间保护就是很好的例子、</span><br><span class="line"><span class="title">但内存层面的漏洞还存在其它的可能性:</span></span><br><span class="line">eg. 其它的人、进程和程序修改调特定进程的指令、数据、让当前进程执行特定的指令和数据、造成破坏</span><br><span class="line"></span><br><span class="line">原先、进程的内存布局空间是固定的、任何第三方很容易知道指令在哪里、程序桟、堆、数据又在哪里</span><br><span class="line">为人文破坏创造了很大的便利、`地址空间布局随机化`就是让位置不固定、让内存空间随机分配这些进程里</span><br><span class="line">不同部分所在的额内存空间地址、让破坏者猜不出来、减小破坏性</span><br><span class="line">eg. 密码登录</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组成原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/91427">https://time.geekbang.org/column/article/91427</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/14027542-eb2558be654ee6b2.jpg" alt="图片发自简书App"></p>
+<p>极课时间上的课程是我觉得质量最高的课程、很多课程忍不住想要记下笔记、如果觉得好、还希望大家多支持作者、到极课时间购买课程</p>
+<p>推荐书籍汇总：</p>
+<p>入门书籍：</p>
+<ol>
+<li>程序是怎样跑起来的</li>
+<li>计算机是怎样跑起来的</li>
+</ol>
+<p>深入学习书籍:</p>
+<ol>
+<li>计算机设计与组成: 硬件&#x2F;软件接口</li>
+<li>深入理解计算机系统</li>
+<li>计算机体系结构: 量化研究方法</li>
+</ol>
+<p>课外阅读:</p>
+<ol>
+<li>What Every Programmer Should Kown About Memory</li>
+<li>编码: 隐匿在计算机软硬件背后的语言</li>
+<li>程序员的自我修养: 链接、装载和库</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av24540152/">https://www.bilibili.com/video/av24540152/</a></li>
+</ol>
+<p>阅读推荐</p>
+<p><a target="_blank" rel="noopener" href="https://people.freebsd.org/~lstewart/articles/cpumemory.pdf">https://people.freebsd.org/~lstewart&#x2F;articles&#x2F;cpumemory.pdf</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8C%87%E4%BB%A4(%E7%AC%AC5%E3%80%816%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8C%87%E4%BB%A4(%E7%AC%AC5%E3%80%816%E8%AE%B2)/" class="post-title-link" itemprop="url">计算机指令(第5、6讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、在软硬件接口中、CPU帮我们做了什么事？<br><code>硬件角度</code> CPU就是一个超大规模集成电路、通过电路实现加法、乘法及各种各样的处理逻辑</p>
+<p><code>软件角度</code> CPU就是执行各种计算机指令(机器语言: Machine Language)的逻辑机器</p>
+<p>不同CPU有不同的指令集、所以 电脑上的程序简单的复制下装载到手机上是不能正常运行的、而复制到另外一台计算器上就可以正常运行</p>
+<p><code>存储程序型计算机</code> 程序是由成千上万条指令组成的、但是CPU里不能一直放着所有指令、平时是存储在存储器的、这种指令存储在存储器的计算机叫<code>存储程序型计算机</code></p>
+<p>二、从编译到汇编、代码怎么变成机器码？<br>高级语言 -&gt; 编译 -&gt; 得到汇编代码<br>汇编代码 -&gt; 汇编 -&gt; 机器码(计算机可识别的指令)</p>
+<p>三、解析指令和机器码<br>常见指令:<br><code>算术指令</code> 加减乘除等、在CPU层面、都会变成一条算术指令<br><code>数据传输指令</code> 给变量赋值、在内存里读写数据等、用的都是数据传输类指令<br><code>逻辑类指令</code> 逻辑上的与或非、都是这类指令<br><code>条件分支指令</code> if&#x2F;else 等都是分支类指令<br><code>无条件跳转指令</code> 函数调用</p>
+<p>四、CPU是如何执行指令的？<br>拿Intel CPU来说、里边包含几百亿个晶体管、实际上指令执行起来非常复杂、对软件程序员来说、只需要知道指令是顺序执行就可以了</p>
+<p>CPU其实是一堆寄存器组成的、而寄存器就是CPU内部由多个触发器(Flip-Flop)或者锁存器(Latches) 组成的简单电路</p>
+<p>N个寄存器或者锁存器可以组成一个N位(bit) 的寄存器、能够保持N位的数据、eg. 我们使用64位Intel的服务器、寄存器就是64位的</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e91a7da79b52f77c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>CPU中不同功能的寄存器会有很多、有三种比较特殊的:<br><code>PC寄存器</code> <code>Program Counter Register</code>， 也叫<code>地址寄存器</code> <code>Instruction Address Register</code> 用来存放<code>下一条</code>需要执行的计算机指令的内存地址</p>
+<p><code>指令寄存器</code> <code>Instruction Register</code> 用来存放<code>当前</code>正在执行的指令</p>
+<p><code>条件码寄存器</code> <code>Status Register</code> 用里边的标记位<code>Flag</code>, 存放CPU进行算术或者逻辑运算的结果</p>
+<p>除了这些特殊的寄存器、CPU还有更多用来存储数据和内存地址的寄存器. 这样的寄存器每类通常有很多、会根据它们的存放内容取名字、eg. <code>整数寄存器</code>, <code>浮点数寄存器</code>, <code>向量寄存器</code>和<code>地址寄存器</code> 等，有些既可以存放数据、也可以存放地址, 我们称为 <code>通用寄存器</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-36b4838173fa42aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>实际上、程序运行的时候、CPU会根据PC寄存器里边的地址、从内存把需要执行的指令读取到寄存器里边执行、然后根据指令长度自增、读取下一条指令, 可以看到指令在内存中是连续保存的、也会顺序加载<br>而有些特殊指令、eg. <code>J指令</code>， 也就是<code>跳转指令</code> 会修改<code>PC</code>寄存器里边的地址值、这样下一条要执行的指令就不是才能够内存顺序加载的了、因此才能使用 <code>if...else</code> &#x2F; <code>while</code> &#x2F; <code>for</code> 等语句</p>
+<p>五、周期概念<br><code>指令周期</code> <code>Fetch</code>-&gt;<code>Decode</code> -&gt; <code>Execute</code> (获取指令 -&gt; 指令译码 -&gt; 执行指令 ) 的循环称为一个指令周期(<code>Instruction Cycle</code>)</p>
+<p><code>CPU周期</code> <code>Machine Cycle</code> CPU的内部操作很快、但是内存访问速度很慢、每一条指令都需要从内存里加载而来、把从内存中读取一条指令的最短时间称为一个<code>CPU周期</code></p>
+<p>一个<code>指令周期</code> 包含多个 <code>cpu周期</code>,<br>一个<code>cpu周期</code> 包含多个 <code>时钟周期</code></p>
+<p>六、建立数据通路</p>
+<blockquote>
+<p>数据通路就是我们的处理器单元、通常由两类元件组成：<br>1.操作元件(组合逻辑元件) 其实就是ALU、在特定输入下、根据组合电路的逻辑生成特定输出<br>2.存储元件: 状态元件 eg. 计算过程中用到的寄存器、无论是通用寄存器还是状态寄存器、都是存储元件<br>通过数据总线将操作元件和存储元件连接、就可以完成数据的存储和传输、就是所谓的建立数据通路</p>
+</blockquote>
+<p>  七、CPU所需要的硬件电路</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> ALU: 无状态的、根据输入得到输出结果的电路</span><br><span class="line"><span class="bullet">2.</span> 寄存器：能够进行状态读写的电路元件. 常见的有 锁存器(Latch)， D触发器(Data/Delay Flip-flop) 电路</span><br><span class="line"><span class="bullet">3.</span> 自动实现pc寄存器自增的电路</span><br><span class="line"><span class="bullet">4.</span> 译码电路: 实现对指令进行decode、对拿到的地址去获取对应的数据或者指令等</span><br></pre></td></tr></table></figure>
+
+<p><code>组合逻辑电路</code> 给定输入、得到固定输出. 无法完成复杂工作<br><code>时序逻辑电路</code> 解决了<code>自动运行</code>和<code>存储</code>问题</p>
+<blockquote>
+<p>时钟信号: 通过一个电磁电路实现、不断切换信号</p>
+</blockquote>
+<blockquote>
+<p>反馈电路: 把当前电路的输出信号作为输入信号、再返回到当前电路</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AF%BE%E5%90%8E%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AF%BE%E5%90%8E%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">课后问题汇总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、图灵机和冯.诺依曼机是不同的计算机吗？</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">简单来说: 图灵机更侧重于计算抽象、后者更侧重于硬件抽象</span></span><br></pre></td></tr></table></figure>
+
+<p>二、time指令的返回分表代表什么?</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">real</span> <span class="type">time</span>: 时钟时间(Wall clock <span class="type">time</span>), 进从开始到结束所用的实际时间、包括其它进程使用的时间片和等待io完成的时间</span><br><span class="line"></span><br><span class="line"><span class="keyword">user</span> <span class="type">time</span>: 指进程执行用户态代码(核心之外)使用的时间、执行此进程实际消耗的CPU时间、其它进程和此进程阻塞时间不包含在内</span><br><span class="line"></span><br><span class="line">sys <span class="type">time</span>: 指进程在内核态消耗的cpu时间</span><br><span class="line"></span><br><span class="line">为什么<span class="keyword">user</span>+sys &gt; <span class="type">real</span> ?</span><br><span class="line"><span class="number">1.</span> <span class="keyword">user</span> + sys 为实际的CPU时间、若有多个线程、则可能出现、<span class="keyword">user</span>+sys包含子进程的时间</span><br><span class="line"><span class="number">2.</span> 在多处理器系统上、可能出现、因为多进程或者线程可并行处理</span><br><span class="line"><span class="number">3.</span> <span class="type">time</span>的输出是由几个不同的系统调用得到的</span><br><span class="line"><span class="keyword">user</span> <span class="type">time</span>和sys <span class="type">time</span>是从wait(<span class="number">2</span>) 或 <span class="type">time</span>(<span class="number">2</span>) 得到的(根据系统不同决定)</span><br><span class="line"><span class="type">real</span> <span class="type">time</span>是从 g<span class="string">e&#x27;t&#x27;</span>timeofday中结束时间和起始时间相减得到</span><br></pre></td></tr></table></figure>
+
+<p>三、时钟周期是什么</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>四、为什么程序无法在linux和win下同时运行？</p>
+<blockquote>
+<p>因为两个系统下的可执行文件的格式不同</p>
+</blockquote>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-g 得到的是目标文件</span><br><span class="line">-o 得到的是可执行文件</span><br><span class="line"></span><br><span class="line">c -&gt; 汇编 -&gt; 机器码</span><br><span class="line">c-&gt;汇编: 编译、汇编、链接 <span class="number">3</span>部分组成</span><br><span class="line">汇编-&gt; 机器码: 通过装载器Loader把可执行文件<span class="keyword">Load</span>到内存中、CPU从内存读取指令和数据、开始真正的执行程序</span><br><span class="line"></span><br><span class="line">目标文件和可执行文件dump得到的内容差不多、因为linux下、都是使用elf(executable and linkable file format)的格式</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-f3fd1f4b38b519c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-39279b8724e3dacf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ELF 文件格式信息:</span><br><span class="line"><span class="number">1.</span> text <span class="keyword">Section</span>: 代码段 用来保存程序的代码和指令</span><br><span class="line"><span class="number">2.</span> .data <span class="keyword">Section</span>: 数据段 用来保存程序里边设置好的初始化数据信息</span><br><span class="line"><span class="number">3.</span> .rel.text <span class="keyword">Section</span>: 重定向表Relocation <span class="keyword">Table</span> 保留的是当前文件里、哪些跳转地址是未知的</span><br><span class="line"><span class="number">4.</span> .symtab <span class="keyword">Section</span>: 符号表 保留了当前文件里定义的函数和对应的地址信息</span><br><span class="line">连接器会扫描所有的输入目标文件、把所有符号表里的信息收集起来、构成一个全局的符号表、把所有不确定要跳转地址的代码、根据符号表里存储的地址、进行一次修正, 最后 把所有的目标文件的对应段进行一次合并、变成了最终的可执行代码</span><br></pre></td></tr></table></figure>
+
+<p>五、java这样使用虚拟机的编程语言里、程序是如何装载到内存的 ？</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">jvm</span>是上层应用、无需考虑物理分页、一般是直接考虑对象本身的空间大小、物理硬件统一管理由承载<span class="keyword">jvm</span>的操作系统来解决</span><br></pre></td></tr></table></figure>
+
+<p>六、CPU一直在取下一条指令、为什么还有满载和idle空闲状态呢？</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BF%A1%E6%81%AF%E5%AD%98%E5%82%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BF%A1%E6%81%AF%E5%AD%98%E5%82%A8/" class="post-title-link" itemprop="url">计算机信息存储</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>大多数计算机使用8位的块、或者字节byte 作为最小的可寻址的内存单位、而不是访问内存中独立的位、机器级的程序将内存视为一个很大的字节数组、称为 虚拟内存(<code>virtual memory</code>), 内存的每个字节由一个唯一的数字来标识、所有可能地址的集合称为 虚拟地址空间(<code>virtual address space</code>)</p>
+</blockquote>
+<blockquote>
+<p>每个计算机都有一个字长 word size, 表明指针数据的标称大小, 对于宇哥w位的机器而言、虚拟地址的范围是 0~2<sup>m-1</sup></p>
+<p>32位字长限制虚拟地址空间为4GB、64位为16EB(1.84*10<sup>19</sup>)字节</p>
+<p>大多数64位机器可以运行32位的程序、</p>
+<p>eg. gcc -m32 prog.c 编译出来的程序可在32位机器上运行、</p>
+<p>​     gcc -m64 prog.c 编译出来只可在64位机器上运行</p>
+<p>so. 将程序称为32位或者64位程序时、区别在于程序是如何编译的、而不是运行时机器的类型</p>
+</blockquote>
+<p><strong>为了避免依赖大小和不同编译器设置带来的差异、ISO C99标准引入了 int32_t 和 int64_t 两种固定长度的数据类型</strong></p>
+<blockquote>
+<p>大端法: 高地址存储高位数</p>
+<p>小端法则反之</p>
+<p>对大多数程序来说、字节顺序完全不可见、但:</p>
+<p>A机器产生的数据通过网络发送到B机器时、B机器会按照字节的内部表示来进行转换、可能会出问题、eg. add %eax, 0x2000b43(%rip) 、字节顺序就会导致数据解析错误</p>
+<p>so. 网络应用程序的代码必须遵守已建立的关于字节顺序的规则</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E6%BC%AB%E8%B0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E6%BC%AB%E8%B0%88/" class="post-title-link" itemprop="url">计算机概念漫谈</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>总线</code>: 一组电子管道, 携带信息字节、并负责在各个组件间传递</p>
+<blockquote>
+<p>每个IO设备通过一个控制器或者适配器与IO总线相连</p>
+<p>控制器和适配器的区别是: 封装方式的不同、但功能都是在IO总线和IO设备之间传递信息</p>
+<p>控制器: IO设备本身或者系统的主板上的芯片组</p>
+<p>适配器: 是一块插在主板槽上的卡</p>
+</blockquote>
+<blockquote>
+<p>主存: 是一个临时性的存储设备、在处理器执行程序时、用来存放程序和程序处理的数据</p>
+<p>从物理上来说、主存是由一组<code>动态随机存取存储器</code>芯片组成的</p>
+<p>从逻辑上来说、存储器是一个线性的字节数组、每个字节有唯一地址(数组索引)、地址从0开始、</p>
+</blockquote>
+<blockquote>
+<p>处理器: 中央处理单元CPU、简称处理器、是解释(或执行)存储在主存中指令的引擎、</p>
+<p>处理器的核心是<code>一个大小为1个字的存储设备(或寄存器)</code>、即: <code>程序计数器PC</code></p>
+<p>在任何时刻、PC都指向主存中的某条机器语言指令(即: 含有该指令的地址)</p>
+<p>处理器从程序计数器指向的内存处读取指令、解释指令中的位、执行该指令的简单操作、然后更新PC, 使其指向下一条指令(不一定和内存中刚刚执行的指令相邻、比如 jump)</p>
+<p>这样的简单操作不多、围绕 主存、寄存器文件 和 算术&#x2F;逻辑单元 ALU 进行. eg. 如下操作</p>
+<p><code>加载</code>: 从<code>主存</code>复制一个字节或者一个字到<code>寄存器</code>、以覆盖寄存器原来的内容</p>
+<p><code>存储</code>: 从<code>寄存器</code>复制一个字节或者一个字到<code>主存</code>的某个位置、以覆盖这个位置上原来的内容</p>
+<p><code>操作</code>: 把两个寄存器的内容复制到<code>ALU</code>, ALU对这两个寄存器的字进行算术运算、并将结果存放到一个寄存器中、覆盖该寄存器原来的内容</p>
+<p><code>跳转</code>: 从指令本身抽取一个字、并将这个字复制到程序计数器PC中、以覆盖PC中原来的值</p>
+</blockquote>
+<blockquote>
+<p>处理器的指令架构集描述的是每条机器代码指令的效果</p>
+<p>微体系结构描述的是处理器实际上如何实现的</p>
+</blockquote>
+<p>处理器从寄存器文件中读数据比从主存中读取几乎要快100倍、所以系统设计者采用了更小更快的存储设备 高速缓存存储器 cache 来存放近期需要的数据</p>
+<blockquote>
+<p>位于处理器芯片上的L1高速缓存 容量可以达到数万字节、访问速度几乎和访问寄存器问你件一样快</p>
+<p>一个容量为数十万到数百万字节的L2高速缓存 通过一条特殊的总线连接到处理器、进程访问L2高速缓存的时间要比访问L1高速缓存的时间长5倍、但仍比访问主存快5~10倍</p>
+<p>L1和L2高速缓存是使用 静态随机访问存储器SRAM的硬件技术实现的</p>
+<p>新的系统出现了L3缓存、系统可以获得一个更大的存储器、同时访问素的也更快、是利用了高速缓存的局部性原理、使程序具有访问局部区域里的数据和代码的趋势、通过让高速缓存里存放可能经常性访问的数据、</p>
+</blockquote>
+<blockquote>
+<p>程序不会直接操作硬件、而是依靠操作系统提供的服务</p>
+<p>可以将操作系统看成应用程序和硬件之间插入的一层软件</p>
+<p>操作系统: 1.防止硬件被失控的应用程序滥用 2.向应用程序提供简单一致的机制来控制硬件设备(通过 进程、虚拟内存、文件来实现)</p>
+</blockquote>
+<p>进程:</p>
+<blockquote>
+<p>并发运行: 一个进程的指令和另一个进程指令是交错执行的、大多数系统中可以运行的进程数多于CPU个数、传统系统 一个时刻只能执行一个程序、多核处理器可以同时执行多个程序</p>
+<p>无论是单核还是多核处理器、一个CPU看上去都像是在并发执行多个进程、是通过进程间切换实现的。这种交错执行的机制称为 上下文(包括PC、寄存器文件当前值及主存内容等)切换</p>
+<p>从一个进程到另一个进程的切换是操作系统内核管理的, 内核是操作系统代码常驻主存部分</p>
+<p>注意: 内核不是一个独立的奖金池、而是系统管理全部进程所用代码和数据结构的集合</p>
+</blockquote>
+<p>线程:</p>
+<blockquote>
+<p>进程实际上由多个线程执行单元组成、每个线程运行在进程上下文中、并共享同样的代码和全局数据</p>
+</blockquote>
+<p>虚拟内存;</p>
+<blockquote>
+<p>虚拟内存是一个抽象概念、为每个进程提供了独占使用主存的假象、每个进程看到的内存是一致的、称为虚拟地址空间</p>
+<p>Linux中、地址空间的最上边的区域是给操作系统代码和数据的、底部存放用户进程的代码和数据、地址从下-&gt; 上增加</p>
+<p>每个进程看到的虚拟地址空间由大量准确定义的区构成、每个区有专门的功能(下述从最低地址向上)</p>
+<ul>
+<li>程序代码和数据: 对所有进程来说、代码从同一个固定地址开始、接着是和C全局变量对应的数据位置</li>
+<li>堆: 代码和数据区后紧随着是运行时 堆、代码和数据区在进程开始运行时就指定了大小、堆是在运行时可动态扩展和收缩的空间</li>
+<li>共享库: 大概地址空间的中间是一块用来存放像C标准库和数学库这样的共享库代码和数据的区域</li>
+<li>桟: 位于用户虚拟地址顶部的是用户桟、编译器用它来实现函数调用</li>
+<li>内存虚拟内存: 不允许应用程序读写这个区域的内容或者直接调用年内和定义的函数</li>
+</ul>
+</blockquote>
+<p>文件:</p>
+<blockquote>
+<p>文件就是文字序列、每个io设备、包括磁盘、键盘、显示器 甚至网络都可以看成文件</p>
+<p>系统中的输出输入都是通过Unix io的系统函数调用读写文件来实现的</p>
+</blockquote>
+<p>Amdahl定律:</p>
+<blockquote>
+<p><code>Amdahl定律</code>: 对系统某部分性能的提升取决于该部分的重要性和加速程度、</p>
+<p>eg. 某系统初始耗时 60%、加速比例 k&#x3D;3 则加速为 1&#x2F;((1-0.6)+0.6&#x2F;3) &#x3D; 1.67倍</p>
+</blockquote>
+<p>并发:</p>
+<blockquote>
+<p>线程级并行:</p>
+<p>1.多个CPU</p>
+<p>2.超线程 又称:同时多线程、是一项允许一个CPU执行多个控制流的技术, 它涉及CPU某些硬件有多个备份、eg. 程序计数器和寄存器文件、而其它的硬件只有一份、eg. 执行浮点数运算的单元, 常规的处理器大约需要20000个时钟周期做线程切换、而超线程的处理器可以在单个周期的基础上决定执行哪个线程</p>
+<p>指令级并行</p>
+<p>早期处理器一个指令需要多个时钟周期来执行、现代处理器可以同时执行多条指令的属性称为: 指令级并行</p>
+<p>单指令、多数据并行</p>
+<p>现代处理器允许一条指令参数多个并行执行的操作、称为: 单指令、多数据并行 即:SIMD并行</p>
+<p>提高这些SIMD指令是为了提高处理影像、声音和视频数据应用的执行速度、虽然有些编译器会试图从C程序中自动抽取SIMD并行性、但更可靠的方法是用编译器支持的特殊向量数据类型来写程序、eg. GCC 就支持向量数据类型</p>
+</blockquote>
+<p>几个抽象:</p>
+<blockquote>
+<p>文件是对IO设备的抽象</p>
+<p>虚拟内存是对程序存储器的抽象</p>
+<p>进程是对一个正在运行的程序的抽象</p>
+<p>虚拟机是对整个计算机的抽象、包括 操作系统、处理器和程序</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%B6%85%E7%BA%BF%E7%A8%8B%E5%92%8CSIMD(27%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%B6%85%E7%BA%BF%E7%A8%8B%E5%92%8CSIMD(27%E8%AE%B2)/" class="post-title-link" itemprop="url">超线程和SIMD(27讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>回顾</strong></p>
+<blockquote>
+<p><code>超标量</code>: 可以让取指令及指令译码并行进行、</p>
+<p><code>VLIW</code>: 可以搞定指令先后依赖关系、使得一次取一个指令包</p>
+</blockquote>
+<p>最后两个提升CPU性能的设计: <code>超线程</code> 和 <code>SIMD(单指令多数据流)</code></p>
+<h4 id="超线程"><a href="#超线程" class="headerlink" title="超线程"></a>超线程</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">奔腾<span class="number">4</span>处理器失败的重要原因: <span class="meta">CPU</span>的流水线级数太深、高达<span class="number">20</span>级、而后期Prescott更是达到了<span class="number">31</span>级、超长流水线、使得各种冒险、并发的方案都用不上</span><br><span class="line"></span><br><span class="line">解决冒险、提升并发的方案, 本质上是一种 <span class="string">`指令级并行(Instruction-level parallelism)`</span></span><br><span class="line">即: <span class="meta">CPU</span> 想要在同一个时间、并行的执行两条指令、而代码原本是有先后顺序的、流水线太深的话、之前的分支预测、乱序执行等优化方式都无法起到很好的效果、</span><br><span class="line"></span><br><span class="line"><span class="number">2002</span>年底、Pentium4的<span class="meta">CPU</span>、第一次引入了超线程(Hyper-Threading技术)</span><br><span class="line"><span class="string">`超线程`</span>: 既然<span class="meta">CPU</span>运行在代码层面有前后依赖关系的指令、会遇到各种冒险问题、如果运行完全独立的程序呢? 指令间是没有依赖关系的、那么跟多个<span class="meta">CPU</span>运行不同任务、或者多进程、多线程技术有什么区别呢 ?</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>.多个<span class="meta">CPU</span>上运行不同的程序、单个<span class="meta">CPU</span>核心里切换运行不同的线程任务、在同一时间点上、其实一个物理的<span class="meta">CPU</span>核心只运行一个线程的指令、所以, 并没有真正做到指令级并行</span><br><span class="line"><span class="number">2</span>. 超线程 是把一个物理<span class="meta">CPU</span>核心、伪装成两个逻辑<span class="meta">CPU</span>、这个<span class="meta">CPU</span>会在硬件层面增加很多电路、使得我们可以在一个<span class="meta">CPU</span>核心内部、维护两个不同线程的指令状态信息</span><br><span class="line">eg. 在一个物理<span class="meta">CPU</span>核心内部、有双份PC寄存器、指令寄存器及条件码寄存器、可以维护两条并行指令的状态、在外面看起来、好像有两个逻辑层面的<span class="meta">CPU</span>同时在运行、也叫<span class="string">`同时多线程`</span>(Simultanneous Multi-Threading, 简称SMT)技术</span><br><span class="line"></span><br><span class="line">但: 在<span class="meta">CPU</span>其它的功能组件上、eg. 指令译码器和ALU 依然只有一份、因为超线程并不真正运行两个指令、它的目的在于 一个线程A的指令、在流水线停顿的时候、让线程B与执行、利用此时<span class="meta">CPU</span>译码器和ALU的空闲来处理、提高<span class="meta">CPU</span>利用率</span><br><span class="line"></span><br><span class="line">通过很小的<span class="meta">CPU</span>代价、实现了同时运行多个线程的效果、通常只要在<span class="meta">CPU</span>核心添加<span class="number">10</span>%左右的逻辑功能、增加可以忽略不计的晶体管数量、就可以实现、但同样只能应用在特殊的额应用场景下(线程等待时间较长)</span><br><span class="line">eg. 需要对很多请求的数据库应用、就很适合、各个指令都需要等待访问内存数据，<span class="meta">CPU</span>计算并未跑满、但当前指令往往要停顿在流水线上、等待内存数据返回、这时、让<span class="meta">CPU</span>里的各个功能单元、处理另一个<span class="built_in">db</span>查询的案例就很好</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-3b63d476f142a99f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="SIMD-如何加速矩阵算法"><a href="#SIMD-如何加速矩阵算法" class="headerlink" title="SIMD: 如何加速矩阵算法"></a>SIMD: 如何加速矩阵算法</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">SIMD:</span> 单指令多数据流(Single <span class="keyword">Instruction </span><span class="keyword">Multiple </span>Data)</span><br><span class="line"><span class="symbol">SISD:</span> 单指令单数据(Single <span class="keyword">Instruction </span>Single Data)</span><br><span class="line">多核CPU可以实现MIMD(<span class="keyword">Multiple </span><span class="keyword">Instruction </span><span class="keyword">Multiple </span>Data)</span><br><span class="line"></span><br><span class="line">为什么SIMD指令可以提高代码执行效率呢? </span><br><span class="line"><span class="number">1</span>.因为SIMD在获取数据和执行指令的时候都是并行的、从内存读数据的时候、SIMD是一次性读多个数据</span><br><span class="line">Intel在引入SSE指令集的时候、在CPU里添加了<span class="number">8</span>个<span class="number">128</span>Bits的寄存器、即 <span class="number">16</span>Bytes、一个寄存器一次性可以加载<span class="number">4</span>个整数、比起循环加载、时间就节省了</span><br><span class="line"><span class="number">2</span>. 指令执行层面、<span class="number">4</span>个整数加法、相互之间完全无依赖、也就没有冒险问题要处理、有足够多的FU即可并行执行、这个加法就是<span class="number">4</span>路同时并行的、也会节省时间</span><br><span class="line"></span><br><span class="line">基于SIMD的向量计算指令、正是在Intel发布Pentium处理器的时候、被引入的指令集、当时的指令集叫 `MMX`, 即: `Matrix Math <span class="keyword">eXtensions`的英文缩写、中文名字叫 </span>矩阵数学扩展</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-f32a5c0c67a98d4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>超线程技术是线程级并行的解决方案、很多场景下不一定能带来性能的提升</p>
+<p>SIMD是指令级并行的解决方案、在处理向量计算的情况下、同一个向量的不同维度之间的计算是相互独立的、</p>
+<p>两者都优化了CPU的使用</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98(37~38%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98(37~38%E8%AE%B2)/" class="post-title-link" itemprop="url">高速缓存(37~38讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="为什么需要高速缓存"><a href="#为什么需要高速缓存" class="headerlink" title="为什么需要高速缓存"></a>为什么需要高速缓存</h4><blockquote>
+<p>按照摩尔定律、CPU的访问速度每18个月便会翻一番、相当于每年增长60%、内存的访问速度也在增长、但只有7%左右、使内存和CPU的性能差距不断拉大. 现在一次内存的访问需要120个CPU周期、即: 访问速度有120倍的差距<br>为了弥补两者的性能差异、真实的把CPU使用起来、现代CPU引入了高速缓存</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-63ffb060446bf2df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="CPU和内存的性能差距会越来越大.png"></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">从CPU <span class="keyword">Cache </span>被加入CPU开始、内存中的指令、数据会先加载到L1</span><br><span class="line">-L3 <span class="keyword">Cache中、而不是直接由CPU访问内存去拿、</span></span><br><span class="line"><span class="keyword"></span>在<span class="number">95</span>%的情况下、CPU只需要访问L1-L3 <span class="keyword">Cache、从里边读取指令和数据、无需访问内存</span></span><br><span class="line"><span class="keyword"></span>注意: CPU <span class="keyword">Cache不是单存概念上的Cache(eg. </span>之前说的以内存作为硬盘的缓存)、而是指特定的由<span class="keyword">SRAM组成的物理芯片</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">CPU从内存中读取数据到CPU <span class="keyword">Cache的过程中、是一小块、一小块读取的、不是按照单个数组元素读取的、</span></span><br><span class="line"><span class="keyword"></span>这样一小块一小块的数据、在CPU <span class="keyword">Cache里、称为 </span>`<span class="keyword">Cache </span>Line`(缓存块)</span><br><span class="line">通常Intel的服务器或者PC里、<span class="keyword">Cache </span>Line的大小通常是<span class="number">64</span>字节</span><br></pre></td></tr></table></figure>
+
+<h4 id="Cache的数据结构和读取过程是什么样的"><a href="#Cache的数据结构和读取过程是什么样的" class="headerlink" title="Cache的数据结构和读取过程是什么样的"></a>Cache的数据结构和读取过程是什么样的</h4><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">现代CPU在数据读取时、无论数据是否已经存储在<span class="keyword">Cache</span>中、都会先访问<span class="keyword">Cache</span>、</span><br><span class="line">只有<span class="keyword">Cache</span>中找不到时、才会访问内存、并且将读到的数据写入<span class="keyword">Cache</span>中、根据时间局部性原理、这样CPU花在等待内存访问上的时间就会大大缩短</span><br><span class="line">通常在基准测试和实际场景中、CPU <span class="keyword">Cache</span>的命中率可以达到<span class="number">95</span>%以上</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-665111aecb317bc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="与应用相似的架构.png"></p>
+<p>思考: 那么CPU是如何知道要访问的内存数据、存储在Cache的哪个位置呢 ?</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CPU访问内存数据、是一小块一小块数据来读取的、对于读取内存中的数据、首先拿到的是数据所在的`内存块(Block)`的地址</span><br><span class="line">而直接映射<span class="built_in">Cache</span>(Direct Mapped Cache)采用的策略就是确保任何一个内存块的地址、</span><br><span class="line">始终映射到一个固定的CPU Cache地址(Cache Line), 而这个映射关系、通常用<span class="built_in">mod</span>(求余)计算来实现</span><br><span class="line">eg. 将主内存分成<span class="number">0</span>~<span class="number">31</span>共<span class="number">32</span>个块、共有<span class="number">8</span>个缓存块、用户需要访问第<span class="number">21</span>号内存块、</span><br><span class="line">若<span class="number">21</span>号内存块内容在缓存块中的话、一定在<span class="number">5</span>号缓存块(<span class="number">21%</span><span class="number">8</span> = <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-0e3d70cab102d106.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cache采用mod方式、将内存块映射到对应的CPU Cache.png"></p>
+<p>思考:<br>现在13号、5号和21号都应该在5号缓存块中、那如何区分、当前缓存块中是几号内存对应的数据呢 ？</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">对应的缓存块会存储一个组标记、记录当前缓存块内存储的数据对应的内存块、</span><br><span class="line">除组标记外、缓存块中还有两个数据<span class="operator">:</span></span><br><span class="line"><span class="number">1.</span> 从主内存中加载来的实际存放的数据、</span><br><span class="line"><span class="number">2.</span>有效位<span class="operator">:</span> 用来标记对应的缓存块中的数据是否是有效的、确保不是机器刚启动时的空数据<span class="operator">.</span> 有效位为<span class="number">0</span>时、<span class="variable">CPU</span>会直接访问内存、重新加载数据</span><br><span class="line"><span class="variable">CPU</span>在读取数据的时候、不是要读取医政股<span class="built_in">Block</span>、只读取一个需要的整数、称为<span class="variable">CPU</span>的一个字<span class="built_in">Word</span></span><br><span class="line">具体是哪个字、就用这个字在整个<span class="built_in">Block</span>中的位置来决定、这个位置称为偏移量<span class="built_in">Offset</span></span><br><span class="line">而内存地址对应到<span class="variable">Cache</span> <span class="built_in">Line</span>里的数据结构则多了一个有效位和对应的数据</span><br><span class="line">由 索引 <span class="operator">+</span> 有效位 <span class="operator">+</span> 组标记 <span class="operator">+</span> 数据组成</span><br><span class="line"></span><br><span class="line">若<span class="operator">:</span> 一个内存中的数据已经在<span class="variable">Cache</span>中、访问步骤为<span class="operator">:</span></span><br><span class="line"><span class="number">1.</span> 根据内存地址的地位、计算在<span class="variable">Cache</span>中的索引</span><br><span class="line"><span class="number">2.</span> 判断有效位、确认<span class="variable">Cache</span>中的数据是有效的</span><br><span class="line"><span class="number">3.</span> 对比内存访问地址的高位、和<span class="variable">Cache</span>中的组标记、确认<span class="variable">Cache</span>中的数据就是要访问的内存数据、从<span class="variable">Cache</span> <span class="built_in">Line</span>读取对应数据块</span><br><span class="line"><span class="number">4.</span> 根据内存地址的<span class="built_in">Offset</span>位、从<span class="variable">Data</span> <span class="built_in">Block</span>中读取所需内容</span><br><span class="line">若在<span class="number">2</span>、<span class="number">3</span>步骤中<span class="variable">CPU</span>发现数据不是要访问的数据、<span class="variable">CPU</span>会访问内存、将<span class="built_in">Block</span> <span class="variable">Data</span>更新到<span class="variable">Cache</span> <span class="built_in">Line</span>中、同时更新对应的有效位和组标记的数据</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bdbd1ecdec2570de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存地址到Cache Line的关系.png"></p>
+<p>思考:volitile 关键字的作用 ?</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">一种错误理解是 当成锁、认为类似sychronized 关键字、不同的线程对于特定变量的访问会加锁</span><br><span class="line">另一种误解是 当成原子化的操作机制、认为加了volitile、对于变量的自增操作就变成原子性的了</span><br><span class="line"></span><br><span class="line">其实: volitile 最核心的知识点要关系到<span class="keyword">Java内存模型(Java </span>Memory Model)上</span><br><span class="line">虽然<span class="keyword">JMM只是Java虚拟机这个进程级虚拟机里的一个内存模型、但这个内存模型和CPU、高速缓存和主内存组合在一起的硬件体系很相似</span></span><br><span class="line"><span class="keyword"></span>虽然<span class="keyword">Java内存模型是一个隔离了硬件实现的虚拟机内的抽象模型、但给了一个很好的缓存同步问题的示例.</span></span><br><span class="line"><span class="keyword"></span>即: 若我们的数据在不同的线程或者CPU核心里去更新、因为不同的线程或者CPU核有各自的缓存、有可能在A线程的更新<span class="keyword">B线程看不到</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="CPU高速缓存的写入"><a href="#CPU高速缓存的写入" class="headerlink" title="CPU高速缓存的写入"></a>CPU高速缓存的写入</h4><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">现在使用的Intel CPU、通常都是多核的、每一个CPU核里、都有独立属于自己的L1、L2的<span class="keyword">Cache</span> 和 多个CPU共用的L3的<span class="keyword">Cache</span>、主内存</span><br><span class="line">因为CPU <span class="keyword">Cache</span>的访问速度要比主内存快很多、L1/L2 <span class="keyword">Cache</span>的速度也比L3 快、所以、CPU都是尽可能的从CPU <span class="keyword">Cache</span>中获取数据、而不是每次从主内存获取</span><br><span class="line"></span><br><span class="line">Java内存模型里、每个线程都有自己的线程桟、每次数据读取其实是从本地线程桟的<span class="keyword">Cache</span>副本里读取、而不是主内存</span><br><span class="line">若对数据只读还好、但事实是读写同时存在的、这时思考两个问题:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>写Cache的性能也比写主内存快、那写入时应该写主内存还是Cache ?<br>2.若直接写主内存、Cache里的数据是否会失效呢 ?</li>
+</ol>
+</blockquote>
+<h4 id="写直达-Write-Through"><a href="#写直达-Write-Through" class="headerlink" title="写直达 Write-Through"></a>写直达 Write-Through</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-daf2deb032fab327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如上图、最简单的一种写入策略, 写直达. 在这个策略里、每一次数据都要写到主内存里、</span><br><span class="line">写入前, 先判断数据是否在<span class="keyword">Cache</span>中、若在、先更新<span class="keyword">Cache</span>、再写入主内存; 若不在、只更新主内存</span><br><span class="line">缺点是: 无论数据是否在<span class="keyword">Cache</span>里、都需要把数据写到主内存、效率较低</span><br><span class="line">类似volatile关键字、始终把数据同步到主内存里</span><br></pre></td></tr></table></figure>
+
+<h4 id="写回-Write-back"><a href="#写回-Write-back" class="headerlink" title="写回 Write-back"></a>写回 Write-back</h4><p><img src="https://upload-images.jianshu.io/upload_images/14027542-ead03578a6a2f4d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="image.png"></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">不把写入同步到主内存、只写CPU <span class="keyword">Cache呢？是否可行 </span>？</span><br><span class="line">如上图所示就是只写<span class="keyword">Cache的策略 </span>-&gt; 每次只把数据写回<span class="keyword">Cache、只有在CPU </span><span class="keyword">Cache里的数据要被替换的时候、才将数据写回主内存</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">过程: 若发现要写回的数据就在<span class="keyword">Cache中、只更新Cache里的数据即可、同时标记Cache里这个Block的数据是Dirty(与主存不一致)</span></span><br><span class="line"><span class="keyword"></span>若发现要写入的数据对应的<span class="keyword">Cache </span><span class="keyword">Block里、放的是别的内存地址的数据</span></span><br><span class="line"><span class="keyword"></span>check下数据是否是<span class="keyword">Dirty、</span></span><br><span class="line"><span class="keyword"></span>若是、先写回主内存然后把当前要写入的数据写入到<span class="keyword">Cache、同时把Cache </span><span class="keyword">Block标记成Dirty</span></span><br><span class="line"><span class="keyword"></span>若不是、直接将数据写入<span class="keyword">Cache、然后把Cache </span><span class="keyword">Block标记为Dirty</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">在使用`写回`这个策略的时候、加载内存数据到<span class="keyword">Cache里的时候、也要多一步同步脏Cache的动作</span></span><br><span class="line"><span class="keyword"></span>若加载内存里的数据到<span class="keyword">Cache的时候、发现Cache </span><span class="keyword">Block里有Dirty标记、需要先把Cache </span><span class="keyword">Block的数据写回主内存、才能加载数据覆盖掉Cache</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">在写回这个策略里、若大量的操作、都能命中缓存、大部分时间都不需要读写主内存、性能会比写直达好</span><br></pre></td></tr></table></figure>
+
+<p>然而、无论写直达还是写回、都未解决多线程或者多CPU缓存一致性问题….</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%9B%BE%E8%B0%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%9B%BE%E8%B0%B1/" class="post-title-link" itemprop="url">计算机组成原理图谱</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-52ce3b562ec64e0e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">存储程序计算机</span><span class="punctuation">:</span> <span class="string">可存储程序、可编程</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">1. 不可编程</span><span class="punctuation">:</span> <span class="string"> eg. 早期的计算器、只能进行简单算术运算、功能不可被修改</span></span><br><span class="line"><span class="attribute">2. 不可存储</span><span class="punctuation">:</span> <span class="string">eg. 早期的插线板式计算机、每次写好的程序不能存储下来供下次使用、需要相同程序的时候、也必须重新插板子、重新编程</span></span><br></pre></td></tr></table></figure>
+
+<p>计算机组成<br><img src="https://upload-images.jianshu.io/upload_images/14027542-6f11ef9e0c7d519e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>所有的计算机程序、都可以抽象为从<code>输入设备</code>读取输入程序，通过<code>运算器</code>和<code>控制器</code>来执行存储在<code>存储器</code>里的程序、最终把结果输出到<code>输出设备</code>中<br><img src="https://upload-images.jianshu.io/upload_images/14027542-e4bfce4bf7b31e33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片来源: 极课时间.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/19/mq_mq%E9%80%89%E6%8B%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/19/mq_mq%E9%80%89%E6%8B%A9/" class="post-title-link" itemprop="url">mq选择</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-19 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-19T00:00:00+08:00">2020-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="基本标准"><a href="#基本标准" class="headerlink" title="基本标准"></a>基本标准</h4><ol>
+<li>开源:  遇到有问题的bug可以通过修改源码的方式来修复或者规避、而不是只能等待下一个官方版本发版来修复</li>
+<li>产品社区有一定活跃度: 遇到问题的时候、可以快速找到类似场景、快速修复, 相比于每一个bug都需要自己通过阅读源码来解决、毕竟线上问题挂着的的成本很高<br>社区活跃度较高的产品、与周边应用的兼容性也会比较好、省去很多造轮子的时间</li>
+<li>性能要求:<ol>
+<li>确保消息可靠传递、不丢失消息</li>
+<li>支持集群、确保某个节点宕掉不会影响整个服务</li>
+<li>性能、能满足大部分实际需求场景的需要</li>
+</ol>
+</li>
+</ol>
+<h4 id="目前可选方案"><a href="#目前可选方案" class="headerlink" title="目前可选方案"></a>目前可选方案</h4><h5 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h5><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">源码实现 : Erlang</span><br><span class="line">特点: 轻量级、性能好、方便部署和使用、维护简单</span><br><span class="line"><span class="code">         支持灵活的路由配置、相对其它MQ、在Producer和Queue之间增加Exchange模块、可根据配置规则将生产者发出的Msg发送到不同队列</span></span><br><span class="line"><span class="code">         Client支持多种语言</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">短处: </span><br><span class="line"><span class="bullet">1.</span> 消息堆积处理支持不好、消息大量堆积时会导致MQ的性能急速下降</span><br><span class="line"><span class="bullet">2.</span> 处理消息的性能比较一般、根据硬件配置不同、每秒大概可以处理的消息数量为: 几w ~ 十几w</span><br><span class="line"><span class="bullet">3.</span> 源码语言为Erlang、比较小众、扩展开发成本增加</span><br></pre></td></tr></table></figure>
+
+<h5 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2012年阿里开源出来的产品、17年交给apache维护</span><br><span class="line"><span class="section">源码: Java</span></span><br><span class="line"><span class="section">性能: 稳定性、可靠性和性能都不错、对响应延迟也做了优化、大多数情况可以做到ms级的响应、每秒可处理消息 几十万(性能比RabbitMQ高一个数量级)</span></span><br><span class="line"></span><br><span class="line"><span class="section">短处: 相比国外同类产品、与周边生态系统的集成度和兼容性稍低</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">最初设计是为了处理海量日志、早期版本不保证消息可靠性、也不支持集群、但对于处理海量日志这个诉求是比较好的选择</span><br><span class="line"></span><br><span class="line">近期版本、在数据可靠性、稳定性和功能特性上都可以满足大多数的场景需求</span><br><span class="line"></span><br><span class="line"><span class="section">源码实现: Java + Scala</span></span><br><span class="line"><span class="section">优势:</span></span><br><span class="line">1. 与周边生态系统的兼容性最好、尤其是大数据和流计算领域、几乎所有相关开源软件都优先支持Kafka</span><br><span class="line">2.  异步收发性能最好、在服务器配置高时、极限情况每秒可处理2000w消息</span><br><span class="line"></span><br><span class="line"><span class="section">短处:</span></span><br><span class="line"><span class="section">异步批量处理带来的问题是: 同步收发响应延时较高、它是攒一批然后批量发送、每秒消息数没那么高的时候、kafka的延时反而会高、</span></span><br><span class="line"></span><br><span class="line">不适合在线业务场景</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二梯队mq"><a href="#第二梯队mq" class="headerlink" title="第二梯队mq"></a>第二梯队mq</h4><h5 id="ZeroMQ"><a href="#ZeroMQ" class="headerlink" title="ZeroMQ"></a>ZeroMQ</h5><p>严格来说不能算是消息队列、而是一个基于消息队列的多线程网络库<br>如果需求是将消息队列的功能集成到系统进程中、可以考虑ZeroMQ</p>
+<h5 id="ActiveMQ"><a href="#ActiveMQ" class="headerlink" title="ActiveMQ"></a>ActiveMQ</h5><p>社区已经不活跃、进入了老年期</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

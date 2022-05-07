@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.  两种负载方式的差异: 1231. Client负载、少了一层proxy转发、查询性能稍微好一些、且整体架构简单、排查问题方便、但与DB层耦合性高、若出现主备切换或者库迁移、Client需要调整连接信息2. proxy负载. 对Client友好、但proxy本身也需要高可用架构、整体架构设计较">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读写分离有哪些坑">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.  两种负载方式的差异: 1231. Client负载、少了一层proxy转发、查询性能稍微好一些、且整体架构简单、排查问题方便、但与DB层耦合性高、若出现主备切换或者库迁移、Client需要调整连接信息2. proxy负载. 对Client友好、但proxy本身也需要高可用架构、整体架构设计较">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-9443eea1ca9ff032.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.822Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-9443eea1ca9ff032.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>读写分离有哪些坑 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91-/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          读写分离有哪些坑
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/14027542-9443eea1ca9ff032.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="读写分离基本架构.png"></p>
+<blockquote>
+<p>读写分离的主要目标是: 分摊主库的压力. 一般有两种架构. 客户端主动做负载 和 proxy做负载.</p>
+</blockquote>
+<p>两种负载方式的差异:</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="built_in">Client</span>负载、少了一层proxy转发、查询性能稍微好一些、且整体架构简单、排查问题方便、</span><br><span class="line">但与DB层耦合性高、若出现主备切换或者库迁移、<span class="built_in">Client</span>需要调整连接信息</span><br><span class="line"><span class="number">2.</span> proxy负载. 对<span class="built_in">Client</span>友好、但proxy本身也需要高可用架构、整体架构设计较复杂.</span><br></pre></td></tr></table></figure>
+<p>不管采用哪种负载方式, 都会存在<code>从库读到系统过期状态</code>的现象, 称为<code>过期读</code>.<br>那么、如何解决过期读呢 ?<br>一、强制走主库<br>其实就是将查询分类、对于必须拿到最新结果的请求、强制转发到主库; 对于可以接受稍微延迟的请求、转发给从库. 但: 极端情况下、可能所有的请求都不能接受延迟、这样所有请求都打到主库、就失去了扩展性.</p>
+<p>二、sleep一段时间<br>eg. 查询数据之前、先强制等待一段时间、但会失去用户体验度. 不过可以折中、用Ajax将客户端输入内容直接展示在页面上、而不去查询DB.<br>存在的问题是: </p>
+<ol>
+<li>若查询本可以0.5s就从从库拿到结果、也会等1s</li>
+<li>若延迟超过1s、还是会出现过期读.</li>
+</ol>
+<p>三、判断主备无延迟</p>
+<ol>
+<li><p>每次从库查询前、先判断<code>seconds_behind_master</code>值、直到&#x3D;0、才执行查询请求.</p>
+</li>
+<li><p>对比位点、确保主备无延迟<br><code>master_log_file</code> 和 <code>read_master_log_pos</code>, 表示读到的主库的最新位点<br><code>relay_master_log_file</code> 和 <code>exec_master_log_pos</code>表示备库执行的最新位点<br>这两组值完全相同时、表示接收的日志已完成同步.</p>
+</li>
+<li><p>对比gtid<br><code>auto_position</code>&#x3D;1, 表示主备关系使用了gtid协议<br><code>retrieved_gtid_set</code>, 表示的是备库收到的所有日志gtid集合<br><code>executed_gtid_set</code>, 是备库已经执行完成的gtid集合<br>这两个集合相同、表示接收到的日志已同步完成.</p>
+<p> 2、3两个方案都是基于<code>备库接收到的日志</code>执行完成了、但还有一部分日志是: Client已经收到提交确认、但备库还未收到日志的状态、所以, 比1要好些、但未达到精准的程度.</p>
+</li>
+</ol>
+<p>四、配合semi-sync方案<br>对于上边的问题、可以解决不? 利用版同步复制、<code>semi-sync replication</code>可以.<br><code>semi-sync</code>设计:</p>
+<ol>
+<li>事务提交时、将binlog发给从库</li>
+<li>从库收到binlog、给主库发送一个ack、代表收到了</li>
+<li>主库收到ack以后、才返回给客户端<code>事务完成</code>的确认.<br>这样, 使用semi-sync配合前边的位点判断、就可以确定从库上执行的查询请求、避免过期读</li>
+</ol>
+<p>但: 一主多从的场景下、主库只要等到一个从库的ack、就开始对Client返回确认、这时可能会存在过期读(查询请求落到了非确认的从库上)</p>
+<p>判断同步位点还有一个潜在问题: 若业务更新的高峰期、可能出现主库的位点或者GTID集合更新很快、导致位点等着判断一直不成立、从库迟迟无法响应的情况. 其实、我们并不需要完全同步、只希望要查询的数据已经同步即可.</p>
+<p>五、等主库位点<br>可以解决上边两个问题:</p>
+<ol>
+<li>一主多从时、部分从库过期读</li>
+<li>过度等待<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> master_pos_wait(file, pos[, timeout]);</span><br></pre></td></tr></table></figure>
+执行逻辑:</li>
+<li>从库上执行</li>
+<li>file 和 pos 指主库上的文件名 和 位置</li>
+<li>timeout 可选、设为正整数N表示这个函数最多等待N秒<br>正常返回一个正整数M、表示从命令开始执行、到应用完file和pos代表的binlog位置、执行了多少事务.<br>其它返回值:</li>
+<li>null、表示执行期间、备库同步线程发生异常</li>
+<li>-1、超过等待时间Ns</li>
+<li>0、刚开始执行时、发现该位置已经执行过了.<br>则、查询逻辑变成了:<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> trx1更新完成后、马上执行 show master status 得到当前主库执行到的File 和 Pos</span><br><span class="line"><span class="bullet">2.</span> 选择一个从库执行查询语句</span><br><span class="line"><span class="bullet">3.</span> 在从库上执行 select master<span class="emphasis">_pos_</span>wait(File, Pos, 1);</span><br><span class="line"><span class="bullet">4.</span> 若返回值是&gt;=0的正整数、则在该从库查询、否则到主库查询</span><br><span class="line">同样存在的问题是: 若所有从库都延迟了、查询压力会打到主库</span><br></pre></td></tr></table></figure>
+一般对于不允许过期读的要求、有两种方案: 超时放弃 和 转到主库, 要根据业务选择.</li>
+</ol>
+<p>六、等GTID<br>若开启GTID模式、同样有等待GTID的方案</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> wait_for_executed_gtid_set(gtid_set, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>执行逻辑:</p>
+<ol>
+<li>等待、直到该库执行的事务中包含传入的gtid_set、返回0</li>
+<li>超时返回1<br>5.7.6版本开始、可以把事务的gtid返回给客户端<br>此时、等GTID的执行流程就变成:<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> trx1事务更新完后、从返回包之间获取事务的gtid、记为gtid1</span><br><span class="line"><span class="bullet">2.</span> 选定一个从库执行查询语句</span><br><span class="line"><span class="bullet">3.</span> 在从库上执行 select wait<span class="emphasis">_for_</span>Executed<span class="emphasis">_gtid_</span>set(gtid1, 1);</span><br><span class="line"><span class="bullet">4.</span> 若返回0、则在该从库执行查询、否则、到主库执行查询.</span><br></pre></td></tr></table></figure>
+问题跟等位点的一样、选择超时放弃还是转到主库查询、要根据业务场景选择.</li>
+</ol>
+<p>思考:</p>
+<blockquote>
+<p>若系统采用的是等待GTID的方案、此时要对一个大表做DDL、可能会出现什么情况呢? 为避免这种情况、改怎么做呢 ?</p>
+</blockquote>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    这是一个典型的大事务的场景、若该DDL语句在主库执行了<span class="number">10</span><span class="built_in">min</span>、提交到备库、也需要执行<span class="number">10</span><span class="built_in">min</span>、</span><br><span class="line">那么在主库DDL之后再提交的事务的GTID、去备库查的时候、就会等待<span class="number">10</span><span class="built_in">min</span>才出现. 这样这个读写分离机制</span><br><span class="line">至少<span class="number">10</span><span class="built_in">min</span>内都会超时、既然是预期内的操作、应该在业务低峰期进行、确保主库可以支撑所有的业务查询、</span><br><span class="line">然后把请求都切到主库、再在主库上做DDL.</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/redis_redis%E5%8A%9F%E8%83%BD%E6%A2%B3%E7%90%86/" rel="prev" title="redis功能梳理">
+      <i class="fa fa-chevron-left"></i> redis功能梳理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/redis_Redis%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="next" title="Redis读书笔记">
+      Redis读书笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

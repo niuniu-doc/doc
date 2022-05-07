@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="数组: 用一组连续的内存空间、存储一组具有相同数据类型的线性表数据结构  121.线性表: 数据只有前、后两个方向. 链表、队列、桟也是线性结构2.连续空间、数据类型相同: 使得数组可以随机访问、但: 插入、删除数据的效率就低很多、需要数据重排    插入和删除1234567891011121.插入  1) 末尾插入、无需移动元素、复杂度 O(1)  2) 头部插入、搬移全部元素、复杂度 O(n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="数组: 用一组连续的内存空间、存储一组具有相同数据类型的线性表数据结构  121.线性表: 数据只有前、后两个方向. 链表、队列、桟也是线性结构2.连续空间、数据类型相同: 使得数组可以随机访问、但: 插入、删除数据的效率就低很多、需要数据重排    插入和删除1234567891011121.插入  1) 末尾插入、无需移动元素、复杂度 O(1)  2) 头部插入、搬移全部元素、复杂度 O(n">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.841Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="数据结构和算法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数组 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数组
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构和算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>数组: 用一组连续的内存空间、存储一组具有相同数据类型的线性表数据结构</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">1.线性表: 数据只有前、后两个方向. 链表、队列、桟也是线性结构</span></span><br><span class="line"><span class="section">2.连续空间、数据类型相同: 使得数组可以随机访问、但: 插入、删除数据的效率就低很多、需要数据重排</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="插入和删除"><a href="#插入和删除" class="headerlink" title="插入和删除"></a>插入和删除</h5><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.插入</span><br><span class="line">  <span class="number">1</span>) 末尾插入、无需移动元素、复杂度 <span class="function"><span class="title">O</span>(<span class="number">1</span>)</span></span><br><span class="line">  <span class="number">2</span>) 头部插入、搬移全部元素、复杂度 <span class="function"><span class="title">O</span>(<span class="variable">n</span>)</span></span><br><span class="line">  每个位置插入的概率相同、平均复杂度为 (<span class="number">1</span>+<span class="number">2</span>+<span class="number">3</span>+...n)/<span class="variable">n</span> = <span class="function"><span class="title">O</span>(<span class="variable">n</span>)</span></span><br><span class="line"> </span><br><span class="line">  若数组有序、只需要搬移<span class="variable">k</span>之后的数据</span><br><span class="line">  若数组无序、且不要求有序、将<span class="variable">k</span>位置的元素直接搬移到最后、只需要一次搬移 <span class="function"><span class="title">O</span>(<span class="number">1</span>)</span></span><br><span class="line">  </span><br><span class="line"><span class="number">2</span>.删除</span><br><span class="line">  <span class="number">1</span>) 与插入类似、最好<span class="function"><span class="title">O</span>(<span class="number">1</span>) 最坏<span class="title">O</span>(<span class="variable">n</span>) 平均<span class="title">O</span>(<span class="variable">n</span>)</span></span><br><span class="line">  <span class="number">2</span>) 删除多(<span class="variable">m</span>)个元素时、可先标记删除(只标记)、后一次性删除、节省<span class="variable">m</span>*<span class="function"><span class="title">O</span>(<span class="variable">n</span>)次操作</span></span><br><span class="line"><span class="function">     <span class="variable">JVM</span>的标记清除算法的核心</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>容器能否代替数组 ?</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> arrayList 将数组操作的细节封装. eg. 数据搬移</span><br><span class="line"><span class="bullet">2.</span> arrayList 支持动态扩容、默认扩容是1.5 </span><br><span class="line">   扩容涉及到内存申请和数据搬移、比较耗时、若知道数据存储大小时、最好指定大小</span><br><span class="line">   </span><br><span class="line"><span class="bullet"> 1.</span> 容器无法存储基础类型、eg. int, long, 需要封装为 Integer、Long 而自动装箱则有部分性能损耗</span><br><span class="line"><span class="bullet"> 2.</span> 若数据大小已知、且操作特别简单、可直接使用数组</span><br><span class="line"> 所以、对业务开发基本上直接使用容器就好、省力、不易出错、丢失的性能可以不太关注、不影响整体性能</span><br><span class="line"> 对底层开发、性能要做到极致、数组就优于容器成为首选</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="为什么大部分编程语言中、数组从0开始编号"><a href="#为什么大部分编程语言中、数组从0开始编号" class="headerlink" title="为什么大部分编程语言中、数组从0开始编号"></a>为什么大部分编程语言中、数组从0开始编号</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">下标确切定义是: 偏移offset、</span><br><span class="line"><span class="number">1</span>.使用a表示首地址、<span class="selector-tag">a</span><span class="selector-attr">[0]</span>就是偏移为<span class="number">0</span>的位置、即首地址、<span class="selector-tag">a</span><span class="selector-attr">[k]</span>表示第k个type_size的地址</span><br><span class="line">  <span class="selector-tag">a</span><span class="selector-attr">[k]</span>_addr = base_addr + k*type_size</span><br><span class="line"><span class="number">2</span>.若使用<span class="number">1</span>开始计数、则</span><br><span class="line">  <span class="selector-tag">a</span><span class="selector-attr">[k]</span>_addr = base_addr + (k-<span class="number">1</span>)*type_size </span><br><span class="line"> 从<span class="number">1</span>开始编号、对于CPU来说、就是多了一次减法运算</span><br><span class="line"> </span><br><span class="line"> 		</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" rel="tag"># 数据结构和算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E9%93%BE%E8%A1%A8/" rel="prev" title="链表">
+      <i class="fa fa-chevron-left"></i> 链表
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E5%86%B5/" rel="next" title="数据结构概况">
+      数据结构概况 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%92%8C%E5%88%A0%E9%99%A4"><span class="nav-number">1.</span> <span class="nav-text">插入和删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%A7%E9%83%A8%E5%88%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E4%B8%AD%E3%80%81%E6%95%B0%E7%BB%84%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%BC%96%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">为什么大部分编程语言中、数组从0开始编号</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

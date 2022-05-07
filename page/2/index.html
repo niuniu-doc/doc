@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/mysql_%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8E%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/25/mysql_%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8E%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E/" class="post-title-link" itemprop="url">误删数据库后该怎么办</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-25 08:49:55" itemprop="dateCreated datePublished" datetime="2020-03-25T08:49:55+08:00">2020-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p> 误删数据库后除了跑路、还能怎么办 ?</p>
+</blockquote>
+<h4 id="使用delete误删数据行"><a href="#使用delete误删数据行" class="headerlink" title="使用delete误删数据行"></a>使用delete误删数据行</h4><p>可以使用Flashback工具把数据恢复. 原理是: 修改binlog的内容、拿回原库重放. 前提是: 确保 binlog_format&#x3D;row 和 binlog_row_image&#x3D;FULL.</p>
+<h5 id="单行事务处理"><a href="#单行事务处理" class="headerlink" title="单行事务处理:"></a>单行事务处理:</h5><p> insert: binlog event的类型 Write_rows event -&gt; Delete_rows event</p>
+<p> delete: 反之</p>
+<p> update: 对调binlog位置即可</p>
+<h5 id="多行事务"><a href="#多行事务" class="headerlink" title="多行事务:"></a>多行事务:</h5><p>(A)delete … (B)insert … (C)update …</p>
+<p>写回的顺序应该是: </p>
+<p>(revert C)update … (revert B)delete … (revert A)insert …</p>
+<p>但: 以上方案只能作为<code>万一</code>的紧急预案、平时应该尽可能的做到提前预防、建议:</p>
+<p> 把sql_safe_updates 参数设置为 on、这样一来、若忘记在delete或者update时写where条件、或者where条件中不包含索引字段的话、SQL执行会报错</p>
+<p> 代码上线前、必须经过SQL审计</p>
+<p><strong>注意:</strong> </p>
+<p>\1. delete 全表是很慢的、需要生成undo log、写 redo log、binlog、从性能角度来看、应该优先考虑 truncate table或者drop table.</p>
+<p>\2. truncate&#x2F;drop table, drop database,即时配置binlog_format&#x3D;row、执行这3个命令、记录的还是statement</p>
+<h4 id="使用drop-table或者truncate-table误删数据表"><a href="#使用drop-table或者truncate-table误删数据表" class="headerlink" title="使用drop table或者truncate table误删数据表"></a>使用drop table或者truncate table误删数据表</h4><p>这种情况就要使用全量备份 + 增量日志的方式了, 必须要有定期的全量备份, 并实时备份binlog才行. 两者都具备时、恢复流程:</p>
+<ol>
+<li><p>取最近一次全量备份、假设是一天一备、上次备份是当天凌晨</p>
+</li>
+<li><p>用备份恢复出一个临时库</p>
+</li>
+<li><p>从日志备份里、取出0点之后的日志</p>
+</li>
+<li><p>把这些日志、除了误删数据的语句之外、全部应用到临时库.</p>
+</li>
+</ol>
+<p><strong>注意:</strong></p>
+<ol>
+<li><p>为了加快数据恢复、若临时库有多个数据库、可在使用mysqlbinlog时、加上-database指定库.</p>
+</li>
+<li><p>应用日志时、需要跳过误操作语句的binlog、</p>
+</li>
+</ol>
+<p>  非gtid: –stop-position执行到误操作之前的日志、–start-position再从它之后开始操作</p>
+<p>  gtid: 假设误操作的gtid是gtid1, set gtid_next&#x3D;gtid1;begin;commit; 将gtid1先加入gtid集合、之后按顺序执行binlog时、会自动跳过误操作的语句.</p>
+<p>不过、即使这样、mysqlbinlog方法恢复数据还是不够快、因为:</p>
+<ol>
+<li><p>mysqlbinlog不能只解析其中一个表的日志</p>
+</li>
+<li><p>mysqlbinlog解析出日志、应用日志的过程只能是单线程.</p>
+</li>
+</ol>
+<p>一种加速方法是: 在用备份恢复出临时实例之后、将这个临时库设为线上备库的从库、这样:</p>
+<ol>
+<li><p>在start slave之前、先通过执行 change replication filter replication_do_table &#x3D; tb、就可以让临时表只同步误操作的表</p>
+</li>
+<li><p>也可以用上并行复制、加速数据恢复</p>
+</li>
+</ol>
+<h4 id="使用drop-database误删数据库"><a href="#使用drop-database误删数据库" class="headerlink" title="使用drop database误删数据库"></a>使用drop database误删数据库</h4><h5 id="搭建延迟备库"><a href="#搭建延迟备库" class="headerlink" title="搭建延迟备库:"></a>搭建延迟备库:</h5><p>虽然可以通过并行复制来加速恢复数据、但恢复时间依然不可控, 若一个库的备份特别大、或者距离上一个全量备份的时间较长、恢复时间就特别长、若核心业务是无法等待这么久的、可以考虑搭建延迟复制的备库(MySQL 5.6引入)</p>
+<p>change master to master_delay&#x3D;n, 让备库与主库有Ns的延迟.</p>
+<p>eg. 设为3600s、代表若主库数据被删、且在1h内发现、其它备库已同时被删除时、可到延迟复制备库执行 stop slave、跳过误删除目录、恢复出需要的数据.</p>
+<h5 id="预防误删库的方法"><a href="#预防误删库的方法" class="headerlink" title="预防误删库的方法:"></a>预防误删库的方法:</h5><ol>
+<li><p>账号分离、避免写错命令</p>
+</li>
+<li><p>指定操作规范. 避免写错要删除的表名. 先重命名待删除表、业务无影响再操作删除</p>
+</li>
+</ol>
+<h4 id="使用rm命令、误删数据库实例"><a href="#使用rm命令、误删数据库实例" class="headerlink" title="使用rm命令、误删数据库实例"></a>使用rm命令、误删数据库实例</h4><p>对一个有HA机制的Mysql集群、只要不恶意删除整个集群、只删除单节点的话、HA系统会开始工作、选出一个新的主库、保证集群正常工作. 这时、需要把节点数据恢复、再接入整个集群.</p>
+<p>建议: 尽量把备份跨机房、最好跨城市保存.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_jianshu_migrate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/tools_jianshu_migrate/" class="post-title-link" itemprop="url">简书文章迁移hexo</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 20:31:49" itemprop="dateCreated datePublished" datetime="2020-03-20T20:31:49+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="导出markdown文件"><a href="#导出markdown文件" class="headerlink" title="导出markdown文件"></a>导出markdown文件</h4><p>首先登陆简书后台, 下载所有源文件</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我 -&gt; 设置 -&gt; 账号管理 -&gt; 下载所有文章</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="将源文件替换成我们需要的格式"><a href="#将源文件替换成我们需要的格式" class="headerlink" title="将源文件替换成我们需要的格式"></a>将源文件替换成我们需要的格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">简书文件存放路径</span></span><br><span class="line">src=/Users/xx/Downloads/jianshu</span><br><span class="line">dsc=/Users/xx/Downloads/jianshu-m</span><br><span class="line">date=$(date &quot;+%Y-%m-%d&quot;)</span><br><span class="line"></span><br><span class="line">for f in $src/*/*; do</span><br><span class="line">   base=$(basename $f .md)</span><br><span class="line">   catgories=$(basename $(dirname $f) $PWD)</span><br><span class="line">   insert=&quot;---\ntitle: $&#123;base&#125;\ndate: $date\ncategories:\n  - $&#123;catgories&#125;\ntags:\n  - $&#123;catgories&#125;\n---\n&quot;</span><br><span class="line">   echo &quot;$&#123;insert&#125;$(cat $f)&quot; &gt; $f  # 将hexo需要的头部内容插入</span><br><span class="line">   lower=$(echo $catgories|tr &#x27;[A-Z]&#x27; &#x27;[a-z]&#x27;) # 可根据个人需要、这里是为了生成指定分类开头的文件名</span><br><span class="line">   srcFile=$dsc&quot;/&quot;$lower&quot;_&quot;$base&quot;.md&quot;</span><br><span class="line">   mv $f $srcFile # 将源文件放到一个文件夹下、统一copy到 _post 文件夹下即可</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="临时解决简书图片链接无法加载"><a href="#临时解决简书图片链接无法加载" class="headerlink" title="临时解决简书图片链接无法加载"></a>临时解决简书图片链接无法加载</h4><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">找到主题文件夹下 -&gt; <span class="function"><span class="title">layout</span>文件夹下 -&gt;</span> 有 &lt;head&gt; 标记的文件、</span><br><span class="line">eg. hexo-<span class="built_in">theme</span>-next主题为:</span><br><span class="line">themes/hexo-<span class="built_in">theme</span>-next/layout/_layout.swig</span><br><span class="line"></span><br><span class="line">添加meta:</span><br><span class="line">&lt;meta <span class="keyword">name</span>=<span class="string">&quot;referrer&quot;</span> content=<span class="string">&quot;no-referrer&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">^.^仅为权宜之计、不想盗链...., 有好的替换方式后更新....</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="本地新增文件图片链接"><a href="#本地新增文件图片链接" class="headerlink" title="本地新增文件图片链接"></a>本地新增文件图片链接</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">利用电脑上的各种工具、剪切的图片直接粘贴到 Typora上、会有 <span class="keyword">copy</span>至 选项, 直接<span class="keyword">copy</span>到我们的资源目录(你存放image的地方)即可</span><br><span class="line">eg. 如果使用默认配置、应该是 <span class="keyword">source</span><span class="regexp">/images/</span></span><br><span class="line">若开启 post_asset_folder: <span class="keyword">true</span> 则每篇文章的图片会单独存放在一个与文件同名的文件夹内</span><br><span class="line">![<span class="number">1</span>.jpg](<span class="regexp">/images/im</span>age-<span class="number">20200320205834941</span>.png)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_FastDFS%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_FastDFS%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">FastDFS安装部署</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在学习<code>taotao商城</code>这个视频的过程中、用到了<code>fastdfs</code>、刚好自己有一台服务器就自己学习了下、参考了网上多篇文章、感谢各位分享~~</p>
+<p><code>FastDFS</code>是<code>c</code>写的开源分布式文件系统、充分考虑了冗余被人、负载均衡、及线性扩容机制、注重高可用、高性能指标、可以很方便的搭建一套高性能的文件服务器集群提供文件上传、下载等服务~</p>
+<p>###一、FastDFS架构<br><code>FastDFS</code>包括<code>Tracker server</code>和<code>Storage server</code>, 客户端请求<code>Tracker server</code>进行文件上传、下载，通过<code>Tracker server</code>调度最终由<code>Storage server</code>完成文件上传和下载。 <code>Tracker server</code> 的角色类似于<code>dubbo</code>的<code>registry</code>和<code>moniter</code>、并不直接提供服务、而是<code>storage server</code>启动时注册到<code>tracker server</code>, <code>client</code>通过<code>tracker server</code>连接<code>storage server</code>, <code>client</code>不知道自己连接的是哪一台<code>storage server</code>, 连接完成后、上传和下载是<code>client</code>直接请求<code>storage server</code>, 可类比于 <code>dubbo consumer</code>通过<code>registry</code>连接<code>dubbo service</code> 但、连接完成之后是<code>consumer</code>和<code>service</code>直接通信</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-81571b0c67e068ef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="fastdfs.jpg"></p>
+<p>#####文件上传流程<br><img src="https://upload-images.jianshu.io/upload_images/14027542-2c255cded5753807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="文件上传流程.png"></p>
+<h5 id="文件下载流程"><a href="#文件下载流程" class="headerlink" title="文件下载流程"></a>文件下载流程</h5><p><img src="https://upload-images.jianshu.io/upload_images/14027542-9b9dcd61bd1a9a57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="文件下载流程.png"></p>
+<p>####1.Tracker Server<br><code>Tracker server</code>作用是负载均衡和调度，通过<code>Tracker server</code>在文件上传时可以根据一些策略找到<code>Storage server</code>提供文件上传服务，可以将tracker称为追踪服务器或调度服务器</p>
+<p>####1.Storage Server<br><code>Storage server</code>作用是文件存储，客户端上传的文件最终存储在<code>Storage</code>服务器上，<code>Storage server</code>没有实现自己的文件系统而是利用操作系统的文件系统来管理文件。可以将<code>storage</code>称为存储服务器。</p>
+<h3 id="二、FastDFS安装"><a href="#二、FastDFS安装" class="headerlink" title="二、FastDFS安装"></a>二、FastDFS安装</h3><p>####1.安装libfastcommon</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 下载：</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/happyfish100/</span>libfastcommon<span class="regexp">/archive/</span>V1.<span class="number">0.7</span>.tar.gz</span><br><span class="line"><span class="number">2</span>. 修改名字：mv V1.<span class="number">0.7</span> libfastcommon-<span class="number">1.0</span>.<span class="number">7</span>.tar.gz</span><br><span class="line"><span class="number">3</span>. 解压：tar zxvf libfastcommon-<span class="number">1.0</span>.<span class="number">7</span>.tar.gz</span><br><span class="line"><span class="number">4</span>. cd libfastcommon-<span class="number">1.0</span>.<span class="number">7</span>/</span><br><span class="line"><span class="number">5</span>. 编译：./make.sh</span><br><span class="line"><span class="number">6</span>. 安装：./make.sh install</span><br><span class="line"></span><br><span class="line">另外：</span><br><span class="line">设置几个软链接、方便后续扩展nginx时使用：</span><br><span class="line">ln -s <span class="regexp">/usr/</span>lib64<span class="regexp">/libfastcommon.so /u</span>sr<span class="regexp">/local/</span>lib/libfastcommon.so</span><br><span class="line">ln -s <span class="regexp">/usr/</span>lib64<span class="regexp">/libfastcommon.so /u</span>sr<span class="regexp">/lib/</span>libfastcommon.so</span><br><span class="line">ln -s <span class="regexp">/usr/</span>lib64<span class="regexp">/libfdfsclient.so /u</span>sr<span class="regexp">/local/</span>lib/libfdfsclient.so</span><br><span class="line">ln -s <span class="regexp">/usr/</span>lib64<span class="regexp">/libfdfsclient.so /u</span>sr<span class="regexp">/lib/</span>libfdfsclient.so</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-安装-tracker"><a href="#2-安装-tracker" class="headerlink" title="2. 安装 tracker"></a>2. 安装 tracker</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 下载：</span><br><span class="line">wget https:<span class="comment">//github.com/happyfish100/fastdfs/archive/V5.05.tar.gz</span></span><br><span class="line"><span class="number">2</span>. 修改名字：mv V5.<span class="number">05</span> FastDFS_v5.<span class="number">05</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br><span class="line"><span class="number">3</span>. 解压：tar zxvf FastDFS_v5.<span class="number">05</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br><span class="line"><span class="number">4</span>. 进入解压后目录：cd fastdfs-<span class="number">5.05</span>/</span><br><span class="line"><span class="number">5</span>. 编译：./make<span class="selector-class">.sh</span></span><br><span class="line"><span class="number">6</span>. 安装：./make<span class="selector-class">.sh</span> install</span><br></pre></td></tr></table></figure>
+<h4 id="3-修改tracker配置文件"><a href="#3-修改tracker配置文件" class="headerlink" title="3. 修改tracker配置文件"></a>3. 修改tracker配置文件</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>安装完成后、在<span class="regexp">/etd/</span>fdfs下有tracker的配置文件</span><br><span class="line">复制一份：cp <span class="regexp">/etc/</span>fdfs<span class="regexp">/tracker.conf.sample /</span>etc<span class="regexp">/fdfs/</span>tracker.conf</span><br><span class="line">mkdir -p <span class="regexp">/usr/</span>local<span class="regexp">/fastdfs/</span>  (此处可以根据自己的情况和习惯存放)</span><br><span class="line">base_path= <span class="regexp">/usr/</span>local<span class="regexp">/fastdfs/</span></span><br><span class="line"></span><br><span class="line">启动 tracker 服务：<span class="regexp">/usr/</span>bin<span class="regexp">/fdfs_trackerd /</span>etc<span class="regexp">/fdfs/</span>tracker.conf</span><br><span class="line">重启 tracker 服务：<span class="regexp">/usr/</span>bin<span class="regexp">/fdfs_trackerd /</span>etc<span class="regexp">/fdfs/</span>tracker.conf restart</span><br><span class="line">查看是否有 tracker 进程：ps aux | <span class="keyword">grep</span> tracker</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>####4. storage(存储节点)服务部署</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">一般 storage 服务我们会单独部署到一台服务器上，但是这里为了方便(~~我只有一台服务器~~)就安装在同一台上了</span><br><span class="line"></span><br><span class="line">如果单独部署到一台服务器上、上边tracker的部署步骤重新来一遍即可</span><br><span class="line">这里是同一台server、只修改配置~~</span><br><span class="line"></span><br><span class="line">复制一份配置：cp <span class="regexp">/etc/</span>fdfs<span class="regexp">/storage.conf.sample /</span>etc<span class="regexp">/fdfs/</span>storage.conf</span><br><span class="line">编辑：vim <span class="regexp">/etc/</span>fdfs/storage.conf</span><br><span class="line">base_path= <span class="regexp">/usr/</span>local<span class="regexp">/fastdfs/</span></span><br><span class="line"></span><br><span class="line">创建目录：mkdir  <span class="regexp">/usr/</span>local<span class="regexp">/fastdfs/</span>storage/images-data</span><br><span class="line">store_path0= <span class="regexp">/usr/</span>local<span class="regexp">/fastdfs/</span>storage/images-data</span><br><span class="line"></span><br><span class="line">图片实际存放路径，如果有多个，这里可以有多行(要创建多个目录)：</span><br><span class="line">store_path0=<span class="regexp">/opt/</span>fastdfs<span class="regexp">/storage/im</span>ages-data0</span><br><span class="line">store_path1=<span class="regexp">/opt/</span>fastdfs<span class="regexp">/storage/im</span>ages-data1</span><br><span class="line"></span><br><span class="line">subdir_count_per_path=<span class="number">256</span> </span><br><span class="line">是用来配置目录个数的、如果只是练习不做实际存储服务、可改小一点儿</span><br><span class="line"></span><br><span class="line">指定 tracker 服务器的 IP 和端口</span><br><span class="line">tracker_server=<span class="number">192.168</span>.<span class="number">1.114</span>:<span class="number">22122</span> (<span class="number">192.168</span>.<span class="number">1.114</span>)是你的server服务器ip、本机也可以使用(<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">22122</span>)、记得不可使用<span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-测试服务"><a href="#5-测试服务" class="headerlink" title="5. 测试服务"></a>5. 测试服务</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">启动 storage 服务：<span class="regexp">/usr/</span>bin<span class="regexp">/fdfs_storaged /</span>etc<span class="regexp">/fdfs/</span>storage.conf，首次启动会很慢，因为它在创建预设存储文件的目录</span><br><span class="line">重启 storage 服务：<span class="regexp">/usr/</span>bin<span class="regexp">/fdfs_storaged /</span>etc<span class="regexp">/fdfs/</span>storage.conf restart</span><br><span class="line">查看是否有 storage 进程：ps aux | <span class="keyword">grep</span> storage</span><br></pre></td></tr></table></figure>
+
+<p>####6. 查看<code>tracker</code>是否可以正常与<code>storage</code>通信</p>
+<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fdfs_monitor /etc/fdfs/storage.conf</span><br><span class="line"><span class="meta prompt_">...</span></span><br><span class="line">Storage 1:</span><br><span class="line">        id = 192.168.2.231</span><br><span class="line">        ip_addr = 192.168.2.231  ACTIVE --若看到ACTIVE这个字样、代表可以正常通信</span><br><span class="line"><span class="meta prompt_">...</span></span><br><span class="line">查看storage和tracker是否正常启动：</span><br><span class="line">ps aux | grep fdfs</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c47e3762cf5b81c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="进程.png"></p>
+<h4 id="7-使用fdfs-client测试"><a href="#7-使用fdfs-client测试" class="headerlink" title="7. 使用fdfs_client测试"></a>7. 使用fdfs_client测试</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">复制一份配置：cp <span class="regexp">/etc/</span>fdfs<span class="regexp">/client.conf.sample /</span>etc<span class="regexp">/fdfs/</span>client.conf</span><br><span class="line">编辑：vim <span class="regexp">/etc/</span>fdfs/client.conf</span><br><span class="line"></span><br><span class="line">base_path= <span class="regexp">/usr/</span>local<span class="regexp">/fastdfs/</span></span><br><span class="line"></span><br><span class="line">指定 tracker 服务器的 IP 和端口</span><br><span class="line">tracker_server=<span class="number">192.168</span>.<span class="number">1.114</span>:<span class="number">22122</span></span><br><span class="line">log_level=info</span><br><span class="line"></span><br><span class="line">echo asasasa &gt; ~/test.txt</span><br><span class="line"></span><br><span class="line">测试：fdfs_test <span class="regexp">/etc/</span>fdfs<span class="regexp">/client.conf upload ~/</span>test.txt </span><br><span class="line">可以看到如下图所示、就是上传成功了</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-3ebfd5dda0a5732d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test.png"></p>
+<p>####8. 安装Nginx和其插件</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">如果Nginx已经安装过，则仅需要fastdfs-nginx-module_v1.<span class="number">16</span>.tar.gz</span><br><span class="line">下载nginx：wget http:<span class="regexp">//</span>nginx.org<span class="regexp">/download/</span>nginx-<span class="number">1.11</span>.<span class="number">8</span>.tar.gz</span><br><span class="line">下载Nginx插件:wget http:<span class="regexp">//</span>jaist.dl.sourceforge.NET<span class="regexp">/project/</span>fastdfs<span class="regexp">/FastDFS%20Nginx%20Module%20Source%20Code/</span>fastdfs-nginx-module_v1.<span class="number">16</span>.tar.gz</span><br><span class="line">解压 Nginx 模块：tar zxvf fastdfs-nginx-module_v1.<span class="number">16</span>.tar.gz</span><br><span class="line">进入解压后的目录 </span><br><span class="line">cd fastdfs-nginx-module</span><br><span class="line">vim src/config</span><br><span class="line">修改：去掉local、因为实际安装fastdfs时、是放到了<span class="regexp">/usr/i</span>nclude下</span><br><span class="line"><span class="number">1</span>. CORE_INCS=<span class="string">&quot;$CORE_INCS /usr/local/include/fastdfs /usr/local/include/fastcommon/&quot;</span></span><br><span class="line">-&gt; CORE_INCS=<span class="string">&quot;$CORE_INCS /usr/include/fastdfs /usr/include/fastcommon/&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>.  CORE_LIBS=<span class="string">&quot;$CORE_LIBS -L/usr/local/lib -lfastcommon -lfdfsclient&quot;</span></span><br><span class="line">-&gt; CORE_LIBS=<span class="string">&quot;$CORE_LIBS -L/usr/lib -lfastcommon -lfdfsclient&quot;</span></span><br><span class="line"></span><br><span class="line">回到nginx的解压目录</span><br><span class="line">cd ../nginx-<span class="number">1.11</span>.<span class="number">8</span></span><br><span class="line">sudo .<span class="regexp">/configure  --prefix=/u</span>sr<span class="regexp">/local/</span>nginx --sbin-path=<span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>nginx --conf-path=<span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/nginx.conf --pid-path=/u</span>sr<span class="regexp">/local/</span>var<span class="regexp">/run/</span>nginx.pid --lock-path=<span class="regexp">/usr/</span>local<span class="regexp">/var/</span>run<span class="regexp">/nginx.lock --error-log-path=/u</span>sr<span class="regexp">/local/</span>var<span class="regexp">/log/</span>nginx<span class="regexp">/^Cror.log --http-log-path=/u</span>sr<span class="regexp">/local/</span>var<span class="regexp">/log/</span>nginx<span class="regexp">/access.log --with-http_gzip_static_module --with-http_stub_status_module --with-http_ssl_module --with-file-aio --add-module=/</span>home<span class="regexp">/nj/</span>build<span class="regexp">/fastdfs-nginx-module/</span>src</span><br><span class="line"></span><br><span class="line">sudo make  &amp;&amp; sudo  make install （若是有权限的账户、可以不用加sudo、我使用的是普通用户）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>####9. 整个fastdfs-nginx-module和nginx</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">copy</span> fastdfs-nginx-module的配置文件到 <span class="regexp">/etc/</span>fdfs下、方便查找</span><br><span class="line">cp <span class="regexp">/home/</span>nj<span class="regexp">/build/</span>fastdfs-nginx-module<span class="regexp">/src/m</span>od_fdfs.conf <span class="regexp">/etc/</span>fdfs</span><br><span class="line">vi <span class="regexp">/etc/</span>fdfs/mod_fdfs.conf</span><br><span class="line"></span><br><span class="line">base_path=<span class="regexp">/usr/</span>local/fastdfs</span><br><span class="line">tracker_server=<span class="number">192.168</span>.<span class="number">1.114</span>:<span class="number">22122</span></span><br><span class="line">url_have_group_name = <span class="keyword">true</span></span><br><span class="line">store_path0=<span class="regexp">/usr/</span>local<span class="regexp">/fastdfs/</span>storage</span><br></pre></td></tr></table></figure>
+
+<p>####10. 然后配置Nginx，添加如下内容</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       <span class="number">80</span>;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">        </span><br><span class="line">         <span class="comment"># 配置fastdfs的访问路径</span></span><br><span class="line">        <span class="keyword">location</span> <span class="title">/group1</span>/M00 &#123;</span><br><span class="line">            ngx_fastdfs_module;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">启动nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="用浏览器访问刚才步骤7中测试上传的文件："><a href="#用浏览器访问刚才步骤7中测试上传的文件：" class="headerlink" title="用浏览器访问刚才步骤7中测试上传的文件："></a>用浏览器访问刚才步骤7中测试上传的文件：</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>xxxx<span class="regexp">/group1/</span>M00<span class="regexp">/00/</span><span class="number">00</span>/fwAAAVu0UTSAZiNHAAAACE6c2W4921_big.txt</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-2fc2f16221227b59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片存储测试.png"></p>
+<h3 id="哦啦-到此安装完成、可以使用了"><a href="#哦啦-到此安装完成、可以使用了" class="headerlink" title="^.^哦啦~ 到此安装完成、可以使用了~~~"></a><code>^.^</code>哦啦~ 到此安装完成、可以使用了~~~</h3><p>####另外：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fastdfs提供了php_client、可以使用php调用fastdfs的服务</span><br><span class="line">参考：</span><br><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/happyfish100/</span>fastdfs<span class="regexp">/tree/m</span>aster<span class="regexp">/php_client/</span>FastDFS%<span class="number">20</span>Nginx%<span class="number">20</span>Module%<span class="number">20</span>Source%<span class="number">20</span>Code/fastdfs-nginx-module_v1.<span class="number">16</span>.tar.gz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h4><blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/happyfish100/fastdfs/tree/master/php_client">https://github.com/happyfish100/fastdfs/tree/master/php_client</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.waitig.com/fastdfs%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4.html">https://www.waitig.com/fastdfs%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.codetd.com/article/3138763">https://www.codetd.com/article/3138763</a></li>
+<li><a target="_blank" rel="noopener" href="http://soartju.iteye.com/blog/803477">http://soartju.iteye.com/blog/803477</a><br>等多个网络资源…</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_Hystrix-MDC%E8%B7%9F%E8%B8%AA/" class="post-title-link" itemprop="url">Hystrix-MDC跟踪</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、实现HystrixConcurrencyStrategy</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MdcHystrixConcurrencyStrategy</span> <span class="keyword">extends</span> <span class="title class_">HystrixConcurrencyStrategy</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; Callable&lt;T&gt; <span class="title function_">wrapCallable</span><span class="params">(Callable&lt;T&gt; callable)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MdcAwareCallable</span>(callable, MDC.getCopyOfContextMap());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">MdcAwareCallable</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;T&gt; &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Callable&lt;T&gt; delegate;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, String&gt; contextMap;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">MdcAwareCallable</span><span class="params">(Callable&lt;T&gt; callable, Map&lt;String, String&gt; contextMap)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.delegate = callable;</span><br><span class="line">            <span class="built_in">this</span>.contextMap = contextMap != <span class="literal">null</span> ? contextMap : <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> T <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                MDC.setContextMap(contextMap);</span><br><span class="line">                <span class="keyword">return</span> delegate.call();</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                MDC.clear();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>二、注册一个插件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HystrixConfig</span> &#123;</span><br><span class="line">    <span class="comment">//用来拦截处理HystrixCommand注解</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> HystrixCommandAspect <span class="title function_">hystrixAspect</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HystrixCommandAspect</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">        HystrixPlugins.getInstance().registerConcurrencyStrategy(<span class="keyword">new</span> <span class="title class_">MdcHystrixConcurrencyStrategy</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>三、mq producer 和 consumer之间的trace跟踪</p>
+<blockquote>
+<p>正常情况下、用msgId就可以了、有些数据分析需要trace来全局跟踪</p>
+</blockquote>
+<ol>
+<li><p>在生产者的消息属性中加入traceId</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SendResult</span> <span class="variable">result</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"> <span class="type">Message</span> <span class="variable">msg</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Message</span>(topic, tag, key, val.getBytes());</span><br><span class="line"> msg.putUserProperty(<span class="string">&quot;traceId&quot;</span>, MDC.get(TraceConst.TRACE_KEY));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在消费者中取出traceId、放入MDC</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MessageExt</span> <span class="variable">msgExt</span> <span class="operator">=</span> msgs.get(i);</span><br><span class="line">                        <span class="type">String</span> <span class="variable">msgId</span> <span class="operator">=</span> msgExt.getMsgId();</span><br><span class="line">                        <span class="type">String</span> <span class="variable">msgBody</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(msgExt.getBody());</span><br><span class="line">                        MDC.put(TraceConst.TRACE_KEY, msgExt.getUserProperty(<span class="string">&quot;traceId&quot;</span>));</span><br><span class="line">                        logger.info(<span class="string">&quot;msgs-size=&#123;&#125;, msgId=&#123;&#125;, msgBody=&#123;&#125;&quot;</span>, msgs.size(), msgId, msgBody);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部分源码<br><img src="https://upload-images.jianshu.io/upload_images/14027542-44bfdc7e5e6f2949.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-87639bf3513c1838.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>文章参考<br><a target="_blank" rel="noopener" href="https://my.oschina.net/u/3748347/blog/1823392">https://my.oschina.net/u/3748347/blog/1823392</a><br><a target="_blank" rel="noopener" href="https://wanghaolistening.github.io/2019/01/26/Hystrix-%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">https://wanghaolistening.github.io/2019/01/26/Hystrix-%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_Java%E5%85%83%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java元注解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Java中元注解有4个：<code>@Retention</code>, <code>@Target</code>, <code>@Document</code>, <code>@Inherited</code></p>
+<p><code>@Retention</code>注解的保留位置：<br><code>@Retention(RetentionPolicy.SOURCE)</code> 注解仅存在于源码中、在class字节码文件中不存在<br><code>@Retention(RetentionPolicy.CLASS)</code> 默认保留策略、注解会在class文件中存在、但、运行时无法获得<br><code>@Retention(RetentionPolicy.RUNTIME)</code> 注解会在class文件中存在、并且可以通过反射得到</p>
+<p><code>@Target</code> 注解的作用目标<br><code>@Target(ElementType.TYPE)</code> 接口、类、枚举、注解<br><code>@Target(ElementType.FIELD)</code> 字段、枚举的常量<br><code>@Target(ElementType.METHOD)</code> 方法<br><code>@Target(ElementType.PARAMETER)</code> 方法参数<br><code>@Target(ElementType.CONSTRUCTOR)</code> 构造函数<br><code>@Target(ElementType.LOCAL_VARIABLE)</code> 局部变量<br><code>@Target(ElementType.ANNTATION_TYPE)</code> 注解<br><code>@Target(ElementType.PACKAGE)</code> 包</p>
+<p><code>@Document</code> 说明该注解将会被包含在javadoc中</p>
+<p><code>@Inherited</code> 说明子类可以继承父类中的该注解</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80(%E4%B8%80)/" class="post-title-link" itemprop="url">Java多线程实现基础(一)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="CPU-的术语介绍"><a href="#CPU-的术语介绍" class="headerlink" title="CPU 的术语介绍"></a>CPU 的术语介绍</h4><p><code>内存屏障</code>: <code>memory barriers</code> 一组处理器指令、用于实现对内存操作的顺序限制</p>
+<p><code>缓冲行</code>: <code>cache line</code> cpu高速缓冲中可以分配的最小存储单位<br>         处理器填写缓冲行时、会加载整个缓存行、现代CPU需要执行几百次CPU指令</p>
+<p><code>原子操作</code>: <code>atomic operations</code> 不可中断的一个或者一系列操作</p>
+<p><code>缓冲行填充</code>: <code>cache line fill</code>当处理器识别到从内存中读取的操作数是可缓存的,<br>        处理器读取整个高速缓存行到适当的缓存(L1,L2,L3或者所有)</p>
+<p><code>缓存命中</code>: <code>cache hit</code>如果进行高速缓存行填充操作的内存位置仍然是下次处理器访问的<br>地址时、处理器从缓存行读取而不是从内存读取</p>
+<p><code>写命中</code>: <code>write hit</code> 当处理器将操作数写回到内存缓存时、会先检查这个缓存的内存地址<br>是否在缓存行中、如果存在一个有效的缓存行、处理器会将这个操作数歇会到缓存、而不是内存</p>
+<p><code>写缺失</code>: <code>write misses the cache</code> 一个有效的缓存行被写入到不存在的内存区域</p>
+<p><code>比较并交换</code>: <code>Compare and Swap</code> cas操作需要两个值, old and new、在操作期间会比较这<br>两个值、如果发生变化则不交换、未发生变化才交换</p>
+<p><code>CPU流水线</code>: <code>CPU pipeline</code>在CPU中由5、6个不同的电路单元组成一条指令处理流水线<br>然后一条X86指令分成5~6步后再由这些电路单元分别执行、就能实现在一个CPU周期内完成<br>一条指令、提高CPU的运算速率</p>
+<p><code>内存顺序冲突</code>: <code>memory order violation</code>一般是由假共享引起的、是指多个CPU同时修改<br>同一个缓存行的不同部分而引起其中一个CPU的操作无效、当出现这个内存顺序冲突时、CPU必须清空流水线</p>
+<h4 id="Lock前缀的指令"><a href="#Lock前缀的指令" class="headerlink" title="Lock前缀的指令"></a>Lock前缀的指令</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lock 前缀的指令、在多核处理器下会引发两件事:</span><br><span class="line"><span class="bullet">1.</span> 将当期处理器的缓存行数据写回内存</span><br><span class="line"><span class="bullet">2.</span> 这个写回内存操作会使在其它CPU里缓存了该地址的数据无效</span><br></pre></td></tr></table></figure>
+
+<h4 id="volatile的实现"><a href="#volatile的实现" class="headerlink" title="volatile的实现"></a>volatile的实现</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为了提高速度、CPU不直接和内存通信、而是先将系统内存的数据加载到内存缓存后再操作</span><br><span class="line">但: 操作完全不知道何时会被写回内存</span><br><span class="line"></span><br><span class="line"><span class="keyword">volatile</span>声明的变量进行读写、JVM会向处理器发送一条<span class="keyword">Lock</span>前缀的指令、精讲变量所在的</span><br><span class="line">缓存行数据写回到内存</span><br><span class="line"></span><br><span class="line">在多核处理器下、实现了缓存一致性协议、每个处理器通过嗅探在总线上传播的数据来检查</span><br><span class="line">自己的缓存是否已过期、当处理器发现自己缓存行对应的内存地址呗修改、会将当期处理器的</span><br><span class="line">缓存行状态设为无效、重新从系统内存读取</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_Java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">Java类的加载和继承实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="类方法-amp-实例方法"><a href="#类方法-amp-实例方法" class="headerlink" title="类方法 &amp; 实例方法"></a>类方法 &amp; 实例方法</h4><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">类方法:(静态方法) <span class="keyword">static</span>修饰、可以通过类名直接访问、</span><br><span class="line">实例方法: 无<span class="keyword">static</span>修饰、必须通过创建的实例才能访问</span><br><span class="line"></span><br><span class="line">类变量和实例变量同理</span><br><span class="line"></span><br><span class="line">实例方法可以直接访问实例变量 ?</span><br><span class="line">因为在实例方法中、有一个隐含的参数(当前操作的对象本身)</span><br><span class="line"><span class="number">1.</span> 类方法只能调用类方法、访问类变量, 不能访问实例方法和实例变量</span><br><span class="line"><span class="number">2.</span> 实例方法可以访问类方法、类变量、实例方法、实例变量</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>可以将类看成自定义数据类型</strong></p>
+<h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 定义一个类本身、什么都不会做、不会分配内存、也不会执行代码</span><br><span class="line"><span class="number">2.</span> 声明变量本身只分配存放位置的内存空间、这块空间还未指向任何实际内容</span><br><span class="line"><span class="number">3.</span> p = <span class="keyword">new</span> <span class="type">Point</span><span class="literal">()</span>; </span><br><span class="line">   <span class="number">1</span>) 分配内存、以存储新对象的数据(这个对象的属性、包括实例变量x|y)</span><br><span class="line">   <span class="number">2</span>) 给实例变量设置默认值、<span class="built_in">int</span>-&gt;<span class="number">0</span> boolean-&gt;<span class="literal">false</span> <span class="built_in">char</span>-&gt;\u000 refer-&gt;null</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> 修改变量默认值</span><br><span class="line">   <span class="number">1</span>) 定义的同时、初始化 <span class="keyword">private</span> <span class="built_in">int</span> x = <span class="number">1</span>;</span><br><span class="line">   <span class="number">2</span>) 初始化代码块 <span class="keyword">private</span> <span class="built_in">int</span> y; &#123;y=<span class="number">2</span>&#125;  </span><br><span class="line">   <span class="number">3</span>) 构造方法 </span><br><span class="line">   调用顺序 <span class="number">1</span>) -&gt; <span class="number">2</span>) -&gt; <span class="number">3</span>)  所以、若多种方式定义了默认值、前边的会被后边的覆盖</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> final修饰类变量、实例变量、表示变量只能被赋值一次、final也可以修饰实例方法</span><br></pre></td></tr></table></figure>
+
+<h4 id="类和对象的生命周期"><a href="#类和对象的生命周期" class="headerlink" title="类和对象的生命周期"></a>类和对象的生命周期</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 程序运行时、第一次通过<span class="keyword">new</span><span class="type"></span>创建一个类的对象的时候、or 直接通过类名访问类变量/类方法的时候、</span><br><span class="line">   Java会讲类加载进内场、为这个类分配一块空间、保护类的定义、有哪些变量和方法、</span><br><span class="line">   还有类的静态变量、并对静态变量赋初值</span><br><span class="line">   </span><br><span class="line">   类加载进内存后一般不会释放、直到程序结束、一般情况下、只加载一次(静态变量在内存中只存在一份)</span><br><span class="line">   </span><br><span class="line"><span class="number">2.</span> 对象 每次<span class="keyword">new</span><span class="type"></span>、都会产生一个新的实例、会有一份独立的实例变量</span><br><span class="line">   每个对象除了保存实例变量的值、还保存着对应类的地址、即: <span class="type"></span>通过对象可以知道类、就能访问到类的变量和方法</span><br><span class="line">   实例方法可以理解为多了<span class="built_in">this</span>参数的静态方法</span><br><span class="line">   </span><br><span class="line">   对象的释放是被Java的垃圾回收机制管理的</span><br><span class="line">   a. 保存地址的部分分配在桟上、函数调用入栈就分配、出栈就释放</span><br><span class="line">   b. 保存内容的部分分配在堆上、无活跃变量指向对象的时候(已加载的类的类变量和桟中所有的变量)、</span><br><span class="line">      就可能被释放</span><br></pre></td></tr></table></figure>
+
+<h4 id="类继承"><a href="#类继承" class="headerlink" title="类继承"></a>类继承</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> java 使用extends表明继承关系、一个类只有一个父类</span><br><span class="line"><span class="bullet">2.</span> 子类不可访问父类的私有属性和方法、可以访问 protected 和 public 的</span><br><span class="line"></span><br><span class="line"><span class="bullet">3.</span> 向上转型: 子类对象赋值给父类引用变量(转换为父类类型)、</span><br><span class="line"></span><br><span class="line"><span class="bullet">4.</span> 多态: 变量shape可以引用任何Shape子类类型的对象、即一种类型的变量、可以引用多种实际类型对象</span><br><span class="line">   变量shape有两种类型、类型Shape: 称为shape的静态类型、circle/line/arrowLine 称为shape的动态类型</span><br><span class="line">   </span><br><span class="line"><span class="bullet">5.</span> 动态绑定: shapes[i].draw() 调用的是其对应动态类型的draw方法、称为方法的动态绑定</span><br><span class="line"></span><br><span class="line"><span class="bullet">6.</span> 若父类只有一个带参数的构造方法、则所有子类都必须通过super调用base的带参构造</span><br><span class="line"></span><br><span class="line"><span class="bullet">7.</span> 若父类构造方法调用了可被重写的方法、可能会出现意想不到的结果</span><br><span class="line"></span><br><span class="line"><span class="bullet">8.</span> 静态绑定: 在类的内部、访问的是当前类</span><br><span class="line">   在类的外部、要看如何访问、静态类型是父类、则访问的是父类</span><br><span class="line"></span><br><span class="line"><span class="bullet">9.</span> 静态变量和方法、一般通过类名直接访问、也可以通过实例对象来访问</span><br><span class="line"></span><br><span class="line"><span class="bullet">10.</span> 在有多个重名函数的时候、首先按照参数类型进行匹配、然后才看变量的动态类型、进行动态绑定</span><br><span class="line"></span><br><span class="line"><span class="bullet">11.</span> 模板方法: 在父类定义一个实现的模板、具体实现由子类提供</span><br><span class="line"></span><br><span class="line"><span class="bullet">12.</span> 子类可以升级父类的可见性、不可降低</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">在Java中、类的加载时将类的相关信息加载到内存、Java是动态加载的、第一次使用时才会加载</span><br><span class="line">加载一个类时、会查看其父类是否已加载、若没有、会加载其父类</span><br><span class="line"></span><br><span class="line">类初始化代码:</span><br><span class="line"><span class="bullet">1.</span> 定义静态变量时的赋值语句</span><br><span class="line"><span class="bullet">2.</span> 静态初始化代码块</span><br><span class="line"></span><br><span class="line">实例初始化代码:</span><br><span class="line"><span class="bullet">1.</span> 定义实例变量时的赋值语句</span><br><span class="line"><span class="bullet">2.</span> 实例初始化代码块</span><br><span class="line"><span class="bullet">3.</span> 构造方法</span><br><span class="line"></span><br><span class="line">类加载过程:</span><br><span class="line"><span class="bullet">1.</span> 分配内存保存类的信息</span><br><span class="line"><span class="bullet">2.</span> 给类变量赋默认值</span><br><span class="line"><span class="bullet">3.</span> 加载父类</span><br><span class="line"><span class="bullet">4.</span> 设置父子关系</span><br><span class="line"><span class="bullet">5.</span> 执行类初始化代码(先执行父类 -&gt; 子类、不过父类执行时、子类静态变量是有值的、默认值)</span><br><span class="line"></span><br><span class="line">内存分为堆(存放动态分配的对象)和桟(存放函数的局部变量)、还有一个内存区: 方法区(存放类的信息)</span><br><span class="line"></span><br><span class="line">创建对象:</span><br><span class="line"><span class="bullet">1.</span> 分配内存</span><br><span class="line">   包括本类和父类的所有实例变量、但不包括任何静态变量</span><br><span class="line">   实例化代码从父类开始、再执行子类</span><br><span class="line">   但: 在任何类执行初始化代码之前、所有的实例变量都已设置完默认值</span><br><span class="line">   </span><br><span class="line"><span class="bullet">2.</span> 对所有的实例变量赋默认值</span><br><span class="line"><span class="bullet">3.</span> 执行实例初始化代码</span><br><span class="line"></span><br><span class="line"><span class="strong">**Note**</span> </span><br><span class="line">每个对象除了保存类的实例变量之外、还保存着实际类信息的引用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="虚方法表"><a href="#虚方法表" class="headerlink" title="虚方法表"></a>虚方法表</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在类加载的时候、为每个类创建一个表、包括类的对象所有动态绑定的方法及地址、包括父类的方法</span><br><span class="line">但同一个方法只有一条记录、子类重写之后就只会保留子类的</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="疑问"><a href="#疑问" class="headerlink" title="疑问:"></a>疑问:</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Q</span>. 实例变量的初始化是在<span class="selector-tag">new</span>的时候进行的、类变量的初始化呢 ？(MyNumber.class)</span><br><span class="line"><span class="selector-tag">A</span>. <span class="selector-tag">Java</span>对静态类的初始化</span><br><span class="line">   <span class="number">1</span>) 为类里边的静态变量分配内存空间、并赋初值</span><br><span class="line">   <span class="number">2</span>) 按照初始化的代码顺序对类变量进行初始化</span><br><span class="line">   </span><br><span class="line"><span class="selector-tag">Q</span>: 父子类、同名静态变量在内存中如何保存 ？</span><br><span class="line">   同名实例变量呢 ？</span><br><span class="line"><span class="selector-tag">A</span>: 对于子类来说、会保存两份、静态类型是哪个的时候、访问的就是哪个</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>参考：<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/u_WmkE5meMWuZ81G5gHhBQ">https://mp.weixin.qq.com/s/u_WmkE5meMWuZ81G5gHhBQ</a></p>
+<p>代码整理:<br><a target="_blank" rel="noopener" href="https://github.com/niujing1/javaLearn/tree/master">https://github.com/niujing1/javaLearn/tree/master</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">Java线程池初探</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="线程池类型"><a href="#线程池类型" class="headerlink" title="线程池类型"></a>线程池类型</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">new</span><span class="type">SingleThreadExecutor</span> </span><br><span class="line">   -&gt; <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>L, </span><br><span class="line">                                      TimeUnit.MILLISECONDS, <span class="keyword">new</span> <span class="type">LinkedBlockingQueue</span>&lt;Runnable&gt;());</span><br><span class="line">   只使用一个线程、使用无界队列 LinkedBlockingQueue, 线程创建后不会超时终止、该线程顺序执行所有任务</span><br><span class="line">   适用于需要确保所有任务呗顺序执行的场合</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> <span class="keyword">new</span><span class="type">FixedThreadPool</span> </span><br><span class="line">   -&gt; ThreadPoolExecutor(nThreads, nThreads, <span class="number">0</span>L, </span><br><span class="line">                         TimeUnit.MILLISECONDS,<span class="keyword">new</span> <span class="type">LinkedBlockingQueue</span>&lt;Runnable&gt;())</span><br><span class="line">   保持固定线程数、新的任务进入、会放进任务队列                       </span><br><span class="line">   </span><br><span class="line"><span class="number">2.</span> <span class="keyword">new</span><span class="type">CachedThreadPool</span> </span><br><span class="line">   -&gt; ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE, <span class="number">60</span>L, </span><br><span class="line">                         TimeUnit.SECONDS, <span class="keyword">new</span> <span class="type">SynchronousQueue</span>&lt;Runnable&gt;())</span><br><span class="line">   任务到达、有空闲线程就复用、无空闲线程就创建</span><br><span class="line">   任务执行完、线程最大空闲时间<span class="number">60</span>s、超过<span class="number">60</span>s会被销毁                     </span><br><span class="line">                         </span><br><span class="line"><span class="number">3.</span> <span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(Runtime.getRuntime().availableProcessors() * <span class="number">3</span>,</span><br><span class="line">                          <span class="number">200</span>, <span class="number">1</span>,TimeUnit.MINUTES, <span class="keyword">new</span> <span class="type">ArrayBlockingQueue</span>&lt;Runnable&gt;(<span class="number">100000</span>), <span class="keyword">new</span> <span class="type">DefaultThreadFactory</span>())                    </span><br></pre></td></tr></table></figure>
+
+<h4 id="核心参数"><a href="#核心参数" class="headerlink" title="核心参数"></a>核心参数</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">corePoolSize:</span> 线程池中维护的核心线程数、空闲依然存在、除非设置了 allowCoreThreadTimeOut 参数</span><br><span class="line"><span class="symbol">maximumPoolSize:</span> 最大线程数</span><br><span class="line"><span class="symbol">keepAliveTime:</span> 线程池中的线程数 &gt; 核心线程数的时候、空闲线程最大idle的时间</span><br><span class="line"><span class="symbol">workQueue:</span> 任务队列</span><br></pre></td></tr></table></figure>
+
+<h4 id="Queue类型"><a href="#Queue类型" class="headerlink" title="Queue类型"></a>Queue类型</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> LinkedBlockingQueue</span><br><span class="line"><span class="bullet">2.</span> SynchronousQueue</span><br><span class="line"><span class="bullet">3.</span> ArrayBlockingQueue</span><br><span class="line"><span class="bullet">4.</span> </span><br></pre></td></tr></table></figure>
+
+<h4 id="reject"><a href="#reject" class="headerlink" title="reject"></a>reject</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> ThreadPoolExecutor.AbortPolicy：这就是默认的方式，抛出异常</span><br><span class="line"><span class="bullet">2.</span> ThreadPoolExecutor.DiscardPolicy：静默处理，忽略新任务，不抛异常，也不执行</span><br><span class="line"><span class="bullet">3.</span> ThreadPoolExecutor.DiscardOldestPolicy：将等待时间最长的任务扔掉，然后自己排队</span><br><span class="line"><span class="bullet">4.</span> ThreadPoolExecutor.CallerRunsPolicy：在任务提交者线程中执行任务，而不是交给线程池中的线程执行</span><br><span class="line"></span><br><span class="line">拒绝策略只有在队列有界，且maximumPoolSize有限的情况下才会触发</span><br><span class="line">如果队列无界，服务不了的任务总是会排队，但这不见得是期望的，因为请求处理队列可能会消耗非常大的内存，甚至引发内存不够的异常</span><br><span class="line">如果队列有界但maximumPoolSize无限，可能会创建过多的线程，占满CPU和内存，使得任何任务都难以完成</span><br><span class="line">在任务量非常大的场景中，让拒绝策略有机会执行是保证系统稳定运行很重要的方面</span><br></pre></td></tr></table></figure>
+
+<h4 id="线程池的选择"><a href="#线程池的选择" class="headerlink" title="线程池的选择"></a>线程池的选择</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 在系统负载很高的情况下、<span class="keyword">new</span><span class="type">FixedThreadPool</span>可以通过队列对新任务排队、保证有足够的资源处理实际任务</span><br><span class="line">   而<span class="keyword">new</span><span class="type">CachedThreadPool</span>会为每一个任务创建一个线程、导致创建过多的线程竞争CPU和内存资源、</span><br><span class="line">   使得任何任务都难以完成、此时使用<span class="keyword">new</span><span class="type">FixedThreadPool</span>更合适</span><br><span class="line"><span class="number">2.</span> 若系统负载不太高、单个任务执行时间也比较短、<span class="keyword">new</span><span class="type">CachedThreadPool</span> 因为不用排队、效率可能更高</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 系统负载可能极高的情况下、两者都不是最好的选择</span><br><span class="line">   <span class="keyword">new</span><span class="type">FiexedThreadPool</span>的问题是: <span class="type"></span>队列过长、占用更多内存</span><br><span class="line">   <span class="keyword">new</span><span class="type">CachedThreadPool</span>的问题是: <span class="type"></span>线程数过多、导致过多线程竞争CPU和内存资源</span><br></pre></td></tr></table></figure>
+
+<h4 id="线程池的死锁"><a href="#线程池的死锁" class="headerlink" title="线程池的死锁"></a>线程池的死锁</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">若任务之间有依赖、可能会出现线程池的死锁</span><br><span class="line">eg. 线程池的大小为<span class="number">5</span>、taskA 提交了<span class="number">5</span>个任务、taskA会提交<span class="number">5</span>个taskB、taskB因为无法创建新的线程只能在等待队列进行等待</span><br><span class="line">    而taskA一直在等待taskB的处理结果、这样就会造成线程池的死锁</span><br><span class="line">    </span><br><span class="line">resolve: <span class="type"></span></span><br><span class="line"><span class="number">1.</span> 使用 <span class="keyword">new</span><span class="type">CachedThreadPool</span> 替代 fixed: <span class="type"></span>这样、有新的任务提交就会创建新的线程</span><br><span class="line"><span class="number">2.</span> 使用 SynchronousQueue 这样、入队成功就意味着有线程接受处理、若入队失败、就会触发reject机制、不管怎么样、都不会死锁了</span><br><span class="line">   <span class="keyword">static</span> ExecutorService executor = <span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(</span><br><span class="line">        THREAD_NUM, THREAD_NUM, <span class="number">0</span>, TimeUnit.SECONDS, </span><br><span class="line">        <span class="keyword">new</span> <span class="type">SynchronousQueue</span>&lt;Runnable&gt;());</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="note"><a href="#note" class="headerlink" title="note"></a>note</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 核心线程不会预先创建，只有当有任务时才会创建</span><br><span class="line"><span class="number">2.</span> 核心线程不会因为空闲而被终止，keepAliveTime参数不适用于它</span><br><span class="line"><span class="number">3.</span> 核心线程干预</span><br><span class="line">   <span class="number">1</span>) <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">prestartAllCoreThreads</span><span class="params">()</span> 预先创建所有的核心线程</span><br><span class="line">   <span class="number">2</span>) <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">prestartCoreThread</span><span class="params">()</span> 创建一个核心线程，如果所有核心线程都已创建，返回<span class="literal">false</span></span><br><span class="line">   <span class="number">3</span>) <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">allowCoreThreadTimeOut</span><span class="params">(<span class="type">boolean</span> value)</span> 如果参数为<span class="literal">true</span>，则keepAliveTime参数也适用于核心线程</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_Solr%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_Solr%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Solr搭建与配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>archive.apache.org<span class="regexp">/dist/</span>lucene<span class="regexp">/solr/</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 将下载完成的solr解压到tomcat的指定目录中</span><br><span class="line">     eg. 我下载的是 tomcat-<span class="number">7.2</span>.<span class="number">1</span>.zip、</span><br><span class="line">         解压目录是 ~<span class="regexp">/Downloads/</span>solr-<span class="number">7.2</span>.<span class="number">1</span></span><br><span class="line">         tomcat部署目录是 ~<span class="regexp">/www/</span>Java</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 复制solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/server/</span>solr-webapp/webapp到tomcat部署目录、同时重命名</span><br><span class="line">   (重命名为非必要步骤、为了方便理解)、</span><br><span class="line">   要<span class="keyword">copy</span>的目录是 solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/server/</span>solr-webapp<span class="regexp">/webapp/</span>、不是  solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/server/</span>solr-webapp/、注意别cp错了~</span><br><span class="line">     cp -R solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/server/</span>solr-webapp<span class="regexp">/webapp/</span> ~<span class="regexp">/www/</span>Java/solr</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 相关jar包复制</span><br><span class="line">    <span class="number">1</span>）solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/server/</span>lib/ext下所有jar包</span><br><span class="line">    <span class="number">2</span>) solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/server/</span>lib/metrics*相关的jar包</span><br><span class="line">    <span class="number">3</span>) solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/dist/</span>solr-dataimporthandler*.jar</span><br><span class="line"> </span><br><span class="line"> [当前处于~/Downloads下]</span><br><span class="line">    cp -R solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/server/</span>lib<span class="regexp">/ext/</span>  ~<span class="regexp">/www/</span>Java<span class="regexp">/solr/</span>WEB-INF<span class="regexp">/lib/</span></span><br><span class="line">    cp -R solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/dist/</span>solr-dataimporthandler-*  ~<span class="regexp">/www/</span>Java<span class="regexp">/solr/</span>WEB-INF<span class="regexp">/lib/</span></span><br><span class="line">    cp -R solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/server/</span>lib<span class="regexp">/metrics-*  ~/</span>www<span class="regexp">/Java/</span>solr<span class="regexp">/WEB-INF/</span>lib/</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. 在 ~<span class="regexp">/www/</span>Java<span class="regexp">/solr/</span>WEB-INF/ 下创建文件夹 classes 用来存放日志配置文件</span><br><span class="line">    mkdir  ~<span class="regexp">/www/</span>Java<span class="regexp">/solr/</span>WEB-INF/classes </span><br><span class="line">  </span><br><span class="line"><span class="number">5</span>. 将日志配置文件放入</span><br><span class="line">     cp ~<span class="regexp">/Downloads/</span>solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/server/</span>resources<span class="regexp">/log4j.properties ~/</span>www<span class="regexp">/Java/</span>solr<span class="regexp">/WEB-INF/</span>classes/</span><br><span class="line"></span><br><span class="line"><span class="number">6</span>. 创建solr_home目录、作为solr的运行目录</span><br><span class="line">   (eg. solr创建的score会放在这里)</span><br><span class="line">    mkdir ~<span class="regexp">/www/</span>Java/solr_home</span><br><span class="line">    </span><br><span class="line"><span class="number">7</span>. 修改配置、将solr_home指定为刚刚创建的位置</span><br><span class="line">    vi ~<span class="regexp">/www/</span>Java<span class="regexp">/solr/</span>WEB-INF/web.xml </span><br><span class="line"></span><br><span class="line">   两处修改:</span><br><span class="line">  <span class="number">1</span>) env-entry 的注释打开、并且将</span><br><span class="line">       &lt;env-entry-value&gt;。。。&lt;/env-entry-value&gt;修改为刚才创建的目录</span><br><span class="line">       &lt;env-entry-value&gt;<span class="regexp">/Users/</span>nj<span class="regexp">/www/</span>Java<span class="regexp">/solr_home&lt;/</span>env-entry-value&gt;</span><br><span class="line">  <span class="number">2</span>) &lt;security-constraint&gt;注释掉(配置访问权限、不然有可能会<span class="number">403</span>)、 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6ff0528121e02f7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="env.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-5eb1ffc4a8d226f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="security.png"></p>
+<h4 id="启动solr"><a href="#启动solr" class="headerlink" title="启动solr"></a>启动solr</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">重启tomcat</span><br><span class="line"><span class="keyword">cd</span> ~/build/java/apache-tomcat/bin</span><br><span class="line"><span class="keyword">sh</span> shutdown.<span class="keyword">sh</span></span><br><span class="line"><span class="keyword">sh</span> startup.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">访问 localhos<span class="variable">t:8081</span>/solr/<span class="built_in">index</span>.html 可以看到solr的管理界面</span><br><span class="line">注:</span><br><span class="line"><span class="number">1</span>. 端口号是自己的tomcat的访问端口、可能是<span class="number">8080</span>或者其它任意端口</span><br><span class="line"><span class="number">2</span>. 访问时一定加上 <span class="built_in">index</span>.html</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-44dc0994227bfdc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>&#x3D;&#x3D;solr服务搭建end</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这样就搭建完成、可以开始使用了</span><br><span class="line">如果遇到<span class="number">404</span>的情况、可以检查下 使用的jar包是不是都<span class="keyword">copy</span>完成了</span><br></pre></td></tr></table></figure>
+
+<h4 id="初始化solr数据"><a href="#初始化solr数据" class="headerlink" title="初始化solr数据"></a>初始化solr数据</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 创建文件夹 ~<span class="regexp">/www/</span>Java<span class="regexp">/solr_home/</span>new_core 用来存放core内容</span><br><span class="line">    将conf文件cp进去</span><br><span class="line">    cp -r ~<span class="regexp">/www/</span>Java<span class="regexp">/solr_home/</span>configsets<span class="regexp">/_default/</span>conf ~<span class="regexp">/www/</span>Java<span class="regexp">/solr_home/</span>new_core/</span><br><span class="line"><span class="number">2</span>. 在页面上可以看到 如下图所示、点击添加一个 core</span><br><span class="line"><span class="number">3</span>. image2中填写的部分都可以修改 name和instanceDir要保持一致(同为刚刚建立的文件夹的名字)</span><br><span class="line"><span class="number">4</span>. 创建成功之后、就可以看到 image中、划线的地方变成了、core Selector、点击、可以看到我们刚刚创建的new_core、如image3</span><br><span class="line">自定义core创建完成、</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-db08b19d9c30d8c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-dd02545058169919.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image2.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-87109e2aadbef028.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image3.png"></p>
+<h4 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 引入jar包</span><br><span class="line">   cp ~<span class="regexp">/www/</span>Java<span class="regexp">/lib/my</span>sql<span class="regexp">/mysql-connector-java-5.1.38.jar ~/</span>www<span class="regexp">/Java/</span>solr<span class="regexp">/WEB-INF/</span>lib/</span><br><span class="line"><span class="number">2</span>. 复制solr-<span class="number">7.2</span>.<span class="number">1</span><span class="regexp">/example/</span>example-DIH<span class="regexp">/solr/</span>db<span class="regexp">/conf/</span>下的db-data-config.xml到solr-home<span class="regexp">/core2/</span>conf/下，此处改名为data-config.xml(也可以不修改)</span><br><span class="line"><span class="number">3</span>. 修改配置内容</span><br><span class="line">   &lt;dataConfig&gt;</span><br><span class="line">    &lt;dataSource type=<span class="string">&quot;JdbcDataSource&quot;</span> driver=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span> url=<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/taotao&quot;</span> user=<span class="string">&quot;root&quot;</span> password=<span class="string">&quot;root&quot;</span>/&gt;</span><br><span class="line">    &lt;document&gt;</span><br><span class="line">        &lt;entity name=<span class="string">&quot;tb_item&quot;</span> </span><br><span class="line">            query=<span class="string">&quot;select id,title,sell_point,price,num,barcore,image,cid,status,created,updated from tb_item&quot;</span>&gt;</span><br><span class="line">        &lt;/entity&gt;</span><br><span class="line">    &lt;/document&gt;</span><br><span class="line">&lt;/dataConfig&gt;</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. 修改solrconfig、添加导入信息</span><br><span class="line">  vi  ~<span class="regexp">/www/</span>Java<span class="regexp">/solr_home/</span>new_core<span class="regexp">/conf/</span>solrconfig.xml</span><br><span class="line"></span><br><span class="line">     &lt;!-- add by myself --&gt;</span><br><span class="line">    &lt;requestHandler name=<span class="string">&quot;/dataimport&quot;</span> <span class="keyword">class</span>=<span class="string">&quot;org.apache.solr.handler.dataimport.DataImportHandler&quot;</span>&gt;</span><br><span class="line">        &lt;lst name=<span class="string">&quot;defaults&quot;</span>&gt;</span><br><span class="line">          &lt;str name=<span class="string">&quot;config&quot;</span>&gt;data-config.xml&lt;/str&gt;</span><br><span class="line">        &lt;/lst&gt;</span><br><span class="line">    &lt;/requestHandler&gt;</span><br><span class="line">注意要和requestHandler标签同级</span><br><span class="line"><span class="number">4</span>. 自定义solr字段、在manager-schema中添加filed字段(放在text后即可)</span><br><span class="line">    如：field.png所示</span><br><span class="line">   注意：type必须是fileType已定义的类型(defined.png)</span><br><span class="line"><span class="number">5</span>. 数据导入</span><br><span class="line"><span class="number">6</span>. 数据查询(query.png)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-b36efbd2eea2cb82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="data-config.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-ac54aea06f0bd371.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="solrconfig.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-13915d20a978490d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="field.png"><br><img src="https://upload-images.jianshu.io/upload_images/14027542-832f12d71e6bf66d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="defined.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-324870b92233d0fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="import.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-2290be0f85dba4b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="query.png"></p>
+<h4 id="end"><a href="#end" class="headerlink" title="end"></a>end</h4><figure class="highlight parser3"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml">这样就可以开始使用了</span><span class="keyword">^.</span><span class="language-xml">^</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">effective-java笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>考虑静态工厂方法代替构造器<ol>
+<li>含义更明确</li>
+<li></li>
+</ol>
+</li>
+<li></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

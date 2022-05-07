@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="bean的作用域123456Spring的&#96;scope&#96; :&#96;Singleton&#96; 一个spring容器中、只有一个&#96;bean&#96; 的实例、spring默认配置&#96;Prototype&#96; 每次调用新建一个bean&#96;Request&#96; web项目中、给每个http request请求一个bean实例&#96;Session&#96; web项目中、给每个http session一个bean实例&#96;GlobalSession&#96;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/java_java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="bean的作用域123456Spring的&#96;scope&#96; :&#96;Singleton&#96; 一个spring容器中、只有一个&#96;bean&#96; 的实例、spring默认配置&#96;Prototype&#96; 每次调用新建一个bean&#96;Request&#96; web项目中、给每个http request请求一个bean实例&#96;Session&#96; web项目中、给每个http session一个bean实例&#96;GlobalSession&#96;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.784Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/java_java%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java基础 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_java%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">Spring的`scope` :</span></span><br><span class="line">`Singleton` 一个spring容器中、只有一个`bean` 的实例、spring默认配置</span><br><span class="line">`Prototype` 每次调用新建一个bean</span><br><span class="line">`Request` web项目中、给每个http request请求一个bean实例</span><br><span class="line">`Session` web项目中、给每个http session一个bean实例</span><br><span class="line">`GlobalSession` 只有在Portal应用中有、给每个global http request一个bean实例</span><br></pre></td></tr></table></figure>
+<h4 id="postConstructor"><a href="#postConstructor" class="headerlink" title="postConstructor"></a>postConstructor</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@PostConstruct</span> 在 construct之后执行、</span><br><span class="line">相当于java配置方式的 <span class="variable">@Bean</span>(initMethod=<span class="string">&#x27;xxx&#x27;</span>)、</span><br><span class="line">相当于xml配置方式的 init-method</span><br><span class="line"></span><br><span class="line"><span class="variable">@PreDestroy</span> 在bean销毁之前执行、</span><br><span class="line">相当于java配置方式的 <span class="variable">@Bean</span>(deatroyMethod=<span class="string">&#x27;xxx&#x27;</span>)</span><br><span class="line">相当于xml配置方式的 destroy-method</span><br></pre></td></tr></table></figure>
+
+<h4 id="profile"><a href="#profile" class="headerlink" title="profile"></a>profile</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">提供不同环境不同配置文件的支持</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Spring的事件为<span class="keyword">Bean与Bean之间的通信提供了支持、</span></span><br><span class="line"><span class="keyword"></span><span class="number">1</span>) 自定义事件  继承ApplicationEvent</span><br><span class="line"><span class="number">2</span>) 定义事件监听器  实现 ApplicationListener</span><br><span class="line"><span class="number">3</span>) 使用容器发布事件</span><br></pre></td></tr></table></figure>
+
+<h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 异步任务 <span class="meta">@Async</span> </span><br><span class="line"><span class="number">2.</span> 规划任务 <span class="meta">@Scheduled</span> 每隔固定时间执行</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="桟"><a href="#桟" class="headerlink" title="桟"></a>桟</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">主要用来存放函数调用所需要的数据<span class="comment">(函数参数、返回地址及函数内部的局部变量)</span>、但、返回值不在桟中、会有一个专门的返回值存储器、</span><br></pre></td></tr></table></figure>
+
+<h4 id="变量的生命周期"><a href="#变量的生命周期" class="headerlink" title="变量的生命周期"></a>变量的生命周期</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 函数中的参数和函数内定义的变量、都分配在桟上、在函数调用时被分配、调用结束释放</span><br><span class="line"><span class="bullet">2.</span> 数组和对象 存放变量地址的空间是分配在桟上的、存放变量内容的空间是分配在堆上的</span><br><span class="line">函数调用结束、存放变量地址的空间会被立即释放、而存放内容的空间不会、它会因为没有变量引用、而被垃圾回收机制回收掉</span><br></pre></td></tr></table></figure>
+
+<h4 id="类和对象的声明周期"><a href="#类和对象的声明周期" class="headerlink" title="类和对象的声明周期"></a>类和对象的声明周期</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类加载进内存后、一般不会释放、直到程序结束、一般情况下、类只会加载<span class="number">1</span>次、所以、静态变量在内存中只有一份</span><br><span class="line"></span><br><span class="line">对象：每次<span class="keyword">new</span><span class="type"></span>创建一个对象的时候、对象产生、在内存中、会存储这个对象的实例变量值、每<span class="keyword">new</span><span class="type"></span>一次、对象就会产生一个、就会有一份独立的实例变量</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_java%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" rel="prev" title="java常用注解">
+      <i class="fa fa-chevron-left"></i> java常用注解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_hbase/" rel="next" title="hbase">
+      hbase <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">bean的作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#postConstructor"><span class="nav-number">2.</span> <span class="nav-text">postConstructor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#profile"><span class="nav-number">3.</span> <span class="nav-text">profile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1"><span class="nav-number">5.</span> <span class="nav-text">任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%9F"><span class="nav-number">6.</span> <span class="nav-text">桟</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">7.</span> <span class="nav-text">变量的生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F"><span class="nav-number">8.</span> <span class="nav-text">类和对象的声明周期</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

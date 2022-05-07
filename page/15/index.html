@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/15/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/15/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86(36%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86(36%E8%AE%B2)/" class="post-title-link" itemprop="url">局部性原理(36讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>平时服务端访问db遇到瓶颈的时候、大部分工程师会选择添加缓存、来缓解DB压力、提升程序性能、但一定是有效的吗 ?</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-a6decbd56530e742.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加缓存层.png"></p>
+<h4 id="理解局部性原理"><a href="#理解局部性原理" class="headerlink" title="理解局部性原理"></a>理解局部性原理</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">时间局部性: 若一个数据被访问了、短时间内再次被访问的概率就增加. </span></span><br><span class="line">eg. 今天读一本小说、还未读完、明天接着读的概率就很大</span><br><span class="line">电商系统中、用户打开一个APP、看到首屏、推断会访问其它页面、将用户的个人信息、从存储在硬盘的数据库读取到内存的缓存中来</span><br><span class="line">利用的就是时间局部性</span><br><span class="line"></span><br><span class="line"><span class="section">空间局部性: eg. 存储数据时、数组内的多项数据会存储在相邻位置、</span></span><br><span class="line">好比图书馆会将同一系列的书放到一个书架上、摆在一起、加载的时候一并加载、</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-99bf7bdef7b5865d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="同一数据在短时间内会反复访问.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-95a6a3adbe0eaed6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="相邻的数据被连续访问.png"></p>
+<blockquote>
+<p>有了时间和空间局部性、可以不用将数据都放在内场车、也不用都放在HDD上、而是将访问次数多的数据、放在贵但是快一些的存储器、访问次数少、价格便宜的放在慢但容量大的容器里、组合使用各种存储设备</p>
+</blockquote>
+<h4 id="如何花最少的钱满足存储需求？"><a href="#如何花最少的钱满足存储需求？" class="headerlink" title="如何花最少的钱满足存储需求？"></a>如何花最少的钱满足存储需求？</h4><figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">假设: 需要提供一个亚马逊这样的电商网站、有<span class="number">6</span>亿件商品、每件商品需要<span class="number">4</span>MB 存储空间(共<span class="number">6</span>亿 * <span class="number">4</span>MB = <span class="number">2400</span><span class="keyword">TB</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>.数据都放在内存、需要<span class="number">3600</span>w美元(<span class="number">2400</span><span class="keyword">TB</span>/<span class="number">1</span>MB * <span class="number">0</span><span class="number">.015</span>美元)</span><br><span class="line"><span class="number">2</span>.假设内存只存放<span class="number">1</span>%的热门商品<span class="number">600</span>w件、剩下存储到HDD硬盘上、存储成本就下降到 <span class="number">45</span><span class="number">.6</span>w美元、原来的<span class="number">1</span><span class="number">.3</span>%</span><br><span class="line"><span class="number">3600</span>w美元*<span class="number">1</span>% + <span class="number">2400</span>T/<span class="number">1</span>M * <span class="number">0</span><span class="number">.00004</span>美元 = <span class="number">45</span><span class="number">.6</span>w美元</span><br><span class="line"></span><br><span class="line">利用的就是时间局部性、将用户访问过的数据、加载到内存中、一旦内存放不下、就把长时间未访问的数据从内存移走、</span><br><span class="line">其实就是LRU缓存算法、商品访问越频繁、越容易在内存找到、很好的利用了内存的随机访问性</span><br><span class="line"></span><br><span class="line">另外还要关注一个指标: 缓存命中率 (Hit Rate / Hit Ratio)</span><br><span class="line"></span><br><span class="line">内存的随机访问需要<span class="number">100</span>ns、即: 极限情况下、可以支持<span class="number">1000</span>w次随机访问</span><br><span class="line">假设: 用了<span class="number">24</span>T(<span class="number">8</span>G一条)内存、意味着<span class="number">3000</span>条内存、可以支持每秒<span class="number">300</span>亿次访问</span><br><span class="line"><span class="number">24</span><span class="keyword">TB</span> / <span class="number">8</span>GB * <span class="number">1</span>s/<span class="number">100</span>ns = <span class="number">300</span>亿</span><br><span class="line">以<span class="number">2017</span>年<span class="number">3</span>亿的用户来看、每天的活跃用户<span class="number">1</span>亿、平均访问<span class="number">100</span>个商品、平均每秒访问的商品数量<span class="number">12</span>w次 </span><br><span class="line">假设数据没有命中缓存、对应的数据请求访问HDD磁盘、一块硬盘每秒只能支撑<span class="number">100</span>次随机访问、</span><br><span class="line"><span class="number">2400</span><span class="keyword">TB</span>的数据、<span class="number">4</span><span class="keyword">TB</span>一块磁盘的话、有<span class="number">600</span>块、每秒支撑 <span class="number">6</span>w次请求</span><br><span class="line"><span class="number">2400</span><span class="keyword">TB</span>/<span class="number">4</span><span class="keyword">TB</span> * <span class="number">1</span>s/<span class="number">10</span>ms </span><br><span class="line">这意味着: 所有的商品都直接到了HDD硬盘、HDD支撑不了这样的压力</span><br><span class="line">至少需要<span class="number">50</span>%的缓存命中率、HDD磁盘才可以支撑对应的访问次数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B8%B8%E7%94%A8%E6%9C%AF%E8%AF%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%B8%B8%E7%94%A8%E6%9C%AF%E8%AF%AD/" class="post-title-link" itemprop="url">常用术语</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>IPL</code> 指令级并行 <code>Instruction-level parallelism</code><br><code>SMT</code> 同时多线程 Simultaneous Multi-Threading<br><code>SIMD</code>  单指令多数据流 Single Instruction Multiple Data<br><code>MIMD</code> 多指令多数据流 Multiple Instruction Multiple Data<br><code>SIMT</code> 单指令多线程 Single Instruction, Multiple Threads<br><code>ASIC</code> 专用集成电路 Application-Specified Integrated Circuit<br><code>FPGA</code> 现场可编程门阵列 Filed-Programmable Gate Array</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF(17-19%E8%AE%B2)/" class="post-title-link" itemprop="url">建立数据通路(17-19讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="指令周期"><a href="#指令周期" class="headerlink" title="指令周期"></a>指令周期</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">计算机每执行一条指令的过程、可以分解为:</span><br><span class="line"><span class="bullet">1.</span> Fetch(取得指令), 也就是从PC寄存器找到对应的指令地址、根据指令地址从内存找到具体指令、加载到指令寄存器、然后将PC寄存器自增、好在未来执行下一条指令</span><br><span class="line"><span class="bullet">2.</span> Decode(指令译码): 根据指令寄存器里的指令、解析成将要进行什么样的操作、是R、I、J中的哪一种指令、具体要操作哪些寄存器、数据或者内存地址</span><br><span class="line"><span class="bullet">3.</span> Execute(执行指令), 也就是实际运行对应的R、I、J这些特定的指令、进行算术逻辑操作、数据传输或者直接的地址跳转</span><br><span class="line"><span class="bullet">4.</span> 重复1~3的步骤</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>Machine Cycle</code>: 又称为<code>机器周期</code>或者<code>CPU周期</code>, CPU的内部操作速度很快、但是访问内存的速度却慢很多、每一条指令都从内存中加载而来、所以一般把从内存中读取一条指令的最短时间称为<code>CPU周期</code></p>
+<p><code>Clock Cycle</code>: 也就是时钟周期及机器的主频、一个CPU周期通常是几个时钟周期的积累、一个CPU周期的时间、就是这几个时钟周期的总和</p>
+<blockquote>
+<p> 对于一个指令周期来说、取出一条指令、然后执行、至少需要两个CPU周期、取出指令至少需要一个CPU周期、执行也至少需要一个CPU周期、复杂的指令需要更多的CPU周期</p>
+<p>so. 一个指令周期包含多个CPU周期、而一个CPU周期又包含多个时钟周期</p>
+</blockquote>
+<h4 id="建立数据通路"><a href="#建立数据通路" class="headerlink" title="建立数据通路"></a>建立数据通路</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">一般来说、数据通路就是处理器单元、通常有两类元件组成</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> 操作元件: 也叫组合逻辑单元、就是ALU、功能就是在特定的输入下、根据下面的组合电路的逻辑、生成特定的输出</span><br><span class="line"><span class="bullet">2.</span> 存储元件: 也叫状态原件, eg. 计算过程中需要用到的寄存器、无论是通用寄存器还是状态寄存器、其实都是存储原件</span><br><span class="line"></span><br><span class="line">通过数据总线的方式、将操作元件和存储元件连接起来、就可以完成数据的存储、处理和传输了、这就是所谓的建立数据通路</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>控制器: 可以看成只是机械的重复 Fetch -&gt; Decode -&gt; Execute 循环中的前两个步骤、然后将最后一个步骤通过控制器产生的信号、交给ALU去处理</p>
+</blockquote>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">控制器电路听起来很简单、其实特别复杂,</span><br><span class="line"><span class="number">1</span>. 所有<span class="meta">CPU</span>支持的指令、都会在控制器里边被解析成不同的输出信号、eg. Intel <span class="meta">CPU</span>支持<span class="number">2000</span>个以上的指令、意味着: 控制器输出的控制信号、至少有<span class="number">2000</span>种不同的组合</span><br><span class="line">控制器里的ALU和各种组合逻辑电路、可以认为是一个固定功能的电路、控制器翻译出来的、就是不同的控制信号、这些控制信号、告诉ALU去做不同的计算</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CPU所需要的硬件电路"><a href="#CPU所需要的硬件电路" class="headerlink" title="CPU所需要的硬件电路"></a>CPU所需要的硬件电路</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">要想搭建CPU、需要再数字电路层面、实现一些功能.</span><br><span class="line">一、ALU: 实际就是一个没有状态的、根据输入计算输出结果的一个电路</span><br><span class="line">二、需要一个寄存器<span class="comment">(可进行状态读写的电路元件)</span></span><br><span class="line">   需要一个电路<span class="comment">(可存储上次计算的结果)</span>、这个计算结果不一定立刻能拿到电路的下游使用、但可在需要的时候拿出来使用、常见能够进行状态读写的电路有: 锁存器<span class="comment">(Latch)</span> 和 D触发器<span class="comment">(Data / Delay Flip-flop)</span></span><br><span class="line">三、需要有一个`自动`的电路: 可按照固定的周期、不停地实现呢PC寄存器自增、自动的执行 Fetch-Decode-Execute的步骤</span><br><span class="line">四、需要一个译码电路: 无论是decode还是对于拿到的内存地址去获对应的数据或者指令、都需要通过一个电路找到对应的数据、这个就是译码器电路</span><br><span class="line"></span><br><span class="line">虽然CPU已经是有几十亿个晶体管组成的及其复杂的电路、但 仍然是由一个个的基本功能的电路组成的</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="时序逻辑电路"><a href="#时序逻辑电路" class="headerlink" title="时序逻辑电路"></a>时序逻辑电路</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">解决了以下问题:</span><br><span class="line"><span class="bullet">1.</span> 自动运行, 时序电路接通后可以不停的开启和关闭开关、进入下一个自动运行的状态、使得控制器不停的让PC寄存器自增读取下一条指令成为可能</span><br><span class="line"><span class="bullet">2.</span> 存储问题, 通过时序电路实现的触发器、可以把计算结果存储在特定的电路里、而不是像组合逻辑电路、一旦输入变化、对应的输出也会变化</span><br><span class="line"><span class="bullet">3.</span> 时序协调问题, 无论是程序实现的软件指令还是硬件层面、各种指令的操作都有先后的顺序要求、时序电路使得不同的事件按照时间顺序发生</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="时钟信号的硬件实现"><a href="#时钟信号的硬件实现" class="headerlink" title="时钟信号的硬件实现"></a>时钟信号的硬件实现</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">时钟: CPU的祝您是又一个晶体振荡器实现的、而这个晶体振荡器生成的电路信号、就是时钟信号</span></span><br><span class="line"><span class="section">反馈电路: 将电路的输出信号作为输入信号的电路构造方式、叫做反馈电路</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="通过D触发器实现存储功能"><a href="#通过D触发器实现存储功能" class="headerlink" title="通过D触发器实现存储功能"></a>通过D触发器实现存储功能</h4><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">将<span class="variable">R</span>和<span class="variable">S</span>两个信号通过一个反相器合并、可以通过一个数据信号<span class="built_in">D</span>进行<span class="variable">Q</span>的写入操作</span><br><span class="line"></span><br><span class="line">只要<span class="variable">CLK</span>信号是<span class="number">1</span>、<span class="variable">R</span>和<span class="variable">S</span>就可以设置输出<span class="variable">Q</span>、而当<span class="variable">CLK</span>信号是<span class="number">0</span>的时候、无论<span class="variable">R</span>和<span class="variable">S</span>怎么设置、输出信号<span class="variable">Q</span>是不变的、这样、整个电路就成了我们最常用的<span class="built_in">D</span>型触发器、用来控制<span class="variable">R</span>和<span class="variable">S</span>这两个开关的信号、可以视为一个输入的数据信号<span class="built_in">D</span>、也就是<span class="variable">Data</span>、这就是<span class="built_in">D</span>型触发器的由来</span><br><span class="line"></span><br><span class="line">一个<span class="built_in">D</span>型触发器、只能控制<span class="number">1</span><span class="variable">bit</span>的读写、若同时拿出多个<span class="built_in">D</span>型触发器并列在一起、并且把用同一个<span class="variable">CLK</span>信号控制作为所有<span class="built_in">D</span>型触发器的开关、就变成了一个<span class="built_in">N</span>位的<span class="built_in">D</span>型触发器、可以同时控制<span class="built_in">N</span>位的读写</span><br><span class="line"></span><br><span class="line"><span class="variable">CPU</span>中的寄存器可以直接通过<span class="built_in">D</span>型触发器来构造、可以在<span class="built_in">D</span>触发器的基础上、加上更多的开关、来实现清<span class="number">0</span>或者全置位这样的操作</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="PC寄存器所需要的计数器"><a href="#PC寄存器所需要的计数器" class="headerlink" title="PC寄存器所需要的计数器"></a>PC寄存器所需要的计数器</h4><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">PC</span>寄存器还有个名字叫程序计数器、为什么呢 <span class="operator">?</span></span><br><span class="line">有了时钟信号、可以提供定时的输入、有了<span class="built_in">D</span>型触发器、可以在时钟信号控制的时间点写入数据、将这两个功能组合起来、就可以实现一个自动的计数器了</span><br><span class="line"></span><br><span class="line">加法器的两个输入、一个始终设置为<span class="number">1</span>、另外一个个来自于一个<span class="built_in">D</span>型触发器<span class="variable">A</span>、将加法器的输出结果、写到这个<span class="built_in">D</span>触发器的<span class="variable">A</span>里边、于是 <span class="built_in">D</span>型触发器里边的数据就会在固定的时钟信号为<span class="number">1</span>的时候更新一次</span><br><span class="line"></span><br><span class="line">加法计数、内存取值、乃至后边的命令执行、最终其实都是由时钟信号来控制执行时间点和先后顺序的、这也是需要时序电路最核心的原因</span><br><span class="line"></span><br><span class="line">在最简单的情况下、需要让每一条指令、从程序计数器、到获取指令、执行指令、都在一个时钟周期内完成、若<span class="variable">PC</span>计数器增长太快、程序就会出错<span class="operator">,</span> 因为此时前一次运算的结果还没写回对应的寄存器</span><br><span class="line">在这种情况下、需要在一个时钟周期里、确保执行完成一条最复杂的<span class="variable">CPU</span>指令、即<span class="operator">:</span> 耗时最长的一条<span class="variable">CPU</span>指令、这样的<span class="variable">CPU</span>设计、称为 单指令周期处理器</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="读写数据所需要的译码器"><a href="#读写数据所需要的译码器" class="headerlink" title="读写数据所需要的译码器"></a>读写数据所需要的译码器</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">现在数据可以存储在D触发器里了、若将多个D触发器放在一起、就可以形成很大的一块存储空间、甚至可以当成一块内存来使用、</span><br><span class="line">eg. 现在的电脑内存可能有8G、16G、那么怎么才能知道写入和读取的数据是这块大的内存里、哪几个bit呢 ?</span><br><span class="line"><span class="section">于是: 我们需要一个电路来完成寻址的工作、就是 译码器</span></span><br><span class="line">将寻址退化到最简单的模型、就是两个地址中选择一个、称为 2-1选择器、</span><br><span class="line">若输入的信号有三个不同的开关、就可以从 2³=8中选择一个地址了、即3-8译码器</span><br><span class="line">现代计算机是64位的、寻址空间是2的64次方、需要一个有64个开关的译码器</span><br><span class="line"></span><br><span class="line"><span class="section">所以: 译码器的本质、就是从输出的多个位的信号中、根据一定的开关和电路组合、选择自己想要的信号、除了可以寻址、还可以将对应的需要运行的指令码同样通过译码器、找出我们期望执行的指令、也就是opcode及后边对应的操作数或者寄存器地址</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>因为从内存取指令的时间很长、若使用单指令周期处理器、意味着我们的指令都要去等待一些慢速操作、这些不同指令执行速度的差异、也正是计算机指令有指令周期、CPU周期和时钟周期之分的原因、因此, 优化现代CPU性能时、用的CPU都不是单指令周期处理器、而是通过流水线、分支预测等技术、来实现在一个周期里同时执行多个指令</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86(28%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86(28%E8%AE%B2)/" class="post-title-link" itemprop="url">异常处理(28讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>之前都是程序正常运行的、不需要网络交互、无IO交互、执行过程无错误、</p>
+<p>但: 实际的软件、程序不仅执行简单指令、还会和IO打交道、执行过程中也会遇到各种异常情况</p>
+<p>此时计算机如何工作呢?</p>
+<h4 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h4><blockquote>
+<p>关于异常、其实是一个硬件和软件结合到一起的处理过程、异常的发生和捕获、是在硬件层面完成的; 异常的处理、是软件完成的</p>
+</blockquote>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">计算机会为每一种可能发生的异常、分配异常代码<span class="comment">(Exception Number)</span>, 或者叫中断向量<span class="comment">(Interrupt Vector)</span>, 异常发生的时候、通常是CPU检测到了一个特殊的信号、eg. 按下键盘上个的按键、输入设备就会给CPU发送信号、或者 正在执行的指令发生了加法溢出、会有一个进位溢出的信号、</span><br><span class="line">这些信号在组成原理里, 一般叫 发生了一个事件<span class="comment">(event)</span></span><br><span class="line">CPU在检测到事件的时候、就拿到了对应的异常代码</span><br><span class="line"></span><br><span class="line">这些异常代码里、</span><br><span class="line"><span class="number">1.</span>IO发出的信号的异常代码是操作系统分配的、即: 软件来设定的、</span><br><span class="line"><span class="number">2.</span>像加法溢出这样的异常代码、则是CPU预先分配好的、也就是硬件来分配的</span><br><span class="line"></span><br><span class="line">拿到异常代码之后、CPU会触发异常处理的流程, 在计算机的内存里、会保留一个异常表 <span class="comment">(Exception Table)</span>, 又叫中断向量表、存放了不同异常代码对应的异常处理程序<span class="comment">(Exception Handler)</span>的地址</span><br><span class="line"></span><br><span class="line">CPU拿到异常码 -&gt; 保存当前程序执行现场<span class="comment">(到程序桟)</span> -&gt; 根据异常码找到对应处理程序 -&gt; 把后续指令执行的指挥权、交给异常处理程序来处理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="异常的分类-中断、陷阱、故障和终止"><a href="#异常的分类-中断、陷阱、故障和终止" class="headerlink" title="异常的分类: 中断、陷阱、故障和终止"></a>异常的分类: 中断、陷阱、故障和终止</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">中断(Interrupt): 在程序执行的过程中被打断、这个打断执行的信号、来自于CPU外部的IO设备、eg. 按下键盘按键</span></span><br><span class="line"></span><br><span class="line"><span class="section">陷阱(Trap): 主动触发的异常, </span></span><br><span class="line">            eg. 1. 程序调试时、设定断点 </span><br><span class="line">            2.应用程序产生系统调用的时候、从用户态切换到内核态、</span><br><span class="line">            3. 应用程序通过系统调用去读取文件、创建进程、其实也是通过触发陷阱完成的</span><br><span class="line">            </span><br><span class="line"><span class="section">故障(Fault): 和陷阱的区别在于: 陷阱是开发者主动触发的、故障是意料之外的、会导致系统异常</span></span><br><span class="line"><span class="section">和前两者的区别在于: 故障在异常处理完成后、仍然回来处理当前指令、而不是执行下一条指令、因为当前指令由于故障没有执行完成</span></span><br><span class="line"></span><br><span class="line"><span class="section">中止(Abort): 与其说是一种异常、不如说是故障的特殊情况、当CPU遇到故障、但无法恢复时、就不得不终止</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="异常的处理-上下文切换"><a href="#异常的处理-上下文切换" class="headerlink" title="异常的处理: 上下文切换"></a>异常的处理: 上下文切换</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在实际异常处理程序之前、CPU需要一次保存现场的操作、过程与函数调用类似</span><br><span class="line">实际更复杂一些:</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> 异常情况往往发生在正常执行的预期之外、eg. 中断、故障发生时、除了本来程序压桟要做的事情、还要把CPU内当前运行程序用到的所有寄存器、放到桟中、最典型的是 条件码寄存器</span><br><span class="line"><span class="bullet">2.</span> 像陷阱这种异常、涉及程序指令在用户态和内核态之间的切换、对应压桟的时候、对应数据要压到内核栈、而不是程序桟</span><br><span class="line"><span class="bullet">3.</span> 像故障这样的异常、在异常处理程序执行完成之后、从桟里返回、继续执行的是引起故障的当前指令、而不是顺序的下一条指令</span><br><span class="line"></span><br><span class="line">对于异常这样的处理流程、不像是顺序执行的指令间的函数调用关系、更像是两个不同的独立进程在CPU层面的切换、这个过程称为 上下文切换(Context Switch)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">异常处理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>异常的发生和捕获是在硬件层面完成的、异常的处理是软件完成的</p>
+</blockquote>
+<h4 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h4><p><code>中断Interrupt</code> 触发CPU内部开关值发生变化的信号<br><code>陷阱 Trap</code> 主动触发的异常、比如调试断点<br><code>故障 Fault</code> 非主动的错误、处理完异常之后回来处理当前指令、而不是去执行程序中的下一条指令<br><code>终止 Abort</code> 故障的一直特殊情况、当CPU遇到故障、但无法恢复时、程序就必须终止了<br><img src="https://upload-images.jianshu.io/upload_images/14027542-9e29e130eb12f784.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="异常.png"></p>
+<h4 id="异常处理、上下文切换"><a href="#异常处理、上下文切换" class="headerlink" title="异常处理、上下文切换"></a>异常处理、上下文切换</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">类似异常处理函数调用、指令的控制权被切换到另外一个<span class="code">`函数`</span>里、但比函数调用更复杂一些</span><br><span class="line"><span class="bullet">1.</span> 因为异常情况往往发生在正常执行的预期之外、eg. 中断、故障发生的时候、所以、除了本来程序压桟要做的事情之外、还需要把CPU内当前运行程序用到的所有寄存器都放在桟里边. eg. 条件码寄存器的内容</span><br><span class="line"></span><br><span class="line"><span class="bullet">2.</span> 类似陷阱这种异常、涉及程序指令在用户态和内核态之间的切换、对应压桟的时候、对应数据是压到内核栈、而不是程序桟</span><br><span class="line"></span><br><span class="line"><span class="bullet">3.</span> 类似故障这样的异常、在异常处理执行完成之后、从桟里返回出来、继续执行的不是顺序的下一条指令、而是故障发生的当前指令、因为当前指令因为故障没有正常执行成功、必须重新执行一次</span><br><span class="line"></span><br><span class="line">对于异常这样的处理流程、不像是顺序执行的指令间的函数调用关系、更像是两个不同的独立进程之间在CPU层面的切换、称为 <span class="code">`上下文切换`</span> </span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E6%80%BB%E7%BA%BF--%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%86%85%E9%83%A8%E7%9A%84%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF(42%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E6%80%BB%E7%BA%BF--%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%86%85%E9%83%A8%E7%9A%84%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF(42%E8%AE%B2)/" class="post-title-link" itemprop="url">总线--计算机内部的高速公路(42讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="降低复杂性-总线的设计思路来源"><a href="#降低复杂性-总线的设计思路来源" class="headerlink" title="降低复杂性: 总线的设计思路来源"></a>降低复杂性: 总线的设计思路来源</h4><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">计算机有很多不同的硬件设备、除了CPU和内存之外、还有大量的输入/出设备.</span><br><span class="line">键盘、鼠标、显示器、硬盘或者通过USB接口连接的各种外部设备、都对应了一个设备</span><br><span class="line">若各个设备间的通信、都是独立的. 假设有<span class="built_in">N</span>个不同的设备、之间独立连接、复杂度为<span class="built_in">N</span>², </span><br><span class="line">为了简化系统复杂度、引入总线、将<span class="built_in">N</span>²的复杂度变成<span class="built_in">N</span>的复杂度</span><br><span class="line"></span><br><span class="line">如何降低呢 ？</span><br><span class="line"></span><br><span class="line">设计一个公用的线路、CPU和设备的通信指令、对应数据或者设备和CPU的通信指令和数据都</span><br><span class="line">发送到该线路上、设备间无需单独建立连接、只建立与总线的连接就好</span><br><span class="line"> 这个设计思路就是`总线`</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-5f05820ee8d9e708.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">总线其实就是一组线路、各个设备通过这组线路相互通信.</span><br><span class="line">对应的设计思路就是<span class="string">`事件总线`</span>设计模式</span><br><span class="line">在这个设计模式里、系统中的各个组件间也需要相互通信、各个模块触发对应的事件、并把事件对象发送到总线上.</span><br><span class="line">即: 每个模块都是发布者<span class="symbol">Publisher</span>, 同时把自己注册到总线上、监听总线上的事件、并根据事件的对象类型</span><br><span class="line">或是对象内容来决定自己是否进行特定的处理或者响应</span><br><span class="line">这样各个模块就是松耦合的、模块间无依赖关系、无论是代码的维护还是未来的扩展、都很方便</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-ac56318353560e27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="理解总线-三种线路和多总线架构"><a href="#理解总线-三种线路和多总线架构" class="headerlink" title="理解总线: 三种线路和多总线架构"></a>理解总线: 三种线路和多总线架构</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">现代Intel CPU的体系结构里、通常有好几条总线</span><br><span class="line"><span class="title">首先, CPU和内存及高速缓存通信的总线、通常有两种, 称为`双独立总线`(DIB:</span> Dual Independent Bus)</span><br><span class="line">CPU里、有一个快速的`本地总线`(Local Bus)及一个相对较慢的`前端总线`(front-side Bus)</span><br><span class="line">本地总线和高速缓存通信、前端总线用来和主内存及IO设备通信</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4a8892f00a079bc6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在物理层面、可以将总线看做一组电线、不过这些电线之间也是有分工的、通常有3类:</span><br><span class="line"><span class="bullet">1.</span> 数据线(Data Bus): 用来传输实际的数据信息</span><br><span class="line"><span class="bullet">2.</span> 地址线(Address Bus): 用来确定将数据传输到哪里、是内存的额某个位置还是某个Io设备、</span><br><span class="line"><span class="bullet">3.</span> 控制线(Control Bus): 用来控制对总线的访问. 若将总线比喻为公交车、有人要坐车时需要通知司机、这个就是控制信号</span><br><span class="line"></span><br><span class="line">总线减少了设备耦合、降低了系统设计的复杂度、但不能同时给多个设备提供通信功能</span><br><span class="line">那多个设备都想使用总线、给谁用呢? 就需要一个机制来决定、这个机制叫<span class="code">`总线裁决`</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%90%86%E8%A7%A3IO_WAIT--IO%E6%80%A7%E8%83%BD%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%E5%84%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%90%86%E8%A7%A3IO_WAIT--IO%E6%80%A7%E8%83%BD%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%E5%84%BF/" class="post-title-link" itemprop="url">理解IO_WAIT--IO性能到底怎么回事儿</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>应用系统的大部分瓶颈在IO上、不是所有的问题都可以利用内存或者CPU Cache做缓存解决、Mysql单表几千万的数据、早已不是罕见现象了、意味着, 使用内存当缓存、存储空间是不够用的. 大部分请求还是会打到硬盘上.</p>
+</blockquote>
+<h4 id="IO性能、顺序和随机访问"><a href="#IO性能、顺序和随机访问" class="headerlink" title="IO性能、顺序和随机访问"></a>IO性能、顺序和随机访问</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">从硬盘厂商的性能报告上、通常可以看到两个指标: 响应时间(Response Time)和数据传输率(Data Transfer Rate)</span><br><span class="line"></span><br><span class="line">现在常用的硬盘有两种: HDD硬盘(机械硬盘) 和 SSD硬盘(固态硬盘). 现在的HDD硬盘使用的是 SATA 3.0 的接口.</span><br><span class="line">SSD硬盘有两种接口: SATA 3.0 和 PCI Express 接口</span><br><span class="line"></span><br><span class="line">SATA 3.0 接口、带宽是6Gb/s, b是bit、相当于每秒传输 768M 数据; 日常使用的HDD硬盘的数据传输率差不多200MB/s</span><br><span class="line">SSD的硬盘、数据传输率差不多500MB/s, 实际SSD的硬盘可以更快. 可以换用PCI Experss的三星SSD硬盘、</span><br><span class="line">它的数据传输率、在读取的时候可以达到2GB/s 左右、差不多是HDD硬盘的10倍、写入时也有1.2GB/s.</span><br><span class="line"></span><br><span class="line">除了数据传输率、我们还关心响应时间. SSD硬盘大概在几十微秒、HDD大概在几ms到十几ms、差异在几十倍甚至上百倍.</span><br><span class="line"></span><br><span class="line">单看响应时间和吞吐率、硬盘性能还可以、基本上在ms时间内可以返回, 1s内可传输的数据也有200MB左右、</span><br><span class="line">db一条记录、一般也就1kb大小、差不多每秒可写入 200M*1024 / 1 约20w条数据、似乎和平时经验不符 ？</span><br><span class="line"></span><br><span class="line">因为硬盘顺序读写和随机读写的性能差异很大.</span><br><span class="line">SSD随机读写的时候、数据传输率只有40MB/s、只有顺序读写情况的几十分之一、按照每次读取4KB计算、</span><br><span class="line">40MB/s / 4kb = 10000次、即: 每秒随机读取1万次、写入会多一些、1s大概90MB、即: 2w多次</span><br><span class="line">这个每秒读写的次数、称为IOPS、即: 每秒输入输出操作的次数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>HDD的IOPS通常只有100左右、而不是20w次、这个100怎么得到的呢 ？如何优化 ？</p>
+</blockquote>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">一块机械硬盘由盘面、磁头和悬臂三个部件组成.</span></span><br><span class="line"><span class="attribute">盘面</span><span class="punctuation">:</span> <span class="string">就是实际存储数据的盘片、通常是使用铝、玻璃或者陶瓷制成的光滑盘片, 盘面有一层磁性涂层</span></span><br><span class="line"><span class="attribute">数据就存储在磁性的涂层上、中间有一个受电机控制的转轴, 用来控制盘面旋转.</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">硬盘一个很重要的指标是转速, 通常有5400转、7200转、10000转的、这个转速指的就是转轴的旋转速度、</span></span><br><span class="line"><span class="attribute">英文单位 RPM, 即</span><span class="punctuation">:</span> <span class="string">每分钟的旋转圈数、7200转为例, 折算到s、就是120圈</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">磁头</span><span class="punctuation">:</span> <span class="string">数据是通过磁头从盘面读取、然后通过电力信号传输给控制电路、接口、再到总线的</span></span><br><span class="line"><span class="attribute">通常一个盘面在正反两面有连你刚刚磁头、且</span><span class="punctuation">:</span> <span class="string">一块硬盘也不是只有一个盘面、而是上下堆叠了很多个盘面、</span></span><br><span class="line"><span class="attribute">各个盘面是平行的、每个盘的正反两面都有磁头.</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">悬臂</span><span class="punctuation">:</span> <span class="string">连接在磁头上、在一定范围内把磁头定位到某个特定的磁道上.</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">盘面通常是圆形的、多个同心圆组成、每个磁道有自己的编号, 悬臂用来控制读哪个磁道的数据</span></span><br><span class="line"><span class="attribute">磁道会分成一个个扇区、上下平响的一个个盘面的相同扇区叫一个柱面、</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">读取数据分两步</span><span class="punctuation">:</span></span><br><span class="line"><span class="attribute">1. 将盘面旋转到某一个位置、在这个位置上、悬臂可以定位到整个盘面的任意子区间、这个区间称为`几何扇区`</span></span><br><span class="line"><span class="attribute">2. 将悬臂移动到特定磁道的特定扇区、找到之后磁头落下、读取数据</span></span><br><span class="line"><span class="attribute">所以, 需要的时间也由两个部分构成</span><span class="punctuation">:</span></span><br><span class="line"><span class="attribute">1. 平均延时, 就是将几何扇区对准悬臂的时间</span></span><br><span class="line"><span class="attribute">7200转为例, 1s可以旋转240个半圈、即</span><span class="punctuation">:</span> <span class="string">1s/240 = 4/71ms</span></span><br><span class="line">2. 平均询道时间, 即 悬臂定位到扇区的时间</span><br><span class="line">HDD硬盘一般在4-10ms、</span><br><span class="line">这样随机数据访问延时一般在8-14ms, 那么</span><br><span class="line">1s/8ms = 125 IOPS 或者 1s/14ms = 70 IOPS</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-f70d1bb6ea65e300.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="硬盘物理结构.png"></p>
+<h4 id="如何定位-IO-WAIT"><a href="#如何定位-IO-WAIT" class="headerlink" title="如何定位 IO_WAIT"></a>如何定位 IO_WAIT</h4><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">由上边可以看到、即使是PCI Express接口的SSD硬盘、IOPS也只有<span class="number">2</span>w左右, CPU 的主频通常在<span class="number">2</span>GHZ以上、</span><br><span class="line">也就是每秒可以做<span class="number">20</span>亿次操作. 即使一条指令需要多个时钟周期、一秒内CPU可执行的指令数和硬盘能进行的操作次数</span><br><span class="line">也有好几个数量级的差异, 所以常听到性能瓶颈在IO上的说法、因为CPU发出指令之后、需要等待IO操作完成.</span><br><span class="line"></span><br><span class="line">如何判断程序性能问题是否真的来源于IO瓶颈呢 ？</span><br><span class="line"><span class="number">1</span>. top指令</span><br><span class="line">top指令的输出结果中、有一行 <span class="meta">%CPU</span> 开头、有一个 wa 的指标、就代表iowait, 即: CPU等待io操作完成花费的时间占CPU的百分比</span><br><span class="line"></span><br><span class="line">iostat可以看到实际的情况</span><br><span class="line"><span class="built_in"></span></span><br><span class="line"><span class="built_in">avg</span>-cpu:  <span class="meta">%user</span>   <span class="meta">%nice</span> <span class="meta">%system</span> <span class="meta">%iowait</span>  <span class="meta">%steal</span>   <span class="meta">%idle</span></span><br><span class="line">          <span class="number">17.02</span>    <span class="number">0</span>.<span class="number">01</span>    <span class="number">2.18</span>    <span class="number">0</span>.<span class="number">04</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">80.76</span></span><br><span class="line">Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn</span><br><span class="line">sda               <span class="number">1.81</span>         <span class="number">2.02</span>        <span class="number">30.87</span>     <span class="number">706768</span>   <span class="number">10777408</span></span><br><span class="line"></span><br><span class="line">tps: 对应的就是硬盘的 IOPS 指标</span><br><span class="line">KB_read/s 和 kb_write/s 对应的就是 数据传输指标</span><br><span class="line">iotop 可以看到具体哪一个进程占用了大量的io</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%A8%8B%E5%BA%8F%E8%A3%85%E8%BD%BD(%E7%AC%AC9%E3%80%8110%E3%80%8111%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%A8%8B%E5%BA%8F%E8%A3%85%E8%BD%BD(%E7%AC%AC9%E3%80%8110%E3%80%8111%E8%AE%B2)/" class="post-title-link" itemprop="url">程序装载(第9、10、11讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、程序装载的挑战<br>在运行可执行文件的时候、装载器会把对应的指令和数据加载到内存中、让CPU执行、装载器需要满足两个条件:</p>
+<ol>
+<li>可执行程序加载后占用的空间是连续的、</li>
+<li>需要同时加载多个程序、并且不能让程序自己规定在内存中加载的位置<br>因为想要的地址可能已经被其它程序给占了</li>
+</ol>
+<p>解决:</p>
+<blockquote>
+<p>在内存里找到连续内存空间分配给装载的程序、然后把这段连续的内存地址和整个程序指令里的指定内存地址做映射</p>
+</blockquote>
+<p><code>虚拟内存地址</code> <code>Virtual Memory Address</code>指令里用到的地址<br><code>物理内存地址</code> <code>Physical Memory Address</code>在内存硬件里的地址</p>
+<p>程序中有指令和各种内存地址、我们只需要关心虚拟内存地址就行了、对于任何一个程序来说、它看到的都是同样的内存地址、我们维护一个虚拟内存到物理内存的映射表、这样实际程序指令执行时、会通过虚拟内存地址、找到对应的物理内存地址、然后执行.<br>因为地址是连续的、只需要维护映射关系的起始地址和对应的空间大小就可以了</p>
+<p>二、内存分段<br><code>分段</code> 找出一段连续的物理内存和虚拟内存地址进行映射的方法<br><img src="https://upload-images.jianshu.io/upload_images/14027542-0603efd72056da7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>分段解决了程序本身不需要关心具体内存地址的问题、也有一些不足之处、<code>内存碎片</code></p>
+<p><code>内存交换</code> <code>Memory Swapping</code> 将程序写回硬盘、再从硬盘读回、读回时放到连续空间位置上、这样剩余空间就是连续的了、解决了<code>内存碎片</code> 的问题<br>但: 若内存交换的时候交互的是一个内存占用很大的程序、机器会十分卡顿</p>
+<p>三、内存分页</p>
+<blockquote>
+<p>既然问题出在内存碎片和交换空间太大上、那么解决办法就是: 少程序内存碎片、另外 当进行内存交换的时候、让需要交换的数据更少、那么问题就可以解决<br>这个办法在计算机的内存管理里边叫<code>内存分页</code></p>
+</blockquote>
+<p><code>内存分页</code> 是把整个物理内存空间切成一段固定尺寸的大小、这样一个连续并且尺寸固定的内存空间叫页(Page)</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">getconf</span> PAGE_SIZE <span class="comment"># 查看页大小、默认4k</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>由于内存是预先划分好的、就没有了不能使用的碎片、只有被释放出来的很多4kb的页、即使内存空间不够、需要让现有的正在运行的程序通过内存交互、释放出来一些内存空间、一次写入磁盘的也只有少数一个或者几个页、不会花很多时间、不会卡顿</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-5ace5504fb471b31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>进一步、程序加载的时候不是一次性全部加载、二手在运行时、需要用到对应虚拟内存页里的指令和数据时才加载、读取特定页时、发现数据未加载到物理内存时会触发一个来自CPU的缺页错误(Page Fault) 系统捕获这个错误、将对应页从虚拟内存读取加载到物理内存</p>
+</blockquote>
+<p>四、链接: 动态链接和静态链接<br><code>动态链接</code> <code>Dynamic Link</code> 链接的不是存储在硬盘上的目标文件代码、二手加载到内存的<code>共享库</code>(<code>shared Libiaries</code>)<br><code>静态链接</code> 之前说到的合并代码段的方式</p>
+<p>在win下、共享库文件是<code>.dll</code> 文件、也就是 <code>Dynamic-Link Library</code>(DLL, 动态链接库).<br>在Linux下、就是<code>.so</code> 文件、(<code>Shared Object</code>)</p>
+<p>五、电信号&amp;门电路</p>
+<blockquote>
+<p>远古传信: 人工、速度慢<br>   -&gt; 金、鼓: 距离有限<br>   -&gt; 烽火台: 光信号、不能传递复杂信息<br>   -&gt; 电报: 传输距离增加、输入信号速度加快<br>   -&gt; 继电器: 解决更远距离传输</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7(39%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7(39%E8%AE%B2)/" class="post-title-link" itemprop="url">缓存一致性(39讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>多核CPU里的每一个CPU核、都有独立属于自己的L1 Cache 和 L2 Cache、多个CPU之间、只是共用L3 Cache 和 主内存、CPU的每个核之间都有各自的缓存、相互之间的操作又是独立的、就会带来<code>缓存一致性</code>问题</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-466c7123a41eebba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="image.png"></p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">示例: 如上图有两个CPU核心、CPU1、CPU2</span><br><span class="line">假设<span class="number">1</span>号核心要将降价信息写入到内存、但使用的是写回策略、先写入到L2 <span class="keyword">Cache</span></span><br><span class="line">但并未同步到L3 <span class="keyword">Cache</span>或者主内存、只有在这个<span class="keyword">Cache</span> Block被交换出去的时候、才会写到主内存</span><br><span class="line">此时L2 <span class="keyword">Cache</span>得到的依然是原始价格、CPU1 和 CPU2 <span class="keyword">Cache</span>里的数据都是读的自身<span class="keyword">Cache</span>、是不一致的</span><br><span class="line">这就是缓存不一致性</span><br></pre></td></tr></table></figure>
+
+<p>思考:<br>缓存要保证一致性、需要满足什么条件呢 ？</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 写传播(<span class="keyword">Write</span> Propagation). 在一个CPU核心里、<span class="keyword">Cache</span>数据更新、必须能传播到其它节点对应的<span class="keyword">Cache</span> Line里</span><br><span class="line"><span class="number">2.</span> 事务的串行化(<span class="keyword">Transaction</span> Serialization): 在一个CPU核心里的读取和写入、在其它的节点看起来、顺序是一样的</span><br><span class="line">(eg. L1 核心先操作了降价为<span class="number">6000</span>、L2核心又操作了降价为<span class="number">5000</span>、若不能保证事务的串行化, 可能L3核心</span><br><span class="line">得到的顺序是L1 -&gt; L2 最终为<span class="number">5000</span>, 而L4得到的顺序为 L2 -&gt; L1 最终为<span class="number">6000</span>、j出现不一致)</span><br></pre></td></tr></table></figure>
+
+<h4 id="总线嗅探机制和MESI协议"><a href="#总线嗅探机制和MESI协议" class="headerlink" title="总线嗅探机制和MESI协议"></a>总线嗅探机制和MESI协议</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">要解决缓存一致性问题、首先要解决的是多个CPU核心之间的数据传播问题、最常见的解决方案叫 `总线嗅探`</span><br><span class="line">其实是把所有的读写请求都通过总线Bus广播给所有的CPU核心、然后让各个核心去嗅探这些请求、再根据本地情况进行响应</span><br><span class="line"></span><br><span class="line">由于总线本身就是一个特别适合广播进行数据传输的机制、所以、也是日常使用的Intel CPU采用的方案</span><br><span class="line"></span><br><span class="line">基于总线嗅探机制、可以分成很多种不同的缓存一致性协议、最常用的就是`MESI`协议</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="MESI协议-写失效协议"><a href="#MESI协议-写失效协议" class="headerlink" title="MESI协议(写失效协议)"></a><code>MESI</code>协议(写失效协议)</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">`MESI`协议、是一种叫`写失效`(`Write Invalidate`)的协议、在写失效协议里、只有一个CPU核心负责写入数据、</span><br><span class="line">其它的核心、只是同步读取到这个写入、在这个CPU核心写入Cache之后、它会广播一个`失效`请求告诉其它核心</span><br><span class="line">其它核心只是判断自己是否也有一个`失效`版本的Cache Block、然后相应标记为`失效`</span><br><span class="line"></span><br><span class="line">MESI 协议由来是对应于 Cache Line的四个不同的标记</span><br><span class="line"><span class="title">M:</span> 已修改 Modified</span><br><span class="line"><span class="title">E:</span> 代表独占 Exclusive</span><br><span class="line"><span class="title">S:</span> 代表共享 Shard</span><br><span class="line"><span class="title">I:</span> 代表已失效 Invalidated</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>独占和共享的差别在哪里呢 ？</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">独占状态下的数据、对应的CPULine只加载到了当前CPU所拥有的<span class="keyword">Cache里、其它的CPU核、</span></span><br><span class="line"><span class="keyword"></span>并没有加载对应的数据到自己的<span class="keyword">Cache里、此时若向独占的Cache </span><span class="keyword">Block写入数据、可自由操作、无需通知其它CPU</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">独占状态下的数据、若收到来自总线的读取缓存的请求、就变成共享状态、因为另一个CPU也把对应的<span class="keyword">Cache </span><span class="keyword">Block加载到了自己的Cache</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">共享状态下、同样的数据多个CPU核心的<span class="keyword">Cache里都有、更新Cache时不可直接修改、</span></span><br><span class="line"><span class="keyword"></span>而是要先向其它的CPU广播一个请求、要求先把其它CPU <span class="keyword">Cache变成无效状态、再更新当前Cache里的数据</span></span><br><span class="line"><span class="keyword"></span>这个广播操作叫`RFO`(Request For Ownership)获取当前对应<span class="keyword">Cache </span><span class="keyword">Block </span>数据的所有权</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-a4378b7c57f51202.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MESI状态流转.png"></p>
+<h4 id="写广播协议"><a href="#写广播协议" class="headerlink" title="写广播协议"></a>写广播协议</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">写广播协议会将一个写入请求广播到所有的<span class="meta">CPU</span>核心、同时更新各个核心里的Cache</span><br><span class="line">在实现上比较简单、但要占用更多的总线带宽、写失效只是告诉其它<span class="meta">CPU</span>核心、哪个地址的缓存失效了、</span><br><span class="line">但是写广播协议把对应的数据传播给其它的<span class="meta">CPU</span>核心</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4(40%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4(40%E8%AE%B2)/" class="post-title-link" itemprop="url">虚拟内存和内存保护(40讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>内存需要被分成固定大小的页(Page),通过虚拟地址到物理地址的转换、才能找到实际物理地址、程序看到的地址都是虚拟地址</p>
+</blockquote>
+<h4 id="简单页表"><a href="#简单页表" class="headerlink" title="简单页表"></a>简单页表</h4><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">虚拟内存和物理内存映射、最直观的方法就是建立一张映射表、实现虚拟内存到物理内存的一一映射</span><br><span class="line">其实就是页表<span class="punctuation">(</span><span class="variable">Page</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">这种转换会把一个内存地址分成页号<span class="built_in">Directory</span>和偏移量<span class="built_in">Offset</span>两个部分</span><br><span class="line">前边的高位、就是内存地址的页号<span class="operator">;</span> 后边的地位就是内存地址里的偏移量<span class="operator">.</span></span><br><span class="line">地址转换的页表、只保留页号之间的映射关系即可<span class="operator">.</span></span><br><span class="line"></span><br><span class="line">同一个页面的内存、在物理层面是连续的、<span class="variable">eg</span><span class="operator">.</span> 一个页大小为<span class="number">4</span><span class="built_in">K</span></span><br><span class="line">需要<span class="number">20</span>位的高位和<span class="number">12</span>位的地位</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-19cb2185b036b931.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<blockquote>
+<p>内存地址转换:</p>
+</blockquote>
+<ol>
+<li>将虚拟内存地址、切分成页号和偏移量的组合</li>
+<li>从页表里边、查询出虚拟页号对应的物理页号</li>
+<li>拿物理页号 + 偏移量 -&gt; 物理内存地址</li>
+</ol>
+<p>思考: 这样一个页表需要多大空间 ？</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">32</span>位的内存地址空间、需要记录<span class="number">2</span>^<span class="number">20</span>大小的数组、一个页号是完整的<span class="number">32</span>位的<span class="number">4</span>字节、这样一个页表就需要<span class="number">4</span>M的空间</span><br><span class="line">并且: 每个进程都有属于自己的虚拟地址空间、也就是、每个进程都需要这样一个页表.</span><br><span class="line">不管进程本身是只有几KB大小的程序、还是需要几GB这样的内存空间、都需要这样一个页表</span><br><span class="line">现在的内存大多超过了<span class="number">4</span>G、若使用上边的数据结构来保存页面、内存占用会更大、如何处理呢 ？</span><br></pre></td></tr></table></figure>
+
+<h4 id="多级页表"><a href="#多级页表" class="headerlink" title="多级页表"></a>多级页表</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">大部分进程占用的内存是有限的、需要的页自然也是有限的、只保存 `用到的页`</span><br><span class="line">之间的映射关系即可</span><br><span class="line"></span><br><span class="line">那、是不是可以选择hash表呢 ？其实采用的是多级页表. 为什么呢 ？</span><br><span class="line"></span><br><span class="line">在整个进程的内存地址空间、通常是 `两头实、中间空`. 在程序运行的时候、内存地址从顶部往下、</span><br><span class="line">不断分配占用的桟的空间. 而堆的空间、则是从底部往上、不断分配占用的</span><br><span class="line"></span><br><span class="line">所以、在一个世纪的程序进程里、虚拟内存占用的地址空间、通常是两段连续的空间、而不是完全散落的随机的内存地址. </span><br><span class="line">而多级页表、就很适合这样的内存地址分布</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以一个4级的多级页表为例: 同一个虚拟内存地址、偏移量的部分和简单页表一样不变、但原有的页号部分、拆成4段、从低到高、分成4级到1级这样4个页表索引</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-2446e7a120d4d843.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">对应的、一个进程会有一个<span class="number">4</span>级页表、先通过<span class="number">4</span>级页表索引、找到<span class="number">4</span>级页表里对应的条目<span class="symbol">Entry</span>. 存放的是一张<span class="number">3</span>级页表所在的位置</span><br><span class="line"><span class="number">4</span>级页表的每一个条目、都对应这一张<span class="number">3</span>级页表、所以可能有多张<span class="number">3</span>级页表</span><br><span class="line"></span><br><span class="line">找到对应的<span class="number">3</span>级页表之后、用<span class="number">3</span>级页表找对应<span class="number">3</span>级索引的条目.</span><br><span class="line"><span class="number">3</span>级页表的索引会指向一个<span class="number">2</span>级页表、同样、二级页表使用索引指向<span class="number">1</span>级页表</span><br><span class="line"><span class="number">1</span>级页表的条目对应的数据内容是物理页号.</span><br><span class="line">拿到物理页号之后、使用 <span class="string">`页号 + 偏移量 `</span> 得到最终的物理内存地址</span><br><span class="line"></span><br><span class="line">可能有很多张<span class="number">1</span>级页表、<span class="number">2</span>级页表甚至<span class="number">3</span>级页表、但: 因为实际的虚拟内存地址通常是连续的、可能只需要很少的<span class="number">2</span>级页表、甚至只需要一张<span class="number">3</span>级页表就可以了</span><br><span class="line">事实上、多级页表就像一个多叉树、常称为页表树(<span class="symbol">Page</span> <span class="symbol">Table</span> <span class="symbol">Tree</span>)</span><br><span class="line"></span><br><span class="line">因为虚拟地址分布的连续性、树的第一层节点的指针、很多是空的、无需对应子树、找最终物理页号</span><br><span class="line">就类似通过一个特定的访问路径、走到树最底层的叶子节点.</span><br><span class="line"></span><br><span class="line">这样分成<span class="number">4</span>级的多级页表来看、若每一级都用<span class="number">5</span>个bit表示、每一张某一级的页表、只需要<span class="number">2</span>^<span class="number">5</span>=<span class="number">32</span>个条目</span><br><span class="line">若每个条目还是<span class="number">4</span>个字节、共需要<span class="number">128</span>字节、而一个一级索引表、对应<span class="number">32</span>个<span class="number">4</span><span class="symbol">KB</span>的、即共<span class="number">128</span><span class="symbol">KB</span>的大小</span><br><span class="line">一个填满的<span class="number">2</span>级索引、对应<span class="number">32</span>个<span class="number">1</span>级索引、即<span class="number">4</span><span class="symbol">MB</span>的大小</span><br><span class="line"></span><br><span class="line">若一个进程占用<span class="number">8</span><span class="symbol">MB</span>的内存空间、分成<span class="number">2</span>个<span class="number">4</span><span class="symbol">MB</span>的连续空间、则它需要<span class="number">2</span>个独立的、填满的<span class="number">2</span>级索引表、</span><br><span class="line"><span class="number">64</span>个<span class="number">1</span>级索引表、<span class="number">2</span>个独立的<span class="number">3</span>级索引表、<span class="number">1</span>个<span class="number">4</span>级索引表、共需要<span class="number">64</span>+<span class="number">2</span>+<span class="number">2</span>+<span class="number">1</span>=<span class="number">69</span>个索引表、每个<span class="number">128</span>字节(<span class="number">9</span><span class="symbol">KB</span>)</span><br><span class="line">差不多只有简单页表的<span class="number">1</span>/<span class="number">500</span>、不过也带来了时间上的开销</span><br><span class="line"></span><br><span class="line">原本只需要一次内存访问就可以找到物理页号、算出物理内存地址、使用<span class="number">4</span>级页表的话、就需要<span class="number">4</span>次内存访问、才能找到物理页号</span><br></pre></td></tr></table></figure>
+
+<p>思考:</p>
+<blockquote>
+<p>内存访问比Cache的性能要差很多、原本只是要做一个简单地址转换、反而要访问好几次内存、时间性能的损耗如何优化呢 ？</p>
+</blockquote>
+<p>— 下文分析</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

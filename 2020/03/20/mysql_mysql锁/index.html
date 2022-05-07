@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="锁的种类和概念Shared and Exclusive Locks 12345678Shard Lock: 共享锁官方: permits the transaction that holds the lock to read a row.eg. select * from table where id&#x3D;1 lock in share mode;Exclusive Locks: 排他锁官方: per">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql锁">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mysql_mysql%E9%94%81/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="锁的种类和概念Shared and Exclusive Locks 12345678Shard Lock: 共享锁官方: permits the transaction that holds the lock to read a row.eg. select * from table where id&#x3D;1 lock in share mode;Exclusive Locks: 排他锁官方: per">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.816Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mysql_mysql%E9%94%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>mysql锁 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_mysql%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql锁
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="锁的种类和概念"><a href="#锁的种类和概念" class="headerlink" title="锁的种类和概念"></a>锁的种类和概念</h3><p><em>Shared and Exclusive Locks</em></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Shard <span class="keyword">Lock</span>: 共享锁</span><br><span class="line">官方: permits the <span class="keyword">transaction</span> that holds the <span class="keyword">lock</span> <span class="keyword">to</span> <span class="keyword">read</span> a <span class="keyword">row</span>.</span><br><span class="line">eg. <span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> id=<span class="number">1</span> <span class="keyword">lock</span> <span class="keyword">in</span> <span class="keyword">share mode</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">Exclusive</span> Locks: 排他锁</span><br><span class="line">官方: permits the <span class="keyword">transaction</span> that holds the <span class="keyword">lock</span> <span class="keyword">to</span> <span class="keyword">update</span> <span class="keyword">or</span> <span class="keyword">delete</span> a <span class="keyword">row</span></span><br><span class="line">eg. <span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> id=<span class="number">1</span> <span class="keyword">for</span> <span class="keyword">update</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><em>Intention Locks</em></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">锁是加在<span class="keyword">table</span>上的、表示要对下一个层级(记录)加锁</span><br><span class="line">Intention shared(<span class="keyword">IS</span>): <span class="keyword">Transaction</span> T intends <span class="keyword">to</span> <span class="keyword">set</span> S locks <span class="keyword">on</span> individual <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">table</span> t</span><br><span class="line">Intention <span class="keyword">exclusive</span>(IX): <span class="keyword">Transaction</span> T intends <span class="keyword">to</span> <span class="keyword">set</span> X <span class="keyword">lock</span> <span class="keyword">on</span> those <span class="keyword">rows</span></span><br><span class="line">在db层看到的是：</span><br><span class="line"><span class="keyword">Table</span> <span class="keyword">Lock</span> <span class="keyword">table</span> `db`.`<span class="keyword">table</span>` trx_id <span class="number">12121212</span> <span class="keyword">lock</span> mode IX</span><br></pre></td></tr></table></figure>
+
+<p><em>Record Locks</em></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">在db层看到的是:</span><br><span class="line"><span class="type">Record</span> Locks space id <span class="keyword">in</span> <span class="number">281</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> <span class="keyword">index</span> <span class="keyword">PRIMARY</span> <span class="keyword">of</span> <span class="keyword">table</span> `db`.`<span class="keyword">table</span>` trx id <span class="number">12121212</span> lock_mode X rec but <span class="keyword">not</span> gap</span><br><span class="line">锁是加在索引上的(从 <span class="keyword">index</span> <span class="keyword">primary</span> <span class="keyword">of</span> <span class="keyword">table</span> `db`.`<span class="keyword">table</span>` ) 可以看出</span><br><span class="line">记录锁有两种类型: </span><br><span class="line"><span class="number">1.</span> lock_mode X locks rec but <span class="keyword">not</span> gap</span><br><span class="line"><span class="number">2.</span> lock_mode S locks rect bot <span class="keyword">not</span> gap</span><br></pre></td></tr></table></figure>
+
+<p><em>Gap Locks</em></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在db层看到的是:</span><br><span class="line"><span class="type">Record</span> Locks space id <span class="number">281</span> pages <span class="keyword">no</span> <span class="number">5</span> n bits <span class="number">72</span> <span class="keyword">index</span> idx_c <span class="keyword">of</span> <span class="keyword">table</span> `lc_3`.`a` trx id <span class="number">133588125</span> lock_mode X locks gap <span class="keyword">before</span> rec</span><br><span class="line">gap锁是用来防止<span class="keyword">insert</span>的</span><br><span class="line">锁的不是记录、而是记录之间的间隙、eg. (<span class="number">10</span>,<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<p><em>Insert intention Locks</em></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在db层看到的是:</span><br><span class="line"><span class="type">Record</span> Locks space id <span class="number">279</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> <span class="keyword">index</span> <span class="keyword">primary</span> <span class="keyword">of</span> <span class="keyword">table</span> `lc_3`.`t1` trx id <span class="number">133587907</span> lock_mode X <span class="keyword">insert</span> intention waiting</span><br></pre></td></tr></table></figure>
+
+<p><em>next-Key locks</em></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在db看到的是:</span><br><span class="line"><span class="type">Record</span> Locks space id <span class="number">281</span> page <span class="keyword">no</span> <span class="number">5</span> n bits <span class="keyword">index</span> idx_c <span class="keyword">of</span> <span class="keyword">table</span> `lc_3`.`t1` trx id <span class="number">133587907</span> lock_mode X</span><br><span class="line">Next-Key Locks = Gap Locks + <span class="type">Record</span> Locks会同时锁住记录和间隙</span><br></pre></td></tr></table></figure>
+
+<p><em>Anto-inc Locks</em></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在db层看到的结果是:</span><br><span class="line">Table Lock table xx trx id <span class="number">7498948</span> lock mode auto-inc waiting </span><br><span class="line">属于表级别的锁 http:<span class="regexp">//</span>keithlan.github.io<span class="regexp">/2017/</span><span class="number">03</span><span class="regexp">/03/</span>auto_increment_lock/</span><br></pre></td></tr></table></figure>
+
+<p><em>显式锁 vs 隐式锁</em></p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">显式锁(explicit lock)</span><br><span class="line">显式加的锁, 在 show engine innoDB <span class="keyword">status</span> 中能够看到、会在内存中产生对象、占用内存</span><br><span class="line">eg. <span class="keyword">select</span> ... for update, <span class="keyword">select</span> ... lock <span class="keyword">in</span> share mode ....</span><br><span class="line"></span><br><span class="line">隐式锁(<span class="keyword">implicit</span> lock)</span><br><span class="line">是在索引中对记录逻辑的加锁、但实际上不产生锁对象、不占用内存空间</span><br><span class="line">eg. insert into xx values(xx)</span><br><span class="line">      update xx set t=t+<span class="number">1</span> <span class="keyword">where</span> id=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">implicit</span> lock -&gt; explicit lock</span><br><span class="line">eg. 只有当<span class="keyword">implicit</span> lock 产生冲突的时候、会自动转换成 explicit lock、降低锁开销</span><br><span class="line">eg. A会话插入记录<span class="number">10</span>、本身会加上 <span class="keyword">implicit</span> lock、但是如果B 会话更新<span class="number">10</span>这条记录、就会转换为 explicit lock</span><br></pre></td></tr></table></figure>
+
+<p><em>metadata lock</em></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">是<span class="keyword">server</span>层实现的锁、与引擎无关</span><br><span class="line">执行<span class="keyword">select</span>时、若有ddl语句、会被阻塞、因为 <span class="keyword">select</span> 会加上 metadata <span class="keyword">lock</span>、防止元数据在访问过程中被修改</span><br></pre></td></tr></table></figure>
+
+<p><em>锁迁移</em></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">锁迁移、又叫锁继承</span><br><span class="line"><span class="selector-tag">A</span>锁住的记录是一条已经被标记为删除的记录、但是还没有被puge、然后这条被标记为删除的记录、被purge掉了、上边的锁就会给了下边一条记录、称为锁迁移</span><br></pre></td></tr></table></figure>
+
+<p><em>锁升级</em></p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一条全表更新的语句、<span class="built_in">db</span>可能会对所有记录加锁、可能造成锁的开销很大、升级为页锁、或者表锁(mysql无锁升级)</span><br></pre></td></tr></table></figure>
+
+<p><em>锁分裂</em></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> innodb 实现的加锁、其实是在页上边做的、没办法直接对记录加锁</span><br><span class="line"><span class="bullet">2.</span> 一个页被读取到内存、会产生锁对象、锁对象里会有位图信息记录哪些heap no被锁住、heapno 表示的就是堆的序列号、可以认为就是定位到某一条记录</span><br><span class="line"><span class="bullet">3.</span> insert的时候、可能会产生页分裂</span><br><span class="line"><span class="bullet">4.</span> 若页分裂、原来对页上边的加锁位图信息也就变了、为了保持这种变化和锁信息、锁对象也会分裂、继续维护分裂后页的锁信息</span><br></pre></td></tr></table></figure>
+
+<p><em>锁合并</em></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考锁分裂</span><br></pre></td></tr></table></figure>
+
+<p><em>latch vs lock</em></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">latch:</span> mutex、rw-<span class="keyword">lock</span>、临界资源用完就释放、不支持死锁检测、应用程序维护 非<span class="built_in">db</span>锁</span><br><span class="line"><span class="symbol">lock:</span> 事务结束后释放、支持死锁检测、<span class="built_in">db</span>锁</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_mysql%E9%94%81%E7%AE%80%E6%9E%90/" rel="prev" title="mysql锁简析">
+      <i class="fa fa-chevron-left"></i> mysql锁简析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_mysql%E7%B4%A2%E5%BC%95%E9%80%89%E6%8B%A9/" rel="next" title="mysql索引选择">
+      mysql索引选择 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E7%A7%8D%E7%B1%BB%E5%92%8C%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">锁的种类和概念</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

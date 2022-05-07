@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/8/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_mysql%E9%94%81%E7%AE%80%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_mysql%E9%94%81%E7%AE%80%E6%9E%90/" class="post-title-link" itemprop="url">mysql锁简析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="mysql锁"><a href="#mysql锁" class="headerlink" title="mysql锁"></a>mysql锁</h3><blockquote>
+<p>根据加锁的范围、MySQL里边的锁可以分为全局锁、表级锁和行锁三类</p>
+</blockquote>
+<h4 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">全局锁: 就是要对整个db实例加锁. mysql提供了一个全局锁支持: </span><br><span class="line">flush tables <span class="keyword">with</span> read <span class="keyword">lock</span>;(FTWRL)</span><br><span class="line">此时: update、ddl、dml语句会被阻塞</span><br><span class="line"></span><br><span class="line">典型场景: 全库逻辑备份</span><br><span class="line"></span><br><span class="line">但是让整个db处于只读状态、比较危险:</span><br><span class="line">若是操作主库、则在整个备份期间、都不能执行更新】整个业务基本上处于停滞状态</span><br><span class="line">若操作从库、则备份期间从库不能执行主库同步过来的binlog、会导致主从延迟</span><br><span class="line"></span><br><span class="line">那么、如果实现不影响业务的备份呢 ？</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> innodb引擎可以使用一致性读</span><br><span class="line">   mysql自带备份工具mysqldump使用参数 --single-transaction 时、mysql就好启动一个事务、来确保拿到一致性视图</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 为何不选择 <span class="keyword">set</span> <span class="keyword">global</span> <span class="keyword">readonly</span>=<span class="literal">true</span> ?</span><br><span class="line">   <span class="number">1</span>) 在某些系统中、<span class="keyword">readonly</span>可能被用来做其它逻辑、比如用来判断db是主还是备库 ？</span><br><span class="line">   <span class="number">2</span>) 在异常处理上的差异</span><br><span class="line">      若执行FTWRL之后、mysql异常断开、mysql会自动释放这个全局锁、整个库可以回到正常更新的状态</span><br><span class="line">      设置<span class="keyword">readonly</span>、若client异常、则db会一直保持<span class="keyword">readonly</span>状态、会导致整个库长时间不可写、风险较高</span><br><span class="line">   <span class="number">3</span>) MDL 在slave库上对super权限无效</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+
+<h4 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql的表级锁有<span class="number">2</span>种: mysql表锁 和 元数据锁(meta data <span class="keyword">lock</span>, MDL)</span><br><span class="line"></span><br><span class="line">表锁的语法是: <span class="keyword">lock</span> <span class="keyword">tables</span> .. <span class="keyword">read</span>/<span class="keyword">write</span>. 与FTWRL类似、使用unlock <span class="keyword">tables</span>主动释放锁、也可以在client断开时自动释放</span><br><span class="line">既限制别的线程、也限制本线程</span><br><span class="line">eg. 某个线程A中执行 <span class="keyword">lock</span> <span class="keyword">tables</span> t1 <span class="keyword">read</span>, t2 <span class="keyword">write</span>; </span><br><span class="line">则其它线程写t1, 读写t2 都会被阻塞、同时、线程A在执行unlock <span class="keyword">tables</span>之前、也只能执行读t1, 读写t2的操作</span><br><span class="line">但innodb可以支持行锁、一般就不使用 <span class="keyword">lock</span> <span class="keyword">tables</span>了、毕竟影响还是很大的</span><br><span class="line"></span><br><span class="line">元数据锁:</span><br><span class="line">不需要显式使用、在访问一个表的时候会被自动加上、MDL的作用是 保证读写的正确性</span><br><span class="line">eg. 正在遍历某表的数据、在执行期间另外一个线程对这个表的结构做了变更、减少了一列、查询结果就会有问题</span><br><span class="line"></span><br><span class="line">在mysql5<span class="number">.5</span>的版本中引入了MDL、当对表curd操作时、会加MDL读锁、对表结构变更时、会加MDL写锁</span><br><span class="line"></span><br><span class="line">* 读锁之间不互斥、可以同时对一张表增删改查</span><br><span class="line">* 写锁、读写锁之间互斥、用来保证表结构变更操作的安全性</span><br><span class="line">so. 两个线程同时对一个表做结构变更时、其中一个要等另外一个执行完才开始执行 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h5><p>case: 给一个小表加字段、却导致db挂掉</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">no<span class="symbol">te:</span> 给表加字段或者修改字段或者加索引、都会导致全表扫描数据</span><br><span class="line">在对大表操作时、都会特别小心、避免对线上造成影响、小表一般认为很快结束、会比较大意、其实、小表操作不当也会造成<span class="built_in">db</span>挂掉</span><br><span class="line"></span><br><span class="line">实验环境<span class="symbol">:</span> mysql5.<span class="number">6</span> <span class="built_in">t</span>是小表</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-94717b6aa177cad2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>可以看到: session A先启动、这时会对t加MDL读锁、session B操作不被影响<br>session C需要MDL写锁、blocked、此时db表现为 不可读写<br>若: 此时db的写十分频繁、且client有重试机制、超时后起一个新的session、这些session很快就会把连接打满</p>
+</blockquote>
+<p>Q: 那么如何安全的给表加字段呢 ？</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">首先要解决长事务、事务不提交、就会一直占着MDL锁. 在mysql的information_schema库的innodb_trx表中、可以看到当前</span><br><span class="line">正在执行的事务、若要做ddl变更的表刚好有长事务在执行、要考虑先暂停DDL或者kill掉事务</span><br><span class="line"></span><br><span class="line">若要变更的是热点表、请求频繁、虽然数据量不大、但请求特别频繁、而不得不加字段、如何做 ?</span><br><span class="line"></span><br><span class="line">此时kill未必管用、因为新的请求马上就进来了、此时比较理想的机制是: </span><br><span class="line">在<span class="keyword">alter</span> <span class="keyword">table</span>语句里设定等待时间、若在这个等待时间里能拿到MDL写锁最好、拿不到也不要阻塞后边的业务、先放弃</span><br><span class="line">之后再重复</span><br><span class="line"></span><br><span class="line">语法: </span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">table</span> nowait <span class="keyword">add</span> column...</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">table</span> wait n <span class="keyword">add</span> column...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="查看锁表情况"><a href="#查看锁表情况" class="headerlink" title="查看锁表情况"></a>查看锁表情况</h4><blockquote>
+<p>show status like ‘table%’;</p>
+</blockquote>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">table<span class="emphasis">_locks_immediate 指能够立即获取表级锁的次数</span></span><br><span class="line"><span class="emphasis">table_locks_</span>waited 指的是不能立即获取表级锁而需要等待的次数、num越大、锁等待越多、有锁争用的情况</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看正在被锁定的表"><a href="#查看正在被锁定的表" class="headerlink" title="查看正在被锁定的表"></a>查看正在被锁定的表</h4><blockquote>
+<p>show open tables where in_use&gt;0;</p>
+</blockquote>
+<h4 id="锁涉及表说明"><a href="#锁涉及表说明" class="headerlink" title="锁涉及表说明"></a>锁涉及表说明</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">information<span class="emphasis">_shcema库</span></span><br><span class="line"><span class="emphasis">innodb_trx 当前innodb内核中的活跃事务</span></span><br><span class="line"><span class="emphasis">innodb_locks 当前状态下产生的innodb锁、仅在有锁等待时打印</span></span><br><span class="line"><span class="emphasis">innodb_lock_</span>waits 当前状态产生的innodb锁等待 仅在有锁等待时打印</span><br></pre></td></tr></table></figure>
+
+<p><strong>innodb_trx表结构说明</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">字段名                 说明</span><br><span class="line"></span><br><span class="line">trx_id innodb          存储引擎内部唯一的事物ID </span><br><span class="line">trx_state              当前事务状态（running和<span class="keyword">lock</span> wait两种状态） </span><br><span class="line">trx_started            事务的开始时间 </span><br><span class="line">trx_requested_lock_id  等待事务的锁ID，如trx_state的状态为<span class="keyword">Lock</span> wait，那么该值带表当前事物等待之前事物占用资源的ID，若trx_state不是<span class="keyword">Lock</span> wait 则该值为<span class="keyword">NULL</span> </span><br><span class="line">trx_wait_started       事务等待的开始时间 </span><br><span class="line">trx_weight             事务的权重，在innodb存储引擎中，当发生死锁需要回滚的时，innodb存储引擎会选择该值最小的进行回滚 </span><br><span class="line">trx_mysql_thread_id     mysql中的线程id, 即<span class="keyword">show</span> processlist显示的结果 </span><br><span class="line">trx_query               事务运行的<span class="keyword">SQL</span>语句 </span><br></pre></td></tr></table></figure>
+
+<p><strong>innodb_locks表结构说明</strong></p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">字段名       说明</span><br><span class="line"></span><br><span class="line">lock_id      锁的ID </span><br><span class="line">lock_trx_id  事务的ID </span><br><span class="line">lock_mode    锁的模式（S锁与X锁两种模式） </span><br><span class="line">lock_type    锁的类型 表锁还是行锁（RECORD） </span><br><span class="line">lock_table   要加锁的表 </span><br><span class="line">lock_index   锁住的索引 </span><br><span class="line">lock_space   锁住对象的<span class="literal">space</span> id </span><br><span class="line">lock_page    事务锁定页的数量，若是表锁则该值为<span class="literal">NULL</span> </span><br><span class="line">lock_rec     事务锁定行的数量，若是表锁则该值为<span class="literal">NULL</span> </span><br><span class="line">lock_data    事务锁定记录主键值，若是表锁则该值为<span class="literal">NULL</span>（此选项不可信)</span><br></pre></td></tr></table></figure>
+
+<p><strong>innodb_lock_waits表结构说明</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">字段名             说明 </span><br><span class="line"></span><br><span class="line">requesting_trx_id  申请锁资源的事物ID </span><br><span class="line">requested_lock_id  申请的锁的ID </span><br><span class="line"><span class="keyword">blocking_trx_id </span>   阻塞其他事物的事物ID </span><br><span class="line"><span class="keyword">blocking_lock_id </span>  阻塞其他锁的锁ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="加锁的原则"><a href="#加锁的原则" class="headerlink" title="加锁的原则"></a>加锁的原则</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 基本单位 nex-key-lock</span><br><span class="line"><span class="bullet">2.</span> 查找过程中访问到的对象才加锁</span><br><span class="line"><span class="bullet">3.</span> 索引上的等值查询、给唯一错音加锁的时候、next-key lock退化为行锁</span><br><span class="line"><span class="bullet">4.</span> 索引上的等值查询、向右遍历时且最后一个值不满足等值条件时、退化为间隙锁</span><br><span class="line"><span class="bullet">5.</span> 唯一索引上的范围查询会访问到不满足条件的第一个值为止</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_mysql%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_mysql%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">mysql问题梳理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 备份一般都会在备库上执行，在用–single-<span class="keyword">transaction</span> 方法做逻辑备份的过程中</span><br><span class="line">   若主库的一个小表做了DDL、eg 添加一列</span><br><span class="line">   在从库会看到什么样的现象 ？</span><br><span class="line">   </span><br><span class="line">   Q1:<span class="keyword">SET</span> <span class="keyword">SESSION</span> <span class="keyword">TRANSACTION</span> <span class="keyword">ISOLATION</span> <span class="keyword">LEVEL</span> <span class="keyword">REPEATABLE</span> <span class="keyword">READ</span>;</span><br><span class="line">   Q2:<span class="keyword">START</span> <span class="keyword">TRANSACTION</span>  <span class="keyword">WITH</span> CONSISTENT <span class="keyword">SNAPSHOT</span>；</span><br><span class="line">   <span class="comment">/* other tables */</span></span><br><span class="line">   Q3:<span class="keyword">SAVEPOINT</span> sp;</span><br><span class="line">   <span class="comment">/* 时刻 1 */</span></span><br><span class="line">   Q4:<span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> `t1`;</span><br><span class="line">   <span class="comment">/* 时刻 2 */</span></span><br><span class="line">   Q5:<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> `t1`;</span><br><span class="line">   <span class="comment">/* 时刻 3 */</span></span><br><span class="line">   Q6:<span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> <span class="keyword">SAVEPOINT</span> sp;</span><br><span class="line">   <span class="comment">/* 时刻 4 */</span></span><br><span class="line">   <span class="comment">/* other tables */</span></span><br><span class="line"></span><br><span class="line">   Q1、确保事务隔离级别为可重复读</span><br><span class="line">   Q2、确保得到一个一致性视图</span><br><span class="line">   Q3、设置一个保存点、Q6 回滚到这个保存点</span><br><span class="line">   </span><br><span class="line">   若DDL语句在Q4之前到达、无影响、备份表结构为修改后的表结构</span><br><span class="line">   若在Q5之前到达、则<span class="keyword">insert</span>和<span class="keyword">create</span>的结构不一致、会提示 <span class="keyword">Table</span> definition has changed, </span><br><span class="line">   retry <span class="keyword">transaction</span>、mysqldump终止</span><br><span class="line">   若在时刻<span class="number">2</span>和<span class="number">3</span>之间到达、会造成主从延时 </span><br><span class="line">   若在Q6之前到达、不影响、备份结构是修改前的表结构</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 删除表数据的比较好的方式？</span><br><span class="line">   <span class="number">1</span>) <span class="keyword">delete</span> <span class="keyword">from</span> T <span class="keyword">limit</span> <span class="number">100000</span>；</span><br><span class="line">   <span class="number">2</span>）<span class="keyword">delete</span> <span class="keyword">from</span> T <span class="keyword">limit</span> <span class="number">5000</span>；执行<span class="number">20</span>次</span><br><span class="line">   <span class="number">3</span>）分<span class="number">20</span>个线程去执行</span><br><span class="line">   <span class="number">1</span>会造成大事务、单语句占用时间长、锁的时间比较长、可能造成主从延迟</span><br><span class="line">   <span class="number">3</span>可能会人为造成锁冲突</span><br><span class="line">   <span class="number">2</span>相对比较好一些</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 唯一索引和普通索引如何选择？</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> change buffer 一开始是写内存的、然后写磁盘</span><br><span class="line">   假如刚写入内存就断电重启、会不会导致change buffer丢失 ？</span><br><span class="line">   不会丢失、虽然只是更新内存、但在事务提交的时候、把change buffer的操作也记录在了redo <span class="keyword">log</span>里、崩溃恢复的时候可以找回</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line"><span class="number">5.</span> 扫描行数如何判断 ？</span><br><span class="line">   mysql在真正执行前并不能精确的知道满足条件的记录有多少条、只能根据统计信息来预估</span><br><span class="line">   这个统计信息就是索引的区分度、称为 索引基数(cardinality)、也就是索引基数越大、索引的区分度越好</span><br><span class="line">   <span class="keyword">show</span> <span class="keyword">index</span> <span class="keyword">from</span> tt; </span><br><span class="line">   可以看到索引信息</span><br><span class="line">   </span><br><span class="line"><span class="number">6.</span> mysql是如何得到索引基数的呢 ？</span><br><span class="line">   将整张表取出来一行行统计 - 可以得到精确值、单代价太高</span><br><span class="line">   所以采用 采样统计、当表数据持续变更的时候、变更的数据行超过 <span class="number">1</span>/M 时、自动触发索引重新统计</span><br><span class="line">   <span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;innodb_stats_persistent&#x27;</span>; 查看存储索引统计方式</span><br><span class="line">   <span class="keyword">on</span> 代表统计信息会持久化存储、默认 N=<span class="number">20</span> M=<span class="number">10</span></span><br><span class="line">   <span class="keyword">off</span> 的时候、代表统计信息只存储在内存中， 默认 N=<span class="number">8</span> M=<span class="number">16</span></span><br><span class="line">   由于是采样统计、不管N是多少、基数都很容易不准</span><br><span class="line">   索引统计值虽然不够精准、大体上还是差不多的、选错索引还有别的原因</span><br><span class="line">   </span><br><span class="line"><span class="number">7.</span> 如何修正索引？</span><br><span class="line">   <span class="number">1</span> 使用force <span class="keyword">index</span> 强制选择一个索引</span><br><span class="line">   <span class="number">2</span> 使用语句引导索引 <span class="keyword">order</span> <span class="keyword">by</span> b, a</span><br><span class="line">   <span class="number">3</span> 新建更合适的索引或者删掉无用索引</span><br><span class="line"></span><br><span class="line"><span class="number">8.</span> 何时会出现mysql抖动、平时很快执行的<span class="keyword">sql</span>在某些瞬间执行很慢？</span><br><span class="line">   <span class="number">1.</span> redo <span class="keyword">log</span> <span class="keyword">log</span>大小超过配置值时、需要刷新到磁盘、此时系统会停止所有的更新操作、应尽可能的避免</span><br><span class="line">   <span class="number">2.</span> 系统内存不足的时候、当需要新的内存页、内存不够用的时候、就淘汰一些数据页、给别的数据页使用、</span><br><span class="line">      若淘汰的是脏页、就需要将脏页写到磁盘</span><br><span class="line">      innodb使用缓冲池 buffer pool来管理内存、缓冲池中的内存页有<span class="number">3</span>种状态</span><br><span class="line">      <span class="number">1</span>）暂未使用的  <span class="number">2</span>）使用了、并且是干净页(内存数据页和磁盘数据页内容一致) <span class="number">3</span>）使用了、并且是脏页</span><br><span class="line">      innodb的策略是尽量使用内存、对一个长时间运行的库来说、未被使用的页面很少</span><br><span class="line">      当要读入的数据页没有在内存的时候、要到缓冲池申请一个数据页、只能把最久不使用的数据页从内存淘汰</span><br><span class="line">      若淘汰掉的是一个干净页、就直接释放出来复用、若淘汰的是脏页、就先刷新到磁盘</span><br><span class="line">      </span><br><span class="line">      所以：</span><br><span class="line">      <span class="number">1.</span> 一个查询要淘汰的脏页个数过多的时候、会导致查询时间明显变长</span><br><span class="line">      <span class="number">2.</span> 日志写满会将更新全部堵塞、写性能跌为<span class="number">0</span>、应尽可能的避免</span><br><span class="line">      </span><br><span class="line">      那么innodb是如何控制刷脏页的策略的呢 ？</span><br><span class="line">      一个是系统io能力、可以使用  fio -filename=$filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randrw -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">500</span>M -numjobs=<span class="number">10</span> -runtime=<span class="number">10</span> -group_reporting -<span class="type">name</span>=mytest 来测试</span><br><span class="line">      一个是脏页比例上限：<span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;innodb_max_dirty_pages_pct&#x27;</span>; 默认<span class="number">75</span>%</span><br><span class="line">      </span><br><span class="line">      另外：mysql在刷脏页的时候、若 innodb_flush_neighbors = <span class="number">1</span> 恰好连着的页也是脏页</span><br><span class="line">      会被一起刷掉、若 情况不妙、连着的连着页也是脏页。。。。会导致你的查询更慢</span><br><span class="line">      这个策略在机械硬盘时代是有意义的、可以减少io、但SSD设备的话、可以设置为<span class="number">0</span> 减少<span class="keyword">sql</span>执行时间</span><br><span class="line">      <span class="number">8.0</span> 已默认为<span class="number">0</span></span><br><span class="line">      </span><br><span class="line">   <span class="number">3.</span> mysql认为系统空闲的时候、</span><br><span class="line">   <span class="number">4.</span> mysql正常关闭的时候</span><br><span class="line"></span><br><span class="line"><span class="number">9.</span> 为什么数据删除、表空间确没有释放</span><br><span class="line">   数据删除流程：假如删除 <span class="number">2</span>、<span class="number">10</span>之间的<span class="number">6</span>记录、它只被标记删除、并不会之间删除</span><br><span class="line">   之后需要<span class="keyword">insert</span> <span class="number">1</span>~<span class="number">10</span>之间的数据时、会复用这个位置</span><br><span class="line">   若删掉了一个数据页上的所有记录、整个数据页可以被直接复用</span><br><span class="line">   记录的复用 只限于符合范围条件的数据、</span><br><span class="line">   页的复用、可以用于任何数据</span><br><span class="line">   若相邻页利用率都很小、系统会把这两个页合并到其中一个数据页、另外一个标记为可复用</span><br><span class="line">   这些可以被复用、而未被复用的空间、称为空洞</span><br><span class="line">   </span><br><span class="line">   不止<span class="keyword">delete</span>会造成空洞、<span class="keyword">insert</span>也会、随机插入会造成索引的数据页分裂</span><br><span class="line">   所以、大量增删改的表是可能存在空洞的、若能去掉空洞、就可以达到收缩表空间的目的</span><br><span class="line">   <span class="number">1.</span> 重建表 可以新建一个与表A结构相同的表B、按照主键ID递增的顺序、把数据行一行一行的从表A读出、再插入到B</span><br><span class="line">      若将B作为临时表、数据从A导入B的操作完成后、用B替换A、就起到了收缩表A空间的作用</span><br><span class="line">      可以使用 <span class="keyword">alter</span> <span class="keyword">table</span> A engine=innodb 来重建、</span><br><span class="line">      执行流程类似、只是不需要自己创建临时表(是在<span class="keyword">server</span>完成的、需要数据导入)、mysql自己完成转存数据、交换表名、删除旧表</span><br><span class="line">      </span><br><span class="line">      显然整个过程最耗时的是、插入数据、在整个DDL过程、A表不能有更新、非online</span><br><span class="line">      </span><br><span class="line">      mysql <span class="number">5.6</span> 版本引入 online ddl</span><br><span class="line">      流程：新建临时表、扫描A主键的所有数据页、</span><br><span class="line">           使用数据页中的A的记录生成B+树、存储到临时文件(存储引擎创建、整个DDL过程在innodb内部完成、无需数据挪到临时表、是原地操作)</span><br><span class="line">           生成临时文件的过程中、将所有对A的操作记录在一个日志文件中、<span class="keyword">row</span> <span class="keyword">log</span>、</span><br><span class="line">           临时文件生成后、将日志文件中的操作应用到临时文件、得到一个逻辑数据上与表A相同的数据文件、</span><br><span class="line">           用临时文件替换表A的数据文件</span><br><span class="line">      </span><br><span class="line">      iplace和online是同一概念 ？？</span><br><span class="line">      <span class="keyword">no</span>、只是ddl过程若是 online 的、一定是 inplace 的</span><br><span class="line">      若、inplace的DDL、可能不是online的、</span><br><span class="line">      eg 给一个innodb的表字段加fulltext索引、整个过程是inplace的、会阻塞 增删改查操作、不是online的</span><br><span class="line">      </span><br><span class="line">            </span><br><span class="line"><span class="number">10.</span> <span class="keyword">alter</span> <span class="keyword">table</span> t engine=innodb 其实是 recreate 重建表的过程、非online</span><br><span class="line">    <span class="keyword">analyze</span> <span class="keyword">table</span> t 不是重建表、不修改数据、只是对表的索引信息进行重新统计、会加MDL 读锁</span><br><span class="line">    optimize <span class="keyword">table</span> t =&gt; recreate + <span class="keyword">analyze</span></span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line"><span class="number">11.</span> 若一个高配的机器、redo <span class="keyword">log</span>设置的太小、会发生什么 ？</span><br><span class="line">    每次事务提交都有些redo <span class="keyword">log</span>、若设置太小、会被很快写满、系统不得不停止所有更新、去刷新redo <span class="keyword">log</span></span><br><span class="line">    同时、change buffer的优化作用也会失效、因为<span class="keyword">checkpoint</span>一直往前推进、会触发merge操作、然后又进一步的触发脏页刷新</span><br><span class="line">    看到的现象会是 磁盘压力小、但是数据库出现间歇性的性能下降</span><br><span class="line">    </span><br><span class="line"><span class="number">12.</span> count(*) 是怎么工作的 ？</span><br><span class="line">    mysiam将数据总行记录在了磁盘上、所以查询 count(*) 会直接返回</span><br><span class="line">    innodb 因为考虑事务的原因、不能这么记录、是从记录一条条遍历出来的、但是会遍历最小的那颗树</span><br><span class="line">    </span><br><span class="line">    so：</span><br><span class="line">    mysiam count(*) 快、但是不支持事务、</span><br><span class="line">    <span class="keyword">show</span> <span class="keyword">table</span> status 返回快、但不准确</span><br><span class="line">    count(*) 会遍历全表、导致性能问题</span><br><span class="line">    </span><br><span class="line">    那么如何自己实现计数？</span><br><span class="line">    <span class="number">1</span>）使用缓存系统 - 数据易丢失、统计不精准(先写redis、记录未插入、则多<span class="number">1</span>、先写db redis未写入 则少<span class="number">1</span>)</span><br><span class="line">    <span class="number">2</span>）使用统计表 使用事务保存</span><br><span class="line">    </span><br><span class="line">    count(*)、count(id)、count(<span class="number">1</span>) 都标识返回满足条件的结果集的总行数</span><br><span class="line">    count(field)表示 filed不为<span class="keyword">null</span>的总个数</span><br><span class="line">    </span><br><span class="line">    count(id) innodb会遍历整张表、取出每行的id值、返回给<span class="keyword">server</span>层、<span class="keyword">server</span>拿到id后、判断不为空、累计行</span><br><span class="line">    count(<span class="number">1</span>) inndb会遍历整张表、但不取值、<span class="keyword">server</span>对于返回的每一行、放数字<span class="number">1</span>进去、判断不为空、按行累加</span><br><span class="line">    所以、count(<span class="number">1</span>)比count(id)快、因为从引擎返回id会涉及到数据行解析、及<span class="keyword">copy</span>字段值得操作</span><br><span class="line">    </span><br><span class="line">    count(field) <span class="keyword">not</span> <span class="keyword">null</span>字段、独处记录、判断不能为<span class="keyword">null</span>、按行累加</span><br><span class="line">    允许为<span class="keyword">null</span>的字段、执行的时候判断到有可能为<span class="keyword">null</span>、会先取出值、判断、不为<span class="keyword">null</span>才累加</span><br><span class="line">    </span><br><span class="line">    count(*) 不会取出全部字段、专门做了优化、不取值</span><br><span class="line">    所以 效率： count(field) &lt; count(主键) &lt; count(<span class="number">1</span>) ~ count(*)    </span><br><span class="line">    </span><br><span class="line"><span class="number">13.</span> mysql 怎么知道binlog是完整的 ？</span><br><span class="line">    一个事务的binlog是有完整格式的、<span class="keyword">statement</span>格式的binlog最后会有<span class="keyword">commit</span></span><br><span class="line">    raw格式的binlog、最后会有一个 xid</span><br><span class="line">    <span class="number">5.6</span>之后的版本、还引入了 binlog-checksum 来保证内容的正确性</span><br><span class="line">    </span><br><span class="line"><span class="number">14.</span> redo <span class="keyword">log</span> 和 binlog 如何关联：</span><br><span class="line">    有一个共同的数据段、xid、崩溃修复的时候会按顺序扫描 redo <span class="keyword">log</span></span><br><span class="line">    若既有<span class="keyword">prepare</span>又有<span class="keyword">commit</span>、则直接提交</span><br><span class="line">    若只有<span class="keyword">prepare</span> 则拿 xid去找binlog 对应的事务</span><br><span class="line">    </span><br><span class="line">    处于<span class="keyword">prepare</span>阶段的redo <span class="keyword">log</span> + 完整binlog 重启就能恢复、why ？</span><br><span class="line">    binlog写完之后、mysql崩溃、此时binlog已经写入、就会被从库使用</span><br><span class="line">    所以在主库上也要提交这个事务、保证主从数据的一致性</span><br><span class="line">    </span><br><span class="line">    为何不是先写 redo <span class="keyword">log</span>再写binlog、然后直接两个<span class="keyword">log</span>完整时才恢复数据 ？</span><br><span class="line">    对于innodb来说、redo <span class="keyword">log</span>提交完成、事务就不能回滚(会覆盖到别的事务的更新)、</span><br><span class="line">    而如果redo <span class="keyword">log</span> 直接提交、然后binlog失败的时候、inndo回滚不了、数据和binlog就又不一致了</span><br><span class="line">    两阶段提交就是为了给所有人一个机会、啊哈~</span><br><span class="line">    </span><br><span class="line"><span class="number">15.</span> 对于正常运行的实例、数据写入后的最终落盘、是从redo <span class="keyword">log</span>更新的还是buffer pool ？</span><br><span class="line">    redo <span class="keyword">log</span> 并未记录数据页的完整数据、所以、没有能力自己去更新磁盘数据页、不存在redo <span class="keyword">log</span>更新进去的情况</span><br><span class="line">    a.若数据页被修改之后、跟磁盘的数据页不一致、称为脏页、最终数据落盘就是把内存中的数据页写盘</span><br><span class="line">    b.若在崩溃恢复的场景中、innodb判断到一个数据页可能在崩溃中丢失了更新、就将其读到内存、</span><br><span class="line">    然后让redo <span class="keyword">log</span>更新内存内容、回到 a 的情况</span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">   fio -filename=$filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randrw -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">500</span>M -numjobs=<span class="number">10</span> -runtime=<span class="number">10</span> -group_reporting -<span class="type">name</span>=mytest </span><br><span class="line"> </span><br><span class="line"><span class="number">16.</span> <span class="keyword">order</span> <span class="keyword">by</span> 是如何工作的 ？</span><br><span class="line">    <span class="keyword">explain</span> 中的 <span class="keyword">using</span> filesort 代表需要排序</span><br><span class="line">    mysql 会给每个线程分配一块内存用于排序、称为 sort_buffer</span><br><span class="line">    </span><br><span class="line">    <span class="number">1</span>) 初始化sort_buffer 确定放入 <span class="type">name</span> city age 三个字段、</span><br><span class="line">    <span class="number">2</span>) 从索引 city 找到 第一个满足 city=xx 条件的主键id</span><br><span class="line">    <span class="number">3</span>) 从主键id索引取出整行、取<span class="type">name</span> city age 三个字段的值、写入 sort_buffer 中</span><br><span class="line">    <span class="number">4</span>) 从索引city取下一条满足条件的记录id</span><br><span class="line">    <span class="number">5</span>) 重复<span class="number">3</span>、<span class="number">4</span> 直到无满足条件的记录</span><br><span class="line">    <span class="number">6</span>) 对sort buffer中的数据按照<span class="type">name</span>进行快排</span><br><span class="line">    <span class="number">7</span>) 取结果集前<span class="number">1000</span>行返回给client</span><br><span class="line">    </span><br><span class="line">    若单行数据超过 max_length_for_sort_data 的值、则会先排序、再回表取数据</span><br><span class="line">    <span class="number">1</span>) 初始化sort_buffer 确定放入 <span class="type">name</span> city age 三个字段、</span><br><span class="line">    <span class="number">2</span>) 从索引 city 找到 第一个满足 city=xx 条件的主键id</span><br><span class="line">    <span class="number">3</span>) 从主键id索引取出整行、取<span class="type">name</span> &amp; id 两个个字段的值、写入 sort_buffer 中</span><br><span class="line">    <span class="number">4</span>) 从索引city取下一条满足条件的记录id</span><br><span class="line">    <span class="number">5</span>) 重复<span class="number">3</span>、<span class="number">4</span> 直到无满足条件的记录</span><br><span class="line">    <span class="number">6</span>) 对sort buffer中的数据按照<span class="type">name</span>进行快排</span><br><span class="line">    <span class="number">7</span>) 取结果集前<span class="number">1000</span>行、回原表扫描city、<span class="type">name</span>和age三个字段值 返回给client  </span><br><span class="line">    </span><br><span class="line">    此时假如 <span class="type">name</span>本身有索引、天然有序、则不需要额外排序、会变成</span><br><span class="line">    <span class="number">1</span>) 从索引 city <span class="type">name</span> 找到满足 city=杭州的 条件的主键</span><br><span class="line">    <span class="number">2</span>) 回主键id索引查出正行、取<span class="type">name</span>、city、age的值 作为结果集的一部分直接返回</span><br><span class="line">    <span class="number">3</span>) 从索引 <span class="type">name</span> city取出下一个满足记录的主键id</span><br><span class="line">    <span class="number">4</span>) 重复<span class="number">2</span>、<span class="number">3</span>、直到足够<span class="number">1000</span>条记录、或者无满足条件的记录</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    使用 optimizer_trace 进行<span class="keyword">sql</span>追踪、一般情况下、一个新的跟踪会覆盖掉以前的跟踪</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 打开 optimizer_trace，只对本线程有效 */</span></span><br><span class="line">    <span class="keyword">SET</span> optimizer_trace=<span class="string">&#x27;enabled=on&#x27;</span>; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* @a 保存 Innodb_rows_read 的初始值 */</span></span><br><span class="line">    <span class="keyword">select</span> VARIABLE_VALUE <span class="keyword">into</span> @a <span class="keyword">from</span>  performance_schema.session_status <span class="keyword">where</span> variable_name = <span class="string">&#x27;Innodb_rows_read&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 执行语句 */</span></span><br><span class="line">    <span class="keyword">select</span> city, <span class="type">name</span>,age <span class="keyword">from</span> t <span class="keyword">where</span> city=<span class="string">&#x27;杭州&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="type">name</span> <span class="keyword">limit</span> <span class="number">1000</span>; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 查看 OPTIMIZER_TRACE 输出 */</span></span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> `information_schema`.`OPTIMIZER_TRACE`\G</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* @b 保存 Innodb_rows_read 的当前值 */</span></span><br><span class="line">    <span class="keyword">select</span> VARIABLE_VALUE <span class="keyword">into</span> @b <span class="keyword">from</span> performance_schema.session_status <span class="keyword">where</span> variable_name = <span class="string">&#x27;Innodb_rows_read&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 计算 Innodb_rows_read 差值 */</span></span><br><span class="line">    <span class="keyword">select</span> @b-@a;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `tt` (</span><br><span class="line">     `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">     `a` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">     `b` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">     <span class="keyword">PRIMARY KEY</span> (`id`),</span><br><span class="line">     KEY `a` (`a`),</span><br><span class="line">     KEY `b` (`b`)</span><br><span class="line">   ) ENGINE=InnoDB；</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">delimiter</span> ;;</span><br><span class="line">   <span class="keyword">create</span> <span class="keyword">procedure</span> idata()</span><br><span class="line">   <span class="keyword">begin</span></span><br><span class="line">     <span class="keyword">declare</span> i <span class="type">int</span>;</span><br><span class="line">     <span class="keyword">set</span> i=<span class="number">1</span>;</span><br><span class="line">     <span class="keyword">while</span>(i&lt;=<span class="number">100000</span>)<span class="keyword">do</span></span><br><span class="line">       <span class="keyword">insert</span> <span class="keyword">into</span> tt <span class="keyword">values</span>(i, i, i);</span><br><span class="line">       <span class="keyword">set</span> i=i+<span class="number">1</span>;</span><br><span class="line">     <span class="keyword">end</span> <span class="keyword">while</span>;</span><br><span class="line">   <span class="keyword">end</span>;;</span><br><span class="line">   <span class="keyword">delimiter</span>;</span><br><span class="line">   <span class="keyword">call</span> idata();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">where</span> a <span class="keyword">between</span> <span class="number">10000</span> <span class="keyword">and</span> <span class="number">20000</span>;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">set</span> long_query_time=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">where</span> a <span class="keyword">between</span> <span class="number">10000</span> <span class="keyword">and</span> <span class="number">20000</span>; <span class="comment">/*Q1*/</span></span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> t force <span class="keyword">index</span>(a) <span class="keyword">where</span> a <span class="keyword">between</span> <span class="number">10000</span> <span class="keyword">and</span> <span class="number">20000</span>;<span class="comment">/*Q2*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> IFNULL(driver_id, <span class="number">0</span>) driverId, count(*) serviceCnt, MAX(booking_start_time) lastBookingDate <span class="keyword">FROM</span> car_order_finished_collect_2018 <span class="keyword">WHERE</span> driver_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>  <span class="keyword">AND</span> order_status &gt; <span class="number">43</span> <span class="keyword">AND</span> order_status &lt; <span class="number">60</span> <span class="keyword">AND</span> booking_user_id = <span class="number">1148735</span> <span class="keyword">AND</span> driver_id <span class="keyword">in</span> (<span class="number">25311</span>)  <span class="keyword">GROUP</span> <span class="keyword">BY</span> driver_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> COUNT(*) <span class="keyword">DESC</span>, MAX(booking_start_time) <span class="keyword">DESC</span>\G;</span><br><span class="line"><span class="keyword">SELECT</span> IFNULL(driver_id, <span class="number">0</span>) driverId, count(*) serviceCnt, MAX(booking_start_time) lastBookingDate <span class="keyword">FROM</span> car_order_finished_collect_2018 <span class="keyword">WHERE</span> driver_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>  <span class="keyword">AND</span> order_status &gt; <span class="number">43</span> <span class="keyword">AND</span> order_status &lt; <span class="number">60</span> <span class="keyword">AND</span> booking_user_id = <span class="number">80004692</span> <span class="keyword">AND</span> driver_id <span class="keyword">in</span> (<span class="number">10101406</span>)  <span class="keyword">GROUP</span> <span class="keyword">BY</span> driver_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> COUNT(*) <span class="keyword">DESC</span>, MAX(booking_start_time) <span class="keyword">DESC</span>\G;</span><br><span class="line">                                     </span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_order-by%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_order-by%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/" class="post-title-link" itemprop="url">order-by是怎么工作的</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">假设有一张市民表、需要查询 城市是 杭州 的所有人的名字、以<span class="keyword">name</span>排序、返回前<span class="number">1000</span>个</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `t` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `city` <span class="type">varchar</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `age` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `addr` <span class="type">varchar</span>(<span class="number">128</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`),</span><br><span class="line">  KEY `city` (`city`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB;</span><br><span class="line"></span><br><span class="line">#查询<span class="keyword">sql</span></span><br><span class="line"><span class="keyword">select</span> city,name,age <span class="keyword">from</span> t <span class="keyword">where</span> city<span class="operator">=</span><span class="string">&#x27;杭州&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> name limit <span class="number">1000</span>  ;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c6445f922b6b14ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="全字段排序.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-ad05011df1ab8624.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="全字段排序"><a href="#全字段排序" class="headerlink" title="全字段排序"></a>全字段排序</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> filesort 表示需要排序、mysql会给每个线程分配一块内存用于排序、sort_buffer</span><br><span class="line"></span><br><span class="line"><span class="keyword">sql</span>执行流程:</span><br><span class="line"><span class="number">1.</span> 初始化sort_buffer、确定放入<span class="type">name</span>、city、age字段</span><br><span class="line"><span class="number">2.</span> 从索引city找到第一个满足 city=<span class="string">&#x27;杭州&#x27;</span> 条件的主键id、也就是图中的ID_X</span><br><span class="line"><span class="number">3.</span> 到主键ID索引取出整行、取<span class="type">name</span>、city、age的值 放入sort_buffer、</span><br><span class="line"><span class="number">4.</span> 从索引city找到下一个满足条件的记录、</span><br><span class="line"><span class="number">5.</span> 重复<span class="number">3</span>、<span class="number">4</span>直到无满足条件的记录、对应的主单id就是图中的ID_Y</span><br><span class="line"><span class="number">6.</span> 对sort_buffer中的数据、按<span class="type">name</span>做快排</span><br><span class="line"><span class="number">7.</span> 按排序结果取前<span class="number">1000</span>行给client</span><br><span class="line"></span><br><span class="line">按<span class="type">name</span>排序可以在内存完成、或者靠外部排序，取决于排序所需内存和sort_buffer_size</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 打开 optimizer_trace，只对本线程有效 */</span></span><br><span class="line"><span class="keyword">SET</span> optimizer_trace<span class="operator">=</span><span class="string">&#x27;enabled=on&#x27;</span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/* @a 保存 Innodb_rows_read 的初始值 */</span></span><br><span class="line"><span class="keyword">select</span> VARIABLE_VALUE <span class="keyword">into</span> <span class="variable">@a</span> <span class="keyword">from</span>  performance_schema.session_status <span class="keyword">where</span> variable_name <span class="operator">=</span> <span class="string">&#x27;Innodb_rows_read&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 执行语句 */</span></span><br><span class="line"><span class="keyword">select</span> city, name,age <span class="keyword">from</span> t <span class="keyword">where</span> city<span class="operator">=</span><span class="string">&#x27;杭州&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> name limit <span class="number">1000</span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/* 查看 OPTIMIZER_TRACE 输出 */</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `information_schema`.`OPTIMIZER_TRACE`\G</span><br><span class="line"></span><br><span class="line"><span class="comment">/* @b 保存 Innodb_rows_read 的当前值 */</span></span><br><span class="line"><span class="keyword">select</span> VARIABLE_VALUE <span class="keyword">into</span> <span class="variable">@b</span> <span class="keyword">from</span> performance_schema.session_status <span class="keyword">where</span> variable_name <span class="operator">=</span> <span class="string">&#x27;Innodb_rows_read&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 计算 Innodb_rows_read 差值 */</span></span><br><span class="line"><span class="keyword">select</span> <span class="variable">@b</span><span class="operator">-</span><span class="variable">@a</span>;</span><br><span class="line"></span><br><span class="line">其中number_of_files 表示的是使用的临时文件的个数、需要外部临时文件排序时、mysql会分散到多个文件中进行排序、然后进行归并排序、</span><br><span class="line">examined_rows 表示参与排序的行数</span><br></pre></td></tr></table></figure>
+
+<h4 id="rowid排序"><a href="#rowid排序" class="headerlink" title="rowid排序"></a>rowid排序</h4><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">单行数据较大时(超过 max_length_for_sort_data)、sort_buffer中存放的字段过多、内存能同时放下的行较少、需要很多临时文件、排序性能会特别差、innodb会采用另外一种排序、只在sort_buffer放入排序字段<span class="built_in">和id</span>、然后流程变为:</span><br><span class="line"><span class="number">1</span>. 初始化sort_buffer、放<span class="built_in">入name</span><span class="built_in">和id</span></span><br><span class="line"><span class="number">2</span>. 从索引city找到第一个满足 city=<span class="string">&#x27;杭州&#x27;</span> 条件的主<span class="built_in">键id</span>、也就是图中的ID_X</span><br><span class="line"><span class="number">3</span>. 回到主键索引取出整行、<span class="built_in">取id</span><span class="built_in">、name</span>这两个字段、放入sort_buffer</span><br><span class="line"><span class="number">4</span>. 从索引city取下一条满足条件的记录、</span><br><span class="line"><span class="number">5</span>. 重复<span class="number">3</span>、<span class="number">4</span>直到无满足条件的记录</span><br><span class="line"><span class="number">6</span>. 对sort_buffer中的记录按<span class="built_in">照name</span>排序、取前<span class="number">1000</span>行</span><br><span class="line"><span class="number">7</span>. <span class="built_in">回id</span>索引取出所有满足条件的记录<span class="built_in">的name</span>、age、city返回client</span><br><span class="line"></span><br><span class="line">SET max_length_for_sort_data = <span class="number">16</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于innodb表、会优先选择内存排序、内存不足时、会优先选择全字段排序</span><br></pre></td></tr></table></figure>
+
+<p>那么对于内存表呢 ？</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">回表只是简单的根据行的位置得到数据、所以排序行会越小越好、优先选择rowid排序</span><br></pre></td></tr></table></figure>
+
+<p><code>tmp_table_size</code> 内存临时表的大小、默认16M</p>
+<p>Q: 假设表中已有city name的联合索引、sql如下: </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t <span class="keyword">where</span> city <span class="keyword">in</span> (<span class="string">&#x27;杭州&#x27;</span>,&quot; 苏州 &quot;) <span class="keyword">order</span> <span class="keyword">by</span> name limit <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p>这个sql执行需要排序吗<br>A: </p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">对于不同city、<span class="keyword">name</span>不是有序的、需要排序</span><br><span class="line">可以将结果拿到业务层去排  </span><br></pre></td></tr></table></figure>
+
+<p><strong>总结</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tmp_table_size 会影响是否使用内存临时表(否则使用磁盘临时表)</span><br><span class="line">sort_buffer_size 使用使用内存完成排序(否则需要文件排序)</span><br><span class="line">max_length_for_sort_data 会影响排序策略(全字段/rowid)</span><br><span class="line">内存排序时、&gt;<span class="number">5.6</span>版本会使用优先队列排序</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88mysql%E4%BC%9A%E5%81%B6%E5%B0%94%E6%8A%96%E5%8A%A8%E4%B8%80%E4%B8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88mysql%E4%BC%9A%E5%81%B6%E5%B0%94%E6%8A%96%E5%8A%A8%E4%B8%80%E4%B8%8B/" class="post-title-link" itemprop="url">为什么mysql会偶尔抖动一下</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><blockquote>
+<p>脏页: 内存页跟磁盘数据页内容不一致的时候、称这个内存页为 脏页<br>干净页: 内存数据写入磁盘后、内存和磁盘上的数据页的内容一致、称为 干净页</p>
+</blockquote>
+<p><strong>干净页和脏页都在内存</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不难想象、平时操作很快的<span class="keyword">sql</span>、其实就是在写内存和日志、而mysql抖动的那一瞬间、可能就是在刷脏页</span><br></pre></td></tr></table></figure>
+
+<h4 id="什么场景下会引发数据库的flush过程呢-？"><a href="#什么场景下会引发数据库的flush过程呢-？" class="headerlink" title="什么场景下会引发数据库的flush过程呢 ？"></a>什么场景下会引发数据库的flush过程呢 ？</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> innodb的redo <span class="keyword">log</span>满了: 此时系统会停止所有更新、把<span class="keyword">checkpoint</span>推进、redo <span class="keyword">log</span>留出空间</span><br><span class="line">   此时需要把原<span class="keyword">write</span> pos和<span class="keyword">checkpoint</span>之间的所有脏页都flush到磁盘上</span><br><span class="line"><span class="number">2.</span> 系统内存不足: 当需要新的内存页、而内存不够用的时候、就需要淘汰一些数据页、空出内存给别的数据页使用</span><br><span class="line">   若淘汰的是脏页、则需要先将内容flush到磁盘</span><br><span class="line">   为什么不直接淘汰内存页 ？ </span><br><span class="line">   若刷脏页、一定会写磁盘、就保证了每个数据页有两种状态</span><br><span class="line">   <span class="number">1</span>) 在内存里存在、内存肯定是正确的结果、直接返回</span><br><span class="line">   <span class="number">2</span>) 在内存里无数据、在磁盘数据文件上肯定是正确的结果、直接读入内存后返回、这样的效率最高 </span><br><span class="line"><span class="number">3.</span> mysql系统空闲的时候</span><br><span class="line"><span class="number">4.</span> mysql正常关闭的时候、mysql会把内存的脏页全部flush到磁盘、下次启动的时候、直接从磁盘读取、启动很快</span><br><span class="line"></span><br><span class="line">其中：<span class="number">1</span>、<span class="number">2</span>会影响性能</span><br><span class="line">   <span class="number">1.</span> 会停止所有更新、性能会跌为<span class="number">0</span>、应该尽可能的避免</span><br><span class="line">   <span class="number">2.</span> 是内存不够用、需要将脏页写到磁盘、其实是常态、innodb使用buffer pool来管理内存、缓存池中的内存页有<span class="number">3</span>种状态</span><br><span class="line">      <span class="number">1</span>) 暂未使用的 <span class="number">2</span>) 已用&amp;干净页 <span class="number">3</span>)已用&amp;脏页</span><br><span class="line">   innodb的策略是尽量使用内存、对一个长时间运行的db来说、未被使用的页面很少</span><br><span class="line">   当需要读入的数据页不在内存的时候、就必须到缓存池申请一个数据页、只能把最久不使用的数据页从内存淘汰</span><br><span class="line">   若淘汰的是干净页、直接释放出来复用、若淘汰的是脏页、需要先flush到磁盘</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+
+<h4 id="innodb刷脏页的控制策略"><a href="#innodb刷脏页的控制策略" class="headerlink" title="innodb刷脏页的控制策略"></a>innodb刷脏页的控制策略</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">innodb_io_capacity 告诉innodb所在主机的io能力、innodb才知道全力刷脏页时、可以刷多块、</span><br><span class="line">    建议设置为磁盘的iops、测试:  fio <span class="attribute">-filename</span>=<span class="variable">$filename</span> <span class="attribute">-direct</span>=1 -iodepth 1 -thread <span class="attribute">-rw</span>=randrw <span class="attribute">-ioengine</span>=psync <span class="attribute">-bs</span>=16k <span class="attribute">-size</span>=500M <span class="attribute">-numjobs</span>=10 <span class="attribute">-runtime</span>=10 -group_reporting <span class="attribute">-name</span>=mytest </span><br><span class="line"></span><br><span class="line">innodb并不是一直全力脏页、毕竟还要服务用户请求、那么是如何控制的呢 ？</span><br><span class="line">1. 脏页比例(innodb_max_dirty_pages_pct)  2.redo log写盘速度</span><br><span class="line">要合理设置io能力、关注脏页比例、当前脏页比例是通过 <span class="built_in">..</span>_dirty/<span class="built_in">..</span>_total 计算的</span><br><span class="line">innodb_buffer_pool_pages_dirty 当前脏页数量</span><br><span class="line">innodb_buffer_pool_pages_total 总的页数量</span><br><span class="line"> </span><br><span class="line">innodb刷页策略: innodb_flush_neighbors 为1: 代表若刷脏页时、临近页也是脏页、则一并刷到磁盘</span><br><span class="line">为0、则只刷本页、</span><br><span class="line">1的策略在机械硬盘时期比较有用、可以减少很多随机io、现在iops都不是问题、设置0即可、减少sql响应时间</span><br><span class="line">mysql8.0 默认为0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Q: 访问某条记录时、mysql是如何知道记录是否在内存中 ？<br>A: </p>
+<blockquote>
+<p>每个数据页都是有编号的、到内存中查看对应页的编号、若不在内存、去磁盘查找即可</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AA%E6%9F%A5%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%B9%9F%E5%BE%88%E6%85%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AA%E6%9F%A5%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%B9%9F%E5%BE%88%E6%85%A2/" class="post-title-link" itemprop="url">为什么只查一行数据也很慢</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>可能在等待锁</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show </span>process list;</span><br><span class="line">如果看到 State列为: <span class="keyword">waiting </span>for table metata lock<span class="comment">; 则证明在等待MDL表锁</span></span><br><span class="line"></span><br><span class="line">select <span class="keyword">blocking_pid </span>from sys.<span class="keyword">schema_table_lock_waits </span>可以找到阻塞的pid</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可能在等待flush</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">State列为: waiting <span class="keyword">for</span> <span class="built_in">table</span> <span class="built_in">flush</span></span><br></pre></td></tr></table></figure>
+<p>Mysql对表的flush一般有两种方式</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> flush <span class="keyword">tables</span> t <span class="keyword">with</span> <span class="keyword">read</span> <span class="keyword">lock</span>. - 只关闭表t</span><br><span class="line"><span class="number">2.</span> flush <span class="keyword">tables</span> <span class="keyword">with</span> <span class="keyword">read</span> <span class="keyword">lock</span>. - 关闭所有表</span><br></pre></td></tr></table></figure>
+<p>正常情况下、这两个操作都很快、除非被阻塞…</p>
+</li>
+<li><p>等行锁</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">where</span> id=<span class="number">1</span> <span class="keyword">lock</span> <span class="keyword">in</span> <span class="keyword">share mode</span>; </span><br><span class="line"></span><br><span class="line">&gt;<span class="number">5.7</span> 版本可以通过看到被哪个<span class="keyword">sql</span>阻塞了</span><br><span class="line">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> t sys.innodb_lock_waits <span class="keyword">where</span> locked_table=`<span class="string">&#x27;test&#x27;</span>.<span class="string">&#x27;t&#x27;</span>`\G</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sql慢</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E4%B8%BB%E5%BA%93%E5%BC%82%E5%B8%B8%E3%80%81%E4%BB%8E%E5%BA%93%E6%80%8E%E4%B9%88%E5%8A%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E4%B8%BB%E5%BA%93%E5%BC%82%E5%B8%B8%E3%80%81%E4%BB%8E%E5%BA%93%E6%80%8E%E4%B9%88%E5%8A%9E/" class="post-title-link" itemprop="url">主库异常、从库怎么办</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://upload-images.jianshu.io/upload_images/14027542-d8b11878314944da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/440" alt="一主多从基本架构.png"><br>说明: 虚箭头表示主备关系、从库B、C、D指向主库A</p>
+<blockquote>
+<p>那么、当主库A发生故障时、A’会成为新的主库、具体怎么切换的呢 ?</p>
+</blockquote>
+<p>一、基于位点的主备复制<br>当需要把节点B设置为A’的从库时、需要执行<code>change master</code>命令</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">change master <span class="keyword">to</span></span><br><span class="line"><span class="attribute">master_host</span>=<span class="variable">$host_name</span></span><br><span class="line"><span class="attribute">master_port</span>=<span class="variable">$port</span></span><br><span class="line"><span class="attribute">master_user</span>=<span class="variable">$user_name</span></span><br><span class="line"><span class="attribute">master_password</span>=<span class="variable">$password</span></span><br><span class="line"><span class="attribute">master_log_file</span>=<span class="variable">$master_log_name</span></span><br><span class="line"><span class="attribute">master_log_pos</span>=<span class="variable">$master_log_pos</span></span><br></pre></td></tr></table></figure>
+<p>其中, <code>master_log_file</code>和<code>master_log_pos</code>表示要从从库的<code>master_log_name</code>文件的<code>master_log_pos</code>位置开始同步, 即: 主库对应文件名和日志偏移量</p>
+<ol>
+<li>如何获取同步位点(偏移量)呢 ?<br>方法一：<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 等待新主库`A&#x27;` 把中转日志 relay <span class="built_in">log</span>全部同步完成</span><br><span class="line"><span class="number">2.</span> 在`A&#x27;`上执行 show master status命令、得到`A&#x27;`上最新的File和Position</span><br><span class="line"><span class="number">3.</span> 取原主库A故障的时刻<span class="built_in">T</span></span><br><span class="line"><span class="number">4.</span> 用mysqlbinlog工具解析`A&#x27;`的File、得到<span class="built_in">T</span>时刻的位点</span><br><span class="line"></span><br><span class="line">mysqlbinlog File <span class="operator">-</span><span class="operator">-</span>stop<span class="operator">-</span>datatime<span class="operator">=</span><span class="built_in">T</span> <span class="operator">-</span><span class="operator">-</span>start<span class="operator">-</span>datetime<span class="operator">=</span><span class="built_in">T</span>， 如下图所示 end_log_pos的值</span><br></pre></td></tr></table></figure>
+<img src="https://upload-images.jianshu.io/upload_images/14027542-11317714a2bf6581.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>但这样得到的值并不精准、假设 T时刻、主库A完成insert操作、插入行R、将binlog传给了A’ 和 B、传完的瞬间A故障, 此时系统状态为:<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 从库B已经同步了binlog、R已存在</span><br><span class="line"><span class="bullet">2.</span> 在新的主库<span class="code">`A&#x27;`</span>, R也存在、且是写在123这个位置后的、</span><br><span class="line"><span class="bullet">3.</span> 在从库B上执行 change master时、指向<span class="code">`A&#x27;`</span>的123位置、R的binlog再次同步到从库B、造成主键冲突.</span><br></pre></td></tr></table></figure>
+通常情况下会主动跳过错误, 有两种方式可以主动跳过:</li>
+<li>主动跳过一个事务<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> sql_slave_skip_counter<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">start</span> slave;</span><br></pre></td></tr></table></figure></li>
+<li>跳过指定类型的错误<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1062</span> <span class="keyword">insert</span>唯一键冲突</span><br><span class="line"><span class="number">1032</span> 删除数据时、找不到行</span><br><span class="line">slave_skip_errors<span class="operator">=</span><span class="string">&#x27;1032,1062&#x27;</span>; 会主动跳过这两类的错误</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>方法二、GTID<br>通过sql_slave_skip_counter跳过事务和slave_skip_errors忽略错误的方法、虽然最终可以建立新的主备关系、但操作复杂、容易出错、Mysql5.6引入了<code>GTID(Global Transaction Identifier)</code>. 格式:<code>GTID=server_uuid:gno</code><br>其中:</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">server_uuid</span> 是实例第一次启动时生成的, 全局唯一</span><br><span class="line"><span class="attribute">gno</span>是一个整数、初始值是<span class="number">1</span>, 每次提交事务时分配给这个事务、并+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>官方定义: <code>GTID=source_id:transaction_id</code></p>
+<p>GTID模式的启动很简单、只需要启动是增加参数:<br>gtid_mode&#x3D;on 和 enforce_gtid_consistency&#x3D;on 即可.</p>
+<p>GTID模式下、每个事务都会跟一个GTID对应、有两种生成方式, 具体使用哪种取决于 session 变量和 gtid_next 的值</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 若 <span class="attribute">gtid_next</span>=automatic, 代表使用默认值、Mysql会把server_uuid:gno 分配给它</span><br><span class="line">   a. 记录binlog时、先记录一行<span class="built_in">set</span></span><br><span class="line">       @@session.gtid_mext = <span class="string">&#x27;server_uuid.gno&#x27;</span></span><br><span class="line">   b. 把这个gtid加入到本实例的gtid集合 </span><br><span class="line">2. 若gtid是固定的值、eg. 通过<span class="built_in">set</span> <span class="attribute">gtid_next</span>=<span class="string">&#x27;current_gtid&#x27;</span>指定、会有两种可能性:</span><br><span class="line">   a. 若current_gtid已存在实例的gtid集合、接下来的事务会被系统忽略</span><br><span class="line">   b. 若不再、就将该值分配给要执行的事务、系统不需要生成、gno也不用+1</span><br></pre></td></tr></table></figure>
+<p>这样、MySQL维护了一个GTID集合、用来对应<code>实例执行过的所有事务</code></p>
+<p>当出现主键冲突时、可以通过GTID加入的方式、跳过事务</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set gtid_next=<span class="string">&#x27;conflict gtid&#x27;</span>; </span><br><span class="line">begin;</span><br><span class="line">commit; <span class="regexp">//</span> 通过提交一个空事务、将gtid加入到实例X的GTID集合</span><br><span class="line">set gtid_next=automatic; <span class="regexp">//</span> 恢复GTID自动分配模式</span><br><span class="line">start slave; <span class="regexp">//</span> 启动从库</span><br></pre></td></tr></table></figure>
+
+
+<p>二、基于GTID的主备切换</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">change master <span class="keyword">to</span></span><br><span class="line">master_host<span class="operator">=</span>$host_name</span><br><span class="line">master_port<span class="operator">=</span>$port</span><br><span class="line">master_user<span class="operator">=</span>$user_name</span><br><span class="line">master_password<span class="operator">=</span>$password</span><br><span class="line">master_auto_position<span class="operator">=</span><span class="number">1</span> <span class="operator">/</span><span class="operator">/</span> 表示主备关系使用的是gtid协议</span><br></pre></td></tr></table></figure>
+<p>主备切换逻辑:</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 实例B指向主库`A&#x27;`, 基于主备协议建立连接</span><br><span class="line"><span class="number">2</span>. 实例B把 set_b 发送给主库 `A&#x27;`</span><br><span class="line"><span class="number">3</span>. 实例`A&#x27;`算出 set_a 与 set_b的差集、即: 所有存在于 set_a、但不存在于 set_b 的gtid集合、判断`A&#x27;`本地是否包含了这个差集需要的所有binlog事务</span><br><span class="line">   a. 若不包含、表示 `A&#x27;` 已经把实例B需要的binlog删除掉、直接返回错误</span><br><span class="line">   b. 若包含、`A&#x27;`从自己的binlog找到第一个不在 set_b 的事务、发给B</span><br><span class="line"><span class="number">4</span>. 从该事务开始、往后读文件、按顺序读取binlog发送给B执行.</span><br></pre></td></tr></table></figure>
+<p>其实、这里边包含了一个设计思想: 在基于GTID的主备关系里、系统认为只要建立主备关系、就必须要保证主库发给备库的日志是完整的、若实例B需要的日志已经不存在、<code>A&#39;</code>就拒绝发送给B</p>
+<p>这跟基于位点的主备协议不同. 基于位点的协议、是由备库决定的、备库指定哪个位点、主库就发送哪个位点、不做日志的完整性判断. GTID是备库自动判断的.</p>
+<p>思考:</p>
+<blockquote>
+<p>若在GTID模式下设置主从关系的时候、从库执行start slave命令后、主库发现需要的binlog已经被删除掉了、导致主备创建不成功. 怎么处理呢 ?</p>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 若业务允许主从不一致、可以在主库上执行 `<span class="keyword">show</span> <span class="keyword">global</span> variables <span class="keyword">like</span> gtid_purged`、得到主库已经删除的gtid集合、假设是 gtid_purged1, 然后先在从库执行 <span class="keyword">reset</span> master, 再执行 <span class="keyword">set</span> <span class="keyword">global</span> gtid_purged=gtid_purged1; 最后执行 <span class="keyword">start</span> slave, 就会从现存binlog开始同步.</span><br><span class="line"><span class="number">2.</span> 若需要主从数据一致的话、最好还是通过重新搭建从库来做</span><br><span class="line"><span class="number">3.</span> 若其它从库有全量binlog的话、可以把新的从库先接到全量binlog的从库、追上日志以后、若有需要、再切回主库</span><br><span class="line"><span class="number">4.</span> 若binlog有备份、可以先在从库应用缺失的binlog、然后再执行<span class="keyword">start</span> slave.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/" class="post-title-link" itemprop="url">备库为什么会延迟好几个小时</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>若备库执行日志的速度低于主库生成日志的速度、备库有可能很久都追不上主库<br>MySQL5.6版本之前、MySQL只支持单线程复制、主库并发高、TPS较高时、可能会出现主备延迟<br>5.6版本之后、sql_thread不会直接更新数据、而是交给 coordinator 来中转日志和分发事务、由worker进程来更新数据. worker的线程数由 slave_parallel_works 决定.<br>一般32核机器设置为 8~16、备库还要提供查询、不能把CPU都吃光了.</p>
+</blockquote>
+<p>思考: </p>
+<ol>
+<li><p>事务能不能轮询分发给各个worker ?<br>不可以. 事务分发给worker以后、不同worker就独立执行了、但由于CPU的调度策略、第二个事务可能会比第一个先执行、此时、若两个事务更新的是同一行数据、就会导致主备不一致.</p>
+</li>
+<li><p>同一个事务的多个更新语句、能不能分发给多个worker执行 ?<br>不可以. 若Trx1 更新了t1和t2 两个表的各一行数据、若分发到不同的worker执行、虽然备库最终结果是一致的、但 t1更新完成的瞬间、会出现不一致, 破坏了事务的隔离性</p>
+</li>
+</ol>
+<p>所以: 分发器 coordinator 需要满足:</p>
+<ol>
+<li>不能造成覆盖更新、更新同一行数据的两个事务必须分发到同一个worker</li>
+<li>同一个事务必须分发到同一个worker.</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6992c49571630b74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="主备流程图.png"></p>
+<p>不同版本的并行复制策略:</p>
+<ol>
+<li>5.5版本<br>官方5.5版本不支持并行复制. <ol>
+<li><p>按表分发. 每个worker线程维护一个hash表、用来保存当前正在这个worker上执行的事务所涉及的表. 有事务分配给该worker时、涉及的表会加入到对应hash表、worker执行完成、从hash表移除. 若与多个worker冲突、coordinator进入等待.<br>事务分发时、与worker冲突情况:<br>a. 跟所有worker都不冲突、coordinator直接分发给最空闲的worker线程<br>b. 跟多于一个worker冲突、coordinator进入等待、直到和该事务冲突的worker进程只有1个<br>c. 若只跟一个worker冲突、分配给存在冲突关系的worker.<br>按表分发、在多表负载均匀的场景下效果不错、但若碰到热点表、比如: 所有的更新事务都涉及同一张表时、所有事务都会分发到同一个worker、就变成单线程了.</p>
+</li>
+<li><p>按行分发. 若两个事务没有更新相同行、可以在备库并行执行、要求binlog格式必须是row.<br>此时判断冲突规则就是 库名 + 表名 + 唯一键值(还要考虑唯一索引)<br>相比于按表分发、按行分发在决定线程分发的时候、需要消耗更多的计算资源.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p> 按表分发和按行分发都有约束:</p>
+<ol>
+<li><p>binlog格式必须是Row</p>
+</li>
+<li><p>表必须要有主键</p>
+</li>
+<li><p>不能有外键、有外键时、级联更新的行不会记录binlog、这样冲突检测就不准确.<br> 按行分发有个问题: 大事务耗费CPU和内存.<br> 解决: 会设置一个阈值、若单事务超过设置行阈值(eg. 单事务更新行数超过10w)、就退化为单线程模式: 1. coordinator暂时hold住事务、2. 等所有worker变成空队列、coordinator直接执行事务 3. 恢复并行模式</p>
+</li>
+<li><p>5.6按库并行<br>原理同上、并行效果取决于压力模型. 若主库上有多个DB、并且多个DB的压力均衡、使用库级别分发效果较好. 相对表级别和行级别优势:</p>
+</li>
+</ol>
+<ol>
+<li>构造hash值很快、只需要库名、且一个实例上DB数量不会过多</li>
+<li>不要求binlog格式为row、statement也可以拿到库名.<br>但: 若主库上的所有表都放在同一个DB里、这个策略就没用了、若不同DB热点不同、也起不到并行效果.</li>
+</ol>
+<ol start="3">
+<li>MariaDB的并行复制策略<br>利用的是组提交的特性.</li>
+</ol>
+<ol>
+<li>能够在同一组里提交的事务、一定不会修改同一行</li>
+<li>主库上可以并行执行的事务、备库上也一定可以并行执行</li>
+</ol>
+<ol>
+<li><p>在一组提交的事务、有一个相同的commit_id、下一组就是 commit_id + 1</p>
+</li>
+<li><p>commit_id直接写入binlog</p>
+</li>
+<li><p>传到备库应用时、相同commit_id的事务分发到多个worker执行</p>
+</li>
+<li><p>一组全部执行完、coordinator再取下一组数据.<br>可以模拟主库的并行模式. 但: 并未完全实现<code>模拟主库并发度</code>这个目标, 在主库上、一组事务commit时、下一组事务是同时处于<code>执行中</code>的. 而备库需要第一组事务执行完、第二组才能开始执行、这样系统的吞吐量就不够、另外、容易被大事务拖后腿.<br>假设 trx1 &#x2F; trx2 &#x2F; trx3为一组事务、trx2为大事务、这样、trx1&#x2F;trx3执行完后也必须等待trx2执行完成、下一组才能开始执行、这段时间只有一个worker线程在工作、是对资源的浪费.</p>
+</li>
+<li><p>MySQL5.7的并行复制策略<br>MySQL5.7提供了 slave-parallel-type 控制并行复制策略<br>slave-parallel-type&#x3D;database; 表示使用mysql5.6的按库并行复制<br>slave-parallel-type&#x3D;logical_clock; 表示使用类似mariadb的策略、但做了改进</p>
+</li>
+</ol>
+<p>思考: 同时处于<code>执行状态</code>的所有事务、是不是可以并行 ?<br>不能. 可能有由于锁冲突而处于锁等待状态的事务、若这些事务在备库上分配到不同的worker、会出现主备不一致. 所以、MariaDB的核心是、处于commit状态的事务并行处理.</p>
+<p>而实际上: 处于redo log prepare阶段的事务、都已经通过了锁冲突检验、<br>所以, Mysql5.7的并行复制策略思想是:</p>
+<ol>
+<li>同时处于prepare状态的事务、在备库可以并行执行</li>
+<li>处于prepare状态的事务、与处于commit状态的事务之间、在备库执行时、也是可以并行的.<br>binlog_group_commit_sync_delay表示延迟多少微秒后调用fsync<br>binlog_group_commit_sync_no_Delay_count表示累积多少次后才调用fsync<br>这两个参数可以用于故意拉长binlog从write到fsync的时间、减少binlog的写盘次数、在5.7的复制策略里、可以用来制造更多处于<code>prepare阶段的事务</code>、增加备库并行度</li>
+</ol>
+<ol start="5">
+<li>Mysql5.7.22并行复制策略<br>18.4月发布的5.7.22版本、增加一个机遇writeset的并行复制<br>binlog-transaction-dependency-tracking控制是否使用新的策略</li>
+</ol>
+<ol>
+<li>commit_order、根据同时进入prepare和commit来判断是否可以并行的策略</li>
+<li>writeset、表示对于事务涉及更新的每一行计算hash值、组成writeset、若两个事务没有操作相同行、就可以并行复制</li>
+<li>writeset_session、在主库上同一个线程先后执行的两个事务、在备库执行时、要保证相同的先后顺序、hash值是通过 db+table+index+value计算的、类似5.5按行复制<br>但: 1. writeset是在主库生成后直接写入binlog的、在备库执行时、不需要解析binlog、节省计算量</li>
+</ol>
+<ol start="2">
+<li>不需要把整个事务的binlog都扫一遍、才决定分发到哪个worker、更省内存</li>
+<li>备库的分发策略不依赖binlog内容、binlog格式可以不局限于row<br>通用性更有保证.</li>
+</ol>
+<p>思考: 假设5.7.22版本的主库、单线程插入很多数据、过了3个小时、想给这个主库搭一个相同版本的备库. 为了更快的追上主库、需要怎么选择并行复制策略呢 ?</p>
+<ol>
+<li>commit_order 由于是单线程执行、每个事务的commit_id不同、从库也只能是单线程执行<br>2、 writeset_order 要求同一个线程的日志必须要与主库上的先后顺序相同、也会导致退化为单线程<br>所以应该选择 writeset 并行复制策略.</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">如何判定一个数据库出了问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>主备切换有两种场景: 主动切换 和 被动切换. 被动切换大多是主库出了问题、由HA系统引发的. 那么: 如何判定主库出了问题呢 ?</p>
+</blockquote>
+<p>一、 select 1 判定<br>实际上, select 1 成功返回、只能说明这个库的进程还在、并不能说明主库没问题. eg. 以下场景:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> innodb_thread_concurrency<span class="operator">=</span><span class="number">3</span>; <span class="operator">/</span><span class="operator">/</span> 控制innodb并发线程上限. 超过、进入等待. 来避免线程数过多、上下文切换的成本过高.</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `t`(</span><br><span class="line"> `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">`c` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">default</span> <span class="keyword">null</span></span><br><span class="line">) engine<span class="operator">=</span>innodb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-a908616fd039d681.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>在session D里、select 1是可执行成功的, 但查询表t会被堵住.<br>注意:</p>
+<blockquote>
+<p>并发连接和并发查询不是一个概念. show processlist看到的几千个连接、指的就是并发连接.<br>当前正在执行的语句、才是并发查询.<br>连接多顶多占一些内存、而并发查询多、才是造成CPU压力的根本. 在线程进入锁等待之后、并发线程的计数会-1, 行锁(包括间隙锁)不占用CPU资源.</p>
+</blockquote>
+<p>思考:</p>
+<blockquote>
+<p>Mysql会什么设计锁等待不计入并发线程数呢 ?</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">假设以下场景:</span><br><span class="line">1. 线程1 执行begin; update t <span class="built_in">set</span> <span class="attribute">c</span>=c+1 where <span class="attribute">id</span>=1; 启动事务trx1, 然后保持、此时线程处于空闲</span><br><span class="line">状态、不计入并发线程</span><br><span class="line">2.  线程2~129执行 update t <span class="built_in">set</span> <span class="attribute">c</span>=c+1 where <span class="attribute">id</span>=1; 由于等行锁、进入等待、这样就有128个</span><br><span class="line">线程处于等待状态.</span><br><span class="line">3. 若处于等待状态线程计数不-1, innodb会认为线程用满、阻止其他查询语句进入引擎执行、线程1不能</span><br><span class="line">提交、而另外的128个线程又处于锁等待状态、整个系统就阻塞了. 如下图:</span><br><span class="line">此时innodb不能响应任何请求、且所有线程都处于等待状态、此时占用CPU为0, 很不合理、所以 </span><br><span class="line">设计进入锁等待、将并发线程的计数器-1, 是合理的.</span><br><span class="line"></span><br><span class="line">但: 若真的执行查询、还是计入并发线程的. eg. select sleep(100) <span class="keyword">from</span> t;</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-facf6013361bf644.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="等待并发线程不减1, 系统锁死.png"></p>
+<p>二、查表判断<br>在系统库(mysql)新建一个表, eg. 命名为 health_check, 里边只放一行数据、定期检测, 可以发现由于并发线程数过多导致的db不可用.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mysql.health_check;</span><br></pre></td></tr></table></figure>
+<p>但: 若空间满了、这种方法又不好使.<br>更新事务要写binlog、而一旦binlog所在磁盘空间占用率达到100%, 那所有的更新和事务提交的commit语句都会被堵住, 但可以正常读取. </p>
+<p>三、更新判断</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> mysql.headlth_check <span class="keyword">set</span> t_modified<span class="operator">=</span>now();</span><br></pre></td></tr></table></figure>
+<p>节点可用性的检测都应该包含主库和备库、若用来检测主库的话、备库也要进行更新检测. 但: 备库的检测也是要写binlog的、一般会把A和B的主备关系、设计为双M架构、所以在备库B上执行的检测命令、也会发回给主库A.<br>但若A、B更新同一条数据、就可能发生行冲突、导致主备同步停止. 可以插入多条数据、使用A、B的server_id做主键.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `headlth_check`(</span><br><span class="line"> `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">`t_modified` <span class="type">timestamp</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">default</span> <span class="built_in">current_timestamp</span>,</span><br><span class="line"><span class="keyword">primary</span> key(`id`)</span><br><span class="line">) engine<span class="operator">=</span>innodb;</span><br><span class="line"># 检测命令</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.health_check(id, t_modified) <span class="keyword">values</span>(@<span class="variable">@server</span>_id, now()) <span class="keyword">on</span> duplicate</span><br></pre></td></tr></table></figure>
+<p>这是一个比较常见的方案、但还存在一些问题, <code>判定慢</code>.<br>eg. 所有的检测逻辑都需要一个超时时间N、执行update、超过Ns不返回、认为系统不可用.<br>但: 假设日志盘IO利用率已经100%, 这个时候系统响应很慢、需要主备切换. 但检测使用的update需要的资源很少、拿到io就可以提交成功、超时之前就返回了、于是得到了<code>系统正常</code>的结论, 显然这是不合理的判定.</p>
+<p>四、内部统计<br>针对磁盘利用率、若Mysql 可以告知每次请求的io时间、就靠谱多了.<br>5.6版本以后的performance_schema库、file_summay_by_event_name表里就统计了每次IO请求时间.<br>event_name&#x3D;’wait&#x2F;io&#x2F;file&#x2F;innodb&#x2F;innodb_log_file’ 统计的是redo log的写入时间. 第一列 event_name表示统计的类型.<br>接下来3组、统计的是redo log操作时间</p>
+<p>第一组5列、是所有IO类型的统计:<br>count_star 是所有IO总次数<br>sum、min、avg、max是统计的总和、最小、平均和最大值.(单位ps)</p>
+<p>第二组6列、是读操作的统计<br>最后一列 sum_number_of_bytes_read统计的是、总共从redo log读多少个字节</p>
+<p>第三组6列, 是写操作统计</p>
+<p>最后四组时间、是对其它类型数据的统计、在redo log里、可以认为是对 fsync的统计.</p>
+<p>binlog对应的event_name是: wait&#x2F;io&#x2F;file&#x2F;sql&#x2F;binlog 这行、统计逻辑同 redo log. 额外的统计这些信息、是有性能耗损的、大概在10%左右. 建议只开启需要的项. </p>
+<p>打开统计项之后、可以通过判断MAX_TIMER的值来判断数据库是否有问题.<br>eg. 设定阈值、单次IO超过200ms属于异常、出现异常把之前的统计值清空、再次出现这个异常就可以加入监控累计值了.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88,-%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88,-%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">幻读是什么,-幻读有什么问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Innodb默认事务隔离级别是可重复读. 接下来的场景设定在可重复读隔离级别(特殊说明除外)</p>
+</blockquote>
+<p>一、幻读是什么 ?<br><img src="https://upload-images.jianshu.io/upload_images/14027542-a05959ed4d3c5fed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="假设只在id=5这行加锁.png"></p>
+<ol>
+<li>在Q1只返回id&#x3D;5这一行</li>
+<li>在T2时刻、session B把id&#x3D;0 这行的d值改为5、T3时刻Q2查询出来 id&#x3D;5 和 id&#x3D;0 这两行</li>
+<li>T4时刻、session C 又插入一行 (1,1,5), 因此T5时刻、查出 id&#x3D;0, 1, 5三行.<br>Q3读到id&#x3D;1 这一行的现象被称为<code>幻读</code>.</li>
+</ol>
+<p><code>幻读</code>: 一个事务在前后两次查询同一个范围的时候、后一次查询看到了前一次查询未看到的行. 两点说明: </p>
+<ol>
+<li>在可重复读隔离级别下、普通查询是快照读、不会看到别的事务插入数据, 所以、只会在当前读下才会出现.</li>
+<li>幻读 仅指新插入的行被读到、修改后满足条件、而被读取到、不能称为<code>幻读</code>.</li>
+</ol>
+<p>二、幻读有什么问题 ?</p>
+<ol>
+<li>首先是语义上的. 前一次查询已经声明要把d&#x3D;5的行加锁、不许别的事务进行读写操作, 而幻读却破坏了这个语义.</li>
+<li>是数据一致性的问题. 锁的设计是为了保证数据的一致性. 这个一致性、不止是数据库内部数据状态此刻的一致性、还包含了数据和日志在逻辑上的一致性.</li>
+</ol>
+<p>三、如何解决幻读?<br>产生幻读的原因是: 行锁只能锁住行、但是新插入记录这个动作、要更新的是记录之间的间隙、为了解决幻读、就引入了间隙锁(Gap Lock).<br>跟行锁产生冲突的是、另外一个行锁. 跟间隙锁存在冲突关系的是: 往间隙中插入一个记录这个操作. 间隙锁之间不存在冲突关系.<br><img src="https://upload-images.jianshu.io/upload_images/14027542-e275608aeb25fad2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="两种行锁之间的冲突关系.png"></p>
+<p>间隙锁和行锁合称 next-key lock, 每个next-key lock是前开后闭的区间. 即: 若表t初始化后、若用select * from t for update. 将整个记录锁起来、就会形成7个next-key lock, 分别是 (-∞,0]、(0,5]、(5,10]、(10,15]、(15,20]、(20, 25]、(25, +supremum].<br><img src="https://upload-images.jianshu.io/upload_images/14027542-84514755a22c141e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="表t主键索引上的行锁和间隙锁.png"></p>
+<p>但: 间隙锁的引入会降低db的并发度.</p>
+<p>如果事务隔离级别是: RC(Read Committed)就不会有间隙锁了.<br>那线上业务该如何选择隔离级别呢 ?</p>
+<ol>
+<li>若读提交隔离级别够用、业务不需要可重复读的保证、这样考虑读提交下操作数据的锁范围更小(没有间隙锁), 这个选择是合理的.</li>
+<li>业务逻辑使用读提交、逻辑备份时、mysqldump为什么把备份线程设置为 可重复读呢 ?</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E6%AD%BB%E9%94%81%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/mysql_%E6%AD%BB%E9%94%81%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">死锁日志分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="innodb基于系统参数开启监控"><a href="#innodb基于系统参数开启监控" class="headerlink" title="innodb基于系统参数开启监控"></a>innodb基于系统参数开启监控</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">set</span> <span class="keyword">global</span>  innodb_status_output=<span class="keyword">on</span>; <span class="comment">#开启innodb标准监控</span></span><br><span class="line"><span class="number">2.</span> <span class="keyword">set</span> <span class="keyword">global</span> innodb_status_output_locks=<span class="keyword">on</span>; <span class="comment"># 开启innodb锁监控</span></span><br><span class="line"><span class="number">3.</span> <span class="keyword">set</span> <span class="keyword">global</span> innodb_print_all_deadlocks=<span class="keyword">on</span>; <span class="comment"># 将死锁日志记录到错误日志文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="死锁分析"><a href="#死锁分析" class="headerlink" title="死锁分析"></a>死锁分析</h3><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2019</span><span class="number">-05</span><span class="number">-21</span> <span class="number">21</span>:<span class="number">46</span>:<span class="number">44</span> <span class="number">7</span>f9ac2fff700</span><br><span class="line"><span class="comment">*** (1) TRANSACTION:</span></span><br><span class="line">TRANSACTION <span class="number">14234356386</span>, ACTIVE <span class="number">0</span> sec fetching rows</span><br><span class="line">mysql tables in use <span class="number">1</span>, locked <span class="number">1</span></span><br><span class="line">LOCK WAIT <span class="number">4</span> lock struct(s), heap size <span class="number">1184</span>, <span class="number">2</span> row lock(s)</span><br><span class="line">MySQL thread id <span class="number">101287388</span>, OS thread handle <span class="number">0x7f9ac472c700</span>, query id <span class="number">15913830552</span> <span class="number">10.20</span><span class="number">.00</span><span class="number">.217</span> zop Searching rows <span class="keyword">for</span> update</span><br><span class="line">update driver_statistics <span class="keyword">set</span> statistics_status=0 , statistics_time=NOW() <span class="comment">where statistics_status=1 and statistics_time &lt;= DATE_SUB(NOW(),INTERVA</span></span><br><span class="line">L <span class="comment">120 SECOND)</span></span><br><span class="line"><span class="comment">*** (1) WAITING FOR THIS LOCK TO BE GRANTED:</span></span><br><span class="line">RECORD <span class="comment">LOCKS space id 65 page no 203 n bits 208 index</span> `<span class="comment">PRIMARY</span>` <span class="comment">of table</span> `<span class="comment">platform</span>`<span class="comment">.</span>`<span class="comment">driver_statistics</span>` <span class="comment">trx id 14234356386 lock_mode X loc</span></span><br><span class="line">ks <span class="comment">rec but not gap waiting</span></span><br><span class="line"><span class="comment">*** (2) TRANSACTION:</span></span><br><span class="line">TRANSACTION <span class="comment">14234356375, ACTIVE 0 sec updating or deleting, thread declared inside InnoDB 0</span></span><br><span class="line">mysql <span class="comment">tables in use 1, locked 1</span></span><br><span class="line">3 lock <span class="comment">struct(s), heap size 1184, 2 row lock(s), undo log entries 1</span></span><br><span class="line">MySQL <span class="comment">thread id 101570708, OS thread handle 0x7f9ac2fff700, query id 15913830539 10.20.00.217 zop updating</span></span><br><span class="line">update <span class="comment">driver_statistics</span></span><br><span class="line">     <span class="keyword">SET</span> <span class="comment">status = 2,time =</span> <span class="comment">&#x27;2019-05-21 21:46:44.96&#x27;</span><span class="comment">,d_id = 44201,</span></span><br><span class="line">        d_phone <span class="comment">=</span> <span class="comment">&#x27;15601237231&#x27;</span><span class="comment">, d_name =</span> <span class="comment">&#x27;k&#x27;</span></span><br><span class="line">    where <span class="comment">id = 54145</span></span><br><span class="line"><span class="comment">*** (2) HOLDS THE LOCK(S):</span></span><br><span class="line">RECORD <span class="comment">LOCKS space id 65 page no 203 n bits 208 index</span> `<span class="comment">PRIMARY</span>` <span class="comment">of table</span> `<span class="comment">platform</span>`<span class="comment">.</span>`<span class="comment">driver_statistics</span>` <span class="comment">trx id 14234356375 lock_mode X loc</span></span><br><span class="line">ks <span class="comment">rec but not gap</span></span><br><span class="line"><span class="comment">*** (2) WAITING FOR THIS LOCK TO BE GRANTED:</span></span><br><span class="line">RECORD <span class="comment">LOCKS space id 65 page no 7749 n bits 1616 index</span> `<span class="comment">idx_statistics_status</span>` <span class="comment">of table</span> `<span class="comment">platform</span>`<span class="comment">.</span>`<span class="comment">driver_statistics</span>` <span class="comment">trx id 14234356375</span></span><br><span class="line"> lock_mode <span class="comment">X locks rec but not gap waiting</span></span><br><span class="line"><span class="comment">*** WE ROLL BACK TRANSACTION (2)</span></span><br><span class="line">------------</span><br></pre></td></tr></table></figure>
+
+<h4 id="先看事务一的信息"><a href="#先看事务一的信息" class="headerlink" title="先看事务一的信息"></a>先看事务一的信息</h4><blockquote>
+<p>***(1) TRANSACTION:<br>TRANSACTION 14234356386, ACTIVE 0 sec fetching rows</p>
+</blockquote>
+<p><code>active 0 sec</code> 表示事务活跃时间<br><code>fetching rows</code> 表示事务正在做的事儿</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可能的事务有 inserting、updating、deleting、fetching <span class="built_in">rows</span>等</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>mysql tables in use 1, locked 1<br>LOCK WAIT 4 lock struct(s), heap size 1184, 2 row lock(s)</p>
+</blockquote>
+<p><code>mysql tables in use 1</code> 表示mysql有一个表被使用<br><code>locked 1</code> 表示有一个表锁<br><code>LOCK WAIT</code> 表示事务正在等待锁<br><code>4 lock struct(s)</code> 表示该事务的锁链表长度为 4, 表示该事务的锁链表的长度为 11，每个链表节点代表该事务持有的一个锁结构，包括表锁，记录锁以及 autoinc 锁等。<br><code>heap size 1184</code> 为事务分配的锁堆内存大小<br><code>2 row lock(s)</code> 表示当前事务持有的行锁个数, 通过遍历上边的4个锁结构、找到其中类型为LOCK_REC的记录数、</p>
+<blockquote>
+<p>MySQL thread id 101287388, OS thread handle 0x7f9ac472c700, query id 15913830552 10.20.00.217 zop Searching rows for update</p>
+</blockquote>
+<p><code>MySQL thread id .. OS...</code> 当前事务线程信息<br><code>10.20.00.217 zop</code> 数据库的ip和dbname<br><code>Searching rows for update</code> 当前事务的状态</p>
+<blockquote>
+<p>update d_statistics set statistics_status&#x3D;0, statistics_time&#x3D;now() where statistics_status&#x3D;1 and statistics_time &lt;&#x3D;date_sub(now(),interval 120 seconds)</p>
+</blockquote>
+<blockquote>
+<p>当前正在执行的sql语句</p>
+</blockquote>
+<blockquote>
+<p>*** (1) WAITING FOR THIS LOCK TO BE GRANTED:<br>RECORD LOCKS space id 65 page no 203 n bits 208 index <code>PRIMARY</code> of table <code>platform</code>.<code>driver_statistics</code> trx id 14234356386 lock_mode X loc<br>ks rec but not gap waiting</p>
+</blockquote>
+<p><code>lock_mode X</code> 表示改记录锁为排他锁<br><code>RECORD LOCKS</code> 表示正在等待的是记录锁<br><code>index PRIMARY</code> 表示要加锁的索引为主键索引<br><code>n bits 208</code> 表示这个记录锁结构上保留有208个bit位(改page上的记录数+64)、<br><code>lock_mode X</code>表示该记录锁为排他锁、<br><code>locks rec but not gap waiting</code>表示要加的锁为记录锁、并且处于锁等待状态</p>
+<h4 id="再看事务二的分析"><a href="#再看事务二的分析" class="headerlink" title="再看事务二的分析"></a>再看事务二的分析</h4><p><code>undo log entries 1</code>表示当前事务有1个undo log记录、因为二级索引不记undo log、表示该事务更新了1个聚簇索引</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title"> (2) HOLDS THE LOCK(S):</span></span><br><span class="line">RECORD LOCKS space id <span class="number">65</span> page no <span class="number">203</span> n bits <span class="number">208</span> index `PRIMARY` of table `platform`.`driver_statistics` trx id <span class="number">14234356375</span> lock_mode X loc</span><br><span class="line">ks rec but <span class="literal">not</span> gap</span><br></pre></td></tr></table></figure>
+<p>表示事务2 持有主键索引的X记录锁、</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">(2) WAITING FOR THIS LOCK TO BE GRANTED:</span></span><br><span class="line">RECORD LOCKS space id <span class="number">65</span> page no <span class="number">7749</span> n bits <span class="number">1616</span> index `idx_statistics_status` of table `platform`.`driver_statistics` trx id <span class="number">14234356375</span></span><br><span class="line"> lock_mode X locks rec but <span class="literal">not</span> gap waiting</span><br></pre></td></tr></table></figure>
+<p>表示事务2正在等待二级索引上的X记录锁</p>
+<h4 id="mysql-加锁方式"><a href="#mysql-加锁方式" class="headerlink" title="mysql 加锁方式"></a>mysql 加锁方式</h4><p><a target="_blank" rel="noopener" href="https://www.aneasystone.com/archives/2017/11/solving-dead-locks-two.html">https://www.aneasystone.com/archives/2017/11/solving-dead-locks-two.html</a></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">批量<span class="keyword">update</span>时、mysql <span class="keyword">server</span>会根据<span class="keyword">where</span>条件读取第一条满足条件的记录、innodb引擎返回第一条记录、并加锁(<span class="keyword">current</span> <span class="keyword">read</span>)、待mysql <span class="keyword">server</span>收到这条加锁的记录后、再发起<span class="keyword">update</span>请求、更新记录</span><br><span class="line"><span class="keyword">server</span>和innodb的交互是一条一条进行的、加锁也是一条一条进行的、</span><br><span class="line">在给二级索引加X锁的同时、会给主键索引也加上X锁、</span><br><span class="line">记录锁是加在索引上的、若表未建索引、db也会隐式的创建一个索引</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">若<span class="keyword">sql</span>无法使用索引时会走主索引实现全表扫描、mysql会给全表所有的记录行加记录锁、若一个<span class="keyword">where</span>条件无法索引快速过滤、存储引擎就会将所有的记录加锁后返回、mysql <span class="keyword">server</span>在进行过滤时、若发现不满足、会调用unlock_row把不满足的记录释放、但是每条记录的加锁操作还是不能省略的、so在没有索引时、会消耗大量的锁资源、增加db开销、降低db的并发性</span><br><span class="line"></span><br><span class="line">RC级别不会加间隙锁</span><br></pre></td></tr></table></figure>
+
+<h4 id="加锁情况分析"><a href="#加锁情况分析" class="headerlink" title="加锁情况分析"></a>加锁情况分析</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 主键索引命中:</span><br><span class="line"><span class="code">    RR和RC 一样、都只加记录锁</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="bullet">2.</span> 主键索引非命中</span><br><span class="line"><span class="code">    RC不加锁、RR加 gap 锁</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="bullet">3.</span> 唯一二级索引、查询命中</span><br><span class="line">   RC和RR都只加记录锁、加二级索引锁的同时会加主键索引锁</span><br><span class="line"></span><br><span class="line"><span class="bullet">4.</span> 唯一二级索引、查询非命中</span><br><span class="line">   RC不加锁、RR会加GAP锁、但只加二级索引、不加主键索引</span><br><span class="line"></span><br><span class="line">5.二级非唯一索引、查询命中</span><br><span class="line">  RC会加记录锁、RR还会加GAP锁、</span><br><span class="line"></span><br><span class="line">6.二级非唯一索引、查询未命中</span><br><span class="line">  RC不加锁、RR会加GAP锁、</span><br><span class="line"></span><br><span class="line"><span class="bullet">7.</span> 无索引</span><br><span class="line">   若where条件不能走索引、只能走全表扫描</span><br><span class="line">   RC会给所有记录加行锁、RR会给所有记录加行锁 + 所有聚簇索引之间加GAP锁</span><br><span class="line"></span><br><span class="line">8.聚簇索引范围查询</span><br><span class="line">   包含等于时、会给下一条记录也加上next-key lock</span><br><span class="line"></span><br><span class="line">9.二级索引范围查询</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html">https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html</a><br><a target="_blank" rel="noopener" href="https://www.aneasystone.com/archives/2017/12/solving-dead-locks-three.html">https://www.aneasystone.com/archives/2017/12/solving-dead-locks-three.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/enweitech/article/details/52447006">https://blog.csdn.net/enweitech/article/details/52447006</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/miyatang/article/details/78227344">https://blog.csdn.net/miyatang/article/details/78227344</a><br><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/75659">https://time.geekbang.org/column/article/75659</a><br><a target="_blank" rel="noopener" href="https://my.oschina.net/u/2408025/blog/535941">https://my.oschina.net/u/2408025/blog/535941</a><br><a target="_blank" rel="noopener" href="https://dbarobin.com/2015/01/27/innodb-lock-wait-under-mysql-5.5/">https://dbarobin.com/2015/01/27/innodb-lock-wait-under-mysql-5.5/</a><br><a target="_blank" rel="noopener" href="https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html">https://www.aneasystone.com/archives/2018/04/solving-dead-locks-four.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LBSer/p/5183300.html">https://www.cnblogs.com/LBSer/p/5183300.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

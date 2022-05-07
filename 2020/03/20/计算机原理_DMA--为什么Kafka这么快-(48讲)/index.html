@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="SSD的IOPS可以达到2w、4w, 可CPU主频在2GHZ以上、每秒可以有2亿次操作, 若对于IO操作、都是由CPU发出对应的指令、然后等待IO设备完成操作之后返回、那CPU有大部分的时间在等待IO. 其实对于IO设备的大量操作、都只是把内存数据传输到IO设备而已、CPU是无效等待, 于是, 就有了 DMA(Direct Memory Access)直接内存访问 技术  理解DMA、一个协处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DMA--为什么Kafka这么快-(48讲)">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_DMA--%E4%B8%BA%E4%BB%80%E4%B9%88Kafka%E8%BF%99%E4%B9%88%E5%BF%AB-(48%E8%AE%B2)/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="SSD的IOPS可以达到2w、4w, 可CPU主频在2GHZ以上、每秒可以有2亿次操作, 若对于IO操作、都是由CPU发出对应的指令、然后等待IO设备完成操作之后返回、那CPU有大部分的时间在等待IO. 其实对于IO设备的大量操作、都只是把内存数据传输到IO设备而已、CPU是无效等待, 于是, 就有了 DMA(Direct Memory Access)直接内存访问 技术  理解DMA、一个协处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-c4145e8dae426f5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-1827f1506ed4ab8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-b190e4dc04bd2a64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.843Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-c4145e8dae426f5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_DMA--%E4%B8%BA%E4%BB%80%E4%B9%88Kafka%E8%BF%99%E4%B9%88%E5%BF%AB-(48%E8%AE%B2)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>DMA--为什么Kafka这么快-(48讲) | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_DMA--%E4%B8%BA%E4%BB%80%E4%B9%88Kafka%E8%BF%99%E4%B9%88%E5%BF%AB-(48%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DMA--为什么Kafka这么快-(48讲)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>SSD的IOPS可以达到2w、4w, 可CPU主频在2GHZ以上、每秒可以有2亿次操作, 若对于IO操作、都是由CPU发出对应的指令、然后等待IO设备完成操作之后返回、那CPU有大部分的时间在等待IO. 其实对于IO设备的大量操作、都只是把内存数据传输到IO设备而已、CPU是无效等待, 于是, 就有了 <code>DMA</code>(Direct Memory Access)<code>直接内存访问</code> 技术</p>
+</blockquote>
+<h4 id="理解DMA、一个协处理器"><a href="#理解DMA、一个协处理器" class="headerlink" title="理解DMA、一个协处理器"></a>理解DMA、一个协处理器</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">本质上:</span> DMA技术就是在主板上放一块独立的芯片, 在进行内存与IO设备的数据传输时, 不在通过CPU来控制</span><br><span class="line">数据传输、而是通过`DMA控制器`(`DMAC`), 这块芯片可以认为就是一个`协处理器`</span><br><span class="line"></span><br><span class="line">DMAC最有价值的地方体现在, 当要传输的数据特别大、速度特别快, 或者传输的数据特别小、速度特别慢时.</span><br><span class="line">eg. <span class="number">1</span>. 用千兆网卡或者硬盘传输大量数据时、若都用CPU来搬运的话、肯定忙不过来、所以, 选择DMAC</span><br><span class="line">    <span class="number">2</span>. 数据传输很慢时, DMAC可以等数据到齐了、再发送信号给CPU处理、而不是让CPU在那里忙等待.</span><br><span class="line"></span><br><span class="line">DMAC在控制数据传输时、还是需要CPU的.</span><br><span class="line"></span><br><span class="line">总线上的设备包括`主设备`和`从设备`, 主动发起数据传输的、必须是主设备, eg.CPU<span class="comment">;从设备只能接收数据. </span></span><br><span class="line"><span class="title">所以:</span> 只能是 CPU从IO设备读数据、或者是CPU向IO设备写数据.</span><br><span class="line"></span><br><span class="line">IO设备不能向主设备发起请求吗？</span><br><span class="line">可以. 但发送的不是实际的数据内容, 而是控制信号. IO设备可以告诉CPU, 有数据要传输、实际数据由CPU</span><br><span class="line">拉取, 而不是IO设备主动推送给CPU.</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c4145e8dae426f5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="包含DMAC的数据传输.png"></p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">DMAC</span>既是一个主设备、有是一个从设备. 对<span class="symbol">CPU</span>来说、它是从设备, 对<span class="symbol">IO</span>设备来说、它是主设备.</span><br><span class="line">使用<span class="symbol">DMAC</span>进行数据传输的过程如下:</span><br><span class="line"><span class="number">1.</span> <span class="symbol">CPU</span>作为一个主设备、向<span class="symbol">DMAC</span>设备发起请求(就是在<span class="symbol">DMAC</span>里修改配置寄存器).</span><br><span class="line"><span class="number">2.</span> <span class="symbol">CPU</span>修改<span class="symbol">DMAC</span>寄存器的时候, 会告诉<span class="symbol">DMAC</span>几个信息:</span><br><span class="line">   <span class="number">1</span>) 源地址的初始值及传输时的地址增减方式</span><br><span class="line">       源地址: 数据要从哪里传输过来. eg. 从内存写入硬盘时, 就是一个内存地址</span><br><span class="line">              从硬盘读取到内存时, 就是硬盘的<span class="symbol">IO</span>接口的地址.</span><br><span class="line">       地址的增减方式: 是说数据从大的地址向小的地址传输, 还是从晓得地址往大的地址传输.</span><br><span class="line">   <span class="number">2</span>) 目标地址初始值及传输时的地址增减方式</span><br><span class="line">   <span class="number">3</span>) 要传输的数据长度</span><br><span class="line"><span class="number">3.</span> 设置完这些信息<span class="symbol">DMAC</span>就变成一个空闲的状态idle</span><br><span class="line"><span class="number">4.</span> 若从硬盘 -&gt; 内存加载数据, 硬盘会向<span class="symbol">DMAC</span>发起一个数据传输请求,这个请求是通过额外的连线(不是总线)</span><br><span class="line"><span class="number">5.</span> <span class="symbol">DMAC</span>再通过一个额外的连线响应该请求.</span><br><span class="line"><span class="number">6.</span> 于是, <span class="symbol">DMAC</span>再向内存发起总线读的数据传输请求, 就从硬盘读到了<span class="symbol">DMAC</span>控制器里.</span><br><span class="line"><span class="number">7.</span> 然后、<span class="symbol">DMAC</span>再向我们的内存发起写的请求、把数据写入内存</span><br><span class="line"><span class="number">8.</span> <span class="symbol">DMAC</span>会反复进行<span class="number">6</span>、<span class="number">7</span> 的操作, 直到<span class="symbol">DMAC</span>的寄存器里边设置的数据长度传输完成.</span><br><span class="line"><span class="number">9.</span> 数据传输完成之后、<span class="symbol">DMAC</span>重新回到第三步的空闲状态.</span><br><span class="line"></span><br><span class="line">整个数据传输的过程中，我们不是通过 <span class="symbol">CPU</span> 来搬运数据，而是由 <span class="symbol">DMAC</span> 这个芯片来搬运数据.</span><br><span class="line">但是 <span class="symbol">CPU</span> 在这个过程中也是必不可少的. 因为传输什么数据，从哪里传输到哪里，其实还是 <span class="symbol">CPU</span> 来设置的.</span><br><span class="line">这也是为什么，<span class="symbol">DMAC</span> 被叫作<span class="string">`协处理器`</span></span><br><span class="line"></span><br><span class="line">早期的计算机里没有<span class="symbol">DMAC</span>、所有数据都是<span class="symbol">CPU</span>来搬运的、然后出现了主板上独立的<span class="symbol">DMAC</span>控制器.</span><br><span class="line">现在数据传输要求越来越复杂、加上显卡、网卡、硬盘等各个设备对数据传输的需求不同、各个设备</span><br><span class="line">都有自己的<span class="symbol">DMAC</span>芯片了</span><br></pre></td></tr></table></figure>
+
+<h4 id="Kafka为什么这么快"><a href="#Kafka为什么这么快" class="headerlink" title="Kafka为什么这么快"></a>Kafka为什么这么快</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">kafka 是一个用来处理实时数据的管道, 常用来做消息队列、或者收集和落地海量的日志. </span><br><span class="line">作为一个实时数据和日志的管道、瓶颈自然也在IO层面</span><br><span class="line"></span><br><span class="line">kafka常见的两种海量数据传输: 1.从网络接收上游数据,落地到本地磁盘 2.从本地磁盘读取、发送到网络上.</span><br><span class="line"></span><br><span class="line">先看场景2, 最直观的是用一个文件读操作, 从磁盘把数据读到内存、再通过一个socket、把数据发到网络上.</span><br><span class="line"></span><br><span class="line">File.read(fileDesc, buf, len);</span><br><span class="line">Socket.send(socket, buf, len);</span><br><span class="line"></span><br><span class="line">这样会有四次数据传输:(两次DMA、两次通过CPU控制的传输)</span><br><span class="line"><span class="bullet">1.</span> 从硬盘上、读到操作系统内核缓冲区(通过DMA搬运).</span><br><span class="line"><span class="bullet">2.</span> 将内核缓冲区的数据、复制到应用分配的内存里(通过CPU搬运)</span><br><span class="line"><span class="bullet">3.</span> 从应用的内存、写到操作系统Socket的缓冲区里(CPU搬运)</span><br><span class="line"><span class="bullet">4.</span> 从Socket的缓冲区、写到网卡的缓冲区(DMA)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-1827f1506ed4ab8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="本次磁盘到网络的数据传输过程.png"></p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">其实只需要搬运一份数据、却搬运了<span class="number">4</span>次、且: 从内核的缓冲区传输到应用的内存里、再从应用的内存里</span><br><span class="line">传输到<span class="built_in">socket</span>的缓冲区里、其实是把一份数据在内存里搬来搬去, 所以kafka就调用Java NIO库、</span><br><span class="line">FileCahnnel-&gt;transfer <span class="built_in">to</span> 方法, 将数据直接通过Channel写入到对应网络设备, 且对于<span class="built_in">socket</span>的操作、</span><br><span class="line">也不是写到<span class="built_in">socket</span>的buffer里、而是直接根据描述符写入到网卡的缓冲区, 省去了<span class="number">2</span>、<span class="number">3</span>, 只有两次数据传输.</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-b190e4dc04bd2a64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="kafka的数据传输模型.png"></p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这样、同一份数据的传输次数从<span class="number">4</span>次变成了<span class="number">2</span>次、且没有通过CPU传输、都是DMA传输, 在这个方法里、</span><br><span class="line">没有在内存层面copy数据, 也称为`零拷贝`(Zero-Copy)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_FPGA%E5%92%8CASIC(32%E8%AE%B2)/" rel="prev" title="FPGA和ASIC(32讲)">
+      <i class="fa fa-chevron-left"></i> FPGA和ASIC(32讲)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_CPU%E6%80%A7%E8%83%BD%E6%9E%81%E8%87%B4/" rel="next" title="CPU性能极致">
+      CPU性能极致 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E8%A7%A3DMA%E3%80%81%E4%B8%80%E4%B8%AA%E5%8D%8F%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">理解DMA、一个协处理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">2.</span> <span class="nav-text">Kafka为什么这么快</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

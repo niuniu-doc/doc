@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="平均负载 loadavg12当系统变慢时、我们想到的很可能是 uptime 或者 top它每一列的含义是什么 ？  so. mark10:13:59 是当前时间up 303 days, 22:27 是系统允许时间 1 user 是正在登录用户数load average: 4.61, 4.37, 3.73 这三列呢 ？依次是 过去1min、5min、15min的平均负载 什么是平均负载 ？？？123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何了解自己的系统运行状态">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="平均负载 loadavg12当系统变慢时、我们想到的很可能是 uptime 或者 top它每一列的含义是什么 ？  so. mark10:13:59 是当前时间up 303 days, 22:27 是系统允许时间 1 user 是正在登录用户数load average: 4.61, 4.37, 3.73 这三列呢 ？依次是 过去1min、5min、15min的平均负载 什么是平均负载 ？？？123">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-7a4f7de3de8dc6be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-4cf1dcfb4a79d551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-e8ae343bc07ff1ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-e6c92ece83479acc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-5b6eb08f6768da70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.801Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Linux使用">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-7a4f7de3de8dc6be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>如何了解自己的系统运行状态 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%A6%82%E4%BD%95%E4%BA%86%E8%A7%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何了解自己的系统运行状态
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">Linux使用</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="平均负载-loadavg"><a href="#平均负载-loadavg" class="headerlink" title="平均负载 loadavg"></a>平均负载 loadavg</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">当系统变慢时、我们想到的很可能是 <span class="built_in">uptime</span> 或者 top</span><br><span class="line">它每一列的含义是什么 ？</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7a4f7de3de8dc6be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime"></p>
+<p>so. mark<br><code>10:13:59</code> 是当前时间<br><code>up 303 days, 22:27</code> 是系统允许时间<br> <code>1 user</code> 是正在登录用户数<br>load average: 4.61, 4.37, 3.73 这三列呢 ？<br>依次是 过去<code>1min</code>、<code>5min</code>、<code>15min</code>的平均负载</p>
+<h4 id="什么是平均负载-？？？"><a href="#什么是平均负载-？？？" class="headerlink" title="什么是平均负载 ？？？"></a>什么是平均负载 ？？？</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">知道了uptime是如何看的、那么平均负载多少算是合适 ？它又是代表什么含义呢 ？</span><br><span class="line"></span><br><span class="line">简单来说平均负载就是单位时间内、系统处于可运行状态和不可中断状态的平均进程数、也就是平均活跃进程数，</span><br><span class="line">之前、我以为是<span class="meta">cpu</span>的使用率来着的~~~xxxxx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可运行状态的进程：指正在使用<span class="meta">CPU</span>或者等待<span class="meta">CPU</span>的进程、ps看到的、处于R状态(Runnable/Running)的进程</span><br><span class="line"></span><br><span class="line">不可中断进程：正处于内核关键流程中的进程、并且这些进程是不可打断的、eg. 等待硬件设备的io响应、也就是ps命令中的D状态(uninterrutible sleep)的进程</span><br><span class="line">不可中断状态其实是系统对进程包含和硬件设备的一种保护机制</span><br><span class="line"></span><br><span class="line">既然平均负载就是平均的活跃进程数、那么最理想的状态就是每个<span class="meta">CPU</span>上都刚好运行着一个进程(每个<span class="meta">cpu</span>充分利用、又不会过载)</span><br><span class="line"></span><br><span class="line">eg. loadavg为<span class="number">2</span>、意味着什么呢 ？</span><br><span class="line"><span class="number">1</span>) 假如系统有<span class="number">2</span>个<span class="meta">CPU</span>、则<span class="meta">cpu</span>刚好都被占用</span><br><span class="line"><span class="number">2</span>) 在<span class="number">4</span>个<span class="meta">CPU</span>的系统上、意味着<span class="number">50</span>%的<span class="meta">CPU</span>空闲</span><br><span class="line"><span class="number">3</span>) 在只有<span class="number">1</span>个<span class="meta">CPU</span>的系统上、则会有一半的进程竞争不到<span class="meta">CPU</span></span><br><span class="line"></span><br><span class="line">最理想的状态是、刚好等于<span class="meta">CPU</span>的核心数</span><br><span class="line">那么如何查询系统有几个<span class="meta">CPU</span> ？？</span><br><span class="line"><span class="number">1</span>) 使用top</span><br><span class="line"><span class="number">2</span>) 从/proc/cpuinfo 获取 </span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4cf1dcfb4a79d551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cpuinfo.png"></p>
+<h4 id="知道了cpu的核数和衡量指标、如何分析负载趋势？"><a href="#知道了cpu的核数和衡量指标、如何分析负载趋势？" class="headerlink" title="知道了cpu的核数和衡量指标、如何分析负载趋势？"></a>知道了cpu的核数和衡量指标、如何分析负载趋势？</h4><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 若<span class="number">1</span><span class="keyword">min</span>、<span class="number">5</span><span class="keyword">min</span>、<span class="number">15</span><span class="keyword">min</span>的值基本相同或者相差不大、说明系统负载很平稳</span><br><span class="line"><span class="number">2.</span> 若<span class="number">1</span><span class="keyword">min</span>内的值远小于<span class="number">15</span><span class="keyword">min</span>的值、说明最近<span class="number">1</span><span class="keyword">min</span>的负载在减小、而过去<span class="number">15</span><span class="keyword">min</span>则负载很高</span><br><span class="line"><span class="number">3.</span> 反过来、若最近<span class="number">1</span>imn的值远高于过去<span class="number">15</span><span class="keyword">min</span>的负载、说明负载在明显升高、需要持续观察一下</span><br><span class="line"></span><br><span class="line">eg. 单核cpu的 loadavg为：<span class="number">1.73</span>  <span class="number">0.60</span>  <span class="number">7.98</span> </span><br><span class="line">说明过去<span class="number">1</span><span class="keyword">min</span>有<span class="number">73</span>%的超载、过去<span class="number">15</span><span class="keyword">min</span>有<span class="number">698</span>%的超载</span><br><span class="line">总体来看、负载在降低</span><br><span class="line"></span><br><span class="line">那么实际生产环境、负载达到多少的时候、我们应该开始关注呢 ？ 一般 超过<span class="number">70</span>%就要持续观察下、看看系统负载的平均趋势</span><br></pre></td></tr></table></figure>
+
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 命令</span><br><span class="line">stress 压力测试工具</span><br><span class="line">mpstat 多核CPU性能分析工具、可实时查看每个CPU的平均指标</span><br><span class="line">pidstat 实时查看进程的cpu、内存、io及上下文切换等指标</span><br><span class="line">watch 监控进程</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 模拟cpu密集型(需要准备<span class="number">3</span>个终端、每个终端执行一个命令)</span><br><span class="line">stress <span class="attr">--cpu</span> <span class="number">1</span> <span class="attr">--timeout</span> <span class="number">600</span></span><br><span class="line"></span><br><span class="line">watch -d uptime (-d代表高亮显示变化的区域)</span><br><span class="line"></span><br><span class="line">mpstat -<span class="selector-tag">P</span> <span class="attribute">ALL</span> <span class="number">5</span> (-<span class="selector-tag">p</span> <span class="attribute">ALL</span>代表监控所有CPU <span class="number">5</span>代表间隔<span class="number">5s</span>输出<span class="number">1</span>次)</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 模拟IO密集型</span><br><span class="line">stress -<span class="selector-tag">i</span> <span class="number">1</span> <span class="attr">--timeout</span> <span class="number">600</span></span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. 大量进程的场景</span><br><span class="line">stress -c <span class="number">8</span> <span class="attr">--timeout</span> <span class="number">600</span></span><br><span class="line"></span><br><span class="line">附：安装stress</span><br><span class="line">sudo yum -y install epel-release</span><br><span class="line">sudo yum -y install stress</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e8ae343bc07ff1ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="stress.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-e6c92ece83479acc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="uptime.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-5b6eb08f6768da70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mpstat.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux%E4%BD%BF%E7%94%A8/" rel="tag"># Linux使用</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="prev" title="常用命令">
+      <i class="fa fa-chevron-left"></i> 常用命令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_tcpdump%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="next" title="tcpdump基本使用">
+      tcpdump基本使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD-loadavg"><span class="nav-number">1.</span> <span class="nav-text">平均负载 loadavg</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD-%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什么是平均负载 ？？？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E9%81%93%E4%BA%86cpu%E7%9A%84%E6%A0%B8%E6%95%B0%E5%92%8C%E8%A1%A1%E9%87%8F%E6%8C%87%E6%A0%87%E3%80%81%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%E8%B4%9F%E8%BD%BD%E8%B6%8B%E5%8A%BF%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">知道了cpu的核数和衡量指标、如何分析负载趋势？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">案例</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

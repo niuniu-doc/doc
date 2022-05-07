@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1234567891011121314151617181920rocketmq消息格式totalSize: 消息长度、4字节magicCode: 魔术 4字节bodycrc: 消息体crc校验码 4字节queueId: 消息队列id 4字节flag: 消息flag、mq不处理、ququeoffset: 消息在队列中的偏移量physicaloffset: 消息在commitlog中的偏移量sysfl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rocketMQ消息存储">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mq_rocketMQ%E6%B6%88%E6%81%AF%E5%AD%98%E5%82%A8/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="1234567891011121314151617181920rocketmq消息格式totalSize: 消息长度、4字节magicCode: 魔术 4字节bodycrc: 消息体crc校验码 4字节queueId: 消息队列id 4字节flag: 消息flag、mq不处理、ququeoffset: 消息在队列中的偏移量physicaloffset: 消息在commitlog中的偏移量sysfl">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.810Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MQ">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mq_rocketMQ%E6%B6%88%E6%81%AF%E5%AD%98%E5%82%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>rocketMQ消息存储 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_rocketMQ%E6%B6%88%E6%81%AF%E5%AD%98%E5%82%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          rocketMQ消息存储
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">rocketmq消息格式</span><br><span class="line"><span class="symbol">totalSize:</span> 消息长度、<span class="number">4</span>字节</span><br><span class="line"><span class="symbol">magicCode:</span> 魔术 <span class="number">4</span>字节</span><br><span class="line"><span class="symbol">bodycrc:</span> 消息体crc校验码 <span class="number">4</span>字节</span><br><span class="line"><span class="symbol">queueId:</span> 消息队列id <span class="number">4</span>字节</span><br><span class="line"><span class="symbol">flag:</span> 消息flag、mq不处理、</span><br><span class="line"><span class="symbol">ququeoffset:</span> 消息在队列中的偏移量</span><br><span class="line"><span class="symbol">physicaloffset:</span> 消息在commitlog中的偏移量</span><br><span class="line"><span class="symbol">sysflag:</span> 消息系统flag、eg 是否压缩、是否是事务消息等 <span class="number">4</span>字节</span><br><span class="line"><span class="symbol">bronTimeStamp:</span> 生产者调用消息发送API时的时间戳 <span class="number">8</span>字节</span><br><span class="line"><span class="symbol">bornHost:</span> 消息发送者ip、端口 <span class="number">8</span>字节</span><br><span class="line"><span class="symbol">storeTimeStamp:</span> 消息存储时间戳  <span class="number">8</span>字节</span><br><span class="line"><span class="symbol">storeHostAddress:</span> broker服务器ip+port <span class="number">8</span>字节</span><br><span class="line"><span class="symbol">reconsumetimes:</span> 消息重试次数 <span class="number">4</span>字节</span><br><span class="line"><span class="symbol">bodylength:</span> 消息长度</span><br><span class="line"><span class="symbol">body:</span> 消息内容</span><br><span class="line"><span class="symbol">topicLength:</span> 主题存储长度</span><br><span class="line"><span class="symbol">topic:</span> 主题</span><br><span class="line"><span class="symbol">propertiesLength:</span> 消息属性长度、<span class="number">2</span>字节</span><br><span class="line"><span class="symbol">Properties:</span> 消息属性</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1.</span> 存储设计</span><br><span class="line">   commitLog: 消息存储文件、所有topic的消息都存储在commitLog</span><br><span class="line">   大小默认<span class="number">1</span>G、以文件中第一个偏移量为文件名、偏移量小于<span class="number">20</span>位、用<span class="number">0</span>补全</span><br><span class="line">   </span><br><span class="line">   consumeQueue: 消息消费队列、消息到达commitLog后悔异步转发到Queue、</span><br><span class="line">   indexFile: 消息索引文件、主要存储key与<span class="keyword">offset</span>的对应关系</span><br><span class="line">   </span><br><span class="line">   事务状态服务: 存储每条消息的事务状态</span><br><span class="line">   定时消息服务: 每一个延迟级别对应一个消息消费队列、存储延迟队列的消息拉取进度</span><br><span class="line">   </span><br><span class="line"><span class="number">2.</span> msg发送存储流程</span><br><span class="line">   若当前broker挂掉或者broker为slave或者不支持写入时、拒绝写入</span><br><span class="line">   若topic的长度&gt;<span class="number">256</span>个字符、或者msg的属性长度&gt;<span class="number">65535</span>时、拒绝写入</span><br><span class="line">   </span><br><span class="line">   若消息的延迟级别&gt;<span class="number">0</span>, 将消息的原主题名称和原消息队列id存入消息属性、使用延迟消息队列schedule_topic</span><br><span class="line">   </span><br><span class="line">   transientStorePoolEnable 是否开启缓存池. rocketmq单独创建一个mappedByteBuffer内存缓存池、临时存储数据、数据会先写入该内存映射、然后由<span class="keyword">commit</span>线程复制到与物理文件对应的内存映射中、主要是提供一种内存锁定、将当前堆外内存一直锁定在内存中、避免被进程将该内存交互到磁盘、提高存储性能</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line"><span class="number">3.</span> 存储文件组织与内存映射机制</span><br><span class="line">   doAppend只是将消息存储到byteBuffer中、然后创建AppendMessageResult、只是将消息存储在MappedFile对应的内存映射buffer中、并未刷到磁盘</span><br><span class="line">   handleDiskFlush方法会处理数据持久化</span><br><span class="line">   handleHA会处理m-s</span><br><span class="line">   </span><br><span class="line"><span class="number">4.</span> 存储文件</span><br><span class="line">   commitlog: 消息存储目录</span><br><span class="line">   config运行期间配置信息</span><br><span class="line">   consumequque 消息消费队列存储目录</span><br><span class="line">   <span class="keyword">index</span> 消息索引文件存储目录</span><br><span class="line">   <span class="keyword">abort</span> 启动时创建、正常退出之前删除</span><br><span class="line">   <span class="keyword">checkpoint</span> 文件检测点、存储commitlog文件最后一次刷盘时间戳、consumeQueue最后一次刷盘时间、<span class="keyword">index</span>文件最后一次刷盘时间戳</span><br><span class="line">   </span><br><span class="line"><span class="number">5.</span> 消费队列、索引文件构成和机制</span><br><span class="line"><span class="number">6.</span> 文件恢复机制</span><br><span class="line">   rocketmq将消息全量存储在commitlog中、然后异步转发任务更新consumeQueue、<span class="keyword">index</span>文件、若消息成功存储在commitLog转发任务执行失败、eg. broker宕机、则存储三者不一致的情况、commitlog中的消息可能永远不会被消费、rocketmq是如何保障最终一致性的 ？</span><br><span class="line">   <span class="number">1</span>) 判断上次退出是否正常、在broker启动时<span class="keyword">check</span>是否存储<span class="keyword">abort</span>文件、若存在、说明是非正常退出、需要修复</span><br><span class="line">   <span class="number">2</span>) 加载延迟队列</span><br><span class="line">   <span class="number">3</span>) 加载commitlog文件</span><br><span class="line">   <span class="number">4</span>) 加载消息消费队列</span><br><span class="line">   <span class="number">5</span>) 加载<span class="keyword">checkpoint</span>文件、</span><br><span class="line">   <span class="number">6</span>) 加载索引文件、索引文件上次刷盘时间&lt;该索引文件最大的消息时间戳时 说明索引文件不完备、立即销毁</span><br><span class="line">   <span class="number">7</span>) 根据broker是否正常停止、执行不同的恢复策略</span><br><span class="line">   </span><br><span class="line"><span class="number">7.</span> 刷盘机制</span><br><span class="line">   rocketMQ的刷盘是基于NIO的内存映射机制MappedByteBuffer、消息存储时先将消息追加到内存、再根据配置的刷盘策略在不同时间进行刷写磁盘。</span><br><span class="line">   同步刷盘时: 消息追加到内存后悔同步调用force()方法</span><br><span class="line">   消息生产者将在消息服务器端将消息内容追加到内存映射文件后、需同步将内存内容立刻刷到磁盘、调用内存映射文件MapppedByteBuffer的force方法可将内存中的数据写入磁盘</span><br><span class="line">   </span><br><span class="line">   异步刷盘时: 消息写到内存后、会立即返回给producer、mq单独起一个线程按照固定频率刷盘</span><br><span class="line">   若开启 transientStorePoolEnable机制、RocketMQ会单独申请一个与目标物理文件commitlog相同大小的堆外内存、它将会使用内存锁定、不会被置换到虚拟内存中、消息先追加到堆外内存、然后提交到与物理文件的内存映射内存中、再flush到磁盘</span><br><span class="line">   若未开启transientStorePoolEnable机制、消息直接追加到与物理文件直接映射内存中、然后刷写到磁盘</span><br><span class="line">   <span class="number">1</span>) 先将消息直接追加到ByteBuffer(堆外内存DirectlyByteBuffer), WrotePosition随消息增加不断向后移动</span><br><span class="line">   <span class="number">2</span>) CommiteRealTimeService线程默认每<span class="number">200</span>ms将ByteBuffer中新追加的内容(WritePosition-commitedPosition)提交到MappedByteBuffer中</span><br><span class="line">   <span class="number">3</span>) MappedByteBuffer在内存中追加提交的内存、wrotePosition向前后移动、然后返回</span><br><span class="line">   <span class="number">4</span>) <span class="keyword">commit</span>操作成功返回、将commitedPosition想前后移动本次提交的内容长度、此时wrotePosition指针依然可以向前推进</span><br><span class="line">   <span class="number">5</span>) flushRealTimeService线程默认每<span class="number">500</span>ms将MappedByteBuffer中新追加的内容wrotePosition-上次刷写位置 flushedPositiont通过调研MappedByteBuffer#force方法讲数据刷写到磁盘</span><br><span class="line">   </span><br><span class="line"><span class="number">8.</span> 文件删除机制</span><br><span class="line">   rocketMQ操作commitLog、conssumeQueue是基于内存映射机制并在启动的时候加载commitLog、consumeQueue下所有的文件、为了避免内存与磁盘浪费、引入文件过期机制:</span><br><span class="line">   超过一定时间间隔内没有更新的文件被认为过期文件、默认<span class="number">72</span>h、可通过fileReservedTime来修改</span><br><span class="line">   满足以下条件会删除:</span><br><span class="line">   <span class="number">1</span>) 指定删除文件的时间点、固定时间执行删除 默认凌晨<span class="number">4</span>点</span><br><span class="line">   <span class="number">2</span>) 磁盘不足时、主动触发过期文件删除操作 磁盘分区使用率超过<span class="number">90</span>%不可写入</span><br><span class="line">   <span class="number">3</span>) 预留、手工触发</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MQ/" rel="tag"># MQ</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mq_rocketMq%E5%85%A5%E9%97%A8/" rel="prev" title="rocketMq入门">
+      <i class="fa fa-chevron-left"></i> rocketMq入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mq_rocketMQ%E5%AE%9E%E4%BE%8B%E4%B8%8A%E7%9A%84%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" rel="next" title="rocketMQ实例上的定时任务">
+      rocketMQ实例上的定时任务 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

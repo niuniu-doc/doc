@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、程序装载的挑战在运行可执行文件的时候、装载器会把对应的指令和数据加载到内存中、让CPU执行、装载器需要满足两个条件:  可执行程序加载后占用的空间是连续的、 需要同时加载多个程序、并且不能让程序自己规定在内存中加载的位置因为想要的地址可能已经被其它程序给占了  解决:  在内存里找到连续内存空间分配给装载的程序、然后把这段连续的内存地址和整个程序指令里的指定内存地址做映射  虚拟内存地址 Vi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="程序装载(第9、10、11讲)">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%A8%8B%E5%BA%8F%E8%A3%85%E8%BD%BD(%E7%AC%AC9%E3%80%8110%E3%80%8111%E8%AE%B2)/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="一、程序装载的挑战在运行可执行文件的时候、装载器会把对应的指令和数据加载到内存中、让CPU执行、装载器需要满足两个条件:  可执行程序加载后占用的空间是连续的、 需要同时加载多个程序、并且不能让程序自己规定在内存中加载的位置因为想要的地址可能已经被其它程序给占了  解决:  在内存里找到连续内存空间分配给装载的程序、然后把这段连续的内存地址和整个程序指令里的指定内存地址做映射  虚拟内存地址 Vi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-0603efd72056da7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-5ace5504fb471b31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.849Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-0603efd72056da7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%A8%8B%E5%BA%8F%E8%A3%85%E8%BD%BD(%E7%AC%AC9%E3%80%8110%E3%80%8111%E8%AE%B2)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>程序装载(第9、10、11讲) | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%A8%8B%E5%BA%8F%E8%A3%85%E8%BD%BD(%E7%AC%AC9%E3%80%8110%E3%80%8111%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          程序装载(第9、10、11讲)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一、程序装载的挑战<br>在运行可执行文件的时候、装载器会把对应的指令和数据加载到内存中、让CPU执行、装载器需要满足两个条件:</p>
+<ol>
+<li>可执行程序加载后占用的空间是连续的、</li>
+<li>需要同时加载多个程序、并且不能让程序自己规定在内存中加载的位置<br>因为想要的地址可能已经被其它程序给占了</li>
+</ol>
+<p>解决:</p>
+<blockquote>
+<p>在内存里找到连续内存空间分配给装载的程序、然后把这段连续的内存地址和整个程序指令里的指定内存地址做映射</p>
+</blockquote>
+<p><code>虚拟内存地址</code> <code>Virtual Memory Address</code>指令里用到的地址<br><code>物理内存地址</code> <code>Physical Memory Address</code>在内存硬件里的地址</p>
+<p>程序中有指令和各种内存地址、我们只需要关心虚拟内存地址就行了、对于任何一个程序来说、它看到的都是同样的内存地址、我们维护一个虚拟内存到物理内存的映射表、这样实际程序指令执行时、会通过虚拟内存地址、找到对应的物理内存地址、然后执行.<br>因为地址是连续的、只需要维护映射关系的起始地址和对应的空间大小就可以了</p>
+<p>二、内存分段<br><code>分段</code> 找出一段连续的物理内存和虚拟内存地址进行映射的方法<br><img src="https://upload-images.jianshu.io/upload_images/14027542-0603efd72056da7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>分段解决了程序本身不需要关心具体内存地址的问题、也有一些不足之处、<code>内存碎片</code></p>
+<p><code>内存交换</code> <code>Memory Swapping</code> 将程序写回硬盘、再从硬盘读回、读回时放到连续空间位置上、这样剩余空间就是连续的了、解决了<code>内存碎片</code> 的问题<br>但: 若内存交换的时候交互的是一个内存占用很大的程序、机器会十分卡顿</p>
+<p>三、内存分页</p>
+<blockquote>
+<p>既然问题出在内存碎片和交换空间太大上、那么解决办法就是: 少程序内存碎片、另外 当进行内存交换的时候、让需要交换的数据更少、那么问题就可以解决<br>这个办法在计算机的内存管理里边叫<code>内存分页</code></p>
+</blockquote>
+<p><code>内存分页</code> 是把整个物理内存空间切成一段固定尺寸的大小、这样一个连续并且尺寸固定的内存空间叫页(Page)</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">getconf</span> PAGE_SIZE <span class="comment"># 查看页大小、默认4k</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>由于内存是预先划分好的、就没有了不能使用的碎片、只有被释放出来的很多4kb的页、即使内存空间不够、需要让现有的正在运行的程序通过内存交互、释放出来一些内存空间、一次写入磁盘的也只有少数一个或者几个页、不会花很多时间、不会卡顿</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-5ace5504fb471b31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>进一步、程序加载的时候不是一次性全部加载、二手在运行时、需要用到对应虚拟内存页里的指令和数据时才加载、读取特定页时、发现数据未加载到物理内存时会触发一个来自CPU的缺页错误(Page Fault) 系统捕获这个错误、将对应页从虚拟内存读取加载到物理内存</p>
+</blockquote>
+<p>四、链接: 动态链接和静态链接<br><code>动态链接</code> <code>Dynamic Link</code> 链接的不是存储在硬盘上的目标文件代码、二手加载到内存的<code>共享库</code>(<code>shared Libiaries</code>)<br><code>静态链接</code> 之前说到的合并代码段的方式</p>
+<p>在win下、共享库文件是<code>.dll</code> 文件、也就是 <code>Dynamic-Link Library</code>(DLL, 动态链接库).<br>在Linux下、就是<code>.so</code> 文件、(<code>Shared Object</code>)</p>
+<p>五、电信号&amp;门电路</p>
+<blockquote>
+<p>远古传信: 人工、速度慢<br>   -&gt; 金、鼓: 距离有限<br>   -&gt; 烽火台: 光信号、不能传递复杂信息<br>   -&gt; 电报: 传输距离增加、输入信号速度加快<br>   -&gt; 继电器: 解决更远距离传输</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag"># 计算机原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7(39%E8%AE%B2)/" rel="prev" title="缓存一致性(39讲)">
+      <i class="fa fa-chevron-left"></i> 缓存一致性(39讲)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E7%90%86%E8%A7%A3IO_WAIT--IO%E6%80%A7%E8%83%BD%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%E5%84%BF/" rel="next" title="理解IO_WAIT--IO性能到底怎么回事儿">
+      理解IO_WAIT--IO性能到底怎么回事儿 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

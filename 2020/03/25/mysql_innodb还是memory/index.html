@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="都说innodb好、还要不要用memory引擎 ?  内存表的数据组织结构innodb表的数据就放在主键索引树上、主键索引是 B+ 树、主键索引上是有序存储的, 在执行select  * 时、会按照叶子节点从左到右扫描、得到的结果 0 出现在第一行 memory引擎的数据和索引是分开的. 主键id的索引里、存放的是每个数据的位置. 主键id是hash索引、索引上的key是乱序的. select">
+<meta property="og:type" content="article">
+<meta property="og:title" content="innodb还是memory">
+<meta property="og:url" content="http://yoursite.com/2020/03/25/mysql_innodb%E8%BF%98%E6%98%AFmemory/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="都说innodb好、还要不要用memory引擎 ?  内存表的数据组织结构innodb表的数据就放在主键索引树上、主键索引是 B+ 树、主键索引上是有序存储的, 在执行select  * 时、会按照叶子节点从左到右扫描、得到的结果 0 出现在第一行 memory引擎的数据和索引是分开的. 主键id的索引里、存放的是每个数据的位置. 主键id是hash索引、索引上的key是乱序的. select">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-25T01:32:53.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.812Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/25/mysql_innodb%E8%BF%98%E6%98%AFmemory/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>innodb还是memory | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/mysql_innodb%E8%BF%98%E6%98%AFmemory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          innodb还是memory
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-25 09:32:53" itemprop="dateCreated datePublished" datetime="2020-03-25T09:32:53+08:00">2020-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p> 都说innodb好、还要不要用memory引擎 ?</p>
+</blockquote>
+<h4 id="内存表的数据组织结构"><a href="#内存表的数据组织结构" class="headerlink" title="内存表的数据组织结构"></a>内存表的数据组织结构</h4><p>innodb表的数据就放在主键索引树上、主键索引是 B+ 树、主键索引上是有序存储的, 在执行select  * 时、会按照叶子节点从左到右扫描、得到的结果 0 出现在第一行</p>
+<p>memory引擎的数据和索引是分开的. 主键id的索引里、存放的是每个数据的位置. 主键id是hash索引、索引上的key是乱序的. select * 也是全表扫描、也是顺序扫描数组、0就是最后一个被读到、并放入结果集的数据. </p>
+<p>innodb把数据放到主键索引上、其它索引保存的是主键id、是索引组织表(Index Organizied Table)<br>memory引擎采用的是数据单独存放、是堆组织表(Heap Organizied Table)</p>
+<p>两者之间的差异:</p>
+<ol>
+<li>innodb的数据总是有序存储的、内存表的数据是按照写入顺序存储的.</li>
+<li>当数据文件有空洞的时候、innodb表在插入新数据时、为了保证数据有序性、只能在固定位置写入新值, 而内存表找到空位置就可以插入新值.</li>
+<li>数据位置发生变化的时候、innodb表只需要修改主键索引、而内存表需要修改所有索引.s</li>
+<li>innodb表用主键索引查询时、需要走一次索引查询、普通索引查询时、要走两次索引查找.<br>memory表无分别、所有的索引地位都是相同的.</li>
+<li>innodb支持变长数据类型、不同记录的长度可能不同、内存表不支持Blob和Text字段、并且即使定义varchar(N)实际也是char(N), 即固定长度存储、所以: 每行数据长度相同.</li>
+</ol>
+<p>所以: 内存表每行数据被删除以后、空出的位置可以被接下来要插入的数据复用.<br>注意: 内存表的索引是hash索引、范围查询 <code>select * from t1 where id&lt;5</code> 是无法用到主键索引的, 会全表扫描.</p>
+<h4 id="hash索引-和-B-Tree索引"><a href="#hash索引-和-B-Tree索引" class="headerlink" title="hash索引 和 B-Tree索引"></a>hash索引 和 B-Tree索引</h4><p>内存表也可以支持B-Tree索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> t1 <span class="keyword">add</span> index a_btree_index <span class="keyword">using</span> btree(id);</span><br></pre></td></tr></table></figure>
+<p>内存表优势是速度快. 一方面它支持hash索引、另一方面、它的数据都在内存; 那么、为什么不建议生产环境使用内存表呢 ?</p>
+<ol>
+<li>锁粒度问题</li>
+<li>数据持久化问题.</li>
+</ol>
+<h4 id="内存表的锁"><a href="#内存表的锁" class="headerlink" title="内存表的锁"></a>内存表的锁</h4><p>内存表不支持行锁、只支持表锁、导致并发性太低.</p>
+<h4 id="数据持久性问题"><a href="#数据持久性问题" class="headerlink" title="数据持久性问题"></a>数据持久性问题</h4><p>数据放在内存中是内存表的优势、也是劣势、因为DB重启时、所有的内存表都会被清空.</p>
+<h5 id="M-S-架构场景"><a href="#M-S-架构场景" class="headerlink" title="M-S 架构场景"></a>M-S 架构场景</h5><ol>
+<li>业务正常访问s主库</li>
+<li>备库硬件升级、备库重启、内存表t1内容被清空</li>
+<li>备库重启后、客户端发送一条update语句、修改表t1的数据行、此时备库应用线程就会找不到要更新的数据.</li>
+</ol>
+<h5 id="双M架构"><a href="#双M架构" class="headerlink" title="双M架构"></a>双M架构</h5><p>MySQL知道重启后、内存表的数据会丢失、所以担心主库重启后、出现主备不一致、在实现上、会在DB重启后写入一行 delete from t1的binlog记录.<br>备库重启时、备库的binlog里的delete语句就会传到主库、然后把主库内存表的内容删除, 出现主库内存表数据突然被清空的现象.</p>
+<p>所以不适合在生产上使用.</p>
+<ol>
+<li>若选择内存表是因为更新量大、那么并发度是重要的参考指标、innodb支持行锁、并发度更好</li>
+<li>若考虑读性能、一个读QPS很高、且数据量不大的表、即使是innodb、数据也都是缓存在buffer pool的、因此innodb表性能也不差.</li>
+</ol>
+<h4 id="一个适合用内存表的场景"><a href="#一个适合用内存表的场景" class="headerlink" title="一个适合用内存表的场景"></a>一个适合用内存表的场景</h4><p>内存临时表: 不会被其它线程访问、无并发问题; 重启需要删除、清空数据问题不存在; 备库的临时表不影响主库用户线程, 所以刚好可以无视内存表的两个不足.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/25/mysql_%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8%E5%86%85%E9%83%A8%E4%B8%B4%E6%97%B6%E8%A1%A8/" rel="prev" title="什么时候使用内部临时表">
+      <i class="fa fa-chevron-left"></i> 什么时候使用内部临时表
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/25/mysql_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E4%B8%8D%E8%BF%9E%E7%BB%AD/" rel="next" title="为什么自增主键不连续">
+      为什么自增主键不连续 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E8%A1%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">内存表的数据组织结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hash%E7%B4%A2%E5%BC%95-%E5%92%8C-B-Tree%E7%B4%A2%E5%BC%95"><span class="nav-number">2.</span> <span class="nav-text">hash索引 和 B-Tree索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E8%A1%A8%E7%9A%84%E9%94%81"><span class="nav-number">3.</span> <span class="nav-text">内存表的锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">数据持久性问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#M-S-%E6%9E%B6%E6%9E%84%E5%9C%BA%E6%99%AF"><span class="nav-number">4.1.</span> <span class="nav-text">M-S 架构场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%8CM%E6%9E%B6%E6%9E%84"><span class="nav-number">4.2.</span> <span class="nav-text">双M架构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E7%94%A8%E5%86%85%E5%AD%98%E8%A1%A8%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">5.</span> <span class="nav-text">一个适合用内存表的场景</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

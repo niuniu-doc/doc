@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="无意中发现idea的版本更新到2019.2了、我上次更新的时候是2019.1闲来无事想玩儿下新版本、就升级了下、 官网下载https:&#x2F;&#x2F;www.jetbrains.com&#x2F;idea&#x2F;download&#x2F;#section&#x3D;mac 安装Mac安装很简单、dmg双击 -&gt; 导入原配置文件 -&gt; 破解(https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;1f2596084784) 很麻溜的操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="idea无法打开">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/tools_idea%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="无意中发现idea的版本更新到2019.2了、我上次更新的时候是2019.1闲来无事想玩儿下新版本、就升级了下、 官网下载https:&#x2F;&#x2F;www.jetbrains.com&#x2F;idea&#x2F;download&#x2F;#section&#x3D;mac 安装Mac安装很简单、dmg双击 -&gt; 导入原配置文件 -&gt; 破解(https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;1f2596084784) 很麻溜的操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-6054554eeebf794a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.828Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-6054554eeebf794a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/tools_idea%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>idea无法打开 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/tools_idea%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          idea无法打开
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>无意中发现idea的版本更新到2019.2了、我上次更新的时候是2019.1<br>闲来无事想玩儿下新版本、就升级了下、</p>
+<h4 id="官网下载"><a href="#官网下载" class="headerlink" title="官网下载"></a>官网下载</h4><p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/idea/download/#section=mac">https://www.jetbrains.com/idea/download/#section=mac</a></p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>Mac安装很简单、dmg双击 -&gt; 导入原配置文件 -&gt; 破解(<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1f2596084784">https://www.jianshu.com/p/1f2596084784</a>)</p>
+<p>很麻溜的操作完、点击运行、傻了 … 居然跑不起来</p>
+<h4 id="搜索、可以借鉴"><a href="#搜索、可以借鉴" class="headerlink" title="搜索、可以借鉴"></a>搜索、可以借鉴</h4><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1f2596084784">https://www.jianshu.com/p/1f2596084784</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40866404/article/details/80192780">https://blog.csdn.net/weixin_40866404&#x2F;article&#x2F;details&#x2F;80192780</a><br>… 类似文章很多、发现都不好使😔</p>
+<h4 id="胡思乱想"><a href="#胡思乱想" class="headerlink" title="胡思乱想"></a>胡思乱想</h4><p>突然想到之前有篇idea破解的文章、可以让 idea 从命令行启动、查看错误提示</p>
+<p>惊喜~</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6054554eeebf794a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="idea启动.png"></p>
+<p><code>1处</code>是 idea 启动的jvm参数<br><code>2、3</code>是启动过程中发生的错误</p>
+<blockquote>
+<p>可以看到、一共是两个错误: 1.gc文件找不到、2.jvm启动参数给的有问题</p>
+</blockquote>
+<p>正常情况下是不会发生这种问题的、纯属自作孽🤷‍♀️、<br>1.之前调过idea的jvm启动参数、都给成1300了、不知道为什么xms的值变成了-Xmx1024m、可能是多版本混合装了、某一个版本修改了默认值<br>2.为了看idea运行过程中gc的情况、将gc写入文件、删垃圾文件的时候又手残删掉了😭</p>
+<p>借以给小伙伴儿们一点儿提示、万一遇到idea无法启动的问题、可以试试从命令行启动、看下错误日志</p>
+<h4 id="任何从命令行启动idea"><a href="#任何从命令行启动idea" class="headerlink" title="任何从命令行启动idea"></a>任何从命令行启动idea</h4><p>应用程序 -&gt; idea -&gt; 右键 -&gt; 显示包内容 -&gt; Contents -&gt; MacOS -&gt; 双击  idea </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Tools/" rel="tag"># Tools</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/tools_idea%E7%A0%B4%E8%A7%A3%E5%AE%89%E8%A3%85/" rel="prev" title="idea破解安装">
+      <i class="fa fa-chevron-left"></i> idea破解安装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/linux%E4%BD%BF%E7%94%A8_linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7---top/" rel="next" title="linux性能监控---top">
+      linux性能监控---top <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">官网下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E3%80%81%E5%8F%AF%E4%BB%A5%E5%80%9F%E9%89%B4"><span class="nav-number">3.</span> <span class="nav-text">搜索、可以借鉴</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3"><span class="nav-number">4.</span> <span class="nav-text">胡思乱想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E4%BD%95%E4%BB%8E%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8idea"><span class="nav-number">5.</span> <span class="nav-text">任何从命令行启动idea</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

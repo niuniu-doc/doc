@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="若备库执行日志的速度低于主库生成日志的速度、备库有可能很久都追不上主库MySQL5.6版本之前、MySQL只支持单线程复制、主库并发高、TPS较高时、可能会出现主备延迟5.6版本之后、sql_thread不会直接更新数据、而是交给 coordinator 来中转日志和分发事务、由worker进程来更新数据. worker的线程数由 slave_parallel_works 决定.一般32核机器设">
+<meta property="og:type" content="article">
+<meta property="og:title" content="备库为什么会延迟好几个小时">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="若备库执行日志的速度低于主库生成日志的速度、备库有可能很久都追不上主库MySQL5.6版本之前、MySQL只支持单线程复制、主库并发高、TPS较高时、可能会出现主备延迟5.6版本之后、sql_thread不会直接更新数据、而是交给 coordinator 来中转日志和分发事务、由worker进程来更新数据. worker的线程数由 slave_parallel_works 决定.一般32核机器设">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-6992c49571630b74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.820Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-6992c49571630b74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>备库为什么会延迟好几个小时 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mysql_%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          备库为什么会延迟好几个小时
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>若备库执行日志的速度低于主库生成日志的速度、备库有可能很久都追不上主库<br>MySQL5.6版本之前、MySQL只支持单线程复制、主库并发高、TPS较高时、可能会出现主备延迟<br>5.6版本之后、sql_thread不会直接更新数据、而是交给 coordinator 来中转日志和分发事务、由worker进程来更新数据. worker的线程数由 slave_parallel_works 决定.<br>一般32核机器设置为 8~16、备库还要提供查询、不能把CPU都吃光了.</p>
+</blockquote>
+<p>思考: </p>
+<ol>
+<li><p>事务能不能轮询分发给各个worker ?<br>不可以. 事务分发给worker以后、不同worker就独立执行了、但由于CPU的调度策略、第二个事务可能会比第一个先执行、此时、若两个事务更新的是同一行数据、就会导致主备不一致.</p>
+</li>
+<li><p>同一个事务的多个更新语句、能不能分发给多个worker执行 ?<br>不可以. 若Trx1 更新了t1和t2 两个表的各一行数据、若分发到不同的worker执行、虽然备库最终结果是一致的、但 t1更新完成的瞬间、会出现不一致, 破坏了事务的隔离性</p>
+</li>
+</ol>
+<p>所以: 分发器 coordinator 需要满足:</p>
+<ol>
+<li>不能造成覆盖更新、更新同一行数据的两个事务必须分发到同一个worker</li>
+<li>同一个事务必须分发到同一个worker.</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6992c49571630b74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="主备流程图.png"></p>
+<p>不同版本的并行复制策略:</p>
+<ol>
+<li>5.5版本<br>官方5.5版本不支持并行复制. <ol>
+<li><p>按表分发. 每个worker线程维护一个hash表、用来保存当前正在这个worker上执行的事务所涉及的表. 有事务分配给该worker时、涉及的表会加入到对应hash表、worker执行完成、从hash表移除. 若与多个worker冲突、coordinator进入等待.<br>事务分发时、与worker冲突情况:<br>a. 跟所有worker都不冲突、coordinator直接分发给最空闲的worker线程<br>b. 跟多于一个worker冲突、coordinator进入等待、直到和该事务冲突的worker进程只有1个<br>c. 若只跟一个worker冲突、分配给存在冲突关系的worker.<br>按表分发、在多表负载均匀的场景下效果不错、但若碰到热点表、比如: 所有的更新事务都涉及同一张表时、所有事务都会分发到同一个worker、就变成单线程了.</p>
+</li>
+<li><p>按行分发. 若两个事务没有更新相同行、可以在备库并行执行、要求binlog格式必须是row.<br>此时判断冲突规则就是 库名 + 表名 + 唯一键值(还要考虑唯一索引)<br>相比于按表分发、按行分发在决定线程分发的时候、需要消耗更多的计算资源.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p> 按表分发和按行分发都有约束:</p>
+<ol>
+<li><p>binlog格式必须是Row</p>
+</li>
+<li><p>表必须要有主键</p>
+</li>
+<li><p>不能有外键、有外键时、级联更新的行不会记录binlog、这样冲突检测就不准确.<br> 按行分发有个问题: 大事务耗费CPU和内存.<br> 解决: 会设置一个阈值、若单事务超过设置行阈值(eg. 单事务更新行数超过10w)、就退化为单线程模式: 1. coordinator暂时hold住事务、2. 等所有worker变成空队列、coordinator直接执行事务 3. 恢复并行模式</p>
+</li>
+<li><p>5.6按库并行<br>原理同上、并行效果取决于压力模型. 若主库上有多个DB、并且多个DB的压力均衡、使用库级别分发效果较好. 相对表级别和行级别优势:</p>
+</li>
+</ol>
+<ol>
+<li>构造hash值很快、只需要库名、且一个实例上DB数量不会过多</li>
+<li>不要求binlog格式为row、statement也可以拿到库名.<br>但: 若主库上的所有表都放在同一个DB里、这个策略就没用了、若不同DB热点不同、也起不到并行效果.</li>
+</ol>
+<ol start="3">
+<li>MariaDB的并行复制策略<br>利用的是组提交的特性.</li>
+</ol>
+<ol>
+<li>能够在同一组里提交的事务、一定不会修改同一行</li>
+<li>主库上可以并行执行的事务、备库上也一定可以并行执行</li>
+</ol>
+<ol>
+<li><p>在一组提交的事务、有一个相同的commit_id、下一组就是 commit_id + 1</p>
+</li>
+<li><p>commit_id直接写入binlog</p>
+</li>
+<li><p>传到备库应用时、相同commit_id的事务分发到多个worker执行</p>
+</li>
+<li><p>一组全部执行完、coordinator再取下一组数据.<br>可以模拟主库的并行模式. 但: 并未完全实现<code>模拟主库并发度</code>这个目标, 在主库上、一组事务commit时、下一组事务是同时处于<code>执行中</code>的. 而备库需要第一组事务执行完、第二组才能开始执行、这样系统的吞吐量就不够、另外、容易被大事务拖后腿.<br>假设 trx1 &#x2F; trx2 &#x2F; trx3为一组事务、trx2为大事务、这样、trx1&#x2F;trx3执行完后也必须等待trx2执行完成、下一组才能开始执行、这段时间只有一个worker线程在工作、是对资源的浪费.</p>
+</li>
+<li><p>MySQL5.7的并行复制策略<br>MySQL5.7提供了 slave-parallel-type 控制并行复制策略<br>slave-parallel-type&#x3D;database; 表示使用mysql5.6的按库并行复制<br>slave-parallel-type&#x3D;logical_clock; 表示使用类似mariadb的策略、但做了改进</p>
+</li>
+</ol>
+<p>思考: 同时处于<code>执行状态</code>的所有事务、是不是可以并行 ?<br>不能. 可能有由于锁冲突而处于锁等待状态的事务、若这些事务在备库上分配到不同的worker、会出现主备不一致. 所以、MariaDB的核心是、处于commit状态的事务并行处理.</p>
+<p>而实际上: 处于redo log prepare阶段的事务、都已经通过了锁冲突检验、<br>所以, Mysql5.7的并行复制策略思想是:</p>
+<ol>
+<li>同时处于prepare状态的事务、在备库可以并行执行</li>
+<li>处于prepare状态的事务、与处于commit状态的事务之间、在备库执行时、也是可以并行的.<br>binlog_group_commit_sync_delay表示延迟多少微秒后调用fsync<br>binlog_group_commit_sync_no_Delay_count表示累积多少次后才调用fsync<br>这两个参数可以用于故意拉长binlog从write到fsync的时间、减少binlog的写盘次数、在5.7的复制策略里、可以用来制造更多处于<code>prepare阶段的事务</code>、增加备库并行度</li>
+</ol>
+<ol start="5">
+<li>Mysql5.7.22并行复制策略<br>18.4月发布的5.7.22版本、增加一个机遇writeset的并行复制<br>binlog-transaction-dependency-tracking控制是否使用新的策略</li>
+</ol>
+<ol>
+<li>commit_order、根据同时进入prepare和commit来判断是否可以并行的策略</li>
+<li>writeset、表示对于事务涉及更新的每一行计算hash值、组成writeset、若两个事务没有操作相同行、就可以并行复制</li>
+<li>writeset_session、在主库上同一个线程先后执行的两个事务、在备库执行时、要保证相同的先后顺序、hash值是通过 db+table+index+value计算的、类似5.5按行复制<br>但: 1. writeset是在主库生成后直接写入binlog的、在备库执行时、不需要解析binlog、节省计算量</li>
+</ol>
+<ol start="2">
+<li>不需要把整个事务的binlog都扫一遍、才决定分发到哪个worker、更省内存</li>
+<li>备库的分发策略不依赖binlog内容、binlog格式可以不局限于row<br>通用性更有保证.</li>
+</ol>
+<p>思考: 假设5.7.22版本的主库、单线程插入很多数据、过了3个小时、想给这个主库搭一个相同版本的备库. 为了更快的追上主库、需要怎么选择并行复制策略呢 ?</p>
+<ol>
+<li>commit_order 由于是单线程执行、每个事务的commit_id不同、从库也只能是单线程执行<br>2、 writeset_order 要求同一个线程的日志必须要与主库上的先后顺序相同、也会导致退化为单线程<br>所以应该选择 writeset 并行复制策略.</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98/" rel="prev" title="如何判定一个数据库出了问题">
+      <i class="fa fa-chevron-left"></i> 如何判定一个数据库出了问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mysql_%E4%B8%BB%E5%BA%93%E5%BC%82%E5%B8%B8%E3%80%81%E4%BB%8E%E5%BA%93%E6%80%8E%E4%B9%88%E5%8A%9E/" rel="next" title="主库异常、从库怎么办">
+      主库异常、从库怎么办 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="####基本概念： 新生代：大多数对象在eden区生产、很多对象的什么周期很短、每次新生代的垃圾回收(minor gc)后只有少量对象存活      所以选用的是复制算法、只需要少量的复制成本就可以完成回收      young generation 一般又分为 eden区 和 survivor 区(一般2个survivor区)      大部分对象在eden区生产、eden区满时、还存活的对象被">
+<meta property="og:type" content="article">
+<meta property="og:title" content="垃圾回收---七种垃圾收集器简介">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E4%B8%83%E7%A7%8D%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="####基本概念： 新生代：大多数对象在eden区生产、很多对象的什么周期很短、每次新生代的垃圾回收(minor gc)后只有少量对象存活      所以选用的是复制算法、只需要少量的复制成本就可以完成回收      young generation 一般又分为 eden区 和 survivor 区(一般2个survivor区)      大部分对象在eden区生产、eden区满时、还存活的对象被">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-ffea12d750747d02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-7b2a44d4cfdc7d12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-601ead2dd3099f9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-a48e748a7206f8ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.795Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-ffea12d750747d02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E4%B8%83%E7%A7%8D%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%AE%80%E4%BB%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>垃圾回收---七种垃圾收集器简介 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E4%B8%83%E7%A7%8D%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          垃圾回收---七种垃圾收集器简介
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>####基本概念：</p>
+<p>新生代：大多数对象在eden区生产、很多对象的什么周期很短、每次新生代的垃圾回收(<code>minor gc</code>)后只有少量对象存活<br>      所以选用的是复制算法、只需要少量的复制成本就可以完成回收<br>      <code>young generation</code> 一般又分为 <code>eden</code>区 和 <code>survivor</code> 区(一般<code>2</code>个<code>survivor</code>区)<br>      大部分对象在eden区生产、eden区满时、还存活的对象被复制到两个survivor区中的一个、这个survivor区满时<br>      此区存活切不满足<code>晋升</code>条件的对象将被复制到另一个survivor区(对象每经历一次<code>minor gc</code>， <code>age</code> + 1，<br>      到达年龄阈值后、被放到老年代<code>old generation</code>, 在<code>Serial</code>和<code>ParNew GC</code>)两种垃圾回收器中、<code>晋升年龄阈值</code><br>      由参数 <code>MaxTenuringThreshould</code>设定、默认15</p>
+<p>老年代：<code>old generation</code>在新生代中经历了n次垃圾回收后仍然存活的对象、会被放到老年代、改区域对象存活的几率比较高<br>      老年代的垃圾回收(<code>Major gc</code>)通常使用 <code>标记-清理</code>或者<code>标记-整理</code>算法，整堆的回收(包括young和old)称为<code>full gc</code><br>      (HotSpot VM)中、除了<code>CMS</code>之外、其它能收集老年代的gc都会同时回收整个GC堆、包括新生代</p>
+<p>永久代: <code>perm generation</code>主要存放元数据、eg. <code>class</code>, <code>method</code>的元信息、与垃圾回收要回收的关系不大、相对新生代<br>      和老年代、改区域对垃圾回收的影响较小</p>
+<h4 id="常见的垃圾回收器"><a href="#常见的垃圾回收器" class="headerlink" title="常见的垃圾回收器"></a>常见的垃圾回收器</h4><h5 id="新生代垃圾收集器"><a href="#新生代垃圾收集器" class="headerlink" title="新生代垃圾收集器"></a>新生代垃圾收集器</h5><ol>
+<li><code>Serial</code>：串行收集器、采用复制算法、jdk1.3之前的唯一选择、单线程、进行垃圾收集时、会STW<br>   <code>jdk1.3</code>之后又很多优秀收集器、单由于它 对于限定单个cpi的环境来说、没有线程交互的开销、简单高效<br>   至今仍然是 hotspot 虚拟机运行在client模式下的默认新生代收集器</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-ffea12d750747d02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="serial &amp; serial old.png"></p>
+<ol start="2">
+<li><code>ParNew</code>：<code>Serial</code>的多线程版本、除了使用多线程进行垃圾收集外、其余行为包括<code>Serial收集器可用的控制参数</code>，<br>  <code>收集算法</code>, <code>stw</code>, <code>对象分配规则</code>, <code>回收策略</code>等 与<code>Serial</code>收集器的完全相同、两者公用了很多代码<br>  ParNew收集器除了使用多线程收集外、其它与Serial收集器并无太多创新之处、<code>但</code>是在Server模式下的首选<br>  一个与性能无关的原因:除Serial外、它是唯一能够和<code>CMS</code>收集器(<code>Concurrent Mark Sweep</code>)配合工作的<br>  <code>ParNew</code> 收集器在 <code>单CPU</code> 的环境中、不会有比<code>Serial</code>收集器更好的效果、甚至由于存在线程交互的开销<br>  在两个CPU的环境中都不能百分之百的保证超越、在多CPU的环境下、随着<code>CPU的增加</code>、在GC时、<br>  对资源的有效利用是有好处的、默认开启的<code>收集线程</code>数和<code>CPU的数量</code>相同, 在CPU非常多的时候、可以通过<br>  <code>-XX:ParallerGCThreads</code>参数设置</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7b2a44d4cfdc7d12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ParNew &amp; Serial Old.png"></p>
+<ol start="3">
+<li><code>Parallel Scavenge</code>: 收集器是<code>并行</code>的<code>多线程</code> <code>新生代</code>收集器, 使用<code>复制</code>算法<br>  它与其它收集器的关注点不同、CMS等收集器的关注点是：尽可能缩短垃圾收集时用户线程的停顿时间<br>  而Parallel Scavenge的关注点是：达到一个可控制的吞吐量<br>  <code>停顿短</code>适合需要与用户交互的程序、良好的响应可以提高用户体验<br>  <code>高吞吐量</code>则可以高效的利用CPU时间、尽快的完成任务、适合在后台运算无需太多交互的任务<br>  <code>Parallel Scavenge</code>收集器提供了一个开关参数 <code>-XX:UseAdaptiveSizePolicy</code>指定后可以不用人工指定<br>  新生代大小(-Xmn)、Eden和Survivor区的比率(-XX:SurvivorRatio)、<br>  晋升老年代年龄(-XX:PretenureSizeThreshold)等参数细节了、虚拟机会根据当前系统的运行情况、动态调整参数<br>  这种方式称为：<code>GC的自适应调节策略</code><br>  <code>注意</code> Parallel Scavenge收集器无法和CMS配合使用、在<code>JDK1.6</code>推出<code>Parallel Old</code>之前、<br>  只能和<code>Serail Old</code>收集器一起使用<br>·<br> <img src="https://upload-images.jianshu.io/upload_images/14027542-601ead2dd3099f9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paralle Scavenge.png"></li>
+</ol>
+<h5 id="老年代收集器"><a href="#老年代收集器" class="headerlink" title="老年代收集器"></a>老年代收集器</h5><ol>
+<li><p><code>Serial Old</code>是<code>Serial</code>收集器的老年代版本、<code>单线程</code>, 使用<code>标记-整理</code>(<code>Mark-Compact</code>)算法<br>     1) JDK1.5及之前的版本(Parallel Old)诞生之前、与 <code>Parallel Scavenge</code>配合使用<br>     2) 作为CMS收集器的后备预案、在并发手机发生 <code>Concurrent Mode Failuer</code>时使用</p>
+</li>
+<li><p><code>Parallel Old</code>是<code>Parallel Scavenge</code>的老年代版本, 使用<code>多线程</code>和<code>标记-整理</code>算法, <code>JDK1.6</code>的版本才开始提供<br>     在它出现之后<code>吞吐量优先</code>才有了名副其实的应用组合、在注重吞吐量和cpu敏感的场合、都可以优先考虑<br>     <code>Parallel Scavenge</code>和<code>Parallel Old</code>组合     </p>
+</li>
+<li><p><code>CMS</code>:<code>Concurrent Mark Sweep</code>收集器是一种以最短回收停顿时间为目标的收集器、使用<code>标记-清除</code>算法<br>   基本流程：</p>
+<ol>
+<li><code>初始标记</code>:<code>CMS Initial mark</code>仅标记<code>GC Roots</code>能直接关联的对象、速度很快, 会 STW</li>
+<li><code>并发标记</code>:<code>CMS Concurrent mark</code>是<code>GC Roots Tracing</code>的过程、耗时最长、但不会STW</li>
+<li><code>重新标记</code>:<code>CMS remark</code>为了修正并发标记期间用户程序继续访问导致标记产生变动的对象的标记<br> 时间会比初始标记长、单远小于并发标记, 需要 STW</li>
+<li><code>并发清除</code>: <code>CMS concurrent sweep</code><br>   缺点：1) CPU资源敏感、在并发阶段不会导致停顿、单会占用CPU资源、导致应用程序变慢、总的吞吐量降低<br> 默认启动的回收线程数是<code>(CPU数+3)/4</code>，即不少于25%的CPU资源、且随着cpu的增加而下降<br> 但、CPU资源不足时、cms对用户程序的影响可能变大、若CPU的负载本身就很高、还要分出一般运算能力<br> 去执行垃圾收集、系统也会有明显的卡顿<br>   2)无法处理浮动垃圾<code>Floating Garbage</code>可能出现<code>Concurrent Mode Failure</code>而导致Full gc<br>  由于CMS并发清理阶段用户线程还在运行着，伴随程序运行自然就还会有新的垃圾不断产生。<br>  出现在标记过程之后，无法再当次收集中处理掉它们，只能待下一次GC时再清理掉。这一部分垃圾就被称为<code>浮动垃圾</code><ol start="3">
+<li>产生空间碎片: 空间碎片过多时、会导致老年代空间有剩余、单无法找到足够大连续空间来分配当前对象</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-a48e748a7206f8ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cms.png"></p>
+<ol start="4">
+<li>G1 收集器<br>   <code>G1</code>: <code>Garbage First</code>收集器是新的、面向Server应用、HotSpot团队赋予它的使命是：在将来替换掉CMS收集器<br>     1) 并发与并行：G1可充分利用多CPU、多核条件下的硬件优势、使用多个CPU来缩短STW的停顿时间、<br>        部分收集器原本需要停顿Java线程执行的GC动作、G1可以通过并发的方式让Java程序继续执行<br>     2) 分代收集: G1可以不需要其它收集器的配合自己管理整个GC堆、可以采用不同方式去处理新创建的对象和<br>        已存活一段时间、经过了n次GC的old对象来获取更好的收集效果<br>     3) 空间整合: G1从整体来看是基于<code>标记-整理</code>实现的, 从局部(两个Region间)来看是基于复制的<br>        所以、在G1运行期间不会产生大量的内存空间碎片、避免提前触发full gc<br>     4) 可预测的停顿: G1和CMS的共同关注点是降级停顿、但G1除了降低停顿之外、还能建立可预测的停顿时间模型<br>        让使用者明确指定在一个长度为M ms的时间片段内、消耗在GC上的时间不得超过N ms、<br>        这几乎是实时Java(RTSJ)的垃圾收集器的特征了</li>
+</ol>
+<p>G1收集器：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5a95ce2bbb36">https://www.jianshu.com/p/5a95ce2bbb36</a></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://crowhawk.github.io/2017/08/15/jvm_3/">https://crowhawk.github.io/2017/08/15/jvm_3/</a></li>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/12/29/jvm-optimize.html">https://tech.meituan.com/2017/12/29/jvm-optimize.html</a><br>等众多网络文章</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---%E5%B0%8F%E7%96%91%E9%97%AE/" rel="prev" title="垃圾回收---小疑问">
+      <i class="fa fa-chevron-left"></i> 垃圾回收---小疑问
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/" rel="next" title="垃圾回收---Java类型引用">
+      垃圾回收---Java类型引用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">常见的垃圾回收器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">新生代垃圾收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%80%81%E5%B9%B4%E4%BB%A3%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">老年代收集器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

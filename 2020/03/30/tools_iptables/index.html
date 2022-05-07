@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="工作机制基础说明12iptables并不是真正的防火墙、它只是位于用户空间的一个命令行工具, netfilter 才是真正的安全框架、iptables只是将我们定义的规则转交给netfilter. netfilter 是Linux操作系统核心层的一个数据包处理模块    规则链名称规则链名称包括以下5个、也被称为5个钩子函数: INPUT链: 处理输入数据包 OUTPUT链: 处理输出数据包 FO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iptables学习">
+<meta property="og:url" content="http://yoursite.com/2020/03/30/tools_iptables/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="工作机制基础说明12iptables并不是真正的防火墙、它只是位于用户空间的一个命令行工具, netfilter 才是真正的安全框架、iptables只是将我们定义的规则转交给netfilter. netfilter 是Linux操作系统核心层的一个数据包处理模块    规则链名称规则链名称包括以下5个、也被称为5个钩子函数: INPUT链: 处理输入数据包 OUTPUT链: 处理输出数据包 FO">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-30T10:04:17.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.829Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/30/tools_iptables/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>iptables学习 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/tools_iptables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          iptables学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-30 18:04:17" itemprop="dateCreated datePublished" datetime="2020-03-30T18:04:17+08:00">2020-03-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h4><h5 id="基础说明"><a href="#基础说明" class="headerlink" title="基础说明"></a>基础说明</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables并不是真正的防火墙、它只是位于用户空间的一个命令行工具, netfilter 才是真正的安全框架、iptables只是将我们定义的规则转交给netfilter. </span><br><span class="line">netfilter 是Linux操作系统核心层的一个数据包处理模块</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="规则链名称"><a href="#规则链名称" class="headerlink" title="规则链名称"></a>规则链名称</h5><p>规则链名称包括以下5个、也被称为5个钩子函数:</p>
+<p><code>INPUT链</code>: 处理输入数据包</p>
+<p><code>OUTPUT链</code>: 处理输出数据包</p>
+<p><code>FORWARD链</code>: 处理转发数据</p>
+<p><code>PREROUTING链</code>: 用于目的地址转换(DNAT)</p>
+<p><code>POSTROUTING链</code>: 用于源地址转换(SNAT)</p>
+<h5 id="报文流向"><a href="#报文流向" class="headerlink" title="报文流向"></a>报文流向</h5><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">本机到某进程: <span class="function"><span class="title">prerouting</span> -&gt;</span> input</span><br><span class="line">本机转发: <span class="function"><span class="title">prerouting</span> -&gt;</span> <span class="function"><span class="title">forward</span> -&gt;</span> postrouting (直接在内核空间转发)</span><br><span class="line">本机进程发出(通常为响应报文): <span class="function"><span class="title">output</span> -&gt;</span> postrouting</span><br><span class="line">即: 当启用你过来防火墙功能时、报文需要经过不同的关卡(链)、但根据情况的不同、会经过不同的链</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="为什么称为链"><a href="#为什么称为链" class="headerlink" title="为什么称为链"></a>为什么称为链</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">防火墙的作用就在于对经过的报文进行规则匹配、然后执行对应的动作、但是每个关卡上可能有很多规则、这些规则按照配置顺序从上到下执行、看起来就像是一个链</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="表"><a href="#表" class="headerlink" title="表"></a>表</h5><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">这么多的链都放了一系列的规则、但是有些很类似、比如A类规则是对ip或者短裤过滤<span class="comment">; B类规则是修改报文... , 那么这些类似功能的规则能不能放在一起呢 ?</span></span><br><span class="line">答案是可以的、iptables提供了如下规则的分类(表):</span><br><span class="line"><span class="keyword">filter</span>表: 负责过滤功能 <span class="punctuation">,</span> 防火墙<span class="comment">; 内核模块 iptable_filter</span></span><br><span class="line">nat表: 网络地址转换<span class="comment">; 内核模块: iptable_nat</span></span><br><span class="line">mangle表: 解析报文、修改报文、并重新封装 内核模块: iptable_mangle</span><br><span class="line">raw表: 关闭nat表上启用的连接追踪机制<span class="comment">; 内核模块: iptable_raw</span></span><br><span class="line"></span><br><span class="line">当这些表处于同一条链时优先级如下:</span><br><span class="line">raw -&gt; mangle -&gt; nat -&gt; <span class="keyword">filter</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="防火墙的策略"><a href="#防火墙的策略" class="headerlink" title="防火墙的策略"></a>防火墙的策略</h5><p><code>通</code>: 默认不允许、需要定义谁可以进入</p>
+<p><code>堵</code>: 默认允许、但需要证明自己的身份</p>
+<p>filter功能: 定义允许或者不允许的策略, 工作在 input &#x2F; output &#x2F; forward 链</p>
+<p>nat选项: 定义地址转换功能, 工作在 prerouting &#x2F; output &#x2F; postrouting 链</p>
+<p>为了让这些功能都工作、制定了<code>表</code>的定义, 来区分不同的工作功能和处理方式</p>
+<h5 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h5><p><code>filter</code> 定义允许或者不允许、工作在 <code>input</code>, <code>output</code>, <code>forward</code> 链上</p>
+<p><code>nat</code> 定义地址转换, 工作在 <code>prerouting</code>, <code>output</code>, <code>postrouting</code> 链上</p>
+<p><code>mangle</code> 修改报文原数据, 5个链都可以工作</p>
+<p>注意: 设置多个规则链时、要把规则严格的放在前边、因为它是从上到下检查的~</p>
+<h5 id="规则动作"><a href="#规则动作" class="headerlink" title="规则动作"></a>规则动作</h5><p><code>accept</code>: 接收数据包</p>
+<p><code>drop</code>: 丢弃数据包</p>
+<p><code>redirect</code>: 重定向、映射、透明代理</p>
+<p><code>snat</code>: 源地址转换</p>
+<p><code>dnat</code>: 目标地址转换</p>
+<p><code>masquerade</code>: ip伪装(nat), 用于ADSL</p>
+<p><code>log</code>: 日志记录</p>
+<h5 id="思考"><a href="#思考" class="headerlink" title="思考:"></a>思考:</h5><p>其实iptables就是帮我们实现了网络包选择、地址转换、报文修改这些功能、为了实现这些功能、它划分了很多链、包括 prerouting、input、forward、output、postrouting, 定义了规则动作 accept、drop、redirect、snat、dnat、log、masquerade来实现这些功能.</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><h5 id="清空当前所有规则和计数"><a href="#清空当前所有规则和计数" class="headerlink" title="清空当前所有规则和计数"></a>清空当前所有规则和计数</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">iptables</span> -F <span class="comment"># 清空所有防火墙规则</span></span><br><span class="line">iptables -X <span class="comment"># 删除用户自定义的空链</span></span><br><span class="line">iptables -Z <span class="comment"># 清空计数</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="配置允许ssh端口连接"><a href="#配置允许ssh端口连接" class="headerlink" title="配置允许ssh端口连接"></a>配置允许ssh端口连接</h5><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">iptables</span> -A INPUT -s <span class="number">192.168.1.0</span>/<span class="number">24</span> -p tcp --dport <span class="number">22</span> -j ACCEPT</span><br><span class="line"><span class="comment"># 22: ssh端口 -s 192.168.1.0/24 被允许的网段、 -j accept 接受这种类型的请求</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="允许本地回环地址可以正常使用"><a href="#允许本地回环地址可以正常使用" class="headerlink" title="允许本地回环地址可以正常使用"></a>允许本地回环地址可以正常使用</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">i</span> lo -j accept</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -o lo -j accept</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="设置默认规则"><a href="#设置默认规则" class="headerlink" title="设置默认规则"></a>设置默认规则</h5><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT <span class="built_in">DROP</span> <span class="meta"># 配置默认的不让进</span></span><br><span class="line">iptables -P FORWARD <span class="built_in">DROP</span> <span class="meta"># 默认的不允许转发</span></span><br><span class="line">iptables -P <span class="keyword">OUTPUT</span> ACCEPT <span class="meta"># 默认的可以出去</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="配置白名单"><a href="#配置白名单" class="headerlink" title="配置白名单"></a>配置白名单</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> <span class="attribute">all</span> -s <span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span> -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> <span class="attribute">all</span> -s <span class="number">192.168</span>.<span class="number">140.0</span>/<span class="number">24</span> -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> tcp -s <span class="number">183.121</span>.<span class="number">3.7</span> <span class="attr">--dport</span> <span class="number">3380</span> -j ACCEPT </span><br><span class="line"># 允许<span class="number">183.121</span>.<span class="number">3.7</span>访问本机的<span class="number">3380</span>端口</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="开启相应的服务端口"><a href="#开启相应的服务端口" class="headerlink" title="开启相应的服务端口"></a>开启相应的服务端口</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> tcp <span class="attr">--dport</span> <span class="number">80</span> -j ACCEPT # 开启<span class="number">80</span>端口，因为web对外都是这个端口</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> icmp <span class="attr">--icmp-type</span> <span class="number">8</span> -j ACCEPT # 允许被ping</span><br><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -m state <span class="attr">--state</span> ESTABLISHED,RELATED -j ACCEPT # 已经建立的连接得让它进来</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="保存规则到配置文件"><a href="#保存规则到配置文件" class="headerlink" title="保存规则到配置文件"></a>保存规则到配置文件</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="regexp">/etc/</span>sysconfig<span class="regexp">/iptables /</span>etc<span class="regexp">/sysconfig/i</span>ptables.bak <span class="comment"># 任何改动之前先备份，请保持这一优秀的习惯</span></span><br><span class="line">iptables-save &gt; <span class="regexp">/etc/</span>sysconfig/iptables</span><br><span class="line">cat <span class="regexp">/etc/</span>sysconfig/iptables</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="列出已设置规则"><a href="#列出已设置规则" class="headerlink" title="列出已设置规则"></a>列出已设置规则</h5><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iptables -L [-t 表名] [链名]</span><br><span class="line"></span><br><span class="line">iptables -L -t nat                  <span class="meta"># 列出 nat 上面的所有规则</span></span><br><span class="line"><span class="meta">#            ^ -t 参数指定，必须是 raw， nat，filter，mangle 中的一个</span></span><br><span class="line">iptables -L -t nat  --<span class="keyword">line</span>-numbers  <span class="meta"># 规则带编号</span></span><br><span class="line">iptables -L <span class="keyword">INPUT</span></span><br><span class="line"></span><br><span class="line">iptables -L -nv  <span class="meta"># 查看，这个列表看起来更详细</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h5><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">iptables</span> -t nat -A PREROUTING -d <span class="number">210.14.67.127</span> -p tcp --dport <span class="number">2222</span>  -j DNAT --to-dest <span class="number">192.168.188.115:22</span></span><br><span class="line"><span class="comment"># 将本机的 2222端口 映射到虚拟机的 22端口</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="防止SYN洪水攻击"><a href="#防止SYN洪水攻击" class="headerlink" title="防止SYN洪水攻击"></a>防止SYN洪水攻击</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -<span class="selector-tag">A</span> <span class="selector-tag">INPUT</span> -<span class="selector-tag">p</span> tcp <span class="attr">--syn</span> -m limit <span class="attr">--limit</span> <span class="number">5</span>/second -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><blockquote>
+<p>iptables –help 可以看到更多的选项、可以看到每一个选项的解释、本文列出了一些简单使用、欢迎指正、交流~</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Tools/" rel="tag"># Tools</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/26/k8s_%E5%A5%91%E6%9C%BA/" rel="prev" title="k8s出现的契机">
+      <i class="fa fa-chevron-left"></i> k8s出现的契机
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/24/redis_sds/" rel="next" title="Redis数据结构实现-SDS">
+      Redis数据结构实现-SDS <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">工作机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">基础说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E9%93%BE%E5%90%8D%E7%A7%B0"><span class="nav-number">1.2.</span> <span class="nav-text">规则链名称</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E6%B5%81%E5%90%91"><span class="nav-number">1.3.</span> <span class="nav-text">报文流向</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%A7%B0%E4%B8%BA%E9%93%BE"><span class="nav-number">1.4.</span> <span class="nav-text">为什么称为链</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%A8"><span class="nav-number">1.5.</span> <span class="nav-text">表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E7%AD%96%E7%95%A5"><span class="nav-number">1.6.</span> <span class="nav-text">防火墙的策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD"><span class="nav-number">1.7.</span> <span class="nav-text">常用功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%8A%A8%E4%BD%9C"><span class="nav-number">1.8.</span> <span class="nav-text">规则动作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">1.9.</span> <span class="nav-text">思考:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B8%85%E7%A9%BA%E5%BD%93%E5%89%8D%E6%89%80%E6%9C%89%E8%A7%84%E5%88%99%E5%92%8C%E8%AE%A1%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">清空当前所有规则和计数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%81%E8%AE%B8ssh%E7%AB%AF%E5%8F%A3%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">配置允许ssh端口连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%81%E8%AE%B8%E6%9C%AC%E5%9C%B0%E5%9B%9E%E7%8E%AF%E5%9C%B0%E5%9D%80%E5%8F%AF%E4%BB%A5%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">允许本地回环地址可以正常使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E8%A7%84%E5%88%99"><span class="nav-number">2.4.</span> <span class="nav-text">设置默认规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%99%BD%E5%90%8D%E5%8D%95"><span class="nav-number">2.5.</span> <span class="nav-text">配置白名单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E7%9B%B8%E5%BA%94%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.6.</span> <span class="nav-text">开启相应的服务端口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E8%A7%84%E5%88%99%E5%88%B0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.7.</span> <span class="nav-text">保存规则到配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E5%B7%B2%E8%AE%BE%E7%BD%AE%E8%A7%84%E5%88%99"><span class="nav-number">2.8.</span> <span class="nav-text">列出已设置规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84"><span class="nav-number">2.9.</span> <span class="nav-text">端口映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2SYN%E6%B4%AA%E6%B0%B4%E6%94%BB%E5%87%BB"><span class="nav-number">2.10.</span> <span class="nav-text">防止SYN洪水攻击</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="nav-number">3.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

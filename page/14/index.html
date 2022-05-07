@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛牛的小窝">
+<meta property="og:url" content="http://yoursite.com/page/14/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java, Mysql, Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/14/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_GPU%E7%9A%84%E4%BA%A7%E7%94%9F%E5%92%8C%E5%8F%91%E5%B1%95(%E7%AC%AC30%E3%80%8131%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_GPU%E7%9A%84%E4%BA%A7%E7%94%9F%E5%92%8C%E5%8F%91%E5%B1%95(%E7%AC%AC30%E3%80%8131%E8%AE%B2)/" class="post-title-link" itemprop="url">GPU的产生和发展(第30、31讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="GPU的历史进程"><a href="#GPU的历史进程" class="headerlink" title="GPU的历史进程"></a>GPU的历史进程</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GPU是随着需要在计算机里渲染三维图形、而发展起来的设备</span><br><span class="line"></span><br><span class="line">到<span class="number">90</span>年代中期、随个人电脑的性能越来越好、开始有了<span class="number">3D</span>显卡的需求、那个时代之前的<span class="number">3D</span>游戏、都是伪<span class="number">3D</span></span><br><span class="line">从不同视角看到的是<span class="number">8</span>副不同的贴图、并不是通过图形学渲染出来的多边形</span><br><span class="line"></span><br><span class="line">为什么<span class="meta">CPU</span>的性能已经大幅度提升、还需要单独的GPU呢 ？</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="图形渲染的流程"><a href="#图形渲染的流程" class="headerlink" title="图形渲染的流程"></a>图形渲染的流程</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">现在电脑显示的3D画面、其实是通过多边形组合出来的. 现在各种游戏人物的脸、不是相机或者摄像头拍出来的、而是通过多边形建模创建出来的</span><br><span class="line"></span><br><span class="line">实际这些人物在画面里的移动、动作、乃至根据光线发生的变化、都是通过计算机根据图形学的各种计算、实时渲染出来的</span><br><span class="line"></span><br><span class="line">图像实时渲染、可拆解为:</span><br><span class="line"><span class="bullet">1.</span> 定点处理 (Vertex Processing)</span><br><span class="line"><span class="bullet">2.</span> 图元处理 (Primitive Processing)</span><br><span class="line"><span class="bullet">3.</span> 栅格化 (Rasteerization)</span><br><span class="line"><span class="bullet">4.</span> 片段处理 (Fragement Processing)</span><br><span class="line"><span class="bullet">5.</span> 像素操作 (Pixel Operations)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="解放图像渲染的GPU"><a href="#解放图像渲染的GPU" class="headerlink" title="解放图像渲染的GPU"></a>解放图像渲染的GPU</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">若使用<span class="meta">CPU</span>渲染、需要多少资源来处理 ?</span><br><span class="line">上世纪<span class="number">90</span>年代、屏幕分辨率大概: <span class="number">640</span>*<span class="number">480</span>, 约30w, 为了眼睛看到的画面不眩晕、希望画面有<span class="number">60</span>帧、即:</span><br><span class="line">每秒重新渲染<span class="number">60</span>次(<span class="number">1800</span>万次单个像素的渲染), 从栅格化开始、每个像素有<span class="number">3</span>个流水线步骤、假设每个步骤只有<span class="number">1</span>个指令、也需要5400w条指令</span><br><span class="line"></span><br><span class="line"><span class="number">90</span>年代的<span class="meta">CPU</span>性能是多少呢 ? <span class="number">93</span>年第一代Pentium处理器、主频60MHZ、后续逐步推出了 66MHZ、75MHZ、100MHZ的处理器、以这个性能来看、用<span class="meta">CPU</span>来渲染<span class="number">3D</span>图形、就基本上把<span class="meta">CPU</span>的性能耗光了、因为实际的每一个渲染步骤不可能只包含一个指令、所以、<span class="meta">CPU</span>跑不动<span class="number">3D</span>图形渲染</span><br><span class="line"></span><br><span class="line">既然图形渲染的流程是固定的、直接使用硬件来处理、不用<span class="meta">CPU</span>计算是不是可以呢 ? Voodoo FX这样的图形加速器出现了、显然、硬件会比制造通用计算性能的<span class="meta">cpu</span>要便宜的多、因为整个计算过程是固定的、不需要流水线停顿、乱序执行等各类导致<span class="meta">CPU</span>计算变的复杂的问题、也不需要可编程能力、只让硬件按照谢浩的逻辑进行运算即可</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="现代GPU的三个核心创意"><a href="#现代GPU的三个核心创意" class="headerlink" title="现代GPU的三个核心创意"></a>现代GPU的三个核心创意</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">现代CPU里的晶体管越来越多、越来越复杂、其实已经不是用来实现`计算`这个核心功能、而是拿来实现乱序执行、分支预测及存储器高速缓存</span><br><span class="line"></span><br><span class="line">而 对于GPU、这些电路就很多余了、GPU的整个处理过程是一个流式处理的过程(Stream Processing), </span><br><span class="line"><span class="title">因为没有太多分支条件或者复杂的依赖关系、可以把GPU的对应电路都省掉、只保留取指令、指令译码、ALU以及执行这些计算需要的寄存器和缓存、一般会抽象为如下图三部分:</span> 取指令、指令译码、ALU和执行上下文(乱序执行、分支预测、高速缓存... 都被省掉)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-f713259807500f3e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="SIMT和多核并行"><a href="#SIMT和多核并行" class="headerlink" title="SIMT和多核并行"></a>SIMT和多核并行</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">这样一来、GPU的电路就比<span class="meta">CPU</span>简化很多了、于是可以在一个GPU里、塞很多并行的GPU来实现计算、好像<span class="meta">CPU</span>里的多核<span class="meta">CPU</span>一样、和<span class="meta">CPU</span>不同的是、不需要单独实现多线程的计算、GPU的计算是天然并行的</span><br><span class="line"></span><br><span class="line">上节提到:</span><br><span class="line">无论是对多边形里的顶点进行处理还是对屏幕里的每一个像素、每个点的计算都是独立的、所以:</span><br><span class="line">简单的添加多核的GGPU、就能做到并行加速、</span><br><span class="line">另外: <span class="meta">CPU</span>的SIMD技术: 在向量计算的时候、要执行的指令是一样的、只是同一个指令的数据有所不同、在GPU的渲染管里、无论是顶点线性变换还是屏幕上临近像素点的光照和上色、都是在用相同指令流程进行计算、GPU就借鉴了SIMD、用来一种叫SIMT的技术,</span><br><span class="line"></span><br><span class="line">SIMT比SIMD更加灵活、在SIMD里、<span class="meta">CPU</span>一次性取出了多个固定长度的数据、放在寄存器里、用同一个指令去执行、而SIMT可以将多条数据、交给不同的线程来处理</span><br><span class="line"></span><br><span class="line">各个线程里执行的指令流程是相同的、但可能根据数据的不同、走到不同的条件分支、这样相同的代码和相同的流程、可能执行不同的具体的指令、于是GPU可以进一步简化、取指的时候可以交给后面多个不同的ALU并行计算、这样一个GPU的核里就可以放下更多的ALU、同时进行更多的并行运算了</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-c61ffb172e910ccf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="多核并行.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4a8944f4e16eae26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SIMT并行-多个ALU.png"></p>
+<h4 id="GPU里的超线程"><a href="#GPU里的超线程" class="headerlink" title="GPU里的超线程"></a>GPU里的超线程</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GPU里的指令、可能会遇到和CPU类似的流水线停顿问题、是不是可以想到优化方案`超线程` ?</span><br><span class="line"><span class="title">在GPU里一样可以有类似的优化. 即:</span> 遇到流水线停顿时、调度一些别的计算任务给当前的ALU</span><br><span class="line"></span><br><span class="line">和超线程一样、既然要调度一个不同的任务执行、就需要针对这个任务、提供更多的执行上下文、so. 一个Core里的执行上下文的数量、需要比 ALU 多</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-a8845384202d495f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="GPU在深度学习上的性能差异"><a href="#GPU在深度学习上的性能差异" class="headerlink" title="GPU在深度学习上的性能差异"></a>GPU在深度学习上的性能差异</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">通过芯片瘦身、SIMT和更多的执行上下文、GPU更擅长并行进行暴力运算、恰好适合深度学习的应用场景</span><br><span class="line"></span><br><span class="line"><span class="section">一方面: GPU是一个可以进行通用计算的框架、可以通过编程、在GPU上实现不同的算法、</span></span><br><span class="line"><span class="section">另一方面: 现在的深度学习计算、都是超大的向量和矩阵、海量的训练样本的计算、整个过程没有复杂的逻辑和分支、非常适合GPU这样并行、计算能力强的架构</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_IO%E8%AE%BE%E5%A4%87(43%E8%AE%B2)/" class="post-title-link" itemprop="url">IO设备(43讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="接口和设备-经典的适配器模式"><a href="#接口和设备-经典的适配器模式" class="headerlink" title="接口和设备: 经典的适配器模式"></a>接口和设备: 经典的适配器模式</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">实际上, 输出输入设备、并不只是一个设备、大部分的输入输出设备、都有两个组成部分.</span><br><span class="line">接口和实际的IO设备. 硬件设备不是直接接入到总线上和CPU通信的、而是通过接口、用接口连接到总线上</span><br><span class="line">再通过总线和CPU通信的. 平时听说的并行接口<span class="comment">(Parallel Interface)</span>, 串行接口<span class="comment">(Serial Inteerface)</span>、</span><br><span class="line">USB接口都是计算机主板上内置的各个接口, 实际的硬件设备 eg. 使用并口的打印机、使用串口的老式鼠标</span><br><span class="line">或者使用USB接口的U盘、都要插入到这些接口上、才能和CPU工作及通信的.</span><br><span class="line"></span><br><span class="line">接口本身就是一块电路板、CPU其实不是和实际的硬件设备打交道、而是和这个接口电路板打交道.</span><br><span class="line">常说的设备里有三类寄存器、都在设备的接口电路上、而不是实际的设备上.</span><br><span class="line"></span><br><span class="line">三类寄存器: 状态寄存器<span class="comment">(Status Register)</span>、命令寄存器<span class="comment">(Command Register)</span>和数据寄存器<span class="comment">(Data Register)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="CPU是如何控制IO设备的"><a href="#CPU是如何控制IO设备的" class="headerlink" title="CPU是如何控制IO设备的"></a>CPU是如何控制IO设备的</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">无论是内置在主板上的接口、还是集成在设备上的接口、除了<span class="number">3</span>类寄存器之外、还有对应的控制电路,</span><br><span class="line">正是通过这个控制电路、<span class="meta">CPU</span>才能向这个接口电路板传输信号、来控制实际的硬件</span><br><span class="line"></span><br><span class="line">设备上的寄存器有什么用呢 ？</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-1349e7dbc149f62a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="打印机.png"></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 数据寄存器. CPU向IO设备写入需要传输的数据、eg. 要打印`GeekTime`, 会先发送一个G给对应IO设备</span><br><span class="line">2. 命令寄存器. CPU发送一个命令、告诉打印机、要打印. 此时打印机里的控制电路会做两个动作.</span><br><span class="line">1) 设置状态寄存器里的状态为<span class="built_in"> not-ready</span></span><br><span class="line"><span class="built_in"></span>2) 实际操作打印机进行打印</span><br><span class="line">3. 状态寄存器. 告诉CPU、设备已经在工作了、此时再发送数据或者命令都是无效的</span><br><span class="line">直到前边的动作已完成、状态寄存器重新变成ready状态、CPU才发送下一个字符和命令</span><br><span class="line"></span><br><span class="line">在实际情况中、打印机通常不止有数据寄存器还有数据缓冲区、CPU也不是真的一个字符一个字符交给打印机处理的</span><br><span class="line">而是一次性将整个文档传输至打印机的内存或者数据缓冲区一起打印的</span><br></pre></td></tr></table></figure>
+
+<h4 id="信号和地址-发挥总线的价值"><a href="#信号和地址-发挥总线的价值" class="headerlink" title="信号和地址: 发挥总线的价值"></a>信号和地址: 发挥总线的价值</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">CPU</span>到底要往总线上发送一个什么样的命令、才能和IO接口上的设备通信呢 ？</span><br><span class="line"></span><br><span class="line"><span class="meta">CPU</span>和IO设备的通信、一样是通过<span class="meta">CPU</span>支持的机器指令来执行的.</span><br><span class="line">和访问主内存一样、使用内存地址来和IO设备通信. 为了让已经足够复杂的<span class="meta">CPU</span>尽可能简单、</span><br><span class="line">计算机会把IO设备的各个寄存器及IO设备内部的内存地址、都映射到主内存地址空间来、</span><br><span class="line">主内存的地址空间里、会给不同的IO设备预留一段一段的内存地址. <span class="meta">CPU</span>想和IO设备通信的时候、</span><br><span class="line">就往这些地址发送数据、这些地址信息就是通过地址总线老来发送的、对应的数据信息就是通过数据总线发送的</span><br><span class="line"></span><br><span class="line">而IO设备、会监控地址线、且在<span class="meta">CPU</span>往自己的地址发送数据的时候、把对应的数据线里边传输过来的数据、</span><br><span class="line">接入到对应的设备里边的寄存器和内存里. <span class="meta">CPU</span>无论是向IO设备发送命令、查询状态还是传输数据都可以</span><br><span class="line">通过这种方式. 称为内存映射IO(Memory-Mapped IO, MMIO)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-6ca26f4063f664e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340" alt="image.png"></p>
+<blockquote>
+<p>那么、MMIO是不是唯一一种CPU和设备通信的方式呢 ?</p>
+</blockquote>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">不是的. 精简指令集MIPS的<span class="meta">CPU</span>特别简单、所以这里只有MMIO. 而有<span class="number">2000</span>多个指令的Intel</span><br><span class="line">而我们有<span class="number">2000</span>多个指令的Intel X86架构的计算机、有专门的和IO设备通信的指令, 即: <span class="keyword">in</span> 和 <span class="keyword">out</span> 指令.</span><br><span class="line">Intel <span class="meta">CPU</span>虽然也支持MMIO、不过还可以通过特定的指令、来支持端口映射IO(Port-Mapped IO, 简称PMIO)</span><br><span class="line">也可以叫独立输入输出(Isolated IO)</span><br><span class="line"></span><br><span class="line">其实PMIO的通信方式和MMIO差不多、核心区别在于: PMIO里访问的设备地址、不再是在内存地址空间里、</span><br><span class="line">而是一个专门的端口, 这个端口不是硬件杀昂的插口、而是和<span class="meta">CPU</span>通信的一个抽象概念</span><br><span class="line"></span><br><span class="line">无论是PMIO还是MMIO、<span class="meta">CPU</span>都会传送一条二进制的数据、给到IO设备的对应地址. 设备自己本身的接口电路、</span><br><span class="line">再去解码这个数据、解码之后的数据会变成设备支持的一条指令、再去通过控制电路操作实际的硬件设备</span><br><span class="line">对<span class="meta">CPU</span>来说、它不关心设备本身可以支持哪些操作、只是在总线上传输一条条数据就好了.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_RISC%E5%92%8CCISC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_RISC%E5%92%8CCISC/" class="post-title-link" itemprop="url">RISC和CISC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><code>CISC</code>: <code>Complex Insturction Set Computing </code>, 即: 复杂指令集</p>
+<p><code>RISC</code>: <code>Reduced Instruction Set Computing</code>, 即: 精简指令集</p>
+</blockquote>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">早期、所有的CPU都是 CISC、并无 CISC 和 RISC 之分 </span><br><span class="line">CPU指令集的设计、需要考虑硬件限制、为了性能考虑、很多功能直接通过硬件电路完成、为了减少内存、指令的长度也是可变的, 常用指令的长度短一些、不常用指令长度可以长一些</span><br><span class="line"></span><br><span class="line">随历史发展、计算机性能和存储都在发展、当时 大卫*帕特森教授发现: 实际在CPU运行的程序里、<span class="number">80</span>%都是在使用 <span class="number">20</span>% 的简单指令、提出 RISC的理念</span><br><span class="line"></span><br><span class="line">RISC的CPU想法其实很直观、既然<span class="number">80</span>%的时间都在使用<span class="number">20</span>%的简单指令、那只使用<span class="number">20</span>%的简单指令呢？ - 因为指令数量很多、计算机科学家在软硬件两方面都受到了很大的挑战</span><br><span class="line"></span><br><span class="line">在硬件层面、想支持更多的复杂指令、CPU里的电路就要越复杂、在散热和功耗上也就会带来更大的挑战、</span><br><span class="line">在软件层面、支持更多的复杂指令、编译器的优化就更难</span><br><span class="line"></span><br><span class="line">于是在RISC架构里、CPU选择将指令精简到<span class="number">20</span>%的简单指令、而原先的复杂指令 则用简单指令组合起来实现、让软件实现硬件的功能、这样CPU的硬件设计就更简单了、性能提升也会变的容易</span><br><span class="line"></span><br><span class="line">RISC的CPU里完成指令的电路变简单了、就腾出了更多空间、这个空间、常被拿来放通用寄存器、因为RISC完成同样的功能、执行的指令数要比CISC多、所以、若需要反复从内存读取指令或者数据到寄存器、很多时间就会花在访问内存上、于是, RISC架构的CPU往往有更多的通用寄存器、</span><br><span class="line"></span><br><span class="line">除了寄存器这样的存储空间、RISC的CPU也可以把更多的晶体管、用来实现更好的分支预测等相关功能、进一步提升CPU的实际利用率</span><br><span class="line"></span><br><span class="line"><span class="string">`CPU执行时间`</span> = <span class="string">`指令数`</span> * <span class="string">`CPI`</span> * <span class="string">`Clock Cycle Time`</span></span><br><span class="line"></span><br><span class="line">CISC的架构其实就是通过优化指令数、来减少CPU的执行时间、而RISC的架构、其实是在优化CPI</span><br><span class="line">指令比较简单、需要的时钟周期就很少</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="微指令架构"><a href="#微指令架构" class="headerlink" title="微指令架构"></a>微指令架构</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">在微指令架构的<span class="meta">CPU</span>里、编译器编译出来的机器码和汇编代码没发生变化、但: 在指令译码阶段、指令译码器翻译出来的、不再是某一条<span class="meta">CPU</span>指令、译码器会把一条机器码、翻译成好几条微指令、这一条条的微指令就变成了固定长度的RISC风格的了</span><br><span class="line"></span><br><span class="line">这些RISC风格的微指令、会被放在一个微指令缓冲区里、然后再从缓冲区里边、分发给后边的超标量、且乱序执行的流水线架构里(精简指令)、在这个架构里、指令译码器相当于变成了<span class="string">`适配器`</span>, 填平； CISC和RISC之间的指令差异</span><br><span class="line"></span><br><span class="line">但: 这样一个可以把CISC的指令译码成RISC指令的指令译码器、比原来的译码器要复杂、就意味着更复杂的电路和更长的译码时间, 本来以为可以通过RISC提升的性能、又有一部分浪费在了指令译码上、怎么解决呢?</span><br><span class="line"></span><br><span class="line">由于<span class="number">80</span>%运行的代码、只包含<span class="number">20</span>%的常用指令、这个很强的局部性、可以使用缓存来解决.</span><br><span class="line">Intel在<span class="meta">CPU</span>里加了一层 L0 Cache、这个Cache保存的就是指令译码器把CISC的指令翻译RISC的微指令的结果、于是大部分情况、<span class="meta">CPU</span>可以从Cache拿到译码结果、而不用实际译码, 不仅优化了性能、因为译码器的开关动作变少了、还减少了功耗</span><br><span class="line"></span><br><span class="line">由于Intel本身在<span class="meta">CPU</span>层上做过大量优化: 分支预测、乱序执行等、X86的<span class="meta">CPU</span>始终在功耗上还是要超过RISC架构的ARM、所以最终在智能手机崛起替代PC的时代、落在了ARM后面</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CPU的现在和未来"><a href="#CPU的现在和未来" class="headerlink" title="CPU的现在和未来"></a>CPU的现在和未来</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">现在、CISC和RISC架构的分界已经不明显了、Intel和AMD的<span class="meta">CPU</span>也都是采用译码成RISC风格的微指令来运行、而ARM的芯片、一条指令通用需要多个时钟周期、有乱序执行和多发射</span><br><span class="line"></span><br><span class="line">未来的<span class="meta">CPU</span>、多半会像Linux一样、逐渐成为一个业界的主流选择、若想打造一个属于自己的<span class="meta">CPU</span>、可以关注下 RISC-V开源项目的发展</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_SSD-(46%E3%80%8147%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_SSD-(46%E3%80%8147%E8%AE%B2)/" class="post-title-link" itemprop="url">SSD-(46、47讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="SSD的读写原理"><a href="#SSD的读写原理" class="headerlink" title="SSD的读写原理"></a>SSD的读写原理</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">下边性能对比图显示:</span> SSD的耐用性很差、若需要频繁的写入/删除数据、则机械硬盘比SSD性价比要高很多.</span><br><span class="line"></span><br><span class="line">之前我们知道、CPU Cahe 是SRAM 用一个电容来存放一个比特的数据、对于SSD、也可先简单认为, </span><br><span class="line">是一个电容+一个电压计、记录一个或多个比特</span><br><span class="line"></span><br><span class="line">`SLC`、`MLC`、`TLC`、`QLC`</span><br><span class="line">给电容充电时、电压就是<span class="number">1</span><span class="comment">; 放电后,里边没电、就是0. 采用这种方式存储的SSD硬盘、称`使用了SLC的颗粒`,</span></span><br><span class="line"><span class="title">全称`Single-Level Cell`, 即:</span> 一个存储单元只有一位数据.</span><br><span class="line"><span class="title">但: 这样就会遇到与CPU Cache相同的问题:</span> 相同面积下、由于存放的元器件有限、存储容量上不去.</span><br><span class="line">于是, 有了`MLC`(Multi-Level Cell)、`TLC`(Triple-Level Cell)及`QLC`(Quad-Level Cell), </span><br><span class="line"><span class="title">即:</span> 一个电容可存<span class="number">2</span>、<span class="number">3</span>乃至<span class="number">4</span>个bit</span><br><span class="line">同时, 由于对精度的要求更高、QLC的读写速度比SLC要慢好几倍</span><br><span class="line"></span><br><span class="line">P/E擦写问题</span><br><span class="line">SSD同其它IO设备、有对应接口和控制电路、控制电路中一个很重要的模块叫`TFL`(Flush Transaction Layer)</span><br><span class="line">闪存转换层. SSD磁盘性能的好坏、很大程度上取决于FTL算法的好坏.</span><br><span class="line"></span><br><span class="line">实际的IO设备和机械硬盘很像、有很多裸片叠在一起<span class="comment">;</span></span><br><span class="line">一张裸片上可放多个平面(Plane), 一个平面的存储容量大概在GB级别<span class="comment">; </span></span><br><span class="line">一个平面上会划分成很多块(Block), 一般一个块的存储大小在几百KB到几MB<span class="comment">;</span></span><br><span class="line">一个块、还会分为很多页(Page), 大小通常是<span class="number">4</span>KB.</span><br><span class="line"></span><br><span class="line">SSD读取和写入的基本单位是`页`， 擦除单位是`块`.</span><br><span class="line">SSD的使用寿命、其实就是每一个块的擦除次数.</span><br><span class="line">`SLC`的擦除次数大概在<span class="number">10</span>w次、`MLC`就<span class="number">1</span>w次左右、`TLC`和`QLC`只有几千次.</span><br><span class="line"></span><br><span class="line">SSD特别适合读多、写少的应用、在日常应用里、系统盘适合使用SSD.</span><br><span class="line">但若使用SSD做下载盘、一直下载各种影音数据、就不好了、特别是现在QLC的SSD, 只有几千次的擦写寿命.</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-277084bb88844b36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SSD和HDD性能对比.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-dbd383714531b895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SSD物理结构.png"></p>
+<h4 id="如何最大化利用SSD"><a href="#如何最大化利用SSD" class="headerlink" title="如何最大化利用SSD"></a>如何最大化利用SSD</h4><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`磨损均衡`</span>: 实现的核心办法、类似虚拟内存、添加一个间接层<span class="string">`FTL`</span>， 像通过一个页表映射虚拟内存和物理页</span><br><span class="line">一样、在<span class="symbol">FLT</span>里存放了逻辑块地址(<span class="symbol">Logic</span> <span class="symbol">Block</span> <span class="symbol">Address</span>, <span class="symbol">LBA</span>)到物理块地址(<span class="symbol">Physical</span> <span class="symbol">Block</span> <span class="symbol">Address</span>, </span><br><span class="line"><span class="symbol">PBA</span>)的映射.</span><br><span class="line"></span><br><span class="line">操作系统所有对<span class="symbol">SSD</span>的读写请求、都要经过<span class="symbol">FLT</span>、<span class="symbol">FTL</span>里又有逻辑块对应的物理块、这样<span class="symbol">FTL</span>可以记录每个物理块</span><br><span class="line">被擦写的次数. 若一个物理块被擦写较多、<span class="symbol">FTL</span>就将它挪到一个擦写少的物理块上,逻辑块不动、操作系统无感.</span><br><span class="line"></span><br><span class="line"><span class="string">`TRIM`</span>指令支持</span><br><span class="line">操作系统不关心底层硬件是什么、在<span class="symbol">SSD</span>的使用上也会带来一个问题:</span><br><span class="line">操作系统的逻辑层和<span class="symbol">SSD</span>的逻辑层里的块状态是不匹配的.</span><br><span class="line"></span><br><span class="line">在操作系统里删除一个文件、其实并没有真正在物理层操作删除、只在文件系统里把对应的inode元信息清理掉, </span><br><span class="line">这个inode还可以继续使用, 写入新的数据, 在物理层面对应的存储空间、在操作系统里被标示可写入.</span><br><span class="line">所以: 日常文件删除、只是操作系统层面的逻辑删除、不小心误删文件时、还可以通过恢复软件、恢复出来,</span><br><span class="line">想彻底删除数据、需要使用文件粉碎功能.</span><br><span class="line"></span><br><span class="line">这个删除的逻辑在机械硬盘上可行、后续的写入可直接覆写该位置. 但在<span class="symbol">SSD</span>上不行. </span><br><span class="line"></span><br><span class="line">eg. 在操作系统里删除一个刚下载的文件 a.txt, 在操作系统里、对应的inode里、就没有文件的元信息,</span><br><span class="line">但 <span class="symbol">SSD</span>的逻辑块层面、并不知道这个事情, a.txt 依然占用了空间、对应的物理页、也是被占用的.</span><br><span class="line">此时: 若要对<span class="symbol">SSD</span>进行垃圾回收、a.txt 对应的物理页、让要被搬运到其它<span class="symbol">Block</span>中去、只有当操作系统再</span><br><span class="line">在刚才的inode写入数据时、才会知道原来的数据已无用, 才会标记删除这种现象导致, 为了磨损均衡、</span><br><span class="line">可能搬运了很多已删除的数据、导致很多不必要的数据读写和擦除, 损耗<span class="symbol">SSD</span>性能.</span><br><span class="line"></span><br><span class="line">为了解决这个问题、现在的操作系统和<span class="symbol">SSD</span>的主控芯片都支持<span class="string">`TRIM`</span>命令、可在文件删除时、让操作系统通知</span><br><span class="line"><span class="symbol">SSD</span>, 标记对应逻辑块为已删除.</span><br><span class="line"></span><br><span class="line"><span class="string">`写入放大`</span>:</span><br><span class="line"><span class="symbol">TRIM</span> 命令的发明，也反应了一个使用 <span class="symbol">SSD</span> 硬盘的问题，那就是，<span class="symbol">SSD</span> 硬盘容易越用越慢.</span><br><span class="line"><span class="symbol">SSD</span>存储空间被越占越多时、每次数据写入可能都没有足够空间, 不得不进行垃圾回收、合并块里的页、</span><br><span class="line">然后擦除一些页. 此时, 从操作系统层看、可能只是写入<span class="number">4</span>k或者<span class="number">4</span><span class="symbol">M</span>的数据、通过<span class="symbol">FTL</span>后、可能要搬运<span class="number">8</span><span class="symbol">MB</span>、<span class="number">16</span><span class="symbol">MB</span>甚至更多的数据</span><br><span class="line"></span><br><span class="line"><span class="string">`实际的闪存写入的数据量 / 系统通过 FTL 写入的数据量 = 写入放大`</span></span><br><span class="line">写入放大越多、<span class="symbol">SSD</span>的性能也就越差.</span><br><span class="line">解决写入放大、需要在后台定时进行垃圾回收.在磁盘较闲时、把搬运数据、擦除数据、留出空白的工作做完.</span><br><span class="line">实际数据写入时、就不会有这么多的性能损耗了.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-25a82b2bc13b5e1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="AeroSpike-如何最大化SSD的使用效率"><a href="#AeroSpike-如何最大化SSD的使用效率" class="headerlink" title="AeroSpike: 如何最大化SSD的使用效率"></a>AeroSpike: 如何最大化SSD的使用效率</h4><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.AeroSpike 操作SSD硬盘、未通过操作系统的文件系统、而是直接操作SSD里的块和页.</span><br><span class="line"><span class="number">2</span>.AeroSpike 在读写数据时有<span class="number">2</span>个优化.</span><br><span class="line">  <span class="number">1</span>) 写数据时、尽可能写一个较大的块, 而不是频繁的写很多小的数据块, 这样磁盘就不太容易出现磁盘碎片.</span><br><span class="line">     也更好的理由磁盘的顺序写入优势.</span><br><span class="line">  <span class="number">2</span>) 读取时、可以读取小数据, 因为SSD的随机读取性能很好、也不像写入数据一样有擦除寿命问题. </span><br><span class="line">     且一次性读较大数据、需要在网络间传输时、可能导致带宽不够.</span><br><span class="line"></span><br><span class="line">另: 由于AeroSpike是一个对响应时间要求很高的实时KV数据库、若出现严重的写放大效应、会导致数据写入</span><br><span class="line">响应时长大幅度变长. 所以做了下边的优化:</span><br><span class="line"><span class="number">1</span>. 持续进行磁盘碎片整理. 使用高水位算法, 其实就是: 一旦一个物理块的数据碎片超过<span class="number">50</span><span class="comment">%, 就将其搬运</span></span><br><span class="line">压缩、然后进行数据擦除、确保始终有足够空间写入.</span><br><span class="line"><span class="number">2</span>.为保障数据库性能,建议只用SSD硬盘容量一半, 即: 人为预留SSD50<span class="comment">%空间、确保SSD的写放大效应尽可能小.</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_TPU--%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%8B%86%E8%A7%A3ASIC%E8%8A%AF%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_TPU--%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%8B%86%E8%A7%A3ASIC%E8%8A%AF%E7%89%87/" class="post-title-link" itemprop="url">TPU--设计和拆解ASIC芯片</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>GPU天生适合海量、并行的矩阵运算、于是大量用在深度学习的模型训练上<br>深度学习中计算量最大的是什么呢 ? 深度学习的推断部分</p>
+</blockquote>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`推断部分`: 在完成深度学习训练之后、把训练完成的模型存储下来. 这个存储下来的模型、是许多个向量组成的参数、然后根据这些参数、计算输入的数据、得到结果. eg. 推测用户是否点击广告<span class="comment">; 扫身份证进行人脸识别</span></span><br></pre></td></tr></table></figure>
+
+<p>思考: 模型的训练和推断有什么区别 ?</p>
+<figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">一、深度学习的推断、灵活性要求更低. 只需要计算一些矩阵的乘法、加法、调用一些sigmoid这样的激活函数、可能计算很多层、但也只是这些计算的简单组合</span><br><span class="line"></span><br><span class="line">二、深度学习推断的性能、首先要保证响应时间的指标</span><br><span class="line">模型训练的时候、只需要考虑吞吐率就可以、但推断不行. eg. 我们不希望人脸识别会超过几秒钟</span><br><span class="line"></span><br><span class="line">三、深度学习的推断工作、希望功耗尽可能的小一些</span><br><span class="line">因为深度学习的推断要<span class="number">7</span>*<span class="number">24</span>小时的跑在数据中心、且对应芯片要大规模的部署在数据中心、一块芯片减少<span class="number">5</span><span class="comment">%的功耗、就可以节省大量的电力</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>于是: 第一代TPU的设计目标:<br>在保障响应时间的情况下、尽可能的提高<code>能效比</code>这个指标、也就是进行相同数量的推断工作、花费的整体能源要低于CPU和GPU</p>
+</blockquote>
+<h4 id="TPU的几点设计"><a href="#TPU的几点设计" class="headerlink" title="TPU的几点设计"></a>TPU的几点设计</h4><blockquote>
+<ol>
+<li>向前兼容  2. TPU未设计成包含取指电路的GPU、而是通过CPU发送需要执行的指令</li>
+<li>使用<code>SRAM</code> 作为统一缓冲区, <code>SRAM</code>一般用来作为CPU的寄存器或者高速缓存、<code>SRAM</code>比<code>DRAM</code>快, 但因为电路密度小、占用空间大、价格也较贵、之所以选择<code>SRAM</code>是因为整个推断过程、它会高频反复地被矩阵乘法单元读写、来完成计算</li>
+<li>细节优化, 使用8Bits数据</li>
+</ol>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-9db6fb03181e5443.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%86%92%E9%99%A9%E5%92%8C%E9%A2%84%E6%B5%8B(21~26%E8%AE%B2)/" class="post-title-link" itemprop="url">冒险和预测(21~26讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="CPU流水线设计"><a href="#CPU流水线设计" class="headerlink" title="CPU流水线设计"></a>CPU流水线设计</h4><p><code>指令流水线</code>: 若把指令执行拆分成<code>取指令</code> -&gt; <code>指令译码</code> -&gt; <code>指令执行</code> 三个部分、这就是一个三级的流水线、若把指令执行进一步拆分成 <code>ALU 计算(指令执行)</code> -&gt; <code>内存访问</code> -&gt; <code>数据写回</code> 就变成了5级流水线、</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">五级流水线:</span></span><br><span class="line">表示在同一个时钟周期里、同时运行5条指令的不同阶段, 虽然执行一条指令的时钟周期变成5、但可以提高CPU的主频, 只需要保证最复杂的一个流水线级的操作在一个时钟周期内完成、无需确保最复杂的那条指令在时钟周期里执行完成</span><br></pre></td></tr></table></figure>
+
+<h4 id="超长流水线性能瓶颈"><a href="#超长流水线性能瓶颈" class="headerlink" title="超长流水线性能瓶颈"></a>超长流水线性能瓶颈</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">增加流水线的深度是有性能成本的</span><br><span class="line">用来同步时钟周期的、不再是指令级别, 而是流水线级别、每一个流水线对应的输出、都要放到流水线寄存器(Pipeline Register) 然后在下一个时钟周期交给下一个流水线级处理、<span class="keyword">so</span>. 增加流水线级、就要多出一级写入流水线寄存器的操作、虽然很快、假设<span class="number">20</span><span class="keyword">ps</span>、但不断增加流水线深度、这些操作占整个指令的执行时间的比例就会不断增加</span><br><span class="line"></span><br><span class="line">eg. 指令执行<span class="number">3</span>ns(<span class="number">3000</span><span class="keyword">ps</span>)、设计<span class="number">20</span>级的流水线、流水线的操作就需要 <span class="number">20</span><span class="keyword">ps</span> * <span class="number">20</span> = <span class="number">400</span><span class="keyword">ps</span> 占比 <span class="number">400</span>/<span class="number">3000</span>超过<span class="number">10</span>% 、也就是但从的增加流水线级数、会带来更多的额外开销、</span><br><span class="line"></span><br><span class="line">所以要合理的设计流水线级数</span><br></pre></td></tr></table></figure>
+
+<h4 id="流水线设计的冒险"><a href="#流水线设计的冒险" class="headerlink" title="流水线设计的冒险"></a>流水线设计的冒险</h4><p>流水线设计需要解决的三大冒险: <code>结构冒险</code>, <code>数据冒险</code> 和 <code>控制冒险</code><br><code>结构冒险</code>: 本质上是硬件层面的资源竞争问题、CPU在同一个时钟周期、同时在运行两条计算机指令的不同阶段、但可能会用到同样的硬件了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-878133ae5032eb4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="同一时钟周期、两个指令访问同一资源.png"></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">如上所示: 在第一条指令执行到访存(MEM)阶段的时候、流水线里的第4条指令、在执行指令Fetch的操作、访存和取指令、都要进行内存数据的读取, 内存只有一个地址译码器的作为地址输入、就只能在一个时钟周期里读取一条数据、无法同时执行第一条指令的读取内存数据和第4条指令的读取指令的操作</span></span><br><span class="line"></span><br><span class="line"><span class="section">类似的资源冲突: </span></span><br><span class="line">常用的键盘、不是每个键的背后都有一根独立的线路、而是多个键公用一个线路、如果在同一时间、按下两个共用一个线路的按键、这两个按键的信号都没办法传输出去、就出现了按下键却不生效的情况</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在CPU的结构冒险里、对于内存访问和取指令的冲突、直观的解决方案是把内存拆成2部分、让他们有各自的地址译码器、分别是存放指令的程序内存和存放数据的数据内存(对应体系结构叫 哈佛架构(Harvard Architecture)), 但这样拆对于指令和数据需要的内存空间、就无法根据实际的应用动态分配了、解决了资源冲突问题、也失去了灵活性<br>现代CPU架构借鉴了哈佛架构的思路、采用了普林斯顿架构、在高速缓存方面拆分成指令缓存和数据缓存<br>内存的访问速度远比CPU慢、所以现代的CPU不会直接读取主内存、会从主内存把指令和数据加载到高速缓存中、这样后续访问都是访问高速缓存、而指令缓存和数据缓存的拆分使得CPU在进行数据访问和取指令的时候、不会发生资源冲突了</p>
+</blockquote>
+<p><code>数据冒险</code>: 三种不同的依赖关系</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据冒险就是多个指令间有数据依赖的情况、可以分为 先读后写、先写后读和写后再写、如果满足不了依赖关系、最终结果就会出错</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过流水线停顿(Pipeline Stall):插入nop操作 来解决数据冒险</p>
+</blockquote>
+<h4 id="操作数前推"><a href="#操作数前推" class="headerlink" title="操作数前推"></a>操作数前推</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add </span>$<span class="built_in">t0</span>, $<span class="built_in">s2</span>,$<span class="built_in">s1</span></span><br><span class="line"><span class="keyword">add </span>$<span class="built_in">s2</span>, $<span class="built_in">s1</span>,$<span class="built_in">t0</span></span><br><span class="line"><span class="number">1</span>. 第一条指令 将<span class="built_in">s1</span> 和 <span class="built_in">s2</span> 寄存器里的数据相加、写入 <span class="built_in">t0</span> 寄存器</span><br><span class="line"><span class="number">2</span>. 第二条指令 将 <span class="built_in">s1</span> 和 <span class="built_in">t0</span> 的数据相加、写入 <span class="built_in">s2</span> 寄存器</span><br><span class="line">指令<span class="number">2</span> 的执行、依赖<span class="built_in">t0</span>的值、而<span class="built_in">t0</span>的值来自于前一条指令的计算结果、所以指令<span class="number">2</span>需要等前一指令的数据写回之后才能执行、就遇到了数据依赖冒险、</span><br><span class="line">使用插入<span class="keyword">nop来解决、可以解决、但是会浪费两个时钟周期</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">其实、如果第一条指令的执行结果可以直接传给第二条指令的执行输入、在第一条指令的执行阶段完成之后、直接将数据传输给下一条指令的ALU、下一指令就不需要插入两个<span class="keyword">nop阶段、就可以继续执行阶段, </span>如下图所示、这种方案就叫操作数前推</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-54ea7826a6b70dad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="乱序执行"><a href="#乱序执行" class="headerlink" title="乱序执行"></a>乱序执行</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">即使综合运用流水线停顿、操作数前推、增加资源等解决结构冒险和数据冒险的问题、仍然会遇到不得不停下整个流水线等待前一指令完成的情况、但是: 如果后边有指令不需要依赖前边指令的执行结果就可以不必等待前边指令完成、直接占用<span class="keyword">nop</span>即可、这样的解决方案、在计算机里叫 乱序执行</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-4d24af97f6f2a623.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不得不nop填充.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-7b98287e4db1bca0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="nop占用.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-2b24ee6d961e9f88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="乱序执行的CPU.png"></p>
+<h4 id="乱序执行的步骤"><a href="#乱序执行的步骤" class="headerlink" title="乱序执行的步骤"></a>乱序执行的步骤</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 取指令和指令译码阶段、同其它CPU、会一级一级顺序进行Fetch和Decode</span><br><span class="line"><span class="bullet">2.</span> 指令译码完成后、CPU不会直接进行指令执行、而是进行指令分发、把指令发到保留站(Reservation Stations)、类似火车站、指令类似列车</span><br><span class="line"><span class="bullet">3.</span> 指令不会立即执行、而是等待依赖数据完成才执行. 类似火车要等乘客到齐才出发</span><br><span class="line"><span class="bullet">4.</span> 依赖数据到齐之后、指令可以交给后边的功能单元(Function Unit, FU)、就是ALU来执行、很多功能单元可以并行运行、但不同功能单元可以执行的指令不同、类似铁轨可以从上海北上、到北京或者哈尔滨;有些是南下、到广州或者深圳</span><br><span class="line"><span class="bullet">5.</span> 指令执行的阶段完成后、不能立即把结果写回寄存器、而是把结果写入指令重排区(Re-Order buffer, ROB).</span><br><span class="line"><span class="bullet">6.</span> 在重排缓冲区、CPU会按照取指令的顺序、对指令的计算结果重新排序、 只有排在前边的指令都完成才会提交指令、完成整改指令的运算结果</span><br><span class="line"><span class="bullet">7.</span> 实际的指令计算结果不直接写入内存或者高速缓存、而是先写入存储缓冲区(Store Buffer)，最终才写入高速缓存和内存</span><br><span class="line">so. 在乱序执行的情况下、只有CPU内部指令的执行层面、可能乱序、只要在指令的译码阶段正确的分析出指令之间的数据依赖关系、乱序就只会在无相互影响的指令间发生</span><br></pre></td></tr></table></figure>
+
+<h4 id="分支预测"><a href="#分支预测" class="headerlink" title="分支预测"></a>分支预测</h4><blockquote>
+<p>缩短分支延迟: 将调解判断、地址调整 提前到指令译码阶段进行、无需放到指令执行阶段. 这种方式本质上和数据冒险的操作数前推方案类似、就是在硬件电路层面讲一些计算结果更早的反馈到流水线中、反馈更快、后边指令的等待时间就变短了</p>
+</blockquote>
+<blockquote>
+<p>分支预测: 1) 静态预测、假装分支不发生. 分支预测失败的代价是: 丢弃已取出的指令&amp;清空已使用的寄存器的操作<br>2) 动态分支预测:<br>a. 一级分支预测: 用1比特、记录当前分支的比较清空、来预测下一次分支时候的比较情况<br>b. 双模态预测器: 从2byte记录对应状态、提高预测的准确度</p>
+</blockquote>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">CPU</span>的流水线设计里、会遇到eg. 指令依赖等的情况、使得下一条指令不能正确执行. 但是通过抢跑的方式、可以得到提升指令 吞吐率 的机会、流水线架构的<span class="meta">CPU</span>、是主动的冒险选择</span><br></pre></td></tr></table></figure>
+
+<h4 id="流水线设计总结"><a href="#流水线设计总结" class="headerlink" title="流水线设计总结"></a>流水线设计总结</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为了不浪费<span class="meta">CPU</span>的性能、把指令执行的过程切分成一个个的流水线、来提升<span class="meta">CPU</span>的吞吐率, 而每增加一级的流水线、也会增加overhead、同样因为指令不是顺序执行</span><br><span class="line"></span><br><span class="line">数据冒险和分支冒险: 通过插入<span class="keyword">nop</span>来解决</span><br><span class="line"></span><br><span class="line"><span class="keyword">nop</span>空转: 通过乱序执行来解决</span><br><span class="line"></span><br><span class="line">乱序执行: 是在指令执行阶段通过一个类似线程池的保留站、让系统之家动态调度先执行哪些指令、前提是不破坏数据依赖性. <span class="meta">CPU</span>只要等到在指令结果的最终提交阶段、再通过重排序的方式、确保指令是顺序执行的</span><br><span class="line"></span><br><span class="line">超标量: (Superscalar) 和 多发射(Multi issue) 在同一时间把多条指令发射到不同的译码器</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E4%B8%BA%E4%BD%95%E4%BC%9A%E5%8F%91%E7%94%9F%E6%A0%88%E6%BA%A2%E5%87%BA(%E7%AC%AC7%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E4%B8%BA%E4%BD%95%E4%BC%9A%E5%8F%91%E7%94%9F%E6%A0%88%E6%BA%A2%E5%87%BA(%E7%AC%AC7%E8%AE%B2)/" class="post-title-link" itemprop="url">函数调用为何会发生栈溢出(第7讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、为什么需要程序栈<br>示例代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// function_Example.c</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="type">static</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> x = <span class="number">5</span>;</span><br><span class="line">   <span class="type">int</span> y = <span class="number">10</span>;</span><br><span class="line">   <span class="type">int</span> u = add(x, y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译代码、使用objdump打印出来</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> static <span class="keyword">add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="number">0</span>:   <span class="number">55</span>                      <span class="keyword">push</span>   <span class="built_in">rbp</span>   # <span class="built_in">bp</span>是基址指针寄存器、处理函数调用、 <span class="keyword">push</span> <span class="built_in">rbp</span> 就是先将<span class="built_in">rbp</span>的内存保存入栈</span><br><span class="line">   <span class="number">1</span>:   <span class="number">48</span> <span class="number">89</span> e5                <span class="keyword">mov</span>    <span class="built_in">rbp</span>,<span class="built_in">rsp</span> #将<span class="built_in">rsp</span>的值赋给<span class="built_in">rbp</span>(<span class="built_in">rbp</span>始终执行栈帧底部、<span class="built_in">rsp</span>始终指向栈帧顶部)</span><br><span class="line">   <span class="number">4</span>:   <span class="number">89</span> <span class="number">7d</span> fc                <span class="keyword">mov</span>    <span class="built_in">DWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbp</span>-<span class="number">0x4</span>],<span class="built_in">edi</span></span><br><span class="line">   <span class="number">7</span>:   <span class="number">89</span> <span class="number">75</span> f8                <span class="keyword">mov</span>    <span class="built_in">DWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbp</span>-<span class="number">0x8</span>],<span class="built_in">esi</span></span><br><span class="line">    return a+b<span class="comment">;</span></span><br><span class="line"><span class="symbol">   a:</span>   8b <span class="number">55</span> fc                <span class="keyword">mov</span>    <span class="built_in">edx</span>,<span class="built_in">DWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbp</span>-<span class="number">0x4</span>]</span><br><span class="line"><span class="symbol">   d:</span>   8b <span class="number">45</span> f8                <span class="keyword">mov</span>    <span class="built_in">eax</span>,<span class="built_in">DWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbp</span>-<span class="number">0x8</span>]</span><br><span class="line">  <span class="number">10</span>:   <span class="number">01</span> d0                   <span class="keyword">add</span>    <span class="built_in">eax</span>,<span class="built_in">edx</span></span><br><span class="line">&#125;</span><br><span class="line">  <span class="number">12</span>:   <span class="number">5d</span>                      <span class="keyword">pop</span>    <span class="built_in">rbp</span></span><br><span class="line">  <span class="number">13</span>:   c3                      <span class="keyword">ret</span>    </span><br><span class="line"><span class="number">0000000000000014</span> &lt;main&gt;:</span><br><span class="line"><span class="keyword">int</span> main()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="number">14</span>:   <span class="number">55</span>                      <span class="keyword">push</span>   <span class="built_in">rbp</span></span><br><span class="line">  <span class="number">15</span>:   <span class="number">48</span> <span class="number">89</span> e5                <span class="keyword">mov</span>    <span class="built_in">rbp</span>,<span class="built_in">rsp</span></span><br><span class="line">  <span class="number">18</span>:   <span class="number">48</span> <span class="number">83</span> ec <span class="number">10</span>             <span class="keyword">sub</span>    <span class="built_in">rsp</span>,<span class="number">0x10</span></span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">5</span><span class="comment">;</span></span><br><span class="line">  1c:   c7 <span class="number">45</span> fc <span class="number">05</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>    <span class="keyword">mov</span>    <span class="built_in">DWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbp</span>-<span class="number">0x4</span>],<span class="number">0x5</span></span><br><span class="line">    <span class="keyword">int</span> y = <span class="number">10</span><span class="comment">;</span></span><br><span class="line">  <span class="number">23</span>:   c7 <span class="number">45</span> f8 0a <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>    <span class="keyword">mov</span>    <span class="built_in">DWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbp</span>-<span class="number">0x8</span>],<span class="number">0xa</span></span><br><span class="line">    <span class="keyword">int</span> u = <span class="keyword">add</span>(x, y)<span class="comment">;</span></span><br><span class="line">  2a:   8b <span class="number">55</span> f8                <span class="keyword">mov</span>    <span class="built_in">edx</span>,<span class="built_in">DWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbp</span>-<span class="number">0x8</span>]</span><br><span class="line">  <span class="number">2d</span>:   8b <span class="number">45</span> fc                <span class="keyword">mov</span>    <span class="built_in">eax</span>,<span class="built_in">DWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbp</span>-<span class="number">0x4</span>]</span><br><span class="line">  <span class="number">30</span>:   <span class="number">89</span> d6                   <span class="keyword">mov</span>    <span class="built_in">esi</span>,<span class="built_in">edx</span></span><br><span class="line">  <span class="number">32</span>:   <span class="number">89</span> c7                   <span class="keyword">mov</span>    <span class="built_in">edi</span>,<span class="built_in">eax</span></span><br><span class="line">  <span class="number">34</span>:   e8 c7 ff ff ff          <span class="keyword">call</span>   <span class="number">0</span> &lt;<span class="keyword">add</span>&gt;</span><br><span class="line">  <span class="number">39</span>:   <span class="number">89</span> <span class="number">45</span> f4                <span class="keyword">mov</span>    <span class="built_in">DWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbp</span>-<span class="number">0xc</span>],<span class="built_in">eax</span></span><br><span class="line">  3c:   b8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>          <span class="keyword">mov</span>    <span class="built_in">eax</span>,<span class="number">0x0</span></span><br><span class="line">&#125;</span><br><span class="line">  <span class="number">41</span>:   c9                      <span class="keyword">leave</span>  </span><br><span class="line">  <span class="number">42</span>:   c3                      <span class="keyword">ret</span>    </span><br></pre></td></tr></table></figure>
+
+<p>二、如何使用函数内联进行优化<br>-O 指令 或者 加上 inline关键字、来提示编译器进行函数内联</p>
+<p>内联带来的优化是、CPU需要执行的指令数变少了、根据地址跳转的过程不需要了、压栈和出栈的过程也不需要了</p>
+<p>但是内联意味着、把可复用的程序指令在调用它的地方完全展开了、若一个函数在很多地方都被调用了、就会被展开多次、整个程序占用的空间就会变大</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">readelf -s link_example.o <span class="regexp">//</span>查看符号表</span><br><span class="line">objdump -r link_example.o <span class="regexp">//</span>查看重定位表</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A4%9A%E5%8F%91%E5%B0%84%E5%92%8CVLIW/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A4%9A%E5%8F%91%E5%B0%84%E5%92%8CVLIW/" class="post-title-link" itemprop="url">多发射和VLIW</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><code>程序的CPU执行时间</code>&#x3D;<code>指令数</code> * <code>CPI</code> * <code>Clock Cycle Time</code>(时钟周期)</p>
+</blockquote>
+<p><code>CPI</code>: 倒数是<code>IPC</code>,即: 一个时钟周期内能够执行的指令数、代表了CPU的吞吐率</p>
+<p>那么: CPU的吞吐率能达到多少呢 ? </p>
+<blockquote>
+<p>最佳情况下、也只能达到1, 即使达到了指令层面的乱序执行、CPU一个周期、仍然只能取一条指令、说明指令优化做的多好、一个时钟周期也只能完成一条指令、而现在的CPU一般能达到2、为什么呢 ?</p>
+</blockquote>
+<h4 id="多发射与超标量-同一时间执行的两条命令"><a href="#多发射与超标量-同一时间执行的两条命令" class="headerlink" title="多发射与超标量: 同一时间执行的两条命令"></a>多发射与超标量: 同一时间执行的两条命令</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在指令乱序执行的过程中、取值<span class="keyword">IF</span> 和 指令译码ID 部分并不是并行的、那么 可不可以呢 ?</span><br><span class="line"><span class="number">1.</span> 将取指令和指令译码、也通过增加硬件的方式、一次从内存里取出多条指令、然后并行的分发给多个并行的指令译码器、进行译码、然后交给不同的FU<span class="comment">(功能单元)</span>去处理、这样一个时钟周期可完成的指令就大于<span class="number">1</span> 、即: IPC大于<span class="number">1</span></span><br><span class="line"></span><br><span class="line">这种CPU设计叫 多发射<span class="comment">(Mulitple issue)</span> 和 超标量<span class="comment">(Superscalar)</span></span><br><span class="line"></span><br><span class="line">在超标量的CPU里边、有很多条并行的流水线、而不是只有一条流水线、</span><br><span class="line">`超标量`这个词是说, 本来我们在一个时钟周期里、只能执行一个标量Scalar运算、在多发射的情况下、可以超过这个限制、同时进行多次运算</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Intel的失败之作-安腾的超长指令设计"><a href="#Intel的失败之作-安腾的超长指令设计" class="headerlink" title="Intel的失败之作: 安腾的超长指令设计"></a>Intel的失败之作: 安腾的超长指令设计</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">无论是乱序执行、还是超标量技术、在实际的硬件层面、都需要解决依赖冲突(冒险)问题、所以、实施会比较复杂</span><br><span class="line"><span class="meta">CPU</span>需要在指令执行之前、判断指令是否有依赖关系、若有, 则不能分发到不同的执行阶段、</span><br><span class="line">所以: 超标量<span class="meta">CPU</span>发射、又被称为动态多发射处理器</span><br><span class="line">对于 依赖关系的检测、会使得<span class="meta">CPU</span>电路变的更加复杂</span><br><span class="line"></span><br><span class="line">于是: 科学家有一个大胆的想法: 将分析和解决依赖关系的事情、放到软件里</span><br><span class="line"><span class="string">`超长指令设计`</span>: VLIW(Very Long Insturction <span class="built_in">Word</span>)、想通过编译器来优化CPI</span><br><span class="line">编译器在汇编完成之后、也可以知道前后数据的依赖、可以让编译器把没有依赖关系的代码位置进行交换、然后把多条连续的指令打成一个指令包、安腾的<span class="meta">CPU</span>就是把<span class="number">3</span>条指令打成一个指令包, 如下图所示:</span><br><span class="line"><span class="meta">CPU</span>在运行的时候、就不再是取一条指令、而是取一个指令包、然后译码解析整个指令包、解析出<span class="number">3</span>条指令并行运行</span><br><span class="line"><span class="number">2</span>.流水线停顿、也是编译器来做了、除了停下整个处理器流水线、<span class="meta">CPU</span>不能在某个周期停顿一下、等待前边依赖的操作完成、编译器需要在适当的位置插入<span class="keyword">NOP</span>操作、直接在编译出来的机器码里、把流水线停顿设计完成</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-f665e77afa662d94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="为什么失败呢"><a href="#为什么失败呢" class="headerlink" title="为什么失败呢"></a>为什么失败呢</h5><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 最重要的原因是<span class="string">&#x27;向前兼容&#x27;</span></span><br><span class="line">   安腾处理器的指令集和X86不同、无法兼容、需要重新编译才可以</span><br><span class="line"><span class="number">2</span>. VLIW架构决定了、若安腾需要提升并行度、就需要增加一个指令包的指令数量、<span class="function"><span class="title">eg</span>. 3个 -&gt;</span> <span class="number">6</span>个、</span><br><span class="line">   而一旦这么做了、同样是VLIW架构、同样指令集的安腾CPU也需要重新编译、甚至需要重写编译器、才能在原来的CPU上继续运行程序</span><br><span class="line">   </span><br><span class="line">   所以、它既不向前兼容、又很难向后兼容、就比较容易失败</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD(%E7%AC%AC4%E8%AE%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD(%E7%AC%AC4%E8%AE%B2)/" class="post-title-link" itemprop="url">如何提高性能(第4讲)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>基本概念:<br><code>响应时间</code>:  执行程序需要花费的时间<br><code>吞吐率</code>: 一定时间内、可以执行的指令</p>
+<p>性能一般定义为: <code>1/响应时间</code></p>
+<p>计算机的计时单位: <code>cpu时钟</code></p>
+<p>虽然时间是衡量性能的标准、但是也有很大的差异</p>
+<ol>
+<li><code>时间不准</code> 应该参与比较的是刨除了io和cpu切换之外的实际CPU时间(user + sys)</li>
+<li>就算拿到cpu时间也不一定可以比较  CPU满载运行时、可能会降频<br>此外、还会受到主板、内存等的硬件影响</li>
+</ol>
+<p><code>程序的cpu执行时间</code> &#x3D; <code>cpu时钟周期数</code> x <code>时钟周期时间</code><br>cpu 时钟周期时间越小、散热的压力也就越大<br><code>cpu时钟周期数</code> &#x3D; <code>指令数</code> x <code>cpi</code> x <code>Clock Circle Time</code><br><code>cpi</code> : 每条指令的平均时钟周期数 Cycles Per Instruction</p>
+<p>时钟周期时间: 取决于硬件<br>CPI: 取决于一条指令需要多少CPU周期、<br>指令数: 代表程序执行需要多少指令、用哪些指令</p>
+<p><code>功耗</code> ~&#x3D; <code>1/2</code> x <code>负载电容</code> x <code>电压的平方</code> x <code>开关频率</code> x <code>晶体管数量</code></p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">所以:</span> </span><br><span class="line"><span class="number">1</span>.为了提升性能、需要增加晶体管数量, 同样面积、就要把体积造的小、  就是提升`制程`</span><br><span class="line"><span class="number">2</span>.但是 功耗增加太多、会导致CPU散热跟不上、就需要降低电压、</span><br><span class="line">   而功耗是和电压的平方成正比的、意味着电压下降到原来的 <span class="number">1</span>/<span class="number">5</span> 、功耗就会变成原来的 <span class="number">1</span>/<span class="number">25</span>.</span><br></pre></td></tr></table></figure>
+
+<p>提升计算机性能的方式</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">1. 摩尔定律</span><span class="punctuation">:</span> <span class="string">增加晶体管数量(主频)</span></span><br><span class="line"><span class="attribute">2. 并行原理</span><span class="punctuation">:</span> <span class="string">多CPU</span></span><br><span class="line"><span class="attribute">3. 加速大概率事件</span><span class="punctuation">:</span> <span class="string">gpu替代cpu</span></span><br><span class="line"><span class="attribute">4. 通过流水线提升性能</span><span class="punctuation">:</span> <span class="string">把cpu执行指令的过程细分</span></span><br><span class="line"><span class="attribute">5. 通过预测提高性能</span><span class="punctuation">:</span> <span class="string">分支和冒险, 局部性原理</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">应用：</span></span><br><span class="line"><span class="attribute">加速大概率事件</span><span class="punctuation">:</span> <span class="string">缓存(内存、CDN缓存)</span></span><br><span class="line"><span class="attribute">流水线</span><span class="punctuation">:</span> <span class="string">并发编程、异步编程、音频播放器边放边缓冲</span></span><br><span class="line"><span class="attribute">预测</span><span class="punctuation">:</span> <span class="string">下一页预加载、cdn预热、指令预加载</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86_%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">存储器层次结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>存储器系统是一个通过各种不同的方法和设备、一层层组合起来的系统.</p>
+</blockquote>
+<h4 id="SRAM"><a href="#SRAM" class="headerlink" title="SRAM"></a>SRAM</h4><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">静态存储器, 只要通电、保存的数据就一直存在、断电则丢失, <span class="number">1</span><span class="keyword">bit</span> 数据、大概需要<span class="number">6</span>~<span class="number">8</span>个晶体管, </span><br><span class="line">密度不高、同样物理空间下、存储的数据有限、不过, 由于电路简单、访问速度特别快</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-bffe7a74d40dae20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6个晶体管组成SRAM的一个bit.png"></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在<span class="meta">CPU</span>中、通常有L1、L2、L3三层高速缓存</span><br><span class="line">每个<span class="meta">CPU</span>有一块属于自己的L1缓存(<span class="string">`指令缓存`</span>和<span class="string">`数据缓存`</span> )</span><br><span class="line">L2缓存也是每个<span class="meta">CPU</span>有一块、但不在<span class="meta">CPU</span>内部、访问速度比L1稍慢</span><br><span class="line">L3 Cache通常是多个<span class="meta">CPU</span>核心共用的、尺寸更大、访问更慢一些</span><br></pre></td></tr></table></figure>
+
+<h4 id="DRAM"><a href="#DRAM" class="headerlink" title="DRAM"></a>DRAM</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">比<span class="keyword">SRAM来说、DRAM的密度更高、容量更大、价格也便宜、CPU一般使用的是SRAM、内存一般使用的是DRAM</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">DRAM被称为动态存储器、是因为DRAM需要不断刷新、才能保持数据被存储起来</span><br><span class="line">DRAM的一个<span class="keyword">bit、只需要一个晶体管和一个电容就可以、同样物理空间、存储数据更多、即: </span>存储密度更大</span><br><span class="line">但: 数据是存储在电容里的、电容会不断漏电、需要定时刷新充电、才能保持数据不丢失</span><br><span class="line">DRAM的数据访问电路和刷新电路都比<span class="keyword">SRAM更复杂、so. </span>访问延时更长</span><br></pre></td></tr></table></figure>
+
+<h4 id="存储器的层次结构"><a href="#存储器的层次结构" class="headerlink" title="存储器的层次结构"></a>存储器的层次结构</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">整个存储器的层次结构、都类似于SRAM和DRAM在性能和价格上的差异、SRAM更贵、速度更快</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-d9ca803938888292.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="存储器的层次关系图.png"></p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 从<span class="keyword">Cache</span>、内存、到SSD和HDD硬盘、计算机用到了所有存储设备、其中, 容量越小的设备速度越快、且: CPU不是直接合每一种存储设备打交道、而是只与相邻设备打交道.</span><br><span class="line">eg. CPU <span class="keyword">Cache</span>是从内存加载而来、数据需要写回内存、并不会直接写回数据到硬盘、也不会直接从硬盘加载数据到CPU <span class="keyword">Cache</span>、而是先加载到内存、再从内存加载到<span class="keyword">Cache</span>中</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这样、每个存储器只喝相邻的一层存储器打交道、且随着一层层向下、存储器的容量逐渐增大、访问速度逐层变慢、且单位存储成本也在逐层下降、就构成了存储器的层次结构</p>
+</blockquote>
+<h4 id="如何权衡价格和性能"><a href="#如何权衡价格和性能" class="headerlink" title="如何权衡价格和性能"></a>如何权衡价格和性能</h4><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">存储器在不同层级之间的性能和价格差异、都至少在一个数量级以上、</span><br><span class="line">eg. L1 <span class="keyword">Cache</span>的访问延时是<span class="number">1</span>ns、内存是<span class="number">100</span>ns、在价格上也差出了<span class="number">400</span>倍</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/14027542-04e233a82ad956b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="存储器性能和价格对比图.png"></p>
+<blockquote>
+<p>一台惠普战66的笔记本配置如下:</p>
+</blockquote>
+<ol>
+<li>Intel i5-8265U 的CPU (4核)</li>
+</ol>
+<ul>
+<li>每个核有有32K、共128KB的L1指令Cache 和 128KB 的数据Cache、采用8路组相连的放置策略</li>
+<li>每个核有256KB、共1M的L2 Cache、采用的是4路组相连的放置策略</li>
+<li>多个核心共用的12MB 的L3 Cache、采用的是12路组相连的放置策略</li>
+</ul>
+<ol start="2">
+<li>8G的内存</li>
+<li>128GB 的SSD硬盘</li>
+<li>1T的HDD硬盘<blockquote>
+<p>可以看到，在一台实际的计算机里面，越是速度快的设备，容量就越小。这里一共十多兆的 Cache，成本只是几十美元。而 8GB 的内存、128G 的 SSD 以及 1T 的 HDD，大概零售价格加在一起，也就和我们的高速缓存的价格差不多</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

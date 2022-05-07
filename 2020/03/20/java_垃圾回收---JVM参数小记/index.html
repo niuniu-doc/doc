@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="JVM参数解析   参数名称 含义 默认值 备注    -Xms 初始堆大小 物理内存的1&#x2F;64(&lt;1G) 默认(MinHeapFreeRatio参数可以调整)空余堆内存小于40%时，JVM就会增大堆直到-Xmx的最大限制.   -Xmx 最大堆大小 物理内存的1&#x2F;4(&lt;1G) 默认(MaxHeapFreeRatio参数可以调整)空余堆内存大于70%时，JVM会减少">
+<meta property="og:type" content="article">
+<meta property="og:title" content="垃圾回收---JVM参数小记">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JVM%E5%8F%82%E6%95%B0%E5%B0%8F%E8%AE%B0/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="JVM参数解析   参数名称 含义 默认值 备注    -Xms 初始堆大小 物理内存的1&#x2F;64(&lt;1G) 默认(MinHeapFreeRatio参数可以调整)空余堆内存小于40%时，JVM就会增大堆直到-Xmx的最大限制.   -Xmx 最大堆大小 物理内存的1&#x2F;4(&lt;1G) 默认(MaxHeapFreeRatio参数可以调整)空余堆内存大于70%时，JVM会减少">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.794Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JVM%E5%8F%82%E6%95%B0%E5%B0%8F%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>垃圾回收---JVM参数小记 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JVM%E5%8F%82%E6%95%B0%E5%B0%8F%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          垃圾回收---JVM参数小记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="JVM参数解析"><a href="#JVM参数解析" class="headerlink" title="JVM参数解析"></a>JVM参数解析</h4><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>含义</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-Xms</td>
+<td>初始堆大小</td>
+<td>物理内存的1&#x2F;64(&lt;1G)</td>
+<td>默认(MinHeapFreeRatio参数可以调整)空余堆内存小于40%时，JVM就会增大堆直到-Xmx的最大限制.</td>
+</tr>
+<tr>
+<td>-Xmx</td>
+<td>最大堆大小</td>
+<td>物理内存的1&#x2F;4(&lt;1G)</td>
+<td>默认(MaxHeapFreeRatio参数可以调整)空余堆内存大于70%时，JVM会减少堆直到 -Xms的最小限制</td>
+</tr>
+<tr>
+<td>-Xmn</td>
+<td>年轻代大小</td>
+<td></td>
+<td><code>注意</code>：此处的大小是（eden+ 2 survivor space)与jmap -heap中显示的New gen是不同的。 整个堆大小&#x3D;年轻代大小 + 年老代大小 + 持久代大小.增大年轻代后,将会减小年老代大小.此值对系统性能影响较大,Sun官方推荐配置为整个堆的3&#x2F;8</td>
+</tr>
+<tr>
+<td>-Xss</td>
+<td>每个线程的堆栈大小</td>
+<td></td>
+<td>JDK5.0以后每个线程堆栈大小为1M,以前每个线程堆栈大小为256K.更具应用的线程所需内存大小进行 调整.在相同物理内存下,减小这个值能生成更多的线程.但是操作系统对一个进程内的线程数还是有限制的,不能无限生成,经验值在3000~5000左右，一般小的应用， 如果栈不是很深， 应该是128k够用的 大的应用建议使用256k。这个选项对性能影响比较大，需要严格的测试。（较长）和threadstacksize选项解释很类似,官方文档似乎没有解释,在论坛中有这样一句话:””Xss is translated in a VM flag named ThreadStackSize”一般设置这个值就可以了。</td>
+</tr>
+<tr>
+<td>-XX:NewRatio</td>
+<td>年轻代(包括Eden和两个Survivor区)与年老代的比值(除去持久代)</td>
+<td></td>
+<td>-XX:NewRatio&#x3D;4表示年轻代与年老代所占比值为1:4,年轻代占整个堆栈的1&#x2F;5 Xms&#x3D;Xmx并且设置了Xmn的情况下，该参数不需要进行设置。</td>
+</tr>
+<tr>
+<td>-XX:SurvivorRatio</td>
+<td>Eden区与Survivor区的大小比值</td>
+<td></td>
+<td>设置为8,则两个Survivor区与一个Eden区的比值为2:8,一个Survivor区占整个年轻代的1&#x2F;10</td>
+</tr>
+<tr>
+<td>-XX:MaxTenuringThreshold</td>
+<td>垃圾年龄的最大值</td>
+<td></td>
+<td>如果设置为0的话,则年轻代对象不经过Survivor区,直接进入年老代. 对于年老代比较多的应用,可以提高效率.如果将此值设置为一个较大值,则年轻代对象会在Survivor区进行多次复制,这样可以增加对象再年轻代的存活 时间,增加在年轻代即被回收的概率 该参数只有在串行GC时才有效</td>
+</tr>
+<tr>
+<td>-XX:PretenureSizeThreshold</td>
+<td>对象超过多大是直接在老年代分配</td>
+<td>0</td>
+<td>单位字节 新生代采用Parallel Scavenge GC时无效，另一种直接在老年代分配的情况是大的数组对象,且数组中无外部引用对象.</td>
+</tr>
+<tr>
+<td>-XX:LargePageSizeInBytes</td>
+<td>内存页的大小不可设置过大， 会影响Perm的大小</td>
+<td></td>
+<td>&#x3D;128m</td>
+</tr>
+<tr>
+<td>-XX:+CollectGen0First</td>
+<td>FullGC时是否先YGC</td>
+<td>false</td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:+UseFastAccessorMethods</td>
+<td>原始类型的快速优化</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:+UseBiasedLocking</td>
+<td>锁机制的性能改善</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:NewSize</td>
+<td>年轻代大小(JDK 1.3&#x2F;1.4)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:MaxNewSize</td>
+<td>年轻代最大值(JDK 1.3&#x2F;1.4)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:PermSize</td>
+<td>设置持久代(perm gen)初始值</td>
+<td>物理内存的1&#x2F;64</td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:MaxPermSize</td>
+<td>设置持久代最大值</td>
+<td>物理内存的1&#x2F;4</td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:ThreadStackSize</td>
+<td>Thread Stack Size</td>
+<td></td>
+<td>(0 means use default stack size) [Sparc: 512; Solaris x86: 320 (was 256 prior in 5.0 and earlier); Sparc 64 bit: 1024; Linux amd64: 1024 (was 0 in 5.0 and earlier); all others 0.]</td>
+</tr>
+<tr>
+<td>-XX:+AggressiveOpts</td>
+<td>加快编译</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id="并行收集器相关参数"><a href="#并行收集器相关参数" class="headerlink" title="并行收集器相关参数"></a>并行收集器相关参数</h5><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>含义</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-XX:+UseParallelGC</td>
+<td>Full GC采用parallel MSC(此项待验证)</td>
+<td></td>
+<td>选择垃圾收集器为并行收集器.此配置仅对年轻代有效.即上述配置下,年轻代使用并发收集,而年老代仍旧使用串行收集.(此项待验证)</td>
+</tr>
+<tr>
+<td>-XX:+UseParNewGC</td>
+<td>设置年轻代为并行收集</td>
+<td></td>
+<td>可与CMS收集同时使用, JDK5.0以上,JVM会根据系统配置自行设置,所以无需再设置此值</td>
+</tr>
+<tr>
+<td>-XX:ParallelGCThreads</td>
+<td>并行收集器的线程数</td>
+<td></td>
+<td>此值最好配置与处理器数目相等 同样适用于CMS</td>
+</tr>
+<tr>
+<td>-XX:+UseParallelOldGC</td>
+<td>年老代垃圾收集方式为并行收集(Parallel Compacting)</td>
+<td></td>
+<td>java6开始出现的参数</td>
+</tr>
+<tr>
+<td>-XX:MaxGCPauseMillis</td>
+<td>每次年轻代垃圾回收的最长时间(最大暂停时间)</td>
+<td></td>
+<td>如果无法满足此时间,JVM会自动调整年轻代大小,以满足此值.</td>
+</tr>
+<tr>
+<td>-XX:+UseAdaptiveSizePolicy</td>
+<td>自动选择年轻代区大小和相应的Survivor区比例</td>
+<td></td>
+<td>设置此选项后,并行收集器会自动选择年轻代区大小和相应的Survivor区比例,以达到目标系统规定的最低相应时间或者收集频率等,此值建议使用并行收集器时,一直打开.</td>
+</tr>
+<tr>
+<td>-XX:GCTimeRatio</td>
+<td>设置垃圾回收时间占程序运行时间的百分比</td>
+<td></td>
+<td>公式为1&#x2F;(1+n)</td>
+</tr>
+<tr>
+<td>-XX:+ScavengeBeforeFullGC</td>
+<td>Full GC前调用YGC</td>
+<td>true</td>
+<td>Do young generation GC prior to a full GC. (Introduced in 1.4.1.)</td>
+</tr>
+</tbody></table>
+<h5 id="CMS相关参数"><a href="#CMS相关参数" class="headerlink" title="CMS相关参数"></a>CMS相关参数</h5><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>含义</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-XX:+UseConcMarkSweepGC</td>
+<td>使用CMS内存收集</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:CMSFullGCsBeforeCompaction</td>
+<td>多少次后进行内存压缩</td>
+<td></td>
+<td>由于并发收集器不对内存空间进行压缩,整理,所以运行一段时间以后会产生”碎片”,使得运行效率降低.设置运行多少次GC以后对内存空间进行压缩,整理</td>
+</tr>
+<tr>
+<td>-XX:+CMSParallelRemarkEnabled</td>
+<td>降低标记停顿</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-XX+UseCMSCompactAtFullCollection</td>
+<td>在FULL GC的时候，对年老代进行压缩</td>
+<td></td>
+<td>CMS是不会移动内存的， 因此， 这个非常容易产生碎片， 导致内存不够用， 因此， 内存的压缩这个时候就会被启用</td>
+</tr>
+<tr>
+<td>-XX:+UseCMSInitiatingOccupancyOnly</td>
+<td>使用手动定义初始化定义开始CMS收集</td>
+<td></td>
+<td>禁止hostspot自行触发CMS GC</td>
+</tr>
+<tr>
+<td>-XX:CMSInitiatingOccupancyFraction&#x3D;70</td>
+<td>使用cms作为垃圾回收使用70％后开始CMS收集</td>
+<td>92</td>
+<td>为了保证不出现promotion failed错误、设置需要满足：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html#CMSInitiatingOccupancyFraction_value">http://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html#CMSInitiatingOccupancyFraction_value</a></td>
+</tr>
+<tr>
+<td>-XX:CMSInitiatingPermOccupancyFraction</td>
+<td>设置Perm Gen使用到达多少比率时触发</td>
+<td>92</td>
+<td></td>
+</tr>
+<tr>
+<td>-XX:+CMSIncrementalMode</td>
+<td>设置为增量模式</td>
+<td></td>
+<td>适用于单CPU的情况</td>
+</tr>
+</tbody></table>
+<h5 id="辅助信息"><a href="#辅助信息" class="headerlink" title="辅助信息"></a>辅助信息</h5><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>含义</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-XX:+PrintGC</td>
+<td></td>
+<td></td>
+<td>[GC 118250K-&gt;113543K(130112K), 0.0094143 secs]</td>
+</tr>
+</tbody></table>
+<pre><code>               [Full GC 121376K-&gt;10414K(130112K), 0.0650971 secs] | 
+</code></pre>
+<p>|-XX:+PrintGCDetails| | | 输出形式:[GC [DefNew: 8614K-&gt;781K(9088K), 0.0123035 secs] 118250K-&gt;113543K(130112K), 0.0124633 secs] [GC [ParNew: 8614K-&gt;8614K(9088K), 0.0000665 secs][Tenured: 112761K-&gt;10414K(121024K), 0.0433488 secs] 121376K-&gt;10414K(130112K), 0.0436268 secs]|<br>|-XX:+PrintGCTimeStamps| | | 输出每个阶段的gc时间|<br>|-XX:+PrintGCApplicationStoppedTime|打印垃圾回收期间程序暂停的时间.可与上面混合使用| | 输出形式:Total time for which application threads were stopped: 0.0468229 seconds|<br>|-XX:+PrintGCApplicationConcurrentTime|打印每次垃圾回收前,程序未中断的执行时间.可与上面混合使用| |输出形式:Application time: 0.5291524 seconds |<br>|-XX:+PrintHeapAtGC|打印GC前后的详细堆栈信息| | |<br>|-Xloggc:filename|把相关日志信息记录到文件以便分析.与上面几个配合使用 | | |<br>|-XX:+PrintTLAB|查看TLAB空间的使用情况| | |<br>|-XX:+PrintTenuringDistribution|查看每次minor GC后新的存活周期的阈值| | Desired survivor size 1048576 bytes, new threshold 7 (max 15) new threshold 7即标识新的存周期的阈值为7|</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---Java%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8/" rel="prev" title="垃圾回收---Java类型引用">
+      <i class="fa fa-chevron-left"></i> 垃圾回收---Java类型引用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6---JDK%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/" rel="next" title="垃圾回收---JDK监控工具">
+      垃圾回收---JDK监控工具 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JVM%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">JVM参数解析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A8%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">并行收集器相关参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CMS%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">CMS相关参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BE%85%E5%8A%A9%E4%BF%A1%E6%81%AF"><span class="nav-number">1.3.</span> <span class="nav-text">辅助信息</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

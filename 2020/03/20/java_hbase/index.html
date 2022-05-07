@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="hbaseinstall12341. brew install hbase2. http:&#x2F;&#x2F;hbase.apache.org&#x2F;book.html#quickstart   tar xzvf hbase-3.0.0-SNAPSHOT-bin.tar.gz   cd hbase-3.0.0-SNAPSHOT&#x2F;  modify config1234567891011121314151617181920">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hbase">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/java_hbase/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="hbaseinstall12341. brew install hbase2. http:&#x2F;&#x2F;hbase.apache.org&#x2F;book.html#quickstart   tar xzvf hbase-3.0.0-SNAPSHOT-bin.tar.gz   cd hbase-3.0.0-SNAPSHOT&#x2F;  modify config1234567891011121314151617181920">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.783Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/java_hbase/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>hbase | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/java_hbase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hbase
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="hbase"><a href="#hbase" class="headerlink" title="hbase"></a>hbase</h3><h4 id="install"><a href="#install" class="headerlink" title="install"></a>install</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">1</span>. brew install hbase</span><br><span class="line"><span class="attribute">2</span>. http://hbase.apache.org/book.html#quickstart</span><br><span class="line">   <span class="attribute">tar</span> xzvf hbase-<span class="number">3</span>.<span class="number">0</span>.<span class="number">0</span>-SNAPSHOT-bin.tar.gz</span><br><span class="line">   <span class="attribute">cd</span> hbase-<span class="number">3</span>.<span class="number">0</span>.<span class="number">0</span>-SNAPSHOT/</span><br></pre></td></tr></table></figure>
+
+<h4 id="modify-config"><a href="#modify-config" class="headerlink" title="modify config"></a>modify config</h4><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1. conf/hbase-env.sh 添加Java jdk路径</span><br><span class="line">vim xxxx/libexec/conf/hbase-env.sh</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=<span class="string">&quot;/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home&quot;</span></span><br><span class="line"></span><br><span class="line">2. conf/hbase-site.xml 添加hbase文件存储路径</span><br><span class="line"></span><br><span class="line"><span class="variable">&lt;configuration&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hbase.rootdir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>file:///usr/local/var/hbase<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hbase.zookeeper.property.clientPort<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>2181<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hbase.zookeeper.property.dataDir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>/usr/local/var/zookeeper<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line"><span class="variable">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="start-server"><a href="#start-server" class="headerlink" title="start server"></a>start server</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>hbase<span class="regexp">/&#123;version&#125;/</span>libexec<span class="regexp">/bin/</span>start-hbase.sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="start-shell"><a href="#start-shell" class="headerlink" title="start shell"></a>start shell</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hbase <span class="keyword">shell</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="command"><a href="#command" class="headerlink" title="command"></a>command</h4><h4 id="base-command"><a href="#base-command" class="headerlink" title="base command"></a>base command</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">status 查询服务器的状态</span><br><span class="line"><span class="built_in">version</span> 查询hbase版本</span><br><span class="line">whoami 查看连接用户</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> 查询库中所有表</span><br></pre></td></tr></table></figure>
+
+<h4 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">create</span></span><br><span class="line">   <span class="keyword">create</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;cf1&#x27;</span>, <span class="string">&#x27;cf2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> <span class="keyword">drop</span></span><br><span class="line">   <span class="keyword">disable</span> <span class="string">&#x27;table_name&#x27;</span> 删除之前需要先让表失效、修改表结构是也是</span><br><span class="line">   <span class="keyword">drop</span> <span class="string">&#x27;table_name&#x27;</span> 删除</span><br><span class="line">   </span><br><span class="line"><span class="number">3.</span> <span class="keyword">exists</span></span><br><span class="line">   <span class="keyword">exists</span> <span class="string">&#x27;table_name&#x27;</span> 查看表是否存在</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> describe 查看表结构</span><br><span class="line">   describe <span class="string">&#x27;table_name&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> <span class="keyword">enable</span> 使表有效</span><br><span class="line">   <span class="keyword">enable</span> <span class="string">&#x27;table_name&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> modify <span class="keyword">table</span> structure</span><br><span class="line">   <span class="number">1</span>) <span class="keyword">alter</span> <span class="string">&#x27;table_name&#x27;</span> <span class="string">&#x27;cf3&#x27;</span>   # 新增列族</span><br><span class="line">   <span class="number">2</span>) <span class="keyword">alter</span> <span class="string">&#x27;test&#x27;</span>, &#123;<span class="type">NAME</span>=&gt;<span class="string">&#x27;cf3&#x27;</span>, <span class="keyword">METHOD</span>=&gt;<span class="string">&#x27;delete&#x27;</span>&#125; # 删除列族</span><br></pre></td></tr></table></figure>
+
+<h4 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">add</span></span><br><span class="line">put <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, <span class="string">&#x27;列族名 1: 列名 1&#x27;</span>, <span class="string">&#x27;value&#x27;</span> #同一个rowkey、执行两次put、认为是更新操作</span><br><span class="line">eg. put <span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;row_key1&#x27;</span>,<span class="string">&#x27;cf1:a&#x27;</span>,<span class="string">&#x27;a&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> incr</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> count 查询表的行数(比较耗时)</span><br><span class="line">   count <span class="string">&#x27;table_name&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> <span class="keyword">select</span></span><br><span class="line">    <span class="number">1</span>) <span class="keyword">get</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, <span class="string">&#x27;列族名：列名&#x27;</span> #查询指定列族的指定列的值</span><br><span class="line">       eg. <span class="keyword">get</span> <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;row_key1&#x27;</span>, <span class="string">&#x27;cf1:a,cf4&#x27;</span> </span><br><span class="line">       </span><br><span class="line">    <span class="number">2</span>) <span class="keyword">get</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span> #获取指定row_key的所有数据</span><br><span class="line">       eg. <span class="keyword">get</span> <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;row_key1&#x27;</span></span><br><span class="line">       </span><br><span class="line">    <span class="number">3</span>) <span class="keyword">get</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, &#123;COLUMN=&gt;<span class="string">&#x27;列族名：列&#x27;</span>, <span class="type">TIMESTAMP</span>=&gt;<span class="number">1373737746997</span>&#125; # 获取指定时间戳的数据</span><br><span class="line">        <span class="keyword">get</span> <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;row_key1&#x27;</span>, &#123;COLUMN=&gt;<span class="string">&#x27;cf1:a&#x27;</span>,<span class="type">TIMESTAMP</span>=&gt;<span class="number">1559367213477</span>&#125;</span><br><span class="line">        </span><br><span class="line">    <span class="number">4</span>) <span class="keyword">get</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, &#123;COLUMN =&gt; <span class="string">&#x27;列族名：列名&#x27;</span>, VERSIONS =&gt; <span class="number">2</span>&#125; 获取多个版本值、默认返回第一个</span><br><span class="line">       <span class="keyword">get</span> <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;row_key1&#x27;</span>, &#123;COLUMN=&gt;<span class="string">&#x27;cf1:a&#x27;</span>,VERSIONS=&gt;<span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> <span class="keyword">delete</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>) <span class="keyword">delete</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, <span class="string">&#x27;列族名：列名&#x27;</span> 删除指定rowkey的指定列族的列名数据</span><br><span class="line">   eg. <span class="keyword">delete</span> <span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;row_key1&#x27;</span>,<span class="string">&#x27;cf1:a&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>) <span class="keyword">delete</span> <span class="string">&#x27;table_name&#x27;</span>, <span class="string">&#x27;rowkey&#x27;</span>, <span class="string">&#x27;列族名&#x27;</span>  删除指定rowkey指定列族的数据</span><br><span class="line">   eg. <span class="keyword">delete</span> <span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;row_key1&#x27;</span>,<span class="string">&#x27;cf1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="number">3</span>) deleteall <span class="string">&#x27;table_name&#x27;</span>, ’rowkey<span class="string">&#x27; 删除rowkey所有column的calue、删除整行数据</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">6. scan &#x27;</span>table_nam<span class="string">e&#x27; 全表扫描</span></span><br><span class="line"><span class="string">   scan &#x27;</span>test<span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">7. truncate &#x27;</span>table_nam<span class="string">e&#x27; 删除全表数据</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">8. hbase shell test.hbaseshell 执行shell脚本</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 行以 rowkey 作为唯一标识、最大长度 <span class="number">64</span>KB</span><br><span class="line">   不支持<span class="keyword">order</span> <span class="keyword">by</span>只能按照rowkey或者range或者全表扫描</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 列族是列的集合 列族:列</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> HBase 通过 <span class="keyword">row</span> 和 <span class="keyword">column</span> 确定一份数据</span><br><span class="line">   tableName + RowKey + ColumnKey + <span class="type">Timestamp</span> =&gt; <span class="keyword">value</span> 唯一确定。Cell 中数据没有类型，字节码存储</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><p><a target="_blank" rel="noopener" href="http://einverne.github.io/post/2017/02/hbase-introduction-and-use.html">http://einverne.github.io/post/2017/02/hbase-introduction-and-use.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://einverne.github.io/post/2017/02/hbase-shell-command.html">http://einverne.github.io/post/2017/02/hbase-shell-command.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_java%E5%9F%BA%E7%A1%80/" rel="prev" title="java基础">
+      <i class="fa fa-chevron-left"></i> java基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/java_effective-java%E7%AC%94%E8%AE%B0/" rel="next" title="effective-java笔记">
+      effective-java笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hbase"><span class="nav-number">1.</span> <span class="nav-text">hbase</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#install"><span class="nav-number">1.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#modify-config"><span class="nav-number">1.2.</span> <span class="nav-text">modify config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#start-server"><span class="nav-number">1.3.</span> <span class="nav-text">start server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#start-shell"><span class="nav-number">1.4.</span> <span class="nav-text">start shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#command"><span class="nav-number">1.5.</span> <span class="nav-text">command</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#base-command"><span class="nav-number">1.6.</span> <span class="nav-text">base command</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DDL"><span class="nav-number">1.7.</span> <span class="nav-text">DDL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DML"><span class="nav-number">1.8.</span> <span class="nav-text">DML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.9.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">1.10.</span> <span class="nav-text">reference</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

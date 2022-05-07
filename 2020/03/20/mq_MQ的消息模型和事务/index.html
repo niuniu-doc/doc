@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="消息队列架构演进早期mq就是按照队列的数据结构来设计的 若有多个生产者往同一队列发送消息、这个队列可以消费到生产者消息的集合、顺序为生产者发送消息的自然顺序若多个消费者消费一个队列、这些消费者是竞争关系、只消费到队列的一部分数据需要每个消费者消费全量消息时、只能创建多个Queue、让生产者发送多份数据、并且生产者必须知道有多少消费者、违背了消息队列解耦的初衷 演进架构发布 - 订阅模型(Publi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MQ的消息模型和事务">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/index.html">
+<meta property="og:site_name" content="牛牛的小窝">
+<meta property="og:description" content="消息队列架构演进早期mq就是按照队列的数据结构来设计的 若有多个生产者往同一队列发送消息、这个队列可以消费到生产者消息的集合、顺序为生产者发送消息的自然顺序若多个消费者消费一个队列、这些消费者是竞争关系、只消费到队列的一部分数据需要每个消费者消费全量消息时、只能创建多个Queue、让生产者发送多份数据、并且生产者必须知道有多少消费者、违背了消息队列解耦的初衷 演进架构发布 - 订阅模型(Publi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-7491db81233d4005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-83faa4bba38ebc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-9c144b17627ba919.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14027542-40c0cd530d78849e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T03:31:06.806Z">
+<meta property="article:author" content="niuniu">
+<meta property="article:tag" content="MQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14027542-7491db81233d4005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MQ的消息模型和事务 | 牛牛的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">牛牛的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不奢望岁月静好 只希望点滴积累</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/mq_MQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="niuniu">
+      <meta itemprop="description" content="多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="牛牛的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MQ的消息模型和事务
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-20T00:00:00+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 11:31:06" itemprop="dateModified" datetime="2022-05-07T11:31:06+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index"><span itemprop="name">MQ</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="消息队列架构演进"><a href="#消息队列架构演进" class="headerlink" title="消息队列架构演进"></a>消息队列架构演进</h4><p><strong>早期mq就是按照队列的数据结构来设计的</strong><br><img src="https://upload-images.jianshu.io/upload_images/14027542-7491db81233d4005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="早期MQ架构"></p>
+<p>若有多个生产者往同一队列发送消息、这个队列可以消费到生产者消息的集合、顺序为生产者发送消息的自然顺序<br>若多个消费者消费一个队列、这些消费者是竞争关系、只消费到队列的一部分数据<br>需要每个消费者消费全量消息时、只能创建多个Queue、让生产者发送多份数据、并且生产者必须知道有多少消费者、违背了消息队列解耦的初衷</p>
+<p><strong>演进架构</strong><br>发布 - 订阅模型(Publish-Subscribe Pattern)<br><img src="https://upload-images.jianshu.io/upload_images/14027542-83faa4bba38ebc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发布-订阅模型"></p>
+<p>在P-S架构中、msg发送方称为发布者Publisher、接收方称为订阅者Subscriber、服务端存放消息的容器称为主题Topic、消费之前必须先订阅主题</p>
+<p>其实和队列模式没有本质区别、最大的区别在于: 一份数据能不能被消费多次</p>
+<h4 id="RabbitMQ的消息模型"><a href="#RabbitMQ的消息模型" class="headerlink" title="RabbitMQ的消息模型"></a>RabbitMQ的消息模型</h4><p>RabbitMQ是少数坚持使用队列模型的产品之一、它如何解决多个消费者的问题呢 ？<br>Exchange: 位于生产者和队列之间、生产者不关心将消息发送给哪个队列、而是将消息发送给Exchange、由Exchange上配置的策略来决定将消息投递到哪些队列中<br><img src="https://upload-images.jianshu.io/upload_images/14027542-9c144b17627ba919.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RabbitMQ消息模型"></p>
+<p>同一份消息需要被多个消费者消费时、需要配置exchange将消息发送到多个队列、每个队列中存放一份完整的消息数据、</p>
+<h4 id="RocketMQ的消息模型"><a href="#RocketMQ的消息模型" class="headerlink" title="RocketMQ的消息模型"></a>RocketMQ的消息模型</h4><p>RocketMQ使用的是标准的发布-订阅模型、</p>
+<p>普通的MQ都是使用的请求-确认机制、确保消息不会再传递过程中由于网络故障或服务器故障丢失. 在生产端、生产者将消息发给服务端Broker、Broker在收到消息并将消息写入主题或者队列后、会给生产者发送确认的响应、若生产者未收到服务端的确认或者收到失败的响应、会重新发消息; 在消费端、消费者收到消息并完成消费逻辑后也会给服务端发送消费成功的确认、服务端只有在收到消费确认后、才会认为一条消息被成功消费、否则会重发消息</p>
+<p>为了保证消息有序性、在消息被成功消费前、下一条消息不能被消费、否则就出现了消息空洞、违背了有序性的原则、所以 MQ增加了队列的概念、只在队列层面保证消息的有序性、主题层面不保证</p>
+<p>消息会被不同消费组消费、消费完的消息不会立即删除、MQ为每个队列维护了一个消费位置Consumer Offset、每成功消费一条消息、位置就+1</p>
+<h4 id="Kafka的消息模型"><a href="#Kafka的消息模型" class="headerlink" title="Kafka的消息模型"></a>Kafka的消息模型</h4><p>Kafka的消费模型和RocketMQ的模型是完全一样的、唯一的区别是 在Kafka中队列这个概念的名称不同、Kafka对应的概念叫 <code>分区</code> - <code>Partition</code> </p>
+<p>注意:<br>RocketMQ 和 Kafka 的业务模型一样、不代表实现一致、其实实现是完全不同的、就像MySQL和hbase存放数据的单元都是表、实现完全不同、MySQL使用B+树来存储、HBase 使用KV结构存储</p>
+<h4 id="MQ的事务实现"><a href="#MQ的事务实现" class="headerlink" title="MQ的事务实现"></a>MQ的事务实现</h4><p>Kafka 和 RocketMQ 都提供了事务的实现<br>在消息队列上开启一个事务、给服务器发送一个<code>半消息</code>状态、它包含完整的消息内容、但对于消费者不可见、本地事务提交后再提交消息事务<br>但: 如果提交消息事务失败怎么办 ？</p>
+<ol>
+<li>kafka的方案简单粗暴、直接抛异常、用户自行处理</li>
+<li>RocketMQ提供了事务反查机制、若Broker未收到提交或者回滚的请求、Broker会定期去Producer上反查本地事务对应状态、来决定事务提交还是回滚<br><img src="https://upload-images.jianshu.io/upload_images/14027542-40c0cd530d78849e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ol>
+<h4 id="消息可靠性保证"><a href="#消息可靠性保证" class="headerlink" title="消息可靠性保证"></a>消息可靠性保证</h4><p><strong>检测消息丢失</strong><br>1.若基础设施比较完善、一般会有分布式链路追踪系统、可以追踪消息流<br>2.利用消息有序性校验: 给每个发出的消息附加一个连续的序号、若序号不连续、就可以判定为消息丢失<br>注意: 多个producer 和 多个consumer的情况、需要判定每个分区的序列有效性<br><strong>如何保证</strong><br>1.生产阶段、根据不同mq的确认机制、进行对应的处理 eg: kafka -&gt; 捕获异常<br>2.存储阶段、正常broker运行的时候、不会出现消息丢失、但若broker出现了故障或者宕机、是可能丢消息的. 单节点broker可以配置broker在收到消息后立即落盘、broker是集群的时候、可以配置至少2个节点收到消息再确认<br>3.消费阶段、同生产阶段、消费端<em>业务逻辑</em>成功后再回传确认<br>有可能消息再网络传输过程中发生错误、发送方收不到确认就会重发消息、所以Broker 和 Consumer 都可能会收到重复消息、需要注意接口的幂等性</p>
+<p><strong>业务变相实现</strong><br>1.利用数据库的唯一约束实现幂等、<br>2.为更新的数据设置前置条件、满足某种条件才更新<br>3.记录并检查操作(需要考虑唯一ID的生成和多步操作的原子性)</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>幂等方案、不止是可以解决消息重复的问题、也同样适用于其它场景.eg: 将HTTP服务设计成幂等的、解决前端或者APP重复提交表单数据问题、也可以将一个微服务设计成幂等的、解决RPC框架自动重试导致的重复调用问题</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MQ/" rel="tag"># MQ</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mq_mq%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8/" rel="prev" title="mq何时使用">
+      <i class="fa fa-chevron-left"></i> mq何时使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/20/mq_RocketMQ%E7%AE%80%E4%BB%8B/" rel="next" title="RocketMQ简介">
+      RocketMQ简介 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B"><span class="nav-number">1.</span> <span class="nav-text">消息队列架构演进</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RabbitMQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">RabbitMQ的消息模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">RocketMQ的消息模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">Kafka的消息模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MQ%E7%9A%84%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">MQ的事务实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7%E4%BF%9D%E8%AF%81"><span class="nav-number">6.</span> <span class="nav-text">消息可靠性保证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">7.</span> <span class="nav-text">思考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">niuniu</p>
+  <div class="site-description" itemprop="description">多数是学习笔记、偶尔发发感慨、给生活添加些许乐趣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niuniu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
